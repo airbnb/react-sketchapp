@@ -1,0 +1,39 @@
+{
+  "name": "react-example",
+  "description": "Example react-sketchapp plugin",
+  "author": "Jon Gold",
+  "homepage": "http://github.com/jongold/react-sketchapp",
+  "version": 0.1,
+  "identifier": "com.jongold.react-sketchapp",
+  "updateURL": "https://github.com/downloads/jongold/react-sketchapp/react-sketchapp.json",
+  "compatibleVersion": 1,
+  "bundleVersion": 1,
+  "disableCocoaScriptPreprocessor": true,
+  "commands": [
+    {
+      "name": "Layer from props",
+      "identifier": "props",
+      "shortcut": "ctrl shift t",
+      "script": "Layer From Props.js"
+    },
+    {
+      "name": "Test Run",
+      "identifier": "test",
+      "shortcut": "ctrl shift u",
+      "script": "Test Run.js"
+    },
+    {
+      "name": "Test React",
+      "identifier": "react",
+      "shortcut": "ctrl shift r",
+      "script": "Test React.js"
+    }
+  ],
+  "menu": {
+    "items": [
+      "props",
+      "test",
+      "react"
+    ]
+  }
+}
