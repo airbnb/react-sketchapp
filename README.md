@@ -119,11 +119,11 @@ export type Text = {
 
 ## Further Reading & inspiration
 ### React Renderers
-- [Dustan Hufar - tiny-react-renderer](https://github.com/iamdustan/tiny-react-renderer)
+- [Dustan Kasten - tiny-react-renderer](https://github.com/iamdustan/tiny-react-renderer)
 
-- [Dustan Hufar - react-hardware](https://github.com/iamdustan/react-hardware)
+- [Dustan Kasten - react-hardware](https://github.com/iamdustan/react-hardware)
 
-- [Dustan Hufar - React renderer directory](http://iamdustan.com/react-renderers/)
+- [Dustan Kasten - React renderer directory](http://iamdustan.com/react-renderers/)
 
 - [Gosha Arinich - Making custom renderers for React](http://goshakkk.name/react-custom-renderers/)
 
