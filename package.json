@@ -1,6 +1,7 @@
 {
   "name": "react-sketchapp",
   "version": "0.1.0",
+  "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "license": "MIT",
   "author": "Jon Gold <jon.gold@airbnb.com> (http://jon.gold)",
@@ -13,6 +14,7 @@
     "build": "npm run build:react && npm run build:plugin",
     "flow": "flow",
     "lint": "eslint .",
+    "prepublish": "npm run build",
     "test": "test test/test.js",
     "watch:plugin": "webpack --watch",
     "watch:react": "babel src -d lib --watch",
@@ -24,6 +26,21 @@
     "ramda": "^0.22.1",
     "react": "~15.3.2"
   },
+  "keywords": [
+    "sketch",
+    "sketchapp",
+    "react",
+    "reactjs",
+    "renderer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jongold/react-sketchapp"
+  },
+  "bugs": {
+    "url": "https://github.com/jongold/react-sketchapp/issues"
+  },
+  "homepage": "https://github.com/jongold/react-sketchapp",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.0.0",
