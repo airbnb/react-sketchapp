@@ -1,4 +1,6 @@
 # react-sketch
+[![Build Status](https://img.shields.io/travis/jongold/react-sketchapp.svg)](https://travis-ci.org/jongold/react-sketchapp)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/react-sketchapp)
 
 Declarative bridge to Sketch.app.
 
