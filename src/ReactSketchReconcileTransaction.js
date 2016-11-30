@@ -28,6 +28,10 @@ const Mixin = {
     return this.reactMountReady;
   },
 
+  getUpdateQueue() {
+    // this was missing and broke non-intrinsic components
+  },
+
   destructor() {
     CallbackQueue.release(this.reactMountReady);
     this.reactMountReady = null;
