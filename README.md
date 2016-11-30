@@ -10,11 +10,11 @@ Make sure Sketch automatically reloads plugins:
 defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
 ```
 
-Clone the repo and symlink the examples:
+Clone & build the repo, and symlink the examples:
 ```
 git clone git@github.com:jongold/react-sketchapp.git
 cd react-sketchapp
-npm run build
+npm install && npm run build:plugin
 ./symlink-plugin.sh
 ```
 
