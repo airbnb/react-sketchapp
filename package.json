@@ -62,6 +62,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
+    "flow-bin": "^0.36.0",
     "jest": "^17.0.3",
     "json-loader": "^0.5.4",
     "rimraf": "^2.5.4",
