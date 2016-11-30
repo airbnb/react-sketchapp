@@ -42,6 +42,11 @@ const ReactSketchComponentMixin = {
 
     SketchCache.add(rootID, node);
 
+    // if (isRootID(rootID)) {
+    if (rootID === '.0.0') {
+      SketchCache.render(node);
+    }
+
     this.mountChildren(
       this._currentElement.props.children,
       transaction,
@@ -54,11 +59,6 @@ const ReactSketchComponentMixin = {
 
     if (this._currentElement.type === 'text' && this._currentElement.props.makeTextStyle) {
       StyleManager.addTextStyle(node);
-    }
-
-    // if (isRootID(rootID)) {
-    if (rootID === '.0.0') {
-      SketchCache.render(node);
     }
   },
 
