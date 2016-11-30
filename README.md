@@ -14,6 +14,7 @@ Clone the repo and symlink the examples:
 ```
 git clone git@github.com:jongold/react-sketchapp.git
 cd react-sketchapp
+npm run build
 ./symlink-plugin.sh
 ```
 
