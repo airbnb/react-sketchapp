@@ -1,9 +1,19 @@
 /* @flow */
-import { addLayerToGroup, drawArtboard, drawRectangle, drawOval, drawGroup, drawText } from './shared';
-import type { SketchNode } from './types';
-import type { Artboard, Group, Rect, Oval, Text } from './shared';
+import drawGroup, { addLayerToGroup } from './bridge/group';
+import drawArtboard from './bridge/artboard';
+import drawOval from './bridge/oval';
+import drawRectangle from './bridge/rectangle';
+import drawText from './bridge/text';
+import type { Artboard } from './bridge/artboard';
+import type { Group } from './bridge/group';
+import type { Oval } from './bridge/oval';
+import type { Rect } from './bridge/rectangle';
+import type { Text } from './bridge/text';
+import type { Dictionary, SketchNode } from './types';
 
-const elements = {
+type f = (p: any, props: any) => any;
+type Hash = Dictionary<string, f>;
+const elements: Hash = {
   // page(parent: SketchNode, props) { return null; }
 
   artboard(parent: SketchNode, props: Artboard) {

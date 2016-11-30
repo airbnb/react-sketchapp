@@ -1,4 +1,5 @@
 /* @flow */
+import { omit } from 'ramda';
 import invariant from 'invariant';
 import ReactMultiChild from 'react/lib/ReactMultiChild';
 import SketchCache from './SketchCache';
@@ -27,7 +28,7 @@ const ReactSketchComponentMixin = {
     nativeContainerInfo: NativeContainerInfo, // idCounter: n
     context: Object, // standard-ass React Context. should be empty.
   ) {
-    const id = idCounter++;
+    const id = idCounter++; // eslint-disable-line no-plusplus
     const parentId = typeof nativeParent === 'object' ? nativeParent._rootNodeID : nativeParent;
     const rootID = `${parentId}.${id}`;
     this._rootNodeID = rootID;
@@ -64,7 +65,7 @@ const ReactSketchComponentMixin = {
   // returns an MSLayerWhateverBS
   mountNode(parent: SketchNode, element: React$Element<*>) {
     const { props, type } = element;
-    const { children, ...options } = props;
+    const options = omit(['children'], props);
     const el = SketchElements[type];
 
     invariant(!!element, 'You used a weirdo component');

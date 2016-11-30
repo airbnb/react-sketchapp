@@ -11,6 +11,18 @@ import StyleManager from './SketchSharedStylesManager';
 
 DefaultInjection.inject();
 
+const invalidComponentError = (element) => {
+  if (typeof element === 'function') {
+    return ' Instead of passing a component class, make sure to instantiate ' +
+    'it by passing it to React.createElement.';
+  }
+  if (element != null && element.props !== undefined) {
+    return ' This may be caused by unintentionally loading two independent ' +
+    'copies of React.';
+  }
+  return '';
+};
+
 const ReactSketchMount = {
   render(
     nextElement: React$Element<*>,
@@ -20,16 +32,7 @@ const ReactSketchMount = {
     invariant(
       ReactElement.isValidElement(nextElement),
       'ReactSketch.render(): Invalid component element.%s',
-      (
-        typeof nextElement === 'function' ?
-          ' Instead of passing a component class, make sure to instantiate ' +
-          'it by passing it to React.createElement.' :
-          // Check if it quacks like an element
-          nextElement != null && nextElement.props !== undefined ?
-          ' This may be caused by unintentionally loading two independent ' +
-          'copies of React.' :
-          ''
-      )
+      invalidComponentError(nextElement)
     );
 
     const id = ReactInstanceHandles.createReactRootID(0);

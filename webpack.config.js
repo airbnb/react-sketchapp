@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const entries = [
   'Layer From Props',
@@ -30,4 +31,10 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'example-plugin/manifest.json' },
+    ]),
+  ],
 };

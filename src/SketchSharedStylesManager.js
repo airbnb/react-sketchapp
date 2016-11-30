@@ -1,6 +1,6 @@
 /* @flow */
 import type { SketchNode } from './types';
-import { addTextStyleFromLayer } from './shared';
+import { addTextStyleFromLayer } from './bridge/text';
 
 class StyleManager {
   context: any;

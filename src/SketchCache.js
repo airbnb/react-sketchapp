@@ -1,6 +1,6 @@
 /* @flow */
 import { compose, dissoc, equals, init, join, length, match, split } from 'ramda';
-import { initialize } from './shared';
+import initialize from './bridge/initialize';
 import type { Dictionary, NodeID, SketchNode } from './types';
 
 export const isRootID = compose(

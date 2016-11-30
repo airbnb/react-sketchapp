@@ -19,6 +19,10 @@
 .*/node_modules/iconv-lite.*
 .*/node_modules/is-my-json-valid.*
 
+# I don't even know why these have started to break, fml
+.*/node_modules/config-chain.*
+.*/node_modules/npmconf.*
+
 .*/_backup
 .*/docs
 

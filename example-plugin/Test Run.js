@@ -1,4 +1,5 @@
-const { drawGroup, drawText, drawOval, drawRectangle, initialize } = require('../src/shared');
+const { sketchShared } = require('../src');
+const { drawGroup, drawText, drawOval, drawRectangle, initialize } = sketchShared;
 
 const colors = {
   gray: '#F3F4F4',
@@ -71,14 +72,6 @@ function onRun(context) {
     radius: 2,
     backgroundColor: colors.pear,
   });
-
-  // => MSRectangle
-
-  page.addLayers([
-    drawGroup({
-      children: [layer1, layer2],
-    })
-  ])
 
   const shapeGroup = drawGroup({
     children: [layer1, layer2, layer3],

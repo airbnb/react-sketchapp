@@ -1,6 +1,5 @@
-# dependencies
-node_modules/
-
-# log
-npm-debug.log
 .DS_Store
+*.log
+node_modules
+lib
+react-example.sketchplugin

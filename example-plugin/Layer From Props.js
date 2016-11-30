@@ -1,4 +1,5 @@
-const { drawRectangle, drawOval, initialize, utils } = require('../src/shared');
+const { sketchShared } = require('../src');
+const { drawRectangle, drawOval, initialize, createLabel } = sketchShared;
 
 // CocoaScript doesn't like strict equality checks.
 const cocoaEqual = (a, b) => a == b; // eslint-disable-line
@@ -19,7 +20,7 @@ const onRun = (context) => {
   );
   alert.addAccessoryView(view);
 
-  const typeLabel = utils.createLabel(
+  const typeLabel = createLabel(
     NSMakeRect(0, viewHeight - 20, viewWidth, 20),
     'Type'
   );
@@ -31,7 +32,7 @@ const onRun = (context) => {
   typeTextField.setStringValue('Rect');
   view.addSubview(typeTextField);
 
-  const propsLabel = utils.createLabel(
+  const propsLabel = createLabel(
     NSMakeRect(0, viewHeight - 80, viewWidth, 20),
     'Props'
   );

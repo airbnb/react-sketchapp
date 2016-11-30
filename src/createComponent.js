@@ -1,5 +1,5 @@
 function createComponent(name: string, ...mixins) {
-  const ReactSketchComponent = function (
+  function ReactSketchComponent(
     element: React$Element<*>,
   ) {
     this.node = null;
@@ -8,7 +8,7 @@ function createComponent(name: string, ...mixins) {
     this._currentElement = element; // React$Element
     this._rootNodeID = null; // NodeID
     this.construct(element);
-  };
+  }
 
   ReactSketchComponent.displayName = name;
 

@@ -25,6 +25,7 @@
   },
   "rules": {
     "no-underscore-dangle": 0,
-    "new-cap": 0
+    "new-cap": 0,
+    "no-duplicate-imports": [0]
   }
 }
