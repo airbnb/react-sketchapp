@@ -13,8 +13,9 @@ let idCounter = 0;
 /* TODO: root nodes aren't incrementing.
  * I have a feeling nativeParent._rootNodeID is the wrong key
  */
+
 const ReactSketchComponentMixin = {
-  construct(element: React$Element<*>) {
+  construct(element: React$Element<any>) {
     this._currentElement = element;
   },
 
@@ -62,8 +63,7 @@ const ReactSketchComponentMixin = {
     }
   },
 
-  // returns an MSLayerWhateverBS
-  mountNode(parent: SketchNode, element: React$Element<*>) {
+  mountNode(parent: SketchNode, element: React$Element<any>) {
     const { props, type } = element;
     const options = omit(['children'], props);
     const el = SketchElements[type];

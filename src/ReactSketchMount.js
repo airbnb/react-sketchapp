@@ -23,12 +23,14 @@ const invalidComponentError = (element) => {
   return '';
 };
 
+type SketchContext = any;
+
 const ReactSketchMount = {
   render(
-    nextElement: React$Element<*>,
-    context: any,
-    callback?: () => void
-  ): void {
+    nextElement: React$Element<any>,
+    context: SketchContext,
+    callback?: ?(() => void),
+  ): React$Component<any, any, any> {
     invariant(
       ReactElement.isValidElement(nextElement),
       'ReactSketch.render(): Invalid component element.%s',
@@ -60,6 +62,8 @@ const ReactSketchMount = {
       });
       ReactUpdates.ReactReconcileTransaction.release(transaction);
     });
+
+    return component;
   },
 };
 
