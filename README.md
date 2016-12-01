@@ -8,12 +8,12 @@ WIP; not ready for public consumption yet!
 
 ## Running example scripts
 Make sure Sketch automatically reloads plugins:
-```
+```sh
 defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
 ```
 
 Clone & build the repo, and symlink the examples:
-```
+```sh
 git clone git@github.com:jongold/react-sketchapp.git
 cd react-sketchapp
 npm install && npm run build:plugin
@@ -35,7 +35,7 @@ react-example.sketchplugin
 
 You'll want to create a new repo, create a similar build process to ^^^, and implement your handler ~= this:
 
-```
+```jsx
 import { render } from 'react-sketchapp';
 
 const document = () => (
@@ -57,7 +57,7 @@ const onRun = (context) => {
 
 ## Documentation
 WIP!
-```
+```jsx
 <artboard />
 type Artboard = {
   name?: string,
