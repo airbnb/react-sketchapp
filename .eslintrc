@@ -2,6 +2,9 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "globals": {
+    "NSFontAttributeName": true,
+    "NSStringDrawingUsesLineFragmentOrigin": true,
+    "CGSizeMake": true,
     "ReactComponent": true,
     "React$Component": true,
     "ReactClass": true,

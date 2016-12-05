@@ -11,18 +11,6 @@
   "disableCocoaScriptPreprocessor": true,
   "commands": [
     {
-      "name": "Layer from props",
-      "identifier": "props",
-      "shortcut": "ctrl shift t",
-      "script": "Layer From Props.js"
-    },
-    {
-      "name": "Test Run",
-      "identifier": "test",
-      "shortcut": "ctrl shift u",
-      "script": "Test Run.js"
-    },
-    {
       "name": "Test React",
       "identifier": "react",
       "shortcut": "ctrl shift r",

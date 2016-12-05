@@ -2,8 +2,6 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const entries = [
-  'Layer From Props',
-  'Test Run',
   'Test React',
 ].reduce((acc, val) => (
   Object.assign({}, acc, { [val]: `./example-plugin/${val}.js` })
