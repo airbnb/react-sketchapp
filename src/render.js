@@ -1,19 +1,12 @@
 import TestRenderer from 'react/lib/ReactTestRenderer';
 import computeLayout from 'css-layout';
-
-import text from './layers/text';
-import group from './layers/group';
-import view from './layers/view';
-import Context from './layers/context';
-import createStringMeasurer from './layers/createStringMeasurer';
+import Context from './utils/Context';
+import createStringMeasurer from './utils/createStringMeasurer';
+import renderers from './renderers';
 import type {
   SketchContext,
   SketchLayer,
   TreeNode,
-  LayerCreator,
-  LayoutInfo,
-  ViewStyle,
-  TextStyle,
 } from './types';
 
 const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
@@ -55,6 +48,7 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
         measure: createStringMeasurer(node, textStyle),
       },
       textStyle,
+      props: null,
       value: node,
       children: [],
     };
@@ -80,52 +74,32 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     type: node.type,
     style,
     textStyle,
+    props: node.props,
     value: null,
     children: children.map(child => reactTreeToFlexTree(child, childContext)),
   };
 };
 
-const layerCreators: { [key: string]: LayerCreator } = {
-  view,
-  text,
-};
-
-const makeLayer = (
-  type: string,
-  style: ViewStyle,
-  layout: LayoutInfo,
-  textStyle: TextStyle,
-  value: ?string
-): SketchLayer => {
-  const create = layerCreators[type];
-  return create(style, layout, textStyle, value);
-};
-
 const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
-  const { type, style, textStyle, layout, value, children } = node;
-  const groupLayer = group(style, layout, textStyle);
+  const { type, style, textStyle, layout, value, props, children } = node;
+  const Renderer = renderers[type];
+  if (Renderer == null) {
+    throw new Error(`Could not find renderer for type '${type}'`);
+  }
+  const renderer = new Renderer();
+  const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props, value);
+  const backingLayer = renderer.renderBackingLayer(layout, style, textStyle, props, value);
   layer.addLayers([
     groupLayer,
   ]);
-  groupLayer.addLayers([
-    makeLayer(type, style, layout, textStyle, value),
-  ]);
+  if (backingLayer !== null) {
+    groupLayer.addLayers([
+      backingLayer,
+    ]);
+  }
   children.map(child => renderToSketch(child, groupLayer));
 };
 
-/**
- *
- * List of things to do:
- * =====================
- * - nested text nodes + view nodes inside of text
- * - border widths
- * - individual border props
- * - individual padding/margin props
- * - text numberOfLines etc.
- * - images
- * - "transform" styles
- * - shadow styles
- */
 function render(element: React$Element<any>, context: SketchContext) {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();

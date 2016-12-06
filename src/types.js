@@ -5,7 +5,6 @@ export type Dictionary<K, T> = {[key: K]: T};
 export type SketchNode = any;
 export type SketchContext = any;
 export type SketchLayer = any;
-export type LayerCreator = (style: any, layout: any, textStyle: any, value: ?string) => SketchLayer;
 
 // Reacty things
 
@@ -117,5 +116,14 @@ export type TreeNode = {
   textStyle: TextStyle,
   layout: LayoutInfo,
   value: ?string,
+  props: any,
   children: ?Array<TreeNode>,
 };
+
+export type LayerCreator = (
+  style: ViewStyle,
+  layout: LayoutInfo,
+  textStyle: TextStyle,
+  props: any,
+  value: ?string
+) => SketchLayer;
