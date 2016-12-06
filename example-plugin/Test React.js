@@ -14,24 +14,26 @@ const colors = {
 };
 
 const text = (
-  <View style={{ backgroundColor: colors.gray, padding: 20 }}>
-    <View
-      style={{
-        width: 200,
-      }}
-    >
-      <Text
+  <artboard>
+    <View style={{ backgroundColor: colors.gray, padding: 20 }}>
+      <View
         style={{
-          fontFamily: 'Arial',
-          fontSize: 24,
-          lineHeight: 32,
-          color: '#000',
+          width: 200,
         }}
       >
-        Hello World! this is a bunch of text that I am hoping wraps...
-      </Text>
+        <Text
+          style={{
+            fontFamily: 'Arial',
+            fontSize: 24,
+            lineHeight: 32,
+            color: '#000',
+          }}
+        >
+          Hello World! this is a bunch of text that I am hoping wraps...
+        </Text>
+      </View>
     </View>
-  </View>
+  </artboard>
 );
 
 // const element = (

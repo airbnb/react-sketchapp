@@ -1,5 +1,4 @@
 import { TextStyle, Size } from '../types';
-import { dump } from '../debug';
 
 // TODO: do something more sensible here
 const FLOAT_MAX = 999999;
