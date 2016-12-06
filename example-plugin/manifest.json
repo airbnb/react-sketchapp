@@ -15,13 +15,18 @@
       "identifier": "react",
       "shortcut": "ctrl shift r",
       "script": "Test React.js"
+    },
+    {
+      "name": "Test Styleguide",
+      "identifier": "styleguide",
+      "shortcut": "ctrl shift s",
+      "script": "Styleguide.js"
     }
   ],
   "menu": {
     "items": [
-      "props",
-      "test",
-      "react"
+      "react",
+      "styleguide"
     ]
   }
 }

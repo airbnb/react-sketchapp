@@ -58,6 +58,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
+    "color": "^1.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^12.0.0",

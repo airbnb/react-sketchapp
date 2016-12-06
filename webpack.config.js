@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const entries = [
   'Test React',
+  'Styleguide'
 ].reduce((acc, val) => (
   Object.assign({}, acc, { [val]: `./example-plugin/${val}.js` })
 ), {});
@@ -19,7 +20,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
       },

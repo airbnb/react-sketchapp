@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from '../src';
 import { dump } from '../src/debug';
+import Text from './components/Text';
+import View from './components/View';
 
 global.dump = dump;
 
@@ -10,18 +12,6 @@ const colors = {
   peach: '#EFADA0',
   pear: '#93DAAB',
 };
-
-class View extends React.Component {
-  render() {
-    return <view {...this.props} />
-  }
-}
-
-class Text extends React.Component {
-  render() {
-    return <text {...this.props} />
-  }
-}
 
 const text = (
   <View style={{ backgroundColor: colors.gray, padding: 20 }}>
@@ -44,25 +34,40 @@ const text = (
   </View>
 );
 
-const element = (
-  <View style={{ backgroundColor: colors.gray, padding: 20 }}>
-    <View style={{ flexDirection: 'column', backgroundColor: colors.sur, padding: 20, margin: 20 }}>
-      <View style={{ width: 100, height: 100, backgroundColor: colors.pear, borderRadius: 10, opacity: 0.5 }} />
-      <View
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: colors.pear,
-          margin: 10,
-          borderWidth: 1,
-          borderRadius: 10,
-          borderColor: '#000',
-        }}
-      />
-      <View style={{ width: 200, height: 100, backgroundColor: colors.pear }} />
-    </View>
-  </View>
-);
+// const element = (
+//   <View style={{ backgroundColor: colors.gray, padding: 20 }}>
+//     <View
+//       style={{
+//         flexDirection: 'column',
+//         backgroundColor: colors.sur,
+//         padding: 20,
+//         margin: 20,
+//       }}
+//     >
+//       <View
+//         style={{
+//           width: 100,
+//           height: 100,
+//           backgroundColor: colors.pear,
+//           borderRadius: 10,
+//           opacity: 0.5,
+//         }}
+//       />
+//       <View
+//         style={{
+//           width: 100,
+//           height: 100,
+//           backgroundColor: colors.pear,
+//           margin: 10,
+//           borderWidth: 1,
+//           borderRadius: 10,
+//           borderColor: '#000',
+//         }}
+//       />
+//       <View style={{ width: 200, height: 100, backgroundColor: colors.pear }} />
+//     </View>
+//   </View>
+// );
 
 const onRun = (context) => {
   log('onRun');
