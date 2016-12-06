@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
-import Text from './Text';
-import View from './View';
+import { View, Text } from '../../src';
 import Label from './Label';
 
 type P = {

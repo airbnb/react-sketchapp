@@ -2,11 +2,10 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { keys } from 'ramda';
-import { render } from '../src';
+import { render, View } from '../src';
 import designSystem from './designSystem';
 
 import Palette from './components/Palette';
-import View from './components/View';
 import TypeSpecimen from './components/TypeSpecimen';
 import Section from './components/Section';
 

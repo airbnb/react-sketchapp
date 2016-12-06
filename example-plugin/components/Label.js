@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import Text from './Text';
+import { Text } from '../../src';
 
 type P = {
   bold?: boolean,
