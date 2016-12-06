@@ -26,7 +26,12 @@ const Document = ({ fonts, colors }: any) =>
   </View>;
 
 const onRun = (context: any) => {
-  render(<Document fonts={designSystem.fonts} colors={designSystem.colors} />, context);
+  render(
+    <Document
+      fonts={designSystem.fonts}
+      colors={designSystem.colors}
+    />
+  , context);
 };
 
 module.exports = onRun;
