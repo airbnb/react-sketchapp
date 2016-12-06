@@ -41,12 +41,12 @@ const fonts = {
   'Title 2': {
     fontSize: typeSizes[2],
     fontFamily: fontFamilies.bold,
-    lineHeight: 48,
+    lineHeight: 36,
   },
   Body: {
     fontSize: typeSizes[5],
     fontFamily: fontFamilies.regular,
-    lineHeight: 48,
+    lineHeight: 24,
   },
 };
 
