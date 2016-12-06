@@ -11,6 +11,11 @@ const TEXT_ALIGN = {
   justify: 3,
 };
 
+const TEXT_BEHAVIOR = {
+  auto: 0,
+  fixed: 1,
+};
+
 const text = (
   style: ViewStyle,
   layout: LayoutInfo,
@@ -56,6 +61,9 @@ const text = (
   if (style.opacity !== undefined) {
     layer.style().contextSettings().opacity = style.opacity;
   }
+
+  // note european spelling :P
+  layer.setTextBehaviour(TEXT_BEHAVIOR.fixed);
 
   layer.frame().setWidth(layout.width);
   layer.frame().setHeight(layout.height);
