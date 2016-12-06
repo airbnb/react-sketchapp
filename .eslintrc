@@ -15,6 +15,7 @@
     "MSTextLayer": true,
     "NSFont": true,
     "NSFontAttributeName": true,
+    "NSKernAttributeName": true,
     "NSMakeRect": true,
     "NSMutableParagraphStyle": true,
     "NSParagraphStyleAttributeName": true,

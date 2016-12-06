@@ -40,12 +40,11 @@ const text = (
     layer.setTextColor(convertToColor(textStyle.color));
   }
 
-  if (textStyle.lineHeight) {
-    // TODO(lmr): have text measurement use lineHeight so we can re-enable this here
-    // layer.setLineHeight(textStyle.lineHeight);
+  if (textStyle.lineHeight !== undefined) {
+    layer.setLineHeight(textStyle.lineHeight);
   }
 
-  if (textStyle.letterSpacing) {
+  if (textStyle.letterSpacing !== undefined) {
     layer.setCharacterSpacing(textStyle.letterSpacing);
   }
 
