@@ -21,7 +21,7 @@
     "check": "npm run flow && npm run lint",
     "flow": "flow",
     "lint": "eslint .",
-    "prepublish": "npm run clean && npm run check && npm run build:react",
+    "prepublish": "npm run clean && npm run check && npm run build",
     "test": "mocha --compilers js:babel-core/register",
     "watch:plugin": "webpack --watch",
     "watch:react": "babel src -d lib --watch",
