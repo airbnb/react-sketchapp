@@ -14,31 +14,33 @@ const colors = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.gray,
-  },
-  someOtherThing: {
     padding: 20,
-  },
-  box: {
     width: 200,
   },
-  text: {
+  someOtherThing: {
+  },
+  box: {
+  },
+  text1: {
     fontFamily: 'Arial',
     fontSize: 24,
     lineHeight: 32,
     color: '#000',
   },
+  text2: {
+
+  },
 });
 
 const text = (
-  <Artboard name="some other thing">
-    <View style={[styles.container, styles.someOtherThing]}>
-      <View style={styles.box}>
-        <Text style={styles.text}>
-          Hello World! this is a bunch of text that I am hoping wraps...
-        </Text>
-      </View>
-    </View>
-  </Artboard>
+  <View style={styles.container}>
+    <Text style={styles.text1}>
+      Hello World! this is a bunch of text that I am hoping wraps...
+    </Text>
+    <Text style={styles.text2}>
+      Hello World! this is a bunch of text that I am hoping wraps...
+    </Text>
+  </View>
 );
 
 // const element = (

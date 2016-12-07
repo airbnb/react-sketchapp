@@ -40,7 +40,7 @@ const INHERITABLE_STYLES = [
 
 const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
   if (typeof node === 'string') {
-    const textStyle = context.getInheritiedStyles();
+    const textStyle = context.getInheritedStyles();
     // string node
     return {
       type: 'text',
@@ -62,21 +62,20 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     const inheritableStyles = pick(style, INHERITABLE_STYLES);
     context.addInheritableStyles(inheritableStyles);
     textStyle = {
-      ...context.getInheritiedStyles(),
+      ...context.getInheritedStyles(),
       ...inheritableStyles,
     };
   } else {
-    textStyle = context.getInheritiedStyles();
+    textStyle = context.getInheritedStyles();
   }
 
-  const childContext = context.forChildren();
   return {
     type: node.type,
     style,
     textStyle,
     props: node.props,
     value: null,
-    children: children.map(child => reactTreeToFlexTree(child, childContext)),
+    children: children.map(child => reactTreeToFlexTree(child, context.forChildren())),
   };
 };
 

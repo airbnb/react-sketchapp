@@ -16,7 +16,7 @@ class Context {
     return new Context(styles);
   }
 
-  getInheritiedStyles() {
+  getInheritedStyles() {
     return this.styles;
   }
 }
