@@ -1,8 +1,6 @@
 import React from 'react';
-import { render } from '../src';
+import { render, View, Text, StyleSheet, Artboard } from '../src';
 import { dump } from '../src/debug';
-import Text from './components/Text';
-import View from './components/View';
 
 global.dump = dump;
 
@@ -13,27 +11,34 @@ const colors = {
   pear: '#93DAAB',
 };
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.gray,
+  },
+  someOtherThing: {
+    padding: 20,
+  },
+  box: {
+    width: 200,
+  },
+  text: {
+    fontFamily: 'Arial',
+    fontSize: 24,
+    lineHeight: 32,
+    color: '#000',
+  },
+});
+
 const text = (
-  <artboard>
-    <View style={{ backgroundColor: colors.gray, padding: 20 }}>
-      <View
-        style={{
-          width: 200,
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: 'Arial',
-            fontSize: 24,
-            lineHeight: 32,
-            color: '#000',
-          }}
-        >
+  <Artboard name="some other thing">
+    <View style={[styles.container, styles.someOtherThing]}>
+      <View style={styles.box}>
+        <Text style={styles.text}>
           Hello World! this is a bunch of text that I am hoping wraps...
         </Text>
       </View>
     </View>
-  </artboard>
+  </Artboard>
 );
 
 // const element = (

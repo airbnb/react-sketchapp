@@ -2,7 +2,7 @@
 import React from 'react';
 import AccessibilityBadge from './AccessibilityBadge';
 import Label from './Label';
-import View from './View';
+import { View } from '../../src';
 import type { Color } from '../processColor';
 
 const SWATCH_WIDTH = 100;

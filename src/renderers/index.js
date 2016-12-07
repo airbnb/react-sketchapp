@@ -1,14 +1,11 @@
 /* @flow */
-import artboard from './ArtboardRenderer';
-import view from './ViewRenderer';
-import text from './TextRenderer';
-import SketchRenderer from './SketchRenderer';
+/* eslint-disable global-require */
+// import type SketchRenderer from './SketchRenderer';
 
-// $FlowFixMe: this flow type should work but doesn't?
-const renderers: { [key: string]: SketchRenderer } = {
-  artboard,
-  view,
-  text,
+const renderers: { [key: string]: any } = {
+  artboard: require('./ArtboardRenderer'),
+  view: require('./ViewRenderer'),
+  text: require('./TextRenderer'),
 };
 
 module.exports = renderers;

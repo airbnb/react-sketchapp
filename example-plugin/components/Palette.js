@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { keys } from 'ramda';
-import View from './View';
+import { View } from '../../src';
 import Swatch from './Swatch';
 
 const SWATCH_WIDTH = 100;
