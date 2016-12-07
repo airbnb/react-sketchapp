@@ -40,7 +40,7 @@ You'll want to create a new repo, create a similar build process to ^^^, and imp
 ```jsx
 import { render, Artboard, View, Text } from 'react-sketchapp';
 
-const document = () => (
+const Document = () => (
   <Artboard>
     <View>
       <View
@@ -63,9 +63,7 @@ const document = () => (
 );
 
 const onRun = (context) => {
-  render(document, context, (element) => {
-    console.log(element)
-  });
+  render(<Document />, context);
 };
 ```
 
