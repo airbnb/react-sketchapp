@@ -1,3 +1,5 @@
+import expandStyle from './expandStyle';
+
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 let _id = 0;
@@ -28,7 +30,7 @@ const registerStyle = (style) => {
   // do "proptype"-like validation here in non-production build
   const id = guid();
   const rules = extractRules(style);
-  declarationRegistry[id] = rules.declarations;
+  declarationRegistry[id] = expandStyle(rules.declarations);
   return id;
 };
 
@@ -94,7 +96,7 @@ const flattenStyle = (input) => {
     // input is falsy, so we skip it by returning undefined
     return undefined;
   }
-  return input;
+  return expandStyle(input);
 };
 
 
