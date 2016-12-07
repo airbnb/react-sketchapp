@@ -6,7 +6,8 @@
   "license": "MIT",
   "author": "Jon Gold <jon.gold@airbnb.com> (http://jon.gold)",
   "contributors": [
-    "Ben Wilkins <ben.wilkins@airbnb.com>"
+    "Ben Wilkins <ben.wilkins@airbnb.com>",
+    "Leland Richardson <leland.richardson@airbnb.com>"
   ],
   "files": [
     "lib",
