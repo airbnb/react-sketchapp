@@ -16,9 +16,11 @@ Clone & build the repo, and symlink the examples:
 ```sh
 git clone git@github.com:jongold/react-sketchapp.git
 cd react-sketchapp
-npm install && npm run build:plugin
+npm install && npm run watch:plugin
 ./symlink-plugin.sh
 ```
+
+Open Sketch; examples will be in `Plugins -> react-example`.
 
 ## Using react-sketchapp
 Check out:
@@ -36,16 +38,28 @@ react-example.sketchplugin
 You'll want to create a new repo, create a similar build process to ^^^, and implement your handler ~= this:
 
 ```jsx
-import { render } from 'react-sketchapp';
+import { render, Artboard, View, Text } from 'react-sketchapp';
 
 const document = () => (
-  <artboard>
-    <group>
-      <rect x={10} y={10} height={10} width={10} />
-      <oval x={10} y={10} height={10} width={10} />
-      <text value='yoooo' />
-    </group>
-  </artboard>
+  <Artboard>
+    <View>
+      <View
+        style={{
+          height: 10,
+          width: 10,
+          backgroundColor: '#333',
+        }}
+      />
+      <Text
+        style={{
+          fontSize: 24,
+          fontFamily: 'FontFoo-PostscriptName',
+          //etc
+        }}
+        children='yoooo'
+      />
+    </View>
+  </Artboard>
 );
 
 const onRun = (context) => {
@@ -56,69 +70,9 @@ const onRun = (context) => {
 ```
 
 ## Documentation
-WIP!
-```jsx
-<artboard />
-type Artboard = {
-  name?: string,
-  children?: any,
-  paddingTop?: number,
-  paddingRight?: number,
-  paddingBottom?: number,
-  paddingLeft?: number,
-  backgroundColor?: string,
-};
-
-<rect />
-export type Rect = {
-  name?: string,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  radius?: number,
-  locked?: boolean,
-  backgroundColor?: string,
-}
-
-<oval />
-export type Oval = {
-  name?: string,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  locked?: boolean,
-  backgroundColor?: string,
-}
-
-<group />
-export type Group = {
-  name?: string,
-  x?: number,
-  y?: number,
-  locked?: boolean,
-  clickThrough?: boolean,
-  children: any[],
-}
-
-<text>
-export type Text = {
-  name?: string,
-  value: string,
-  uppercase?: boolean,
-  fontFamily: string,
-  fontSize: number,
-  color?: string,
-  lineHeight?: number,
-  opacity?: number,
-  x?: number,
-  y?: number,
-  letterSpacing?: number,
-  align?: 'left' | 'right' | 'center' | 'full',
-  locked?: boolean,
-}
-```
+WIP, sorry. `<View />` & `<Text />` mirror their [`react-native`](https://github.com/facebook/react-native) /
+[`react-primitives`](https://github.com/lelandrichardson/react-primitives)
+counterparts - have fun with full flexbox layout.
 
 ## Further Reading & inspiration
 ### React Renderers
@@ -144,7 +98,3 @@ export type Text = {
 - Fluid for Sketch - provides a means to create constraint-based designs. Shows custom UI and interacts with a framework https://github.com/matt-curtis/Fluid-for-Sketch https://github.com/matt-curtis/Sketch-Plugin-Framework
 
 - Create shapes from props https://github.com/elliotekj/specify
-
-### Development
-```
-```
