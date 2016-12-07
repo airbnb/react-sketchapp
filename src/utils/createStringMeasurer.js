@@ -10,7 +10,7 @@ const createStringMeasurer = (string: string, style: TextStyle) => (
   // heightMode: MeasureMode
 ): Size => {
   // TODO: create a shared style => font/letterspacing/etc function to reuse in `text`
-  const font = NSFont.fontWithName_size(style.fontFamily || 'Arial', style.fontSize || 32);
+  const font = NSFont.fontWithName_size(style.fontFamily || 'Helvetica', style.fontSize || 12);
   // TODO: add in attributes for letterSpacing, etc.
 
 
