@@ -30,6 +30,7 @@
     "ReactComponent": true
   },
   "rules": {
+    "class-methods-use-this": 0,
     "no-underscore-dangle": 0,
     "new-cap": 0,
     "no-duplicate-imports": [0],
