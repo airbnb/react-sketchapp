@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, View, Text, StyleSheet, Artboard } from '../src';
+import { render, View, Text, StyleSheet } from '../src';
 import { dump } from '../src/debug';
 
 global.dump = dump;
