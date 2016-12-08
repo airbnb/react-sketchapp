@@ -87,15 +87,11 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
   }
   const renderer = new Renderer();
   const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props, value);
-  const backingLayer = renderer.renderBackingLayer(layout, style, textStyle, props, value);
+  const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, value);
   layer.addLayers([
     groupLayer,
   ]);
-  if (backingLayer !== null) {
-    groupLayer.addLayers([
-      backingLayer,
-    ]);
-  }
+  groupLayer.addLayers(backingLayers);
   children.map(child => renderToSketch(child, groupLayer));
 };
 

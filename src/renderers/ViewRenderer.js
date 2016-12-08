@@ -1,19 +1,17 @@
 /* @flow */
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
+import processTransform from './processTransform';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 
 const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
 
-const BORDER_RADIUS_PROPS = [
-  'borderRadius',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderBottomLeftRadius',
-  'borderBottomRightRadius',
-];
-
-const BORDER_PROPS = [
+const VISIBLE_STYLES = [
+  'shadowColor',
+  'shadowOffset',
+  'shadowOpacity',
+  'shadowRadius',
+  'backgroundColor',
   'borderColor',
   'borderTopColor',
   'borderRightColor',
@@ -27,154 +25,158 @@ const BORDER_PROPS = [
   'borderLeftWidth',
 ];
 
-/*
-  a   b   0
-  c   d   0
-  tx  ty  1
- */
-function CGAffineTransformMake(a, b, c, d, tx, ty) {
-  return { a, b, c, d, tx, ty };
-}
+function makeRect(x, y, width, height, color) {
+  const rect = MSRectangleShape.alloc().init();
+  rect.frame = MSRect.rectWithRect(NSMakeRect(x, y, width, height));
 
-function convertToRadians(value: string): number {
-  const floatValue = parseFloat(value, 10);
-  return value.indexOf('rad') > -1 ? floatValue : ((floatValue * Math.PI) / 180);
-}
+  const layer = MSShapeGroup.shapeWithPath(rect);
 
-function applyTransform(rect: any, layout: LayoutInfo, key: string, value: number | string) {
-  let transform = null;
-  switch (key) {
-    case 'perspective':
-      // TODO: Figure out how to do 3D transforms
-      break;
-    case 'rotate':
-    case 'rotateZ':
-      transform = CGAffineTransformMakeRotation(convertToRadians(value));
-      break;
-    case 'rotateX':
-    case 'rotateY':
-      // TODO: Figure out how to do 3D transforms
-      break;
-    case 'scale':
-      transform = CGAffineTransformMakeScale(value, value);
-      break;
-    case 'scaleX':
-      transform = CGAffineTransformMakeScale(value, 1);
-      break;
-    case 'scaleY':
-      transform = CGAffineTransformMakeScale(1, value);
-      break;
-    case 'translateX':
-      transform = CGAffineTransformMakeTranslation(value / layout.width, 0);
-      break;
-    case 'translateY':
-      transform = CGAffineTransformMakeTranslation(0, value / layout.height);
-      break;
-    case 'skewX': {
-      //   1      0      0
-      // sin(x) cos(x)   0
-      //   0      0      1
-      const rads = convertToRadians(value);
-      transform = CGAffineTransformMake(1, 0, Math.sin(rads), Math.cos(rads), 0, 0);
-    } break;
-    case 'skewY': {
-      // cos(y) sin(y)   0
-      //   0      1      0
-      //   0      0      1
-      const rads = convertToRadians(value);
-      transform = CGAffineTransformMake(Math.cos(rads), Math.sin(rads), 0, 1, 0, 0);
-    } break;
-    default:
-      log(`did an unsupported transform: ${key}: ${value}`);
-      break;
+  if (color !== undefined) {
+    const fillStyle = layer.style().addStylePartOfType(0);
+    fillStyle.color = convertToColor(color);
   }
-  if (transform !== null) {
-    // by default in sketch, transform origin is (0, 0), but in RN it's (0.5, 0.5)
-    // to remedy, we apply a translation matrix before and after the transform
-    const translate = CGAffineTransformMakeTranslation(-0.5, -0.5);
-    const untranslate = CGAffineTransformMakeTranslation(0.5, 0.5);
-    // this is effectively translate * transfrom * untranslate
-    transform = CGAffineTransformConcat(translate, transform);
-    transform = CGAffineTransformConcat(transform, untranslate);
-    rect.applyAffineTransformToPath(transform);
-  }
+
+  return layer;
 }
 
-function processTransform(rect: any, layout: LayoutInfo, transforms: Array<any>) {
-  transforms.forEach((t) => {
-    Object.keys(t).forEach(key => applyTransform(rect, layout, key, t[key]));
-  });
+function same(a, b, c, d) {
+  return a === b && b === c && c === d;
 }
 
 class ViewRenderer extends SketchRenderer {
-  renderBackingLayer(
+  renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
     value: ?string
-  ): SketchLayer {
-    const rect = MSRectangleShape.alloc().init();
+  ): Array<SketchLayer> {
+    const layers = [];
     // NOTE: the group handles the position, so we just care about width/height here
-    const borderWidth = style.borderWidth || 0;
-    rect.frame = MSRect.rectWithRect(
-      NSMakeRect(0, 0, layout.width - borderWidth, layout.height - borderWidth)
-    );
 
-    if (hasAnyDefined(style, BORDER_RADIUS_PROPS)) {
-      const initial = style.borderRadius !== undefined ? style.borderRadius : 0;
-      let topLeft = initial;
-      let topRight = initial;
-      let bottomRight = initial;
-      let bottomLeft = initial;
-      if (style.borderTopLeftRadius !== undefined) {
-        topLeft = style.borderTopLeftRadius;
+    const bl = style.borderLeftWidth || 0;
+    const br = style.borderRightWidth || 0;
+    const bt = style.borderTopWidth || 0;
+    const bb = style.borderBottomWidth || 0;
+
+    const btlr = style.borderTopLeftRadius || 0;
+    const btrr = style.borderTopRightRadius || 0;
+    const bbrr = style.borderBottomRightRadius || 0;
+    const bblr = style.borderBottomLeftRadius || 0;
+
+    if (!hasAnyDefined(style, VISIBLE_STYLES)) {
+      // in some cases, views are just spacing and nothing else.
+      // in that case, just do nothing.
+
+      // TODO(lmr): do border colors need to be the same as well?
+    } else if (same(bl, br, bt, bb)) {
+      // all sides have same border width
+      // in this case, we can do everything with just a single shape.
+
+      const rect = MSRectangleShape.alloc().init();
+      rect.frame = MSRect.rectWithRect(
+        NSMakeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb)
+      );
+
+      // set radius
+      rect.setCornerRadiusFromComponents(`${btlr}/${btrr}/${bbrr}/${bblr}`);
+
+      // TODO(lmr):
+      // we need to figure out how to move this to the group, because if we don't, it won't
+      // transform its children as well...
+      if (style.transform !== undefined) {
+        processTransform(rect, layout, style.transform);
       }
-      if (style.borderTopRightRadius !== undefined) {
-        topRight = style.borderTopRightRadius;
+
+      const content = MSShapeGroup.shapeWithPath(rect);
+
+      if (style.backgroundColor !== undefined) {
+        const fillStyle = content.style().addStylePartOfType(0);
+        fillStyle.color = convertToColor(style.backgroundColor);
       }
-      if (style.borderBottomRightRadius !== undefined) {
-        bottomRight = style.borderBottomRightRadius;
-      }
-      if (style.borderBottomLeftRadius !== undefined) {
-        bottomLeft = style.borderBottomLeftRadius;
-      }
-      rect.setCornerRadiusFromComponents(`${topLeft}/${topRight}/${bottomRight}/${bottomLeft}`);
-    }
 
-    if (style.transform !== undefined) {
-      processTransform(rect, layout, style.transform);
-    }
+      const borderStyle = content.style().addStylePartOfType(1);
 
-    const layer = MSShapeGroup.shapeWithPath(rect);
-    const fillStyle = layer.style().addStylePartOfType(0);
-
-    fillStyle.color = convertToColor(style.backgroundColor);
-
-    if (style.opacity !== undefined) {
-      layer.style().contextSettings().opacity = style.opacity;
-    }
-
-
-    if (hasAnyDefined(style, BORDER_PROPS)) {
-      const borderStyle = layer.style().addStylePartOfType(1);
+      // 0 - solid
+      // 1 - gradient
       borderStyle.setFillType(0); // solid
 
-      if (style.borderColor !== undefined) {
-        borderStyle.setColor(convertToColor(style.borderColor));
-      }
-      if (style.borderWidth !== undefined) {
-        borderStyle.setThickness(style.borderWidth);
+      if (style.borderTopColor !== undefined) {
+        borderStyle.setColor(convertToColor(style.borderTopColor));
       }
 
-      // TODO: handle different widths/colors for each side
-      // TODO: handle different stroke patterns, like dashed etc.
+      borderStyle.setThickness(style.borderTopWidth || 0);
+
+      // 0 - center
+      // 1 - inside
+      // 2 - outside
+      borderStyle.setPosition(2);
+
+
+      layers.push(content);
+    } else {
+      // some sides have different border widths. In this case, we don't currently
+      // support the border radius property, as we end up creating each border
+      // as a separate shape.
+      if (style.backgroundColor !== undefined) {
+        const content = makeRect(
+          bl,
+          bt,
+          layout.width - bl - br,
+          layout.height - bt - bb,
+          style.backgroundColor
+        );
+        layers.push(content);
+      }
+
+      if (bt > 0) {
+        const topBorder = makeRect(
+          0,
+          0,
+          layout.width,
+          bt,
+          style.borderTopColor
+        );
+        layers.push(topBorder);
+      }
+
+      if (bl > 0) {
+        const leftBorder = makeRect(
+          0,
+          0,
+          bl,
+          layout.height,
+          style.borderLeftColor
+        );
+        layers.push(leftBorder);
+      }
+
+      if (bb > 0) {
+        const bottomBorder = makeRect(
+          0,
+          layout.height - bb,
+          layout.width,
+          bb,
+          style.borderBottomColor
+        );
+        layers.push(bottomBorder);
+      }
+
+      if (br > 0) {
+        const rightBorder = makeRect(
+          layout.width - br,
+          0,
+          br,
+          layout.height,
+          style.borderRightColor
+        );
+        layers.push(rightBorder);
+      }
+      // TODO(lmr): how do we do transform in this case?
     }
 
-    // TODO: handle style.transform
-
-    return layer;
+    return layers;
   }
 }
 

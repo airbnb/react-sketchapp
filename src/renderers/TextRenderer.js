@@ -18,16 +18,16 @@ const TEXT_BEHAVIOR = {
 };
 
 class TextRenderer extends SketchRenderer {
-  renderBackingLayer(
+  renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
     props: any,
     value: ?string
-  ): SketchLayer {
+  ): Array<SketchLayer> {
     if (value === null) {
       const viewRenderer = new ViewRenderer();
-      return viewRenderer.renderBackingLayer(layout, style, textStyle, props, value);
+      return viewRenderer.renderBackingLayers(layout, style, textStyle, props, value);
     }
 
     const layer = MSTextLayer
@@ -73,7 +73,7 @@ class TextRenderer extends SketchRenderer {
 
     // TODO: fontWeight
 
-    return layer;
+    return [layer];
   }
 }
 

@@ -72,7 +72,7 @@ const styleShortHands = {
  * override less specific styles, whatever the order in which they were
  * originally declared.
  */
-const sortProps = (propsArray) => propsArray.sort((a, b) => {
+const sortProps = propsArray => propsArray.sort((a, b) => {
   const expandedA = styleShortHands[a];
   const expandedB = styleShortHands[b];
   if (expandedA && expandedA[b]) {
@@ -93,12 +93,14 @@ const expandStyle = (style) => {
   const sortedProps = sortProps(propsArray);
   const resolvedStyle = {};
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < sortedProps.length; i++) {
     const key = sortedProps[i];
     const expandedProps = styleShortHands[key];
     const value = style[key];
 
     if (expandedProps) {
+      // eslint-disable-next-line no-restricted-syntax
       for (const propName in expandedProps) {
         if (hasOwnProperty.call(expandedProps, propName)) {
           resolvedStyle[propName] = value;

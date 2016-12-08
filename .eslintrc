@@ -4,6 +4,10 @@
   "globals": {
     "CGSizeMake": true,
     "COSAlertWindow": true,
+    "CGAffineTransformMakeRotation": true,
+    "CGAffineTransformMakeScale": true,
+    "CGAffineTransformMakeTranslation": true,
+    "CGAffineTransformConcat": true,
     "log": true,
     "MSArtboardGroup": true,
     "MSColor": true,

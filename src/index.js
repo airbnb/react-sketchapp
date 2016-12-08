@@ -1,5 +1,6 @@
 /* @flow */
 import render from './render';
+import Platform from './Platform';
 import StyleSheet from './stylesheet';
 import View from './components/View';
 import Text from './components/Text';
@@ -11,4 +12,5 @@ module.exports = {
   View,
   Text,
   Artboard,
+  Platform,
 };
