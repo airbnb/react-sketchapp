@@ -20,3 +20,7 @@ declare var MSRectangleShape: any;
 declare var MSShapeGroup: any;
 declare var MSTextLayer: any;
 declare var NSMakeRect: any;
+declare var CGAffineTransformMakeRotation: any;
+declare var CGAffineTransformMakeScale: any;
+declare var CGAffineTransformMakeTranslation: any;
+declare var CGAffineTransformConcat: any;

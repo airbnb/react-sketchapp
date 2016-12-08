@@ -19,27 +19,31 @@ class SketchRenderer {
   ): SketchLayer {
     const layer = MSLayerGroup.alloc().init();
 
-    // NOTE:
-    // in sketch, borders with width are centered on the frame, so a border width of 10 will result
-    // in 5 pixels of it being outside of the frame, and 5 being inside. The flexbox algorithm
-    // assumes box-sizing: border-box, which includes border widths in the width/height
-    // calculations. As a result, we want to add half of the border width to the top/left.
-    const borderWidth = style.borderWidth || 0;
-    layer.frame().setX(layout.left + (borderWidth / 2));
-    layer.frame().setY(layout.top + (borderWidth / 2));
-    layer.frame().setWidth(layout.width - borderWidth);
-    layer.frame().setHeight(layout.height - borderWidth);
+    layer.frame().setX(layout.left);
+    layer.frame().setY(layout.top);
+    layer.frame().setWidth(layout.width);
+    layer.frame().setHeight(layout.height);
+
+    // TODO(lmr): applying transform to the group would be ideal, but not sure if it's possible
+    // if (style.transform !== undefined) {
+    //   processTransform(layer, layout, style.transform);
+    // }
+
+    if (style.opacity !== undefined) {
+      layer.style().contextSettings().opacity = style.opacity;
+    }
+
     return layer;
   }
-  renderBackingLayer(
+  renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
     value: ?string
-  ): ?SketchLayer {
-    return null;
+  ): Array<SketchLayer> {
+    return [];
   }
 }
 
