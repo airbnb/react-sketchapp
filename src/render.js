@@ -48,7 +48,7 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
         measure: createStringMeasurer(node, textStyle),
       },
       textStyle,
-      props: null,
+      props: {},
       value: node,
       children: [],
     };

@@ -7,8 +7,9 @@ import type {
 } from '../types';
 
 class SketchRenderer {
-  props: any;
-  value: ?string;
+  getDefaultGroupName(/* props: any, value: ?string */) {
+    return 'Group';
+  }
   renderGroupLayer(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -23,6 +24,12 @@ class SketchRenderer {
     layer.frame().setY(layout.top);
     layer.frame().setWidth(layout.width);
     layer.frame().setHeight(layout.height);
+
+    if (props.name) {
+      layer.setName(props.name);
+    } else {
+      layer.setName(this.getDefaultGroupName(props, value));
+    }
 
     // TODO(lmr): applying transform to the group would be ideal, but not sure if it's possible
     // if (style.transform !== undefined) {
