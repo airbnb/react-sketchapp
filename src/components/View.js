@@ -8,6 +8,7 @@ const propTypes = {
   style: PropTypes.shape({
     ...ViewStylePropTypes,
   }),
+  name: PropTypes.string,
   children: PropTypes.node,
 };
 
@@ -15,6 +16,7 @@ class View extends React.Component {
   render() {
     return (
       <view
+        name={this.props.name}
         style={StyleSheet.flatten(this.props.style)}
       >
         {this.props.children}

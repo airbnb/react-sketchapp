@@ -10,6 +10,7 @@ const propTypes = {
     ...ViewStylePropTypes,
     ...TextStylePropTypes,
   }),
+  name: PropTypes.string,
   children: PropTypes.node,
 };
 
@@ -17,6 +18,7 @@ class Text extends React.Component {
   render() {
     return (
       <text
+        name={this.props.name}
         style={StyleSheet.flatten(this.props.style)}
       >
         {this.props.children}

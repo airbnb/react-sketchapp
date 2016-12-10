@@ -44,6 +44,9 @@ function same(a, b, c, d) {
 }
 
 class ViewRenderer extends SketchRenderer {
+  getDefaultGroupName(/* props: any, value: ?string */) {
+    return 'View';
+  }
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -91,6 +94,8 @@ class ViewRenderer extends SketchRenderer {
 
       const content = MSShapeGroup.shapeWithPath(rect);
 
+      content.setName('Content');
+
       if (style.backgroundColor !== undefined) {
         const fillStyle = content.style().addStylePartOfType(0);
         fillStyle.color = convertToColor(style.backgroundColor);
@@ -127,6 +132,7 @@ class ViewRenderer extends SketchRenderer {
           layout.height - bt - bb,
           style.backgroundColor
         );
+        content.setName('Content');
         layers.push(content);
       }
 
@@ -138,6 +144,7 @@ class ViewRenderer extends SketchRenderer {
           bt,
           style.borderTopColor
         );
+        topBorder.setName('Border (top)');
         layers.push(topBorder);
       }
 
@@ -149,6 +156,7 @@ class ViewRenderer extends SketchRenderer {
           layout.height,
           style.borderLeftColor
         );
+        leftBorder.setName('Border (left)');
         layers.push(leftBorder);
       }
 
@@ -160,6 +168,7 @@ class ViewRenderer extends SketchRenderer {
           bb,
           style.borderBottomColor
         );
+        bottomBorder.setName('Border (bottom)');
         layers.push(bottomBorder);
       }
 
@@ -171,6 +180,7 @@ class ViewRenderer extends SketchRenderer {
           layout.height,
           style.borderRightColor
         );
+        rightBorder.setName('Border (right)');
         layers.push(rightBorder);
       }
       // TODO(lmr): how do we do transform in this case?
