@@ -1,87 +1,54 @@
+/* @flow */
 import React from 'react';
-import { render, View, Text, StyleSheet } from '../src';
+import { render, View } from '../src';
+import Profile from './Twitter';
 import { dump } from '../src/debug';
+import { spacing } from './designSystem';
+import Space from './components/Space';
 
 global.dump = dump;
 
-const colors = {
-  gray: '#F3F4F4',
-  sur: '#96DBE4',
-  peach: '#EFADA0',
-  pear: '#93DAAB',
-};
+type SketchContext = any;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.gray,
-    padding: 20,
-    width: 200,
+const users = [
+  {
+    screen_name: 'mxstbr',
+    name: 'Max Stoiber',
+    description: '⚛️ Makes styled-components, react-boilerplate, @KeystoneJS and CarteBlanche. ✌ Open source developer @thethinkmill. ☕ Speciality coffee geek, skier, traveller.',
+    location: 'Vienna, Austria',
+    url: 'mxstbr.com',
+    profile_image_url: 'https://pbs.twimg.com/profile_images/763033229993574400/6frGyDyA_400x400.jpg',
   },
-  someOtherThing: {
+  {
+    name: '- ̗̀Jackie ̖́-',
+    screen_name: 'jackiesaik',
+    description: 'Graphic designer, never won a spelling be. Toronto on weekdays. Go Home Lake on weekends. ╮ (. ● ᴗ ●.) ╭',
+    location: 'Toronto, ON',
+    url: 'cargocollective.com/jackiesaik',
+    profile_image_url: 'https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg',
   },
-  box: {
+  {
+    screen_name: 'jongold',
+    name: 'kerning man',
+    description: 'an equal command of technology and form • functional programming (oc)cultist • design tools @airbnbdesign',
+    location: 'California',
+    url: 'weirdwideweb.jon.gold',
+    profile_image_url: 'https://pbs.twimg.com/profile_images/773384639796740096/KdvxyX7M.jpg',
   },
-  text1: {
-    fontFamily: 'Arial',
-    fontSize: 24,
-    lineHeight: 32,
-    color: '#000',
-  },
-  text2: {
+];
 
-  },
-});
-
-const text = (
-  <View style={styles.container}>
-    <Text style={styles.text1}>
-      Hello World! this is a bunch of text that I am hoping wraps...
-    </Text>
-    <Text style={styles.text2}>
-      Hello World! this is a bunch of text that I am hoping wraps...
-    </Text>
+const Page = () => (
+  <View style={{ flexDirection: 'row', flexWrap: 'wrap', width: 600 }}>
+    { users.map(user =>
+      <Space h={spacing} v={spacing}>
+        <Profile user={user} />
+      </Space>
+    )}
   </View>
 );
 
-// const element = (
-//   <View style={{ backgroundColor: colors.gray, padding: 20 }}>
-//     <View
-//       style={{
-//         flexDirection: 'column',
-//         backgroundColor: colors.sur,
-//         padding: 20,
-//         margin: 20,
-//       }}
-//     >
-//       <View
-//         style={{
-//           width: 100,
-//           height: 100,
-//           backgroundColor: colors.pear,
-//           borderRadius: 10,
-//           opacity: 0.5,
-//         }}
-//       />
-//       <View
-//         style={{
-//           width: 100,
-//           height: 100,
-//           backgroundColor: colors.pear,
-//           margin: 10,
-//           borderWidth: 1,
-//           borderRadius: 10,
-//           borderColor: '#000',
-//         }}
-//       />
-//       <View style={{ width: 200, height: 100, backgroundColor: colors.pear }} />
-//     </View>
-//   </View>
-// );
-
-const onRun = (context) => {
-  log('onRun');
-  // render(element, context);
-  render(text, context);
+const onRun = (context: SketchContext) => {
+  render(<Page />, context);
 };
 
 module.exports = onRun;
