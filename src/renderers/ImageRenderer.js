@@ -18,6 +18,24 @@ const PATTERN_FILL_TYPE = {
   Fit: 3,
 };
 
+function makeRect(x, y, width, height, color) {
+  const rect = MSRectangleShape.alloc().init();
+  rect.frame = MSRect.rectWithRect(NSMakeRect(x, y, width, height));
+
+  const layer = MSShapeGroup.shapeWithPath(rect);
+
+  if (color !== undefined) {
+    const fillStyle = layer.style().addStylePartOfType(0);
+    fillStyle.color = convertToColor(color);
+  }
+
+  return layer;
+}
+
+function same(a, b, c, d) {
+  return a === b && b === c && c === d;
+}
+
 class ImageRenderer extends SketchRenderer {
   renderBackingLayers(
     layout: LayoutInfo,
@@ -29,11 +47,17 @@ class ImageRenderer extends SketchRenderer {
   ): Array<SketchLayer> {
     // TODO: borders
 
+    const bl = style.borderLeftWidth || 0;
+    const br = style.borderRightWidth || 0;
+    const bt = style.borderTopWidth || 0;
+    const bb = style.borderBottomWidth || 0;
+
     const btlr = style.borderTopLeftRadius || 0;
     const btrr = style.borderTopRightRadius || 0;
     const bbrr = style.borderBottomRightRadius || 0;
     const bblr = style.borderBottomLeftRadius || 0;
 
+    const layers = [];
     const rect = MSRectangleShape.alloc().init();
     rect.frame = MSRect.rectWithRect(
       NSMakeRect(0, 0, layout.width, layout.height)
@@ -41,14 +65,14 @@ class ImageRenderer extends SketchRenderer {
 
     rect.setCornerRadiusFromComponents(`${btlr}/${btrr}/${bbrr}/${bblr}`);
 
-    const layer = MSShapeGroup.shapeWithPath(rect);
+    const content = MSShapeGroup.shapeWithPath(rect);
 
     if (style.backgroundColor !== undefined) {
-      const fillStyle = layer.style().addStylePartOfType(0);
+      const fillStyle = content.style().addStylePartOfType(0);
       fillStyle.color = convertToColor(style.backgroundColor);
     }
 
-    const imageFill = layer.style().addStylePartOfType(0);
+    const imageFill = content.style().addStylePartOfType(0);
     const imageData = NSImage.alloc().initByReferencingURL(NSURL.URLWithString(props.source));
     imageFill.setImage(MSImageData.alloc().initWithImage_convertColorSpace(imageData, false));
     imageFill.setFillType(FILL_TYPE.Pattern);
@@ -58,12 +82,71 @@ class ImageRenderer extends SketchRenderer {
       processTransform(rect, layout, style.transform);
     }
 
-    // layer.setRotation(30);
+    layers.push(content);
 
+    if (same(bl, br, bt, bb)) {
+      const borderStyle = content.style().addStylePartOfType(1);
+      // 0 - solid
+      // 1 - gradient
+      borderStyle.setFillType(0); // solid
 
-    return [
-      layer,
-    ];
+      if (style.borderTopColor !== undefined) {
+        borderStyle.setColor(convertToColor(style.borderTopColor));
+      }
+
+      borderStyle.setThickness(style.borderTopWidth || 0);
+
+      // 0 - center
+      // 1 - inside
+      // 2 - outside
+      borderStyle.setPosition(2);
+    } else {
+      if (bt > 0) {
+        const topBorder = makeRect(
+          0,
+          0,
+          layout.width,
+          bt,
+          style.borderTopColor
+        );
+        layers.push(topBorder);
+      }
+
+      if (bl > 0) {
+        const leftBorder = makeRect(
+          0,
+          0,
+          bl,
+          layout.height,
+          style.borderLeftColor
+        );
+        layers.push(leftBorder);
+      }
+
+      if (bb > 0) {
+        const bottomBorder = makeRect(
+          0,
+          layout.height - bb,
+          layout.width,
+          bb,
+          style.borderBottomColor
+        );
+        layers.push(bottomBorder);
+      }
+
+      if (br > 0) {
+        const rightBorder = makeRect(
+          layout.width - br,
+          0,
+          br,
+          layout.height,
+          style.borderRightColor
+        );
+        layers.push(rightBorder);
+      }
+    }
+
+    return layers;
   }
 }
 
