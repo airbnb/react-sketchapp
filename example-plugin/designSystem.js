@@ -57,7 +57,10 @@ export const fonts = {
 };
 
 export default {
-  colors: colors.map(processColor),
+  colors: Object.keys(colors).reduce((acc, name) => ({
+    ...acc,
+    [name]: processColor(colors[name]),
+  }), {}),
   fonts,
   spacing,
 };
