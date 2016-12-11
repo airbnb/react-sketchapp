@@ -1,4 +1,4 @@
-import TestRenderer from 'react/lib/ReactTestRenderer';
+import TestRenderer from 'react-test-renderer';
 import computeLayout from 'css-layout';
 import Context from './utils/Context';
 import createStringMeasurer from './utils/createStringMeasurer';

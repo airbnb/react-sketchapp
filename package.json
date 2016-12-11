@@ -33,11 +33,11 @@
     "watch": "npm run watch:react & npm run watch:plugin"
   },
   "dependencies": {
-    "css-layout": "^1.1.1",
-    "fbjs": "^0.8.5",
-    "invariant": "^2.2.2",
-    "ramda": "^0.22.1",
-    "react": "~15.3.2"
+    "css-layout": "^1.1.1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-test-renderer": "*"
   },
   "keywords": [
     "sketch",
@@ -75,6 +75,8 @@
     "gitbook-cli": "^2.3.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
+    "react": "^15.4.1",
+    "react-test-renderer": "^15.4.1",
     "rimraf": "^2.5.4",
     "webpack": "^1.13.3"
   }

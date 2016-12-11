@@ -1,10 +1,10 @@
 /* @flow */
 import React, { PropTypes } from 'react';
-import { dissoc } from 'ramda';
 import StyleSheet from '../stylesheet';
-import View from './View';
 import ViewStylePropTypes from './ViewStylePropTypes';
 
+// TODO: handle other types, like React Native does
+// https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageSourcePropType.js
 const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.shape({
     uri: PropTypes.string.isRequired,
@@ -12,13 +12,23 @@ const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.string,
 ]);
 
+const ResizeModePropType = PropTypes.oneOf([
+  'contain',
+  'cover',
+  'stretch',
+  'center',
+  'repeat',
+  'none',
+]);
+
 const propTypes = {
   children: PropTypes.any,
   defaultSource: ImageSourcePropType,
-  resizeMode: PropTypes.oneOf(['contain', 'cover', 'none', 'stretch']),
+  resizeMode: ResizeModePropType,
   source: ImageSourcePropType,
   style: PropTypes.shape({
     ...ViewStylePropTypes,
+    resizeMode: ResizeModePropType,
   }),
 };
 
@@ -26,6 +36,8 @@ const ResizeModes = {
   contain: 'Fit',
   cover: 'Fill',
   stretch: 'Stretch',
+  // center: 'Center', // TODO
+  // repeat: 'Repeat', // TODO
   // none: 'Fill',
 };
 
@@ -42,9 +54,11 @@ class Image extends React.Component {
 
     const sketchResizeMode = ResizeModes[resizeMode || style.resizeMode];
 
+    // TODO: check to see if `source` specifies a width/height as well, and pass into `style` if so
+
     return (
       <image
-        style={dissoc('resizeMode', style)}
+        style={style}
         source={source || defaultSource}
         resizeMode={sketchResizeMode}
       >

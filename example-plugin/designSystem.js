@@ -1,4 +1,3 @@
-import { map } from 'ramda';
 import processColor from './processColor';
 import type { Color } from './processColor';
 
@@ -58,7 +57,7 @@ export const fonts = {
 };
 
 export default {
-  colors: map(processColor, colors),
+  colors: colors.map(processColor),
   fonts,
   spacing,
 };
