@@ -14,6 +14,12 @@ const propTypes = {
   children: PropTypes.node,
 };
 
+/**
+ * @example
+ * <Text name='Foo' style={style}>
+ *   Hello World!
+ * </Text>
+ */
 class Text extends React.Component {
   render() {
     return (

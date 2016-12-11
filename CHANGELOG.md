@@ -1,2 +1,4 @@
-## 0.1.0 (Nov 28, 2016)
-Initial push
+# Change Log
+
+This project adheres to [Semantic Versioning](http://semver.org/).
+Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/jongold/react-sketchapp/releases) page.

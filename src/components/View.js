@@ -12,6 +12,12 @@ const propTypes = {
   children: PropTypes.node,
 };
 
+/**
+ * @example
+ * <View name='Foo' style={style}>
+ *   <Text />
+ * </View>
+ */
 class View extends React.Component {
   render() {
     return (

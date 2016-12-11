@@ -2,4 +2,5 @@
 **/react-example.sketchplugin/**
 **/node_modules/**
 **/flow-typed/**
+**/_book/**
 webpack.config*

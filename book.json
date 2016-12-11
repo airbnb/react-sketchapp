@@ -1,0 +1,22 @@
+{
+  "gitbook": ">= 3.2.1",
+  "title": "react-sketchapp",
+  "plugins": [
+    "edit-link",
+    "prism",
+    "-highlight",
+    "github",
+    "-search",
+    "codeblock-disable-glossary",
+    "anchorjs"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/jongold/react-sketchapp/tree/master",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/jongold/react-sketchapp/"
+    }
+  }
+}
