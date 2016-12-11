@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import { keys } from 'ramda';
 import { View } from '../../src';
 import Swatch from './Swatch';
 
@@ -17,7 +16,7 @@ const Palette = ({ colors }: P) =>
       flexDirection: 'row',
     }}
   >
-    { keys(colors).map(name =>
+    { Object.keys(colors).map(name =>
       <Swatch color={colors[name]} name={name} />
       )
     }

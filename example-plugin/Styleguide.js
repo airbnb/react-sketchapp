@@ -1,7 +1,6 @@
 /* @flow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { keys } from 'ramda';
 import { render, View } from '../src';
 import designSystem from './designSystem';
 
@@ -13,7 +12,7 @@ const Document = ({ fonts, colors }: any) =>
   <View>
     <Section title="Type Styles">
       <View>
-        { keys(fonts).map(name =>
+        { Object.keys(fonts).map(name =>
           <TypeSpecimen name={name} style={fonts[name]} />)
         }
       </View>
