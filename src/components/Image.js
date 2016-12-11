@@ -43,18 +43,13 @@ class Image extends React.Component {
     const sketchResizeMode = ResizeModes[resizeMode || style.resizeMode];
 
     return (
-      <View>
-        <image
-          style={dissoc('resizeMode', style)}
-          source={source || defaultSource}
-          resizeMode={sketchResizeMode}
-        />
-        { children &&
-          <View>
-            { children }
-          </View>
-        }
-      </View>
+      <image
+        style={dissoc('resizeMode', style)}
+        source={source || defaultSource}
+        resizeMode={sketchResizeMode}
+      >
+        { children }
+      </image>
     );
   }
 }
