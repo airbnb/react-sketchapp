@@ -95,6 +95,13 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
   children.map(child => renderToSketch(child, groupLayer));
 };
 
+/**
+ * Render a React element using a provided SketchContext.
+ * @example
+ * const onRun = (context) => {
+ *   render(<View />, context);
+ * }
+ */
 function render(element: React$Element<any>, context: SketchContext) {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();

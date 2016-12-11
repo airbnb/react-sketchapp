@@ -99,7 +99,9 @@ const flattenStyle = (input) => {
   return expandStyle(input);
 };
 
-
+/**
+ * A StyleSheet is an abstraction similar to CSS StyleSheets. WIP.
+ */
 const StyleSheet = {
   hairlineWidth: 1, // TODO(lmr): should this be something different?
   absoluteFill: registerStyle({
