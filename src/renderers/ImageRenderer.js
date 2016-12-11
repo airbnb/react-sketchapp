@@ -36,6 +36,13 @@ function same(a, b, c, d) {
   return a === b && b === c && c === d;
 }
 
+function extractURLFromSource(source) {
+  if (typeof source === 'string') {
+    return source;
+  }
+  return source.uri;
+}
+
 class ImageRenderer extends SketchRenderer {
   renderBackingLayers(
     layout: LayoutInfo,
@@ -73,7 +80,9 @@ class ImageRenderer extends SketchRenderer {
     }
 
     const imageFill = content.style().addStylePartOfType(0);
-    const imageData = NSImage.alloc().initByReferencingURL(NSURL.URLWithString(props.source));
+    const imageData = NSImage.alloc().initByReferencingURL(
+      NSURL.URLWithString(extractURLFromSource(props.source))
+    );
     imageFill.setImage(MSImageData.alloc().initWithImage_convertColorSpace(imageData, false));
     imageFill.setFillType(FILL_TYPE.Pattern);
     imageFill.setPatternFillType(PATTERN_FILL_TYPE[props.resizeMode] || PATTERN_FILL_TYPE.Fill);

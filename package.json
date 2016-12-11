@@ -33,11 +33,11 @@
     "watch": "npm run watch:react & npm run watch:plugin"
   },
   "dependencies": {
-    "css-layout": "^1.1.1",
-    "fbjs": "^0.8.5",
-    "invariant": "^2.2.2",
-    "ramda": "^0.22.1",
-    "react": "~15.3.2"
+    "css-layout": "^1.1.1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-test-renderer": "*"
   },
   "keywords": [
     "sketch",
