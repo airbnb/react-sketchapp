@@ -22,9 +22,12 @@
 # I don't even know why these have started to break, fml
 .*/node_modules/config-chain.*
 .*/node_modules/npmconf.*
+.*/node_modules/conventional-changelog-core.*
+.*/node_modules/npm.*
 
 .*/_backup
 .*/docs
+.*/_book
 
 [include]
 
