@@ -4,8 +4,9 @@
 
 const renderers: { [key: string]: any } = {
   artboard: require('./ArtboardRenderer'),
-  view: require('./ViewRenderer'),
+  image: require('./ImageRenderer'),
   text: require('./TextRenderer'),
+  view: require('./ViewRenderer'),
 };
 
 module.exports = renderers;
