@@ -1,3 +1,4 @@
+/* @flow */
 import { TextStyle, Size } from '../types';
 
 // TODO: do something more sensible here

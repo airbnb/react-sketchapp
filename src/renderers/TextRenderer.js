@@ -18,6 +18,9 @@ const TEXT_BEHAVIOR = {
 };
 
 class TextRenderer extends SketchRenderer {
+  getDefaultGroupName(props: any, value: ?string) {
+    return value || 'Text';
+  }
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -36,6 +39,7 @@ class TextRenderer extends SketchRenderer {
 
     // Text Value
     layer.setStringValue(value);
+    layer.setName(value);
 
     // Styling
 

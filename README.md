@@ -1,4 +1,8 @@
-# react-sketch
+<a href="https://github.com/jongold/react-sketchapp">
+  <img alt="react-sketchapp" src="./docs/assets/logo-stijl@2x.png" height="72px" />
+</a>
+<br />
+
 [![Build Status](https://img.shields.io/travis/jongold/react-sketchapp.svg)](https://travis-ci.org/jongold/react-sketchapp)
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
 
