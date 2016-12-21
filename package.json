@@ -10,7 +10,8 @@
     "Leland Richardson <leland.richardson@airbnb.com>"
   ],
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "build:plugin": "webpack -c",
