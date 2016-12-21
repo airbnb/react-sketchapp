@@ -105,7 +105,7 @@ const findFont = (style: TextStyle): NSFont => {
   // Handle system font as special case. This ensures that we preserve
   // the specific metrics of the standard system font as closely as possible.
   if ((familyName === defaultFontFamily) || (familyName === 'System')) {
-    font = NSFont.systemFontOfSize_weight(14, fontWeight);
+    font = NSFont.systemFontOfSize_weight(fontSize, fontWeight);
 
     if (font) {
       didFindFont = true;
@@ -142,7 +142,7 @@ const findFont = (style: TextStyle): NSFont => {
       isCondensed = isCondensedFont(font);
     } else {
       log(`Unrecognized font family '${familyName}'`);
-      font = NSFont.systemFontOfSize_weight(14, fontWeight);
+      font = NSFont.systemFontOfSize_weight(fontSize, fontWeight);
     }
   }
 
