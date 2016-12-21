@@ -2,6 +2,7 @@
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
+import findFont from '../utils/findFont';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 
 const TEXT_ALIGN = {
@@ -42,12 +43,8 @@ class TextRenderer extends SketchRenderer {
     layer.setName(value);
 
     // Styling
-
-    if (textStyle.fontFamily) {
-      // TODO(lmr): handle default font family etc.
-      const font = NSFont.fontWithName_size(textStyle.fontFamily, textStyle.fontSize);
-      layer.setFont(font);
-    }
+    const font = findFont(textStyle);
+    layer.setFont(font);
 
     if (textStyle.color !== undefined) {
       layer.setTextColor(convertToColor(textStyle.color));

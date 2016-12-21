@@ -24,34 +24,44 @@ const typeSizes = [
 export const spacing = 16;
 
 const fontFamilies = {
-  bold: 'SFUIDisplay-Bold',
-  regular: 'SFUIDisplay-Regular',
+  display: 'Helvetica',
+  body: 'Georgia',
+};
+
+const fontWeights = {
+  regular: 'regular',
+  bold: 'bold',
 };
 
 export const fonts = {
   Headline: {
     fontSize: typeSizes[0],
-    fontFamily: fontFamilies.bold,
+    fontFamily: fontFamilies.display,
+    fontWeight: fontWeights.bold,
     lineHeight: 60,
   },
   'Title 1': {
     fontSize: typeSizes[2],
-    fontFamily: fontFamilies.bold,
+    fontFamily: fontFamilies.display,
+    fontWeight: fontWeights.bold,
     lineHeight: 48,
   },
   'Title 2': {
     fontSize: typeSizes[3],
-    fontFamily: fontFamilies.bold,
+    fontFamily: fontFamilies.display,
+    fontWeight: fontWeights.bold,
     lineHeight: 36,
   },
   'Title 3': {
     fontSize: typeSizes[4],
-    fontFamily: fontFamilies.regular,
+    fontFamily: fontFamilies.body,
+    fontWeight: fontWeights.regular,
     lineHeight: 24,
   },
   Body: {
     fontSize: typeSizes[5],
-    fontFamily: fontFamilies.regular,
+    fontFamily: fontFamilies.body,
+    fontWeight: fontWeights.regular,
     lineHeight: 24,
   },
 };
