@@ -103,12 +103,17 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
  * }
  */
 function render(element: React$Element<any>, context: SketchContext) {
-  const renderer = TestRenderer.create(element);
-  const json: TreeNode = renderer.toJSON();
-  const tree = reactTreeToFlexTree(json, new Context());
-  computeLayout(tree);
-  const page: SketchLayer = context.document.currentPage();
-  renderToSketch(tree, page);
+  try {
+    const renderer = TestRenderer.create(element);
+    const json: TreeNode = renderer.toJSON();
+    const tree = reactTreeToFlexTree(json, new Context());
+    computeLayout(tree);
+    const page: SketchLayer = context.document.currentPage();
+    renderToSketch(tree, page);
+  } catch (err) {
+    // TODO: Make error messaging actually useful
+    context.document.showMessage(`ERROR: ${err.name}`);
+  }
 }
 
 module.exports = render;
