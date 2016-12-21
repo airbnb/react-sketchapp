@@ -45,7 +45,10 @@ const weightOfFont = (font: NSFont): number => {
 
   const weight = traits[NSFontWeightTrait].doubleValue();
   if (weight === 0.0) {
-    for (const w in FONT_WEIGHTS) {
+    const weights = Object.keys(FONT_WEIGHTS);
+    for (let i = 0; i < weights.length; i += 1) {
+      const w = weights[i];
+
       if (font.fontName().toLowerCase().endsWith(w)) {
         return FONT_WEIGHTS[w];
       }
@@ -55,10 +58,6 @@ const weightOfFont = (font: NSFont): number => {
   return weight;
 };
 
-// NSFont doesn't have UIFont's useful
-// UIFont.fontNamesForFamilyName, so we can
-// replicate it
-// https://github.com/iccir/XUIKit/blob/master/Source/XUIFontAdditions.m#L52
 const fontNamesForFamilyName = (familyName: string): Array<string> => {
   const manager = NSFontManager.sharedFontManager();
   const members = NSArray.arrayWithArray(
@@ -73,7 +72,7 @@ const fontNamesForFamilyName = (familyName: string): Array<string> => {
   return results;
 };
 
-const findNSFont = (style: TextStyle): NSFont => {
+const findFont = (style: TextStyle): NSFont => {
   let font;
   const defaultFontFamily = NSFont.systemFontOfSize(14).familyName();
   const defaultFontWeight = NSFontWeightRegular;
@@ -177,4 +176,4 @@ const findNSFont = (style: TextStyle): NSFont => {
   return font;
 };
 
-export default findNSFont;
+export default findFont;
