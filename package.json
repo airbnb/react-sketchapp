@@ -10,12 +10,12 @@
     "Leland Richardson <leland.richardson@airbnb.com>"
   ],
   "files": [
-    "lib",
-    "src"
+    "lib"
   ],
   "scripts": {
     "build:plugin": "webpack -c",
     "build:react": "babel src -d lib",
+    "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
     "build": "npm run build:react && npm run build:plugin",
     "clean": "rimraf lib react-example.sketchplugin",
     "check": "npm run flow && npm run lint",
@@ -72,6 +72,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "flow-bin": "^0.36.0",
+    "flow-copy-source": "^1.1.0",
     "gitbook-cli": "^2.3.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
