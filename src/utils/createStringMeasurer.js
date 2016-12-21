@@ -1,5 +1,6 @@
 /* @flow */
 import { TextStyle, Size } from '../types';
+import findFont from './findFont';
 
 // TODO: do something more sensible here
 const FLOAT_MAX = 999999;
@@ -11,7 +12,7 @@ const createStringMeasurer = (string: string, style: TextStyle) => (
   // heightMode: MeasureMode
 ): Size => {
   // TODO: create a shared style => font/letterspacing/etc function to reuse in `text`
-  const font = NSFont.fontWithName_size(style.fontFamily || 'Helvetica', style.fontSize || 12);
+  const font = findFont(style);
   // TODO: add in attributes for letterSpacing, etc.
 
 
