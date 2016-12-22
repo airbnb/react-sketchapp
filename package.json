@@ -34,7 +34,8 @@
     "watch": "npm run watch:react & npm run watch:plugin"
   },
   "dependencies": {
-    "css-layout": "^1.1.1"
+    "css-layout": "^1.1.1",
+    "error-stack-parser": "^2.0.0"
   },
   "peerDependencies": {
     "react": "*",
