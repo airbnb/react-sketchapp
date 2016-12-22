@@ -1,3 +1,4 @@
+import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import computeLayout from 'css-layout';
 import Context from './utils/Context';
@@ -8,6 +9,7 @@ import type {
   SketchLayer,
   TreeNode,
 } from './types';
+import RedBox from './components/RedBox';
 
 const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
 
@@ -95,6 +97,15 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
   children.map(child => renderToSketch(child, groupLayer));
 };
 
+const buildTree = (element: React$Element<any>): TreeNode => {
+  const renderer = TestRenderer.create(element);
+  const json: TreeNode = renderer.toJSON();
+  const tree = reactTreeToFlexTree(json, new Context());
+  computeLayout(tree);
+
+  return tree;
+};
+
 /**
  * Render a React element using a provided SketchContext.
  * @example
@@ -103,16 +114,13 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
  * }
  */
 function render(element: React$Element<any>, context: SketchContext) {
+  const page: SketchLayer = context.document.currentPage();
   try {
-    const renderer = TestRenderer.create(element);
-    const json: TreeNode = renderer.toJSON();
-    const tree = reactTreeToFlexTree(json, new Context());
-    computeLayout(tree);
-    const page: SketchLayer = context.document.currentPage();
+    const tree = buildTree(element);
     renderToSketch(tree, page);
   } catch (err) {
-    // TODO: Make error messaging actually useful
-    context.document.showMessage(`ERROR: ${err.name}`);
+    const tree = buildTree(<RedBox error={err} />);
+    renderToSketch(tree, page);
   }
 }
 
