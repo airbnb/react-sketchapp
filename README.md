@@ -3,8 +3,9 @@
 </a>
 <br />
 
-[![Build Status](https://img.shields.io/travis/jongold/react-sketchapp.svg)](https://travis-ci.org/jongold/react-sketchapp)
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
+[![CircleCI](https://circleci.com/gh/jongold/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/jongold/react-sketchapp)
+<!--[![Build Status](https://img.shields.io/travis/jongold/react-sketchapp.svg)](https://travis-ci.org/jongold/react-sketchapp)-->
 
 - 🦄 Render React components to Sketch.app!
 - 🦄 Use flexbox for layout!
