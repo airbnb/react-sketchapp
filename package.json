@@ -17,7 +17,7 @@
     "build:plugin": "webpack -c",
     "build:react": "babel src -d lib",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
-    "build": "npm run build:react && npm run build:plugin",
+    "build": "npm run build:react && npm run build:plugin && npm run build:flow",
     "clean": "rimraf lib react-example.sketchplugin",
     "check": "npm run flow && npm run lint",
     "docs:clean": "rimraf _book",
