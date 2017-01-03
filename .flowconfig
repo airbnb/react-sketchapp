@@ -4,6 +4,7 @@
 .*/node_modules/fbjs.*
 .*/node_modules/babel.*
 .*/node_modules/babylon.*
+.*/node_modules/animated.*
 
 # npm3 and other tooling interop is so fun
 .*/examples/.*/node_modules

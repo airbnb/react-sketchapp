@@ -13,8 +13,12 @@ function convertToRadians(value: string): number {
   return value.indexOf('rad') > -1 ? floatValue : ((floatValue * Math.PI) / 180);
 }
 
-function applyTransform(rect: any, layout: LayoutInfo, key: string, value: number | string) {
-  let transform = null;
+const IDENTITY = CGAffineTransformMake(1, 0, 0, 1, 0, 0);
+const TRANSLATE = CGAffineTransformMakeTranslation(-0.5, -0.5);
+const UNTRANSLATE = CGAffineTransformMakeTranslation(0.5, 0.5);
+
+function makeTransformFromKeyValue(layout, key, value) {
+  let transform = IDENTITY;
   switch (key) {
     case 'perspective':
       // TODO: Figure out how to do 3D transforms
@@ -60,22 +64,28 @@ function applyTransform(rect: any, layout: LayoutInfo, key: string, value: numbe
       log(`did an unsupported transform: ${key}: ${value}`);
       break;
   }
-  if (transform !== null) {
-    // by default in sketch, transform origin is (0, 0), but in RN it's (0.5, 0.5)
-    // to remedy, we apply a translation matrix before and after the transform
-    const translate = CGAffineTransformMakeTranslation(-0.5, -0.5);
-    const untranslate = CGAffineTransformMakeTranslation(0.5, 0.5);
-    // this is effectively translate * transfrom * untranslate
-    transform = CGAffineTransformConcat(translate, transform);
-    transform = CGAffineTransformConcat(transform, untranslate);
-    rect.applyAffineTransformToPath(transform);
-  }
+  return transform;
 }
 
-function processTransform(rect: any, layout: LayoutInfo, transforms: Array<any>) {
+function transformFromTransformArray(layout: LayoutInfo, transforms: Array<any>) {
+  let transform = IDENTITY;
   transforms.forEach((t) => {
-    Object.keys(t).forEach(key => applyTransform(rect, layout, key, t[key]));
+    Object.keys(t).forEach((key) => {
+      transform = CGAffineTransformConcat(
+        transform,
+        makeTransformFromKeyValue(layout, key, t[key])
+      );
+    });
   });
+  return transform;
 }
 
-export default processTransform;
+export default function processTransform(rect: any, layout: LayoutInfo, transforms: Array<any>) {
+  let transform = transformFromTransformArray(layout, transforms);
+  // by default in sketch, transform origin is (0, 0), but in RN it's (0.5, 0.5)
+  // to remedy, we apply a translation matrix before and after the transform
+  // this is effectively TRANSLATE * transfrom * UNTRANSLATE
+  transform = CGAffineTransformConcat(TRANSLATE, transform);
+  transform = CGAffineTransformConcat(transform, UNTRANSLATE);
+  rect.applyAffineTransformToPath(transform);
+}
