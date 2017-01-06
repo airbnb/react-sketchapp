@@ -7,6 +7,7 @@ import Image from './components/Image';
 import RedBox from './components/RedBox';
 import View from './components/View';
 import Text from './components/Text';
+import SharedStyles from './components/SharedStyles';
 
 module.exports = {
   render,
@@ -17,4 +18,5 @@ module.exports = {
   Text,
   View,
   Platform,
+  SharedStyles,
 };

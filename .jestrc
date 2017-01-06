@@ -1,6 +1,5 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
+  "testEnvironment": "node",
   "globals": {
     "CGSizeMake": true,
     "COSAlertWindow": true,
@@ -51,17 +50,5 @@
     "React$Element": true,
     "ReactClass": true,
     "ReactComponent": true
-  },
-  "rules": {
-    "class-methods-use-this": 0,
-    "no-underscore-dangle": 0,
-    "new-cap": 0,
-    "no-duplicate-imports": [0],
-    "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": 0,
-  },
-  "env": {
-    "node": true,
-    "jest": true
   }
 }
