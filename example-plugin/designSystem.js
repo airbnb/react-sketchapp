@@ -38,7 +38,7 @@ export const fonts = {
     fontSize: typeSizes[0],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
-    lineHeight: 60,
+    lineHeight: 80,
   },
   'Title 1': {
     fontSize: typeSizes[2],

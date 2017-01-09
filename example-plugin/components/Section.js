@@ -12,7 +12,9 @@ const Section = ({ title, children }: P) =>
     <View style={{ width: 200 }}>
       <Label bold>{ title }</Label>
     </View>
-    { children }
+    <View>
+      { children }
+    </View>
   </View>;
 
 export default Section;
