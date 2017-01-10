@@ -1,5 +1,10 @@
 {
   "testEnvironment": "node",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "<rootDir>/lib",
+    "<rootDir>/scratch"
+  ],
   "globals": {
     "CGSizeMake": true,
     "COSAlertWindow": true,

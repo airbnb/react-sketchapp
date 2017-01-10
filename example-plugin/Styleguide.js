@@ -2,14 +2,13 @@
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 import React from 'react';
-import { render, View } from '../src';
+import { render, SharedStyles, View } from '../src';
 import designSystem from './designSystem';
 import type { DesignSystem } from './designSystem';
 
 import Palette from './components/Palette';
 import TypeSpecimen from './components/TypeSpecimen';
 import Section from './components/Section';
-import SharedStyles from '../src/components/SharedStyles';
 
 const Document = ({ system }: { system: DesignSystem }) =>
   <View>
@@ -19,18 +18,22 @@ const Document = ({ system }: { system: DesignSystem }) =>
       }
     </Section>
 
-    <Section title="DLS Color Palette">
+    <Section title="Color Palette">
       <Palette colors={system.colors} />
     </Section>
   </View>;
 
 const onRun = (context: any) => {
+  SharedStyles
+    .create({
+      context,
+      clearExistingStyles: true,
+    }, designSystem.fonts);
+
   render(
-    <SharedStyles styles={designSystem.fonts} clearExistingStyles>
-      <Document
-        system={designSystem}
-      />
-    </SharedStyles>
+    <Document
+      system={designSystem}
+    />
   , context);
 };
 

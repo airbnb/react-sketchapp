@@ -7,7 +7,7 @@ import Image from './components/Image';
 import RedBox from './components/RedBox';
 import View from './components/View';
 import Text from './components/Text';
-import SharedStyles from './components/SharedStyles';
+import SharedStyles from './StyleProvider';
 
 module.exports = {
   render,
