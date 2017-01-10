@@ -1,6 +1,6 @@
 /* @flow */
 import invariant from 'invariant';
-import type { Dictionary, SketchContext } from './types';
+import type { Dictionary, SketchContext, SketchStyle } from './types';
 import createLayerFromStyle from './createLayerFromStyle';
 import hashStyle from './utils/hashStyle';
 import TextStyles from './TextStyles';
@@ -14,17 +14,14 @@ type StyleHash = Dictionary<string, any>;
 
 let _styles: StyleHash = {};
 
-let textStyles = null;
-
 const _clearExistingStyles = () =>
-  textStyles && textStyles.setStyles([]);
+  TextStyles.setStyles([]);
 
 const registerStyle = (key: string, style: Style): StyleHash => {
-  invariant(textStyles, 'Please provide a context');
   const layer = createLayerFromStyle(key, style);
   const className = hashStyle(style);
 
-  textStyles.addStyle(key, layer.style());
+  TextStyles.addStyle(key, layer.style());
 
   _styles = {
     ..._styles,
@@ -42,7 +39,7 @@ const create = (options: Options, styles: Dictionary<string, Style>): StyleHash 
   invariant(options && options.context, 'Please provide a context');
   const { clearExistingStyles, context } = options;
 
-  textStyles = new TextStyles(context);
+  TextStyles.setContext(context);
   if (clearExistingStyles) { _clearExistingStyles(); }
 
   return Object
@@ -53,7 +50,6 @@ const create = (options: Options, styles: Dictionary<string, Style>): StyleHash 
 };
 
 const resolve = (style: Style): ?SketchStyle => {
-  invariant(textStyles, 'Please provide a context');
   const hash = hashStyle(style);
 
   return _styles[hash];

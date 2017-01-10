@@ -2,9 +2,10 @@
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 import React from 'react';
-import { render, SharedStyles, Text, View } from '../src';
+import { render, SharedStyles, View } from '../src';
 import designSystem from './designSystem';
 import type { DesignSystem } from './designSystem';
+import type { SketchContext } from '../src/types';
 
 import Label from './components/Label';
 import Palette from './components/Palette';
@@ -34,7 +35,7 @@ const Document = ({ system }: { system: DesignSystem }) =>
     </Section>
   </View>;
 
-const onRun = (context: any) => {
+const onRun = (context: SketchContext) => {
   SharedStyles
     .create({
       context,
