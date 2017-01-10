@@ -10,10 +10,20 @@ type P = {
   }
 }
 const AccessibilityBadge = ({ level }: P) => {
-  let text = null;
-  if (level.aaa) { text = 'AAA'; }
-  if (level.aa) { text = 'AA'; }
-  if (level.aaLarge) { text = 'AA Large'; }
+  let text;
+  switch (true) {
+    case level.aaa:
+      text = 'AAA';
+      break;
+    case level.aa:
+      text = 'AA';
+      break;
+    case level.aaLarge:
+      text = 'AA Large';
+      break;
+    default:
+      text = null;
+  }
   return (
     text && <Badge>
       { text }
