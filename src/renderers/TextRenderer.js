@@ -4,7 +4,7 @@ import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
 import findFont from '../utils/findFont';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
-import hashStyle from '../utils/hashStyle';
+import StyleProvider from '../StyleProvider';
 
 const TEXT_ALIGN = {
   auto: 0,
@@ -43,9 +43,10 @@ class TextRenderer extends SketchRenderer {
     layer.setStringValue(value);
     layer.setName(value);
 
-    const hash = hashStyle(textStyle);
-    if (global.result && Object.keys(global.result).includes(hash)) {
-      layer.style = global.result[hash];
+    const resolvedStyle = StyleProvider.resolve(textStyle);
+
+    if (resolvedStyle) {
+      layer.style = resolvedStyle;
       return [layer];
     }
 

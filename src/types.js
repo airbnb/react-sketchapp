@@ -3,8 +3,38 @@ export type Dictionary<K, T> = {[key: K]: T};
 
 // Sketchy things
 export type SketchNode = any;
-export type SketchContext = any;
 export type SketchLayer = any;
+// TODO: are these duplicates?
+
+
+export type SketchStyle = any;
+
+export type SketchSharedStyleContainer = {
+  setObjects: (objects: Array<SketchStyle>) => void,
+  addSharedStyleWithName_firstInstance: (name: string, ins: SketchStyle) => void,
+}
+
+type MSGradient = any;
+
+type SketchAssetCollection = {
+  colors: () => Array<MSColor>,
+  gradients: () => Array<MSGradient>,
+};
+
+export type SketchDocumentData = {
+  layerStyles: () => void,
+  layerTextStyles: () => SketchSharedStyleContainer,
+  layerSymbols: () => void,
+  assets: () => SketchAssetCollection,
+}
+
+export type SketchDocument = {
+  documentData: () => SketchDocumentData,
+}
+export type SketchContext = {
+  document: SketchDocument,
+};
+
 
 // Reacty things
 

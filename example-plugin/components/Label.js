@@ -10,7 +10,6 @@ const Label = ({ bold, children }: P) =>
   <Text
     style={{
       color: '#333',
-      fontFamily: 'Helvetica',
       fontWeight: bold ? 'bold' : 'normal',
       fontSize: 16,
       lineHeight: 24,

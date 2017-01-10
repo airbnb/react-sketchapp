@@ -13,13 +13,16 @@ beforeEach(() => {
   }));
 
   context = {
-    sharedStyles: {
-      setObjects: jest.fn(),
-      addSharedStyleWithName_firstInstance: jest.fn(),
+    document: {
+      documentData: jest.fn(() => ({
+        layerTextStyles: jest.fn(() => ({
+          setObjects: jest.fn(),
+          addSharedStyleWithName_firstInstance: jest.fn(),
+        })),
+      })),
     },
   };
 });
-
 
 describe('create', () => {
   describe('without a context', () => {
@@ -109,7 +112,7 @@ describe('registerStyle', () => {
 
       expect(Object.keys(styles).length).toBe(2);
 
-      expect(context.sharedStyles.addSharedStyleWithName_firstInstance).toBeCalled();
+      expect(context.document.documentData().layerTextStyles().addSharedStyleWithName_firstInstance).toBeCalled();
     });
 
     test('duplicate keys w/ unique styles', () => {
@@ -127,7 +130,7 @@ describe('registerStyle', () => {
 
       expect(Object.keys(styles).length).toBe(2);
 
-      expect(context.sharedStyles.addSharedStyleWithName_firstInstance).toHaveBeenCalledTimes(2);
+      expect(context.document.documentData().layerTextStyles().addSharedStyleWithName_firstInstance).toHaveBeenCalledTimes(2);
     });
 
     test('unique keys w/ duplicate styles', () => {
@@ -142,7 +145,7 @@ describe('registerStyle', () => {
 
       expect(Object.keys(styles).length).toBe(1);
 
-      expect(context.sharedStyles.addSharedStyleWithName_firstInstance).toHaveBeenCalledTimes(2);
+      expect(context.document.documentData().layerTextStyles().addSharedStyleWithName_firstInstance).toHaveBeenCalledTimes(2);
     });
 
     test('duplicate keys w/ duplicate styles', () => {
@@ -156,7 +159,51 @@ describe('registerStyle', () => {
 
       expect(Object.keys(styles).length).toBe(1);
 
-      expect(context.sharedStyles.addSharedStyleWithName_firstInstance).toHaveBeenCalledTimes(2);
+      expect(context.document.documentData().layerTextStyles().addSharedStyleWithName_firstInstance).toHaveBeenCalledTimes(2);
+    });
+  });
+});
+
+describe('resolve', () => {
+  describe('without a context', () => {
+    test('it errors', () => {
+      const style = {};
+      expect(() =>
+        StyleProvider.resolve(style)
+      ).toThrowError(/Please provide a context/);
+    });
+  });
+
+  describe('with a context', () => {
+    beforeEach(() => {
+      StyleProvider.create({
+        context,
+      }, {});
+    });
+
+    test('retrieves a matching style', () => {
+      const key = 'foo';
+      const style = {
+        foo: 'bar',
+      };
+
+      StyleProvider.registerStyle(key, style);
+
+      expect(StyleProvider.resolve(style)).toBeDefined();
+    });
+
+    test('returns null with no matching style', () => {
+      const key = 'foo';
+      const style1 = {
+        foo: 'bar',
+      };
+      const style2 = {
+        baz: 'qux',
+      };
+
+      StyleProvider.registerStyle(key, style1);
+
+      expect(StyleProvider.resolve(style2)).not.toBeDefined();
     });
   });
 });

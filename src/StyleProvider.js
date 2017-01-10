@@ -3,6 +3,8 @@ import invariant from 'invariant';
 import type { Dictionary, SketchContext } from './types';
 import createLayerFromStyle from './createLayerFromStyle';
 import hashStyle from './utils/hashStyle';
+import TextStyles from './TextStyles';
+
 
 // input css style
 type Style = Dictionary<string, any>;
@@ -11,18 +13,19 @@ type Style = Dictionary<string, any>;
 type StyleHash = Dictionary<string, any>;
 
 let _styles: StyleHash = {};
-let _context: SketchContext = null;
 
-const _clearExistingStyles = (): void => {
-  _context.sharedStyles.setObjects([]);
-};
+let textStyles = null;
+
+const _clearExistingStyles = () =>
+  textStyles && textStyles.setStyles([]);
 
 const registerStyle = (key: string, style: Style): StyleHash => {
-  invariant(_context, 'Please provide a context');
+  invariant(textStyles, 'Please provide a context');
   const layer = createLayerFromStyle(key, style);
   const className = hashStyle(style);
 
-  _context.sharedStyles.addSharedStyleWithName_firstInstance(key, layer.style());
+  textStyles.addStyle(key, layer.style());
+
   _styles = {
     ..._styles,
     [className]: layer.style(),
@@ -39,7 +42,7 @@ const create = (options: Options, styles: Dictionary<string, Style>): StyleHash 
   invariant(options && options.context, 'Please provide a context');
   const { clearExistingStyles, context } = options;
 
-  _context = context;
+  textStyles = new TextStyles(context);
   if (clearExistingStyles) { _clearExistingStyles(); }
 
   return Object
@@ -49,9 +52,17 @@ const create = (options: Options, styles: Dictionary<string, Style>): StyleHash 
     , null);
 };
 
+const resolve = (style: Style): ?SketchStyle => {
+  invariant(textStyles, 'Please provide a context');
+  const hash = hashStyle(style);
+
+  return _styles[hash];
+};
+
 const StyleProvider = {
   registerStyle,
   create,
+  resolve,
   styles() {
     return _styles;
   },
