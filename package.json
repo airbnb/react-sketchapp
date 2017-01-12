@@ -80,6 +80,7 @@
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
     "react": "^15.4.1",
+    "react-markdown": "^2.4.2",
     "react-test-renderer": "^15.4.1",
     "rimraf": "^2.5.4",
     "webpack": "^1.13.3"

@@ -63,6 +63,7 @@ export const fonts = {
     fontFamily: fontFamilies.body,
     fontWeight: fontWeights.regular,
     lineHeight: 24,
+    marginBottom: 24,
   },
 };
 

@@ -1,14 +1,13 @@
 /* @flow */
+/* eslint-disable */
 import React from 'react';
-import { render, View } from '../src';
+import { render, Text, View } from '../src';
 import Profile from './Twitter';
 import { dump } from '../src/debug';
-import { spacing } from './designSystem';
+import { fonts, spacing } from './designSystem';
 import Space from './components/Space';
-
-global.dump = dump;
-
-type SketchContext = any;
+import Markdown from './components/Markdown';
+import pkg from '../package.json';
 
 const users = [
   {
@@ -37,18 +36,32 @@ const users = [
   },
 ];
 
-const Page = () => (
+const text = `
+  # ${pkg.name} ${pkg.version}
+
+  This is an example passing data from the Twitter API to a user profile card.
+`;
+
+const Page = () =>
   <View style={{ flexDirection: 'row', flexWrap: 'wrap', width: 600 }}>
+    <View>
+      <Markdown
+        style={{
+          width: 480,
+        }}
+        source={text}
+      />
+    </View>
     { users.map(user =>
       <Space h={spacing} v={spacing}>
         <Profile user={user} />
       </Space>
     )}
-  </View>
-);
+  </View>;
 
 const onRun = (context: SketchContext) => {
-  render(<Page />, context);
+  // const readme = NSString.stringWithContentsOfFile('Users/jon_gold/code/react-sketch/README2.md');
+  render(<Page pkg={pkg} />, context);
 };
 
 module.exports = onRun;
