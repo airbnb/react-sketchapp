@@ -12,13 +12,6 @@ const propTypes = {
   children: PropTypes.node,
 };
 
-/**
- * A wrapper for Sketch Artboards. Not exposed in `react-primitives`!
- * @example
- * <Artboard name='Foo' style={style}>
- *   // children
- * </Artboard>
- */
 class Artboard extends React.Component {
   render() {
     return (
