@@ -46,7 +46,9 @@ module.exports = onRun;
 [`react-sketchapp-starter`](http://github.com/jongold/react-sketchapp-starter) is a minimal boilerplace to start developing your own plugin.
 
 ### Examples
-react-sketchapp includes [a folder of examples](example-plugin/). We use it internally when developing new features — it may change as we update the API.
+`react-sketchapp` includes [a folder of examples](example-plugin/) showing how you might use it to work with a JavaScript [design system](example-plugin/designSystem.js).
+* [Styleguide](example-plugin/Styleguide.js)
+* [Twitter-style profiles](example-plugin/Test React.js)
 
 Clone & build the repo, and symlink the examples:
 ```bash
