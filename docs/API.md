@@ -3,6 +3,7 @@
 * [`render`](#render)
 * [Components](#components)
   * [`<Artboard>`](#artboard)
+  * [`<Image>`](#image)
   * [`<RedBox>`](#redbox)
   * [`<Text>`](#text)
   * [`<View>`](#view)
@@ -59,6 +60,34 @@ See [styling](/docs/styling.md)
   <Text>Hello world!</Text>
 </Artboard>
 ```
+
+### `<Image>`
+
+#### Props
+##### `children`
+##### `defaultSource`
+A source to use whilst the image is loading
+
+##### `resizeMode`
+`contain` | `cover` | `stretch` | `center` | `repeat` | `none`
+
+##### `source`
+
+##### `style`
+See [styling](/docs/styling.md)
+
+#### Example
+```js
+<Image
+  source='http://placekitten.com/400'
+  resizeMode='contain'
+  style={{
+    height: 400,
+    width: 400,
+  }}
+/>
+```
+
 
 ### `<RedBox>`
 A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react)
