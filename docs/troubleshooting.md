@@ -21,6 +21,11 @@ You can view the logs using `Console.app`, or in the terminal.
 tail -f ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
 ```
 
+Occasionally this file gets trashed — in that case, run this and then try `tail`ing again.
+```bash
+touch ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
+```
+
 #### My changes don’t show up when rerunning my plugin
 Make sure Sketch is configured to automatically reload plugins!
 ```bash
