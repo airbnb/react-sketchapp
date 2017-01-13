@@ -62,7 +62,6 @@ const Page = () =>
   </View>;
 
 const onRun = (context: SketchContext) => {
-  // const readme = NSString.stringWithContentsOfFile('Users/jon_gold/code/react-sketch/README2.md');
   render(<Page pkg={pkg} />, context);
 };
 

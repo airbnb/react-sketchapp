@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import ReactMarkdown from 'react-markdown'; // eslint-disable-line import/no-extraneous-dependencies
-import { Text, View } from '../../src';
+import { Image, Text, View } from '../../src';
 import { fonts } from '../designSystem';
 
 type P = { children: any };
@@ -12,18 +12,14 @@ const Paragraph = ({ children }: P) =>
 const Span = ({ children }: P) =>
   <Text style={fonts.Body}>{ children }</Text>;
 
-
 const Emph = ({ children }: P) =>
   <Text style={fonts.Body}>{ children }</Text>;
-
 
 const Strong = ({ children }: P) =>
   <Text style={{ ...fonts.Body, fontWeight: 'bold' }}>{ children }</Text>;
 
-
 const List = ({ children }: P) =>
   <View>{ children }</View>;
-
 
 const HtmlInline = ({ children }: P) =>
   <Text style={fonts.Body}>{ children }</Text>;
@@ -45,7 +41,17 @@ const Heading = ({ children, level }: HeadingP) =>
     { children }
   </Text>;
 
-const Image = () => null;
+type ImageP = {
+  src: string,
+};
+const ImageEl = ({ src }: ImageP) =>
+  <Image
+    source={src}
+    style={{
+      height: 200,
+      width: 200,
+    }}
+  />;
 
 const renderers = {
   Paragraph,
@@ -57,7 +63,7 @@ const renderers = {
   Item,
   CodeBlock,
   Heading,
-  Image,
+  Image: ImageEl,
 };
 
 
