@@ -25,6 +25,7 @@
 .*/node_modules/npmconf.*
 .*/node_modules/conventional-changelog-core.*
 .*/node_modules/npm.*
+.*/node_modules/kefir.*
 
 .*/_backup
 .*/docs

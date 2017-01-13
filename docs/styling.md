@@ -1,6 +1,6 @@
 # Styling
 
-Components use the same flexbox algorithm as `react-native`!
+Components use CSS styles + flexbox layout.
 
 #### Layout Styles
 ```javascript
@@ -91,9 +91,9 @@ export type TextStyle = {
 };
 ```
 
-Styles can be passed to components as plain objects, or via [`StyleSheet`](/docs/api/StyleSheet.md).
+Styles can be passed to components as plain objects, or via [`StyleSheet`](/docs/API.md).
 
-```
+```js
 import { View, StyleSheet } from 'react-sketchapp';
 
 // inline props

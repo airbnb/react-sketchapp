@@ -1,31 +1,31 @@
 # Universal Rendering
 
-Because `react-sketchapp` uses the same interfaces as `react-native`, we can render the same components across multiple platforms.
-
-### Usage with react-primitives
-[`react-primitives`](https://github.com/lelandrichardson/react-primitives) exposes a consistent interface across platforms.
+[`react-primitives`](https://github.com/lelandrichardson/react-primitives) exposes consistent primitive interfaces across platforms. We can use it to render the same components across multiple platforms.
 
 ```
 npm install --save react-primitives
 ```
 
-```javascript
+```diff
 /**
  * components/Row.js
  * Define your component using platform-independent primitives
  */
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-primitives';
+- import { View, Text, StyleSheet } from 'react-sketchapp';
++ import { View, Text, StyleSheet } from 'react-primitives';
 
-const Row = ({ props }) =>
+const Row = props =>
   <View>
     <Text>{ props.title }</Text>
     <Text>{ props.description }</Text>
   </View>
 
-// etc
 export default Row;
+```
 
+Then, render as usual.
+```js
 /**
   * dom-entry.js
   * Standard ReactDOM setup for the browser
