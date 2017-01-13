@@ -1,40 +1,44 @@
 /* @flow */
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown'; // eslint-disable-line import/no-extraneous-dependencies
 import { Text, View } from '../../src';
 import { fonts } from '../designSystem';
 
-const Paragraph = ({ children }) =>
+type P = { children: any };
+
+const Paragraph = ({ children }: P) =>
+  <Text style={fonts.Body}>{ children }</Text>;
+
+const Span = ({ children }: P) =>
   <Text style={fonts.Body}>{ children }</Text>;
 
 
-const Span = ({ children }) =>
+const Emph = ({ children }: P) =>
   <Text style={fonts.Body}>{ children }</Text>;
 
 
-const Emph = ({ children }) =>
-  <Text style={fonts.Body}>{ children }</Text>;
-
-
-const Strong = ({ children }) =>
+const Strong = ({ children }: P) =>
   <Text style={{ ...fonts.Body, fontWeight: 'bold' }}>{ children }</Text>;
 
 
-const List = ({ children }) =>
+const List = ({ children }: P) =>
   <View>{ children }</View>;
 
 
-const HtmlInline = ({ children }) =>
+const HtmlInline = ({ children }: P) =>
   <Text style={fonts.Body}>{ children }</Text>;
 
-
-const Item = ({ children }) =>
+const Item = ({ children }: P) =>
   <Text style={{ ...fonts.Body, marginBottom: 0 }}>{ `* ${children}` }</Text>;
 
-const CodeBlock = ({ children }) =>
+const CodeBlock = ({ children }: P) =>
   <View>{ children }</View>;
 
-const Heading = ({ children, level }) =>
+type HeadingP = {
+  children: any,
+  level: number,
+}
+const Heading = ({ children, level }: HeadingP) =>
   <Text
     style={fonts[`Title ${level}`]}
   >

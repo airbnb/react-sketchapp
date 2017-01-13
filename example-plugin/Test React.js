@@ -9,6 +9,8 @@ import Space from './components/Space';
 import Markdown from './components/Markdown';
 import pkg from '../package.json';
 
+type SketchContext = any;
+
 const users = [
   {
     screen_name: 'mxstbr',
