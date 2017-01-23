@@ -8,7 +8,7 @@ const propTypes = {
   style: PropTypes.shape({
     ...ViewStylePropTypes,
   }),
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   children: PropTypes.node,
 };
 

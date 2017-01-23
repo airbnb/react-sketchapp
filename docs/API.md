@@ -42,7 +42,7 @@ const onRun = context =>
 Wrapper for Sketch's artboards.
 
 #### Props
-##### `name` (required)
+##### `name`
 The name to be displayed in the Sketch Layer List
 
 ##### `children`
