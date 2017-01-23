@@ -114,8 +114,6 @@ const buildTree = (element: React$Element<any>): TreeNode => {
  * }
  */
 function render(element: React$Element<any>, context: SketchContext) {
-  global.sharedStyles = context.document.documentData().layerTextStyles();
-
   const page: SketchLayer = context.document.currentPage();
   try {
     const tree = buildTree(element);
