@@ -4,6 +4,7 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
 [![CircleCI](https://circleci.com/gh/jongold/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/jongold/react-sketchapp)
+![Sketch.app](https://img.shields.io/badge/Sketch.app-42-brightgreen.svg)
 
 ## Features
 
