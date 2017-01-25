@@ -1,28 +1,28 @@
 /* @flow */
 import invariant from 'invariant';
 import type { Dictionary, SketchContext, SketchStyle, TextStyle } from './types';
-import createLayerFromStyle from './createLayerFromStyle';
+import applyTextStyleToLayer from './utils/applyTextStyleToLayer';
 import hashStyle from './utils/hashStyle';
-import TextStyles from './TextStyles';
+import sharedTextStyles from './wrappers/sharedTextStyles';
+import textLayer from './wrappers/textLayer';
 
 // stored styles
 type StyleHash = Dictionary<string, SketchStyle>;
 
 let _styles: StyleHash = {};
 
-const _clearExistingStyles = () =>
-  TextStyles.setStyles([]);
-
 const registerStyle = (key: string, style: TextStyle): StyleHash => {
-  const layer = createLayerFromStyle(key, style);
+  const layer = applyTextStyleToLayer(
+    textLayer(key, { top: 0, left: 0, width: 250, height: 50 }),
+    style
+  );
+
   const className = hashStyle(style);
 
-  TextStyles.addStyle(key, layer.style());
+  sharedTextStyles.addStyle(key, layer.style());
 
-  _styles = {
-    ..._styles,
-    [className]: layer.style(),
-  };
+  _styles[className] = layer.style();
+
   return _styles;
 };
 
@@ -35,14 +35,16 @@ const create = (options: Options, styles: Dictionary<string, TextStyle>): StyleH
   invariant(options && options.context, 'Please provide a context');
   const { clearExistingStyles, context } = options;
 
-  TextStyles.setContext(context);
-  if (clearExistingStyles) { _clearExistingStyles(); }
+  sharedTextStyles.setContext(context);
 
-  return Object
-    .keys(styles)
-    .reduce((acc, key) =>
-      registerStyle(key, styles[key])
-    , null);
+  if (clearExistingStyles) {
+    _styles = {};
+    sharedTextStyles.setStyles([]);
+  }
+
+  Object.keys(styles).forEach(key => registerStyle(key, styles[key]));
+
+  return _styles;
 };
 
 const resolve = (style: TextStyle): ?SketchStyle => {
@@ -51,13 +53,13 @@ const resolve = (style: TextStyle): ?SketchStyle => {
   return _styles[hash];
 };
 
-const StyleProvider = {
+const styles = () => _styles;
+
+const TextStyles = {
   registerStyle,
   create,
   resolve,
-  styles() {
-    return _styles;
-  },
+  styles,
 };
 
-export default StyleProvider;
+export default TextStyles;

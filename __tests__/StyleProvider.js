@@ -6,15 +6,22 @@ let TextStyles;
 beforeEach(() => {
   jest.resetModules();
   StyleProvider = require('../src/StyleProvider').default;
-  const createLayerFromStyle = require('../src/createLayerFromStyle').default;
 
-  jest.mock('../src/createLayerFromStyle');
-  createLayerFromStyle.mockImplementation((name, style) => ({
-    style() { return style; },
+  const applyTextStyleToLayer = require('../src/utils/applyTextStyleToLayer').default;
+
+  jest.mock('../src/utils/applyTextStyleToLayer');
+  applyTextStyleToLayer.mockImplementation(layer => layer);
+
+  TextStyles = require('../src/wrappers/sharedTextStyles').default;
+
+  jest.mock('../src/wrappers/sharedTextStyles');
+
+  const textLayer = require('../src/wrappers/textLayer').default;
+  jest.mock('../src/wrappers/textLayer');
+
+  textLayer.mockImplementation(() => ({
+    style: () => null,
   }));
-
-  jest.mock('../src/TextStyles');
-  TextStyles = require('../src/TextStyles').default;
 
   TextStyles.addStyle = jest.fn();
   TextStyles.setStyles = jest.fn();

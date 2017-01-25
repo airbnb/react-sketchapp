@@ -2,7 +2,6 @@
 export type Dictionary<K, T> = {[key: K]: T};
 
 // Sketchy things
-export type SketchNode = any;
 export type SketchLayer = any;
 // TODO: are these duplicates?
 

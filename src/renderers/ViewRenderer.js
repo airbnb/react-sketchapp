@@ -1,4 +1,5 @@
 /* @flow */
+import { BorderPosition, FillType } from 'sketch-constants';
 import convertToColor from '../utils/convertToColor';
 import colorWithOpacity from '../utils/colorWithOpacity';
 import SketchRenderer from './SketchRenderer';

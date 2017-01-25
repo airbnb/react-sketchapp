@@ -1,6 +1,6 @@
 /* @flow */
 import invariant from 'invariant';
-import type { SketchContext, SketchStyle } from './types';
+import type { SketchContext, SketchStyle } from '../types';
 
 class TextStyles {
   _context: ?SketchContext;
