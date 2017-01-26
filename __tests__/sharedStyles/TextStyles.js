@@ -1,30 +1,31 @@
 /* eslint-disable global-require */
-let StyleProvider;
-let context;
 let TextStyles;
+let context;
+let sharedTextStyles;
 
 beforeEach(() => {
   jest.resetModules();
-  StyleProvider = require('../src/StyleProvider').default;
+  TextStyles = require('../../src/sharedStyles/TextStyles').default;
 
-  const applyTextStyleToLayer = require('../src/utils/applyTextStyleToLayer').default;
+  const applyTextStyleToLayer = require('../../src/utils/applyTextStyleToLayer').default;
 
-  jest.mock('../src/utils/applyTextStyleToLayer');
+  jest.mock('../../src/utils/applyTextStyleToLayer');
   applyTextStyleToLayer.mockImplementation(layer => layer);
 
-  TextStyles = require('../src/wrappers/sharedTextStyles').default;
+  sharedTextStyles = require('../../src/wrappers/sharedTextStyles').default;
 
-  jest.mock('../src/wrappers/sharedTextStyles');
+  jest.mock('../../src/wrappers/sharedTextStyles');
 
-  const textLayer = require('../src/wrappers/textLayer').default;
-  jest.mock('../src/wrappers/textLayer');
+  const textLayer = require('../../src/wrappers/textLayer').default;
+
+  jest.mock('../../src/wrappers/textLayer');
 
   textLayer.mockImplementation(() => ({
     style: () => null,
   }));
 
-  TextStyles.addStyle = jest.fn();
-  TextStyles.setStyles = jest.fn();
+  sharedTextStyles.addStyle = jest.fn();
+  sharedTextStyles.setStyles = jest.fn();
 
   context = jest.fn();
 });
@@ -34,31 +35,31 @@ describe('create', () => {
     test('it errors', () => {
       const styles = {};
       expect(() =>
-        StyleProvider.create(null, styles)
+        TextStyles.create(null, styles)
       ).toThrowError(/Please provide a context/);
 
       expect(() =>
-        StyleProvider.create({}, styles)
+        TextStyles.create({}, styles)
       ).toThrowError(/Please provide a context/);
     });
   });
 
   describe('with a context', () => {
     test('with clearExistingStyles', () => {
-      StyleProvider.create({
+      TextStyles.create({
         clearExistingStyles: true,
         context,
       }, {});
 
-      expect(TextStyles.setStyles).toHaveBeenCalled();
+      expect(sharedTextStyles.setStyles).toHaveBeenCalled();
     });
 
     test('without clearExistingStyles', () => {
-      StyleProvider.create({
+      TextStyles.create({
         clearExistingStyles: false,
         context,
       }, {});
-      expect(TextStyles.setStyles).not.toHaveBeenCalled();
+      expect(sharedTextStyles.setStyles).not.toHaveBeenCalled();
     });
     test('one style', () => {
       const styles = {
@@ -67,7 +68,7 @@ describe('create', () => {
         },
       };
 
-      const res = StyleProvider.create({ context }, styles);
+      const res = TextStyles.create({ context }, styles);
 
       expect(Object.keys(res).length).toBe(1);
     });
@@ -82,17 +83,17 @@ describe('create', () => {
         },
       };
 
-      const res = StyleProvider.create({ context }, styles);
+      const res = TextStyles.create({ context }, styles);
 
       expect(Object.keys(res).length).toBe(2);
-      expect(TextStyles.addStyle).toHaveBeenCalledTimes(2);
+      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
     });
   });
 });
 
 describe('registerStyle', () => {
   beforeEach(() => {
-    StyleProvider.create({
+    TextStyles.create({
       context,
     }, {});
   });
@@ -103,10 +104,10 @@ describe('registerStyle', () => {
       foo: 'bar',
     };
 
-    const styles = StyleProvider.registerStyle(key, style);
+    const styles = TextStyles.registerStyle(key, style);
 
     expect(Object.keys(styles).length).toBe(1);
-    expect(TextStyles.addStyle).toHaveBeenCalledTimes(1);
+    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
   });
 
   test('unique keys w/ unique styles', () => {
@@ -120,11 +121,11 @@ describe('registerStyle', () => {
       baz: 'bar',
     };
 
-    let styles = StyleProvider.registerStyle(key1, style1);
-    styles = StyleProvider.registerStyle(key2, style2);
+    let styles = TextStyles.registerStyle(key1, style1);
+    styles = TextStyles.registerStyle(key2, style2);
 
     expect(Object.keys(styles).length).toBe(2);
-    expect(TextStyles.addStyle).toHaveBeenCalledTimes(2);
+    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
   });
 
   test('duplicate keys w/ unique styles', () => {
@@ -137,11 +138,11 @@ describe('registerStyle', () => {
       baz: 'bar',
     };
 
-    let styles = StyleProvider.registerStyle(key, style1);
-    styles = StyleProvider.registerStyle(key, style2);
+    let styles = TextStyles.registerStyle(key, style1);
+    styles = TextStyles.registerStyle(key, style2);
 
     expect(Object.keys(styles).length).toBe(2);
-    expect(TextStyles.addStyle).toHaveBeenCalledTimes(2);
+    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
   });
 
   test('unique keys w/ duplicate styles', () => {
@@ -151,8 +152,8 @@ describe('registerStyle', () => {
       foo: 'bar',
     };
 
-    let styles = StyleProvider.registerStyle(key1, style);
-    styles = StyleProvider.registerStyle(key2, style);
+    let styles = TextStyles.registerStyle(key1, style);
+    styles = TextStyles.registerStyle(key2, style);
 
     expect(Object.keys(styles).length).toBe(1);
   });
@@ -163,17 +164,17 @@ describe('registerStyle', () => {
       foo: 'bar',
     };
 
-    let styles = StyleProvider.registerStyle(key, style);
-    styles = StyleProvider.registerStyle(key, style);
+    let styles = TextStyles.registerStyle(key, style);
+    styles = TextStyles.registerStyle(key, style);
 
     expect(Object.keys(styles).length).toBe(1);
-    expect(TextStyles.addStyle).toHaveBeenCalledTimes(2);
+    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
   });
 });
 
 describe('resolve', () => {
   beforeEach(() => {
-    StyleProvider.create({
+    TextStyles.create({
       context,
     }, {});
   });
@@ -184,10 +185,10 @@ describe('resolve', () => {
       foo: 'bar',
     };
 
-    StyleProvider.registerStyle(key, style);
+    TextStyles.registerStyle(key, style);
 
-    expect(StyleProvider.resolve(style)).toBeDefined();
-    expect(TextStyles.addStyle).toHaveBeenCalledTimes(1);
+    expect(TextStyles.resolve(style)).toBeDefined();
+    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
   });
 
   test('returns null with no matching style', () => {
@@ -199,9 +200,9 @@ describe('resolve', () => {
       baz: 'qux',
     };
 
-    StyleProvider.registerStyle(key, style1);
+    TextStyles.registerStyle(key, style1);
 
-    expect(StyleProvider.resolve(style2)).not.toBeDefined();
-    expect(TextStyles.addStyle).toHaveBeenCalledTimes(1);
+    expect(TextStyles.resolve(style2)).not.toBeDefined();
+    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
   });
 });

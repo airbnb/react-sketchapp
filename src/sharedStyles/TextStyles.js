@@ -1,10 +1,10 @@
 /* @flow */
 import invariant from 'invariant';
-import type { Dictionary, SketchContext, SketchStyle, TextStyle } from './types';
-import applyTextStyleToLayer from './utils/applyTextStyleToLayer';
-import hashStyle from './utils/hashStyle';
-import sharedTextStyles from './wrappers/sharedTextStyles';
-import textLayer from './wrappers/textLayer';
+import type { Dictionary, SketchContext, SketchStyle, TextStyle } from '../types';
+import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
+import hashStyle from '../utils/hashStyle';
+import sharedTextStyles from '../wrappers/sharedTextStyles';
+import textLayer from '../wrappers/textLayer';
 
 // stored styles
 type StyleHash = Dictionary<string, SketchStyle>;
