@@ -2,7 +2,7 @@
 import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
-import StyleProvider from '../StyleProvider';
+import TextStyles from '../sharedStyles/TextStyles';
 import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
 import textLayer from '../wrappers/textLayer';
 
@@ -24,7 +24,7 @@ class TextRenderer extends SketchRenderer {
 
     let layer = textLayer(value, layout);
 
-    const resolvedStyle = StyleProvider.resolve(textStyle);
+    const resolvedStyle = TextStyles.resolve(textStyle);
 
     if (resolvedStyle) {
       layer.style = resolvedStyle;
