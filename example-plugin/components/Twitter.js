@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-import { Image, View, Text, StyleSheet } from '../src';
-import { colors, fonts, spacing } from './designSystem';
+import { Image, View, Text, StyleSheet } from '../../src';
+import { colors, fonts, spacing } from '../designSystem';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,10 +14,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginBottom: 20,
     borderRadius: 10,
-    // backgroundColor: 'red',
-    // transform: [
-    //   { rotateZ: '30deg' },
-    // ],
   },
   title: fonts['Title 2'],
   subtitle: fonts['Title 3'],

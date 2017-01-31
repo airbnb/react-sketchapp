@@ -2,9 +2,9 @@
 /* eslint-disable */
 import React from 'react';
 import { render, Text, TextStyles, View } from '../src';
-import Profile from './Twitter';
 import { dump } from '../src/debug';
 import { fonts, spacing } from './designSystem';
+import Profile from './components/Twitter';
 import Space from './components/Space';
 import Markdown from './components/Markdown';
 import pkg from '../package.json';
