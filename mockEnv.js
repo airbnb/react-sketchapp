@@ -1,4 +1,4 @@
 CGAffineTransformMakeTranslation = jest.fn();
 MSColor = {
-  colorWithRGBADictionary: jest.fn()
-}
+  colorWithRGBADictionary: jest.fn(),
+};
