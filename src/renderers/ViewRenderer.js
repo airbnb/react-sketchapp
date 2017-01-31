@@ -82,14 +82,9 @@ function makeBorderFromRect(rect, thickness, color, style) {
 
   const borderOptions = layer.style().borderOptions();
 
-  // 0 - solid
-  // 1 - gradient
-  borderStyle.setFillType(0); // solid
+  borderStyle.setFillType(FillType.Solid);
   borderStyle.setThickness(thickness || 0);
-  // 0 - center
-  // 1 - inside
-  // 2 - outside
-  borderStyle.setPosition(1);
+  borderStyle.setPosition(BorderPosition.Inside);
 
   borderStyle.setColor(convertToColor(color || DEFAULT_BORDER_COLOR));
 
@@ -236,18 +231,13 @@ class ViewRenderer extends SketchRenderer {
 
       const borderStyle = content.style().addStylePartOfType(1);
 
-      // 0 - solid
-      // 1 - gradient
-      borderStyle.setFillType(0); // solid
+      borderStyle.setFillType(FillType.Solid); // solid
 
       if (style.borderTopStyle !== undefined) {
         const borderOptions = content.style().borderOptions();
         const width = style.borderTopWidth;
 
-        // 0 - unknown?
-        // 1 - rounded
-        // 2 - square
-        // borderOptions.setLineCapStyle(0);
+        // borderOptions.setLineCapStyle(BorderLineCapsStyle.Square);
 
         switch (style.borderTopStyle) {
           case 'dashed':
@@ -270,10 +260,7 @@ class ViewRenderer extends SketchRenderer {
 
       borderStyle.setThickness(style.borderTopWidth || 0);
 
-      // 0 - center
-      // 1 - inside
-      // 2 - outside
-      borderStyle.setPosition(2);
+      borderStyle.setPosition(BorderPosition.Outside);
 
 
       layers.push(content);

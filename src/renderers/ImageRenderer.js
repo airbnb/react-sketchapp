@@ -1,17 +1,13 @@
 /* @flow */
+import { BorderPosition, FillType } from 'sketch-constants';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import processTransform from './processTransform';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 
-const FILL_TYPE = {
-  Solid: 0,
-  Gradient: 1,
-  Pattern: 4,
-  Noise: 5,
-};
-
-const PATTERN_FILL_TYPE = {
+// out of date in sketch-constants
+// https://github.com/turbobabr/sketch-constants/pull/1
+const PatternFillType = {
   Tile: 0,
   Fill: 1,
   Stretch: 2,
@@ -84,8 +80,8 @@ class ImageRenderer extends SketchRenderer {
       NSURL.URLWithString(extractURLFromSource(props.source))
     );
     imageFill.setImage(MSImageData.alloc().initWithImage_convertColorSpace(imageData, false));
-    imageFill.setFillType(FILL_TYPE.Pattern);
-    imageFill.setPatternFillType(PATTERN_FILL_TYPE[props.resizeMode] || PATTERN_FILL_TYPE.Fill);
+    imageFill.setFillType(FillType.Pattern);
+    imageFill.setPatternFillType(PatternFillType[props.resizeMode] || PatternFillType.Fill);
 
     if (style.transform !== undefined) {
       processTransform(rect, layout, style.transform);
@@ -95,9 +91,7 @@ class ImageRenderer extends SketchRenderer {
 
     if (same(bl, br, bt, bb)) {
       const borderStyle = content.style().addStylePartOfType(1);
-      // 0 - solid
-      // 1 - gradient
-      borderStyle.setFillType(0); // solid
+      borderStyle.setFillType(FillType.Solid); // solid
 
       if (style.borderTopColor !== undefined) {
         borderStyle.setColor(convertToColor(style.borderTopColor));
@@ -105,10 +99,7 @@ class ImageRenderer extends SketchRenderer {
 
       borderStyle.setThickness(style.borderTopWidth || 0);
 
-      // 0 - center
-      // 1 - inside
-      // 2 - outside
-      borderStyle.setPosition(2);
+      borderStyle.setPosition(BorderPosition.Outside);
     } else {
       if (bt > 0) {
         const topBorder = makeRect(
