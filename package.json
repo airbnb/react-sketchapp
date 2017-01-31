@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build:plugin": "webpack -c",
-    "build:react": "babel src -d lib",
+    "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
     "build": "npm run build:react && npm run build:plugin && npm run build:flow",
     "clean": "rimraf lib react-example.sketchplugin",
@@ -30,8 +30,8 @@
     "prepublish": "npm run clean && npm run check && npm run build",
     "test": "jest --config .jestrc",
     "test:watch": "npm run test -- --watch",
-    "watch:plugin": "webpack --watch",
-    "watch:react": "babel src -d lib --watch",
+    "watch:plugin": "npm run build:plugin -- --watch",
+    "watch:react": "npm run build:react -- --watch",
     "watch": "npm run watch:react & npm run watch:plugin"
   },
   "dependencies": {
