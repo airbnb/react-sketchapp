@@ -1,4 +1,7 @@
 {
+  "setupFiles": [
+    "./mockEnv.js"
+  ],
   "testEnvironment": "node",
   "testPathIgnorePatterns": [
     "/node_modules/",
