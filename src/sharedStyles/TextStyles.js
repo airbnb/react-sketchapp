@@ -56,7 +56,6 @@ const resolve = (style: TextStyle): ?SketchStyle => {
 const styles = () => _styles;
 
 const TextStyles = {
-  registerStyle,
   create,
   resolve,
   styles,

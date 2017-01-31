@@ -61,6 +61,7 @@ describe('create', () => {
       }, {});
       expect(sharedTextStyles.setStyles).not.toHaveBeenCalled();
     });
+
     test('one style', () => {
       const styles = {
         foo: {
@@ -73,7 +74,7 @@ describe('create', () => {
       expect(Object.keys(res).length).toBe(1);
     });
 
-    test('one style', () => {
+    test('two styles', () => {
       const styles = {
         foo: {
           foo: 'bar',
@@ -88,87 +89,70 @@ describe('create', () => {
       expect(Object.keys(res).length).toBe(2);
       expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
     });
-  });
-});
 
-describe('registerStyle', () => {
-  beforeEach(() => {
-    TextStyles.create({
-      context,
-    }, {});
-  });
+    test('unique keys w/ unique styles', () => {
+      const styles = {
+        foo: {
+          foo: 'bar',
+        },
+        bar: {
+          baz: 'bar',
+        },
+      };
 
-  test('one style', () => {
-    const key = 'foo';
-    const style = {
-      foo: 'bar',
-    };
+      const res = TextStyles.create({ context }, styles);
 
-    const styles = TextStyles.registerStyle(key, style);
+      expect(Object.keys(res).length).toBe(2);
+      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
+    });
 
-    expect(Object.keys(styles).length).toBe(1);
-    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
-  });
+    test('duplicate keys w/ unique styles', () => {
+      const styles = {
+        foo: {
+          foo: 'bar',
+        },
+        foo: { // eslint-disable-line no-dupe-keys
+          baz: 'bar',
+        },
+      };
 
-  test('unique keys w/ unique styles', () => {
-    const key1 = 'foo';
-    const style1 = {
-      foo: 'bar',
-    };
+      const res = TextStyles.create({ context }, styles);
 
-    const key2 = 'bar';
-    const style2 = {
-      baz: 'bar',
-    };
+      expect(Object.keys(res).length).toBe(1);
+      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
+    });
 
-    let styles = TextStyles.registerStyle(key1, style1);
-    styles = TextStyles.registerStyle(key2, style2);
+    test('unique keys w/ duplicate styles', () => {
+      const styles = {
+        foo: {
+          foo: 'bar',
+        },
+        bar: {
+          foo: 'bar',
+        },
+      };
 
-    expect(Object.keys(styles).length).toBe(2);
-    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
-  });
+      const res = TextStyles.create({ context }, styles);
 
-  test('duplicate keys w/ unique styles', () => {
-    const key = 'foo';
-    const style1 = {
-      foo: 'bar',
-    };
+      expect(Object.keys(res).length).toBe(1);
+      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
+    });
 
-    const style2 = {
-      baz: 'bar',
-    };
+    test('duplicate keys w/ duplicate styles', () => {
+      const styles = {
+        foo: {
+          foo: 'bar',
+        },
+        foo: { // eslint-disable-line no-dupe-keys
+          foo: 'bar',
+        },
+      };
 
-    let styles = TextStyles.registerStyle(key, style1);
-    styles = TextStyles.registerStyle(key, style2);
+      const res = TextStyles.create({ context }, styles);
 
-    expect(Object.keys(styles).length).toBe(2);
-    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
-  });
-
-  test('unique keys w/ duplicate styles', () => {
-    const key1 = 'foo';
-    const key2 = 'bar';
-    const style = {
-      foo: 'bar',
-    };
-
-    let styles = TextStyles.registerStyle(key1, style);
-    styles = TextStyles.registerStyle(key2, style);
-
-    expect(Object.keys(styles).length).toBe(1);
-  });
-
-  test('duplicate keys w/ duplicate styles', () => {
-    const key = 'foo';
-    const style = {
-      foo: 'bar',
-    };
-
-    let styles = TextStyles.registerStyle(key, style);
-    styles = TextStyles.registerStyle(key, style);
-
-    expect(Object.keys(styles).length).toBe(1);
-    expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
+      expect(Object.keys(res).length).toBe(1);
+      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
+    });
   });
 });
 
@@ -181,26 +165,28 @@ describe('resolve', () => {
 
   test('retrieves a matching style', () => {
     const key = 'foo';
-    const style = {
-      foo: 'bar',
+    const styles = {
+      [key]: { foo: 'bar' },
     };
 
-    TextStyles.registerStyle(key, style);
+    TextStyles.create({ context }, styles);
 
-    expect(TextStyles.resolve(style)).toBeDefined();
+    expect(TextStyles.resolve(styles[key])).toBeDefined();
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
   });
 
   test('returns null with no matching style', () => {
     const key = 'foo';
-    const style1 = {
-      foo: 'bar',
-    };
+    const styles = {
+      [key]: {
+        foo: 'bar',
+      },
+    }
     const style2 = {
       baz: 'qux',
     };
 
-    TextStyles.registerStyle(key, style1);
+    TextStyles.create({ context }, styles);
 
     expect(TextStyles.resolve(style2)).not.toBeDefined();
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
