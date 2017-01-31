@@ -19,20 +19,9 @@ const styles = StyleSheet.create({
     //   { rotateZ: '30deg' },
     // ],
   },
-  title: {
-    ...fonts['Title 2'],
-    color: colors.Night,
-  },
-  subtitle: {
-    ...fonts['Title 3'],
-    color: colors.Night,
-    marginBottom: spacing,
-  },
-  body: {
-    ...fonts.Body,
-    color: colors.Night,
-    marginBottom: spacing,
-  },
+  title: fonts['Title 2'],
+  subtitle: fonts['Title 3'],
+  body: fonts.Body,
 });
 
 type User = {
@@ -76,8 +65,10 @@ const Body = ({ children }: TextP): React$Element<any> =>
 const Profile = (props: ProfileP): React$Element<any> =>
   <View style={styles.container}>
     <Avatar url={props.user.profile_image_url} />
-    <Title>{ props.user.name }</Title>
-    <Subtitle>{ `@${props.user.screen_name}` }</Subtitle>
+    <View style={{ marginBottom: spacing }}>
+      <Title>{ props.user.name }</Title>
+      <Subtitle>{ `@${props.user.screen_name}` }</Subtitle>
+    </View>
     <Body>{ props.user.description }</Body>
     <Body>{ props.user.location }</Body>
     <Body>{ props.user.url }</Body>

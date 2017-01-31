@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 import React from 'react';
-import { render, SharedStyles, View } from '../src';
+import { render, TextStyles, View } from '../src';
 import designSystem from './designSystem';
 import type { DesignSystem } from './designSystem';
 import type { SketchContext } from '../src/types';
@@ -36,11 +36,10 @@ const Document = ({ system }: { system: DesignSystem }) =>
   </View>;
 
 const onRun = (context: SketchContext) => {
-  SharedStyles
-    .create({
-      context,
-      clearExistingStyles: true,
-    }, designSystem.fonts);
+  TextStyles.create({
+    context,
+    clearExistingStyles: true,
+  }, designSystem.fonts);
 
   render(
     <Document

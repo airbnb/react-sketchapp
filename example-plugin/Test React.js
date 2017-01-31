@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable */
 import React from 'react';
-import { render, Text, View } from '../src';
+import { render, Text, TextStyles, View } from '../src';
 import Profile from './Twitter';
 import { dump } from '../src/debug';
 import { fonts, spacing } from './designSystem';
@@ -62,6 +62,7 @@ const Page = () =>
   </View>;
 
 const onRun = (context: SketchContext) => {
+  TextStyles.create({ context, clearExistingStyles: true }, fonts);
   render(<Page pkg={pkg} />, context);
 };
 

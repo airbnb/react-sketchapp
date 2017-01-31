@@ -35,30 +35,35 @@ const fontWeights = {
 
 export const fonts = {
   Headline: {
+    color: colors.night,
     fontSize: typeSizes[0],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
     lineHeight: 80,
   },
   'Title 1': {
+    color: colors.night,
     fontSize: typeSizes[2],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
     lineHeight: 48,
   },
   'Title 2': {
+    color: colors.night,
     fontSize: typeSizes[3],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
     lineHeight: 36,
   },
   'Title 3': {
+    color: colors.night,
     fontSize: typeSizes[4],
     fontFamily: fontFamilies.body,
     fontWeight: fontWeights.regular,
     lineHeight: 24,
   },
   Body: {
+    color: colors.night,
     fontSize: typeSizes[5],
     fontFamily: fontFamilies.body,
     fontWeight: fontWeights.regular,
