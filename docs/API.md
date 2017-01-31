@@ -17,6 +17,11 @@
   * [`create`](#create)
   * [`flatten`](#flatten)
   * [`resolve`](#resolve)
+* [`TextStyles`](#textstyles)
+  * [`registerStyle`](#registerStyle)
+  * [`create`](#create)
+  * [`resolve`](#resolve)
+  * [`styles`](#styles)
 
 ### `render(element, context, [callback])`
 
@@ -250,3 +255,60 @@ const styles = StyleSheet.create({
 StyleSheet.resolve(styles.foo);
 // { style: { fontSize: 24, color: 'red' } }
 ```
+
+## TextStyles
+An interface to Sketch's shared text styles. Create styles with or without rendering them to the document canvas.
+
+### `create(options, styles)`
+The primary interface to TextStyles. **Call this before rendering**.
+
+#### params
+##### `options: { context, styles }`
+###### `context` **(required)**
+The Sketch API context from the main plugin `onRun` function.
+
+###### `clearExistingStyles`
+Clear any styles already registered in the document.
+
+##### `styles` **(required)**
+An object of JavaScript styles. The keys will be used as Sketch's Text Style names.
+
+#### Example
+```js
+const onRun = context =>
+  const typeStyles = {
+    Headline: {
+      fontSize: 36,
+      fontFamily: 'Apercu',
+      lineHeight: 38,
+    },
+    Body: {
+      fontSize: 16,
+      fontFamily: 'Helvetica',
+      lineHeight: 22,
+    },
+  };
+
+  TextStyles.create({
+    context: context,
+    clearExistingStyles: true,
+  }, typeStyles);
+
+  const Document = () =>
+    <View>
+      <Text style={styles.Headline}>Headline text</Text>
+      <Text style={styles.Body}>Body text</Text>
+    </View>
+
+  render(<Document />, context);
+```
+
+### `resolve(style)`
+Find a stored native Sketch style object for a given JavaScript style object. You probably don't need to use this.
+
+#### params
+##### `style`
+A JavaScript style
+
+### `styles`
+Find all of the registered styles. You probably don't need to use this.
