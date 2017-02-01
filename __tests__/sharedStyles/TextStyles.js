@@ -181,7 +181,7 @@ describe('resolve', () => {
       [key]: {
         foo: 'bar',
       },
-    }
+    };
     const style2 = {
       baz: 'qux',
     };
