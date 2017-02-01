@@ -95,6 +95,8 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
   ]);
   groupLayer.addLayers(backingLayers);
   children.map(child => renderToSketch(child, groupLayer));
+
+  return groupLayer;
 };
 
 const buildTree = (element: React$Element<any>): TreeNode => {
@@ -113,14 +115,24 @@ const buildTree = (element: React$Element<any>): TreeNode => {
  *   render(<View />, context);
  * }
  */
-function render(element: React$Element<any>, context: SketchContext) {
+function render(
+  element: React$Element<any>,
+  context: SketchContext,
+  callback?: ((el: ?SketchLayer) => void)
+): ?SketchLayer {
   const page: SketchLayer = context.document.currentPage();
   try {
     const tree = buildTree(element);
-    renderToSketch(tree, page);
+    const rendered = renderToSketch(tree, page);
+
+    if (callback) { callback(rendered); }
+    return rendered;
   } catch (err) {
     const tree = buildTree(<RedBox error={err} />);
-    renderToSketch(tree, page);
+    const rendered = renderToSketch(tree, page);
+
+    if (callback) { callback(rendered); }
+    return rendered;
   }
 }
 

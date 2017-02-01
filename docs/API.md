@@ -19,12 +19,19 @@
   * [`resolve`](#resolve)
 
 ### `render(element, context, [callback])`
+Returns the top-level rendered Sketch object.
 
 #### params
 ##### `element` (required)
 
 ##### `context` (required)
 The Sketch context passed to a plugin
+
+#### `callback`
+An optional callback, called with the top-most rendered native Sketch layer.
+
+### returns
+The top-most rendered native Sketch layer.
 
 #### Example
 ```js
