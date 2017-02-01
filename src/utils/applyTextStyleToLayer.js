@@ -11,6 +11,15 @@ const TEXT_ALIGN = {
   justify: TextAlignment.Justified,
 };
 
+const TEXT_TRANSFORM = {
+  uppercase: 1,
+  lowercase: 2,
+  initial: 0,
+  inherit: 0,
+  none: 0,
+  capitalize: 0,
+};
+
 function applyTextStyleToLayer(
   layer: SketchLayer,
   textStyle: TextStyle,
@@ -37,6 +46,13 @@ function applyTextStyleToLayer(
 
   if (style && style.opacity !== undefined) {
     layer.style().contextSettings().opacity = style.opacity; //eslint-disable-line
+  }
+
+  if (textStyle.textTransform) {
+    layer.addAttribute_value(
+      'MSAttributedStringTextTransformAttribute',
+      TEXT_TRANSFORM[textStyle.textTransform] * 1,
+    );
   }
 
   // note european spelling :P
