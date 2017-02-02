@@ -42,12 +42,11 @@ const onRun = context =>
 Wrapper for Sketch's artboards.
 
 #### Props
-##### `name`
-The name to be displayed in the Sketch Layer List
-
-##### `children`
-##### `style`
-See [styling](/docs/styling.md)
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `name` | `String` | | The name to be displayed in the Sketch Layer List |
+| `children` | `Node` | | |
+| `style` | [`Style`](/docs/styling.md) | | |
 
 #### Example
 ```js
@@ -64,17 +63,17 @@ See [styling](/docs/styling.md)
 ### `<Image>`
 
 #### Props
-##### `children`
-##### `defaultSource`
-A source to use whilst the image is loading
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `children` | `Node` | | |
+| `source` | `ImageSource` | | |
+| `style` | [`Style`](/docs/styling.md) | | |
+| `resizeMode` | `ResizeMode` | `contain` | |
 
-##### `resizeMode`
-`contain` | `cover` | `stretch` | `center` | `repeat` | `none`
-
-##### `source`
-
-##### `style`
-See [styling](/docs/styling.md)
+```
+type ImageSource = String | { src: String }
+type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
+```
 
 #### Example
 ```js
@@ -93,8 +92,9 @@ See [styling](/docs/styling.md)
 A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react)
 
 #### Props
-##### `error` (required)
-A JavaScript [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object.
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `error` | [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) | **required** | A JavaScript Error object |
 
 #### Example
 ```js
@@ -111,11 +111,12 @@ const onRun = context => {
 Text primitives
 
 #### Props
-##### `name`
-The name to be displayed in the Sketch Layer List
-##### `children`
-##### `style`
-See [styling](/docs/styling.md)
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `name` | `String` | | The name to be displayed in the Sketch Layer List |
+| `children` | `String` | | |
+| `style` | [`Style`](/docs/styling.md) | | |
+
 
 #### Example
 ```js
@@ -136,11 +137,11 @@ See [styling](/docs/styling.md)
 View primitives
 
 #### Props
-##### `name`
-The name to be displayed in the Sketch Layer List
-##### `children`
-##### `style`
-See [styling](/docs/styling.md)
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `name` | `String` | | The name to be displayed in the Sketch Layer List |
+| `children` | `Node` | | |
+| `style` | [`Style`](/docs/styling.md) | | |
 
 #### Example
 ```js
