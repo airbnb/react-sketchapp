@@ -63,7 +63,7 @@ const Document = props =>
     <Text>Hello world!</Text>
   </View>;
 
-export default function (onRun) {
+export default function (context) {
   render(<Document />, context);
 }
 ```
