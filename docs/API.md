@@ -1,6 +1,6 @@
 # API Reference
 
-* [`render`](#render)
+* [`render`](#renderelement-context-callback)
 * [Components](#components)
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
@@ -10,13 +10,13 @@
 * [`Platform`](#platform)
   * [`OS`](#os)
   * [`Version`](#version)
-  * [`select`](#select)
+  * [`select`](#selectobj)
 * [`StyleSheet`](#stylesheet)
   * [`hairlineWidth`](#hairlinewidth)
   * [`absoluteFill`](#absolutefill)
-  * [`create`](#create)
-  * [`flatten`](#flatten)
-  * [`resolve`](#resolve)
+  * [`create`](#createstyle)
+  * [`flatten`](#flattenstyles)
+  * [`resolve`](#resolvestyles)
 
 ### `render(element, context, [callback])`
 
