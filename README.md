@@ -1,12 +1,12 @@
-<img alt="react-sketchapp" src="./docs/assets/logo-stijl@2x.png" height="72px" />
+> This project is currently in **alpha and APIs are subject to change**. If you found the repo on npm — the source (& docs, oops) is private for now; it will be announced on <a href="jon.gold/txt">my mailing list</a> and <a href="http://twitter.com/jongold">Twitter</a> very soon :)
+
+<img alt="react-sketchapp" src="./docs/assets/logo-orange.png" height="72px" />
 
 A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem:
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
 [![CircleCI](https://circleci.com/gh/jongold/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/jongold/react-sketchapp)
 ![Sketch.app](https://img.shields.io/badge/Sketch.app-42-brightgreen.svg)
-
-> This project is currently in **alpha and APIs are subject to change**. The source (& docs, oops) is private for now; it will be announced on <a href="jon.gold/txt">my mailing list</a> and <a href="http://twitter.com/jongold">Twitter</a> very soon :)
 
 ## Features
 
