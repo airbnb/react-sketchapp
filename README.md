@@ -23,14 +23,39 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 * [Troubleshooting](/docs/troubleshooting.md)
 
 ## Usage
-Using [npm](https://www.npmjs.com/):
-```bash
-npm install --save react-sketchapp
+`react-sketchapp` projects are implemented as [Sketch plugins](http://developer.sketchapp.com/). First, make sure you've disabled [Sketch's caching mechanism](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running).
+```
+defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
 ```
 
-`react-sketchapp` projects are implemented as [Sketch plugins](http://developer.sketchapp.com/). We recommend disabling CocoaScript, and using a module bundler like [webpack](https://webpack.github.io/) to compile into Sketch's plugin format.
+There are several ways to build Sketch plugins:
 
+### The simple way
+The simplest way to build Sketch plugins with modern JavaScript is [skpm](https://github.com/sketch-pm/skpm) 💎📦.
+
+Install skpm, if you don't have it already, and create a new project.
+```
+npm install -g skpm
+mkdir my-rad-sketch-plugin
+cd my-rad-sketch-plugin
+skpm init
+skpm link .
+```
+Install some dependencies and set up JSX compilation
+```
+npm install --save react-sketchapp react react-test-renderer
+npm install --save-dev babel-preset-react
+echo '{"presets": ["react"]}' > .babelrc
+```
+
+Then, to build your plugin
+```
+skpm build --watch
+```
+
+And write your plugin in `src/my-command.js`
 ```js
+import React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 
 const Document = props =>
@@ -38,13 +63,19 @@ const Document = props =>
     <Text>Hello world!</Text>
   </View>;
 
-const onRun = context =>
+export default function (context) {
   render(<Document />, context);
-
-module.exports = onRun;
+}
 ```
 
-[`react-sketchapp-starter`](http://github.com/jongold/react-sketchapp-starter) is a minimal boilerplace to start developing your own plugin.
+Run your plugin in Sketch via `Plugins → [your plugin name] → my-command`.
+
+Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information.
+
+### The manual way
+Feel free to use whatever build process you're comfortable with — just [disable CocoaScript](http://developer.sketchapp.com/introduction/plugin-bundles/#disablecocoascriptpreprocessor) and you can use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
+
+[`react-sketchapp-starter`](http://github.com/jongold/react-sketchapp-starter) is a minimal boilerplace to start developing with Webpack.
 
 ### Examples
 `react-sketchapp` includes [a folder of examples](example-plugin/) showing how you might use it to work with a JavaScript [design system](example-plugin/designSystem.js).
