@@ -18,13 +18,17 @@
   * [`flatten`](#flattenstyles)
   * [`resolve`](#resolvestyles)
 
-### `render(element, context, [callback])`
+### `render(element, context)`
+Returns the top-level rendered Sketch object.
 
 #### params
 ##### `element` (required)
 
 ##### `context` (required)
 The Sketch context passed to a plugin
+
+### returns
+The top-most rendered native Sketch layer.
 
 #### Example
 ```js
