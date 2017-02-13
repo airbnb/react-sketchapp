@@ -18,7 +18,7 @@
   * [`flatten`](#flatten)
   * [`resolve`](#resolve)
 
-### `render(element, context, [callback])`
+### `render(element, context)`
 Returns the top-level rendered Sketch object.
 
 #### params
@@ -26,9 +26,6 @@ Returns the top-level rendered Sketch object.
 
 ##### `context` (required)
 The Sketch context passed to a plugin
-
-#### `callback`
-An optional callback, called with the top-most rendered native Sketch layer.
 
 ### returns
 The top-most rendered native Sketch layer.
