@@ -6,6 +6,8 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 [![CircleCI](https://circleci.com/gh/jongold/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/jongold/react-sketchapp)
 ![Sketch.app](https://img.shields.io/badge/Sketch.app-42-brightgreen.svg)
 
+> This project is currently in **alpha and APIs are subject to change**. The source (& docs, oops) is private for now; it will be announced on <a href="jon.gold/txt">my mailing list</a> and <a href="http://twitter.com/jongold">Twitter</a> very soon :)
+
 ## Features
 
 * **Declarative.** All the lessons we've learnt from the React model of programming. A comfortable layer over Sketch’s API.
