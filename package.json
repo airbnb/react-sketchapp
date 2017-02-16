@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "license": "MIT",
@@ -61,6 +61,7 @@
   },
   "homepage": "https://github.com/jongold/react-sketchapp",
   "devDependencies": {
+    "@jongold/eslint-config-sketch": "^1.0.0-2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.1.0",

@@ -8,11 +8,11 @@ import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 
 const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
 
+const TRANSPARENT = convertToColor('transparent');
 const DEFAULT_BORDER_COLOR = '#000';
 const DEFAULT_BORDER_STYLE = 'solid';
 const DEFAULT_SHADOW_COLOR = '#000'; // TODO: what does web do?
-const DEFAULT_BACKGROUND_COLOR = '#fff';
-const TRANSPARENT = convertToColor('transparent');
+const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
 
 const VISIBLE_STYLES = [
   'shadowColor',

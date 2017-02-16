@@ -27,7 +27,7 @@ touch ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
 ```
 
 #### My changes don’t show up when rerunning my plugin
-Make sure Sketch is configured to automatically reload plugins!
+Make sure Sketch is configured to [automatically reload plugins](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running)!
 ```bash
 defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
 ```
