@@ -34,6 +34,7 @@ const INHERITABLE_STYLES = [
   'textShadowOffset',
   'textShadowRadius',
   'textShadowColor',
+  'textTransform',
   'letterSpacing',
   'lineHeight',
   'textAlign',

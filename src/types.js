@@ -133,6 +133,7 @@ export type TextStyle = {
   textShadowOffset: { width: number, height: number },
   textShadowRadius: number,
   textShadowColor: Color,
+  textTransform: 'uppercase' | 'lowercase',
   letterSpacing: number,
   lineHeight: number,
   textAlign: 'auto' | 'left' | 'right' | 'center' | 'justify',
