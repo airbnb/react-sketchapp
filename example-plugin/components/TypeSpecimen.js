@@ -8,7 +8,10 @@ type P = {
   style: any,
 }
 const TypeSpecimen = ({ name, style }: P) =>
-  <View style={{ flexDirection: 'row', marginBottom: 24 }}>
+  <View
+    name={`TypeSpecimen-${name}`}
+    style={{ flexDirection: 'row', marginBottom: 24 }}
+  >
     <View style={{ width: 100 }}>
       <Label>
         {`${style.fontSize} / ${style.lineHeight}`}
@@ -17,8 +20,6 @@ const TypeSpecimen = ({ name, style }: P) =>
     <Text
       style={{
         ...style,
-        flexStretch: 1,
-        color: '#333',
       }}
     >
       { name }

@@ -1,22 +1,10 @@
 /* @flow */
-import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
-import findFont from '../utils/findFont';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
-
-const TEXT_ALIGN = {
-  auto: 0,
-  left: 0,
-  right: 1,
-  center: 2,
-  justify: 3,
-};
-
-const TEXT_BEHAVIOR = {
-  auto: 0,
-  fixed: 1,
-};
+import TextStyles from '../sharedStyles/TextStyles';
+import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
+import textLayer from '../wrappers/textLayer';
 
 class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: any, value: ?string) {
@@ -34,45 +22,19 @@ class TextRenderer extends SketchRenderer {
       return viewRenderer.renderBackingLayers(layout, style, textStyle, props, value);
     }
 
-    const layer = MSTextLayer
-      .alloc()
-      .initWithFrame_(NSMakeRect(layout.left, layout.top, layout.width, layout.height));
+    let layer = textLayer(value, layout);
 
-    // Text Value
-    layer.setStringValue(value);
-    layer.setName(value);
+    const resolvedStyle = TextStyles.resolve(textStyle);
 
-    // Styling
-    const font = findFont(textStyle);
-    layer.setFont(font);
-
-    if (textStyle.color !== undefined) {
-      layer.setTextColor(convertToColor(textStyle.color));
+    if (resolvedStyle) {
+      layer.style = resolvedStyle;
+      return [layer];
     }
 
-    if (textStyle.lineHeight !== undefined) {
-      layer.setLineHeight(textStyle.lineHeight);
-    }
-
-    if (textStyle.letterSpacing !== undefined) {
-      layer.setCharacterSpacing(textStyle.letterSpacing);
-    }
-
-    if (textStyle.textAlign) {
-      layer.setTextAlignment(TEXT_ALIGN[textStyle.textAlign]);
-    }
-
-    if (style.opacity !== undefined) {
-      layer.style().contextSettings().opacity = style.opacity;
-    }
-
-    // note european spelling :P
-    layer.setTextBehaviour(TEXT_BEHAVIOR.fixed);
+    layer = applyTextStyleToLayer(layer, textStyle, style);
 
     layer.frame().setWidth(layout.width);
     layer.frame().setHeight(layout.height);
-
-    // TODO: fontWeight
 
     return [layer];
   }

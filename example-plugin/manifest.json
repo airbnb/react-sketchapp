@@ -11,13 +11,13 @@
   "disableCocoaScriptPreprocessor": true,
   "commands": [
     {
-      "name": "Test React",
-      "identifier": "react",
+      "name": "Example: Profiles",
+      "identifier": "profiles",
       "shortcut": "ctrl shift r",
-      "script": "Test React.js"
+      "script": "Profiles.js"
     },
     {
-      "name": "Test Styleguide",
+      "name": "Example: Styleguide",
       "identifier": "styleguide",
       "shortcut": "ctrl shift s",
       "script": "Styleguide.js"
@@ -25,7 +25,7 @@
   ],
   "menu": {
     "items": [
-      "react",
+      "profiles",
       "styleguide"
     ]
   }

@@ -82,7 +82,7 @@ Feel free to use whatever build process you're comfortable with — just [disabl
 ### Examples
 `react-sketchapp` includes [a folder of examples](example-plugin/) showing how you might use it to work with a JavaScript [design system](example-plugin/designSystem.js).
 * [Styleguide](example-plugin/Styleguide.js)
-* [Twitter-style profiles](example-plugin/Test React.js)
+* [Twitter-style profiles](example-plugin/Profiles.js)
 
 Clone & build the repo, and symlink the examples:
 ```bash

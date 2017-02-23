@@ -1,7 +1,6 @@
 /* @flow */
 import React, { PropTypes } from 'react';
 import ErrorStackParser from 'error-stack-parser';
-import StyleSheet from '../stylesheet';
 import Text from './Text';
 import View from './View';
 
@@ -20,12 +19,13 @@ type StackFrame = {
   evalOrigin?: StackFrame,
 }
 
-const styles = StyleSheet.create({
+const styles = {
   redbox: {
     padding: 10,
     width: 480,
     backgroundColor: 'rgb(204, 0, 0)',
   },
+  frame: {},
   message: {
     fontWeight: 'bold',
     fontSize: 16,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'white',
   },
-});
+};
 
 const propTypes = {
   error: PropTypes.instanceOf(Error).isRequired,
