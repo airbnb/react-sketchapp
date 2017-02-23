@@ -14,7 +14,7 @@
       "name": "Example: Profiles",
       "identifier": "profiles",
       "shortcut": "ctrl shift r",
-      "script": "Test React.js"
+      "script": "Profiles.js"
     },
     {
       "name": "Example: Styleguide",

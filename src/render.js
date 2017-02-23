@@ -82,7 +82,7 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
   };
 };
 
-const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
+const renderToSketch = (node: TreeNode, layer: SketchLayer): SketchLayer => {
   const { type, style, textStyle, layout, value, props, children } = node;
   const Renderer = renderers[type];
   if (Renderer == null) {
@@ -96,6 +96,8 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer) => {
   ]);
   groupLayer.addLayers(backingLayers);
   children.map(child => renderToSketch(child, groupLayer));
+
+  return groupLayer;
 };
 
 const buildTree = (element: React$Element<any>): TreeNode => {
@@ -107,21 +109,17 @@ const buildTree = (element: React$Element<any>): TreeNode => {
   return tree;
 };
 
-/**
- * Render a React element using a provided SketchContext.
- * @example
- * const onRun = (context) => {
- *   render(<View />, context);
- * }
- */
-function render(element: React$Element<any>, context: SketchContext) {
+function render(
+  element: React$Element<any>,
+  context: SketchContext,
+): SketchLayer {
   const page: SketchLayer = context.document.currentPage();
   try {
     const tree = buildTree(element);
-    renderToSketch(tree, page);
+    return renderToSketch(tree, page);
   } catch (err) {
     const tree = buildTree(<RedBox error={err} />);
-    renderToSketch(tree, page);
+    return renderToSketch(tree, page);
   }
 }
 
