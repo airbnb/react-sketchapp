@@ -25,10 +25,7 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 * [Troubleshooting](/docs/troubleshooting.md)
 
 ## Usage
-`react-sketchapp` projects are implemented as [Sketch plugins](http://developer.sketchapp.com/). First, make sure you've disabled [Sketch's caching mechanism](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running).
-```
-defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
-```
+`react-sketchapp` projects are implemented as [Sketch plugins](http://developer.sketchapp.com/).
 
 There are several ways to build Sketch plugins:
 
@@ -75,7 +72,13 @@ Run your plugin in Sketch via `Plugins → [your plugin name] → my-command`.
 Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information.
 
 ### The manual way
-Feel free to use whatever build process you're comfortable with — just [disable CocoaScript](http://developer.sketchapp.com/introduction/plugin-bundles/#disablecocoascriptpreprocessor) and you can use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
+
+Feel free to use whatever build process you're comfortable with — just [disable CocoaScript](http://developer.sketchapp.com/introduction/plugin-bundles/#disablecocoascriptpreprocessor) and disabled [Sketch's caching mechanism](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running)
+```
+defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
+```
+
+You can then use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
 
 [`react-sketchapp-starter`](http://github.com/jongold/react-sketchapp-starter) is a minimal boilerplace to start developing with Webpack.
 
