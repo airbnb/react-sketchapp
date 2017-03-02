@@ -4,6 +4,8 @@ import computeLayout from 'css-layout';
 import Context from './utils/Context';
 import createStringMeasurer from './utils/createStringMeasurer';
 import renderers from './renderers';
+import { renderToSketchJSON, translateJSONToLayer } from './renderViaJSON';
+
 import type {
   SketchContext,
   SketchLayer,
@@ -12,6 +14,8 @@ import type {
 import RedBox from './components/RedBox';
 
 const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
+
+const useNewRenderer = true;
 
 const pick = (obj, keys) => {
   const result = {};
@@ -82,6 +86,19 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
   };
 };
 
+const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer => {
+  log("creating json from tree");
+  const json = renderToSketchJSON(node);
+  log("trying to insert json:");
+  log(json);
+  const sl = translateJSONToLayer(json);
+  log("not adding layers for now " + sl);
+  page.addLayers([sl]);
+  return page; 
+}
+
+//// END NEW VERSION
+
 const renderToSketch = (node: TreeNode, layer: SketchLayer): SketchLayer => {
   const { type, style, textStyle, layout, value, props, children } = node;
   const Renderer = renderers[type];
@@ -116,7 +133,12 @@ function render(
   const page: SketchLayer = context.document.currentPage();
   try {
     const tree = buildTree(element);
-    return renderToSketch(tree, page);
+    if (useNewRenderer) {
+      return renderToSketchViaJSON(tree, page);
+    } else {
+      log("using old renderer");
+      return renderToSketch(tree, page);
+    }
   } catch (err) {
     const tree = buildTree(<RedBox error={err} />);
     return renderToSketch(tree, page);
