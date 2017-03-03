@@ -178,7 +178,7 @@ class ViewRenderer extends SketchRenderer {
  
 
       const frame = makeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb);
-      const radii = [bsl, bsr, bst, bsb];
+      const radii = [btlr, btrr, bbrr, bblr];
       const shapeLayer = makeRectShapeLayer(0, 0, layout.width - bl - br, layout.height - bt - bb, radii);
       const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
 
