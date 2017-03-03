@@ -3,7 +3,7 @@ import convertToColor from './convertToColor';
 import findFont from './findFont';
 import type { SketchLayer, TextStyle, ViewStyle } from '../types';
 
-const TEXT_ALIGN = {
+export const TEXT_ALIGN = {
   auto: TextAlignment.Left,
   left: TextAlignment.Left,
   right: TextAlignment.Right,
@@ -11,7 +11,7 @@ const TEXT_ALIGN = {
   justify: TextAlignment.Justified,
 };
 
-const TEXT_TRANSFORM = {
+export const TEXT_TRANSFORM = {
   uppercase: 1,
   lowercase: 2,
   initial: 0,

@@ -19,17 +19,19 @@ class TextRenderer extends SketchRenderer {
     props: any,
     value: ?string
   ): Array<SketchLayer> {
+    
     if (value === null) {
       const viewRenderer = new ViewRenderer();
       return viewRenderer.renderBackingLayers(layout, style, textStyle, props, value);
     }
 
     const frame = makeRect(0, 0, layout.width, layout.height)
-    const layer = makeTextLayer(frame, value, 'black');
+    const layer = makeTextLayer(frame, value, textStyle);
 
     //let layer = textLayer(value, layout);
 
-    //const resolvedStyle = TextStyles.resolve(textStyle);
+    // This is a sketch api. Naughty :((
+    const resolvedStyle = TextStyles.resolve(textStyle);
 
     // if (resolvedStyle) {
     //   layer.style = resolvedStyle;

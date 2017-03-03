@@ -91,10 +91,10 @@ const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer =
   const json = renderToSketchJSON(node);
   log("trying to insert json:");
 
-  // var str = NSString.stringWithString_(JSON.stringify(json));
+  var str = NSString.stringWithString_(JSON.stringify(json));
   // log(str);  
-  // const file = '/Users/andrew/Desktop/sketchtest.json';
-  // str.writeToFile_atomically_(file, false);
+  const file = NSString.stringWithString_('~/Desktop/sketchtest.json').stringByExpandingTildeInPath();
+  str.writeToFile_atomically_(file, false);
 
   const sl = translateJSONToLayer(json);
   log("adding layers " + sl);
@@ -126,8 +126,11 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer): SketchLayer => {
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
+  log("starting react to flex");
   const tree = reactTreeToFlexTree(json, new Context());
+  log("done react to flex");
   computeLayout(tree);
+  log("done computeLayout");
 
   return tree;
 };
@@ -140,6 +143,7 @@ function render(
   try {
     const tree = buildTree(element);
     if (useNewRenderer) {
+      renderToSketch(tree, page);
       return renderToSketchViaJSON(tree, page);
     } else {
       log("using old renderer");

@@ -11,6 +11,7 @@ const createStringMeasurer = (string: string, style: TextStyle) => (
   // height: number,
   // heightMode: MeasureMode
 ): Size => {
+
   // TODO: create a shared style => font/letterspacing/etc function to reuse in `text`
   const font = findFont(style);
   // TODO: add in attributes for letterSpacing, etc.

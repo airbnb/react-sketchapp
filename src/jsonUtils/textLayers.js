@@ -1,7 +1,7 @@
-import { makeAttributedString } from './hacksForJSONImpl';
+import { makeAttributedString, makeTextStyle } from './hacksForJSONImpl';
 import { generateID } from './models';
 
-export function makeTextLayer(frame, text, color) {
+export function makeTextLayer(frame, text, textStyle) {
   return {
     _class: 'text',
     do_objectID: generateID(),
@@ -23,28 +23,16 @@ export function makeTextLayer(frame, text, color) {
     resizingType: 0,
     rotation: 0,
     shouldBreakMaskChain: false,
-    style: {
-      _class: 'style',
-      endDecorationType: 0,
-      miterLimit: 10,
-      startDecorationType: 0,
-      textStyle: {
-        _class: 'textStyle',
-        encodedAttributes: {
-          NSColor: {
-            _archive: 'YnBsaXN0MDDUAQIDBAUGHyBYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKUHCBEVHFUkbnVsbNQJCgsMDQ4PEFVOU1JHQlxOU0NvbG9yU3BhY2VfEBJOU0N1c3RvbUNvbG9yU3BhY2VWJGNsYXNzTxAnMC4xODc4NDEzOTc3IDAuNTE1ODY0MTU4MiAwLjIyNjcyNzI0ODEAEAGAAoAE0hIMExRUTlNJRBABgAPSFhcYGVokY2xhc3NuYW1lWCRjbGFzc2VzXE5TQ29sb3JTcGFjZaIaG1xOU0NvbG9yU3BhY2VYTlNPYmplY3TSFhcdHldOU0NvbG9yoh0bXxAPTlNLZXllZEFyY2hpdmVy0SEiVHJvb3SAAQAIABEAGgAjAC0AMgA3AD0AQwBMAFIAXwB0AHsApQCnAKkAqwCwALUAtwC5AL4AyQDSAN8A4gDvAPgA/QEFAQgBGgEdASIAAAAAAAACAQAAAAAAAAAjAAAAAAAAAAAAAAAAAAABJA=='
-          },
-          MSAttributedStringFontAttribute: {
-            _archive: 'YnBsaXN0MDDUAQIDBAUGJidYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKkHCA0XGBkaGyJVJG51bGzSCQoLDFYkY2xhc3NfEBpOU0ZvbnREZXNjcmlwdG9yQXR0cmlidXRlc4AIgALTDg8JEBMWV05TLmtleXNaTlMub2JqZWN0c6IREoADgASiFBWABYAGgAdfEBNOU0ZvbnRTaXplQXR0cmlidXRlXxATTlNGb250TmFtZUF0dHJpYnV0ZSNALAAAAAAAAF8QEC5TRk5TVGV4dC1NZWRpdW3SHB0eH1okY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxlRGljdGlvbmFyeaMeICFcTlNEaWN0aW9uYXJ5WE5TT2JqZWN00hwdIyRfEBBOU0ZvbnREZXNjcmlwdG9yoiUhXxAQTlNGb250RGVzY3JpcHRvcl8QD05TS2V5ZWRBcmNoaXZlctEoKVRyb290gAEACAARABoAIwAtADIANwBBAEcATABTAHAAcgB0AHsAgwCOAJEAkwCVAJgAmgCcAJ4AtADKANMA5gDrAPYA/wEVARkBJgEvATQBRwFKAV0BbwFyAXcAAAAAAAACAQAAAAAAAAAqAAAAAAAAAAAAAAAAAAABeQ=='
-          },
-          NSParagraphStyle: {
-            _archive: 'YnBsaXN0MDDUAQIDBAUGICFYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKUHCBMXHVUkbnVsbNUJCgsMDQ4PEBESWk5TVGFiU3RvcHNbTlNBbGlnbm1lbnRcTlNUZXh0QmxvY2tzXxAfTlNBbGxvd3NUaWdodGVuaW5nRm9yVHJ1bmNhdGlvblYkY2xhc3OAABAEgAIQAYAE0hQNFRZaTlMub2JqZWN0c6CAA9IYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNXTlNBcnJheaIaHFhOU09iamVjdNIYGR4fXxAQTlNQYXJhZ3JhcGhTdHlsZaIeHF8QD05TS2V5ZWRBcmNoaXZlctEiI1Ryb290gAEACAARABoAIwAtADIANwA9AEMATgBZAGUAcgCUAJsAnQCfAKEAowClAKoAtQC2ALgAvQDIANEA2QDcAOUA6gD9AQABEgEVARoAAAAAAAACAQAAAAAAAAAkAAAAAAAAAAAAAAAAAAABHA=='
-          },
-          NSKern: 0.03402778
-        }
-      }
-    },
-    attributedString: makeAttributedString(text, null),
+    // It works to omit this entirely
+    // style: {
+    //   _class: 'style',
+    //   endDecorationType: 0,
+    //   miterLimit: 10,
+    //   startDecorationType: 0,
+    //   // The text style seems to just mirror the attributed string, so it's faster to not set it
+    //   // textStyle: makeTextStyle(textStyle),
+    // },
+    attributedString: makeAttributedString(text, textStyle),
     // {
     //   _class: MSAttributedString,
     //   archivedAttributedString: {
@@ -53,10 +41,11 @@ export function makeTextLayer(frame, text, color) {
     // },
     automaticallyDrawOnUnderlyingPath: false,
     dontSynchroniseWithSymbol: false,
-    glyphBounds: '{{0, 0}, {116, 17}}',
+    // I haven't fully figured out the meaning of glyphBounds
+    //glyphBounds: '{{0, 0}, {116, 17}}',
     heightIsClipped: false,
     lineSpacingBehaviour: 2,
-    textBehaviour: 0
+    textBehaviour: 1
   };
 }
 

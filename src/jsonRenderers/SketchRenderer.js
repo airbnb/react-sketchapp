@@ -28,11 +28,10 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
+    // TODO(akp): handle opacity
     // if (style.opacity !== undefined) {
     //   layer.style().contextSettings().opacity = style.opacity;
     // }
-
-    log("rendering layer");
 
     return {
       ...layerGroup(layout.left, layout.top, layout.width, layout.height),
