@@ -220,7 +220,7 @@ class ViewRenderer extends SketchRenderer {
 
       // borderStyle.setFillType(FillType.Solid); // solid
 
-      // if (style.borderTopStyle !== undefined) {
+      if (style.borderTopStyle !== undefined) {
       //   const borderOptions = content.style().borderOptions();
       //   const width = style.borderTopWidth;
 
@@ -239,11 +239,22 @@ class ViewRenderer extends SketchRenderer {
       //       // do nothing
       //       break;
       //   }
-      // }
+      }
 
-      // if (style.borderTopColor !== undefined) {
-      //   borderStyle.setColor(convertToColor(style.borderTopColor));
-      // }
+      if (style.borderTopColor !== undefined) {
+        // borderStyle.setColor(convertToColor(style.borderTopColor));
+        content.style.borders = [
+          {
+            _class: 'border',
+            isEnabled: true,
+            color: makeColorFromCSS(style.borderTopColor),
+            fillType: 0,
+            position: BorderPosition.Outside,
+            thickness: bl,
+          }
+      ];
+    }
+
 
       // borderStyle.setThickness(style.borderTopWidth || 0);
 
