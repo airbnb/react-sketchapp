@@ -5,13 +5,13 @@ import { generateID, makeRect } from './models';
 export const layerGroup = (x, y, width, height) => ({
   _class: 'group',
   do_objectID: generateID(),
-  // exportOptions: {
-  //   _class: exportOptions,
-  //   exportFormats: [],
-  //   includedLayerIds: [],
-  //   layerOptions: 0,
-  //   shouldTrim: false
-  // },
+  exportOptions: {
+    _class: 'exportOptions',
+    exportFormats: [],
+    includedLayerIds: [],
+    layerOptions: 0,
+    shouldTrim: false
+  },
   frame: makeRect(x, y, width, height),
   isFlippedHorizontal: false,
   isFlippedVertical: false,
@@ -24,12 +24,12 @@ export const layerGroup = (x, y, width, height) => ({
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,
-  // style: {
-  //   _class: 'style',
-  //   endDecorationType: 0,
-  //   miterLimit: 10,
-  //   startDecorationType: 0
-  // },
+  style: {
+    _class: 'style',
+    endDecorationType: 0,
+    miterLimit: 10,
+    startDecorationType: 0
+  },
   hasClickThrough: false,
   layers: [ /* This to be filled in by the client */]
 });

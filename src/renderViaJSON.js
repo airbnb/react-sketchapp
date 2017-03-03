@@ -15,11 +15,6 @@ export const renderToSketchJSON = (node: TreeNode) => {
 
   const { type, style, textStyle, layout, value, props, children } = node;
   const Renderer = jsonRenderers[type];
-  if (type !== 'artboard' && type !== 'view') {
-    // Temporary broken hata
-    log(`invalid type ${type}`);
-    return null;    
-  }
   if (Renderer == null) {
     throw new Error(`Could not find renderer for type '${type}'`);
   }
@@ -30,16 +25,10 @@ export const renderToSketchJSON = (node: TreeNode) => {
 
   const sublayers = children.map(child => renderToSketchJSON(child));
 
-  log("groupData:");
-  log(groupLayer);
-  // return testData;
-
   // Filter out anything null, undefined
-  const layers = [...sublayers, ...backingLayers].filter(l => l);
-  log("sublayers:");
-  log(layers);
+  const layers = [...backingLayers, ...sublayers].filter(l => l);
 
-  return {...groupLayer};
+  return {...groupLayer, layers};
 }
 
 

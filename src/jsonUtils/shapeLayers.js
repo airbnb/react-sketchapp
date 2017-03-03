@@ -1,7 +1,7 @@
-import { generateID, makeRect, makeColorFromCSS, } from './models';
+import { generateID, makeRect, makeColorFill, makeColorFromCSS, } from './models';
 
 // This could be made more consty
-export const makeRectPath = (radii) => {
+export const makeRectPath = (radii = []) => {
   const [r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0] = radii;
   return {
     "_class": "path",
@@ -125,16 +125,7 @@ export const makeShapeGroup = (frame, layers = [], fillCSSColor = 'black') => ({
     // ],
     "endDecorationType": 0,
     "fills": [
-      {
-        "_class": "fill",
-        "isEnabled": true,
-        "color": makeColorFromCSS(fillCSSColor),
-        "fillType": 0,
-        "noiseIndex": 0,
-        "noiseIntensity": 0,
-        "patternFillType": 1,
-        "patternTileScale": 1
-      }
+      makeColorFill(fillCSSColor),
     ],
     "miterLimit": 10,
     "startDecorationType": 0

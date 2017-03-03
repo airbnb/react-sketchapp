@@ -49,6 +49,7 @@ class ImageRenderer extends SketchRenderer {
     value: ?string,
   ): Array<SketchLayer> {
     // TODO: borders
+    return [];
 
     const bl = style.borderLeftWidth || 0;
     const br = style.borderRightWidth || 0;

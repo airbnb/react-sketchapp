@@ -87,13 +87,19 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
 };
 
 const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer => {
-  log("creating json from tree");
+  // log("creating json from tree");
   const json = renderToSketchJSON(node);
   log("trying to insert json:");
-  log(json);
+
+  // var str = NSString.stringWithString_(JSON.stringify(json));
+  // log(str);  
+  // const file = '/Users/andrew/Desktop/sketchtest.json';
+  // str.writeToFile_atomically_(file, false);
+
   const sl = translateJSONToLayer(json);
-  log("not adding layers for now " + sl);
+  log("adding layers " + sl);
   page.addLayers([sl]);
+  log("done adding layers.");
   return page; 
 }
 

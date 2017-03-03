@@ -4,7 +4,7 @@ import convertToColor from '../utils/convertToColor';
 import colorWithOpacity from '../utils/colorWithOpacity';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
-import { makeRectPath, makeRectShapeLayer, makeRectShapeGroup } from '../jsonUtils/shapeLayers';
+import { makeRectPath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import processTransform from './processTransform';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 
@@ -173,21 +173,14 @@ class ViewRenderer extends SketchRenderer {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
 
-      const color = bcl;
-      const r = makeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb);
+      const borderColor = bcl;
+      const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
+ 
+
+      const frame = makeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb);
       const radii = [bsl, bsr, bst, bsb];
-      const rsl = makeRectShapeLayer(0, 0, layout.width - bl - br, layout.height - bt - bb, radii);
-      const content = makeRectShapeGroup(r, [rsl], color);
-
-
-
-
-
-
-
-
-
-
+      const shapeLayer = makeRectShapeLayer(0, 0, layout.width - bl - br, layout.height - bt - bb, radii);
+      const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
 
 
 
@@ -217,9 +210,6 @@ class ViewRenderer extends SketchRenderer {
       // const content = MSShapeGroup.shapeWithPath(rect);
 
       // content.name = 'Content';
-
-      // const fillStyle = content.style().addStylePartOfType(0);
-      // fillStyle.color = convertToColor(style.backgroundColor || DEFAULT_BACKGROUND_COLOR);
 
       if (hasAnyDefined(style, SHADOW_STYLES)) {
         addShadowToLayer(content, style);
@@ -264,6 +254,7 @@ class ViewRenderer extends SketchRenderer {
 
     } else {
       //TODO(akp): Handle this case
+      log("non uniform border, continuing");
       return [];
 
       // some sides have different border widths. In this case, we don't currently

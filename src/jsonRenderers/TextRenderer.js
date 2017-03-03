@@ -3,8 +3,10 @@ import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 import TextStyles from '../sharedStyles/TextStyles';
-import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
-import textLayer from '../wrappers/textLayer';
+import { makeTextLayer } from '../jsonUtils/textLayers';
+import { makeRect } from '../jsonUtils/models';
+//import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
+//import textLayer from '../wrappers/textLayer';
 
 class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: any, value: ?string) {
@@ -22,19 +24,22 @@ class TextRenderer extends SketchRenderer {
       return viewRenderer.renderBackingLayers(layout, style, textStyle, props, value);
     }
 
-    let layer = textLayer(value, layout);
+    const frame = makeRect(0, 0, layout.width, layout.height)
+    const layer = makeTextLayer(frame, value, 'black');
 
-    const resolvedStyle = TextStyles.resolve(textStyle);
+    //let layer = textLayer(value, layout);
 
-    if (resolvedStyle) {
-      layer.style = resolvedStyle;
-      return [layer];
-    }
+    //const resolvedStyle = TextStyles.resolve(textStyle);
 
-    layer = applyTextStyleToLayer(layer, textStyle, style);
+    // if (resolvedStyle) {
+    //   layer.style = resolvedStyle;
+    //   return [layer];
+    // }
 
-    layer.frame().setWidth(layout.width);
-    layer.frame().setHeight(layout.height);
+    // layer = applyTextStyleToLayer(layer, textStyle, style);
+
+    // layer.frame().setWidth(layout.width);
+    // layer.frame().setHeight(layout.height);
 
     return [layer];
   }
