@@ -75,12 +75,12 @@ const fontNamesForFamilyName = (familyName: string): Array<string> => {
 };
 
 const useCache = true;
-const _cache: Map<string, NSFont> = new Map();
+const _cache: Map<number, NSFont> = new Map();
 
-const getCached = (key: string): NSFont => {
+const getCached = (key: number): NSFont => {
   if (!useCache) return undefined;
   return _cache.get(key);
-}
+};
 
 const findFont = (style: TextStyle): NSFont => {
   const cacheKey = hashStyle(style);
