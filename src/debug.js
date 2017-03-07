@@ -29,9 +29,7 @@ export const dump = (obj: any) => {
 
 export const timeFunction = (fn: () => any, label: string) => {
   const methodStart = NSDate.date();
-  if (showStart) {
-    log(`${label} start`);
-  }
+
   const res = fn();
 
   const methodFinish = NSDate.date();
