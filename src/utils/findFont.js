@@ -2,6 +2,8 @@
 /* eslint-disable no-bitwise, quote-props */
 import { TextStyle } from '../types';
 
+import hashStyle from './hashStyle';
+
 // this borrows heavily from react-native's RCTFont class
 // thanks y'all
 // https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
@@ -72,8 +74,21 @@ const fontNamesForFamilyName = (familyName: string): Array<string> => {
   return results;
 };
 
+const useCache = true;
+const _cache: Map<number, NSFont> = new Map();
+
+const getCached = (key: number): NSFont => {
+  if (!useCache) return undefined;
+  return _cache.get(key);
+};
+
 const findFont = (style: TextStyle): NSFont => {
-  let font;
+  const cacheKey = hashStyle(style);
+
+  let font = getCached(cacheKey);
+  if (font) {
+    return font;
+  }
   const defaultFontFamily = NSFont.systemFontOfSize(14).familyName();
   const defaultFontWeight = NSFontWeightRegular;
   const defaultFontSize = 14;
@@ -172,6 +187,9 @@ const findFont = (style: TextStyle): NSFont => {
   }
 
   // TODO: support opentype features: small-caps & number types
+  if (font) {
+    _cache.set(cacheKey, font);
+  }
 
   return font;
 };
