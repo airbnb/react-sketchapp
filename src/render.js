@@ -92,7 +92,7 @@ const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer =
   log("trying to insert json:");
 
   var str = NSString.stringWithString_(JSON.stringify(json));
-  // log(str);  
+  // log(str);
   const file = NSString.stringWithString_('~/Desktop/sketchtest.json').stringByExpandingTildeInPath();
   str.writeToFile_atomically_(file, false);
 
@@ -100,7 +100,7 @@ const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer =
   log("adding layers " + sl);
   page.addLayers([sl]);
   log("done adding layers.");
-  return page; 
+  return page;
 }
 
 //// END NEW VERSION
@@ -142,7 +142,7 @@ function render(
   const page: SketchLayer = context.document.currentPage();
   try {
     const tree = buildTree(element);
-    if (useNewRenderer) {
+    if (context.api()._metadata.appVersion >= 43 && useNewRenderer) {
       renderToSketch(tree, page);
       return renderToSketchViaJSON(tree, page);
     } else {
