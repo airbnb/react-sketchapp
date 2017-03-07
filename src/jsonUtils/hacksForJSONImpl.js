@@ -2,10 +2,9 @@
 // We need native macOS fonts and colors for these hacks so import the old utils
 import normalizeColor from 'normalize-css-color';
 import findFont from '../utils/findFont';
-import convertToColor from '../utils/convertToColor';
-import {TEXT_ALIGN, TEXT_TRANSFORM} from '../utils/applyTextStyleToLayer';
+import { TEXT_ALIGN } from '../utils/applyTextStyleToLayer';
 
-// Awkwardly we encode then immediatly decode the JSON, but seems like 
+// Awkwardly we encode then immediatly decode the JSON, but seems like
 function encodeSketchJSON(sketchObj) {
   const encoded = MSJSONDataArchiver.archiveStringWithRootObject_error_(sketchObj, null);
   return JSON.parse(encoded);
@@ -48,16 +47,6 @@ export function makeAttributedString(string, textStyle) {
 
   return encodeSketchJSON(msAttribStr);
 }
-
-
-
-
-
-
-
-
-
-
 
 
 // I think this is not needed anymore. rm?

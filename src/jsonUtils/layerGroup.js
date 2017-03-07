@@ -10,7 +10,7 @@ export const layerGroup = (x, y, width, height) => ({
     exportFormats: [],
     includedLayerIds: [],
     layerOptions: 0,
-    shouldTrim: false
+    shouldTrim: false,
   },
   frame: makeRect(x, y, width, height),
   isFlippedHorizontal: false,
@@ -28,8 +28,8 @@ export const layerGroup = (x, y, width, height) => ({
     _class: 'style',
     endDecorationType: 0,
     miterLimit: 10,
-    startDecorationType: 0
+    startDecorationType: 0,
   },
   hasClickThrough: false,
-  layers: [ /* This to be filled in by the client */]
+  layers: [],
 });

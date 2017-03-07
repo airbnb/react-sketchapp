@@ -1,5 +1,5 @@
 /* @flow */
-import { layerGroup } from '../jsonUtils/layerGroup'
+import { layerGroup } from '../jsonUtils/layerGroup';
 
 import type {
   LayoutInfo,
@@ -20,7 +20,6 @@ class SketchRenderer {
     // eslint-disable-next-line no-unused-vars
     value: ?string
   ): SketchJSON {
-
     // Default SketchRenderer just renders an empty group
 
     // TODO(lmr): applying transform to the group would be ideal, but not sure if it's possible

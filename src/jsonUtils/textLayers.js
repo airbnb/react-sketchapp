@@ -12,7 +12,7 @@ export function makeTextLayer(frame, text, textStyle) {
     //   layerOptions: 0,
     //   shouldTrim: false
     // },
-    frame: frame,
+    frame,
     isFlippedHorizontal: false,
     isFlippedVertical: false,
     isLocked: false,
@@ -42,11 +42,9 @@ export function makeTextLayer(frame, text, textStyle) {
     automaticallyDrawOnUnderlyingPath: false,
     dontSynchroniseWithSymbol: false,
     // I haven't fully figured out the meaning of glyphBounds
-    //glyphBounds: '{{0, 0}, {116, 17}}',
+    // glyphBounds: '{{0, 0}, {116, 17}}',
     heightIsClipped: false,
     lineSpacingBehaviour: 2,
-    textBehaviour: 1
+    textBehaviour: 1,
   };
 }
-
-

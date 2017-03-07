@@ -55,21 +55,20 @@ function makeShadow(color, opacity, radius, offsetX, offsetY) {
     contextSettings: {
       _class: 'graphicsContextSettings',
       blendMode: 0,
-      opacity: opacity,
+      opacity,
     },
-    offsetX: offsetX,
-    offsetY: offsetY,
+    offsetX,
+    offsetY,
     spread: 0,
   };
 }
 
 // TODO(akp): This shouldn't really mutate layer but ok for now #sketch43
 function addShadowToLayer(layer, style) {
-
   const opacity = style.shadowOpacity !== undefined ? style.shadowOpacity : 1;
   const color = style.shadowColor || DEFAULT_SHADOW_COLOR;
   const radius = style.shadowRadius !== undefined ? style.shadowRadius : 1;
-  const {width: offsetX = 0, height: offsetY = 0} = style.shadowOffset;
+  const { width: offsetX = 0, height: offsetY = 0 } = style.shadowOffset;
 
   layer.shadows = [makeShadow(color, opacity, radius * 2, offsetX, offsetY)];
 }
@@ -183,14 +182,6 @@ class ViewRenderer extends SketchRenderer {
       const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
 
 
-
-
-
-
-
-
-
-
       // const r = MSRectangleShape.alloc().init();
       // r.frame = MSRect.rectWithRect(
       //   NSMakeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb)
@@ -251,9 +242,9 @@ class ViewRenderer extends SketchRenderer {
             fillType: 0,
             position: BorderPosition.Outside,
             thickness: bl,
-          }
-      ];
-    }
+          },
+        ];
+      }
 
 
       // borderStyle.setThickness(style.borderTopWidth || 0);
@@ -262,10 +253,9 @@ class ViewRenderer extends SketchRenderer {
 
 
       layers.push(content);
-
     } else {
-      //TODO(akp): Handle this case #sketch43
-      log("non uniform border, continuing");
+      // TODO(akp): Handle this case #sketch43
+      log('non uniform border, continuing');
       return [];
 
       // some sides have different border widths. In this case, we don't currently

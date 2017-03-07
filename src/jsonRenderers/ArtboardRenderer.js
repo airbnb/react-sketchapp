@@ -12,7 +12,6 @@ class ArtboardRenderer extends SketchRenderer {
     // eslint-disable-next-line no-unused-vars
     value: ?string
   ): SketchJSON {
-
     let color;
     if (style.backgroundColor !== undefined) {
       color = makeColorFromCSS(style.backgroundColor);

@@ -11,7 +11,6 @@ const createStringMeasurer = (string: string, style: TextStyle) => (
   // height: number,
   // heightMode: MeasureMode
 ): Size => {
-
   const font = findFont(style);
   const attributes = {
     [NSFontAttributeName]: font,
