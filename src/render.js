@@ -5,6 +5,7 @@ import Context from './utils/Context';
 import createStringMeasurer from './utils/createStringMeasurer';
 import renderers from './renderers';
 import { renderToSketchJSON, translateJSONToLayer } from './renderViaJSON';
+import { timeFunction } from './debug';
 
 import type {
   SketchContext,
@@ -89,19 +90,21 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
 const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer => {
   // log("creating json from tree");
   const json = renderToSketchJSON(node);
-  log("trying to insert json:");
+  log('trying to insert json:');
 
-  var str = NSString.stringWithString_(JSON.stringify(json));
+  const str = NSString.stringWithString_(JSON.stringify(json));
   // log(str);
-  const file = NSString.stringWithString_('~/Desktop/sketchtest.json').stringByExpandingTildeInPath();
-  str.writeToFile_atomically_(file, false);
+  timeFunction(() => {
+    const file = NSString.stringWithString_('~/Desktop/sketchtest.json').stringByExpandingTildeInPath();
+    str.writeToFile_atomically_(file, false);
+  }, 'writeToFile_atomically_');
 
   const sl = translateJSONToLayer(json);
-  log("adding layers " + sl);
+  log(`adding layers ${sl}`);
   page.addLayers([sl]);
-  log("done adding layers.");
+  log('done adding layers.');
   return page;
-}
+};
 
 //// END NEW VERSION
 
@@ -126,11 +129,12 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer): SketchLayer => {
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
-  log("starting react to flex");
-  const tree = reactTreeToFlexTree(json, new Context());
-  log("done react to flex");
-  computeLayout(tree);
-  log("done computeLayout");
+  const tree = timeFunction(() =>
+    reactTreeToFlexTree(json, new Context())
+  , '- reactTreeToFlexTree');
+  timeFunction(() =>
+    computeLayout(tree)
+  , '- computeLayout');
 
   return tree;
 };
@@ -141,14 +145,19 @@ function render(
 ): SketchLayer {
   const page: SketchLayer = context.document.currentPage();
   try {
-    const tree = buildTree(element);
+    const tree = timeFunction(() =>
+      buildTree(element)
+    , 'build tree');
     if (context.api()._metadata.appVersion >= 43 && useNewRenderer) {
-      renderToSketch(tree, page);
-      return renderToSketchViaJSON(tree, page);
-    } else {
-      log("using old renderer");
-      return renderToSketch(tree, page);
+      timeFunction(() =>
+        renderToSketch(tree, page)
+      , 'old renderer');
+      return timeFunction(() =>
+        renderToSketchViaJSON(tree, page)
+      , 'new renderer');
     }
+    log('using old renderer');
+    return renderToSketch(tree, page);
   } catch (err) {
     const tree = buildTree(<RedBox error={err} />);
     return renderToSketch(tree, page);

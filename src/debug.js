@@ -26,3 +26,18 @@ export const dump = (obj: any) => {
   log(obj.treeAsDictionary());
   return obj;
 };
+
+export const timeFunction = (fn: () => any, label: string) => {
+  const methodStart = NSDate.date();
+  if (showStart) {
+    log(`${label} start`);
+  }
+  const res = fn();
+
+  const methodFinish = NSDate.date();
+  const executionTime = methodFinish.timeIntervalSinceDate(methodStart);
+
+  log(`${label}: ${executionTime.toFixed(3)}`);
+
+  return res;
+};

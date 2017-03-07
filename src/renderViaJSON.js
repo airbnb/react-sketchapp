@@ -28,7 +28,5 @@ export const renderToSketchJSON = (node: TreeNode) => {
   // Filter out anything null, undefined
   const layers = [...backingLayers, ...sublayers].filter(l => l);
 
-  return {...groupLayer, layers};
-}
-
-
+  return { ...groupLayer, layers };
+};
