@@ -1,18 +1,18 @@
 import jsonRenderers from './jsonRenderers';
 
 export function translateJSONToLayer(json) {
-  const decoded = MSJSONDictionaryUnarchiver.alloc().initForReadingFromDictionary(json).decodeRoot();
+  const decoded = MSJSONDictionaryUnarchiver.alloc()
+    .initForReadingFromDictionary(json).decodeRoot();
   const mutableClass = decoded.class().mutableClass();
-  log("decoded for class " + mutableClass);
+  log(`decoded for class ${mutableClass}`);
   log(decoded);
-  log("model");
+  log('model');
   const model = mutableClass.alloc().initWithImmutableModelObject(decoded);
   log(model);
   return model;
 }
 
 export const renderToSketchJSON = (node: TreeNode) => {
-
   const { type, style, textStyle, layout, value, props, children } = node;
   const Renderer = jsonRenderers[type];
   if (Renderer == null) {
