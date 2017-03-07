@@ -67,7 +67,7 @@ const mergeTransforms = (a, b) => {
 
 // merge two style hashes together. Sort of like `Object.assign`, but is aware of `transform` as a
 // special case.
-// NOTE: mutates the first argument!
+// NOTE(lmr): mutates the first argument!
 const mergeStyle = (a, b) => {
   let key;
   // eslint-disable-next-line no-restricted-syntax

@@ -21,7 +21,7 @@ function makeTransformFromKeyValue(layout, key, value) {
   let transform = IDENTITY;
   switch (key) {
     case 'perspective':
-      // TODO: Figure out how to do 3D transforms
+      // TODO(lmr): Figure out how to do 3D transforms
       break;
     case 'rotate':
     case 'rotateZ':
@@ -29,7 +29,7 @@ function makeTransformFromKeyValue(layout, key, value) {
       break;
     case 'rotateX':
     case 'rotateY':
-      // TODO: Figure out how to do 3D transforms
+      // TODO(lmr): Figure out how to do 3D transforms
       break;
     case 'scale':
       transform = CGAffineTransformMakeScale(value, value);

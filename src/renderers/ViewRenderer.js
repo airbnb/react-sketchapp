@@ -11,7 +11,7 @@ const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
 const TRANSPARENT = convertToColor('transparent');
 const DEFAULT_BORDER_COLOR = '#000';
 const DEFAULT_BORDER_STYLE = 'solid';
-const DEFAULT_SHADOW_COLOR = '#000'; // TODO: what does web do?
+const DEFAULT_SHADOW_COLOR = '#000'; // TODO(lmr): what does web do?
 const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
 
 const VISIBLE_STYLES = [
@@ -173,7 +173,7 @@ class ViewRenderer extends SketchRenderer {
     value: ?string
   ): Array<SketchLayer> {
     const layers = [];
-    // NOTE: the group handles the position, so we just care about width/height here
+    // NOTE(lmr): the group handles the position, so we just care about width/height here
 
     const bl = style.borderLeftWidth || 0;
     const br = style.borderRightWidth || 0;

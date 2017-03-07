@@ -3,9 +3,9 @@ import type { Color } from '../types';
 
 /*
 These are all JSON types used in the sketch format
-*/ 
+*/
 
-// TODO: don't depend on sketch here if we're not running there!
+// TODO(akp): don't depend on sketch here if we're not running there! #sketch43
 //export const generateID = () => "" + MSModelObjectCommon.generateObjectID();
 
 var lut = []; for (var i=0; i<256; i++) { lut[i] = (i<16?'0':'')+(i).toString(16); }
@@ -41,7 +41,7 @@ export const makeColorFill = (cssColor) => ({
 
 // Used in frames, etc
 export const makeRect = (x, y, width, height): Any => ({
-  _class: 'rect', 
+  _class: 'rect',
   constrainProportions: false,
   x, y, width, height,
 });
@@ -61,4 +61,3 @@ export const makeColorFromCSS = (input: Color): Any => {
     alpha: a,
   };
 };
-

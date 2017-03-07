@@ -186,7 +186,8 @@ const findFont = (style: TextStyle): NSFont => {
     }
   }
 
-  // TODO: support opentype features: small-caps & number types
+  // TODO(gold): support opentype features: small-caps & number types
+
   if (font) {
     _cache.set(cacheKey, font);
   }

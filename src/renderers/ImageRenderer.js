@@ -48,8 +48,6 @@ class ImageRenderer extends SketchRenderer {
     // eslint-disable-next-line no-unused-vars
     value: ?string,
   ): Array<SketchLayer> {
-    // TODO: borders
-
     const bl = style.borderLeftWidth || 0;
     const br = style.borderRightWidth || 0;
     const bt = style.borderTopWidth || 0;

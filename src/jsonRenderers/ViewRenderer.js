@@ -13,7 +13,7 @@ const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
 const TRANSPARENT = convertToColor('transparent');
 const DEFAULT_BORDER_COLOR = '#000';
 const DEFAULT_BORDER_STYLE = 'solid';
-const DEFAULT_SHADOW_COLOR = '#000'; // TODO: what does web do?
+const DEFAULT_SHADOW_COLOR = '#000'; // TODO(lmr): what does web do?
 const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
 
 const VISIBLE_STYLES = [
@@ -63,7 +63,7 @@ function makeShadow(color, opacity, radius, offsetX, offsetY) {
   };
 }
 
-// TODO(akp): This shouldn't really mutate layer but ok for now
+// TODO(akp): This shouldn't really mutate layer but ok for now #sketch43
 function addShadowToLayer(layer, style) {
 
   const opacity = style.shadowOpacity !== undefined ? style.shadowOpacity : 1;
@@ -75,7 +75,7 @@ function addShadowToLayer(layer, style) {
 }
 
 function makeBorderFromRect(rect, thickness, color, style) {
-  // TODO(akp): fill in this function
+  // TODO(akp): fill in this function #sketch43
   return null;
   /*
 
@@ -142,8 +142,8 @@ class ViewRenderer extends SketchRenderer {
   ): Array<SketchLayer> {
     const layers = [];
 
-    // NOTE: the group handles the position, so we just care about width/height here
-    // TODO: switch to ES6 comprehensions here
+    // NOTE(lmr): the group handles the position, so we just care about width/height here
+    // TODO(lmr): switch to ES6 comprehensions here
 
     const bl = style.borderLeftWidth || 0;
     const br = style.borderRightWidth || 0;
@@ -175,7 +175,7 @@ class ViewRenderer extends SketchRenderer {
 
       const borderColor = bcl;
       const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
- 
+
 
       const frame = makeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb);
       const radii = [btlr, btrr, bbrr, bblr];
@@ -199,9 +199,9 @@ class ViewRenderer extends SketchRenderer {
       // set radius
       // r.setCornerRadiusFromComponents(`${btlr}/${btrr}/${bbrr}/${bblr}`);
 
-      // TODO(akp): implement this 
-      // TODO(lmr):
-      // we need to figure out how to move this to the group, because if we don't, it won't
+      // TODO(akp): implement this #sketch43
+      // TODO(lmr): we need to figure out how to move this to the group,
+      // because if we don't, it won't
       // transform its children as well...
       // if (style.transform !== undefined) {
       //   processTransform(rect, layout, style.transform);
@@ -215,7 +215,7 @@ class ViewRenderer extends SketchRenderer {
         addShadowToLayer(content, style);
       }
 
-      // TODO(akp): implement borders
+      // TODO(akp): implement borders #sketch43
       // const borderStyle = content.style().addStylePartOfType(1);
 
       // borderStyle.setFillType(FillType.Solid); // solid
@@ -264,7 +264,7 @@ class ViewRenderer extends SketchRenderer {
       layers.push(content);
 
     } else {
-      //TODO(akp): Handle this case
+      //TODO(akp): Handle this case #sketch43
       log("non uniform border, continuing");
       return [];
 
@@ -281,7 +281,7 @@ class ViewRenderer extends SketchRenderer {
       if (hasAnyDefined(style, SHADOW_STYLES)) {
         addShadowToLayer(content, style);
       }
-      // TODO(akp): treat this as immutible?
+      // TODO(akp): treat this as immutible? #sketch43
       content.name = 'Content';
       layers.push(content);
 

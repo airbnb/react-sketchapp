@@ -3,7 +3,6 @@ export type Dictionary<K, T> = {[key: K]: T};
 
 // Sketchy things
 export type SketchLayer = any;
-// TODO: are these duplicates?
 
 export type SketchJSON = {[key: string]: any};
 

@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 
-// TODO: handle other types, like React Native does
+// TODO(lmr): handle other types, like React Native does
 // https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageSourcePropType.js
 const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.shape({
@@ -36,8 +36,8 @@ const ResizeModes = {
   contain: 'Fit',
   cover: 'Fill',
   stretch: 'Stretch',
-  center: 'Fill', // TODO
-  repeat: 'Fill', // TODO
+  center: 'Fill', // TODO(gold): implement ResizeModes.center
+  repeat: 'Fill', // TODO(gold): implement ResizeModes.repeat
   none: 'Fill',
 };
 
@@ -54,7 +54,7 @@ class Image extends React.Component {
 
     const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'contain'];
 
-    // TODO: check to see if `source` specifies a width/height as well, and pass into `style` if so
+    // TODO(lmr): check to see if `source` specifies a width/height as well, and pass into `style` if so
 
     return (
       <image
