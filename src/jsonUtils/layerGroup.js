@@ -1,8 +1,14 @@
+/* @flow */
 // Just a generic layer group
 
 import { generateID, makeRect } from './models';
 
-export const layerGroup = (x, y, width, height) => ({
+const layerGroup = (
+  x: number,
+  y: number,
+  width: number,
+  height: number
+) => ({
   _class: 'group',
   do_objectID: generateID(),
   exportOptions: {
@@ -33,3 +39,5 @@ export const layerGroup = (x, y, width, height) => ({
   hasClickThrough: false,
   layers: [],
 });
+
+export default layerGroup;

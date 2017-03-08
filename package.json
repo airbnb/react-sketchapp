@@ -40,7 +40,9 @@
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
     "normalize-css-color": "^1.0.1",
-    "sketch-constants": "^1.0.2"
+    "sketch-constants": "^1.0.2",
+    "sketchapp-json-flow-types": "0.0.1",
+    "sketchapp-json-plugin": "0.0.2"
   },
   "peerDependencies": {
     "react": "*",

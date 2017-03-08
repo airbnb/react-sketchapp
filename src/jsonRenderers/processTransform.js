@@ -1,3 +1,4 @@
+/* @flow */
 import type { LayoutInfo } from '../types';
 /*
  a   b   0

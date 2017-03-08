@@ -1,5 +1,5 @@
 /* @flow */
-import { layerGroup } from '../jsonUtils/layerGroup';
+import layerGroup from '../jsonUtils/layerGroup';
 
 import type {
   LayoutInfo,

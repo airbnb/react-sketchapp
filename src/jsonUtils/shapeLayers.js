@@ -1,8 +1,13 @@
-import { generateID, makeRect, makeColorFill, makeColorFromCSS } from './models';
+/* @flow */
+import type { SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type { Color } from '../types';
+import { generateID, makeRect, makeColorFill } from './models';
+
+type Radii = Array<number>;
 
 // This could be made more consty
-export const makeRectPath = (radii = []) => {
-  const [r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0] = radii;
+export const makeRectPath = (radii: Radii = [0, 0, 0, 0]) => {
+  const [r0, r1, r2, r3] = radii;
   return {
     _class: 'path',
     isClosed: true,
@@ -51,7 +56,13 @@ export const makeRectPath = (radii = []) => {
   };
 };
 
-export const makeRectShapeLayer = (x, y, width, height, radii = [0, 0, 0, 0]) => ({
+export const makeRectShapeLayer = (
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  radii: Radii = [0, 0, 0, 0],
+) => ({
   _class: 'rectangle',
   do_objectID: generateID(),
   // "exportOptions": {
@@ -79,12 +90,11 @@ export const makeRectShapeLayer = (x, y, width, height, radii = [0, 0, 0, 0]) =>
   hasConvertedToNewRoundCorners: true,
 });
 
-export function makeRectShapeGroup(x, y, width, height, color) {
-  const rsl = makeRectShapeLayer(x, y, width, height);
-  return makeShapeGroup(makeRect(x, y, width, height), [rsl], color);
-}
-
-export const makeShapeGroup = (frame, layers = [], fillCSSColor = 'black') => ({
+export const makeShapeGroup = (
+  frame: SJRect,
+  layers: Array<any> = [],
+  fillCSSColor: Color = 'black'
+): SJShapeGroupLayer => ({
   _class: 'shapeGroup',
   do_objectID: generateID(),
   // "exportOptions": {
@@ -137,3 +147,13 @@ export const makeShapeGroup = (frame, layers = [], fillCSSColor = 'black') => ({
   windingRule: 1,
 });
 
+export function makeRectShapeGroup(
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  color: Color,
+): SJShapeGroupLayer {
+  const rsl = makeRectShapeLayer(x, y, width, height);
+  return makeShapeGroup(makeRect(x, y, width, height), [rsl], color);
+}

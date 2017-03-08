@@ -1,15 +1,16 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
+/* @flow */
+import type { SJColor, SJFill, SJRect } from 'sketchapp-json-flow-types';
 import normalizeColor from 'normalize-css-color';
 import type { Color } from '../types';
 
-/*
-These are all JSON types used in the sketch format
-*/
-
-// TODO(akp): don't depend on sketch here if we're not running there! #sketch43
+// TODO(gold): can we remove this ID generator?
 // export const generateID = () => "" + MSModelObjectCommon.generateObjectID();
 
-const lut = []; for (let i = 0; i < 256; i += 1) { lut[i] = (i < 16 ? '0' : '') + (i).toString(16); }
+const lut = [];
+for (let i = 0; i < 256; i += 1) {
+  lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
+}
 // Hack (http://stackoverflow.com/a/21963136)
 function e7() {
   const d0 = Math.random() * 0xffffffff | 0;
@@ -22,19 +23,12 @@ function e7() {
     }${lut[d3 & 0xff]}${lut[d3 >> 8 & 0xff]}${lut[d3 >> 16 & 0xff]}${lut[d3 >> 24 & 0xff]}`;
 }
 
-export function generateID() {
+export function generateID(): string {
   return e7();
 }
 
-type Color_ = {
-  _class: 'color',
-  red: number,
-  green: number,
-  blue: number,
-  alpha: number,
-}
 // Takes 'white', '#fff', &c
-export const makeColorFromCSS = (input: Color): Color_ => {
+export const makeColorFromCSS = (input: Color): SJColor => {
   const nullableColor: ?number = normalizeColor(input);
   const colorInt: number = nullableColor == null ? 0x00000000 : nullableColor;
   const { r, g, b, a } = normalizeColor.rgba(colorInt);
@@ -49,7 +43,7 @@ export const makeColorFromCSS = (input: Color): Color_ => {
 };
 
 // Solid color fill
-export const makeColorFill = cssColor => ({
+export const makeColorFill = (cssColor: Color): SJFill => ({
   _class: 'fill',
   isEnabled: true,
   color: makeColorFromCSS(cssColor),
@@ -61,15 +55,12 @@ export const makeColorFill = cssColor => ({
 });
 
 // Used in frames, etc
-type Rect_ = {
-  _class: 'rect',
-  constrainProportions: bool,
+export const makeRect = (
   x: number,
   y: number,
   width: number,
   height: number,
-}
-export const makeRect = (x, y, width, height): Rect_ => ({
+): SJRect => ({
   _class: 'rect',
   constrainProportions: false,
   x,

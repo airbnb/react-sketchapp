@@ -1,15 +1,14 @@
-
+/* @flow */
 // We need native macOS fonts and colors for these hacks so import the old utils
 import normalizeColor from 'normalize-css-color';
 import findFont from '../utils/findFont';
 import { TEXT_ALIGN } from '../utils/applyTextStyleToLayer';
 
-// Awkwardly we encode then immediatly decode the JSON, but seems like
+// Awkwardly we encode then immediately decode the JSON, but seems like
 function encodeSketchJSON(sketchObj) {
   const encoded = MSJSONDataArchiver.archiveStringWithRootObject_error_(sketchObj, null);
   return JSON.parse(encoded);
 }
-
 
 function makeParagraphStyle(textStyle) {
   const pStyle = NSMutableParagraphStyle.alloc().init();
@@ -49,6 +48,7 @@ export function makeAttributedString(string, textStyle) {
 }
 
 
+/* eslint-disable max-len */
 // I think this is not needed anymore. rm?
 /*
 function makeTextStyle(textStyle) {
