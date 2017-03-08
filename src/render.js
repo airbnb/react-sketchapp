@@ -1,7 +1,8 @@
 import React from 'react';
+import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import renderers from './renderers';
-import { renderToSketchJSON, translateJSONToLayer } from './renderViaJSON';
+import flexToSketchJSON from './renderViaJSON';
 import { timeFunction } from './debug';
 
 import type {
@@ -15,19 +16,21 @@ const useNewRenderer = true;
 
 const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer => {
   // log("creating json from tree");
-  const json = renderToSketchJSON(node);
+  const json = flexToSketchJSON(node);
+  log(json);
   log('trying to insert json:');
 
-  const str = NSString.stringWithString_(JSON.stringify(json));
+  // const str = NSString.stringWithString_(JSON.stringify(json));
   // log(str);
-  timeFunction(() => {
-    const file = NSString.stringWithString_('~/Desktop/sketchtest.json').stringByExpandingTildeInPath();
-    str.writeToFile_atomically_(file, false);
-  }, 'writeToFile_atomically_');
+  // timeFunction(() => {
+  //   const file = NSString.stringWithString_('~/Desktop/sketchtest.json')
+  //     .stringByExpandingTildeInPath();
+  //   str.writeToFile_atomically_(file, false);
+  // }, 'writeToFile_atomically_');
 
-  const sl = translateJSONToLayer(json);
-  log(`adding layers ${sl}`);
-  page.addLayers([sl]);
+  const layer = fromSJSONDictionary(json);
+  log(`adding layers ${layer}`);
+  page.addLayers([layer]);
   log('done adding layers.');
   return page;
 };
@@ -59,7 +62,7 @@ function render(
     const tree = timeFunction(() =>
       buildTree(element)
     , 'build tree');
-    if (context.api()._metadata.appVersion >= 43 && useNewRenderer) {
+    if (appVersionSupported && useNewRenderer) {
       timeFunction(() =>
         renderToSketch(tree, page)
       , 'old renderer');
