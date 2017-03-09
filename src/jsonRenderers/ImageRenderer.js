@@ -2,8 +2,11 @@
 import { BorderPosition, FillType } from 'sketch-constants';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
-import processTransform from './processTransform';
+// import processTransform from './processTransform';
+import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
+import { makeRectPath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import imageTree from './imageTree';
 
 // out of date in sketch-constants
 // https://github.com/turbobabr/sketch-constants/pull/1
@@ -14,29 +17,23 @@ const PatternFillType = {
   Fit: 3,
 };
 
-function makeMSRectShape(x, y, width, height, color) {
-  const rect = MSRectangleShape.alloc().init();
-  rect.frame = MSRect.rectWithRect(NSMakeRect(x, y, width, height));
-
-  const layer = MSShapeGroup.shapeWithPath(rect);
-
-  if (color !== undefined) {
-    const fillStyle = layer.style().addStylePartOfType(0);
-    fillStyle.color = convertToColor(color);
-  }
-
-  return layer;
-}
-
-function same(a, b, c, d) {
-  return a === b && b === c && c === d;
-}
-
 function extractURLFromSource(source) {
   if (typeof source === 'string') {
     return source;
   }
   return source.uri;
+}
+
+type SJImageFill = {
+  _class: 'MSJSONOriginalDataReference',
+  _ref: string,
+  _ref_class: 'MSImageData',
+  data: {
+    _data: string,
+  },
+  sha1: {
+    _data: string,
+  };
 }
 
 class ImageRenderer extends SketchRenderer {
@@ -49,7 +46,34 @@ class ImageRenderer extends SketchRenderer {
     value: ?string,
   ): Array<SketchLayer> {
     // TODO(gold): Implement ImageRenderer #sketch43
-    return [];
+
+    const imageData = NSImage.alloc().initByReferencingURL(
+      NSURL.URLWithString(extractURLFromSource(props.source))
+    );
+
+    const image = MSImageData.alloc().initWithImage_convertColorSpace(imageData, false);
+
+    const imageFill = {
+      _class: 'MSJSONOriginalDataReference',
+      _ref: '123123', // TODO(gold): "images/string" - idk where the ref comes from
+      _ref_class: 'MSImageData',
+      data: {
+        _data: image.data().base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+      },
+      sha1: {
+        _data: image.sha1().base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+      },
+    };
+
+
+    const frame = makeRect(0, 0, layout.width, layout.height);
+    const radii = [10, 10, 10, 10];
+    const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
+    const content = makeShapeGroup(frame, [shapeLayer], 'red');
+    // TODO(jg): set the fill properly tho
+    content.style.fills[0].fillType = 4;
+    content.style.fills[0].image = imageFill;
+    return [content];
 
     // const bl = style.borderLeftWidth || 0;
     // const br = style.borderRightWidth || 0;
