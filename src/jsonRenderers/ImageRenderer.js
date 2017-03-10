@@ -3,7 +3,7 @@ import { BorderPosition, FillType } from 'sketch-constants';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 // import processTransform from './processTransform';
-import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
+import { makeRect, makeColorFromCSS, generateID } from '../jsonUtils/models';
 import { makeRectPath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 import imageTree from './imageTree';
@@ -36,6 +36,27 @@ type SJImageFill = {
   };
 }
 
+const makeImageFill = image => ({
+  _class: 'MSJSONOriginalDataReference',
+  _ref: `images/${generateID()}`,
+  _ref_class: 'MSImageData',
+  data: {
+    _data: image
+      .data()
+      .base64EncodedStringWithOptions(
+        NSDataBase64EncodingEndLineWithCarriageReturn
+      ),
+      // TODO(gold): can I just declare this as a var instead of using Cocoa?
+  },
+  sha1: {
+    _data: image
+      .sha1()
+      .base64EncodedStringWithOptions(
+        NSDataBase64EncodingEndLineWithCarriageReturn
+      ),
+  },
+});
+
 class ImageRenderer extends SketchRenderer {
   renderBackingLayers(
     layout: LayoutInfo,
@@ -47,24 +68,15 @@ class ImageRenderer extends SketchRenderer {
   ): Array<SketchLayer> {
     // TODO(gold): Implement ImageRenderer #sketch43
 
+    log(props.source);
+
     const imageData = NSImage.alloc().initByReferencingURL(
       NSURL.URLWithString(extractURLFromSource(props.source))
     );
 
     const image = MSImageData.alloc().initWithImage_convertColorSpace(imageData, false);
 
-    const imageFill = {
-      _class: 'MSJSONOriginalDataReference',
-      _ref: '123123', // TODO(gold): "images/string" - idk where the ref comes from
-      _ref_class: 'MSImageData',
-      data: {
-        _data: image.data().base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
-      },
-      sha1: {
-        _data: image.sha1().base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
-      },
-    };
-
+    const imageFill = makeImageFill(image);
 
     const frame = makeRect(0, 0, layout.width, layout.height);
     const radii = [10, 10, 10, 10];

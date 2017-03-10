@@ -16,6 +16,7 @@ declare var MSRectangleShape: any;
 declare var MSShapeGroup: any;
 declare var MSTextLayer: any;
 declare var NSArray: any;
+declare var NSDataBase64EncodingEndLineWithCarriageReturn: any;
 declare var NSFontCondensedTrait: any;
 declare var NSFontItalicTrait: any;
 declare var NSFontManager: any;
