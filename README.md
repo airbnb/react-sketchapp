@@ -30,9 +30,9 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 There are several ways to build Sketch plugins:
 
 ### The simple way
-The simplest way to build Sketch plugins with modern JavaScript is [skpm](https://github.com/sketch-pm/skpm) 💎📦.
+The simplest way to build Sketch plugins with modern JavaScript is [`skpm`](https://github.com/sketch-pm/skpm) 💎📦.
 
-Install skpm, if you don't have it already, and create a new project.
+Install `skpm`, if you don't have it already, and create a new project.
 ```bash
 npm install -g skpm
 mkdir my-rad-sketch-plugin
@@ -69,7 +69,7 @@ export default function (context) {
 
 Run your plugin in Sketch via `Plugins → [your plugin name] → my-command`.
 
-Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information.
+[Minimal running example](https://github.com/jongold/react-sketchapp-skpm-example). Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
 
 ### The manual way
 
