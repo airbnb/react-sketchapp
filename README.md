@@ -33,7 +33,7 @@ There are several ways to build Sketch plugins:
 The simplest way to build Sketch plugins with modern JavaScript is [skpm](https://github.com/sketch-pm/skpm) 💎📦.
 
 Install skpm, if you don't have it already, and create a new project.
-```
+```bash
 npm install -g skpm
 mkdir my-rad-sketch-plugin
 cd my-rad-sketch-plugin
@@ -41,15 +41,15 @@ skpm init
 skpm link .
 ```
 Install some dependencies and set up JSX compilation
-```
+```bash
 npm install --save react-sketchapp react react-test-renderer
-npm install --save-dev babel-preset-react
-echo '{"presets": ["react"]}' > .babelrc
+npm install --save-dev babel-preset-react babel-preset-es2015 babel-plugin-external-helpers
+echo '{ "presets": [["es2015", { "modules": false }], "react"], "plugins": [ "external-helpers" ] }' > .babelrc
 ```
 
 Then, to build your plugin
-```
-skpm build --watch
+```bash
+npm run build
 ```
 
 And write your plugin in `src/my-command.js`
