@@ -80,7 +80,7 @@ defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysRelo
 
 You can then use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
 
-[`react-sketchapp-starter`](http://github.com/jongold/react-sketchapp-starter) is a minimal boilerplace to start developing with Webpack.
+[`react-sketchapp-webpack-example`](http://github.com/jongold/react-sketchapp-webpack-example) is a minimal boilerplace to start developing with Webpack.
 
 ### Examples
 `react-sketchapp` includes [a folder of examples](example-plugin/) showing how you might use it to work with a JavaScript [design system](example-plugin/designSystem.js).
