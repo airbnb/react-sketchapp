@@ -105,55 +105,53 @@ class ViewRenderer extends SketchRenderer {
     // eslint-disable-next-line no-unused-vars
     value: ?string,
   ): Array<SketchLayer> {
-    const layers = [];
-
     // NOTE(lmr): the group handles the position, so we just care about width/height here
-    // TODO(lmr): switch to ES6 comprehensions here
+    const {
+      borderTopWidth: bt = 0,
+      borderRightWidth: br = 0,
+      borderBottomWidth: bb = 0,
+      borderLeftWidth: bl = 0,
 
-    const bl = style.borderLeftWidth || 0;
-    const br = style.borderRightWidth || 0;
-    const bt = style.borderTopWidth || 0;
-    const bb = style.borderBottomWidth || 0;
+      borderTopLeftRadius: btlr = 0,
+      borderTopRightRadius: btrr = 0,
+      borderBottomRightRadius: bbrr = 0,
+      borderBottomLeftRadius: bblr = 0,
 
-    const btlr = style.borderTopLeftRadius || 0;
-    const btrr = style.borderTopRightRadius || 0;
-    const bbrr = style.borderBottomRightRadius || 0;
-    const bblr = style.borderBottomLeftRadius || 0;
+      borderTopColor: bct = DEFAULT_BORDER_COLOR,
+      borderRightColor: bcr = DEFAULT_BORDER_COLOR,
+      borderBottomColor: bcb = DEFAULT_BORDER_COLOR,
+      borderLeftColor: bcl = DEFAULT_BORDER_COLOR,
 
-    const bcl = style.borderLeftColor || DEFAULT_BORDER_COLOR;
-    const bcr = style.borderRightColor || DEFAULT_BORDER_COLOR;
-    const bct = style.borderTopColor || DEFAULT_BORDER_COLOR;
-    const bcb = style.borderBottomColor || DEFAULT_BORDER_COLOR;
-
-    const bsl = style.borderLeftStyle || DEFAULT_BORDER_STYLE;
-    const bsr = style.borderRightStyle || DEFAULT_BORDER_STYLE;
-    const bst = style.borderTopStyle || DEFAULT_BORDER_STYLE;
-    const bsb = style.borderBottomStyle || DEFAULT_BORDER_STYLE;
-
+      borderTopStyle: bst = DEFAULT_BORDER_STYLE,
+      borderRightStyle: bsr = DEFAULT_BORDER_STYLE,
+      borderBottomStyle: bsb = DEFAULT_BORDER_STYLE,
+      borderLeftStyle: bsl = DEFAULT_BORDER_STYLE,
+    } = style;
 
     if (!hasAnyDefined(style, VISIBLE_STYLES)) {
-      // in some cases, views are just spacing and nothing else.
-      // in that case, just do nothing.
-    } else if (same(bl, br, bt, bb) && same(bcl, bcr, bct, bcb) && same(bsl, bsr, bst, bsb)) {
+      return [];
+    }
+
+    const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
+
+    const frame = makeRect(bl, bt, layout.width, layout.height);
+    const radii = [btlr, btrr, bbrr, bblr];
+    const shapeLayer = makeRectShapeLayer(
+      0,
+      0,
+      layout.width,
+      layout.height,
+      radii,
+    );
+    const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
+
+    if (hasAnyDefined(style, SHADOW_STYLES)) {
+      content.style.shadows = [makeShadow(style)];
+    }
+
+    if (same(bl, br, bt, bb) && same(bcl, bcr, bct, bcb) && same(bsl, bsr, bst, bsb)) {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
-      const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
-
-      const frame = makeRect(bl, bt, layout.width, layout.height);
-      const radii = [btlr, btrr, bbrr, bblr];
-      const shapeLayer = makeRectShapeLayer(
-        0,
-        0,
-        layout.width,
-        layout.height,
-        radii,
-      );
-      const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
-
-      if (hasAnyDefined(style, SHADOW_STYLES)) {
-        content.style.shadows = [makeShadow(style)];
-      }
-
       if (bst !== undefined) {
         switch (bst) {
           case 'dashed': {
@@ -184,63 +182,43 @@ class ViewRenderer extends SketchRenderer {
         ];
       }
 
-      layers.push(content);
-    } else {
-      // TODO(akp): Handle this case #sketch43
-      log('non uniform border, continuing');
-      return [];
-
-      // some sides have different border widths. In this case, we don't currently
-      // support the border radius property, as we end up creating each border
-      // as a separate shape.
-      const content = makeRectShapeGroup(
-        bl,
-        bt,
-        layout.width - bl - br,
-        layout.height - bt - bb,
-        style.backgroundColor || DEFAULT_BACKGROUND_COLOR,
-      );
-      if (hasAnyDefined(style, SHADOW_STYLES)) {
-        addShadowToLayer(content, style);
-      }
-      // TODO(akp): treat this as immutible? #sketch43
-      content.name = 'Content';
-      layers.push(content);
-
-      if (bt > 0) {
-        const topBorder = makeHorizontalBorder(0, 0, layout.width, bt, bct, bst);
-        topBorder.name = 'Border (top)';
-        layers.push(topBorder);
-      }
-
-      if (bl > 0) {
-        const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
-        leftBorder.name = 'Border (left)';
-        layers.push(leftBorder);
-      }
-
-      if (bb > 0) {
-        const bottomBorder = makeHorizontalBorder(
-          0,
-          layout.height - bb,
-          layout.width,
-          bb,
-          bcb,
-          bsb,
-        );
-        bottomBorder.name = 'Border (bottom)';
-        layers.push(bottomBorder);
-      }
-
-      if (br > 0) {
-        const rightBorder = makeVerticalBorder(layout.width - br, 0, layout.height, br, bcr, bsr);
-        rightBorder.name = 'Border (right)';
-        layers.push(rightBorder);
-      }
-      // TODO(lmr): how do we do transform in this case?
+      return [content];
     }
+    // TODO(akp): Handle this case #sketch43
+    log('non uniform border, continuing');
+    return [content];
 
-    return layers;
+    // if (bt > 0) {
+    //   const topBorder = makeHorizontalBorder(0, 0, layout.width, bt, bct, bst);
+    //   topBorder.name = 'Border (top)';
+    //   layers.push(topBorder);
+    // }
+    //
+    // if (bl > 0) {
+    //   const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
+    //   leftBorder.name = 'Border (left)';
+    //   layers.push(leftBorder);
+    // }
+    //
+    // if (bb > 0) {
+    //   const bottomBorder = makeHorizontalBorder(
+    //     0,
+    //     layout.height - bb,
+    //     layout.width,
+    //     bb,
+    //     bcb,
+    //     bsb,
+    //   );
+    //   bottomBorder.name = 'Border (bottom)';
+    //   layers.push(bottomBorder);
+    // }
+    //
+    // if (br > 0) {
+    //   const rightBorder = makeVerticalBorder(layout.width - br, 0, layout.height, br, bcr, bsr);
+    //   rightBorder.name = 'Border (right)';
+    //   layers.push(rightBorder);
+    // }
+    // TODO(lmr): how do we do transform in this case?
   }
 }
 
