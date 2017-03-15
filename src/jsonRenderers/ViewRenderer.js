@@ -198,22 +198,6 @@ class ViewRenderer extends SketchRenderer {
           default:
             break;
         }
-        //   const borderOptions = content.style().borderOptions();
-        //   const width = style.borderTopWidth;
-        //   // borderOptions.setLineCapStyle(BorderLineCapsStyle.Square);
-        //   switch (style.borderTopStyle) {
-        //     case 'dashed':
-        //       borderOptions.setDashPattern([width * 3, width * 3]);
-        //       break;
-        //     case 'dotted':
-        //       borderOptions.setDashPattern([width, width]);
-        //       borderOptions.setLineJoinStyle(0);
-        //       break;
-        //     case 'solid':
-        //     default:
-        //       // do nothing
-        //       break;
-        //   }
       }
 
       if (bct !== undefined) {
