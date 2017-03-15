@@ -1,20 +1,19 @@
 /* @flow */
 import { BorderPosition, FillType } from 'sketch-constants';
 import convertToColor from '../utils/convertToColor';
-import colorWithOpacity from '../utils/colorWithOpacity';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 // import processTransform from './processTransform';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
-import { makeDottedBorder, makeDashedBorder } from '../jsonUtils/style';
+import { makeDottedBorder, makeDashedBorder, makeShadow } from '../jsonUtils/style';
 
 const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
 
 const TRANSPARENT = convertToColor('transparent');
 const DEFAULT_BORDER_COLOR = '#000';
 const DEFAULT_BORDER_STYLE = 'solid';
-const DEFAULT_SHADOW_COLOR = '#000'; // TODO(lmr): what does web do?
+
 const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
 
 const VISIBLE_STYLES = [
@@ -42,32 +41,6 @@ const VISIBLE_STYLES = [
 
 const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
-function makeShadow(color, opacity, radius, offsetX, offsetY) {
-  return {
-    _class: 'shadow',
-    isEnabled: true,
-    blurRadius: radius,
-    color: makeColorFromCSS(color),
-    contextSettings: {
-      _class: 'graphicsContextSettings',
-      blendMode: 0,
-      opacity,
-    },
-    offsetX,
-    offsetY,
-    spread: 0,
-  };
-}
-
-// TODO(akp): This shouldn't really mutate layer but ok for now #sketch43
-function addShadowToLayer(layer, style) {
-  const opacity = style.shadowOpacity !== undefined ? style.shadowOpacity : 1;
-  const color = style.shadowColor || DEFAULT_SHADOW_COLOR;
-  const radius = style.shadowRadius !== undefined ? style.shadowRadius : 1;
-  const { width: offsetX = 0, height: offsetY = 0 } = style.shadowOffset;
-
-  layer.shadows = [makeShadow(color, opacity, radius * 2, offsetX, offsetY)];
-}
 
 function makeBorderFromRect(rect, thickness, color, style) {
   // TODO(akp): fill in this function #sketch43
@@ -164,23 +137,21 @@ class ViewRenderer extends SketchRenderer {
     } else if (same(bl, br, bt, bb) && same(bcl, bcr, bct, bcb) && same(bsl, bsr, bst, bsb)) {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
-
-      const borderColor = bcl;
       const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
 
-      const frame = makeRect(bl, bt, layout.width - bl - br, layout.height - bt - bb);
+      const frame = makeRect(bl, bt, layout.width, layout.height);
       const radii = [btlr, btrr, bbrr, bblr];
       const shapeLayer = makeRectShapeLayer(
         0,
         0,
-        layout.width - bl - br,
-        layout.height - bt - bb,
+        layout.width,
+        layout.height,
         radii,
       );
       const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
 
       if (hasAnyDefined(style, SHADOW_STYLES)) {
-        addShadowToLayer(content, style);
+        content.style.shadows = [makeShadow(style)];
       }
 
       if (bst !== undefined) {
@@ -201,7 +172,6 @@ class ViewRenderer extends SketchRenderer {
       }
 
       if (bct !== undefined) {
-        // borderStyle.setColor(convertToColor(style.borderTopColor));
         content.style.borders = [
           {
             _class: 'border',
@@ -213,10 +183,6 @@ class ViewRenderer extends SketchRenderer {
           },
         ];
       }
-
-      // borderStyle.setThickness(style.borderTopWidth || 0);
-
-      // borderStyle.setPosition(BorderPosition.Outside);
 
       layers.push(content);
     } else {
