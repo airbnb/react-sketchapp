@@ -15,11 +15,7 @@ import RedBox from './components/RedBox';
 const useNewRenderer = true;
 
 const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer => {
-  // log("creating json from tree");
   const json = flexToSketchJSON(node);
-  log(json);
-  log('trying to insert json:');
-
   // const str = NSString.stringWithString_(JSON.stringify(json));
   // log(str);
   // timeFunction(() => {
@@ -27,11 +23,8 @@ const renderToSketchViaJSON = (node: TreeNode, page: SketchLayer): SketchLayer =
   //     .stringByExpandingTildeInPath();
   //   str.writeToFile_atomically_(file, false);
   // }, 'writeToFile_atomically_');
-
   const layer = fromSJSONDictionary(json);
-  log(`adding layers ${layer}`);
   page.addLayers([layer]);
-  log('done adding layers.');
   return page;
 };
 
@@ -64,14 +57,12 @@ function render(
     , 'build tree');
     if (appVersionSupported && useNewRenderer) {
       timeFunction(() =>
-        renderToSketch(tree, page)
-      , 'old renderer');
-      return timeFunction(() =>
         renderToSketchViaJSON(tree, page)
       , 'new renderer');
     }
-    log('using old renderer');
-    return renderToSketch(tree, page);
+    return timeFunction(() =>
+      renderToSketch(tree, page)
+    , 'old renderer');
   } catch (err) {
     const tree = buildTree(<RedBox error={err} />);
     return renderToSketch(tree, page);
