@@ -14,7 +14,7 @@ let _styles: StyleHash = {};
 const registerStyle = (key: string, style: TextStyle): StyleHash => {
   const layer = applyTextStyleToLayer(
     textLayer(key, { top: 0, left: 0, width: 250, height: 50 }),
-    style
+    style,
   );
 
   const className = hashStyle(style);
@@ -29,7 +29,7 @@ const registerStyle = (key: string, style: TextStyle): StyleHash => {
 type Options = {
   clearExistingStyles?: boolean,
   context: SketchContext,
-}
+};
 
 const create = (options: Options, styles: Dictionary<string, TextStyle>): StyleHash => {
   invariant(options && options.context, 'Please provide a context');

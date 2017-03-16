@@ -60,9 +60,7 @@ class ImageRenderer extends SketchRenderer {
 
     const layers = [];
     const rect = MSRectangleShape.alloc().init();
-    rect.frame = MSRect.rectWithRect(
-      NSMakeRect(0, 0, layout.width, layout.height)
-    );
+    rect.frame = MSRect.rectWithRect(NSMakeRect(0, 0, layout.width, layout.height));
 
     rect.setCornerRadiusFromComponents(`${btlr}/${btrr}/${bbrr}/${bblr}`);
 
@@ -75,7 +73,7 @@ class ImageRenderer extends SketchRenderer {
 
     const imageFill = content.style().addStylePartOfType(0);
     const imageData = NSImage.alloc().initByReferencingURL(
-      NSURL.URLWithString(extractURLFromSource(props.source))
+      NSURL.URLWithString(extractURLFromSource(props.source)),
     );
     imageFill.setImage(MSImageData.alloc().initWithImage_convertColorSpace(imageData, false));
     imageFill.setFillType(FillType.Pattern);
@@ -100,24 +98,12 @@ class ImageRenderer extends SketchRenderer {
       borderStyle.setPosition(BorderPosition.Outside);
     } else {
       if (bt > 0) {
-        const topBorder = makeRect(
-          0,
-          0,
-          layout.width,
-          bt,
-          style.borderTopColor
-        );
+        const topBorder = makeRect(0, 0, layout.width, bt, style.borderTopColor);
         layers.push(topBorder);
       }
 
       if (bl > 0) {
-        const leftBorder = makeRect(
-          0,
-          0,
-          bl,
-          layout.height,
-          style.borderLeftColor
-        );
+        const leftBorder = makeRect(0, 0, bl, layout.height, style.borderLeftColor);
         layers.push(leftBorder);
       }
 
@@ -127,7 +113,7 @@ class ImageRenderer extends SketchRenderer {
           layout.height - bb,
           layout.width,
           bb,
-          style.borderBottomColor
+          style.borderBottomColor,
         );
         layers.push(bottomBorder);
       }
@@ -138,7 +124,7 @@ class ImageRenderer extends SketchRenderer {
           0,
           br,
           layout.height,
-          style.borderRightColor
+          style.borderRightColor,
         );
         layers.push(rightBorder);
       }

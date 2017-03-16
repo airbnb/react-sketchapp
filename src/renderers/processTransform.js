@@ -10,7 +10,7 @@ function CGAffineTransformMake(a, b, c, d, tx, ty) {
 
 function convertToRadians(value: string): number {
   const floatValue = parseFloat(value, 10);
-  return value.indexOf('rad') > -1 ? floatValue : ((floatValue * Math.PI) / 180);
+  return value.indexOf('rad') > -1 ? floatValue : floatValue * Math.PI / 180;
 }
 
 const IDENTITY = CGAffineTransformMake(1, 0, 0, 1, 0, 0);
@@ -52,14 +52,16 @@ function makeTransformFromKeyValue(layout, key, value) {
       //   0      0      1
       const rads = convertToRadians(value);
       transform = CGAffineTransformMake(1, 0, Math.sin(rads), Math.cos(rads), 0, 0);
-    } break;
+    }
+      break;
     case 'skewY': {
       // cos(y) sin(y)   0
       //   0      1      0
       //   0      0      1
       const rads = convertToRadians(value);
       transform = CGAffineTransformMake(Math.cos(rads), Math.sin(rads), 0, 1, 0, 0);
-    } break;
+    }
+      break;
     default:
       log(`did an unsupported transform: ${key}: ${value}`);
       break;
@@ -73,7 +75,7 @@ function transformFromTransformArray(layout: LayoutInfo, transforms: Array<any>)
     Object.keys(t).forEach((key) => {
       transform = CGAffineTransformConcat(
         transform,
-        makeTransformFromKeyValue(layout, key, t[key])
+        makeTransformFromKeyValue(layout, key, t[key]),
       );
     });
   });

@@ -23,10 +23,7 @@ const propTypes = {
 class Text extends React.Component {
   render() {
     return (
-      <text
-        name={this.props.name}
-        style={StyleSheet.flatten(this.props.style)}
-      >
+      <text name={this.props.name} style={StyleSheet.flatten(this.props.style)}>
         {this.props.children}
       </text>
     );

@@ -1,10 +1,5 @@
 /* @flow */
-import type {
-  LayoutInfo,
-  ViewStyle,
-  TextStyle,
-  SketchLayer,
-} from '../types';
+import type { LayoutInfo, ViewStyle, TextStyle, SketchLayer } from '../types';
 
 class SketchRenderer {
   getDefaultGroupName(/* props: any, value: ?string */) {
@@ -16,7 +11,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): SketchLayer {
     const layer = MSLayerGroup.alloc().init();
 
@@ -48,7 +43,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): Array<SketchLayer> {
     return [];
   }

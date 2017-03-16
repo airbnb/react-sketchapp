@@ -5,11 +5,7 @@ import renderers from './renderers';
 import flexToSketchJSON from './renderViaJSON';
 import { timeFunction } from './debug';
 
-import type {
-  SketchContext,
-  SketchLayer,
-  TreeNode,
-} from './types';
+import type { SketchContext, SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
 
 const useNewRenderer = true;
@@ -37,32 +33,21 @@ const renderToSketch = (node: TreeNode, layer: SketchLayer): SketchLayer => {
   const renderer = new Renderer();
   const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props, value);
   const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, value);
-  layer.addLayers([
-    groupLayer,
-  ]);
+  layer.addLayers([groupLayer]);
   groupLayer.addLayers(backingLayers);
   children.map(child => renderToSketch(child, groupLayer));
 
   return groupLayer;
 };
 
-function render(
-  element: React$Element<any>,
-  context: SketchContext,
-): SketchLayer {
+function render(element: React$Element<any>, context: SketchContext): SketchLayer {
   const page: SketchLayer = context.document.currentPage();
   try {
-    const tree = timeFunction(() =>
-      buildTree(element)
-    , 'build tree');
+    const tree = timeFunction(() => buildTree(element), 'build tree');
     if (appVersionSupported && useNewRenderer) {
-      timeFunction(() =>
-        renderToSketchViaJSON(tree, page)
-      , 'new renderer');
+      timeFunction(() => renderToSketchViaJSON(tree, page), 'new renderer');
     }
-    return timeFunction(() =>
-      renderToSketch(tree, page)
-    , 'old renderer');
+    return timeFunction(() => renderToSketch(tree, page), 'old renderer');
   } catch (err) {
     const tree = buildTree(<RedBox error={err} />);
     return renderToSketch(tree, page);

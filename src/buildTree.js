@@ -55,10 +55,7 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
   const style = node.props.style || {};
 
   let textStyle;
-  if (node.type === 'text' &&
-      node.props.style &&
-      hasAnyDefined(style, INHERITABLE_STYLES)
-    ) {
+  if (node.type === 'text' && node.props.style && hasAnyDefined(style, INHERITABLE_STYLES)) {
     const inheritableStyles = pick(style, INHERITABLE_STYLES);
     context.addInheritableStyles(inheritableStyles);
     textStyle = {
@@ -82,15 +79,13 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
-  const tree = timeFunction(() =>
-    reactTreeToFlexTree(json, new Context())
-  , '- reactTreeToFlexTree');
-  timeFunction(() =>
-    computeLayout(tree)
-  , '- computeLayout');
+  const tree = timeFunction(
+    () => reactTreeToFlexTree(json, new Context()),
+    '- reactTreeToFlexTree',
+  );
+  timeFunction(() => computeLayout(tree), '- computeLayout');
 
   return tree;
 };
-
 
 export default buildTree;

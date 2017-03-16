@@ -17,7 +17,7 @@ class TextRenderer extends SketchRenderer {
     style: ViewStyle,
     textStyle: TextStyle,
     props: any,
-    value: ?string
+    value: ?string,
   ): Array<SketchLayer> {
     if (value === null) {
       const viewRenderer = new ViewRenderer();

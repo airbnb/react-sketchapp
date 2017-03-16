@@ -21,10 +21,7 @@ const propTypes = {
 class View extends React.Component {
   render() {
     return (
-      <view
-        name={this.props.name}
-        style={StyleSheet.flatten(this.props.style)}
-      >
+      <view name={this.props.name} style={StyleSheet.flatten(this.props.style)}>
         {this.props.children}
       </view>
     );

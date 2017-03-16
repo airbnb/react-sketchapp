@@ -17,7 +17,7 @@ type StackFrame = {
   source?: string,
   args?: any[],
   evalOrigin?: StackFrame,
-}
+};
 
 const styles = {
   redbox: {
@@ -51,12 +51,10 @@ class RedBox extends React.Component {
   static defaultProps = {
     useLines: true,
     useColumns: true,
-  }
+  };
 
   renderFrames(frames: Array<StackFrame>) {
-    return frames.map((f, index) => (
-      <Text key={index} style={styles.stack}>{f.functionName}</Text>
-    ));
+    return frames.map((f, index) => <Text key={index} style={styles.stack}>{f.functionName}</Text>);
   }
 
   render() {

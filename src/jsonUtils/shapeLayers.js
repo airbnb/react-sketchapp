@@ -29,7 +29,7 @@ export const makeHorizontalPath = (): SJPath => ({
       hasCurveTo: false,
       point: '{1, 0.5}',
     },
-  ]
+  ],
 });
 
 export const makeVerticalPath = (): SJPath => ({
@@ -56,7 +56,7 @@ export const makeVerticalPath = (): SJPath => ({
       hasCurveTo: false,
       point: '{0.5, 1}',
     },
-  ]
+  ],
 });
 
 // This could be made more consty
@@ -127,7 +127,7 @@ export const makeShapePath = (frame, path) => ({
   booleanOperation: -1,
   edited: false,
   path,
-})
+});
 
 export const makeRectShapeLayer = (
   x: number,

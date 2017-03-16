@@ -10,7 +10,7 @@ class ArtboardRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): SketchJSON {
     let color;
     if (style.backgroundColor !== undefined) {

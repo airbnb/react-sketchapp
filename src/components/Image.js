@@ -57,12 +57,8 @@ class Image extends React.Component {
     // TODO(lmr): check to see if `source` specifies a width/height as well, and pass into `style` if so
 
     return (
-      <image
-        style={style}
-        source={source || defaultSource}
-        resizeMode={sketchResizeMode}
-      >
-        { children }
+      <image style={style} source={source || defaultSource} resizeMode={sketchResizeMode}>
+        {children}
       </image>
     );
   }

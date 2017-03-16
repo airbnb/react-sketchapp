@@ -3,12 +3,7 @@
 
 import { generateID, makeRect } from './models';
 
-const layerGroup = (
-  x: number,
-  y: number,
-  width: number,
-  height: number
-) => ({
+const layerGroup = (x: number, y: number, width: number, height: number) => ({
   _class: 'group',
   do_objectID: generateID(),
   exportOptions: {

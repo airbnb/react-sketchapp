@@ -4,11 +4,7 @@ import { makeAttributedString } from './hacksForJSONImpl';
 import type { TextStyle } from '../types';
 import { generateID } from './models';
 
-const makeTextLayer = (
-  frame: SJRect,
-  text: ?string,
-  textStyle: TextStyle,
-): SJTextLayer => ({
+const makeTextLayer = (frame: SJRect, text: ?string, textStyle: TextStyle): SJTextLayer => ({
   _class: 'text',
   do_objectID: generateID(),
   // exportOptions: {

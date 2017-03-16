@@ -10,12 +10,12 @@ class ArtboardRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): SketchLayer {
     const layer = MSArtboardGroup.alloc().init();
 
     layer.frame = MSRect.rectWithRect(
-      NSMakeRect(layout.top, layout.left, layout.width, layout.height)
+      NSMakeRect(layout.top, layout.left, layout.width, layout.height),
     );
 
     if (props.name !== undefined) {

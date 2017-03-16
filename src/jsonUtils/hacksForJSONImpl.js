@@ -35,7 +35,12 @@ export function makeAttributedString(string: ?string, textStyle: TextStyle) {
   const attribs = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSParagraphStyle: makeParagraphStyle(textStyle),
-    NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(color.r / 255, color.g / 255, color.b / 255, color.a),
+    NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
+      color.r / 255,
+      color.g / 255,
+      color.b / 255,
+      color.a,
+    ),
   };
 
   if (textStyle.letterSpacing !== undefined) {
@@ -47,7 +52,6 @@ export function makeAttributedString(string: ?string, textStyle: TextStyle) {
 
   return encodeSketchJSON(msAttribStr);
 }
-
 
 /* eslint-disable max-len */
 // I think this is not needed anymore. rm?

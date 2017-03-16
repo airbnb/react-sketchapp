@@ -19,8 +19,7 @@ class TextStyles {
   setStyles(styles: Array<any>) {
     invariant(this._context, 'Please provide a context');
 
-    this._context.document.documentData().layerTextStyles()
-      .setObjects(styles);
+    this._context.document.documentData().layerTextStyles().setObjects(styles);
 
     return this;
   }
@@ -28,7 +27,9 @@ class TextStyles {
   addStyle(name: string, style: SketchStyle) {
     invariant(this._context, 'Please provide a context');
 
-    this._context.document.documentData().layerTextStyles()
+    this._context.document
+      .documentData()
+      .layerTextStyles()
       .addSharedStyleWithName_firstInstance(name, style);
 
     return this;

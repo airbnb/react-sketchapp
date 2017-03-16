@@ -1,12 +1,7 @@
 /* @flow */
 import layerGroup from '../jsonUtils/layerGroup';
 
-import type {
-  LayoutInfo,
-  ViewStyle,
-  TextStyle,
-  SketchJSON,
-} from '../types';
+import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON } from '../types';
 
 class SketchRenderer {
   getDefaultGroupName(/* props: any, value: ?string */) {
@@ -18,7 +13,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): SketchJSON {
     // Default SketchRenderer just renders an empty group
 
@@ -43,7 +38,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): Array<SketchJSON> {
     return [];
   }

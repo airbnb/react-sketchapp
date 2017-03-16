@@ -72,16 +72,17 @@ const styleShortHands = {
  * override less specific styles, whatever the order in which they were
  * originally declared.
  */
-const sortProps = propsArray => propsArray.sort((a, b) => {
-  const expandedA = styleShortHands[a];
-  const expandedB = styleShortHands[b];
-  if (expandedA && expandedA[b]) {
-    return -1;
-  } else if (expandedB && expandedB[a]) {
-    return 1;
-  }
-  return (a < b) ? -1 : (a > b) ? 1 : 0;
-});
+const sortProps = propsArray =>
+  propsArray.sort((a, b) => {
+    const expandedA = styleShortHands[a];
+    const expandedB = styleShortHands[b];
+    if (expandedA && expandedA[b]) {
+      return -1;
+    } else if (expandedB && expandedB[a]) {
+      return 1;
+    }
+    return a < b ? -1 : a > b ? 1 : 0;
+  });
 
 /**
  * Expand the shorthand properties to isolate every declaration from the others.

@@ -47,12 +47,15 @@ const create = (styles) => {
 const mergeTransforms = (a, b) => {
   if (!a || a.length === 0) return b; // in this case, a has nothing to contribute.
   const result = [];
-  const transformsInA = a.reduce((hash, t) => {
-    const key = Object.keys(t)[0];
-    result.push(t);
-    hash[key] = result.length - 1;
-    return hash;
-  }, {});
+  const transformsInA = a.reduce(
+    (hash, t) => {
+      const key = Object.keys(t)[0];
+      result.push(t);
+      hash[key] = result.length - 1;
+      return hash;
+    },
+    {},
+  );
   b.forEach((t) => {
     const key = Object.keys(t)[0];
     const index = transformsInA[key];
