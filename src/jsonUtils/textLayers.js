@@ -1,6 +1,6 @@
 /* @flow */
 import type { SJRect, SJTextLayer } from 'sketchapp-json-flow-types';
-import { makeAttributedString, makeTextStyle } from './hacksForJSONImpl';
+import { makeAttributedString } from './hacksForJSONImpl';
 import type { TextStyle } from '../types';
 import { generateID } from './models';
 
