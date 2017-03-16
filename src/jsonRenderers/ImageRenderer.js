@@ -4,7 +4,13 @@ import { BorderPosition } from 'sketch-constants';
 // import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 // import processTransform from './processTransform';
-import { makeRect, makeColorFromCSS, makeColorFill, makeImageFill, generateID } from '../jsonUtils/models';
+import {
+  makeRect,
+  makeColorFromCSS,
+  makeColorFill,
+  makeImageFill,
+  generateID,
+} from '../jsonUtils/models';
 import { makeRectPath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import { makeDottedBorder, makeDashedBorder, makeShadow } from '../jsonUtils/style';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
@@ -91,12 +97,15 @@ class ImageRenderer extends SketchRenderer {
     const fillImage = makeFillImage(image);
 
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const radii = [borderTopLeftRadius, borderTopRightRadius, borderBottomRightRadius, borderBottomLeftRadius];
+    const radii = [
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderBottomRightRadius,
+      borderBottomLeftRadius,
+    ];
     const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
 
-    const fills = [
-      makeImageFill(fillImage),
-    ];
+    const fills = [makeImageFill(fillImage)];
 
     if (style.backgroundColor) {
       fills.unshift(makeColorFill(style.backgroundColor));
@@ -108,9 +117,11 @@ class ImageRenderer extends SketchRenderer {
       content.style.shadows = [makeShadow(style)];
     }
 
-    if (same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
-    same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
-    same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)) {
+    if (
+      same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
+      same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
+      same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)
+    ) {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
       if (borderTopStyle !== undefined) {

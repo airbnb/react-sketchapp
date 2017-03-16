@@ -4,7 +4,13 @@ import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
-import { makeHorizontalPath, makeVerticalPath, makeShapePath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
+import {
+  makeHorizontalPath,
+  makeVerticalPath,
+  makeShapePath,
+  makeRectShapeLayer,
+  makeShapeGroup,
+} from '../jsonUtils/shapeLayers';
 // import processTransform from './processTransform';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import { makeDottedBorder, makeDashedBorder, makeShadow } from '../jsonUtils/style';
@@ -149,14 +155,13 @@ class ViewRenderer extends SketchRenderer {
     const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
 
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const radii = [borderTopLeftRadius, borderTopRightRadius, borderBottomRightRadius, borderBottomLeftRadius];
-    const shapeLayer = makeRectShapeLayer(
-      0,
-      0,
-      layout.width,
-      layout.height,
-      radii,
-    );
+    const radii = [
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderBottomRightRadius,
+      borderBottomLeftRadius,
+    ];
+    const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
 
     const fill = makeColorFill(backgroundColor);
     const content = makeShapeGroup(frame, [shapeLayer], [fill]);
@@ -165,9 +170,11 @@ class ViewRenderer extends SketchRenderer {
       content.style.shadows = [makeShadow(style)];
     }
 
-    if (same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
-    same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
-    same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)) {
+    if (
+      same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
+      same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
+      same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)
+    ) {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
       if (borderTopStyle !== undefined) {
@@ -195,13 +202,7 @@ class ViewRenderer extends SketchRenderer {
       layers.push(content);
 
       if (borderTopWidth > 0) {
-        const topBorder = makeHorizontalBorder(
-          0,
-          0,
-          layout.width,
-          borderTopWidth,
-          borderTopColor,
-        );
+        const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
         topBorder.name = 'Border (top)';
 
         const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
@@ -249,7 +250,13 @@ class ViewRenderer extends SketchRenderer {
       }
 
       if (borderLeftWidth > 0) {
-        const leftBorder = makeVerticalBorder(0, 0, layout.height, borderLeftWidth, borderLeftColor);
+        const leftBorder = makeVerticalBorder(
+          0,
+          0,
+          layout.height,
+          borderLeftWidth,
+          borderLeftColor,
+        );
         leftBorder.name = 'Border (left)';
 
         const borderOptions = findBorderStyle(borderLeftStyle, borderLeftWidth);
