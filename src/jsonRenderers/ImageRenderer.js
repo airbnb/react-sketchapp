@@ -11,9 +11,14 @@ import {
   makeImageFill,
   generateID,
 } from '../jsonUtils/models';
-import { makeRectPath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
-import { makeDottedBorder, makeDashedBorder, makeShadow } from '../jsonUtils/style';
-import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
+import {
+  findBorderStyle,
+  makeShadow,
+  makeHorizontalBorder,
+  makeVerticalBorder,
+} from '../jsonUtils/style';
+import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import same from '../utils/same';
 
@@ -125,19 +130,9 @@ class ImageRenderer extends SketchRenderer {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
       if (borderTopStyle !== undefined) {
-        switch (borderTopStyle) {
-          case 'dashed': {
-            content.style.borderOptions = makeDashedBorder(borderTopWidth);
-            break;
-          }
-          case 'dotted': {
-            content.style.borderOptions = makeDottedBorder(borderTopWidth);
-            break;
-          }
-          case 'solid':
-            break;
-          default:
-            break;
+        const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
+        if (borderOptions) {
+          content.style.borderOptions = borderOptions;
         }
       }
 
@@ -155,108 +150,79 @@ class ImageRenderer extends SketchRenderer {
       }
       layers.push(content);
     } else {
+      content.hasClippingMask = true;
       layers.push(content);
+
+      if (borderTopWidth > 0) {
+        const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
+        topBorder.name = 'Border (top)';
+
+        const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
+        if (borderOptions) {
+          topBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(topBorder);
+      }
+
+      if (borderRightWidth > 0) {
+        const rightBorder = makeVerticalBorder(
+          layout.width - borderRightWidth,
+          0,
+          layout.height,
+          borderRightWidth,
+          borderRightColor,
+        );
+        rightBorder.name = 'Border (right)';
+
+        const borderOptions = findBorderStyle(borderRightStyle, borderRightWidth);
+        if (borderOptions) {
+          rightBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(rightBorder);
+      }
+
+      if (borderBottomWidth > 0) {
+        const bottomBorder = makeHorizontalBorder(
+          0,
+          layout.height - borderBottomWidth,
+          layout.width,
+          borderBottomWidth,
+          borderBottomColor,
+        );
+        bottomBorder.name = 'Border (bottom)';
+
+        const borderOptions = findBorderStyle(borderBottomStyle, borderBottomWidth);
+        if (borderOptions) {
+          bottomBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(bottomBorder);
+      }
+
+      if (borderLeftWidth > 0) {
+        const leftBorder = makeVerticalBorder(
+          0,
+          0,
+          layout.height,
+          borderLeftWidth,
+          borderLeftColor,
+        );
+        leftBorder.name = 'Border (left)';
+
+        const borderOptions = findBorderStyle(borderLeftStyle, borderLeftWidth);
+        if (borderOptions) {
+          leftBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(leftBorder);
+      }
+
+      // TODO(lmr): how do we do transform in this case?
     }
 
     return layers;
-
-    // const bl = style.borderLeftWidth || 0;
-    // const br = style.borderRightWidth || 0;
-    // const bt = style.borderTopWidth || 0;
-    // const bb = style.borderBottomWidth || 0;
-    //
-    // const btlr = style.borderTopLeftRadius || 0;
-    // const btrr = style.borderTopRightRadius || 0;
-    // const bbrr = style.borderBottomRightRadius || 0;
-    // const bblr = style.borderBottomLeftRadius || 0;
-    //
-    // const layers = [];
-    // const rect = MSRectangleShape.alloc().init();
-    // rect.frame = MSRect.rectWithRect(
-    //   NSMakeRect(0, 0, layout.width, layout.height)
-    // );
-    //
-    // rect.setCornerRadiusFromComponents(`${btlr}/${btrr}/${bbrr}/${bblr}`);
-    //
-    // const content = MSShapeGroup.shapeWithPath(rect);
-    //
-    // if (style.backgroundColor !== undefined) {
-    //   const fillStyle = content.style().addStylePartOfType(0);
-    //   fillStyle.color = convertToColor(style.backgroundColor);
-    // }
-    //
-    // const imageFill = content.style().addStylePartOfType(0);
-    // const imageData = NSImage.alloc().initByReferencingURL(
-    //   NSURL.URLWithString(extractURLFromSource(props.source))
-    // );
-    // imageFill.setImage(MSImageData.alloc().initWithImage_convertColorSpace(imageData, false));
-    // imageFill.setFillType(FillType.Pattern);
-    // imageFill.setPatternFillType(PatternFillType[props.resizeMode] || PatternFillType.Fill);
-    //
-    // if (style.transform !== undefined) {
-    //   processTransform(rect, layout, style.transform);
-    // }
-    //
-    // layers.push(content);
-    //
-    // if (same(bl, br, bt, bb)) {
-    //   const borderStyle = content.style().addStylePartOfType(1);
-    //   borderStyle.setFillType(FillType.Solid); // solid
-    //
-    //   if (style.borderTopColor !== undefined) {
-    //     borderStyle.setColor(convertToColor(style.borderTopColor));
-    //   }
-    //
-    //   borderStyle.setThickness(style.borderTopWidth || 0);
-    //
-    //   borderStyle.setPosition(BorderPosition.Outside);
-    // } else {
-    //   if (bt > 0) {
-    //     const topBorder = makeRect(
-    //       0,
-    //       0,
-    //       layout.width,
-    //       bt,
-    //       style.borderTopColor
-    //     );
-    //     layers.push(topBorder);
-    //   }
-    //
-    //   if (bl > 0) {
-    //     const leftBorder = makeRect(
-    //       0,
-    //       0,
-    //       bl,
-    //       layout.height,
-    //       style.borderLeftColor
-    //     );
-    //     layers.push(leftBorder);
-    //   }
-    //
-    //   if (bb > 0) {
-    //     const bottomBorder = makeRect(
-    //       0,
-    //       layout.height - bb,
-    //       layout.width,
-    //       bb,
-    //       style.borderBottomColor
-    //     );
-    //     layers.push(bottomBorder);
-    //   }
-    //
-    //   if (br > 0) {
-    //     const rightBorder = makeRect(
-    //       layout.width - br,
-    //       0,
-    //       br,
-    //       layout.height,
-    //       style.borderRightColor
-    //     );
-    //     layers.push(rightBorder);
-    //   }
-    // }
-    //
-    // return layers;
   }
 }
 
