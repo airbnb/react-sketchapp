@@ -16,13 +16,15 @@ module.exports = {
   },
 
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'babel-loader' }
-        ],
+        loader: 'babel',
+      },
+      {
+        test: /\.json$/,
+        loader: 'json',
       },
     ],
   },
