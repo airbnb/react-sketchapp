@@ -121,25 +121,25 @@ class ViewRenderer extends SketchRenderer {
     const layers = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
     const {
-      borderTopWidth: bt = 0,
-      borderRightWidth: br = 0,
-      borderBottomWidth: bb = 0,
-      borderLeftWidth: bl = 0,
+      borderTopWidth = 0,
+      borderRightWidth = 0,
+      borderBottomWidth = 0,
+      borderLeftWidth = 0,
 
-      borderTopLeftRadius: btlr = 0,
-      borderTopRightRadius: btrr = 0,
-      borderBottomRightRadius: bbrr = 0,
-      borderBottomLeftRadius: bblr = 0,
+      borderTopLeftRadius = 0,
+      borderTopRightRadius = 0,
+      borderBottomRightRadius = 0,
+      borderBottomLeftRadius = 0,
 
-      borderTopColor: bct = DEFAULT_BORDER_COLOR,
-      borderRightColor: bcr = DEFAULT_BORDER_COLOR,
-      borderBottomColor: bcb = DEFAULT_BORDER_COLOR,
-      borderLeftColor: bcl = DEFAULT_BORDER_COLOR,
+      borderTopColor = DEFAULT_BORDER_COLOR,
+      borderRightColor = DEFAULT_BORDER_COLOR,
+      borderBottomColor = DEFAULT_BORDER_COLOR,
+      borderLeftColor = DEFAULT_BORDER_COLOR,
 
-      borderTopStyle: bst = DEFAULT_BORDER_STYLE,
-      borderRightStyle: bsr = DEFAULT_BORDER_STYLE,
-      borderBottomStyle: bsb = DEFAULT_BORDER_STYLE,
-      borderLeftStyle: bsl = DEFAULT_BORDER_STYLE,
+      borderTopStyle = DEFAULT_BORDER_STYLE,
+      borderRightStyle = DEFAULT_BORDER_STYLE,
+      borderBottomStyle = DEFAULT_BORDER_STYLE,
+      borderLeftStyle = DEFAULT_BORDER_STYLE,
     } = style;
 
     if (!hasAnyDefined(style, VISIBLE_STYLES)) {
@@ -149,7 +149,7 @@ class ViewRenderer extends SketchRenderer {
     const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
 
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const radii = [btlr, btrr, bbrr, bblr];
+    const radii = [borderTopLeftRadius, borderTopRightRadius, borderBottomRightRadius, borderBottomLeftRadius];
     const shapeLayer = makeRectShapeLayer(
       0,
       0,
@@ -165,25 +165,27 @@ class ViewRenderer extends SketchRenderer {
       content.style.shadows = [makeShadow(style)];
     }
 
-    if (same(bl, br, bt, bb) && same(bcl, bcr, bct, bcb) && same(bsl, bsr, bst, bsb)) {
+    if (same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
+    same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
+    same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)) {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
-      if (bst !== undefined) {
-        const borderOptions = findBorderStyle(bst, bt);
+      if (borderTopStyle !== undefined) {
+        const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
         if (borderOptions) {
           content.style.borderOptions = borderOptions;
         }
       }
 
-      if (bct !== undefined) {
+      if (borderTopWidth !== undefined) {
         content.style.borders = [
           {
             _class: 'border',
             isEnabled: true,
-            color: makeColorFromCSS(bct),
+            color: makeColorFromCSS(borderTopColor),
             fillType: 0,
             position: BorderPosition.Inside,
-            thickness: bl,
+            thickness: borderTopWidth,
           },
         ];
       }
@@ -192,17 +194,17 @@ class ViewRenderer extends SketchRenderer {
       content.hasClippingMask = true;
       layers.push(content);
 
-      if (bt > 0) {
+      if (borderTopWidth > 0) {
         const topBorder = makeHorizontalBorder(
           0,
           0,
           layout.width,
-          bt,
-          bct,
+          borderTopWidth,
+          borderTopColor,
         );
         topBorder.name = 'Border (top)';
 
-        const borderOptions = findBorderStyle(bst, bt);
+        const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
         if (borderOptions) {
           topBorder.style.borderOptions = borderOptions;
         }
@@ -210,17 +212,17 @@ class ViewRenderer extends SketchRenderer {
         layers.push(topBorder);
       }
 
-      if (br > 0) {
+      if (borderRightWidth > 0) {
         const rightBorder = makeVerticalBorder(
-          layout.width - br,
+          layout.width - borderRightWidth,
           0,
           layout.height,
-          br,
-          bcr,
+          borderRightWidth,
+          borderRightColor,
         );
         rightBorder.name = 'Border (right)';
 
-        const borderOptions = findBorderStyle(bsr, br);
+        const borderOptions = findBorderStyle(borderRightStyle, borderRightWidth);
         if (borderOptions) {
           rightBorder.style.borderOptions = borderOptions;
         }
@@ -228,18 +230,17 @@ class ViewRenderer extends SketchRenderer {
         layers.push(rightBorder);
       }
 
-      if (bb > 0) {
+      if (borderBottomWidth > 0) {
         const bottomBorder = makeHorizontalBorder(
           0,
-          layout.height - bb,
+          layout.height - borderBottomWidth,
           layout.width,
-          bb,
-          bcb,
-          bsb,
+          borderBottomWidth,
+          borderBottomColor,
         );
         bottomBorder.name = 'Border (bottom)';
 
-        const borderOptions = findBorderStyle(bsb, bb);
+        const borderOptions = findBorderStyle(borderBottomStyle, borderBottomWidth);
         if (borderOptions) {
           bottomBorder.style.borderOptions = borderOptions;
         }
@@ -247,11 +248,11 @@ class ViewRenderer extends SketchRenderer {
         layers.push(bottomBorder);
       }
 
-      if (bl > 0) {
-        const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
+      if (borderLeftWidth > 0) {
+        const leftBorder = makeVerticalBorder(0, 0, layout.height, borderLeftWidth, borderLeftColor);
         leftBorder.name = 'Border (left)';
 
-        const borderOptions = findBorderStyle(bsl, bl);
+        const borderOptions = findBorderStyle(borderLeftStyle, borderLeftWidth);
         if (borderOptions) {
           leftBorder.style.borderOptions = borderOptions;
         }
