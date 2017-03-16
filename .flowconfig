@@ -30,6 +30,7 @@
 .*/_backup
 .*/docs
 .*/_book
+./lib
 
 [include]
 
