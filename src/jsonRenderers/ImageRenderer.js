@@ -1,6 +1,7 @@
 /* @flow */
 import type { SJShapeGroupLayer, SJFillImage } from 'sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
+import { PatternFillType } from '../utils/constants';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
@@ -29,15 +30,6 @@ const DEFAULT_BORDER_STYLE = 'solid';
 
 const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
-// out of date in sketch-constants
-// https://github.com/turbobabr/sketch-constants/pull/1
-const PatternFillType = {
-  Tile: 0,
-  Fill: 1,
-  Stretch: 2,
-  Fit: 3,
-};
-
 function extractURLFromSource(source) {
   if (typeof source === 'string') {
     return source;
@@ -45,7 +37,7 @@ function extractURLFromSource(source) {
   return source.uri;
 }
 
-const makeFillImage = (image): SJFillImage => ({
+const makeJSONDataReference = (image): SJFillImage => ({
   _class: 'MSJSONOriginalDataReference',
   _ref: `images/${generateID()}`,
   _ref_class: 'MSImageData',
@@ -97,7 +89,7 @@ class ImageRenderer extends SketchRenderer {
 
     const image = makeImageDataFromUrl(extractURLFromSource(props.source));
 
-    const fillImage = makeFillImage(image);
+    const fillImage = makeJSONDataReference(image);
 
     const frame = makeRect(0, 0, layout.width, layout.height);
     const radii = [

@@ -4,8 +4,6 @@ export type Dictionary<K, T> = { [key: K]: T };
 // Sketchy things
 export type SketchLayer = any;
 
-export type SketchJSON = { [key: string]: any };
-
 export type SketchStyle = any;
 
 export type SketchSharedStyleContainer = {

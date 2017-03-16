@@ -1,6 +1,13 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
 /* @flow */
-import type { SJColor, SJFill, SJFillImage, SJRect } from 'sketchapp-json-flow-types';
+import type {
+  SJColor,
+  SJFill,
+  SJFillImage,
+  SJPatternFillTypeEnum,
+  SJRect,
+} from 'sketchapp-json-flow-types';
+import { FillType } from 'sketch-constants';
 import normalizeColor from 'normalize-css-color';
 import type { Color } from '../types';
 

@@ -1,7 +1,6 @@
 /* @flow */
 import type { SJFill, SJPath, SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
-import type { Color } from '../types';
-import { generateID, makeRect, makeColorFill } from './models';
+import { generateID, makeRect } from './models';
 
 type Radii = Array<number>;
 

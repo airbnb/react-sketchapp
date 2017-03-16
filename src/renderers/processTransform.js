@@ -1,4 +1,6 @@
+/* eslint-disable no-mixed-operators */
 import type { LayoutInfo } from '../types';
+
 /*
  a   b   0
  c   d   0

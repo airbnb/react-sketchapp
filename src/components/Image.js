@@ -54,7 +54,8 @@ class Image extends React.Component {
 
     const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'contain'];
 
-    // TODO(lmr): check to see if `source` specifies a width/height as well, and pass into `style` if so
+    // TODO(lmr): check to see if `source` specifies a width/height as well,
+    // and pass into `style` if so
 
     return (
       <image style={style} source={source || defaultSource} resizeMode={sketchResizeMode}>

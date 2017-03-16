@@ -9,6 +9,10 @@
     "React$Element": true,
     "ReactClass": true,
     "ReactComponent": true,
+    "NSColor": true,
+    "MSJSONDataArchiver": true,
+    "NSAttributedString": true,
+    "NSDate": true,
     "NSDataBase64EncodingEndLineWithCarriageReturn": true,
   },
   "rules": {

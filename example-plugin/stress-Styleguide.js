@@ -47,7 +47,7 @@ const Document = ({ system }: { system: DesignSystem }) =>
       </Label>
     </View>
 
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap'}}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
       { borders().map(border =>
         <View
           style={border}

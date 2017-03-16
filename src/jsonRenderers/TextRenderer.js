@@ -2,7 +2,7 @@
 import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
-import TextStyles from '../sharedStyles/TextStyles';
+// import TextStyles from '../sharedStyles/TextStyles';
 import makeTextLayer from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
 // import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';

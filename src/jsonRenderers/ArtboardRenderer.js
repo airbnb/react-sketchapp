@@ -1,6 +1,6 @@
 /* @flow */
 import type { SJArtboardLayer } from 'sketchapp-json-flow-types';
-import { generateID, makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
+import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 
