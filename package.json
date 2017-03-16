@@ -14,7 +14,7 @@
     "src"
   ],
   "scripts": {
-    "build:plugin": "webpack -c",
+    "build:plugin": "webpack",
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
     "build": "npm run build:react && npm run build:plugin && npm run build:flow",
@@ -82,7 +82,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
-    "flow-bin": "^0.36.0",
+    "flow-bin": "^0.41.0",
     "flow-copy-source": "^1.1.0",
     "gitbook-cli": "^2.3.0",
     "jest-cli": "^18.1.0",
