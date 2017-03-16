@@ -1,7 +1,8 @@
 /* @flow */
+import type { SJArtboardLayer } from 'sketchapp-json-flow-types';
 import { generateID, makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
-import type { SketchJSON, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 
 class ArtboardRenderer extends SketchRenderer {
   renderGroupLayer(
@@ -11,7 +12,7 @@ class ArtboardRenderer extends SketchRenderer {
     props: any,
     // eslint-disable-next-line no-unused-vars
     value: ?string,
-  ): SketchJSON {
+  ): SJArtboardLayer {
     let color;
     if (style.backgroundColor !== undefined) {
       color = makeColorFromCSS(style.backgroundColor);
