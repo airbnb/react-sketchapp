@@ -1,5 +1,6 @@
 /* @flow */
 import { BorderPosition, FillType } from 'sketch-constants';
+import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
@@ -104,7 +105,8 @@ class ViewRenderer extends SketchRenderer {
     props: any,
     // eslint-disable-next-line no-unused-vars
     value: ?string,
-  ): Array<SketchLayer> {
+  ): Array<SJShapeGroupLayer> {
+    const layers = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
     const {
       borderTopWidth: bt = 0,
@@ -129,7 +131,7 @@ class ViewRenderer extends SketchRenderer {
     } = style;
 
     if (!hasAnyDefined(style, VISIBLE_STYLES)) {
-      return [];
+      return layers;
     }
 
     const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
@@ -181,44 +183,47 @@ class ViewRenderer extends SketchRenderer {
           },
         ];
       }
+      layers.push(content);
+    } else {
+      // TODO(akp): Handle this case #sketch43
+      content.hasClippingMask = true;
+      layers.push(content);
 
-      return [content];
+      log('non uniform border, continuing');
+
+      // if (bt > 0) {
+      //   const topBorder = makeHorizontalBorder(0, 0, layout.width, bt, bct, bst);
+      //   topBorder.name = 'Border (top)';
+      //   layers.push(topBorder);
+      // }
+      //
+      // if (bl > 0) {
+      //   const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
+      //   leftBorder.name = 'Border (left)';
+      //   layers.push(leftBorder);
+      // }
+      //
+      // if (bb > 0) {
+      //   const bottomBorder = makeHorizontalBorder(
+      //     0,
+      //     layout.height - bb,
+      //     layout.width,
+      //     bb,
+      //     bcb,
+      //     bsb,
+      //   );
+      //   bottomBorder.name = 'Border (bottom)';
+      //   layers.push(bottomBorder);
+      // }
+      //
+      // if (br > 0) {
+      //   const rightBorder = makeVerticalBorder(layout.width - br, 0, layout.height, br, bcr, bsr);
+      //   rightBorder.name = 'Border (right)';
+      //   layers.push(rightBorder);
+      // }
+      // TODO(lmr): how do we do transform in this case?
     }
-    // TODO(akp): Handle this case #sketch43
-    log('non uniform border, continuing');
-    return [content];
-
-    // if (bt > 0) {
-    //   const topBorder = makeHorizontalBorder(0, 0, layout.width, bt, bct, bst);
-    //   topBorder.name = 'Border (top)';
-    //   layers.push(topBorder);
-    // }
-    //
-    // if (bl > 0) {
-    //   const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
-    //   leftBorder.name = 'Border (left)';
-    //   layers.push(leftBorder);
-    // }
-    //
-    // if (bb > 0) {
-    //   const bottomBorder = makeHorizontalBorder(
-    //     0,
-    //     layout.height - bb,
-    //     layout.width,
-    //     bb,
-    //     bcb,
-    //     bsb,
-    //   );
-    //   bottomBorder.name = 'Border (bottom)';
-    //   layers.push(bottomBorder);
-    // }
-    //
-    // if (br > 0) {
-    //   const rightBorder = makeVerticalBorder(layout.width - br, 0, layout.height, br, bcr, bsr);
-    //   rightBorder.name = 'Border (right)';
-    //   layers.push(rightBorder);
-    // }
-    // TODO(lmr): how do we do transform in this case?
+    return layers;
   }
 }
 
