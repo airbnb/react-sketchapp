@@ -58,14 +58,17 @@ export const makeColorFill = (cssColor: Color): SJFill => ({
   patternTileScale: 1,
 });
 
-export const makeImageFill = (image: SJFillImage): SJFill => ({
+export const makeImageFill = (
+  image: SJFillImage,
+  patternFillType: SJPatternFillTypeEnum = 1,
+): SJFill => ({
   _class: 'fill',
   isEnabled: true,
-  fillType: 4,
+  fillType: FillType.Pattern,
   image,
   noiseIndex: 0,
   noiseIntensity: 0,
-  patternFillType: 1,
+  patternFillType,
   patternTileScale: 1,
 });
 

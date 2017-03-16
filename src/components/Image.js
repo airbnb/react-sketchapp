@@ -37,7 +37,7 @@ const ResizeModes = {
   cover: 'Fill',
   stretch: 'Stretch',
   center: 'Fill', // TODO(gold): implement ResizeModes.center
-  repeat: 'Fill', // TODO(gold): implement ResizeModes.repeat
+  repeat: 'Tile',
   none: 'Fill',
 };
 
@@ -52,7 +52,7 @@ class Image extends React.Component {
 
     const style = StyleSheet.flatten(this.props.style);
 
-    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'contain'];
+    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
 
     // TODO(lmr): check to see if `source` specifies a width/height as well,
     // and pass into `style` if so
