@@ -5,10 +5,15 @@ import ViewStylePropTypes from './ViewStylePropTypes';
 
 // TODO(lmr): handle other types, like React Native does
 // https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageSourcePropType.js
+const ImageURISourcePropType = PropTypes.shape({
+  uri: PropTypes.string.isRequired,
+  height: PropTypes.number,
+  width: PropTypes.number,
+});
+
 const ImageSourcePropType = PropTypes.oneOfType([
-  PropTypes.shape({
-    uri: PropTypes.string.isRequired,
-  }),
+  ImageURISourcePropType,
+  // PropTypes.arrayOf(ImageURISourcePropType), // TODO: handle me
   PropTypes.string,
 ]);
 
@@ -54,8 +59,15 @@ class Image extends React.Component {
 
     const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
 
-    // TODO(lmr): check to see if `source` specifies a width/height as well,
-    // and pass into `style` if so
+    if (typeof source !== 'string') {
+      const { width, height } = source;
+      if (width) {
+        style.width = width;
+      }
+      if (height) {
+        style.height = height;
+      }
+    }
 
     return (
       <image style={style} source={source || defaultSource} resizeMode={sketchResizeMode}>
