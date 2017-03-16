@@ -1,5 +1,5 @@
 /* @flow */
-import type { SJPath, SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type { SJFill, SJPath, SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import type { Color } from '../types';
 import { generateID, makeRect, makeColorFill } from './models';
 
@@ -110,7 +110,7 @@ export const makeRectPath = (radii: Radii = [0, 0, 0, 0]): SJPath => {
   };
 };
 
-export const makeShapePath = (frame, path) => ({
+export const makeShapePath = (frame: SJRect, path: SJPath) => ({
   _class: 'shapePath',
   frame,
   do_objectID: generateID(),
