@@ -119,7 +119,7 @@ class ViewRenderer extends SketchRenderer {
         }
       }
 
-      if (borderTopWidth !== undefined) {
+      if (borderTopWidth > 0) {
         content.style.borders = [
           {
             _class: 'border',
