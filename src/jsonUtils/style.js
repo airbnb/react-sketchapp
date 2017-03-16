@@ -1,7 +1,14 @@
 /* @flow */
-import type { SJBorderOptions, SJShadow } from 'sketchapp-json-flow-types';
-import type { ViewStyle } from '../types';
-import { makeColorFromCSS } from './models';
+import { BorderPosition } from 'sketch-constants';
+import type { SJBorderOptions, SJShadow, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
+import {
+  makeHorizontalPath,
+  makeVerticalPath,
+  makeShapePath,
+  makeShapeGroup,
+} from '../jsonUtils/shapeLayers';
+import type { Color, ViewStyle } from '../types';
 
 const DEFAULT_SHADOW_COLOR = '#000';
 
@@ -13,8 +20,7 @@ export const makeBorderStyle = (dashPattern: Array<number>): SJBorderOptions => 
   lineJoinStyle: 0,
 });
 
-export const makeDottedBorder = (width: number): SJBorderOptions =>
-  makeBorderStyle([width, width]);
+export const makeDottedBorder = (width: number): SJBorderOptions => makeBorderStyle([width, width]);
 
 export const makeDashedBorder = (width: number): SJBorderOptions =>
   makeBorderStyle([width * 3, width * 3]);
@@ -39,4 +45,67 @@ export const makeShadow = (style: ViewStyle): SJShadow => {
     offsetY,
     spread: 0,
   };
+};
+
+export const makeVerticalBorder = (
+  x: number,
+  y: number,
+  length: number,
+  thickness: number,
+  color: Color,
+): SJShapeGroupLayer => {
+  const frame = makeRect(x, y, thickness, length);
+  const shapeFrame = makeRect(0, 0, thickness, length);
+  const shapePath = makeShapePath(shapeFrame, makeVerticalPath());
+  const content = makeShapeGroup(frame, [shapePath]);
+  content.style.borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: 0,
+      position: BorderPosition.Center,
+      thickness,
+    },
+  ];
+  return content;
+};
+
+export const makeHorizontalBorder = (
+  x: number,
+  y: number,
+  length: number,
+  thickness: number,
+  color: Color,
+): SJShapeGroupLayer => {
+  const frame = makeRect(x, y, length, thickness);
+  const shapeFrame = makeRect(0, 0, length, thickness);
+  const shapePath = makeShapePath(shapeFrame, makeHorizontalPath());
+  const content = makeShapeGroup(frame, [shapePath]);
+  content.style.borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: 0,
+      position: BorderPosition.Center,
+      thickness,
+    },
+  ];
+  return content;
+};
+
+export const findBorderStyle = (style: 'dashed' | 'dotted' | 'solid', width: number) => {
+  switch (style) {
+    case 'dashed': {
+      return makeDashedBorder(width);
+    }
+    case 'dotted': {
+      return makeDottedBorder(width);
+    }
+    case 'solid':
+      return null;
+    default:
+      return null;
+  }
 };

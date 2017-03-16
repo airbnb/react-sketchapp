@@ -4,16 +4,15 @@ import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
-import {
-  makeHorizontalPath,
-  makeVerticalPath,
-  makeShapePath,
-  makeRectShapeLayer,
-  makeShapeGroup,
-} from '../jsonUtils/shapeLayers';
+import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 // import processTransform from './processTransform';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
-import { makeDottedBorder, makeDashedBorder, makeShadow } from '../jsonUtils/style';
+import {
+  findBorderStyle,
+  makeShadow,
+  makeHorizontalBorder,
+  makeVerticalBorder,
+} from '../jsonUtils/style';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import same from '../utils/same';
 
@@ -47,70 +46,6 @@ const VISIBLE_STYLES = [
 ];
 
 const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
-
-const makeVerticalBorder = (
-  x: number,
-  y: number,
-  length: number,
-  thickness: number,
-  color,
-): SJShapeGroupLayer => {
-  const frame = makeRect(x, y, thickness, length);
-  const shapeFrame = makeRect(0, 0, thickness, length);
-  const shapePath = makeShapePath(shapeFrame, makeVerticalPath());
-  const content = makeShapeGroup(frame, [shapePath]);
-  content.style.borders = [
-    {
-      _class: 'border',
-      isEnabled: true,
-      color: makeColorFromCSS(color),
-      fillType: 0,
-      position: BorderPosition.Center,
-      thickness,
-    },
-  ];
-  return content;
-};
-
-const makeHorizontalBorder = (
-  x: number,
-  y: number,
-  length: number,
-  thickness: number,
-  color,
-): SJShapeGroupLayer => {
-  const frame = makeRect(x, y, length, thickness);
-  const shapeFrame = makeRect(0, 0, length, thickness);
-  const shapePath = makeShapePath(shapeFrame, makeHorizontalPath());
-  const content = makeShapeGroup(frame, [shapePath]);
-  content.style.borders = [
-    {
-      _class: 'border',
-      isEnabled: true,
-      color: makeColorFromCSS(color),
-      fillType: 0,
-      position: BorderPosition.Center,
-      thickness,
-    },
-  ];
-  return content;
-};
-
-const findBorderStyle = (style: 'dashed' | 'dotted' | 'solid', width: number) => {
-  // if (style !== undefined) {
-  switch (style) {
-    case 'dashed': {
-      return makeDashedBorder(width);
-    }
-    case 'dotted': {
-      return makeDottedBorder(width);
-    }
-    case 'solid':
-      return null;
-    default:
-      return null;
-  }
-};
 
 class ViewRenderer extends SketchRenderer {
   getDefaultGroupName() {
