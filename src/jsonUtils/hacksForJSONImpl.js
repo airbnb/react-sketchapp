@@ -2,6 +2,7 @@
 // We need native macOS fonts and colors for these hacks so import the old utils
 import normalizeColor from 'normalize-css-color';
 import findFont from '../utils/findFont';
+import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 import { TEXT_ALIGN } from '../utils/applyTextStyleToLayer';
 
 // Awkwardly we encode then immediately decode the JSON, but seems like
