@@ -1,12 +1,66 @@
 /* @flow */
-import type { SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type { SJPath, SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import type { Color } from '../types';
 import { generateID, makeRect, makeColorFill } from './models';
 
 type Radii = Array<number>;
 
+export const makeHorizontalPath = (): SJPath => ({
+  _class: 'path',
+  isClosed: false,
+  points: [
+    {
+      _class: 'curvePoint',
+      cornerRadius: 0,
+      curveFrom: '{0, 0}',
+      curveMode: 1,
+      curveTo: '{0, 0}',
+      hasCurveFrom: false,
+      hasCurveTo: false,
+      point: '{0, 0.5}',
+    },
+    {
+      _class: 'curvePoint',
+      cornerRadius: 0,
+      curveFrom: '{0, 0}',
+      curveMode: 1,
+      curveTo: '{0, 0}',
+      hasCurveFrom: false,
+      hasCurveTo: false,
+      point: '{1, 0.5}',
+    },
+  ]
+});
+
+export const makeVerticalPath = (): SJPath => ({
+  _class: 'path',
+  isClosed: false,
+  points: [
+    {
+      _class: 'curvePoint',
+      cornerRadius: 0,
+      curveFrom: '{0, 0}',
+      curveMode: 1,
+      curveTo: '{0, 0}',
+      hasCurveFrom: false,
+      hasCurveTo: false,
+      point: '{0.5, 0}',
+    },
+    {
+      _class: 'curvePoint',
+      cornerRadius: 0,
+      curveFrom: '{0, 0}',
+      curveMode: 1,
+      curveTo: '{0, 0}',
+      hasCurveFrom: false,
+      hasCurveTo: false,
+      point: '{0.5, 1}',
+    },
+  ]
+});
+
 // This could be made more consty
-export const makeRectPath = (radii: Radii = [0, 0, 0, 0]) => {
+export const makeRectPath = (radii: Radii = [0, 0, 0, 0]): SJPath => {
   const [r0, r1, r2, r3] = radii;
   return {
     _class: 'path',
@@ -56,6 +110,25 @@ export const makeRectPath = (radii: Radii = [0, 0, 0, 0]) => {
   };
 };
 
+export const makeShapePath = (frame, path) => ({
+  _class: 'shapePath',
+  frame,
+  do_objectID: generateID(),
+  isFlippedHorizontal: false,
+  isFlippedVertical: false,
+  isLocked: false,
+  isVisible: true,
+  layerListExpandedType: 0,
+  name: 'Path',
+  nameIsFixed: false,
+  resizingType: 0,
+  rotation: 0,
+  shouldBreakMaskChain: false,
+  booleanOperation: -1,
+  edited: false,
+  path,
+})
+
 export const makeRectShapeLayer = (
   x: number,
   y: number,
@@ -93,7 +166,7 @@ export const makeRectShapeLayer = (
 export const makeShapeGroup = (
   frame: SJRect,
   layers: Array<any> = [],
-  fillCSSColor: Color = 'black'
+  fills?: Array<SJFill> = [],
 ): SJShapeGroupLayer => ({
   _class: 'shapeGroup',
   do_objectID: generateID(),
@@ -134,9 +207,7 @@ export const makeShapeGroup = (
     //   }
     // ],
     endDecorationType: 0,
-    fills: [
-      makeColorFill(fillCSSColor),
-    ],
+    fills,
     miterLimit: 10,
     startDecorationType: 0,
   },
@@ -147,13 +218,13 @@ export const makeShapeGroup = (
   windingRule: 1,
 });
 
-export function makeRectShapeGroup(
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  color: Color,
-): SJShapeGroupLayer {
-  const rsl = makeRectShapeLayer(x, y, width, height);
-  return makeShapeGroup(makeRect(x, y, width, height), [rsl], color);
-}
+// export function makeRectShapeGroup(
+//   x: number,
+//   y: number,
+//   width: number,
+//   height: number,
+//   color: Color,
+// ): SJShapeGroupLayer {
+//   const rsl = makeRectShapeLayer(x, y, width, height);
+//   return makeShapeGroup(makeRect(x, y, width, height), [rsl], [makeColorFill(color)]);
+// }

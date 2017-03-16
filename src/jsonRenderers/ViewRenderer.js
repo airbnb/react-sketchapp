@@ -1,15 +1,15 @@
 /* @flow */
-import { BorderPosition, FillType } from 'sketch-constants';
+import { BorderPosition } from 'sketch-constants';
 import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
-import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
-import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
+import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
+import { makeHorizontalPath, makeVerticalPath, makeShapePath, makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 // import processTransform from './processTransform';
-import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import { makeDottedBorder, makeDashedBorder, makeShadow } from '../jsonUtils/style';
-
-const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
+import hasAnyDefined from '../utils/hasAnyDefined';
+import same from '../utils/same';
 
 const TRANSPARENT = convertToColor('transparent');
 const DEFAULT_BORDER_COLOR = '#000';
@@ -42,57 +42,69 @@ const VISIBLE_STYLES = [
 
 const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
+const makeVerticalBorder = (
+  x: number,
+  y: number,
+  length: number,
+  thickness: number,
+  color,
+): SJShapeGroupLayer => {
+  const frame = makeRect(x, y, thickness, length);
+  const shapeFrame = makeRect(0, 0, thickness, length);
+  const shapePath = makeShapePath(shapeFrame, makeVerticalPath());
+  const content = makeShapeGroup(frame, [shapePath]);
+  content.style.borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: 0,
+      position: BorderPosition.Center,
+      thickness,
+    },
+  ];
+  return content;
+};
 
-function makeBorderFromRect(rect, thickness, color, style) {
-  // TODO(akp): fill in this function #sketch43
-  return null;
-  /*
+const makeHorizontalBorder = (
+  x: number,
+  y: number,
+  length: number,
+  thickness: number,
+  color,
+): SJShapeGroupLayer => {
+  const frame = makeRect(x, y, length, thickness);
+  const shapeFrame = makeRect(0, 0, length, thickness);
+  const shapePath = makeShapePath(shapeFrame, makeHorizontalPath());
+  const content = makeShapeGroup(frame, [shapePath]);
+  content.style.borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: 0,
+      position: BorderPosition.Center,
+      thickness,
+    },
+  ];
+  return content;
+};
 
-  const layer = MSShapeGroup.shapeWithPath(rect);
-
-  layer.style().addStylePartOfType(0).color = TRANSPARENT;
-
-  const borderStyle = layer.style().addStylePartOfType(1);
-
-  const borderOptions = layer.style().borderOptions();
-
-  borderStyle.setFillType(FillType.Solid);
-  borderStyle.setThickness(thickness || 0);
-  borderStyle.setPosition(BorderPosition.Inside);
-
-  borderStyle.setColor(convertToColor(color || DEFAULT_BORDER_COLOR));
-
+const findBorderStyle = (style: 'dashed' | 'dotted' | 'solid', width: number) => {
+  // if (style !== undefined) {
   switch (style) {
-    case 'dashed':
-      borderOptions.setDashPattern([thickness * 3, thickness * 4]);
-      break;
-    case 'dotted':
-      borderOptions.setDashPattern([thickness / 2, thickness / 2]);
-      borderOptions.setLineJoinStyle(0);
-      break;
+    case 'dashed': {
+      return makeDashedBorder(width);
+    }
+    case 'dotted': {
+      return makeDottedBorder(width);
+    }
     case 'solid':
+      return null;
     default:
-      // do nothing
-      break;
+      return null;
   }
-  return layer;
-
-  */
-}
-
-function makeVerticalBorder(x, y, length, thickness, color, style) {
-  const rect = makeRect(x, y, thickness, length);
-  return makeBorderFromRect(rect, thickness, color, style);
-}
-
-function makeHorizontalBorder(x, y, length, thickness, color, style) {
-  const rect = makeRect(x, y, length, thickness);
-  return makeBorderFromRect(rect, thickness, color, style);
-}
-
-function same(a, b, c, d) {
-  return a === b && b === c && c === d;
-}
+};
 
 class ViewRenderer extends SketchRenderer {
   getDefaultGroupName() {
@@ -136,7 +148,7 @@ class ViewRenderer extends SketchRenderer {
 
     const backgroundColor = style.backgroundColor || DEFAULT_BACKGROUND_COLOR;
 
-    const frame = makeRect(bl, bt, layout.width, layout.height);
+    const frame = makeRect(0, 0, layout.width, layout.height);
     const radii = [btlr, btrr, bbrr, bblr];
     const shapeLayer = makeRectShapeLayer(
       0,
@@ -145,7 +157,9 @@ class ViewRenderer extends SketchRenderer {
       layout.height,
       radii,
     );
-    const content = makeShapeGroup(frame, [shapeLayer], backgroundColor);
+
+    const fill = makeColorFill(backgroundColor);
+    const content = makeShapeGroup(frame, [shapeLayer], [fill]);
 
     if (hasAnyDefined(style, SHADOW_STYLES)) {
       content.style.shadows = [makeShadow(style)];
@@ -155,19 +169,9 @@ class ViewRenderer extends SketchRenderer {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
       if (bst !== undefined) {
-        switch (bst) {
-          case 'dashed': {
-            content.style.borderOptions = makeDashedBorder(bt);
-            break;
-          }
-          case 'dotted': {
-            content.style.borderOptions = makeDottedBorder(bt);
-            break;
-          }
-          case 'solid':
-            break;
-          default:
-            break;
+        const borderOptions = findBorderStyle(bst, bt);
+        if (borderOptions) {
+          content.style.borderOptions = borderOptions;
         }
       }
 
@@ -185,42 +189,76 @@ class ViewRenderer extends SketchRenderer {
       }
       layers.push(content);
     } else {
-      // TODO(akp): Handle this case #sketch43
       content.hasClippingMask = true;
       layers.push(content);
 
-      log('non uniform border, continuing');
+      if (bt > 0) {
+        const topBorder = makeHorizontalBorder(
+          0,
+          0,
+          layout.width,
+          bt,
+          bct,
+        );
+        topBorder.name = 'Border (top)';
 
-      // if (bt > 0) {
-      //   const topBorder = makeHorizontalBorder(0, 0, layout.width, bt, bct, bst);
-      //   topBorder.name = 'Border (top)';
-      //   layers.push(topBorder);
-      // }
-      //
-      // if (bl > 0) {
-      //   const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
-      //   leftBorder.name = 'Border (left)';
-      //   layers.push(leftBorder);
-      // }
-      //
-      // if (bb > 0) {
-      //   const bottomBorder = makeHorizontalBorder(
-      //     0,
-      //     layout.height - bb,
-      //     layout.width,
-      //     bb,
-      //     bcb,
-      //     bsb,
-      //   );
-      //   bottomBorder.name = 'Border (bottom)';
-      //   layers.push(bottomBorder);
-      // }
-      //
-      // if (br > 0) {
-      //   const rightBorder = makeVerticalBorder(layout.width - br, 0, layout.height, br, bcr, bsr);
-      //   rightBorder.name = 'Border (right)';
-      //   layers.push(rightBorder);
-      // }
+        const borderOptions = findBorderStyle(bst, bt);
+        if (borderOptions) {
+          topBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(topBorder);
+      }
+
+      if (br > 0) {
+        const rightBorder = makeVerticalBorder(
+          layout.width - br,
+          0,
+          layout.height,
+          br,
+          bcr,
+        );
+        rightBorder.name = 'Border (right)';
+
+        const borderOptions = findBorderStyle(bsr, br);
+        if (borderOptions) {
+          rightBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(rightBorder);
+      }
+
+      if (bb > 0) {
+        const bottomBorder = makeHorizontalBorder(
+          0,
+          layout.height - bb,
+          layout.width,
+          bb,
+          bcb,
+          bsb,
+        );
+        bottomBorder.name = 'Border (bottom)';
+
+        const borderOptions = findBorderStyle(bsb, bb);
+        if (borderOptions) {
+          bottomBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(bottomBorder);
+      }
+
+      if (bl > 0) {
+        const leftBorder = makeVerticalBorder(0, 0, layout.height, bl, bcl, bsl);
+        leftBorder.name = 'Border (left)';
+
+        const borderOptions = findBorderStyle(bsl, bl);
+        if (borderOptions) {
+          leftBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(leftBorder);
+      }
+
       // TODO(lmr): how do we do transform in this case?
     }
     return layers;
