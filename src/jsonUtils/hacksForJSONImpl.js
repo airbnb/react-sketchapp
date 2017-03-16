@@ -27,7 +27,7 @@ function makeParagraphStyle(textStyle) {
 }
 
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(
-export function makeAttributedString(string, textStyle) {
+export function makeAttributedString(string: ?string, textStyle: TextStyle) {
   const font = findFont(textStyle);
 
   const color = normalizeColor.rgba(normalizeColor(textStyle.color || 'black'));
