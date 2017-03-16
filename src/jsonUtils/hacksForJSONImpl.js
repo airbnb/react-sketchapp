@@ -2,7 +2,7 @@
 // We need native macOS fonts and colors for these hacks so import the old utils
 import normalizeColor from 'normalize-css-color';
 import findFont from '../utils/findFont';
-import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import type { TextStyle } from '../types';
 import { TEXT_ALIGN } from '../utils/applyTextStyleToLayer';
 
 // Awkwardly we encode then immediately decode the JSON, but seems like
@@ -25,6 +25,12 @@ function makeParagraphStyle(textStyle) {
 
   return pStyle;
 }
+
+export const makeImageDataFromUrl = (url: string): MSImageData => {
+  const imageData = NSImage.alloc().initByReferencingURL(NSURL.URLWithString(url));
+
+  return MSImageData.alloc().initWithImage_convertColorSpace(imageData, false);
+};
 
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(
 export function makeAttributedString(string: ?string, textStyle: TextStyle) {

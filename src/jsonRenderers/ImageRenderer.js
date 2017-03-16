@@ -3,6 +3,7 @@ import type { SJShapeGroupLayer, SJFillImage } from 'sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
+import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 // import processTransform from './processTransform';
 import {
   makeRect,
@@ -94,11 +95,7 @@ class ImageRenderer extends SketchRenderer {
       borderLeftStyle = DEFAULT_BORDER_STYLE,
     } = style;
 
-    const imageData = NSImage.alloc().initByReferencingURL(
-      NSURL.URLWithString(extractURLFromSource(props.source)),
-    );
-
-    const image = MSImageData.alloc().initWithImage_convertColorSpace(imageData, false);
+    const image = makeImageDataFromUrl(extractURLFromSource(props.source));
 
     const fillImage = makeFillImage(image);
 
