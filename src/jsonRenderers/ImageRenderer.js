@@ -1,7 +1,7 @@
 /* @flow */
 import type { SJShapeGroupLayer, SJFillImage } from 'sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
-// import convertToColor from '../utils/convertToColor';
+import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 // import processTransform from './processTransform';
 import {
@@ -22,7 +22,8 @@ import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import same from '../utils/same';
 
-const DEFAULT_BORDER_COLOR = '#000';
+const TRANSPARENT = convertToColor('transparent');
+const DEFAULT_BORDER_COLOR = TRANSPARENT;
 const DEFAULT_BORDER_STYLE = 'solid';
 
 const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];

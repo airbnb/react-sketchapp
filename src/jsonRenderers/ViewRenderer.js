@@ -17,7 +17,7 @@ import hasAnyDefined from '../utils/hasAnyDefined';
 import same from '../utils/same';
 
 const TRANSPARENT = convertToColor('transparent');
-const DEFAULT_BORDER_COLOR = '#000';
+const DEFAULT_BORDER_COLOR = TRANSPARENT;
 const DEFAULT_BORDER_STYLE = 'solid';
 
 const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
