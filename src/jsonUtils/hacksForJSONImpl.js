@@ -38,7 +38,7 @@ export function makeAttributedString(string: ?string, textStyle: TextStyle) {
 
   const color = normalizeColor.rgba(normalizeColor(textStyle.color || 'black'));
 
-  const attribs = {
+  const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSParagraphStyle: makeParagraphStyle(textStyle),
     NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
