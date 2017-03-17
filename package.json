@@ -67,8 +67,7 @@
   "homepage": "https://github.com/jongold/react-sketchapp",
   "lint-staged": {
     "*.js": [
-      "flow",
-      "eslint",
+      "npm run check",
       "prettier-eslint --write \"src/**/*.js\"",
       "git add"
     ]
