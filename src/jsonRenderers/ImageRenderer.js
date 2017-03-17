@@ -100,9 +100,7 @@ class ImageRenderer extends SketchRenderer {
     ];
     const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
 
-    const fills = [
-      makeImageFill(fillImage, PatternFillType[props.resizeMode]),
-    ];
+    const fills = [makeImageFill(fillImage, PatternFillType[props.resizeMode])];
 
     if (style.backgroundColor) {
       fills.unshift(makeColorFill(style.backgroundColor));

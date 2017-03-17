@@ -3,12 +3,16 @@ import React, { PropTypes } from 'react';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 
-// TODO(lmr): handle other types, like React Native does
-// https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageSourcePropType.js
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
   height: PropTypes.number,
   width: PropTypes.number,
+  // bundle: PropTypes.string,
+  // method: PropTypes.string,
+  // headers: PropTypes.objectOf(PropTypes.string),
+  // body: PropTypes.string,
+  // cache: PropTypes.oneOf(['default', 'reload', 'force-cache', 'only-if-cached']),
+  // scale: PropTypes.number,
 });
 
 const ImageSourcePropType = PropTypes.oneOfType([
