@@ -5218,9 +5218,13 @@ sketch-constants@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/sketch-constants/-/sketch-constants-1.0.2.tgz#106ef685e02c1e703203b1e7b714743f57188cd9"
 
-sketchapp-json-flow-types@0.0.1, sketchapp-json-flow-types@^0.0.1:
+sketchapp-json-flow-types@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/sketchapp-json-flow-types/-/sketchapp-json-flow-types-0.0.1.tgz#e38197e38ca01f690dd42432def6e2fc51beb8eb"
+
+sketchapp-json-flow-types@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/sketchapp-json-flow-types/-/sketchapp-json-flow-types-0.0.2.tgz#226496e79f6a3845b89021d666b090ab4558d7d0"
 
 sketchapp-json-plugin@0.0.2:
   version "0.0.2"
