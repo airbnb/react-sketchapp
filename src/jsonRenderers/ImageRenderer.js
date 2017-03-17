@@ -1,5 +1,5 @@
 /* @flow */
-import type { SJShapeGroupLayer, SJFillImage } from 'sketchapp-json-flow-types';
+import type { SJShapeGroupLayer, SJImageDataReference } from 'sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
 import { PatternFillType } from '../utils/constants';
 import convertToColor from '../utils/convertToColor';
@@ -37,7 +37,7 @@ function extractURLFromSource(source) {
   return source.uri;
 }
 
-const makeJSONDataReference = (image): SJFillImage => ({
+const makeJSONDataReference = (image): SJImageDataReference => ({
   _class: 'MSJSONOriginalDataReference',
   _ref: `images/${generateID()}`,
   _ref_class: 'MSImageData',

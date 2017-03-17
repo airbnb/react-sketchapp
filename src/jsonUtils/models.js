@@ -1,12 +1,6 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
 /* @flow */
-import type {
-  SJColor,
-  SJFill,
-  SJFillImage,
-  SJPatternFillTypeEnum,
-  SJRect,
-} from 'sketchapp-json-flow-types';
+import type { SJColor, SJFill, SJImageDataReference, SJRect } from 'sketchapp-json-flow-types';
 import { FillType } from 'sketch-constants';
 import normalizeColor from 'normalize-css-color';
 import type { Color } from '../types';
@@ -59,8 +53,8 @@ export const makeColorFill = (cssColor: Color): SJFill => ({
 });
 
 export const makeImageFill = (
-  image: SJFillImage,
-  patternFillType: SJPatternFillTypeEnum = 1,
+  image: SJImageDataReference,
+  patternFillType: 0 | 1 | 2 | 3 = 1,
 ): SJFill => ({
   _class: 'fill',
   isEnabled: true,
