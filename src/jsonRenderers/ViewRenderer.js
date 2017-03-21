@@ -1,5 +1,5 @@
 /* @flow */
-import { BorderPosition } from 'sketch-constants';
+import { BorderPosition, FillType } from 'sketch-constants';
 import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
@@ -125,7 +125,7 @@ class ViewRenderer extends SketchRenderer {
             _class: 'border',
             isEnabled: true,
             color: makeColorFromCSS(borderTopColor),
-            fillType: 0,
+            fillType: FillType.Solid,
             position: BorderPosition.Inside,
             thickness: borderTopWidth,
           },
