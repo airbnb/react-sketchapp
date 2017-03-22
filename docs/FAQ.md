@@ -7,7 +7,7 @@
 Some data points:
 * This project follows [semantic versioning](http://semver.org/)
 * We haven't baked a 1.0 release yet; until then, APIs are liable to change as we make them comfortable & productive.
-* There's a [changelog](https://github.com/jongold/react-sketchapp/releases)
+* There's a [changelog](https://github.com/airbnb/react-sketchapp/releases)
 * We're using it day-to-day at Airbnb.
 
 #### `<View>` & `<Text>`? Where are the shapes at?
@@ -66,7 +66,7 @@ Not currently. When we find the right API we'll probably implement an SVG-style 
 #### Any plans to support Sketch's constraints for layout?
 Not currently. Flexbox is the closest we have to a predictable, cross-platform layout specification — by using it, we can use the same styles on every platform we build for.
 
-We currently use [`css-layout`](https://github.com/facebook/css-layout), but switching to [`yoga`](https://github.com/facebook/yoga) is on the roadmap. [#51](https://github.com/jongold/react-sketchapp/issues/51).
+We currently use [`css-layout`](https://github.com/facebook/css-layout), but switching to [`yoga`](https://github.com/facebook/yoga) is on the roadmap. [#51](https://github.com/airbnb/react-sketchapp/issues/51).
 
 #### Is there two-way binding? Can I generate React components from Sketch? :repeat:
 Nope.
