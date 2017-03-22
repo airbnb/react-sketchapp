@@ -5,7 +5,7 @@
 A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem:
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
-[![CircleCI](https://circleci.com/gh/jongold/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/jongold/react-sketchapp)
+[![CircleCI](https://circleci.com/gh/airbnb/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/airbnb/react-sketchapp)
 ![Sketch.app](https://img.shields.io/badge/Sketch.app-42-brightgreen.svg)
 
 ## Features
@@ -30,10 +30,10 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 There are several ways to build Sketch plugins:
 
 ### The simple way
-The simplest way to build Sketch plugins with modern JavaScript is [skpm](https://github.com/sketch-pm/skpm) 💎📦.
+The simplest way to build Sketch plugins with modern JavaScript is [`skpm`](https://github.com/sketch-pm/skpm) 💎📦.
 
-Install skpm, if you don't have it already, and create a new project.
-```
+Install `skpm`, if you don't have it already, and create a new project.
+```bash
 npm install -g skpm
 mkdir my-rad-sketch-plugin
 cd my-rad-sketch-plugin
@@ -41,15 +41,15 @@ skpm init
 skpm link .
 ```
 Install some dependencies and set up JSX compilation
-```
+```bash
 npm install --save react-sketchapp react react-test-renderer
-npm install --save-dev babel-preset-react
-echo '{"presets": ["react"]}' > .babelrc
+npm install --save-dev babel-preset-react babel-preset-es2015 babel-plugin-external-helpers
+echo '{ "presets": [["es2015", { "modules": false }], "react"], "plugins": [ "external-helpers" ] }' > .babelrc
 ```
 
 Then, to build your plugin
-```
-skpm build --watch
+```bash
+npm run build
 ```
 
 And write your plugin in `src/my-command.js`
@@ -69,7 +69,7 @@ export default function (context) {
 
 Run your plugin in Sketch via `Plugins → [your plugin name] → my-command`.
 
-Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information.
+[Minimal running example](https://github.com/jongold/react-sketchapp-skpm-example). Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
 
 ### The manual way
 
@@ -80,7 +80,7 @@ defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysRelo
 
 You can then use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
 
-[`react-sketchapp-starter`](http://github.com/jongold/react-sketchapp-starter) is a minimal boilerplace to start developing with Webpack.
+[`react-sketchapp-webpack-example`](http://github.com/jongold/react-sketchapp-webpack-example) is a minimal boilerplace to start developing with Webpack.
 
 ### Examples
 `react-sketchapp` includes [a folder of examples](example-plugin/) showing how you might use it to work with a JavaScript [design system](example-plugin/designSystem.js).
@@ -89,7 +89,7 @@ You can then use [react-native-packager](https://github.com/facebook/react-nativ
 
 Clone & build the repo, and symlink the examples:
 ```bash
-git clone git@github.com:jongold/react-sketchapp.git && cd react-sketchapp
+git clone git@github.com:airbnb/react-sketchapp.git && cd react-sketchapp
 npm install && npm run build:plugin
 ./symlink-plugin.sh
 ```

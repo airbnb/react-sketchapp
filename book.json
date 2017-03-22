@@ -12,11 +12,11 @@
   ],
   "pluginsConfig": {
     "edit-link": {
-      "base": "https://github.com/jongold/react-sketchapp/tree/master",
+      "base": "https://github.com/airbnb/react-sketchapp/tree/master",
       "label": "Edit This Page"
     },
     "github": {
-      "url": "https://github.com/jongold/react-sketchapp/"
+      "url": "https://github.com/airbnb/react-sketchapp/"
     }
   }
 }
