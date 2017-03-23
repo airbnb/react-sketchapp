@@ -203,6 +203,18 @@ describe('get', () => {
     TextStyles.create({ context }, styles);
 
     expect(TextStyles.get('foo')).toEqual(styles.foo);
-    expect(TextStyles.get('baz')).not.toBeDefined();
+    expect(TextStyles.get('baz')).toEqual({});
+  });
+
+  it('returns an empty object when not found', () => {
+    const styles = {
+      foo: {
+        fontSize: 'bar',
+      },
+    };
+
+    TextStyles.create({ context }, styles);
+
+    expect(TextStyles.get('baz')).toEqual({});
   });
 });

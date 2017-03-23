@@ -94,11 +94,11 @@ const resolve = (style: TextStyle): ?RegisteredStyle => {
   return _styles[hash];
 };
 
-const get = (name: string): ?RegisteredStyle => {
+const get = (name: string): TextStyle => {
   const hash = _byName[name];
   const style = _styles[hash];
 
-  return style && style.cssStyle;
+  return style ? style.cssStyle : {};
 };
 
 const styles = () => _styles;
