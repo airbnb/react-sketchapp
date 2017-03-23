@@ -6,6 +6,7 @@ let sharedTextStyles;
 beforeEach(() => {
   jest.resetModules();
   jest.mock('sketchapp-json-plugin', () => ({
+    appVersionSupported: jest.fn(() => true),
     fromSJSONDictionary: jest.fn(),
     toSJSON: jest.fn(),
   }));
@@ -28,7 +29,6 @@ describe('create', () => {
   describe('without a context', () => {
     it('it errors', () => {
       const styles = {};
-      expect(() => TextStyles.create(null, styles)).toThrowError(/Please provide a context/);
 
       expect(() => TextStyles.create({}, styles)).toThrowError(/Please provide a context/);
     });
@@ -186,5 +186,23 @@ describe('resolve', () => {
 
     expect(TextStyles.resolve(style2)).not.toBeDefined();
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('get', () => {
+  it('finds a matching registered style by name', () => {
+    const styles = {
+      foo: {
+        fontSize: 'bar',
+      },
+      bar: {
+        fontSize: 'baz',
+      },
+    };
+
+    TextStyles.create({ context }, styles);
+
+    expect(TextStyles.get('foo')).toEqual(styles.foo);
+    expect(TextStyles.get('baz')).not.toBeDefined();
   });
 });
