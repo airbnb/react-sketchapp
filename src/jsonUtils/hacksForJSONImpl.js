@@ -1,12 +1,30 @@
 /* @flow */
 // We need native macOS fonts and colors for these hacks so import the old utils
 import type { SJTextStyle } from 'sketchapp-json-flow-types';
+import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from 'sketchapp-json-plugin';
 import normalizeColor from 'normalize-css-color';
 import findFont from '../utils/findFont';
 import type { TextStyle } from '../types';
 import { generateID } from './models';
-import { TEXT_ALIGN, TEXT_TRANSFORM } from '../utils/applyTextStyleToLayer';
+
+export const TEXT_ALIGN = {
+  auto: TextAlignment.Left,
+  left: TextAlignment.Left,
+  right: TextAlignment.Right,
+  center: TextAlignment.Center,
+  justify: TextAlignment.Justified,
+};
+
+// this doesn't exist in constants
+export const TEXT_TRANSFORM = {
+  uppercase: 1,
+  lowercase: 2,
+  initial: 0,
+  inherit: 0,
+  none: 0,
+  capitalize: 0,
+};
 
 // Awkwardly we encode then immediately decode the JSON, but seems like
 function encodeSketchJSON(sketchObj) {

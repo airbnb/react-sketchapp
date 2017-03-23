@@ -1,5 +1,6 @@
 /* @flow */
 import invariant from 'invariant';
+import { appVersionSupported } from 'sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext, SketchStyle, TextStyle } from '../types';
 import hashStyle from '../utils/hashStyle';
@@ -60,8 +61,13 @@ type Options = {
 };
 
 const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
-  invariant(options && options.context, 'Please provide a context');
   const { clearExistingStyles, context } = options;
+
+  if (!appVersionSupported()) {
+    return context.document.showMessage('💎 Requires Sketch 43+ 💎');
+  }
+
+  invariant(options && options.context, 'Please provide a context');
 
   sharedTextStyles.setContext(context);
 
