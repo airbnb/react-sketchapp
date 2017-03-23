@@ -1,6 +1,8 @@
 /* @flow */
 import invariant from 'invariant';
-import type { SketchContext, SketchStyle } from '../types';
+import { fromSJSONDictionary } from 'sketchapp-json-plugin';
+import type { SJStyle } from 'sketchapp-json-flow-types';
+import type { SketchContext } from '../types';
 
 class TextStyles {
   _context: ?SketchContext;
@@ -24,15 +26,23 @@ class TextStyles {
     return this;
   }
 
-  addStyle(name: string, style: SketchStyle) {
+  addStyle(name: string, style: SJStyle) {
     invariant(this._context, 'Please provide a context');
 
-    this._context.document
+    const textStyle = fromSJSONDictionary(style);
+
+    // Flow doesn't pick up invariant truthies
+    const context: SketchContext = this._context;
+
+    const s = context.document
       .documentData()
       .layerTextStyles()
-      .addSharedStyleWithName_firstInstance(name, style);
+      .addSharedStyleWithName_firstInstance(name, textStyle);
 
-    return this;
+    // NOTE(gold): the returned object ID changes after being added to the store
+    // _don't_ rely on the object ID we pass to it, but we have to have one set
+    // otherwise Sketch crashes
+    return s.objectID();
   }
 }
 

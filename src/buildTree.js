@@ -4,20 +4,8 @@ import Context from './utils/Context';
 import createStringMeasurer from './utils/createStringMeasurer';
 import type { TreeNode } from './types';
 import { timeFunction } from './debug';
-
-const hasAnyDefined = (obj, names) => names.some(key => obj[key] !== undefined);
-
-const pick = (obj, keys) => {
-  const result = {};
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    if (obj[key] !== undefined) {
-      result[key] = obj[key];
-    }
-  }
-  return result;
-};
+import hasAnyDefined from './utils/hasAnyDefined';
+import pick from './utils/pick';
 
 const INHERITABLE_STYLES = [
   'color',

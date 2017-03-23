@@ -1,29 +1,57 @@
 /* @flow */
 import invariant from 'invariant';
-import type { Dictionary, SketchContext, SketchStyle, TextStyle } from '../types';
-import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
+import type { SJStyle } from 'sketchapp-json-flow-types';
+import type { SketchContext, SketchStyle, TextStyle } from '../types';
 import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
-import textLayer from '../wrappers/textLayer';
+import { makeTextStyle } from '../jsonUtils/hacksForJSONImpl';
+import pick from '../utils/pick';
 
+type MurmurHash = number;
+type SketchObjectID = string;
 // stored styles
-type StyleHash = Dictionary<string, SketchStyle>;
+const INHERITABLE_STYLES = [
+  'color',
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontWeight',
+  'textShadowOffset',
+  'textShadowRadius',
+  'textShadowColor',
+  'textTransform',
+  'letterSpacing',
+  'lineHeight',
+  'textAlign',
+  'writingDirection',
+];
+
+type StyleHash = { [key: MurmurHash]: SketchStyle };
+
+type RegisteredStyle = {|
+  cssStyle: TextStyle,
+  name: string,
+  sketchStyle: SJStyle,
+  sharedObjectID: SketchObjectID,
+|};
 
 let _styles: StyleHash = {};
 
-const registerStyle = (key: string, style: TextStyle): StyleHash => {
-  const layer = applyTextStyleToLayer(
-    textLayer(key, { top: 0, left: 0, width: 250, height: 50 }),
-    style,
-  );
+const registerStyle = (styles: StyleHash, key: string, style: TextStyle): StyleHash => {
+  const safeStyle = pick(style, INHERITABLE_STYLES);
+  const hash = hashStyle(safeStyle);
+  const sketchStyle = makeTextStyle(safeStyle);
+  const sharedObjectID = sharedTextStyles.addStyle(key, sketchStyle);
 
-  const className = hashStyle(style);
-
-  sharedTextStyles.addStyle(key, layer.style());
-
-  _styles[className] = layer.style();
-
-  return _styles;
+  return {
+    ...styles,
+    [hash]: {
+      cssStyle: safeStyle,
+      name: key,
+      sketchStyle,
+      sharedObjectID,
+    },
+  };
 };
 
 type Options = {
@@ -31,7 +59,7 @@ type Options = {
   context: SketchContext,
 };
 
-const create = (options: Options, styles: Dictionary<string, TextStyle>): StyleHash => {
+const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
   invariant(options && options.context, 'Please provide a context');
   const { clearExistingStyles, context } = options;
 
@@ -42,12 +70,12 @@ const create = (options: Options, styles: Dictionary<string, TextStyle>): StyleH
     sharedTextStyles.setStyles([]);
   }
 
-  Object.keys(styles).forEach(key => registerStyle(key, styles[key]));
+  _styles = Object.keys(styles).reduce((acc, key) => registerStyle(acc, key, styles[key]), _styles);
 
   return _styles;
 };
 
-const resolve = (style: TextStyle): ?SketchStyle => {
+const resolve = (style: TextStyle): ?RegisteredStyle => {
   const hash = hashStyle(style);
 
   return _styles[hash];

@@ -2,11 +2,9 @@
 import SketchRenderer from './SketchRenderer';
 import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
-// import TextStyles from '../sharedStyles/TextStyles';
 import makeTextLayer from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
-// import applyTextStyleToLayer from '../utils/applyTextStyleToLayer';
-// import textLayer from '../wrappers/textLayer';
+import TextStyles from '../sharedStyles/TextStyles';
 
 class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: any, value: ?string) {
@@ -27,15 +25,11 @@ class TextRenderer extends SketchRenderer {
     const frame = makeRect(0, 0, layout.width, layout.height);
     const layer = makeTextLayer(frame, value, textStyle);
 
-    // TODO(gold): reimplement resolveStyle
-    // NOTE(akp): This is a sketch api. Naughty :((
-    // const resolvedStyle = TextStyles.resolve(textStyle);
-
-    // let layer = textLayer(value, layout);
-    // if (resolvedStyle) {
-    //   layer.style = resolvedStyle;
-    //   return [layer];
-    // }
+    const resolvedStyle = TextStyles.resolve(textStyle);
+    if (resolvedStyle) {
+      layer.style = resolvedStyle.sketchStyle;
+      layer.style.sharedObjectID = resolvedStyle.sharedObjectID;
+    }
 
     return [layer];
   }

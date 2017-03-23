@@ -35,8 +35,8 @@
 [include]
 
 [libs]
-types/fbjs.js
-types/sketch.js
+flow-typed/fbjs.js
+flow-typed/sketch.js
 
 [options]
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(2[0-0]\\|1[0-9]\\|[0-9]\\).[0-9]\\)? *\\)
