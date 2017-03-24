@@ -1,6 +1,7 @@
 # API Reference
 
-* [`render`](#renderToelement-context)
+* [`render`](#renderelement-context)
+* [`renderToJSON`](#renderToJSONelement)
 * [Components](#components)
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
@@ -43,6 +44,15 @@ const Document = props =>
 const onRun = context =>
   render(<Document />, context);
 ```
+
+### `renderToJSON(element)`
+Returns a Sketch JSON object for further consumption - doesn't add to the page.
+
+#### params
+##### `element` (required)
+
+### returns
+The top-most Sketch layer as JSON.
 
 ## Components
 ### `<Artboard>`
