@@ -1,6 +1,5 @@
 /* @flow */
 
-// eslint-disable-next-line import/prefer-default-export
 export const dump = (obj: any) => {
   log('#####################################################################################');
   log(`## Dumping object ${obj}`);
