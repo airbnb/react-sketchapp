@@ -1,6 +1,6 @@
 # API Reference
 
-* [`render`](#renderelement-context-callback)
+* [`render`](#renderToelement-context)
 * [Components](#components)
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
