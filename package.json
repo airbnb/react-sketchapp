@@ -67,7 +67,6 @@
   "homepage": "https://github.com/airbnb/react-sketchapp",
   "lint-staged": {
     "*.js": [
-      "npm run check",
       "prettier-eslint --write \"src/**/*.js\"",
       "git add"
     ]
