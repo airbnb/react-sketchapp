@@ -20,7 +20,7 @@
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
     "build": "npm run build:react && npm run build:plugin && npm run build:flow",
     "clean": "rimraf lib react-example.sketchplugin",
-    "check": "npm run flow && npm run lint",
+    "check": "npm run test && npm run flow && npm run lint",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build",
