@@ -144,7 +144,7 @@ export const makeRectShapeLayer = (
   //   "layerOptions": 0,
   //   "shouldTrim": false
   // },
-  frame: makeRect(0, 0, width, height),
+  frame: makeRect(x, y, width, height),
   isFlippedHorizontal: false,
   isFlippedVertical: false,
   isLocked: false,
