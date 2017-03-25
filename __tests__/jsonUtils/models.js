@@ -1,4 +1,4 @@
-import { generateID, makeColorFromCSS/* , makeColorFill, makeRect*/ } from '../../src/jsonUtils/models';
+import { generateID, makeColorFromCSS, makeColorFill, makeRect } from '../../src/jsonUtils/models';
 
 describe('generateID', () => {
   it('is unique', () => {
@@ -8,7 +8,13 @@ describe('generateID', () => {
 
 const BLACK = { _class: 'color', red: 0, green: 0, blue: 0, alpha: 1 };
 const WHITE = { _class: 'color', red: 1, green: 1, blue: 1, alpha: 1 };
-const GOLD = { _class: 'color', red: 0.8745098039215686, green: 0.7294117647058823, blue: 0.4117647058823529, alpha: 1 };
+const GOLD = {
+  _class: 'color',
+  red: 0.8745098039215686,
+  green: 0.7294117647058823,
+  blue: 0.4117647058823529,
+  alpha: 1,
+};
 const PURPLE = { _class: 'color', red: 0.4, green: 0.2, blue: 0.6, alpha: 1 };
 
 describe('makeColorFromCSS', () => {
@@ -38,7 +44,6 @@ describe('makeColorFromCSS', () => {
     expect(makeColorFromCSS('rgba(102, 51, 153, 1)')).toEqual(PURPLE);
   });
 
-
   it('works with hsl colors', () => {
     expect(makeColorFromCSS('hsl(0, 0%, 0%)')).toEqual(BLACK);
     expect(makeColorFromCSS('hsl(0, 0%, 100%)')).toEqual(WHITE);
@@ -50,8 +55,22 @@ describe('makeColorFromCSS', () => {
   });
 });
 
-xdescribe('makeColorFill', () => {
+describe('makeColorFill', () => {
+  it('sets the correct color', () => {
+    expect(makeColorFill('#000')).toHaveProperty('color', BLACK);
+    expect(makeColorFill('#fff')).toHaveProperty('color', WHITE);
+    expect(makeColorFill('rebeccapurple')).toHaveProperty('color', PURPLE);
+    expect(makeColorFill('#DFBA69')).toHaveProperty('color', GOLD);
+  });
 });
 
-xdescribe('makeRect', () => {
+describe('makeRect', () => {
+  it('is correctly constructed', () => {
+    const group = makeRect(100, 200, 300, 400);
+
+    expect(group).toHaveProperty('x', 100);
+    expect(group).toHaveProperty('y', 200);
+    expect(group).toHaveProperty('width', 300);
+    expect(group).toHaveProperty('height', 400);
+  });
 });
