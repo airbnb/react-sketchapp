@@ -31,6 +31,7 @@ const ResizeModePropType = PropTypes.oneOf([
 ]);
 
 const propTypes = {
+  name: PropTypes.string,
   children: PropTypes.any,
   defaultSource: ImageSourcePropType,
   resizeMode: ResizeModePropType,
@@ -51,19 +52,23 @@ const ResizeModes = {
 };
 
 class Image extends React.Component {
+  static defaultProps = {
+    name: 'Image',
+  };
+
   render() {
     const {
       children,
       source,
       defaultSource,
       resizeMode,
+      name,
     } = this.props;
 
     const style = StyleSheet.flatten(this.props.style);
 
     const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
-
-    if (typeof source !== 'string') {
+    if (source && typeof source !== 'string') {
       const { width, height } = source;
       if (width) {
         style.width = width;
@@ -74,7 +79,12 @@ class Image extends React.Component {
     }
 
     return (
-      <image style={style} source={source || defaultSource} resizeMode={sketchResizeMode}>
+      <image
+        style={style}
+        source={source || defaultSource}
+        name={name}
+        resizeMode={sketchResizeMode}
+      >
         {children}
       </image>
     );
