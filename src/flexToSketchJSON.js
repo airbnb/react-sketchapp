@@ -1,10 +1,10 @@
 /* @flow */
-import jsonRenderers from './jsonRenderers';
+import renderers from './renderers';
 import type { TreeNode } from './types';
 
 const flexToSketchJSON = (node: TreeNode) => {
   const { type, style, textStyle, layout, value, props, children } = node;
-  const Renderer = jsonRenderers[type];
+  const Renderer = renderers[type];
   if (Renderer == null) {
     throw new Error(`Could not find renderer for type '${type}'`);
   }
