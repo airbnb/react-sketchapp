@@ -95,3 +95,10 @@ npm install && npm run build:plugin
 ```
 
 Open Sketch; examples will be in `Plugins → react-example`.
+
+
+### Contributing
+Contributions are more than welcome. Just submit a PR with a description of your changes. Please attach screenshots and Sketch files (if relevant) to your Pull Requests for review.
+
+### Issues, bugs, or feature requests
+File GitHub issues for anything that is unexpectedly broken. If there are issues with generated Sketch files please attach them to the issue. If you have ideas or feature requests you should also file a GitHub issue.
