@@ -98,7 +98,7 @@ Open Sketch; examples will be in `Plugins → react-example`.
 
 
 ### Contributing
-Contributions are more than welcome. Just submit a PR with a description of your changes. Please attach screenshots and sketch files (if relevant) to your Pull Requests for review.
+Contributions are more than welcome. Just submit a PR with a description of your changes. Please attach screenshots and Sketch files (if relevant) to your Pull Requests for review.
 
 ### Issues, bugs, or feature requests
-File github issues for anything that is unexpectedly broken. If there are issues with generated sketch files please attach them to the issue. If you have ideas or feature requests you should also file a github issue.
+File GitHub issues for anything that is unexpectedly broken. If there are issues with generated Sketch files please attach them to the issue. If you have ideas or feature requests you should also file a GitHub issue.
