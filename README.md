@@ -43,8 +43,8 @@ skpm link .
 Install some dependencies and set up JSX compilation
 ```bash
 npm install --save react-sketchapp react react-test-renderer
-npm install --save-dev babel-preset-react babel-preset-es2015 babel-plugin-external-helpers
-echo '{ "presets": [["es2015", { "modules": false }], "react"], "plugins": [ "external-helpers" ] }' > .babelrc
+npm install --save-dev babel-preset-react babel-preset-es2015
+echo '{ "presets": [["es2015", { "modules": false }], "react"] }' > .babelrc
 ```
 
 Then, to build your plugin
