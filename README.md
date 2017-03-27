@@ -44,8 +44,8 @@ skpm link .
 Install some dependencies and set up JSX compilation
 ```bash
 npm install --save react-sketchapp react react-test-renderer
-npm install --save-dev babel-preset-react babel-preset-es2015 babel-plugin-external-helpers
-echo '{ "presets": [["es2015", { "modules": false }], "react"], "plugins": [ "external-helpers" ] }' > .babelrc
+npm install --save-dev babel-preset-react babel-preset-es2015
+echo '{ "presets": [["es2015", { "modules": false }], "react"] }' > .babelrc
 ```
 
 Then, to build your plugin
@@ -96,3 +96,10 @@ npm install && npm run build:plugin
 ```
 
 Open Sketch; examples will be in `Plugins → react-example`.
+
+
+### Contributing
+Contributions are more than welcome. Just submit a PR with a description of your changes. Please attach screenshots and Sketch files (if relevant) to your Pull Requests for review.
+
+### Issues, bugs, or feature requests
+File GitHub issues for anything that is unexpectedly broken. If there are issues with generated Sketch files please attach them to the issue. If you have ideas or feature requests you should also file a GitHub issue.
