@@ -12,10 +12,7 @@ import type { Color, ViewStyle } from '../types';
 
 const DEFAULT_SHADOW_COLOR = '#000';
 
-export const makeDashPattern = (
-  style: 'dashed' | 'dotted' | 'solid',
-  width: number,
-): Array<number> => {
+const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): Array<number> => {
   switch (style) {
     case 'dashed': {
       return [width * 3, width * 3];
