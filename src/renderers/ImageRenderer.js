@@ -2,7 +2,6 @@
 import type { SJShapeGroupLayer, SJImageDataReference } from 'sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
 import { PatternFillType } from '../utils/constants';
-import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 // import processTransform from './processTransform';
@@ -24,7 +23,7 @@ import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import same from '../utils/same';
 
-const TRANSPARENT = convertToColor('transparent');
+const TRANSPARENT = 'transparent';
 const DEFAULT_BORDER_COLOR = TRANSPARENT;
 const DEFAULT_BORDER_STYLE = 'solid';
 

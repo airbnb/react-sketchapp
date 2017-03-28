@@ -5,7 +5,6 @@ describe('public API', () => {
   beforeEach(() => {
     // jest.resetModules();
     jest.mock('../src/jsonUtils/hacksForJSONImpl');
-    jest.mock('../src/utils/convertToColor');
     ReactSketch = require('../src');
   });
 

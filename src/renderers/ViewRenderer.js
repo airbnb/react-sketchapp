@@ -1,7 +1,6 @@
 /* @flow */
 import { BorderPosition, FillType } from 'sketch-constants';
 import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
-import convertToColor from '../utils/convertToColor';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
@@ -16,8 +15,7 @@ import {
 import hasAnyDefined from '../utils/hasAnyDefined';
 import same from '../utils/same';
 
-const TRANSPARENT = convertToColor('transparent');
-const DEFAULT_BORDER_COLOR = TRANSPARENT;
+const DEFAULT_BORDER_COLOR = 'transparent';
 const DEFAULT_BORDER_STYLE = 'solid';
 
 const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
