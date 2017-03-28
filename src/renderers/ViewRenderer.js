@@ -18,7 +18,7 @@ import same from '../utils/same';
 const DEFAULT_BORDER_COLOR = 'transparent';
 const DEFAULT_BORDER_STYLE = 'solid';
 
-const DEFAULT_BACKGROUND_COLOR = TRANSPARENT;
+const DEFAULT_BACKGROUND_COLOR = 'transparent';
 
 const VISIBLE_STYLES = [
   'shadowColor',
