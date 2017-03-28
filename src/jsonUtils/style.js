@@ -12,18 +12,34 @@ import type { Color, ViewStyle } from '../types';
 
 const DEFAULT_SHADOW_COLOR = '#000';
 
-export const makeBorderStyle = (dashPattern: Array<number>): SJBorderOptions => ({
+export const makeDashPattern = (
+  style: 'dashed' | 'dotted' | 'solid',
+  width: number,
+): Array<number> => {
+  switch (style) {
+    case 'dashed': {
+      return [width * 3, width * 3];
+    }
+    case 'dotted': {
+      return [width, width];
+    }
+    case 'solid':
+      return [];
+    default:
+      return [];
+  }
+};
+
+export const makeBorderOptions = (
+  style: 'dashed' | 'dotted' | 'solid',
+  width: number,
+): SJBorderOptions => ({
   _class: 'borderOptions',
   isEnabled: false,
-  dashPattern: [...dashPattern],
+  dashPattern: makeDashPattern(style, width),
   lineCapStyle: 0,
   lineJoinStyle: 0,
 });
-
-export const makeDottedBorder = (width: number): SJBorderOptions => makeBorderStyle([width, width]);
-
-export const makeDashedBorder = (width: number): SJBorderOptions =>
-  makeBorderStyle([width * 3, width * 3]);
 
 export const makeShadow = (style: ViewStyle): SJShadow => {
   const opacity = style.shadowOpacity !== undefined ? style.shadowOpacity : 1;
@@ -93,19 +109,4 @@ export const makeHorizontalBorder = (
     },
   ];
   return content;
-};
-
-export const findBorderStyle = (style: 'dashed' | 'dotted' | 'solid', width: number) => {
-  switch (style) {
-    case 'dashed': {
-      return makeDashedBorder(width);
-    }
-    case 'dotted': {
-      return makeDottedBorder(width);
-    }
-    case 'solid':
-      return null;
-    default:
-      return null;
-  }
 };

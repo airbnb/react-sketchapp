@@ -14,7 +14,7 @@ import {
 } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import {
-  findBorderStyle,
+  makeBorderOptions,
   makeShadow,
   makeHorizontalBorder,
   makeVerticalBorder,
@@ -119,7 +119,7 @@ class ImageRenderer extends SketchRenderer {
       // all sides have same border width
       // in this case, we can do everything with just a single shape.
       if (borderTopStyle !== undefined) {
-        const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
+        const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
         if (borderOptions) {
           content.style.borderOptions = borderOptions;
         }
@@ -146,7 +146,7 @@ class ImageRenderer extends SketchRenderer {
         const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
         topBorder.name = 'Border (top)';
 
-        const borderOptions = findBorderStyle(borderTopStyle, borderTopWidth);
+        const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
         if (borderOptions) {
           topBorder.style.borderOptions = borderOptions;
         }
@@ -164,7 +164,7 @@ class ImageRenderer extends SketchRenderer {
         );
         rightBorder.name = 'Border (right)';
 
-        const borderOptions = findBorderStyle(borderRightStyle, borderRightWidth);
+        const borderOptions = makeBorderOptions(borderRightStyle, borderRightWidth);
         if (borderOptions) {
           rightBorder.style.borderOptions = borderOptions;
         }
@@ -182,7 +182,7 @@ class ImageRenderer extends SketchRenderer {
         );
         bottomBorder.name = 'Border (bottom)';
 
-        const borderOptions = findBorderStyle(borderBottomStyle, borderBottomWidth);
+        const borderOptions = makeBorderOptions(borderBottomStyle, borderBottomWidth);
         if (borderOptions) {
           bottomBorder.style.borderOptions = borderOptions;
         }
@@ -200,7 +200,7 @@ class ImageRenderer extends SketchRenderer {
         );
         leftBorder.name = 'Border (left)';
 
-        const borderOptions = findBorderStyle(borderLeftStyle, borderLeftWidth);
+        const borderOptions = makeBorderOptions(borderLeftStyle, borderLeftWidth);
         if (borderOptions) {
           leftBorder.style.borderOptions = borderOptions;
         }
