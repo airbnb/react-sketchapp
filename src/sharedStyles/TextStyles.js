@@ -39,7 +39,7 @@ type RegisteredStyle = {|
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
 
-const registerStyle = (styles: StyleHash, name: string, style: TextStyle): StyleHash => {
+const registerStyle = (name: string, style: TextStyle): void => {
   const safeStyle = pick(style, INHERITABLE_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
@@ -48,14 +48,11 @@ const registerStyle = (styles: StyleHash, name: string, style: TextStyle): Style
   // FIXME(gold): side effect :'(
   _byName[name] = hash;
 
-  return {
-    ...styles,
-    [hash]: {
-      cssStyle: safeStyle,
-      name,
-      sketchStyle,
-      sharedObjectID,
-    },
+  _styles[hash] = {
+    cssStyle: safeStyle,
+    name,
+    sketchStyle,
+    sharedObjectID,
   };
 };
 
@@ -80,10 +77,7 @@ const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHa
     sharedTextStyles.setStyles([]);
   }
 
-  _styles = Object.keys(styles).reduce(
-    (acc, name) => registerStyle(acc, name, styles[name]),
-    _styles,
-  );
+  Object.keys(styles).forEach(name => registerStyle(name, styles[name]));
 
   return _styles;
 };
