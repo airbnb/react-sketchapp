@@ -95,6 +95,11 @@ const get = (name: string): TextStyle => {
   return style ? style.cssStyle : {};
 };
 
+const clear = () => {
+  _styles = {};
+  sharedTextStyles.setStyles([]);
+};
+
 const styles = () => _styles;
 
 const TextStyles = {
@@ -102,6 +107,7 @@ const TextStyles = {
   resolve,
   get,
   styles,
+  clear,
 };
 
 export default TextStyles;

@@ -218,3 +218,21 @@ describe('get', () => {
     expect(TextStyles.get('baz')).toEqual({});
   });
 });
+
+describe('clear', () => {
+  it('clears previously registered styles', () => {
+    const styles = {
+      foo: {
+        fontSize: 'bar',
+      },
+      bar: {
+        fontSize: 'baz',
+      },
+    };
+
+    TextStyles.create({ context }, styles);
+    TextStyles.clear();
+
+    expect(TextStyles.styles()).toEqual({});
+  });
+});
