@@ -29,7 +29,7 @@
     "flow": "flow",
     "lint": "eslint .",
     "lint-staged": "lint-staged",
-    "prepublish": "npm run clean && npm run check && npm run build",
+    "prepublishOnly": "npm run clean && npm run check && npm run build",
     "test": "jest --config .jestrc",
     "test:watch": "npm run test -- --watch",
     "watch:plugin": "npm run build:plugin -- --watch",
