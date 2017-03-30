@@ -5,9 +5,6 @@ import { FillType } from 'sketch-constants';
 import normalizeColor from 'normalize-css-color';
 import type { Color } from '../types';
 
-// TODO(gold): can we remove this ID generator?
-// export const generateID = () => "" + MSModelObjectCommon.generateObjectID();
-
 const lut = [];
 for (let i = 0; i < 256; i += 1) {
   lut[i] = (i < 16 ? '0' : '') + i.toString(16);

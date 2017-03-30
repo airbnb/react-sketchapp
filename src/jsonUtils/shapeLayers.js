@@ -58,7 +58,6 @@ export const makeVerticalPath = (): SJPath => ({
   ],
 });
 
-// This could be made more consty
 export const makeRectPath = (radii: Radii = [0, 0, 0, 0]): SJPath => {
   const [r0, r1, r2, r3] = radii;
   return {
@@ -137,13 +136,6 @@ export const makeRectShapeLayer = (
 ) => ({
   _class: 'rectangle',
   do_objectID: generateID(),
-  // "exportOptions": {
-  //   "_class": "exportOptions",
-  //   "exportFormats": [],
-  //   "includedLayerIds": [],
-  //   "layerOptions": 0,
-  //   "shouldTrim": false
-  // },
   frame: makeRect(x, y, width, height),
   isFlippedHorizontal: false,
   isFlippedVertical: false,
@@ -169,19 +161,9 @@ export const makeShapeGroup = (
 ): SJShapeGroupLayer => ({
   _class: 'shapeGroup',
   do_objectID: generateID(),
-  // "exportOptions": {
-  //   "_class": "exportOptions",
-  //   "exportFormats": [],
-  //   "includedLayerIds": [],
-  //   "layerOptions": 0,
-  //   "shouldTrim": false
-  // },
   frame,
-  // "isFlippedHorizontal": false,
-  // "isFlippedVertical": false,
   isLocked: false,
   isVisible: true,
-  // "layerListExpandedType": 0,
   name: 'ShapeGroup',
   nameIsFixed: false,
   resizingType: 0,
@@ -189,22 +171,6 @@ export const makeShapeGroup = (
   shouldBreakMaskChain: false,
   style: {
     _class: 'style',
-    // "borders": [
-    //   {
-    //     "_class": "border",
-    //     "isEnabled": false,
-    //     "color": {
-    //       "_class": "color",
-    //       "alpha": 1,
-    //       "blue": 0,
-    //       "green": 0,
-    //       "red": 0
-    //     },
-    //     "fillType": 0,
-    //     "position": 1,
-    //     "thickness": 1
-    //   }
-    // ],
     endDecorationType: 0,
     fills,
     miterLimit: 10,
@@ -216,14 +182,3 @@ export const makeShapeGroup = (
   hasClippingMask: false,
   windingRule: 1,
 });
-
-// export function makeRectShapeGroup(
-//   x: number,
-//   y: number,
-//   width: number,
-//   height: number,
-//   color: Color,
-// ): SJShapeGroupLayer {
-//   const rsl = makeRectShapeLayer(x, y, width, height);
-//   return makeShapeGroup(makeRect(x, y, width, height), [rsl], [makeColorFill(color)]);
-// }

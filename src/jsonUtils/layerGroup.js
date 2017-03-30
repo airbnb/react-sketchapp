@@ -1,5 +1,4 @@
 /* @flow */
-// Just a generic layer group
 
 import { generateID, makeRect } from './models';
 
@@ -18,7 +17,6 @@ const layerGroup = (x: number, y: number, width: number, height: number) => ({
   isFlippedVertical: false,
   isLocked: false,
   isVisible: true,
-  // Expand by default?
   layerListExpandedType: 2,
   name: 'Group',
   nameIsFixed: false,

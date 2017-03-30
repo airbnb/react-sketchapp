@@ -26,7 +26,8 @@ export const TEXT_TRANSFORM = {
   capitalize: 0,
 };
 
-// Awkwardly we encode then immediately decode the JSON, but seems like
+// NOTE(gold): toSJSON doesn't recursively parse JS objects
+// https://github.com/airbnb/react-sketchapp/pull/73#discussion_r108529703
 function encodeSketchJSON(sketchObj) {
   const encoded = toSJSON(sketchObj);
   return JSON.parse(encoded);
