@@ -27,14 +27,15 @@ export const dump = (obj: any) => {
 };
 
 export const timeFunction = (fn: () => any, label: string) => {
-  const methodStart = NSDate.date();
+  const a = MSMoment.new().timestamp();
 
   const res = fn();
 
-  const methodFinish = NSDate.date();
-  const executionTime = methodFinish.timeIntervalSinceDate(methodStart);
+  const b = MSMoment.new().timestamp();
 
-  log(`${label}: ${executionTime.toFixed(3)}`);
+  const time = (b - a).toFixed(3);
+
+  log(`${label}: ${time}`);
 
   return res;
 };
