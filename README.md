@@ -30,27 +30,29 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 
 There are several ways to build Sketch plugins:
 
-### The simple way
-The simplest way to build Sketch plugins with modern JavaScript is [`skpm`](https://github.com/sketch-pm/skpm) 💎📦.
+### Using a template
+The simplest way to build Sketch plugins with modern JavaScript is [`skpm`](https://github.com/sketch-pm/skpm) 💎📦 with the `react-sketchapp-skpm-example` template. Feel free to remove anything you're not using.
 
-Install `skpm`, if you don't have it already, and create a new project.
+Install `skpm`, if you don't have it already:
 ```bash
 npm install -g skpm
-mkdir my-rad-sketch-plugin
-cd my-rad-sketch-plugin
-skpm init
-skpm link .
-```
-Install some dependencies and set up JSX compilation
-```bash
-npm install --save react-sketchapp react react-test-renderer
-npm install --save-dev babel-preset-react babel-preset-es2015
-echo '{ "presets": [["es2015", { "modules": false }], "react"] }' > .babelrc
 ```
 
-Then, to build your plugin
+create a new project:
 ```bash
-npm run build
+mkdir my-rad-sketch-plugin
+cd my-rad-sketch-plugin
+# Initialize this plugin with the template
+skpm init git+ssh://git@github.com:jongold/react-sketchapp-skpm-example.git
+# Install dependencies
+npm install
+# Setup an alias from the .sketchplugin to the sketch plugins folder
+skpm link .
+```
+
+Then, to build your plugin (will auto update when you change the code)
+```bash
+npm run watch
 ```
 
 And write your plugin in `src/my-command.js`
@@ -70,7 +72,7 @@ export default function (context) {
 
 Run your plugin in Sketch via `Plugins → [your plugin name] → my-command`.
 
-[Minimal running example](https://github.com/jongold/react-sketchapp-skpm-example). Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
+Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
 
 ### The manual way
 
