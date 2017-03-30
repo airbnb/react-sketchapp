@@ -65,17 +65,15 @@ class Image extends React.Component {
       name,
     } = this.props;
 
-    const style = StyleSheet.flatten(this.props.style);
+    let style = StyleSheet.flatten(this.props.style) || {};
 
     const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
     if (source && typeof source !== 'string') {
-      const { width, height } = source;
-      if (width) {
-        style.width = width;
-      }
-      if (height) {
-        style.height = height;
-      }
+      style = {
+        height: source.height,
+        width: source.width,
+        ...style,
+      };
     }
 
     return (

@@ -101,6 +101,18 @@ describe('<Image />', () => {
 
   describe('source', () => {
     it('sets height from source', () => {
+      const tree = renderer.create(<Image source={{ uri: 'foo', height: 500 }} />).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('sets width from source', () => {
+      const tree = renderer.create(<Image source={{ uri: 'foo', width: 500 }} />).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('favors style over source for height', () => {
       const tree = renderer
         .create(<Image source={{ uri: 'foo', height: 500 }} style={{ height: 400, width: 300 }} />)
         .toJSON();
@@ -108,7 +120,7 @@ describe('<Image />', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('sets width from source', () => {
+    it('favors style over source for width', () => {
       const tree = renderer
         .create(<Image source={{ uri: 'foo', width: 500 }} style={{ height: 400, width: 300 }} />)
         .toJSON();
