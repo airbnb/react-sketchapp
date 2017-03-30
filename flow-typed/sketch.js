@@ -12,6 +12,7 @@ declare var MSColor: any;
 declare var MSImageData: any;
 declare var MSJSONDataArchiver;
 declare var MSLayerGroup: any;
+declare var MSMoment: any;
 declare var MSOvalShape: any;
 declare var MSRect: any;
 declare var MSRectangleShape: any;
