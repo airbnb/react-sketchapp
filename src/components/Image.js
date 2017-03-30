@@ -3,12 +3,21 @@ import React, { PropTypes } from 'react';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 
-// TODO: handle other types, like React Native does
-// https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageSourcePropType.js
+const ImageURISourcePropType = PropTypes.shape({
+  uri: PropTypes.string.isRequired,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  // bundle: PropTypes.string,
+  // method: PropTypes.string,
+  // headers: PropTypes.objectOf(PropTypes.string),
+  // body: PropTypes.string,
+  // cache: PropTypes.oneOf(['default', 'reload', 'force-cache', 'only-if-cached']),
+  // scale: PropTypes.number,
+});
+
 const ImageSourcePropType = PropTypes.oneOfType([
-  PropTypes.shape({
-    uri: PropTypes.string.isRequired,
-  }),
+  ImageURISourcePropType,
+  // PropTypes.arrayOf(ImageURISourcePropType), // TODO: handle me
   PropTypes.string,
 ]);
 
@@ -22,6 +31,7 @@ const ResizeModePropType = PropTypes.oneOf([
 ]);
 
 const propTypes = {
+  name: PropTypes.string,
   children: PropTypes.any,
   defaultSource: ImageSourcePropType,
   resizeMode: ResizeModePropType,
@@ -36,33 +46,44 @@ const ResizeModes = {
   contain: 'Fit',
   cover: 'Fill',
   stretch: 'Stretch',
-  center: 'Fill', // TODO
-  repeat: 'Fill', // TODO
+  center: 'Fill', // TODO(gold): implement ResizeModes.center
+  repeat: 'Tile',
   none: 'Fill',
 };
 
 class Image extends React.Component {
+  static defaultProps = {
+    name: 'Image',
+  };
+
   render() {
     const {
       children,
       source,
       defaultSource,
       resizeMode,
+      name,
     } = this.props;
 
-    const style = StyleSheet.flatten(this.props.style);
+    let style = StyleSheet.flatten(this.props.style) || {};
 
-    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'contain'];
-
-    // TODO: check to see if `source` specifies a width/height as well, and pass into `style` if so
+    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
+    if (source && typeof source !== 'string') {
+      style = {
+        height: source.height,
+        width: source.width,
+        ...style,
+      };
+    }
 
     return (
       <image
         style={style}
         source={source || defaultSource}
+        name={name}
         resizeMode={sketchResizeMode}
       >
-        { children }
+        {children}
       </image>
     );
   }

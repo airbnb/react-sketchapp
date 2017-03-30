@@ -1,0 +1,19 @@
+exports[`<Text /> name defaults to Text 1`] = `
+<text
+  name="Text"
+  style={undefined} />
+`;
+
+exports[`<Text /> name passes its name 1`] = `
+<text
+  name="foo"
+  style={undefined} />
+`;
+
+exports[`<Text /> passes its children 1`] = `
+<text
+  name="Text"
+  style={undefined}>
+  foo
+</text>
+`;

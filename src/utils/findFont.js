@@ -62,9 +62,7 @@ const weightOfFont = (font: NSFont): number => {
 
 const fontNamesForFamilyName = (familyName: string): Array<string> => {
   const manager = NSFontManager.sharedFontManager();
-  const members = NSArray.arrayWithArray(
-    manager.availableMembersOfFontFamily(familyName)
-  );
+  const members = NSArray.arrayWithArray(manager.availableMembersOfFontFamily(familyName));
 
   const results = [];
   for (let i = 0; i < members.length; i += 1) {
@@ -119,7 +117,7 @@ const findFont = (style: TextStyle): NSFont => {
 
   // Handle system font as special case. This ensures that we preserve
   // the specific metrics of the standard system font as closely as possible.
-  if ((familyName === defaultFontFamily) || (familyName === 'System')) {
+  if (familyName === defaultFontFamily || familyName === 'System') {
     font = NSFont.systemFontOfSize_weight(fontSize, fontWeight);
 
     if (font) {
@@ -166,8 +164,7 @@ const findFont = (style: TextStyle): NSFont => {
   for (let i = 0; i < fontNames.length; i += 1) {
     const match = NSFont.fontWithName_size(fontNames[i], fontSize);
 
-    if (isItalic === isItalicFont(match) &&
-        isCondensed === isCondensedFont(match)) {
+    if (isItalic === isItalicFont(match) && isCondensed === isCondensedFont(match)) {
       const testWeight = weightOfFont(match);
 
       if (Math.abs(testWeight - fontWeight) < Math.abs(closestWeight - fontWeight)) {
@@ -186,7 +183,8 @@ const findFont = (style: TextStyle): NSFont => {
     }
   }
 
-  // TODO: support opentype features: small-caps & number types
+  // TODO(gold): support opentype features: small-caps & number types
+
   if (font) {
     _cache.set(cacheKey, font);
   }

@@ -12,19 +12,14 @@ const propTypes = {
   children: PropTypes.node,
 };
 
-/**
- * @example
- * <View name='Foo' style={style}>
- *   <Text />
- * </View>
- */
 class View extends React.Component {
+  static defaultProps = {
+    name: 'View',
+  };
+
   render() {
     return (
-      <view
-        name={this.props.name}
-        style={StyleSheet.flatten(this.props.style)}
-      >
+      <view name={this.props.name} style={StyleSheet.flatten(this.props.style)}>
         {this.props.children}
       </view>
     );

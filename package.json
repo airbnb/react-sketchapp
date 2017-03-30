@@ -13,13 +13,14 @@
     "lib",
     "src"
   ],
+  "pre-commit": "lint-staged",
   "scripts": {
     "build:plugin": "webpack -c",
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
     "build": "npm run build:react && npm run build:plugin && npm run build:flow",
     "clean": "rimraf lib react-example.sketchplugin",
-    "check": "npm run flow && npm run lint",
+    "check": "npm run test && npm run flow && npm run lint",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build",
@@ -27,7 +28,8 @@
     "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch git@github.com:airbnb/react-sketchapp.git gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push git@github.com:airbnb/react-sketchapp.git gh-pages --force",
     "flow": "flow",
     "lint": "eslint .",
-    "prepublish": "npm run clean && npm run check && npm run build",
+    "lint-staged": "lint-staged",
+    "prepublishOnly": "npm run clean && npm run check && npm run build",
     "test": "jest --config .jestrc",
     "test:watch": "npm run test -- --watch",
     "watch:plugin": "npm run build:plugin -- --watch",
@@ -40,7 +42,9 @@
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
     "normalize-css-color": "^1.0.1",
-    "sketch-constants": "^1.0.2"
+    "sketch-constants": "^1.0.2",
+    "sketchapp-json-flow-types": "^0.0.3",
+    "sketchapp-json-plugin": "^0.0.3"
   },
   "peerDependencies": {
     "react": "*",
@@ -61,6 +65,12 @@
     "url": "https://github.com/airbnb/react-sketchapp/issues"
   },
   "homepage": "https://github.com/airbnb/react-sketchapp",
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write \"src/**/*.js\"",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@jongold/eslint-config-sketch": "^1.0.0-2",
     "babel-cli": "^6.18.0",
@@ -85,6 +95,9 @@
     "gitbook-cli": "^2.3.0",
     "jest-cli": "^18.1.0",
     "json-loader": "^0.5.4",
+    "lint-staged": "^3.4.0",
+    "pre-commit": "^1.2.2",
+    "prettier-eslint-cli": "^3.1.2",
     "react": "^15.4.1",
     "react-markdown": "^2.4.2",
     "react-test-renderer": "^15.4.1",

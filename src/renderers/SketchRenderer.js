@@ -1,10 +1,7 @@
 /* @flow */
-import type {
-  LayoutInfo,
-  ViewStyle,
-  TextStyle,
-  SketchLayer,
-} from '../types';
+import layerGroup from '../jsonUtils/layerGroup';
+
+import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON } from '../types';
 
 class SketchRenderer {
   getDefaultGroupName(/* props: any, value: ?string */) {
@@ -16,31 +13,24 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
-  ): SketchLayer {
-    const layer = MSLayerGroup.alloc().init();
-
-    layer.frame().setX(layout.left);
-    layer.frame().setY(layout.top);
-    layer.frame().setWidth(layout.width);
-    layer.frame().setHeight(layout.height);
-
-    if (props.name) {
-      layer.setName(props.name);
-    } else {
-      layer.setName(this.getDefaultGroupName(props, value));
-    }
+    value: ?string,
+  ): SketchJSON {
+    // Default SketchRenderer just renders an empty group
 
     // TODO(lmr): applying transform to the group would be ideal, but not sure if it's possible
     // if (style.transform !== undefined) {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    if (style.opacity !== undefined) {
-      layer.style().contextSettings().opacity = style.opacity;
-    }
+    // TODO(akp): handle opacity #sketch43
+    // if (style.opacity !== undefined) {
+    //   layer.style().contextSettings().opacity = style.opacity;
+    // }
 
-    return layer;
+    return {
+      ...layerGroup(layout.left, layout.top, layout.width, layout.height),
+      name: props.name || this.getDefaultGroupName(props, value),
+    };
   }
   renderBackingLayers(
     layout: LayoutInfo,
@@ -48,8 +38,8 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
-  ): Array<SketchLayer> {
+    value: ?string,
+  ): Array<SketchJSON> {
     return [];
   }
 }

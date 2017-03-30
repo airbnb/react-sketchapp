@@ -12,14 +12,7 @@ export const colors = {
   'Pear a11y': '#2E854B',
 };
 
-const typeSizes = [
-  80,
-  48,
-  36,
-  24,
-  20,
-  16,
-];
+const typeSizes = [80, 48, 36, 24, 20, 16];
 
 export const spacing = 16;
 
@@ -35,35 +28,35 @@ const fontWeights = {
 
 export const fonts = {
   Headline: {
-    color: colors.night,
+    color: colors.Night,
     fontSize: typeSizes[0],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
     lineHeight: 80,
   },
   'Title 1': {
-    color: colors.night,
+    color: colors.Night,
     fontSize: typeSizes[2],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
     lineHeight: 48,
   },
   'Title 2': {
-    color: colors.night,
+    color: colors.Night,
     fontSize: typeSizes[3],
     fontFamily: fontFamilies.display,
     fontWeight: fontWeights.bold,
     lineHeight: 36,
   },
   'Title 3': {
-    color: colors.night,
+    color: colors.Night,
     fontSize: typeSizes[4],
     fontFamily: fontFamilies.body,
     fontWeight: fontWeights.regular,
     lineHeight: 24,
   },
   Body: {
-    color: colors.night,
+    color: colors.Night,
     fontSize: typeSizes[5],
     fontFamily: fontFamilies.body,
     fontWeight: fontWeights.regular,
@@ -73,15 +66,18 @@ export const fonts = {
 };
 
 export default {
-  colors: Object.keys(colors).reduce((acc, name) => ({
-    ...acc,
-    [name]: processColor(colors[name]),
-  }), {}),
+  colors: Object.keys(colors).reduce(
+    (acc, name) => ({
+      ...acc,
+      [name]: processColor(colors[name]),
+    }),
+    {},
+  ),
   fonts,
   spacing,
 };
 
 export type DesignSystem = {
   fonts: any,
-  colors: {[key: string]: Color},
-}
+  colors: { [key: string]: Color },
+};

@@ -1,6 +1,5 @@
 /* @flow */
 
-// eslint-disable-next-line import/prefer-default-export
 export const dump = (obj: any) => {
   log('#####################################################################################');
   log(`## Dumping object ${obj}`);
@@ -25,4 +24,18 @@ export const dump = (obj: any) => {
   log('obj.treeAsDictionary():');
   log(obj.treeAsDictionary());
   return obj;
+};
+
+export const timeFunction = (fn: () => any, label: string) => {
+  const a = MSMoment.new().timestamp();
+
+  const res = fn();
+
+  const b = MSMoment.new().timestamp();
+
+  const time = (b - a).toFixed(3);
+
+  log(`${label}: ${time}`);
+
+  return res;
 };

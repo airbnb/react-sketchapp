@@ -1,7 +1,8 @@
 /* @flow */
-import convertToColor from '../utils/convertToColor';
+import type { SJArtboardLayer } from 'sketchapp-json-flow-types';
+import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
-import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 
 class ArtboardRenderer extends SketchRenderer {
   renderGroupLayer(
@@ -10,24 +11,25 @@ class ArtboardRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
-  ): SketchLayer {
-    const layer = MSArtboardGroup.alloc().init();
-
-    layer.frame = MSRect.rectWithRect(
-      NSMakeRect(layout.top, layout.left, layout.width, layout.height)
-    );
-
-    if (props.name !== undefined) {
-      layer.setName(props.name);
-    }
-
+    value: ?string,
+  ): SJArtboardLayer {
+    let color;
     if (style.backgroundColor !== undefined) {
-      layer.setBackgroundColor(convertToColor(style.backgroundColor));
-      layer.hasBackgroundColor = true;
+      color = makeColorFromCSS(style.backgroundColor);
     }
 
-    return layer;
+    return {
+      _class: 'artboard',
+      do_objectID: generateID(),
+      frame: makeRect(layout.top, layout.left, layout.width, layout.height),
+      // "layerListExpandedType": 0,
+      name: props.name || 'Artboard',
+      nameIsFixed: props.name !== undefined,
+      // "layers": [],
+      isVisible: true,
+      backgroundColor: color || makeColorFromCSS('white'),
+      hasBackgroundColor: color !== undefined,
+    };
   }
 }
 

@@ -13,12 +13,13 @@ const propTypes = {
 };
 
 class Artboard extends React.Component {
+  static defaultProps = {
+    name: 'Artboard',
+  };
+
   render() {
     return (
-      <artboard
-        style={StyleSheet.flatten(this.props.style)}
-        name={this.props.name}
-      >
+      <artboard style={StyleSheet.flatten(this.props.style)} name={this.props.name}>
         {this.props.children}
       </artboard>
     );

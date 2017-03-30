@@ -1,17 +1,15 @@
 // Useful things
-export type Dictionary<K, T> = {[key: K]: T};
+export type Dictionary<K, T> = { [key: K]: T };
 
 // Sketchy things
 export type SketchLayer = any;
-// TODO: are these duplicates?
-
 
 export type SketchStyle = any;
 
 export type SketchSharedStyleContainer = {
   setObjects: (objects: Array<SketchStyle>) => void,
   addSharedStyleWithName_firstInstance: (name: string, ins: SketchStyle) => void,
-}
+};
 
 type MSGradient = any;
 
@@ -25,15 +23,14 @@ export type SketchDocumentData = {
   layerTextStyles: () => SketchSharedStyleContainer,
   layerSymbols: () => void,
   assets: () => SketchAssetCollection,
-}
+};
 
 export type SketchDocument = {
   documentData: () => SketchDocumentData,
-}
+};
 export type SketchContext = {
   document: SketchDocument,
 };
-
 
 // Reacty things
 
@@ -155,5 +152,5 @@ export type LayerCreator = (
   layout: LayoutInfo,
   textStyle: TextStyle,
   props: any,
-  value: ?string
+  value: ?string,
 ) => SketchLayer;

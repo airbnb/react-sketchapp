@@ -1,12 +1,10 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const entries = [
-  'Profiles',
-  'Styleguide'
-].reduce((acc, val) => (
-  Object.assign({}, acc, { [val]: `./example-plugin/${val}.js` })
-), {});
+const entries = ['Profiles', 'stress-Styleguide', 'Styleguide'].reduce(
+  (acc, val) => Object.assign({}, acc, { [val]: `./example-plugin/${val}.js` }),
+  {}
+);
 
 module.exports = {
   entry: entries,
@@ -31,9 +29,5 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new CopyWebpackPlugin([
-      { from: 'example-plugin/manifest.json' },
-    ]),
-  ],
+  plugins: [new CopyWebpackPlugin([{ from: 'example-plugin/manifest.json' }])],
 };

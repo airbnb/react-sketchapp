@@ -1,36 +1,33 @@
 /* @flow */
-import { BorderPosition, FillType } from 'sketch-constants';
-import convertToColor from '../utils/convertToColor';
+import type { SJShapeGroupLayer, SJImageDataReference } from 'sketchapp-json-flow-types';
+import { BorderPosition } from 'sketch-constants';
+import { PatternFillType } from '../utils/constants';
 import SketchRenderer from './SketchRenderer';
-import processTransform from './processTransform';
-import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
+// import processTransform from './processTransform';
+import {
+  makeRect,
+  makeColorFromCSS,
+  makeColorFill,
+  makeImageFill,
+  generateID,
+} from '../jsonUtils/models';
+import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
+import {
+  makeBorderOptions,
+  makeShadow,
+  makeHorizontalBorder,
+  makeVerticalBorder,
+} from '../jsonUtils/style';
+import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import hasAnyDefined from '../utils/hasAnyDefined';
+import same from '../utils/same';
 
-// out of date in sketch-constants
-// https://github.com/turbobabr/sketch-constants/pull/1
-const PatternFillType = {
-  Tile: 0,
-  Fill: 1,
-  Stretch: 2,
-  Fit: 3,
-};
+const TRANSPARENT = 'transparent';
+const DEFAULT_BORDER_COLOR = TRANSPARENT;
+const DEFAULT_BORDER_STYLE = 'solid';
 
-function makeRect(x, y, width, height, color) {
-  const rect = MSRectangleShape.alloc().init();
-  rect.frame = MSRect.rectWithRect(NSMakeRect(x, y, width, height));
-
-  const layer = MSShapeGroup.shapeWithPath(rect);
-
-  if (color !== undefined) {
-    const fillStyle = layer.style().addStylePartOfType(0);
-    fillStyle.color = convertToColor(color);
-  }
-
-  return layer;
-}
-
-function same(a, b, c, d) {
-  return a === b && b === c && c === d;
-}
+const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
 function extractURLFromSource(source) {
   if (typeof source === 'string') {
@@ -38,6 +35,23 @@ function extractURLFromSource(source) {
   }
   return source.uri;
 }
+
+const makeJSONDataReference = (image): SJImageDataReference => ({
+  _class: 'MSJSONOriginalDataReference',
+  _ref: `images/${generateID()}`,
+  _ref_class: 'MSImageData',
+  data: {
+    _data: image
+      .data()
+      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+    // TODO(gold): can I just declare this as a var instead of using Cocoa?
+  },
+  sha1: {
+    _data: image
+      .sha1()
+      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+  },
+});
 
 class ImageRenderer extends SketchRenderer {
   renderBackingLayers(
@@ -47,103 +61,154 @@ class ImageRenderer extends SketchRenderer {
     props: any,
     // eslint-disable-next-line no-unused-vars
     value: ?string,
-  ): Array<SketchLayer> {
-    // TODO: borders
-
-    const bl = style.borderLeftWidth || 0;
-    const br = style.borderRightWidth || 0;
-    const bt = style.borderTopWidth || 0;
-    const bb = style.borderBottomWidth || 0;
-
-    const btlr = style.borderTopLeftRadius || 0;
-    const btrr = style.borderTopRightRadius || 0;
-    const bbrr = style.borderBottomRightRadius || 0;
-    const bblr = style.borderBottomLeftRadius || 0;
-
+  ): Array<SJShapeGroupLayer> {
     const layers = [];
-    const rect = MSRectangleShape.alloc().init();
-    rect.frame = MSRect.rectWithRect(
-      NSMakeRect(0, 0, layout.width, layout.height)
-    );
 
-    rect.setCornerRadiusFromComponents(`${btlr}/${btrr}/${bbrr}/${bblr}`);
+    const {
+      borderTopWidth = 0,
+      borderRightWidth = 0,
+      borderBottomWidth = 0,
+      borderLeftWidth = 0,
 
-    const content = MSShapeGroup.shapeWithPath(rect);
+      borderTopLeftRadius = 0,
+      borderTopRightRadius = 0,
+      borderBottomRightRadius = 0,
+      borderBottomLeftRadius = 0,
 
-    if (style.backgroundColor !== undefined) {
-      const fillStyle = content.style().addStylePartOfType(0);
-      fillStyle.color = convertToColor(style.backgroundColor);
+      borderTopColor = DEFAULT_BORDER_COLOR,
+      borderRightColor = DEFAULT_BORDER_COLOR,
+      borderBottomColor = DEFAULT_BORDER_COLOR,
+      borderLeftColor = DEFAULT_BORDER_COLOR,
+
+      borderTopStyle = DEFAULT_BORDER_STYLE,
+      borderRightStyle = DEFAULT_BORDER_STYLE,
+      borderBottomStyle = DEFAULT_BORDER_STYLE,
+      borderLeftStyle = DEFAULT_BORDER_STYLE,
+    } = style;
+
+    const image = makeImageDataFromUrl(extractURLFromSource(props.source));
+
+    const fillImage = makeJSONDataReference(image);
+
+    const frame = makeRect(0, 0, layout.width, layout.height);
+    const radii = [
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderBottomRightRadius,
+      borderBottomLeftRadius,
+    ];
+    const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
+
+    const fills = [makeImageFill(fillImage, PatternFillType[props.resizeMode])];
+
+    if (style.backgroundColor) {
+      fills.unshift(makeColorFill(style.backgroundColor));
     }
 
-    const imageFill = content.style().addStylePartOfType(0);
-    const imageData = NSImage.alloc().initByReferencingURL(
-      NSURL.URLWithString(extractURLFromSource(props.source))
-    );
-    imageFill.setImage(MSImageData.alloc().initWithImage_convertColorSpace(imageData, false));
-    imageFill.setFillType(FillType.Pattern);
-    imageFill.setPatternFillType(PatternFillType[props.resizeMode] || PatternFillType.Fill);
+    const content = makeShapeGroup(frame, [shapeLayer], fills);
 
-    if (style.transform !== undefined) {
-      processTransform(rect, layout, style.transform);
+    if (hasAnyDefined(style, SHADOW_STYLES)) {
+      content.style.shadows = [makeShadow(style)];
     }
 
-    layers.push(content);
-
-    if (same(bl, br, bt, bb)) {
-      const borderStyle = content.style().addStylePartOfType(1);
-      borderStyle.setFillType(FillType.Solid); // solid
-
-      if (style.borderTopColor !== undefined) {
-        borderStyle.setColor(convertToColor(style.borderTopColor));
+    if (
+      same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
+      same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
+      same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)
+    ) {
+      // all sides have same border width
+      // in this case, we can do everything with just a single shape.
+      if (borderTopStyle !== undefined) {
+        const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
+        if (borderOptions) {
+          content.style.borderOptions = borderOptions;
+        }
       }
 
-      borderStyle.setThickness(style.borderTopWidth || 0);
-
-      borderStyle.setPosition(BorderPosition.Outside);
+      if (borderTopWidth > 0) {
+        content.style.borders = [
+          {
+            _class: 'border',
+            isEnabled: true,
+            color: makeColorFromCSS(borderTopColor),
+            fillType: 0,
+            position: BorderPosition.Inside,
+            thickness: borderTopWidth,
+          },
+        ];
+      }
+      layers.push(content);
     } else {
-      if (bt > 0) {
-        const topBorder = makeRect(
-          0,
-          0,
-          layout.width,
-          bt,
-          style.borderTopColor
-        );
+      content.hasClippingMask = true;
+      layers.push(content);
+
+      if (borderTopWidth > 0) {
+        const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
+        topBorder.name = 'Border (top)';
+
+        const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
+        if (borderOptions) {
+          topBorder.style.borderOptions = borderOptions;
+        }
+
         layers.push(topBorder);
       }
 
-      if (bl > 0) {
-        const leftBorder = makeRect(
+      if (borderRightWidth > 0) {
+        const rightBorder = makeVerticalBorder(
+          layout.width - borderRightWidth,
           0,
-          0,
-          bl,
           layout.height,
-          style.borderLeftColor
+          borderRightWidth,
+          borderRightColor,
         );
-        layers.push(leftBorder);
+        rightBorder.name = 'Border (right)';
+
+        const borderOptions = makeBorderOptions(borderRightStyle, borderRightWidth);
+        if (borderOptions) {
+          rightBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(rightBorder);
       }
 
-      if (bb > 0) {
-        const bottomBorder = makeRect(
+      if (borderBottomWidth > 0) {
+        const bottomBorder = makeHorizontalBorder(
           0,
-          layout.height - bb,
+          layout.height - borderBottomWidth,
           layout.width,
-          bb,
-          style.borderBottomColor
+          borderBottomWidth,
+          borderBottomColor,
         );
+        bottomBorder.name = 'Border (bottom)';
+
+        const borderOptions = makeBorderOptions(borderBottomStyle, borderBottomWidth);
+        if (borderOptions) {
+          bottomBorder.style.borderOptions = borderOptions;
+        }
+
         layers.push(bottomBorder);
       }
 
-      if (br > 0) {
-        const rightBorder = makeRect(
-          layout.width - br,
+      if (borderLeftWidth > 0) {
+        const leftBorder = makeVerticalBorder(
           0,
-          br,
+          0,
           layout.height,
-          style.borderRightColor
+          borderLeftWidth,
+          borderLeftColor,
         );
-        layers.push(rightBorder);
+        leftBorder.name = 'Border (left)';
+
+        const borderOptions = makeBorderOptions(borderLeftStyle, borderLeftWidth);
+        if (borderOptions) {
+          leftBorder.style.borderOptions = borderOptions;
+        }
+
+        layers.push(leftBorder);
       }
+
+      // TODO(lmr): how do we do transform in this case?
     }
 
     return layers;

@@ -5,24 +5,19 @@ let sharedTextStyles;
 
 beforeEach(() => {
   jest.resetModules();
+  jest.mock('sketchapp-json-plugin', () => ({
+    appVersionSupported: jest.fn(() => true),
+    fromSJSONDictionary: jest.fn(),
+    toSJSON: jest.fn(),
+  }));
+
   TextStyles = require('../../src/sharedStyles/TextStyles').default;
-
-  const applyTextStyleToLayer = require('../../src/utils/applyTextStyleToLayer').default;
-
-  jest.mock('../../src/utils/applyTextStyleToLayer');
-  applyTextStyleToLayer.mockImplementation(layer => layer);
 
   sharedTextStyles = require('../../src/wrappers/sharedTextStyles').default;
 
   jest.mock('../../src/wrappers/sharedTextStyles');
 
-  const textLayer = require('../../src/wrappers/textLayer').default;
-
-  jest.mock('../../src/wrappers/textLayer');
-
-  textLayer.mockImplementation(() => ({
-    style: () => null,
-  }));
+  jest.mock('../../src/jsonUtils/hacksForJSONImpl');
 
   sharedTextStyles.addStyle = jest.fn();
   sharedTextStyles.setStyles = jest.fn();
@@ -32,40 +27,41 @@ beforeEach(() => {
 
 describe('create', () => {
   describe('without a context', () => {
-    test('it errors', () => {
+    it('it errors', () => {
       const styles = {};
-      expect(() =>
-        TextStyles.create(null, styles)
-      ).toThrowError(/Please provide a context/);
 
-      expect(() =>
-        TextStyles.create({}, styles)
-      ).toThrowError(/Please provide a context/);
+      expect(() => TextStyles.create({}, styles)).toThrowError(/Please provide a context/);
     });
   });
 
   describe('with a context', () => {
-    test('with clearExistingStyles', () => {
-      TextStyles.create({
-        clearExistingStyles: true,
-        context,
-      }, {});
+    it('clears clearExistingStyles when true', () => {
+      TextStyles.create(
+        {
+          clearExistingStyles: true,
+          context,
+        },
+        {},
+      );
 
       expect(sharedTextStyles.setStyles).toHaveBeenCalled();
     });
 
-    test('without clearExistingStyles', () => {
-      TextStyles.create({
-        clearExistingStyles: false,
-        context,
-      }, {});
+    it('doesn’t clearExistingStyles when false', () => {
+      TextStyles.create(
+        {
+          clearExistingStyles: false,
+          context,
+        },
+        {},
+      );
       expect(sharedTextStyles.setStyles).not.toHaveBeenCalled();
     });
 
-    test('one style', () => {
+    it('stores one style', () => {
       const styles = {
         foo: {
-          foo: 'bar',
+          fontSize: 'bar',
         },
       };
 
@@ -74,13 +70,13 @@ describe('create', () => {
       expect(Object.keys(res).length).toBe(1);
     });
 
-    test('two styles', () => {
+    it('stores unique styles seperately', () => {
       const styles = {
         foo: {
-          foo: 'bar',
+          fontSize: 'bar',
         },
         bar: {
-          baz: 'qux',
+          fontSize: 'baz',
         },
       };
 
@@ -90,45 +86,13 @@ describe('create', () => {
       expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
     });
 
-    test('unique keys w/ unique styles', () => {
+    it('merges duplicate styles', () => {
       const styles = {
         foo: {
-          foo: 'bar',
+          fontSize: 'foo',
         },
         bar: {
-          baz: 'bar',
-        },
-      };
-
-      const res = TextStyles.create({ context }, styles);
-
-      expect(Object.keys(res).length).toBe(2);
-      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
-    });
-
-    test('duplicate keys w/ unique styles', () => {
-      const styles = {
-        foo: {
-          foo: 'bar',
-        },
-        foo: { // eslint-disable-line no-dupe-keys
-          baz: 'bar',
-        },
-      };
-
-      const res = TextStyles.create({ context }, styles);
-
-      expect(Object.keys(res).length).toBe(1);
-      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
-    });
-
-    test('unique keys w/ duplicate styles', () => {
-      const styles = {
-        foo: {
-          foo: 'bar',
-        },
-        bar: {
-          foo: 'bar',
+          fontSize: 'foo',
         },
       };
 
@@ -138,35 +102,67 @@ describe('create', () => {
       expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
     });
 
-    test('duplicate keys w/ duplicate styles', () => {
-      const styles = {
-        foo: {
-          foo: 'bar',
-        },
-        foo: { // eslint-disable-line no-dupe-keys
-          foo: 'bar',
-        },
-      };
+    it('only stores text attributes', () => {
+      const whitelist = [
+        'color',
+        'fontFamily',
+        'fontSize',
+        'fontStyle',
+        'fontWeight',
+        'textShadowOffset',
+        'textShadowRadius',
+        'textShadowColor',
+        'textTransform',
+        'letterSpacing',
+        'lineHeight',
+        'textAlign',
+        'writingDirection',
+      ];
 
-      const res = TextStyles.create({ context }, styles);
+      const blacklist = ['foo', 'bar', 'baz'];
 
-      expect(Object.keys(res).length).toBe(1);
-      expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
+      const input = [...whitelist, ...blacklist].reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: true,
+        }),
+        {},
+      );
+
+      const res = TextStyles.create(
+        {
+          context,
+        },
+        { foo: input },
+      );
+
+      const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
+
+      whitelist.forEach((key) => {
+        expect(firstStoredStyle).toHaveProperty(key, true);
+      });
+
+      blacklist.forEach((key) => {
+        expect(firstStoredStyle).not.toHaveProperty(key);
+      });
     });
   });
 });
 
 describe('resolve', () => {
   beforeEach(() => {
-    TextStyles.create({
-      context,
-    }, {});
+    TextStyles.create(
+      {
+        context,
+      },
+      {},
+    );
   });
 
-  test('retrieves a matching style', () => {
+  it('retrieves a matching style', () => {
     const key = 'foo';
     const styles = {
-      [key]: { foo: 'bar' },
+      [key]: { fontSize: 'bar' },
     };
 
     TextStyles.create({ context }, styles);
@@ -175,20 +171,68 @@ describe('resolve', () => {
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
   });
 
-  test('returns null with no matching style', () => {
+  it('returns null with no matching style', () => {
     const key = 'foo';
     const styles = {
       [key]: {
-        foo: 'bar',
+        fontSize: 'bar',
       },
     };
     const style2 = {
-      baz: 'qux',
+      fontSize: 'qux',
     };
 
     TextStyles.create({ context }, styles);
 
     expect(TextStyles.resolve(style2)).not.toBeDefined();
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('get', () => {
+  it('finds a matching registered style by name', () => {
+    const styles = {
+      foo: {
+        fontSize: 'bar',
+      },
+      bar: {
+        fontSize: 'baz',
+      },
+    };
+
+    TextStyles.create({ context }, styles);
+
+    expect(TextStyles.get('foo')).toEqual(styles.foo);
+    expect(TextStyles.get('baz')).toEqual({});
+  });
+
+  it('returns an empty object when not found', () => {
+    const styles = {
+      foo: {
+        fontSize: 'bar',
+      },
+    };
+
+    TextStyles.create({ context }, styles);
+
+    expect(TextStyles.get('baz')).toEqual({});
+  });
+});
+
+describe('clear', () => {
+  it('clears previously registered styles', () => {
+    const styles = {
+      foo: {
+        fontSize: 'bar',
+      },
+      bar: {
+        fontSize: 'baz',
+      },
+    };
+
+    TextStyles.create({ context }, styles);
+    TextStyles.clear();
+
+    expect(TextStyles.styles()).toEqual({});
   });
 });

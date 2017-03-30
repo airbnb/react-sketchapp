@@ -8,7 +8,12 @@
     "React$Component": true,
     "React$Element": true,
     "ReactClass": true,
-    "ReactComponent": true
+    "ReactComponent": true,
+    "NSColor": true,
+    "MSJSONDataArchiver": true,
+    "NSAttributedString": true,
+    "NSDate": true,
+    "NSDataBase64EncodingEndLineWithCarriageReturn": true,
   },
   "rules": {
     "class-methods-use-this": 0,

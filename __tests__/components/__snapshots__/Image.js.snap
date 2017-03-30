@@ -1,0 +1,193 @@
+exports[`<Image /> name defaults to Image 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> name passes its name 1`] = `
+<image
+  name="bar"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> renders children 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}}>
+  <foo />
+</image>
+`;
+
+exports[`<Image /> resizeMode falls back to a resizeMode from style 1`] = `
+<image
+  name="Image"
+  resizeMode="Fit"
+  source="foo"
+  style={
+    Object {
+      "resizeMode": "contain",
+    }
+  } />
+`;
+
+exports[`<Image /> resizeMode falls back to cover 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> resizeMode prefers prop to style 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={
+    Object {
+      "resizeMode": "contain",
+    }
+  } />
+`;
+
+exports[`<Image /> resizeMode translates center 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> resizeMode translates contain 1`] = `
+<image
+  name="Image"
+  resizeMode="Fit"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> resizeMode translates cover 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> resizeMode translates none 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> resizeMode translates repeat 1`] = `
+<image
+  name="Image"
+  resizeMode="Tile"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> resizeMode translates stretch 1`] = `
+<image
+  name="Image"
+  resizeMode="Stretch"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> source falls back to defaultSource if available 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> source favors style over source for height 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source={
+    Object {
+      "height": 500,
+      "uri": "foo",
+    }
+  }
+  style={
+    Object {
+      "height": 400,
+      "width": 300,
+    }
+  } />
+`;
+
+exports[`<Image /> source favors style over source for width 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source={
+    Object {
+      "uri": "foo",
+      "width": 500,
+    }
+  }
+  style={
+    Object {
+      "height": 400,
+      "width": 300,
+    }
+  } />
+`;
+
+exports[`<Image /> source prefers source over defaultSource 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source="foo"
+  style={Object {}} />
+`;
+
+exports[`<Image /> source sets height from source 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source={
+    Object {
+      "height": 500,
+      "uri": "foo",
+    }
+  }
+  style={
+    Object {
+      "height": 500,
+      "width": undefined,
+    }
+  } />
+`;
+
+exports[`<Image /> source sets width from source 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  source={
+    Object {
+      "uri": "foo",
+      "width": 500,
+    }
+  }
+  style={
+    Object {
+      "height": undefined,
+      "width": 500,
+    }
+  } />
+`;

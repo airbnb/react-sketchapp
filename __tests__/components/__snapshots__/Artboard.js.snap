@@ -1,0 +1,21 @@
+exports[`<Artboard /> name defaults to Artboard 1`] = `
+<artboard
+  name="Artboard"
+  style={undefined} />
+`;
+
+exports[`<Artboard /> name passes its name 1`] = `
+<artboard
+  name="bar"
+  style={undefined} />
+`;
+
+exports[`<Artboard /> renders children 1`] = `
+<artboard
+  name="Artboard"
+  style={undefined}>
+  <foo>
+    <bar />
+  </foo>
+</artboard>
+`;
