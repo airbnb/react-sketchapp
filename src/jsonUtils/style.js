@@ -14,12 +14,10 @@ const DEFAULT_SHADOW_COLOR = '#000';
 
 const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): Array<number> => {
   switch (style) {
-    case 'dashed': {
+    case 'dashed':
       return [width * 3, width * 3];
-    }
-    case 'dotted': {
+    case 'dotted':
       return [width, width];
-    }
     case 'solid':
       return [];
     default:
