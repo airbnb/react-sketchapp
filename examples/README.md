@@ -7,8 +7,12 @@
 ### [Profile Cards](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards)
 
 ## In Progress
+- [ ] Shared Text Styles
 - [ ] Styleguide
-- [ ] Component permutations
 - [ ] React Primitives
+- [ ] React Primitives + create-react-app
+- [ ] React Primitives + create-react-native-app
 - [ ] Fetching Data
 - [ ] GraphQL
+- [ ] `react-markdown`
+- [ ] Component permutations
