@@ -4,8 +4,9 @@
 
 ### [Basic Webpack setup](https://github.com/airbnb/react-sketchapp/tree/master/examples/basic-webpack)
 
+### [Profile Cards](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards)
+
 ## In Progress
-- [ ] Profile Cards
 - [ ] Styleguide
 - [ ] Component permutations
 - [ ] React Primitives

@@ -14,18 +14,16 @@ export type User = {
 };
 
 const Page = ({ users }: { users: Array<User> }) => (
-  <Artboard>
-    <View
-      style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        width: users.length * 300,
-      }}
-    >
-      {users.map(user => <Profile user={user} />)}
-    </View>
-  </Artboard>
+  <View
+    style={{
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      width: users.length * 300,
+    }}
+  >
+    {users.map(user => <Profile user={user} />)}
+  </View>
 );
 
 const onRun = (context) => {
