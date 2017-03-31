@@ -38,7 +38,7 @@ Install `skpm`, if you don't have it already:
 npm install -g skpm
 ```
 
-create a new project:
+Create a new project:
 ```bash
 mkdir my-rad-sketch-plugin
 cd my-rad-sketch-plugin
@@ -55,7 +55,7 @@ Then, to build your plugin (will auto update when you change the code)
 npm run watch
 ```
 
-And write your plugin in `src/my-command.js`
+Write your plugin in `src/my-command.js`
 ```js
 import React from 'react';
 import { render, Text, View } from 'react-sketchapp';
@@ -70,7 +70,7 @@ export default function (context) {
 }
 ```
 
-Run your plugin in Sketch via `Plugins → [your plugin name] → my-command`.
+Run your plugin in Sketch via `Plugins → [plugin name] → my-command`.
 
 Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
 
@@ -83,22 +83,8 @@ defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysRelo
 
 You can then use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
 
-[`react-sketchapp-webpack-example`](http://github.com/jongold/react-sketchapp-webpack-example) is a minimal boilerplace to start developing with Webpack.
-
 ### Examples
-`react-sketchapp` includes [a folder of examples](example-plugin/) showing how you might use it to work with a JavaScript [design system](example-plugin/designSystem.js).
-* [Styleguide](example-plugin/Styleguide.js)
-* [Twitter-style profiles](example-plugin/Profiles.js)
-
-Clone & build the repo, and symlink the examples:
-```bash
-git clone git@github.com:airbnb/react-sketchapp.git && cd react-sketchapp
-npm install && npm run build:plugin
-./symlink-plugin.sh
-```
-
-Open Sketch; examples will be in `Plugins → react-example`.
-
+`react-sketchapp` includes [several examples](examples/) showing how you might use it — including GraphQL data fetching and multi-platform universal rendering.
 
 ### Contributing
 Contributions are more than welcome. Just submit a PR with a description of your changes. Please attach screenshots and Sketch files (if relevant) to your Pull Requests for review.
