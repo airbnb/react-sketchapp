@@ -1,12 +1,21 @@
 # Basic Webpack example
 
-
 ## How to use
+Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
 ```
-git clone git@github.com:jongold/react-sketchapp-webpack-example.git && cd react-sketchapp-webpack-example
-npm install
-./symlink-plugin.sh
-npm run build
+curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/basic-webpack
+cd basic-webpack
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp-webpack-example → Run Plugin`
+Install the dependencies, build, and link
+```
+npm install
+npm run build
+./symlink-plugin.sh
+```
+
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Webpack Example → Run Plugin`
+
+## The idea behind the example
+
+Using Webpack to build `react-sketchapp` apps requires a little bit of configuration - use this as an example.
