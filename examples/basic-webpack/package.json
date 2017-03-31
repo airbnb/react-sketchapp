@@ -1,0 +1,23 @@
+{
+  "name": "basic-webpack-example",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "link-plugin": "./symlink-plugin.sh"
+  },
+  "author": "Jon Gold <jon.gold@airbnb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-airbnb": "^2.2.3",
+    "react": "^15.4.2",
+    "react-sketchapp": "^0.9.1",
+    "react-test-renderer": "^15.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "copy-webpack-plugin": "^4.0.1",
+    "webpack": "^2.3.2"
+  }
+}
