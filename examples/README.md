@@ -1,9 +1,10 @@
 # Examples
 
+### [Basic skpm setup](https://github.com/airbnb/react-sketchapp/tree/master/examples/basic-skpm)
+
 ### [Basic Webpack setup](https://github.com/airbnb/react-sketchapp/tree/master/examples/basic-webpack)
 
 ## In Progress
-- [ ] Basic skpm setup
 - [ ] Profile Cards
 - [ ] Styleguide
 - [ ] Component permutations
