@@ -1,4 +1,4 @@
-# Basic skpm example
+# Profile Cards
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
@@ -11,6 +11,7 @@ Install the dependencies, build, and link
 ```
 npm install
 npm run build
+./symlink-plugin.sh
 ```
 
 Then, open Sketch and navigate to `Plugins → react-sketchapp: Profile Cards → Run Plugin`
