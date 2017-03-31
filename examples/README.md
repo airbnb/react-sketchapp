@@ -6,9 +6,10 @@
 
 ### [Profile Cards](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards)
 
+### [Styleguide](https://github.com/airbnb/react-sketchapp/tree/master/examples/styleguide)
+
 ## In Progress
 - [ ] Shared Text Styles
-- [ ] Styleguide
 - [ ] React Primitives
 - [ ] React Primitives + create-react-app
 - [ ] React Primitives + create-react-native-app
