@@ -27,8 +27,4 @@ module.exports = {
       { from: 'src/manifest.json' },
     ]),
   ],
-
-  resolve: {
-    extensions: ['.sketch.js', '.js']
-  },
 };

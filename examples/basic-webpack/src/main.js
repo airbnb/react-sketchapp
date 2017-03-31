@@ -30,7 +30,7 @@ const Document = ({ message }) => (
 Document.propTypes = { message: PropTypes.string };
 
 const onRun = (context) => {
-  render(<Document message="Hello world!" />, context);
+  render(<Document message="Hello from Webpack!" />, context);
 };
 
 module.exports = onRun;

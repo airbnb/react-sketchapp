@@ -9,7 +9,7 @@
     "link-plugin": "skpm link",
     "publish": "skpm publish"
   },
-  "author": "Jon Gold <hello@designedbygold.com> (http://jon.gold)",
+  "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "manifest": "src/manifest.json",
   "devDependencies": {
