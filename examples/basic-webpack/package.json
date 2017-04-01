@@ -1,5 +1,5 @@
 {
-  "name": "basic-webpack-example",
+  "name": "basic-webpack",
   "private": true,
   "scripts": {
     "build": "webpack",
