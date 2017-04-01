@@ -1,28 +1,26 @@
 import React from 'react';
-import { render, Artboard, View } from 'react-sketchapp';
-import { spacing } from './designSystem';
+import { render, Text, View } from 'react-sketchapp';
+import type { User } from './types';
+import { fonts, spacing } from './designSystem';
 import Profile from './components/Profile';
 import Space from './components/Space';
 
-export type User = {
-  screen_name: string,
-  name: string,
-  description: string,
-  profile_image_url: string,
-  location: string,
-  url: string,
-};
-
 const Page = ({ users }: { users: Array<User> }) => (
-  <View
-    style={{
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      width: users.length * 300,
-    }}
-  >
-    {users.map(user => <Profile user={user} />)}
+  <View>
+    <Text style={fonts['Title 1']}>Profile Cards</Text>
+    <View
+      style={{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: users.length * 300,
+      }}
+    >
+      {users.map(user => (
+        <Space key={user.screen_name} h={spacing} v={spacing}>
+          <Profile user={user} />
+        </Space>
+      ))}
+    </View>
   </View>
 );
 
