@@ -1,4 +1,4 @@
-# Basic Webpack example
+# React Primitives
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
@@ -14,8 +14,8 @@ npm run build
 ./symlink-plugin.sh
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Webpack Example → Run Plugin`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: React Primitives → Run Plugin`
 
 ## The idea behind the example
 
-Using Webpack to build `react-sketchapp` apps requires a little bit of configuration - use this as an example.
+`react-primitives` provides a powerful way to build platform-independent components. This is a simple example of rendering to web & Sketch simulatenously.
