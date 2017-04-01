@@ -7,14 +7,24 @@ curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz 
 cd react-primitives
 ```
 
+### Run it in Sketch
+
 Install the dependencies, build, and link
 ```
 npm install
-npm run build
+npm run build:sketch
 ./symlink-plugin.sh
 ```
 
 Then, open Sketch and navigate to `Plugins → react-sketchapp: React Primitives → Run Plugin`
+
+### Run it in your browser
+
+Install the dependencies, start server, open browser.
+```
+npm install
+npm start:web
+```
 
 ## The idea behind the example
 
