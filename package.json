@@ -15,10 +15,9 @@
   ],
   "pre-commit": "lint-staged",
   "scripts": {
-    "build:plugin": "webpack -c",
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
-    "build": "npm run build:react && npm run build:plugin && npm run build:flow",
+    "build": "npm run build:react && npm run build:flow",
     "clean": "rimraf lib react-example.sketchplugin",
     "check": "npm run test && npm run flow && npm run lint",
     "docs:clean": "rimraf _book",
@@ -32,9 +31,7 @@
     "prepublishOnly": "npm run clean && npm run check && npm run build",
     "test": "jest --config .jestrc",
     "test:watch": "npm run test -- --watch",
-    "watch:plugin": "npm run build:plugin -- --watch",
-    "watch:react": "npm run build:react -- --watch",
-    "watch": "npm run watch:react & npm run watch:plugin"
+    "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
     "css-layout": "^1.1.1",
