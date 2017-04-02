@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Map from 'react-primitives-google-static-map';
-import { StyleSheet, Image, Text, View } from 'react-primitives';
-import data from './data.json';
+import { StyleSheet, Text, View } from 'react-primitives';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,20 +20,35 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   rowWrapper: {
-    padding: 24,
+    padding: 16,
     borderBottomWidth: 2,
     borderBottomColor: '#dfba69',
   },
   rowTitle: {
     color: '#dfba69',
     fontSize: 18,
-    fontFamily: 'GT America v2',
+    // lineHeight: 27,
+    fontWeight: 'bold',
+    fontFamily: 'GT America',
   },
   rowSubtitle: {
     color: '#dfba69',
     fontSize: 14,
-    fontFamily: 'GT America v2',
+    // lineHeight: 18,
+    fontFamily: 'GT America',
   },
+});
+
+const LatLong = {
+  latitude: PropTypes.string,
+  longitude: PropTypes.string,
+};
+
+const Venue = PropTypes.shape({
+  name: PropTypes.string,
+  location: PropTypes.shape({
+    address: PropTypes.string,
+  }),
 });
 
 const Row = ({ name, location }) => (
@@ -44,7 +58,9 @@ const Row = ({ name, location }) => (
   </View>
 );
 
-const Document = ({ center, message, venues }) => {
+Row.propTypes = Venue;
+
+const App = ({ center, venues }) => {
   const pins = venues.map(v => ({ latitude: v.location.lat, longitude: v.location.lng }));
   return (
     <View style={styles.container}>
@@ -64,19 +80,9 @@ const Document = ({ center, message, venues }) => {
     </View>
   );
 };
-Document.propTypes = { message: PropTypes.string };
+App.propTypes = {
+  center: LatLong,
+  venues: PropTypes.arrayOf(Venue),
+};
 
-const latitude = '37.773972';
-const longitude = '-122.431297';
-
-const venues = data.response.venues;
-
-export default () => (
-  <Document
-    center={{
-      latitude,
-      longitude,
-    }}
-    venues={venues}
-  />
-);
+export default App;

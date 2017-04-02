@@ -1662,6 +1662,10 @@ coa@~1.0.1:
   dependencies:
     q "^1.1.2"
 
+cocoascript-class@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/cocoascript-class/-/cocoascript-class-0.1.2.tgz#dab25f20389946d9986c1812b88ac3783eec42d3"
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -3689,6 +3693,10 @@ joi@^6.6.1:
     isemail "1.x.x"
     moment "2.x.x"
     topo "1.x.x"
+
+jquery-param@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/jquery-param/-/jquery-param-0.2.0.tgz#55da8130428c50980eb516491c1b77cc78f0dcb1"
 
 js-base64@^2.1.9:
   version "2.1.9"
@@ -6044,6 +6052,12 @@ simple-plist@0.1.4:
 sketch-constants@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/sketch-constants/-/sketch-constants-1.0.2.tgz#106ef685e02c1e703203b1e7b714743f57188cd9"
+
+sketch-module-fetch-polyfill@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/sketch-module-fetch-polyfill/-/sketch-module-fetch-polyfill-0.1.2.tgz#05d29f6f98df45c5d6a4c5482e9e64344d374436"
+  dependencies:
+    cocoascript-class "^0.1.2"
 
 sketchapp-json-flow-types@^0.0.2:
   version "0.0.2"

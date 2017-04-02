@@ -1,5 +1,5 @@
 {
-  "name": "maps",
+  "name": "foursquare-maps",
   "author": "Jon Gold",
   "version": 0.1,
   "compatibleVersion": 1,
@@ -13,7 +13,7 @@
     }
   ],
   "menu": {
-    "title": "react-sketchapp: Google Maps",
+    "title": "react-sketchapp: Foursquare + Google Maps",
     "items": [
       "main"
     ]

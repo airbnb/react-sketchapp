@@ -1,15 +1,16 @@
 {
-  "name": "maps",
+  "name": "foursquare-maps",
   "private": true,
   "scripts": {
     "build": "webpack",
-    "start:web": "react run src/App.js",
+    "start:web": "react run src/web.js",
     "watch": "webpack --watch",
     "link-plugin": "./symlink-plugin.sh"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "dependencies": {
+    "jquery-param": "^0.2.0",
     "nwb": "^0.15.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -17,7 +18,8 @@
     "react-primitives": "^0.3.4",
     "react-primitives-google-static-map": "^1.0.1",
     "react-sketchapp": "^0.9.1",
-    "react-test-renderer": "^15.4.1"
+    "react-test-renderer": "^15.4.1",
+    "sketch-module-fetch-polyfill": "^0.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
