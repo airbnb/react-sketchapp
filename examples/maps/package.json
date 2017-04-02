@@ -1,0 +1,29 @@
+{
+  "name": "maps",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start:web": "react run src/App.js",
+    "watch": "webpack --watch",
+    "link-plugin": "./symlink-plugin.sh"
+  },
+  "author": "Jon Gold <jon.gold@airbnb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nwb": "^0.15.6",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-native": "^0.42.3",
+    "react-primitives": "^0.3.4",
+    "react-primitives-google-static-map": "^1.0.1",
+    "react-sketchapp": "^0.9.1",
+    "react-test-renderer": "^15.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-airbnb": "^2.2.3",
+    "copy-webpack-plugin": "^4.0.1",
+    "webpack": "^2.3.2"
+  }
+}
