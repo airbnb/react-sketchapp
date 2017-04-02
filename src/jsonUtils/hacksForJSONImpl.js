@@ -48,7 +48,7 @@ function makeParagraphStyle(textStyle) {
 }
 
 export const makeImageDataFromUrl = (url: string): MSImageData => {
-  const imageData = NSImage.alloc().initByReferencingURL(NSURL.URLWithString(url));
+  const imageData = NSImage.alloc().initWithContentsOfURL(NSURL.URLWithString(url));
 
   return MSImageData.alloc().initWithImage_convertColorSpace(imageData, false);
 };
