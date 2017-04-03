@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#dfba69',
     borderRadius: 4,
-    overflow: 'hidden',
+    overflowY: 'scroll',
   },
   text: {
     fontFamily: 'Helvetica',
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   },
   rowWrapper: {
     padding: 16,
+    backgroundColor: '#FFF',
     borderBottomWidth: 2,
     borderBottomColor: '#dfba69',
   },
@@ -52,7 +53,7 @@ const Venue = PropTypes.shape({
 });
 
 const Row = ({ name, location }) => (
-  <View style={styles.rowWrapper}>
+  <View style={styles.rowWrapper} name={name}>
     <Text style={styles.rowTitle}>{name}</Text>
     <Text style={styles.rowSubtitle}>{location.address}</Text>
   </View>
@@ -63,10 +64,10 @@ Row.propTypes = Venue;
 const App = ({ center, venues }) => {
   const pins = venues.map(v => ({ latitude: v.location.lat, longitude: v.location.lng }));
   return (
-    <View style={styles.container}>
+    <View style={styles.container} name="Wrapper">
       <Map
         {...center}
-        zoom={13}
+        zoom={12}
         scale={1}
         hasCenterMarker={false}
         format="png"
@@ -76,7 +77,9 @@ const App = ({ center, venues }) => {
         }}
         markers={pins}
       />
-      {venues.map(v => <Row key={v.id} {...v} />)}
+      <View name="ListView">
+        {venues.map(v => <Row key={v.id} {...v} />)}
+      </View>
     </View>
   );
 };
