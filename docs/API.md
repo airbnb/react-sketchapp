@@ -325,3 +325,43 @@ A JavaScript style
 
 ### `styles`
 Find all of the registered styles. You probably don't need to use this.
+
+### `get(name)`
+Find a stored style by _name_.
+
+#### params
+##### `name`
+The style name
+
+#### Example
+```js
+const onRun = context =>
+  const typeStyles = {
+    Headline: {
+      fontSize: 36,
+      fontFamily: 'Apercu',
+      lineHeight: 38,
+    },
+    Body: {
+      fontSize: 16,
+      fontFamily: 'Helvetica',
+      lineHeight: 22,
+    },
+  };
+
+  TextStyles.create({
+    context: context,
+    clearExistingStyles: true,
+  }, typeStyles);
+
+  const Document = () =>
+    <View>
+      <Text style={TextStyle.get('Headline')}>Headline text</Text>
+      <Text style={TextStyle.get('Body')}>Body text</Text>
+    </View>
+
+  render(<Document />, context);
+```
+
+### `clear`
+Reset the registered styles.
