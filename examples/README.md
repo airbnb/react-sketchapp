@@ -6,7 +6,7 @@
 
 ### [Profile Cards](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards)
 
-### [Profile Cards w/ GraphQL](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards-gql)
+### [Profile Cards w/ GraphQL](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards-graphql)
 
 ### [Styleguide](https://github.com/airbnb/react-sketchapp/tree/master/examples/styleguide)
 
