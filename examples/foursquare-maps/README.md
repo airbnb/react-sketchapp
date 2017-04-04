@@ -7,19 +7,23 @@ curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz 
 cd foursquare-maps
 ```
 
+### Run it in Sketch
 Install the dependencies, build, and link
 ```
 npm install
-npm run build
-./symlink-plugin.sh
-```
-
-To run the web version
-```
-npm run start:web
+npm run build:sketch
+npm run link-plugin
 ```
 
 Then, open Sketch and navigate to `Plugins → react-sketchapp: Foursquare + Google Maps → Run Plugin`
+
+### Run it in your browser
+
+Install the dependencies, start server, open browser.
+```
+npm install
+npm start:web
+```
 
 ## The idea behind the example
 

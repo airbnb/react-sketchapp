@@ -13,7 +13,7 @@ Install the dependencies, build, and link
 ```
 npm install
 npm run build:sketch
-./symlink-plugin.sh
+npm run link-plugin
 ```
 
 Then, open Sketch and navigate to `Plugins → react-sketchapp: React Primitives → Run Plugin`
