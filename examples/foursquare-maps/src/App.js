@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const LatLong = {
+const LatLong = PropTypes.shape({
   latitude: PropTypes.string,
   longitude: PropTypes.string,
-};
+});
 
 const Venue = PropTypes.shape({
   name: PropTypes.string,

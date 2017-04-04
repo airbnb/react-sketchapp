@@ -1,17 +1,15 @@
-import 'sketch-module-fetch-polyfill';
 import React from 'react';
+import fetch from 'sketch-module-fetch-polyfill';
 import { Artboard, render } from 'react-sketchapp';
 import App from './App';
 import getVenues from './getVenues';
 
-const onRun = (context) => {
-  getVenues().then(({
+export default function (context) {
+  getVenues(fetch).then(({
     venues,
     latitude,
     longitude,
   }) => {
     render(<Artboard><App venues={venues} center={{ latitude, longitude }} /></Artboard>, context);
   });
-};
-
-module.exports = onRun;
+}
