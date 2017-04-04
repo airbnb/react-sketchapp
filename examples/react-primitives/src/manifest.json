@@ -1,0 +1,21 @@
+{
+  "name": "react-primitives",
+  "author": "Jon Gold",
+  "version": 0.1,
+  "compatibleVersion": 1,
+  "bundleVersion": 1,
+  "disableCocoaScriptPreprocessor": true,
+  "commands": [
+    {
+      "name": "Run Plugin",
+      "identifier": "main",
+      "script": "main.js"
+    }
+  ],
+  "menu": {
+    "title": "react-sketchapp: React Primitives",
+    "items": [
+      "main"
+    ]
+  }
+}
