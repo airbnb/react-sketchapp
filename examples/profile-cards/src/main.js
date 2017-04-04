@@ -24,7 +24,7 @@ const Page = ({ users }: { users: Array<User> }) => (
   </View>
 );
 
-const onRun = (context) => {
+export default function (context) {
   const DATA = [
     {
       screen_name: 'mxstbr',
@@ -53,6 +53,4 @@ const onRun = (context) => {
   ];
 
   render(<Page users={DATA} />, context);
-};
-
-module.exports = onRun;
+}
