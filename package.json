@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "0.8.0",
+  "version": "0.9.1",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "license": "MIT",
@@ -15,10 +15,9 @@
   ],
   "pre-commit": "lint-staged",
   "scripts": {
-    "build:plugin": "webpack -c",
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
-    "build": "npm run build:react && npm run build:plugin && npm run build:flow",
+    "build": "npm run build:react && npm run build:flow",
     "clean": "rimraf lib react-example.sketchplugin",
     "check": "npm run test && npm run flow && npm run lint",
     "docs:clean": "rimraf _book",
@@ -33,9 +32,7 @@
     "test": "jest --config .jestrc",
     "test:ci": "jest --config .jestrc --runInBand",
     "test:watch": "npm run test -- --watch",
-    "watch:plugin": "npm run build:plugin -- --watch",
-    "watch:react": "npm run build:react -- --watch",
-    "watch": "npm run watch:react & npm run watch:plugin"
+    "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
     "css-layout": "^1.1.1",
@@ -78,14 +75,11 @@
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
-    "babel-loader": "^6.2.7",
     "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "color": "^1.0.1",
-    "copy-webpack-plugin": "^4.0.1",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",
@@ -95,14 +89,11 @@
     "flow-copy-source": "^1.1.0",
     "gitbook-cli": "^2.3.0",
     "jest-cli": "^18.1.0",
-    "json-loader": "^0.5.4",
     "lint-staged": "^3.4.0",
     "pre-commit": "^1.2.2",
     "prettier-eslint-cli": "^3.1.2",
     "react": "^15.4.1",
-    "react-markdown": "^2.4.2",
     "react-test-renderer": "^15.4.1",
-    "rimraf": "^2.5.4",
-    "webpack": "^1.13.3"
+    "rimraf": "^2.5.4"
   }
 }

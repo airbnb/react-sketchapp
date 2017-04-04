@@ -1,0 +1,26 @@
+{
+  "name": "basic-skpm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "plugin.sketchplugin",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "skpm build",
+    "link-plugin": "skpm link",
+    "publish": "skpm publish"
+  },
+  "author": "Jon Gold <jon.gold@airbnb.com>",
+  "license": "MIT",
+  "manifest": "src/manifest.json",
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-react": "^6.23.0",
+    "skpm": "^0.6.2"
+  },
+  "dependencies": {
+    "chroma-js": "^1.2.2",
+    "react": "^15.4.2",
+    "react-sketchapp": "^0.9.1",
+    "react-test-renderer": "^15.4.2"
+  }
+}
