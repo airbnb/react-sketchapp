@@ -11,7 +11,7 @@ cd foursquare-maps
 Install the dependencies, build, and link
 ```
 npm install
-npm run build
+npm run build:sketch
 npm run link-plugin
 ```
 
