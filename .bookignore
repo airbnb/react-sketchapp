@@ -1,5 +1,7 @@
+.github/
 __tests__/
-example/
+examples/
 flow-typed/
 lib/
 scratch/
+src/
