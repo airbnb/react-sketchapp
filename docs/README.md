@@ -3,6 +3,7 @@
 * [Introduction](/README.md)
 * [Examples](/docs/examples.md)
 * [Guides](/docs/guides/README.md)
+    * [Data Fetching](/docs/guides/data-fetching.md)
     * [Universal Rendering](/docs/guides/universal-rendering.md)
 * [API Reference](/docs/API.md)
     * [`render`](/docs/API.md#renderelement-context)

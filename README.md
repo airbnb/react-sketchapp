@@ -23,6 +23,7 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 * [Styling](/docs/styling.md)
 * [API Reference](/docs/API.md)
 * [Universal Rendering](/docs/guides/universal-rendering.md)
+* [Data Fetching](/docs/guides/data-fetching.md)
 * [Troubleshooting](/docs/troubleshooting.md)
 * [FAQ](/docs/FAQ.md)
 
