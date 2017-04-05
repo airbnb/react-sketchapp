@@ -1,7 +1,7 @@
 ## Table of Contents
 
 * [Introduction](/README.md)
-* [Contributing](/CONTRIBUTING.md)
+* [Examples](/docs/examples.md)
 * [Styling](/docs/styling.md)
 * [Universal Rendering](/docs/guides/universal-rendering.md)
 * [API Reference](/docs/API.md)
