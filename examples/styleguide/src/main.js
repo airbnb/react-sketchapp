@@ -32,7 +32,7 @@ const Document = ({ system }: { system: DesignSystem }) => (
   </View>
 );
 
-const onRun = (context: any) => {
+export default function (context: any) {
   TextStyles.create(
     {
       context,
@@ -42,6 +42,4 @@ const onRun = (context: any) => {
   );
 
   render(<Document system={designSystem} />, context);
-};
-
-module.exports = onRun;
+}
