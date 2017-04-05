@@ -28,7 +28,7 @@ const Page = ({ users }: { users: Array<User> }) => (
   </View>
 );
 
-const onRun = (context) => {
+export default function (context) {
   const QUERY = `{
     allProfiles {
       screenname,
@@ -40,9 +40,10 @@ const onRun = (context) => {
     }
   }`;
 
-  Client(GRAPHQL_ENDPOINT).query(QUERY).then(({ allProfiles }) => {
-    render(<Page users={allProfiles} />, context);
-  });
-};
-
-module.exports = onRun;
+  Client(GRAPHQL_ENDPOINT)
+    .query(QUERY)
+    .then(({ allProfiles }) => {
+      render(<Page users={allProfiles} />, context);
+    })
+    .catch(console.log);
+}
