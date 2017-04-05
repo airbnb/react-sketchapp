@@ -1,5 +1,7 @@
 # Examples
 
+`react-sketchapp` is bundled with lots of examples!
+
 ### [Basic skpm setup](https://github.com/airbnb/react-sketchapp/tree/master/examples/basic-skpm)
 
 ### [Basic Webpack setup](https://github.com/airbnb/react-sketchapp/tree/master/examples/basic-webpack)
