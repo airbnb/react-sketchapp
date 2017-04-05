@@ -1,0 +1,5 @@
+__tests__/
+example/
+flow-typed/
+lib/
+scratch/
