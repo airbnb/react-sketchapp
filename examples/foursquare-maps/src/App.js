@@ -45,12 +45,12 @@ const LatLong = PropTypes.shape({
   longitude: PropTypes.string,
 });
 
-const Venue = PropTypes.shape({
+const Venue = {
   name: PropTypes.string,
   location: PropTypes.shape({
     address: PropTypes.string,
   }),
-});
+};
 
 const Row = ({ name, location }) => (
   <View style={styles.rowWrapper} name={name}>
@@ -85,7 +85,7 @@ const App = ({ center, venues }) => {
 };
 App.propTypes = {
   center: LatLong,
-  venues: PropTypes.arrayOf(Venue),
+  venues: PropTypes.arrayOf(PropTypes.shape(Venue)),
 };
 
 export default App;

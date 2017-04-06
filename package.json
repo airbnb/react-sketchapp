@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "0.9.1",
+  "version": "0.9.4",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "license": "MIT",
@@ -8,10 +8,6 @@
   "contributors": [
     "Ben Wilkins <ben.wilkins@airbnb.com>",
     "Leland Richardson <leland.richardson@airbnb.com>"
-  ],
-  "files": [
-    "lib",
-    "src"
   ],
   "pre-commit": "lint-staged",
   "scripts": {
