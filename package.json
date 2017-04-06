@@ -9,10 +9,6 @@
     "Ben Wilkins <ben.wilkins@airbnb.com>",
     "Leland Richardson <leland.richardson@airbnb.com>"
   ],
-  "files": [
-    "lib",
-    "src"
-  ],
   "pre-commit": "lint-staged",
   "scripts": {
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
