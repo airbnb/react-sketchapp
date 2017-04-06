@@ -1,7 +1,7 @@
 import param from 'jquery-param';
 
 export default () => {
-  const query = 'chicken';
+  const query = 'coffee';
   const latitude = '37.773972';
   const longitude = '-122.431297';
 
