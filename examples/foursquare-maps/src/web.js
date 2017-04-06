@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import App from './App';
 import getVenues from './getVenues';
 
-getVenues().then(({
+getVenues(fetch).then(({
   venues,
   latitude,
   longitude,

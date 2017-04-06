@@ -1,5 +1,10 @@
 {
   "presets": [
-    "airbnb"
+    [
+      "airbnb",
+      {
+        "modules": false
+      }
+    ]
   ]
 }
