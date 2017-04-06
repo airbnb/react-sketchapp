@@ -17,7 +17,7 @@
     "react-native": "^0.42.3",
     "react-primitives": "^0.3.4",
     "react-primitives-google-static-map": "^1.0.1",
-    "react-sketchapp": "^0.9.1",
+    "react-sketchapp": "^0.9.2",
     "react-test-renderer": "^15.4.1",
     "sketch-module-fetch-polyfill": "^0.1.2"
   },

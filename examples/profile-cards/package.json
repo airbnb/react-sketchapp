@@ -11,7 +11,7 @@
   "manifest": "src/manifest.json",
   "dependencies": {
     "react": "^15.4.2",
-    "react-sketchapp": "^0.9.1",
+    "react-sketchapp": "^0.9.2",
     "react-test-renderer": "^15.4.2"
   },
   "devDependencies": {
