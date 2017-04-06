@@ -3,13 +3,13 @@
 	"bundleVersion": 1,
 	"commands": [
 		{
-			"name": "my-command",
+			"name": "react-sketchapp: Basic skpm Example",
 			"identifier": "my-command-identifier",
 			"script": "./my-command.js"
 		}
 	],
 	"menu": {
-		"title": "react-sketchapp: Basic skpm Example",
+		"isRoot": true,
 		"items": [
 			"my-command-identifier"
 		]

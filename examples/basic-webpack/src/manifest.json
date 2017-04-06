@@ -7,13 +7,13 @@
   "disableCocoaScriptPreprocessor": true,
   "commands": [
     {
-      "name": "Run Plugin",
+      "name": "react-sketchapp: Basic Webpack Example",
       "identifier": "main",
       "script": "main.js"
     }
   ],
   "menu": {
-    "title": "react-sketchapp: Basic Webpack Example",
+    "isRoot": true,
     "items": [
       "main"
     ]

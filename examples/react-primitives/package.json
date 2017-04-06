@@ -4,9 +4,9 @@
 	"main": "plugin.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
-    "start:web": "react run src/web.js",
-    "build:sketch": "skpm build",
-    "watch:sketch": "skpm build --watch",
+    "web": "react run src/web.js",
+    "build": "skpm build",
+    "watch": "skpm build --watch",
     "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",

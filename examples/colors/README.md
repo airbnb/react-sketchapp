@@ -14,7 +14,7 @@ npm run build
 npm run link-plugin
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Webpack Example → Run Plugin`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Generative Colors`
 
 ## The idea behind the example
 

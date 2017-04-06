@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "skpm build",
+    "watch": "npm run build -- --watch",
     "link-plugin": "skpm link",
     "publish": "skpm publish"
   },

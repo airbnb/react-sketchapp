@@ -14,7 +14,7 @@ npm run build
 npm run link-plugin
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Styleguide → Run Plugin`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Styleguide`
 
 ## The idea behind the example
 

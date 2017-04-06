@@ -11,18 +11,18 @@ cd foursquare-maps
 Install the dependencies, build, and link
 ```
 npm install
-npm run build:sketch
+npm run build
 npm run link-plugin
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Foursquare + Google Maps → Run Plugin`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Foursquare + Google Maps`
 
 ### Run it in your browser
 
 Install the dependencies, start server, open browser.
 ```
 npm install
-npm start:web
+npm web
 ```
 
 ## The idea behind the example

@@ -3,13 +3,13 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "Run Plugin",
+      "name": "react-sketchapp: Foursquare + Google Maps",
       "identifier": "main",
       "script": "./main.js"
     }
   ],
   "menu": {
-    "title": "react-sketchapp: Foursquare + Google Maps",
+    "isRoot": true,
     "items": [
       "main"
     ]

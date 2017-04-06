@@ -14,7 +14,7 @@ npm run build
 npm run link-plugin
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic skpm Example → Run Plugin`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic skpm Example`
 
 ## The idea behind the example
 

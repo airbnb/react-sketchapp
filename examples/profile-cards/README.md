@@ -14,7 +14,7 @@ npm run build
 npm run link-plugin
 ```
 
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Profile Cards → Run Plugin`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Profile Cards`
 
 ## The idea behind the example
 

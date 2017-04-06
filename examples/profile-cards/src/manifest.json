@@ -3,13 +3,13 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "Run Plugin",
+      "name": "react-sketchapp: Profile Cards",
       "identifier": "main",
       "script": "./main.js"
     }
   ],
   "menu": {
-    "title": "react-sketchapp: Profile Cards",
+    "isRoot": true,
     "items": [
       "main"
     ]

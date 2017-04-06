@@ -7,13 +7,13 @@
   "disableCocoaScriptPreprocessor": true,
   "commands": [
     {
-      "name": "Run Plugin",
+      "name": "react-sketchapp: Generative Colors",
       "identifier": "main",
       "script": "main.js"
     }
   ],
   "menu": {
-    "title": "react-sketchapp: Generative Colors",
+    "isRoot": true,
     "items": [
       "main"
     ]

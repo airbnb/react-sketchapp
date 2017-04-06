@@ -3,13 +3,13 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "Run Plugin",
+      "name": "react-sketchapp: React Primitives",
       "identifier": "main",
       "script": "./main.js"
     }
   ],
   "menu": {
-    "title": "react-sketchapp: React Primitives",
+    "isRoot": true,
     "items": [
       "main"
     ]

@@ -3,13 +3,13 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "Run Plugin",
+      "name": "react-sketchapp: Styleguide",
       "identifier": "main",
       "script": "./main.js"
     }
   ],
   "menu": {
-    "title": "react-sketchapp: Styleguide",
+    "isRoot": true,
     "items": [
       "main"
     ]
