@@ -2089,8 +2089,8 @@ rc@^1.1.7:
     strip-json-comments "~2.0.1"
 
 react-sketchapp@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.2.tgz#1ba3ac23570e9e161ebf9d7caae1d0d1aa5b0882"
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.4.tgz#38bd57b1cc0a308bef4bcf0c9fbf229c0b06f3e6"
   dependencies:
     css-layout "^1.1.1"
     error-stack-parser "^2.0.0"

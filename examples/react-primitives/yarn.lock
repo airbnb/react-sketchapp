@@ -1253,16 +1253,9 @@ babel-register@^6.18.0, babel-register@^6.22.0, babel-register@^6.24.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@6.22.0:
+babel-runtime@6.22.0, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.22.0.tgz#1cf8b4ac67c77a4ddb0db2ae1f74de52ac4ca611"
-  dependencies:
-    core-js "^2.4.0"
-    regenerator-runtime "^0.10.0"
-
-babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0:
-  version "6.23.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
@@ -5548,8 +5541,8 @@ react-proxy@^1.1.7:
     react-deep-force-update "^1.0.0"
 
 react-sketchapp@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.2.tgz#1ba3ac23570e9e161ebf9d7caae1d0d1aa5b0882"
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.4.tgz#38bd57b1cc0a308bef4bcf0c9fbf229c0b06f3e6"
   dependencies:
     css-layout "^1.1.1"
     error-stack-parser "^2.0.0"
