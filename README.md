@@ -19,11 +19,13 @@ A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem
 ## Documentation
 
 * [Usage](#usage)
-* [FAQ](/docs/FAQ.md)
-* [API Reference](/docs/API.md)
+* [Examples](/docs/examples.md)
 * [Styling](/docs/styling.md)
-* [Universal Rendering](/docs/universal-rendering.md)
+* [API Reference](/docs/API.md)
+* [Universal Rendering](/docs/guides/universal-rendering.md)
+* [Data Fetching](/docs/guides/data-fetching.md)
 * [Troubleshooting](/docs/troubleshooting.md)
+* [FAQ](/docs/FAQ.md)
 
 ## Usage
 `react-sketchapp` projects are implemented as [Sketch plugins](http://developer.sketchapp.com/).

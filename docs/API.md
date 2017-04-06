@@ -1,7 +1,7 @@
 # API Reference
 
 * [`render`](#renderelement-context)
-* [`renderToJSON`](#renderToJSONelement)
+* [`renderToJSON`](#rendertojsonelement)
 * [Components](#components)
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
