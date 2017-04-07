@@ -72,7 +72,7 @@ export default function (context) {
 }
 ```
 
-Run your plugin in Sketch via `Plugins → [plugin name] → my-command`.
+Run your plugin in Sketch via `Plugins → [plugin name] → my-command`. The plugin name is determined by `src/manifest.json`
 
 Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
 
