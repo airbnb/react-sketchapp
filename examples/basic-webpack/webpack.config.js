@@ -4,6 +4,23 @@ const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const target = 'basic-webpack-example';
 
+const plugins = [
+  new CopyWebpackPlugin([{
+    from: 'src/manifest.json'
+  }])
+ ];
+
+if (process.env.RENDER === 'true') {
+  plugins.push(
+    new WebpackShellPlugin({
+      onBuildEnd: [
+        `/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool run ${target}.sketchplugin main`,
+      ],
+      dev: false,
+    })
+  );
+}
+
 module.exports = {
   entry: {
     main: './src/main.js',
@@ -25,14 +42,5 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new CopyWebpackPlugin([
-      { from: 'src/manifest.json' },
-    ]),
-    new WebpackShellPlugin({
-      onBuildExit: [
-        `/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool run ${target}.sketchplugin main`
-       ]
-    })
-  ],
+  plugins,
 };
