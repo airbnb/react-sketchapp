@@ -4589,13 +4589,9 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@2.3.2:
+nan@2.3.2, nan@^2.3.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.3.2.tgz#4d4ecf17e1da4e989efb4f273d8d00201cad087e"
-
-nan@^2.3.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.0.tgz#b9b0a907d796d0d336fd73afce24f5e1aa929934"
 
 ncname@1.0.x:
   version "1.0.0"
@@ -5724,9 +5720,9 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
-react-sketchapp@^0.9.1:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.4.tgz#38bd57b1cc0a308bef4bcf0c9fbf229c0b06f3e6"
+react-sketchapp@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.10.0.tgz#3a7cfb830f2f91e2f0ef4474b37ea7c7335dc21b"
   dependencies:
     css-layout "^1.1.1"
     error-stack-parser "^2.0.0"
@@ -6089,15 +6085,15 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.1.tgz#c2338ec643df7a1b7fe5c54fa86f57428a55f33d"
+rimraf@2, rimraf@2.5.4, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
   dependencies:
     glob "^7.0.5"
 
-rimraf@2.5.4, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
+rimraf@^2.5.1, rimraf@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.1.tgz#c2338ec643df7a1b7fe5c54fa86f57428a55f33d"
   dependencies:
     glob "^7.0.5"
 

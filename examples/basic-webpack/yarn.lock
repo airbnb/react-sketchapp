@@ -2080,9 +2080,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-sketchapp@^0.9.2:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.4.tgz#38bd57b1cc0a308bef4bcf0c9fbf229c0b06f3e6"
+react-sketchapp@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.10.0.tgz#3a7cfb830f2f91e2f0ef4474b37ea7c7335dc21b"
   dependencies:
     css-layout "^1.1.1"
     error-stack-parser "^2.0.0"

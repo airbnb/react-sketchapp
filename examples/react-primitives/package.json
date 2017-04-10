@@ -1,7 +1,7 @@
 {
   "name": "react-primitives",
   "private": true,
-	"main": "plugin.sketchplugin",
+  "main": "plugin.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
     "web": "react run src/web.js",
@@ -17,7 +17,7 @@
     "react-dom": "^15.4.2",
     "react-native": "^0.42.3",
     "react-primitives": "^0.3.4",
-    "react-sketchapp": "^0.9.1",
+    "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {

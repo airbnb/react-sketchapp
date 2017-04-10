@@ -5739,7 +5739,20 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
-react-sketchapp@^0.9.1, react-sketchapp@^0.9.2:
+react-sketchapp@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.10.0.tgz#3a7cfb830f2f91e2f0ef4474b37ea7c7335dc21b"
+  dependencies:
+    css-layout "^1.1.1"
+    error-stack-parser "^2.0.0"
+    invariant "^2.2.2"
+    murmur2js "^1.0.0"
+    normalize-css-color "^1.0.1"
+    sketch-constants "^1.0.2"
+    sketchapp-json-flow-types "^0.0.3"
+    sketchapp-json-plugin "^0.0.3"
+
+react-sketchapp@^0.9.1:
   version "0.9.4"
   resolved "https://registry.yarnpkg.com/react-sketchapp/-/react-sketchapp-0.9.4.tgz#38bd57b1cc0a308bef4bcf0c9fbf229c0b06f3e6"
   dependencies:

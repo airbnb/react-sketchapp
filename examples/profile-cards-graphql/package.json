@@ -8,12 +8,12 @@
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
-	"main": "plugin.sketchplugin",
+  "main": "plugin.sketchplugin",
   "manifest": "src/manifest.json",
   "dependencies": {
     "gql-sketch": "^1.0.1",
     "react": "^15.4.2",
-    "react-sketchapp": "^0.9.2",
+    "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.2",
     "sketch-module-fetch-polyfill": "^0.1.3"
   },
