@@ -1,5 +1,7 @@
+const livereload = require('rollup-plugin-sketch-livereload')
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
+const { main } = require('./package.json');
 
 module.exports = {
   plugins: [
@@ -24,5 +26,9 @@ module.exports = {
         ],
       },
     }),
+    livereload({
+      enabled: process.env.RENDER === true,
+      bundle: main,
+    })
   ],
 };

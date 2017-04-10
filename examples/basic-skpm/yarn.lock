@@ -1783,6 +1783,12 @@ rollup-plugin-replace@^1.1.1:
     minimatch "^3.0.2"
     rollup-pluginutils "^1.5.0"
 
+rollup-plugin-sketch-livereload@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-sketch-livereload/-/rollup-plugin-sketch-livereload-1.0.1.tgz#f2b5ed62cac674061edc81c76fe75970705c99c0"
+  dependencies:
+    babel-eslint "^7.2.1"
+
 rollup-pluginutils@^1.5.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-1.5.2.tgz#1e156e778f94b7255bfa1b3d0178be8f5c552408"

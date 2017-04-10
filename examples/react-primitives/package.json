@@ -7,6 +7,8 @@
     "web": "react run src/web.js",
     "build": "skpm build",
     "watch": "skpm build --watch",
+    "render": "RENDER=true npm run watch",
+    "render:once": "RENDER=true npm run build",
     "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
@@ -24,6 +26,7 @@
     "babel-preset-airbnb": "^2.2.3",
     "rollup-plugin-commonjs": "8.0.2",
     "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-sketch-livereload": "^1.0.1",
     "skpm": "^0.7.2"
   }
 }

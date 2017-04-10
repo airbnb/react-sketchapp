@@ -4,11 +4,11 @@
   "description": "",
   "main": "plugin.sketchplugin",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "skpm build",
     "watch": "npm run build -- --watch",
-    "link-plugin": "skpm link",
-    "publish": "skpm publish"
+    "render": "RENDER=true npm run watch",
+    "render:once": "RENDER=true npm run build",
+    "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-react": "^6.23.0",
+    "rollup-plugin-sketch-livereload": "^1.0.1",
     "skpm": "^0.7.2"
   },
   "dependencies": {

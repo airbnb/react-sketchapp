@@ -1,5 +1,7 @@
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
+const livereload = require('rollup-plugin-sketch-livereload')
+const { main } = require('./package.json');
 
 module.exports = {
   plugins: [
@@ -23,6 +25,10 @@ module.exports = {
           'Platform',
         ],
       },
+    }),
+    livereload({
+      enabled: process.env.render === 'true',
+      bundle: main,
     }),
   ],
 };
