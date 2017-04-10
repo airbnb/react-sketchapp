@@ -1,5 +1,25 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
+const target = 'basic-webpack-example';
+
+const plugins = [
+  new CopyWebpackPlugin([{
+    from: 'src/manifest.json'
+  }])
+ ];
+
+if (process.env.RENDER === 'true') {
+  plugins.push(
+    new WebpackShellPlugin({
+      onBuildEnd: [
+        `/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool run ${target}.sketchplugin main`,
+      ],
+      dev: false,
+    })
+  );
+}
 
 module.exports = {
   entry: {
@@ -9,7 +29,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     library: 'onRun',
-    path: path.join(__dirname, 'basic-webpack-example.sketchplugin/Contents/Sketch'),
+    path: path.join(__dirname, `${target}.sketchplugin/Contents/Sketch`),
   },
 
   module: {
@@ -22,9 +42,5 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new CopyWebpackPlugin([
-      { from: 'src/manifest.json' },
-    ]),
-  ],
+  plugins,
 };

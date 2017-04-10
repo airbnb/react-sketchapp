@@ -41,5 +41,5 @@ export default function (context: any) {
     designSystem.fonts,
   );
 
-  render(<Document system={designSystem} />, context);
+  render(<Document system={designSystem} />, context.document.currentPage());
 }

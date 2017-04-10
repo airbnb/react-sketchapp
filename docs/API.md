@@ -1,6 +1,6 @@
 # API Reference
 
-* [`render`](#renderelement-context)
+* [`render`](#renderelement-container)
 * [`renderToJSON`](#rendertojsonelement)
 * [Components](#components)
   * [`<Artboard>`](#artboard)
@@ -22,14 +22,14 @@
   * [`create`](#createstyleoptionsstyles)
   * [`resolve`](#resolvestyle)
 
-### `render(element, context)`
+### `render(element, container)`
 Returns the top-level rendered Sketch object.
 
 #### params
 ##### `element` (required)
 
-##### `context` (required)
-The Sketch context passed to a plugin
+##### `container` (required)
+The element to render into - will be replaced. Should either be a Group or a Page — usually you should use `context.document.currentPage()`
 
 ### returns
 The top-most rendered native Sketch layer.
@@ -42,7 +42,7 @@ const Document = props =>
   </View>;
 
 const onRun = context =>
-  render(<Document />, context);
+  render(<Document />, context.document.currentPage());
 ```
 
 ### `renderToJSON(element)`
@@ -117,9 +117,9 @@ A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-re
 ```js
 const onRun = context => {
   try {
-    render(<BrokenComponent />, context);
+    render(<BrokenComponent />, context.document.currentPage());
   } catch (err) {
-    render(<RedBox error={err} />, context);
+    render(<RedBox error={err} />, context.document.currentPage());
   }
 }
 ```
@@ -313,7 +313,7 @@ const onRun = context =>
       <Text style={styles.Body}>Body text</Text>
     </View>
 
-  render(<Document />, context);
+  render(<Document />, context.document.currentPage());
 ```
 
 ### `resolve(style)`
@@ -360,7 +360,7 @@ const onRun = context =>
       <Text style={TextStyle.get('Body')}>Body text</Text>
     </View>
 
-  render(<Document />, context);
+  render(<Document />, context.document.currentPage());
 ```
 
 ### `clear`

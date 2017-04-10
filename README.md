@@ -68,7 +68,7 @@ const Document = props =>
   </View>;
 
 export default function (context) {
-  render(<Document />, context);
+  render(<Document />, context.document.currentPage());
 }
 ```
 

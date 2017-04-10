@@ -2,8 +2,10 @@
   "name": "colors",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "webpack ",
     "watch": "webpack --watch",
+    "render": "RENDER=true npm run watch",
+    "render:once": "RENDER=true npm run build",
     "link-plugin": "./symlink-plugin.sh"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
@@ -13,7 +15,8 @@
     "ramda": "^0.23.0",
     "react": "^15.4.2",
     "react-sketchapp": "^0.9.2",
-    "react-test-renderer": "^15.4.1"
+    "react-test-renderer": "^15.4.1",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",

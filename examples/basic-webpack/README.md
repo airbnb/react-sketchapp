@@ -7,15 +7,11 @@ curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz 
 cd basic-webpack
 ```
 
-Install the dependencies, build, and link
+Install the dependencies and start rendering
 ```
 npm install
-npm run build
-npm run link-plugin
+npm run render
 ```
-
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Webpack Example`
-
 ## The idea behind the example
 
 Using Webpack to build `react-sketchapp` apps requires a little bit of configuration - use this as an example.

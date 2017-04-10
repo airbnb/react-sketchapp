@@ -20,7 +20,7 @@ const onRun = (context) => {
   fetch('https://reqres.in/api/users')
   .then(res => res.json())
   .then(data => {
-    render(<MyApp users={data.users} />, context);
+    render(<MyApp users={data.users} />, context.document.currentPage());
   })
 }
 ```
@@ -53,7 +53,7 @@ const onRun = (context) => {
     }
   `).then(
     ({ allFilms }) => {
-      render(<MyApp films={allFilms} />, context);
+      render(<MyApp films={allFilms} />, context.document.currentPage());
     }
   )
 }

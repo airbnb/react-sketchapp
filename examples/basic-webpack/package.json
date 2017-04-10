@@ -4,6 +4,8 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
+    "render": "RENDER=true npm run watch",
+    "render:once": "RENDER=true npm run build",
     "link-plugin": "./symlink-plugin.sh"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
@@ -18,6 +20,7 @@
     "babel-loader": "^6.2.8",
     "babel-preset-airbnb": "^2.2.3",
     "copy-webpack-plugin": "^4.0.1",
-    "webpack": "^2.3.2"
+    "webpack": "^2.3.2",
+    "webpack-shell-plugin": "^0.5.0"
   }
 }

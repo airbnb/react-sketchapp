@@ -107,7 +107,7 @@ import { render } from 'react-sketchapp';
 import Row from './components/Row';
 
 const onRun = (context) =>
-  render(<Row title='Foo' subtitle='Bar' />, context);
+  render(<Row title='Foo' subtitle='Bar' />, context.document.currentPage());
 
 module.exports = onRun;
 ```
@@ -123,7 +123,7 @@ import { Artboard, render } from 'react-sketchapp';
 import Row from './components/Row'; // built with react-primitives
 
 const onRun = (context) =>
-  render(<Artboard><Row title='Foo' subtitle='Bar' /></Artboard>, context);
+  render(<Artboard><Row title='Foo' subtitle='Bar' /></Artboard>, context.document.currentPage());
 
 module.exports = onRun;
 ```
