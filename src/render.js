@@ -16,7 +16,7 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
 const renderToSketch = (node: TreeNode, page: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
-  page.addLayers([layer]);
+  page.replaceAllLayersWithLayers([layer]);
   return page;
 };
 
