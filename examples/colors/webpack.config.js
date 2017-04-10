@@ -1,5 +1,8 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
+const target = 'colors';
 
 module.exports = {
   entry: {
@@ -9,7 +12,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     library: 'onRun',
-    path: path.join(__dirname, 'colors.sketchplugin/Contents/Sketch'),
+    path: path.join(__dirname, `${target}.sketchplugin/Contents/Sketch`),
   },
 
   module: {
@@ -26,5 +29,10 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'src/manifest.json' },
     ]),
+    new WebpackShellPlugin({
+      onBuildExit: [
+        `/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool run ${target}.sketchplugin main`
+       ]
+    })
   ],
 };
