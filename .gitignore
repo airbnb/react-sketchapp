@@ -4,3 +4,4 @@ node_modules
 lib
 react-example.sketchplugin
 _book
+.vscode
