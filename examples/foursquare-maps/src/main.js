@@ -10,6 +10,6 @@ export default function (context) {
     latitude,
     longitude,
   }) => {
-    render(<Artboard><App venues={venues} center={{ latitude, longitude }} /></Artboard>, context);
+    render(<Artboard><App venues={venues} center={{ latitude, longitude }} /></Artboard>, context.document.currentPage());
   });
 }

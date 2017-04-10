@@ -43,7 +43,7 @@ export default function (context) {
   Client(GRAPHQL_ENDPOINT)
     .query(QUERY)
     .then(({ allProfiles }) => {
-      render(<Page users={allProfiles} />, context);
+      render(<Page users={allProfiles} />, context.document.currentPage());
     })
     .catch(console.log);
 }

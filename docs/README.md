@@ -6,7 +6,7 @@
     * [Data Fetching](/docs/guides/data-fetching.md)
     * [Universal Rendering](/docs/guides/universal-rendering.md)
 * [API Reference](/docs/API.md)
-    * [`render`](/docs/API.md#renderelement-context)
+    * [`render`](/docs/API.md#renderelement-container)
     * [`renderToJSON`](/docs/API.md#rendertojsonelement)
     * [`<Artboard />`](/docs/API.md#artboard)
     * [`<Image />`](/docs/API.md#image)

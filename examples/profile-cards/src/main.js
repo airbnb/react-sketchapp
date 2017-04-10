@@ -52,5 +52,5 @@ export default function (context) {
     },
   ];
 
-  render(<Page users={DATA} />, context);
+  render(<Page users={DATA} />, context.document.currentPage());
 }
