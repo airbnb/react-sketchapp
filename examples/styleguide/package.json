@@ -1,11 +1,13 @@
 {
   "name": "styleguide",
   "private": true,
-	"main": "plugin.sketchplugin",
+  "main": "styleguide.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",
     "watch": "skpm build --watch",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
     "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
@@ -13,11 +15,10 @@
   "dependencies": {
     "chroma-js": "^1.2.2",
     "react": "^15.4.2",
-    "react-sketchapp": "^0.9.2",
+    "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.2"
   },
   "devDependencies": {
-    "babel-preset-airbnb": "^2.2.3",
-    "skpm": "^0.7.2"
+    "skpm": "^0.8.0"
   }
 }

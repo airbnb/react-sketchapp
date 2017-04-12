@@ -4,14 +4,14 @@
 	"commands": [
 		{
 			"name": "react-sketchapp: Basic skpm Example",
-			"identifier": "my-command-identifier",
+			"identifier": "main",
 			"script": "./my-command.js"
 		}
 	],
 	"menu": {
 		"isRoot": true,
 		"items": [
-			"my-command-identifier"
+			"main"
 		]
 	}
 }

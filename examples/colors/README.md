@@ -7,12 +7,21 @@ curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz 
 cd colors
 ```
 
-Install the dependencies and start rendering
+Install the dependencies
 ```
 npm install
+```
+
+Run with live reloading in Sketch
+```
 npm run render
 ```
 
+To install as a Sketch plugin:
+```
+npm run build
+npm run link-plugin
+```
 Then, open Sketch and navigate to `Plugins → react-sketchapp: Generative Colors`
 
 ## The idea behind the example

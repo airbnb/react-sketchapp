@@ -1,12 +1,14 @@
 {
   "name": "colors",
   "private": true,
+  "main": "colors.sketchplugin",
+  "manifest": "src/manifest.json",
   "scripts": {
-    "build": "webpack ",
-    "watch": "webpack --watch",
-    "render": "RENDER=true npm run watch",
-    "render:once": "RENDER=true npm run build",
-    "link-plugin": "./symlink-plugin.sh"
+    "build": "skpm build",
+    "watch": "skpm build --watch",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
+    "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
@@ -14,15 +16,11 @@
     "chroma-js": "^1.2.2",
     "ramda": "^0.23.0",
     "react": "^15.4.2",
-    "react-sketchapp": "^0.9.2",
+    "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.1",
     "webpack-shell-plugin": "^0.5.0"
   },
   "devDependencies": {
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.8",
-    "babel-preset-airbnb": "^2.2.3",
-    "copy-webpack-plugin": "^4.0.1",
-    "webpack": "^2.3.2"
+    "skpm": "^0.8.0"
   }
 }

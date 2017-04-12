@@ -7,9 +7,18 @@ curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz 
 cd profile-cards
 ```
 
-Install the dependencies, build, and link
+Install the dependencies
 ```
 npm install
+```
+
+Run with live reloading in Sketch
+```
+npm run render
+```
+
+To install as a Sketch plugin:
+```
 npm run build
 npm run link-plugin
 ```

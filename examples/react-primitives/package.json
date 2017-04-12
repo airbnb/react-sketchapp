@@ -1,13 +1,15 @@
 {
   "name": "react-primitives",
   "private": true,
-	"main": "plugin.sketchplugin",
+  "main": "react-primitives.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
-    "web": "react run src/web.js",
     "build": "skpm build",
     "watch": "skpm build --watch",
-    "link-plugin": "skpm link"
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
+    "link-plugin": "skpm link",
+    "web": "react run src/web.js"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
@@ -17,13 +19,10 @@
     "react-dom": "^15.4.2",
     "react-native": "^0.42.3",
     "react-primitives": "^0.3.4",
-    "react-sketchapp": "^0.9.1",
+    "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
-    "babel-preset-airbnb": "^2.2.3",
-    "rollup-plugin-commonjs": "8.0.2",
-    "rollup-plugin-node-resolve": "3.0.0",
-    "skpm": "^0.7.2"
+    "skpm": "^0.8.0"
   }
 }
