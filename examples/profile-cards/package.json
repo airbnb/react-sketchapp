@@ -1,25 +1,23 @@
 {
   "name": "profile-cards",
   "private": true,
+  "main": "profile-cards.sketchplugin",
+  "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",
     "watch": "skpm build --watch",
-    "render": "RENDER=true npm run watch",
-    "render:once": "RENDER=true npm run build",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
     "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
-  "main": "plugin.sketchplugin",
-  "manifest": "src/manifest.json",
   "dependencies": {
     "react": "^15.4.2",
     "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.2"
   },
   "devDependencies": {
-    "babel-preset-airbnb": "^2.2.3",
-    "rollup-plugin-sketch-livereload": "^1.0.1",
-    "skpm": "^0.7.2"
+    "skpm": "^0.8.0"
   }
 }

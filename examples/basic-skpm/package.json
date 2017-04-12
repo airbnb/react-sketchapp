@@ -2,22 +2,19 @@
   "name": "basic-skpm",
   "version": "1.0.0",
   "description": "",
-  "main": "plugin.sketchplugin",
+  "main": "basic-skpm.sketchplugin",
+  "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",
-    "watch": "npm run build -- --watch",
-    "render": "RENDER=true npm run watch",
-    "render:once": "RENDER=true npm run build",
+    "watch": "skpm build --watch",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
     "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
-  "manifest": "src/manifest.json",
   "devDependencies": {
-    "babel-preset-es2015-rollup": "^3.0.0",
-    "babel-preset-react": "^6.23.0",
-    "rollup-plugin-sketch-livereload": "^1.0.1",
-    "skpm": "^0.7.2"
+    "skpm": "^0.8.0"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",

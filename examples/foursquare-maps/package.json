@@ -1,13 +1,14 @@
 {
   "name": "foursquare-maps",
   "private": true,
-  "main": "plugin.sketchplugin",
+  "main": "foursquare-maps.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",
-    "watch": "npm run build -- --watch",
-    "render": "RENDER=true npm run watch",
-    "render:once": "RENDER=true npm run build",
+    "watch": "skpm build --watch",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
+    "web": "react run src/web.js",
     "link-plugin": "skpm link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
@@ -25,10 +26,6 @@
     "sketch-module-fetch-polyfill": "0.1.2"
   },
   "devDependencies": {
-    "babel-preset-airbnb": "^2.2.3",
-    "rollup-plugin-commonjs": "8.0.2",
-    "rollup-plugin-node-resolve": "3.0.0",
-    "rollup-plugin-sketch-livereload": "^1.0.1",
-    "skpm": "^0.7.2"
+    "skpm": "^0.8.0"
   }
 }
