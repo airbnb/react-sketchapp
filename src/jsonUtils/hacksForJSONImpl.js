@@ -3,10 +3,9 @@
 import type { SJTextStyle } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from 'sketchapp-json-plugin';
-import normalizeColor from 'normalize-css-color';
 import findFont from '../utils/findFont';
 import type { TextStyle } from '../types';
-import { generateID } from './models';
+import { generateID, makeColorFromCSS } from './models';
 
 export const TEXT_ALIGN = {
   auto: TextAlignment.Left,
@@ -57,16 +56,16 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
 export function makeAttributedString(string: ?string, textStyle: TextStyle) {
   const font = findFont(textStyle);
 
-  const color = normalizeColor.rgba(normalizeColor(textStyle.color || 'black'));
+  const color = makeColorFromCSS(textStyle.color || 'black');
 
   const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSParagraphStyle: makeParagraphStyle(textStyle),
     NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
-      color.r / 255,
-      color.g / 255,
-      color.b / 255,
-      color.a,
+      color.red,
+      color.green,
+      color.blue,
+      color.alpha,
     ),
   };
 
@@ -89,7 +88,7 @@ export function makeTextStyle(textStyle: TextStyle) {
 
   const font = findFont(textStyle);
 
-  const color = normalizeColor.rgba(normalizeColor(textStyle.color || 'black'));
+  const color = makeColorFromCSS(textStyle.color || 'black');
 
   const value: SJTextStyle = {
     _class: 'textStyle',
@@ -97,10 +96,10 @@ export function makeTextStyle(textStyle: TextStyle) {
       MSAttributedStringFontAttribute: encodeSketchJSON(font.fontDescriptor()),
       NSColor: encodeSketchJSON(
         NSColor.colorWithDeviceRed_green_blue_alpha(
-          color.r / 255,
-          color.g / 255,
-          color.b / 255,
-          color.a,
+          color.red,
+          color.green,
+          color.blue,
+          color.alpha,
         ),
       ),
       NSParagraphStyle: encodeSketchJSON(pStyle),

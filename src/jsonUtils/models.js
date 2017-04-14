@@ -22,9 +22,17 @@ export function generateID(): string {
   return e7();
 }
 
-// Takes 'white', '#fff', &c
+const safeToLower = (input: Color): Color => {
+  if (typeof input === 'string') {
+    return input.toLowerCase();
+  }
+
+  return input;
+};
+
+// Takes colors as CSS hex, name, rgb, rgba, hsl or hsla
 export const makeColorFromCSS = (input: Color): SJColor => {
-  const nullableColor: ?number = normalizeColor(input);
+  const nullableColor: ?number = normalizeColor(safeToLower(input));
   const colorInt: number = nullableColor == null ? 0x00000000 : nullableColor;
   const { r, g, b, a } = normalizeColor.rgba(colorInt);
 
