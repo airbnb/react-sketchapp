@@ -52,10 +52,10 @@ const Document = ({ colors }) => (
 );
 
 Document.propTypes = {
-  colors: React.PropTypes.arrayOf(React.PropTypes.shape(...Color)).isRequired,
+  colors: React.PropTypes.objectOf(React.PropTypes.string).isRequired,
 };
 
-export default function (context) {
+export default (context) => {
   const colorList = {
     Haus: '#F3F4F4',
     Night: '#333',

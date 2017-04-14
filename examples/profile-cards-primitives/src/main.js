@@ -9,7 +9,7 @@ import DATA from './data';
 
 const Page = ({ users }: { users: Array<User> }) => (
   <View>
-    <Text style={fonts['Title 1']}>Profile Cards</Text>
+    <Text style={fonts['Title 1']}>Profile Cards w/ React Primitives</Text>
     <View
       style={{
         flexDirection: 'row',
@@ -26,6 +26,6 @@ const Page = ({ users }: { users: Array<User> }) => (
   </View>
 );
 
-export default function (context) {
+export default (context) => {
   render(<Page users={DATA} />, context.document.currentPage());
 }

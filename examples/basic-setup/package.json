@@ -1,8 +1,8 @@
 {
-  "name": "basic-skpm",
+  "name": "basic-setup",
   "version": "1.0.0",
   "description": "",
-  "main": "basic-skpm.sketchplugin",
+  "main": "basic-setup.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",

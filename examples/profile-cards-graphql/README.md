@@ -17,7 +17,7 @@ Run with live reloading in Sketch
 npm run render
 ```
 
-To install as a Sketch plugin:
+Or, to install as a Sketch plugin:
 ```
 npm run build
 npm run link-plugin

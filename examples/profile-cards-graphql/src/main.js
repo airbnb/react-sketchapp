@@ -11,7 +11,7 @@ const GRAPHQL_ENDPOINT = 'https://api.graph.cool/simple/v1/cj09zm1k4jcpc0115ecso
 
 const Page = ({ users }: { users: Array<User> }) => (
   <View>
-    <Text style={fonts['Title 1']}>Profile Cards</Text>
+    <Text style={fonts['Title 1']}>Profile Cards w/ GraphQL</Text>
     <View
       style={{
         flexDirection: 'row',
@@ -28,7 +28,7 @@ const Page = ({ users }: { users: Array<User> }) => (
   </View>
 );
 
-export default function (context) {
+export default (context) => {
   const QUERY = `{
     allProfiles {
       screenname,

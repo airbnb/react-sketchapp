@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions are welcome and are greatly appreciated! Every little bit helps, and credit will always be given. By contributing, you agree to abide by the [code of conduct](https://github.com/airbnb/react-sketchapp/blog/master/CODE_OF_CONDUCT.md).
+Contributions are welcome and are greatly appreciated! Every little bit helps, and credit will always be given. By contributing, you agree to abide by the [code of conduct](https://github.com/airbnb/react-sketchapp/blob/master/CODE_OF_CONDUCT.md).
 
 ## Reporting Issues and Asking Questions
 

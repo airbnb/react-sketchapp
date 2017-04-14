@@ -41,8 +41,9 @@ const Document = props =>
     <Text>Hello world!</Text>
   </View>;
 
-const onRun = context =>
+export default (context) => {
   render(<Document />, context.document.currentPage());
+}
 ```
 
 ### `renderToJSON(element)`
@@ -58,7 +59,7 @@ The top-most Sketch layer as JSON.
 ### `<Artboard>`
 Wrapper for Sketch's artboards.
 
-#### Props
+#### props
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | `name` | `String` | | The name to be displayed in the Sketch Layer List |
@@ -107,6 +108,7 @@ type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
 
 ### `<RedBox>`
 A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react)
+--SUGGESTION: can you give a screenshot of what this looks like?
 
 #### Props
 | Prop | Type | Default | Note |
@@ -115,7 +117,7 @@ A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-re
 
 #### Example
 ```js
-const onRun = context => {
+export default (context) => {
   try {
     render(<BrokenComponent />, context.document.currentPage());
   } catch (err) {
@@ -190,6 +192,7 @@ View primitives
 ##### `obj`
 
 ## StyleSheet
+Compared to single-use `style` objects, `StyleSheets` enable creation of re-usable, optimized style references.
 
 ### `hairlineWidth`
 The platform's global 'hairline width'
@@ -266,7 +269,7 @@ const styles = StyleSheet.create({
 });
 
 StyleSheet.resolve(styles.foo);
-// { style: { fontSize: 24, color: 'red' } }
+// { fontSize: 24, color: 'red' }
 ```
 
 ## TextStyles
@@ -276,9 +279,9 @@ An interface to Sketch's shared text styles. Create styles with or without rende
 The primary interface to TextStyles. **Call this before rendering**.
 
 #### params
-##### `options: { context, styles }`
+##### `options: { context, clearExistingStyles }`
 ###### `context` **(required)**
-The Sketch API context from the main plugin `onRun` function.
+The Sketch API context.
 
 ###### `clearExistingStyles`
 Clear any styles already registered in the document.
@@ -288,7 +291,7 @@ An object of JavaScript styles. The keys will be used as Sketch's Text Style nam
 
 #### Example
 ```js
-const onRun = context =>
+export default (context) => {
   const typeStyles = {
     Headline: {
       fontSize: 36,
@@ -314,6 +317,7 @@ const onRun = context =>
     </View>
 
   render(<Document />, context.document.currentPage());
+}
 ```
 
 ### `resolve(style)`
@@ -335,7 +339,7 @@ The style name
 
 #### Example
 ```js
-const onRun = context =>
+export default (context) => {
   const typeStyles = {
     Headline: {
       fontSize: 36,
@@ -361,6 +365,7 @@ const onRun = context =>
     </View>
 
   render(<Document />, context.document.currentPage());
+}
 ```
 
 ### `clear`

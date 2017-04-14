@@ -16,16 +16,16 @@ import fetch from 'sketch-module-fetch-polyfill'
 import { render } from 'react-sketchapp';
 import MyApp from './MyApp';
 
-const onRun = (context) => {
+export default (context) => {
   fetch('https://reqres.in/api/users')
   .then(res => res.json())
   .then(data => {
     render(<MyApp users={data.users} />, context.document.currentPage());
-  })
+  });
 }
 ```
 
-## GraphQl
+## GraphQL
 
 [Full example](https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards-graphql)
 
@@ -40,7 +40,7 @@ import Client from 'gql-sketch';
 import { render } from 'react-sketchapp';
 import MyApp from './MyApp';
 
-const onRun = (context) => {
+export default (context) => {
   Client('http://example.com/my-graphql-endpoint').query(`
     {
       allFilms {
@@ -55,6 +55,6 @@ const onRun = (context) => {
     ({ allFilms }) => {
       render(<MyApp films={allFilms} />, context.document.currentPage());
     }
-  )
+  );
 }
 ```

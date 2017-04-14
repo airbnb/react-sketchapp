@@ -32,7 +32,7 @@ const Document = ({ system }: { system: DesignSystem }) => (
   </View>
 );
 
-export default function (context: any) {
+export default (context: any) => {
   TextStyles.create(
     {
       context,

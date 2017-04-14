@@ -7,10 +7,19 @@ curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz 
 cd foursquare-maps
 ```
 
-### Run it in Sketch
-Install the dependencies, build, and link
+Install the dependencies
 ```
 npm install
+```
+
+### Run it in Sketch
+Run with live reloading in Sketch
+```
+npm run render
+```
+
+Or, to install as a Sketch plugin:
+```
 npm run build
 npm run link-plugin
 ```
@@ -19,11 +28,11 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Foursquare + Goo
 
 ### Run it in your browser
 
-Install the dependencies, start server, open browser.
 ```
-npm install
-npm web
+npm run web
 ```
+
+Open a browser to `http://localhost:3000`
 
 ## The idea behind the example
 

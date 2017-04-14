@@ -1,95 +1,91 @@
 # Styling
-
 Components use CSS styles + flexbox layout.
 
 #### Layout Styles
-```javascript
-export type ViewStyle = {
-  // shadowColor: Color,
-  // shadowOffset: { width: number, height: number },
-  // shadowOpacity: number,
-  // shadowRadius: number,
-  width: number,
-  height: number,
-  top: number,
-  left: number,
-  right: number,
-  bottom: number,
-  minWidth: number,
-  maxWidth: number,
-  minHeight: number,
-  maxHeight: number,
-  margin: number,
-  marginVertical: number,
-  marginHorizontal: number,
-  marginTop: number,
-  marginBottom: number,
-  marginLeft: number,
-  marginRight: number,
-  padding: number,
-  paddingVertical: number,
-  paddingHorizontal: number,
-  paddingTop: number,
-  paddingBottom: number,
-  paddingLeft: number,
-  paddingRight: number,
-  borderWidth: number,
-  borderTopWidth: number,
-  borderRightWidth: number,
-  borderBottomWidth: number,
-  borderLeftWidth: number,
-  position: 'absolute' | 'relative',
-  flexDirection: 'row' | 'row-reverse' | 'column' | 'column-reverse',
-  flexWrap: 'wrap' | 'nowrap',
-  justifyContent: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around',
-  alignItems: 'flex-start' | 'flex-end' | 'center' | 'stretch',
-  alignSelf: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch',
-  // overflow: 'visible' | 'hidden' | 'scroll',
-  flex: number,
-  flexGrow: number,
-  flexShrink: number,
-  flexBasis: number,
-  // aspectRatio: number,
-  zIndex: number,
-  // backfaceVisibility: 'visible' | 'hidden',
-  backgroundColor: Color,
-  borderColor: Color,
-  borderTopColor: Color,
-  borderRightColor: Color,
-  borderBottomColor: Color,
-  borderLeftColor: Color,
-  borderRadius: number,
-  borderTopLeftRadius: number,
-  borderTopRightRadius: number,
-  borderBottomLeftRadius: number,
-  borderBottomRightRadius: number,
-  borderStyle: 'solid' | 'dotted' | 'dashed',
-  borderWidth: number,
-  borderTopWidth: number,
-  borderRightWidth: number,
-  borderBottomWidth: number,
-  borderLeftWidth: number,
-  opacity: number,
+| property | type | supported? |
+| -------- | ---- | ---------- |
+| `shadowColor` | `Color` | ⛔️ |
+| `shadowOffset` | `{ width: number, height: number }` | ✅ |
+| `shadowOpacity` | `number` | ✅ |
+| `shadowRadius` | `number` | ✅ |
+| `width` | `number` | ✅ |
+| `height` | `number` | ✅ |
+| `top` | `number` | ✅ |
+| `left` | `number` | ✅ |
+| `right` | `number` | ✅ |
+| `bottom` | `number` | ✅ |
+| `minWidth` | `number` | ✅ |
+| `maxWidth` | `number` | ✅ |
+| `minHeight` | `number` | ✅ |
+| `maxHeight` | `number` | ✅ |
+| `margin` | `number` | ✅ |
+| `marginVertical` | `number` | ✅ |
+| `marginHorizontal` | `number` | ✅ |
+| `marginTop` | `number` | ✅ |
+| `marginBottom` | `number` | ✅ |
+| `marginLeft` | `number` | ✅ |
+| `marginRight` | `number` | ✅ |
+| `padding` | `number` | ✅ |
+| `paddingVertical` | `number` | ✅ |
+| `paddingHorizontal` | `number` | ✅ |
+| `paddingTop` | `number` | ✅ |
+| `paddingBottom` | `number` | ✅ |
+| `paddingLeft` | `number` | ✅ |
+| `paddingRight` | `number` | ✅ |
+| `borderWidth` | `number` | ✅ |
+| `borderTopWidth` | `number` | ✅ |
+| `borderRightWidth` | `number` | ✅ |
+| `borderBottomWidth` | `number` | ✅ |
+| `borderLeftWidth` | `number` | ✅ |
+| `position` | `absolute` &#124; `relative` | ✅ |
+| `flexDirection` | `row` &#124; `row-reverse` &#124; `column` &#124; `column-reverse` | ✅ |
+| `flexWrap` | `wrap` &#124; `nowrap` | ✅ |
+| `justifyContent` | `flex-start` &#124; `flex-end` &#124; `center` &#124; `space-between` &#124; `space-around` | ✅ |
+| `alignItems` | `flex-start` &#124; `flex-end` &#124; `center` &#124; `stretch` | ✅ |
+| `alignSelf` | `auto` &#124; `flex-start` &#124; `flex-end` &#124; `center` &#124; `stretch` | ✅ |
+| `overflow` | `visible` &#124; `hidden` &#124; `scroll` | ✅ |
+| `flex` | `number` | ✅ |
+| `flexGrow` | `number` | ✅ |
+| `flexShrink` | `number` | ✅ |
+| `flexBasis` | `number` | ✅ |
+| `aspectRatio` | `number` | ⛔️ |
+| `zIndex` | `number` | ✅ |
+| `backfaceVisibility` | `visible` &#124; `hidden` | ⛔️ |
+| `backgroundColor` | `Color` | ✅ |
+| `borderColor` | `Color` | ✅ |
+| `borderTopColor` | `Color` | ✅ |
+| `borderRightColor` | `Color` | ✅ |
+| `borderBottomColor` | `Color` | ✅ |
+| `borderLeftColor` | `Color` | ✅ |
+| `borderRadius` | `number` | ✅ |
+| `borderTopLeftRadius` | `number` | ✅ |
+| `borderTopRightRadius` | `number` | ✅ |
+| `borderBottomLeftRadius` | `number` | ✅ |
+| `borderBottomRightRadius` | `number` | ✅ |
+| `borderStyle` | `solid` &#124; `dotted` &#124; `dashed` | ✅ |
+| `borderWidth` | `number` | ✅ |
+| `borderTopWidth` | `number` | ✅ |
+| `borderRightWidth` | `number` | ✅ |
+| `borderBottomWidth` | `number` | ✅ |
+| `borderLeftWidth` | `number` | ✅ |
+| `opacity` | `number` | ✅ |
 };
-```
 
 #### Type Styles
-```javascript
-export type TextStyle = {
-  color: Color,
-  fontFamily: string,
-  fontSize: number,
-  fontStyle: 'normal' | 'italic',
-  fontWeight: string,
-  // textShadowOffset: { width: number, height: number },
-  // textShadowRadius: number,
-  // textShadowColor: Color,
-  letterSpacing: number,
-  lineHeight: number,
-  textAlign: 'auto' | 'left' | 'right' | 'center' | 'justify',
-  // writingDirection: 'auto' | 'ltr' | 'rtl',
-};
-```
+| property | type | supported? |
+| -------- | ---- | ---------- |
+| `color` | `Color` | ✅ |
+| `fontFamily` | `string` | ✅ |
+| `fontSize` | `number` | ✅ |
+| `fontStyle` | `normal` &#124; `italic` | ✅ |
+| `fontWeight` | `string` | ✅ |
+| `textShadowOffset` | `{ width: number, height: number }` | ⛔️ |
+| `textShadowRadius` | `number` | ⛔️ |
+| `textShadowColor` | `Color` | ⛔️ |
+| `letterSpacing` | `number` | ✅ |
+| `lineHeight` | `number` | ✅ |
+| `textAlign` | `auto` &#124; `left` &#124; `right` &#124; `center` &#124; `justify` | ✅ |
+| `writingDirection` | `auto` &#124; `ltr` &#124; `rtl` | ⛔️ |
 
 Styles can be passed to components as plain objects, or via [`StyleSheet`](/docs/API.md).
 
@@ -135,13 +131,14 @@ const colors = {
 };
 
 <View>
-  { Object.keys(colors).map(name => {
+  {Object.keys(colors).map(name => (
     <View
+      key={name}
       style={{
         flex: 1,
         backgroundColor: colors[name],
       }}
     />
-  }) }
+  ))}
 </View>
 ```

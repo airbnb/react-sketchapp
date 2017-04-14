@@ -3,60 +3,37 @@
 #### Why?!??!
 `react-sketchapp` evolved out of our need to generate **high-quality, consistent Sketch assets** for our design system at Airbnb. Wrapping Sketch’s imperative API is a pragmatic solution for a great developer experience and predictable rendering.
 
-#### Is it stable? :horse:
-Some data points:
-* This project follows [semantic versioning](http://semver.org/)
-* We haven't baked a 1.0 release yet; until then, APIs are liable to change as we make them comfortable & productive.
-* There's a [changelog](https://github.com/airbnb/react-sketchapp/releases)
-* We're using it day-to-day at Airbnb.
+#### How do I `console.log`?
+If you're using `skpm`, use `console.log` as usual.
 
-#### `<View>` & `<Text>`? Where are the shapes at?
-
-Early versions of `react-sketchapp` mirrored Sketch's primitives — `<Rect>`, `<Oval>` etc. This was adequate for rendering simplistic designs such as grids of color palettes, but **our focus is on production design systems.**
-
-At some point, we had to translate from our engineering primitives to Sketch's primitives. We tried translating trees of React Native elements into `<Rect>`s etc ~==
-```js
-// designSystem/components/Widget.js
-const Widget = props =>
-  <View style={{
-    backgroundColor: 'red',
-    borderRadius: 10,
-    flexDirection: 'row', // how do we handle flex?!
-  }} />;
-
-// DSToSketch.js
-const switcherooElement = (el: NativeElement): SketchElement => {
-  let type;
-  let props = {};
-  switch (el.type) {
-    case 'View': {
-      type = 'Rect';
-      props.x = props.style.x;
-      props.width = props.style.width;
-      // etc, translating every property
-      break;
-    }
-    // etc, for every single native element
-  }
-  return {
-    type,
-    props,
-  }
-}
-const translate = tree = ({
-  ...switcherooElement(tree),
-  children: tree.children.map(translate),
-})
-
-// => <Rect radius={20} fill={{color: 'red'}} />
+You can view the logs using `Console.app -> ~/Library/Logs -> com.bohemiancoding.sketch -> Plugin Output.log`, or in the terminal
+```bash
+tail -f ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
 ```
 
-This was clumsy. Not every Sketch property has an analog in react-native, but **every react-native property is translatable to Sketch** (because our app is designed in Sketch and implemented in React).
+Occasionally this file disappears — in that case, run this and then try `tail`ing again.
+```bash
+touch ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
+```
 
-By switching to react-native's primitives we:
+Outside of `skpm`, use `log` instead of `console.log`.
+
+#### I'm running a project as a plugin & Sketch isn't showing my changes
+Sketch has a [developer mode](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running) which refreshes plugins before running. If you're using `skpm` this should be set up automatically, but just in case try running
+```bash
+defaults write com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
+```
+
+#### `<View>` & `<Text>`? Where are the shapes? Talk to me about your API decisions!
+
+Early versions of `react-sketchapp` mirrored Sketch's layers — `<Rect>`, `<Oval>`, `<Star>` etc. This was adequate for rendering simplistic designs such as grids of color palettes, but our focus is on production design systems.
+
+At some point, we had to translate from our component codebase's primitives to Sketch's shapes. We tried translating trees of React Native elements into `<Rect>`s etc, but it felt clumsy. Not every Sketch property has an analog in react-native, but **most react-native properties are translatable to Sketch**.
+
+By aligning with react-native's API we:
 * think in the same primitives as we actually use in production
 * use the same layout algorithm in design & code
-* [render real components](/docs/universal-rendering.md) into Sketch with `react-primitives` (a platform independent set of primitives)
+* [render real components](http://airbnb.io/react-sketchapp/docs/guides/universal-rendering.html) into Sketch with `react-primitives` (a platform independent set of primitives)
 
 Where it makes sense we're open to creating Sketch-specific components —there's no analog for `<Artboard>` on web or mobile—but the goal of `react-sketchapp` is to bring design & engineering closer together.
 
@@ -93,6 +70,3 @@ Rather than tying us into one design tools, reasoning about design in cross-plat
 Of course!
 
 Flow definitions are published with the npm package in `lib/*.flow.js`.
-
-#### Why is it called `react-sketchapp` rather than `react-sketch`?
-`react-sketch` was taken on npm.

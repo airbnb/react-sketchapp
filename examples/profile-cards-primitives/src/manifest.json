@@ -3,7 +3,7 @@
   "bundleVersion": 1,
   "commands": [
     {
-      "name": "react-sketchapp: React Primitives",
+      "name": "react-sketchapp: Profile Cards w/ Primitives",
       "identifier": "main",
       "script": "./main.js"
     }

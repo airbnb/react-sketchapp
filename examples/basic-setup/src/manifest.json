@@ -3,7 +3,7 @@
 	"bundleVersion": 1,
 	"commands": [
 		{
-			"name": "react-sketchapp: Basic skpm Example",
+			"name": "react-sketchapp: Basic Setup",
 			"identifier": "main",
 			"script": "./my-command.js"
 		}

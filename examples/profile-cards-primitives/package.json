@@ -1,7 +1,7 @@
 {
-  "name": "react-primitives",
+  "name": "profile-cards-primitives",
   "private": true,
-  "main": "react-primitives.sketchplugin",
+  "main": "profile-cards-primitives.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",

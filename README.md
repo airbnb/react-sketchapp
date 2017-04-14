@@ -1,95 +1,64 @@
-> **requires [Sketch 43 Beta](https://sketchapp.com/beta/) or higher**
-> This project is currently in **alpha and APIs are subject to change**. If you found the repo on npm — the source (& docs, oops) is private for now; it will be announced on <a href="jon.gold/txt">my mailing list</a> and <a href="http://twitter.com/jongold">Twitter</a> very soon :)
+> This project is currently in **beta and APIs are subject to change**.
 
-<img alt="react-sketchapp" src="https://cloud.githubusercontent.com/assets/591643/22898688/146aea8e-f1dd-11e6-934c-cdbd29b82a0e.png" height="72px" />
+<div align="center">
+  <img alt="react-sketchapp" src="https://cloud.githubusercontent.com/assets/591643/22898688/146aea8e-f1dd-11e6-934c-cdbd29b82a0e.png" height="72px" />
+</div>
 
-A React renderer for [Sketch.app](https://www.sketchapp.com/) :atom_symbol: :gem:
+<div align="center">
+  <strong>render React components to Sketch; tailor-made for design systems</strong>
+</div>
+
+## Quickstart 🏃‍
+First, make sure you have installed [Sketch](http://sketchapp.com) version 43+, & a recent [npm](https://nodejs.org/en/download/).
+```bash
+curl -L https://github.com/jongold/react-sketchapp-example/archive/master.zip | tar -xz 
+cd react-sketchapp-example-master && npm install
+
+npm run render
+```
+
+![readme-intro](https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png)
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
 [![CircleCI](https://circleci.com/gh/airbnb/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/airbnb/react-sketchapp)
-![Sketch.app](https://img.shields.io/badge/Sketch.app-43-brightgreen.svg)
+![Sketch.app](https://img.shields.io/badge/Sketch.app-43+-brightgreen.svg)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-sketchapp/Lobby)
 
-## Features
+## Why?!
 
-* **Declarative.** All the lessons we've learnt from the React model of programming. A comfortable layer over Sketch’s API.
-* **Familiar.** Flexbox layouts. `react-native` components. You already know how to use `react-sketchapp`.
-* **Data-based.** Pipe in real data from JSON files, APIs, and databases.
-* **Universal.** Start from scratch, or use your existing component libraries
+Managing the assets of design systems in Sketch is complex, error-prone and time consuming. Sketch is scriptable, but the API often changes. React provides the perfect wrapper to build reusable documents in a way already familiar to JavaScript developers.
 
-## Documentation
-
-* [Usage](#usage)
-* [Examples](/docs/examples.md)
-* [Styling](/docs/styling.md)
-* [API Reference](/docs/API.md)
-* [Universal Rendering](/docs/guides/universal-rendering.md)
-* [Data Fetching](/docs/guides/data-fetching.md)
-* [Troubleshooting](/docs/troubleshooting.md)
-* [FAQ](/docs/FAQ.md)
-
-## Usage
-`react-sketchapp` projects are implemented as [Sketch plugins](http://developer.sketchapp.com/).
-
-There are several ways to build Sketch plugins:
-
-### Using a template
-The simplest way to build Sketch plugins with modern JavaScript is [`skpm`](https://github.com/sketch-pm/skpm) 💎📦 with the `react-sketchapp-skpm-example` template. Feel free to remove anything you're not using.
-
-Install `skpm`, if you don't have it already:
-```bash
-npm install -g skpm
-```
-
-Create a new project:
-```bash
-mkdir my-rad-sketch-plugin
-cd my-rad-sketch-plugin
-# Initialize this plugin with the template
-skpm init git+ssh://git@github.com:jongold/react-sketchapp-skpm-example.git
-# Install dependencies
-npm install
-# Setup an alias from the .sketchplugin to the sketch plugins folder
-skpm link .
-```
-
-Then, to build your plugin (will auto update when you change the code)
-```bash
-npm run watch
-```
-
-Write your plugin in `src/my-command.js`
+## What does the code look like?
 ```js
-import React from 'react';
-import { render, Text, View } from 'react-sketchapp';
+import { render, Text, Artboard } from 'react-sketchapp';
 
-const Document = props =>
-  <View>
-    <Text>Hello world!</Text>
-  </View>;
+const App = props => (
+  <Artboard>
+    <Text style={{ fontFamily: 'Comic Sans MS', color: 'hotPink' }}>
+      { props.message }
+    </Text>
+  </Artboard>
+);
 
-export default function (context) {
-  render(<Document />, context.document.currentPage());
+export default (context) => {
+  render(<App message="Hello world!" />, context);
 }
 ```
 
-Run your plugin in Sketch via `Plugins → [plugin name] → my-command`. The plugin name is determined by `src/manifest.json`
+## What can I do with it?
+* **Manage design systems—** `react-sketchapp` was built for [Airbnb’s design system](http://airbnb.design/building-a-visual-language/); this is the easiest way to manage Sketch assets in a large design system
+* **Use real components for designs—** Implement your designs in code as React components and render them into Sketch
+* **Design with real data—** Designing with data is important but challenging; `react-sketchapp` makes it simple to fetch and incorporate real data into your Sketch files
+* **Build new tools on top of Sketch—** the easiest way to use Sketch as a canvas for custom design tooling
 
-Refer to the [skpm docs](https://github.com/sketch-pm/skpm) for more information about skpm.
+Found a novel use? We'd love to hear about it!
 
-### The manual way
+## Documentation
 
-Feel free to use whatever build process you're comfortable with — just [disable CocoaScript](http://developer.sketchapp.com/introduction/plugin-bundles/#disablecocoascriptpreprocessor) and disabled [Sketch's caching mechanism](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running)
-```
-defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
-```
-
-You can then use [react-native-packager](https://github.com/facebook/react-native/tree/master/packager), [rollup](http://rollupjs.org/), [webpack](https://webpack.github.io/) etc.
-
-### Examples
-`react-sketchapp` includes [several examples](examples/) showing how you might use it — including GraphQL data fetching and multi-platform universal rendering.
-
-### Contributing
-Contributions are more than welcome. Just submit a PR with a description of your changes. Please attach screenshots and Sketch files (if relevant) to your Pull Requests for review.
-
-### Issues, bugs, or feature requests
-File GitHub issues for anything that is unexpectedly broken. If there are issues with generated Sketch files please attach them to the issue. If you have ideas or feature requests you should also file a GitHub issue.
+* [Examples](http://airbnb.io/react-sketchapp/docs/examples.html)
+* [API Reference](http://airbnb.io/react-sketchapp/docs/API.html)
+* [Styling](http://airbnb.io/react-sketchapp/docs/styling.html)
+* [Universal Rendering](http://airbnb.io/react-sketchapp/docs/guides/universal-rendering.html)
+* [Data Fetching](http://airbnb.io/react-sketchapp/docs/guides/data-fetching.html)
+* [FAQ](http://airbnb.io/react-sketchapp/docs/FAQ.html)
+* [Contributing](http://airbnb.io/react-sketchapp/CONTRIBUTING.html)
