@@ -32,6 +32,12 @@ describe('makeColorFromCSS', () => {
     expect(makeColorFromCSS('rebeccapurple')).toEqual(PURPLE);
   });
 
+  it('is case-insensitive', () => {
+    expect(makeColorFromCSS('BLACK')).toEqual(BLACK);
+    expect(makeColorFromCSS('wHIte')).toEqual(WHITE);
+    expect(makeColorFromCSS('rebeccaPurple')).toEqual(PURPLE);
+  });
+
   it('works with rgb colors', () => {
     expect(makeColorFromCSS('rgb(0, 0, 0)')).toEqual(BLACK);
     expect(makeColorFromCSS('rgb(255, 255, 255)')).toEqual(WHITE);
