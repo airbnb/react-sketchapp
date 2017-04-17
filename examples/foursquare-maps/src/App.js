@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Map from 'react-primitives-google-static-map';
 import { StyleSheet, Text, View } from 'react-primitives';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
@@ -32,8 +33,8 @@ const Swatch = ({ name, hex }) => (
 );
 
 const Color = {
-  hex: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
+  hex: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 Swatch.propTypes = Color;
@@ -52,7 +53,7 @@ const Document = ({ colors }) => (
 );
 
 Document.propTypes = {
-  colors: React.PropTypes.objectOf(React.PropTypes.string).isRequired,
+  colors: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default (context) => {

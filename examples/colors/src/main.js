@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { render, StyleSheet, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 import { times } from 'ramda';

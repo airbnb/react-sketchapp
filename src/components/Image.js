@@ -1,5 +1,6 @@
 /* @flow */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 
@@ -57,13 +58,7 @@ class Image extends React.Component {
   };
 
   render() {
-    const {
-      children,
-      source,
-      defaultSource,
-      resizeMode,
-      name,
-    } = this.props;
+    const { children, source, defaultSource, resizeMode, name } = this.props;
 
     let style = StyleSheet.flatten(this.props.style) || {};
 

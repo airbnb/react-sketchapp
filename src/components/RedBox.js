@@ -1,5 +1,6 @@
 /* @flow */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ErrorStackParser from 'error-stack-parser';
 import Text from './Text';
 import View from './View';
