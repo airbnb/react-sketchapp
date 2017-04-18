@@ -37,3 +37,5 @@ Open a browser to `http://localhost:3000`
 ## The idea behind the example
 
 `react-primitives` provides a powerful way to build platform-independent components. This is a simple example of rendering to web & Sketch simulatenously.
+
+![examples-primitives](https://cloud.githubusercontent.com/assets/591643/24778174/0dd9d214-1ade-11e7-9372-fa8b578a0b48.png)

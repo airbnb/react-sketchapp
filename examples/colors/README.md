@@ -1,4 +1,4 @@
-# Basic Webpack example
+# Generative Colors w/ chroma-js
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
@@ -26,4 +26,6 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Generative Color
 
 ## The idea behind the example
 
-Using Webpack to build `react-sketchapp` apps requires a little bit of configuration - use this as an example.
+Calculating color scales is pretty tricky in Sketch - have fun with it!
+
+![examples-colors](https://cloud.githubusercontent.com/assets/591643/24778153/efc76cdc-1add-11e7-93dd-0351f8f428c0.png)

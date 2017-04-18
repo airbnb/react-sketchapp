@@ -27,3 +27,5 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Profile Cards w/
 ## The idea behind the example
 
 Building on the [Profile Cards example](../profile-cards), it's simple to fetch real data for your mockups with GraphQL!
+
+![examples-profile-cards-gql](https://cloud.githubusercontent.com/assets/591643/24778175/0dda21d8-1ade-11e7-9545-13b472263ff6.png)
