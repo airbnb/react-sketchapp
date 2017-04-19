@@ -10,9 +10,11 @@
 
 ## Quickstart 🏃‍
 First, make sure you have installed [Sketch](http://sketchapp.com) version 43+, & a recent [npm](https://nodejs.org/en/download/).
+
+Open a new Sketch file, then in a terminal:
 ```bash
-curl -L https://github.com/jongold/react-sketchapp-example/archive/master.zip | tar -xz 
-cd react-sketchapp-example-master && npm install
+git clone https://github.com/airbnb/react-sketchapp.git
+cd react-sketchapp/examples/basic-setup && npm install
 
 npm run render
 ```
