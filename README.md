@@ -1,7 +1,7 @@
 > This project is currently in **beta and APIs are subject to change**.
 
 <div align="center">
-  <img alt="react-sketchapp" src="https://cloud.githubusercontent.com/assets/591643/22898688/146aea8e-f1dd-11e6-934c-cdbd29b82a0e.png" height="72px" />
+  <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" height="163px" />
 </div>
 
 <div align="center">
