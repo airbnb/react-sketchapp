@@ -7,7 +7,7 @@ declare var CGAffineTransformMakeTranslation: any;
 declare var CGSizeMake: any;
 declare var COSAlertWindow: any;
 declare var MSArtboardGroup: any
-declare var MSAttributedString: any;;
+declare var MSAttributedString: any;
 declare var MSColor: any;
 declare var MSImageData: any;
 declare var MSJSONDataArchiver;
