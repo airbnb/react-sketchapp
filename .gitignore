@@ -5,3 +5,4 @@ lib
 react-example.sketchplugin
 _book
 .vscode
+yarn.lock
