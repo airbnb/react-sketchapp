@@ -1,0 +1,24 @@
+{
+  "name": "profile-cards-react-with-styles",
+  "private": true,
+  "main": "profile-cards-react-with-styles.sketchplugin",
+  "manifest": "src/manifest.json",
+  "scripts": {
+    "build": "skpm build",
+    "watch": "skpm build --watch",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
+    "link-plugin": "skpm link"
+  },
+  "author": "Jon Gold <jon.gold@airbnb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-sketchapp": "^0.10.0",
+    "react-test-renderer": "^15.4.2",
+    "react-with-styles": "^1.4.0"
+  },
+  "devDependencies": {
+    "skpm": "^0.8.0"
+  }
+}
