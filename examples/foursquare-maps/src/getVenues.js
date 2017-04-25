@@ -1,6 +1,6 @@
 import param from 'jquery-param';
 
-export default (platformFetch) => {
+export default () => {
   const query = 'burger';
   const latitude = '37.773972';
   const longitude = '-122.431297';
@@ -15,7 +15,7 @@ export default (platformFetch) => {
     client_secret: 'Q10HUP5APBQOYNTPABSH4CSKRGEAI2CXIYULYGG0EZYUUWUZ',
   });
 
-  return platformFetch(`https://api.foursquare.com/v2/venues/search?${params}`)
+  return fetch(`https://api.foursquare.com/v2/venues/search?${params}`)
     .then(res => res.json())
     .then(data => ({
       venues: data.response.venues,

@@ -1,11 +1,10 @@
 import React from 'react';
-import fetch from 'sketch-module-fetch-polyfill';
 import { Artboard, render } from 'react-sketchapp';
 import App from './App';
 import getVenues from './getVenues';
 
 export default (context) => {
-  getVenues(fetch).then(({
+  getVenues().then(({
     venues,
     latitude,
     longitude,
