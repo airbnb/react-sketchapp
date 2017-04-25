@@ -1,0 +1,8 @@
+.DS_Store
+*.log*
+node_modules
+_book
+examples
+docs
+.vscode
+yarn.lock

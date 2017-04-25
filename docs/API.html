@@ -1,0 +1,903 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>API Reference · react-sketchapp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="API.html" />
+    
+    
+    <link rel="prev" href="styling.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Table of Contents</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="examples.html">
+            
+                <a href="examples.html">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="guides/">
+            
+                <a href="guides/">
+            
+                    
+                    Guides
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="guides/data-fetching.html">
+            
+                <a href="guides/data-fetching.html">
+            
+                    
+                    Data Fetching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="guides/universal-rendering.html">
+            
+                <a href="guides/universal-rendering.html">
+            
+                    
+                    Universal Rendering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="styling.html">
+            
+                <a href="styling.html">
+            
+                    
+                    Styling
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="API.html">
+            
+                <a href="API.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="API.html">
+            
+                <a href="API.html#renderelement-container">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="API.html">
+            
+                <a href="API.html#rendertojsonelement">
+            
+                    
+                    renderToJSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="API.html">
+            
+                <a href="API.html#artboard">
+            
+                    
+                    Artboard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="API.html">
+            
+                <a href="API.html#image">
+            
+                    
+                    Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="API.html">
+            
+                <a href="API.html#redbox">
+            
+                    
+                    RedBox
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="API.html">
+            
+                <a href="API.html#text">
+            
+                    
+                    Text
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="API.html">
+            
+                <a href="API.html#view">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="API.html">
+            
+                <a href="API.html#platform">
+            
+                    
+                    Platform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="API.html">
+            
+                <a href="API.html#stylesheet">
+            
+                    
+                    StyleSheet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="API.html">
+            
+                <a href="API.html#textstyles">
+            
+                    
+                    TextStyles
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../CHANGELOG.html">
+            
+                <a href="../CHANGELOG.html">
+            
+                    
+                    Change Log
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="FAQ.html">
+            
+                <a href="FAQ.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../CONTRIBUTING.html">
+            
+                <a href="../CONTRIBUTING.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >API Reference</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="api-reference">API Reference</h1>
+<ul>
+<li><a href="#renderelement-container"><code>render</code></a></li>
+<li><a href="#rendertojsonelement"><code>renderToJSON</code></a></li>
+<li><a href="#components">Components</a><ul>
+<li><a href="#artboard"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Artboard</span><span class="token punctuation">&gt;</span></span></code></a></li>
+<li><a href="#image"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Image</span><span class="token punctuation">&gt;</span></span></code></a></li>
+<li><a href="#redbox"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RedBox</span><span class="token punctuation">&gt;</span></span></code></a></li>
+<li><a href="#text"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span><span class="token punctuation">&gt;</span></span></code></a></li>
+<li><a href="#view"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span><span class="token punctuation">&gt;</span></span></code></a></li>
+</ul>
+</li>
+<li><a href="#platform"><code>Platform</code></a><ul>
+<li><a href="#os"><code>OS</code></a></li>
+<li><a href="#version"><code>Version</code></a></li>
+<li><a href="#selectobj"><code>select</code></a></li>
+</ul>
+</li>
+<li><a href="#stylesheet"><code>StyleSheet</code></a><ul>
+<li><a href="#hairlinewidth"><code>hairlineWidth</code></a></li>
+<li><a href="#absolutefill"><code>absoluteFill</code></a></li>
+<li><a href="#createstyles"><code>create</code></a></li>
+<li><a href="#flattenstyles"><code>flatten</code></a></li>
+<li><a href="#resolvestyle"><code>resolve</code></a></li>
+</ul>
+</li>
+<li><a href="#textstyles"><code>TextStyles</code></a><ul>
+<li><a href="#createstyleoptionsstyles"><code>create</code></a></li>
+<li><a href="#resolvestyle"><code>resolve</code></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="renderelement-container"><code>render(element, container)</code></h3>
+<p>Returns the top-level rendered Sketch object.</p>
+<h4 id="params">params</h4>
+<h5 id="element-required"><code>element</code> (required)</h5>
+<h5 id="container-required"><code>container</code> (required)</h5>
+<p>The element to render into - will be replaced. Should either be a Group or a Page &#x2014; usually you should use <code>context.document.currentPage()</code></p>
+<h3 id="returns">returns</h3>
+<p>The top-most rendered native Sketch layer.</p>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> Document <span class="token operator">=</span> props <span class="token operator">=</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>View<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>Text<span class="token operator">&gt;</span>Hello world<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>Document <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> context<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">currentPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="rendertojsonelement"><code>renderToJSON(element)</code></h3>
+<p>Returns a Sketch JSON object for further consumption - doesn&apos;t add to the page.</p>
+<h4 id="params">params</h4>
+<h5 id="element-required"><code>element</code> (required)</h5>
+<h3 id="returns">returns</h3>
+<p>The top-most Sketch layer as JSON.</p>
+<h2 id="components">Components</h2>
+<h3 id="artboard"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Artboard</span><span class="token punctuation">&gt;</span></span></code></h3>
+<p>Wrapper for Sketch&apos;s artboards.</p>
+<h4 id="props">props</h4>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Type</th>
+<th>Default</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>String</code></td>
+<td></td>
+<td>The name to be displayed in the Sketch Layer List</td>
+</tr>
+<tr>
+<td><code>children</code></td>
+<td><code>Node</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><a href="styling.html"><code>Style</code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token operator">&lt;</span>Artboard
+  name<span class="token operator">=</span><span class="token string">&apos;My Artboard&apos;</span>
+  style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+    width<span class="token punctuation">:</span> <span class="token number">480</span>
+  <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Text<span class="token operator">&gt;</span>Hello world<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>Artboard<span class="token operator">&gt;</span>
+</code></pre>
+<h3 id="image"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Image</span><span class="token punctuation">&gt;</span></span></code></h3>
+<h4 id="props">Props</h4>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Type</th>
+<th>Default</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>children</code></td>
+<td><code>Node</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td><code>ImageSource</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><a href="styling.html"><code>Style</code></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>resizeMode</code></td>
+<td><code>ResizeMode</code></td>
+<td><code>contain</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="language-"><code>type ImageSource = String | { src: String }
+type ResizeMode = &apos;contain&apos; | &apos;cover&apos; | &apos;stretch&apos; | &apos;center&apos; | &apos;repeat&apos; | &apos;none&apos;
+</code></pre><h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token operator">&lt;</span>Image
+  source<span class="token operator">=</span><span class="token string">&apos;http://placekitten.com/400&apos;</span>
+  resizeMode<span class="token operator">=</span><span class="token string">&apos;contain&apos;</span>
+  style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+    height<span class="token punctuation">:</span> <span class="token number">400</span><span class="token punctuation">,</span>
+    width<span class="token punctuation">:</span> <span class="token number">400</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">/</span><span class="token operator">&gt;</span>
+</code></pre>
+<h3 id="redbox"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RedBox</span><span class="token punctuation">&gt;</span></span></code></h3>
+<p>A red box / &apos;red screen of death&apos; error handler. Thanks to <a href="https://github.com/commissure/redbox-react" target="_blank">commissure/redbox-react</a>
+--SUGGESTION: can you give a screenshot of what this looks like?</p>
+<h4 id="props">Props</h4>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Type</th>
+<th>Default</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" target="_blank"><code>Error</code></a></td>
+<td><strong>required</strong></td>
+<td>A JavaScript Error object</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>BrokenComponent <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> context<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">currentPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">err</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>RedBox error<span class="token operator">=</span><span class="token punctuation">{</span>err<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> context<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">currentPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="text"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span><span class="token punctuation">&gt;</span></span></code></h3>
+<p>Text primitives</p>
+<h4 id="props">Props</h4>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Type</th>
+<th>Default</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>String</code></td>
+<td></td>
+<td>The name to be displayed in the Sketch Layer List</td>
+</tr>
+<tr>
+<td><code>children</code></td>
+<td><code>String</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><a href="styling.html"><code>Style</code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token operator">&lt;</span>Text
+  name<span class="token operator">=</span><span class="token string">&apos;Sketch Layer name&apos;</span>
+  style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+    fontFamily<span class="token punctuation">:</span> <span class="token string">&apos;Helvetica&apos;</span><span class="token punctuation">,</span>
+    fontWeight<span class="token punctuation">:</span> <span class="token string">&apos;bold&apos;</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">&apos;#01ffae&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;</span>
+  Hello World<span class="token operator">!</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+</code></pre>
+<h3 id="view"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span><span class="token punctuation">&gt;</span></span></code></h3>
+<p>View primitives</p>
+<h4 id="props">Props</h4>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Type</th>
+<th>Default</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>String</code></td>
+<td></td>
+<td>The name to be displayed in the Sketch Layer List</td>
+</tr>
+<tr>
+<td><code>children</code></td>
+<td><code>Node</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td><a href="styling.html"><code>Style</code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token operator">&lt;</span>View
+  name<span class="token operator">=</span><span class="token string">&apos;Sketch Layer name&apos;</span>
+  style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+    flexDirection<span class="token punctuation">:</span> <span class="token string">&apos;row&apos;</span><span class="token punctuation">,</span>
+    width<span class="token punctuation">:</span> <span class="token number">480</span><span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">&apos;#01ffae&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Text<span class="token operator">&gt;</span>Hello World<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Text<span class="token operator">&gt;</span>Hello World<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Text<span class="token operator">&gt;</span>Hello World<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+</code></pre>
+<h2 id="platform">Platform</h2>
+<h3 id="os"><code>OS</code></h3>
+<p><code>sketch</code></p>
+<h3 id="version"><code>Version</code></h3>
+<p><code>1</code></p>
+<h3 id="selectobj"><code>select(obj)</code></h3>
+<h4 id="params">params</h4>
+<h5 id="obj"><code>obj</code></h5>
+<h2 id="stylesheet">StyleSheet</h2>
+<p>Compared to single-use <code>style</code> objects, <code>StyleSheets</code> enable creation of re-usable, optimized style references.</p>
+<h3 id="hairlinewidth"><code>hairlineWidth</code></h3>
+<p>The platform&apos;s global &apos;hairline width&apos;</p>
+<h3 id="absolutefill"><code>absoluteFill</code></h3>
+<p>A constant &apos;absolute fill&apos; style.</p>
+<h3 id="createstyles"><code>create(styles)</code></h3>
+<p>Create an optimized StyleSheet reference from a style object.</p>
+<h4 id="params">params</h4>
+<h5 id="styles"><code>styles</code></h5>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> styles <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  foo<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  bar<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">36</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">&apos;blue&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// { foo: 1, bar: 2 }</span>
+
+<span class="token operator">&lt;</span>View<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>foo<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>bar<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+</code></pre>
+<h3 id="flattenstyles"><code>flatten(styles)</code></h3>
+<p>Flatten an array of style objects into one aggregated object, <strong>or</strong> look up the definition for a registered stylesheet.</p>
+<h4 id="params">params</h4>
+<h5 id="styles"><code>styles</code></h5>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> styles <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  foo<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  bar<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">&apos;blue&apos;</span><span class="token punctuation">,</span>
+    lineHeight<span class="token punctuation">:</span> <span class="token number">36</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+StyleSheet<span class="token punctuation">.</span><span class="token function">flatten</span><span class="token punctuation">(</span><span class="token punctuation">[</span>styles<span class="token punctuation">.</span>foo<span class="token punctuation">,</span> styles<span class="token punctuation">.</span>bar<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// { fontSize: 24, color: &apos;red&apos;,  backgroundColor: &apos;blue&apos;, lineHeight: 36 }</span>
+
+<span class="token comment" spellcheck="true">// alternatively:</span>
+StyleSheet<span class="token punctuation">.</span><span class="token function">flatten</span><span class="token punctuation">(</span>styles<span class="token punctuation">.</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// { fontSize: 24, color: &apos;red&apos; }</span>
+</code></pre>
+<h3 id="resolvestyle"><code>resolve(style)</code></h3>
+<p>Resolve one style</p>
+<h4 id="params">params</h4>
+<h5 id="style"><code>style</code></h5>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> styles <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  foo<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+StyleSheet<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>styles<span class="token punctuation">.</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// { fontSize: 24, color: &apos;red&apos; }</span>
+</code></pre>
+<h2 id="textstyles">TextStyles</h2>
+<p>An interface to Sketch&apos;s shared text styles. Create styles with or without rendering them to the document canvas.</p>
+<h3 id="createoptions-styles"><code>create(options, styles)</code></h3>
+<p>The primary interface to TextStyles. <strong>Call this before rendering</strong>.</p>
+<h4 id="params">params</h4>
+<h5 id="options--context-clearexistingstyles-"><code>options: { context, clearExistingStyles }</code></h5>
+<h6 id="context-required"><code>context</code> <strong>(required)</strong></h6>
+<p>The Sketch API context.</p>
+<h6 id="clearexistingstyles"><code>clearExistingStyles</code></h6>
+<p>Clear any styles already registered in the document.</p>
+<h5 id="styles-required"><code>styles</code> <strong>(required)</strong></h5>
+<p>An object of JavaScript styles. The keys will be used as Sketch&apos;s Text Style names.</p>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> typeStyles <span class="token operator">=</span> <span class="token punctuation">{</span>
+    Headline<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontSize<span class="token punctuation">:</span> <span class="token number">36</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">&apos;Apercu&apos;</span><span class="token punctuation">,</span>
+      lineHeight<span class="token punctuation">:</span> <span class="token number">38</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    Body<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontSize<span class="token punctuation">:</span> <span class="token number">16</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">&apos;Helvetica&apos;</span><span class="token punctuation">,</span>
+      lineHeight<span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  TextStyles<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    context<span class="token punctuation">:</span> context<span class="token punctuation">,</span>
+    clearExistingStyles<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> typeStyles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> Document <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>View<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>Headline<span class="token punctuation">}</span><span class="token operator">&gt;</span>Headline text<span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>Body<span class="token punctuation">}</span><span class="token operator">&gt;</span>Body text<span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>Document <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> context<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">currentPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="resolvestyle"><code>resolve(style)</code></h3>
+<p>Find a stored native Sketch style object for a given JavaScript style object. You probably don&apos;t need to use this.</p>
+<h4 id="params">params</h4>
+<h5 id="style"><code>style</code></h5>
+<p>A JavaScript style</p>
+<h3 id="styles"><code>styles</code></h3>
+<p>Find all of the registered styles. You probably don&apos;t need to use this.</p>
+<h3 id="getname"><code>get(name)</code></h3>
+<p>Find a stored style by <em>name</em>.</p>
+<h4 id="params">params</h4>
+<h5 id="name"><code>name</code></h5>
+<p>The style name</p>
+<h4 id="example">Example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>context<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> typeStyles <span class="token operator">=</span> <span class="token punctuation">{</span>
+    Headline<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontSize<span class="token punctuation">:</span> <span class="token number">36</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">&apos;Apercu&apos;</span><span class="token punctuation">,</span>
+      lineHeight<span class="token punctuation">:</span> <span class="token number">38</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    Body<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontSize<span class="token punctuation">:</span> <span class="token number">16</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">&apos;Helvetica&apos;</span><span class="token punctuation">,</span>
+      lineHeight<span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  TextStyles<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    context<span class="token punctuation">:</span> context<span class="token punctuation">,</span>
+    clearExistingStyles<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> typeStyles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> Document <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>View<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>TextStyle<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">&apos;Headline&apos;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>Headline text<span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>TextStyle<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">&apos;Body&apos;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>Body text<span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>Document <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> context<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">currentPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="clear"><code>clear</code></h3>
+<p>Reset the registered styles.</p>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="styling.html" class="navigation navigation-prev " aria-label="Previous page: Styling">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="API.html#renderelement-container" class="navigation navigation-next " aria-label="Next page: render">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"API Reference","level":"1.4","depth":1,"next":{"title":"render","level":"1.4.1","depth":2,"anchor":"#renderelement-container","path":"docs/API.md","ref":"docs/API.md#renderelement-container","articles":[]},"previous":{"title":"Styling","level":"1.3.3","depth":2,"path":"docs/styling.md","ref":"docs/styling.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","-search","codeblock-disable-glossary","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/airbnb/react-sketchapp/"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/airbnb/react-sketchapp/tree/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"react-sketchapp","gitbook":">= 3.2.1"},"file":{"path":"docs/API.md","mtime":"2017-04-25T04:02:01.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-25T04:02:13.345Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

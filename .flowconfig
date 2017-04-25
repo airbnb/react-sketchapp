@@ -1,0 +1,45 @@
+[ignore]
+# Ignore react and fbjs where there are overlaps, but don't ignore
+# anything that react-native relies on
+.*/node_modules/fbjs.*
+.*/node_modules/babel.*
+.*/node_modules/babylon.*
+.*/node_modules/animated.*
+
+# npm3 and other tooling interop is so fun
+.*/examples/.*/node_modules
+.*/node_modules/binary-extensions.*
+.*/node_modules/builtin-modules.*
+.*/node_modules/jasmine-es6.*
+.*/node_modules/json5.*
+.*/node_modules/resolve.*
+.*/node_modules/spdx-exceptions.*
+.*/node_modules/spdx-license-ids.*
+.*/node_modules/ua-parser-js.*
+.*/node_modules/y18n.*
+.*/node_modules/iconv-lite.*
+.*/node_modules/is-my-json-valid.*
+
+# I don't even know why these have started to break, fml
+.*/node_modules/config-chain.*
+.*/node_modules/npmconf.*
+.*/node_modules/conventional-changelog-core.*
+.*/node_modules/npm.*
+.*/node_modules/kefir.*
+
+.*/_backup
+.*/docs
+.*/_book
+./lib
+.*/examples/.*
+
+[include]
+
+[libs]
+flow-typed/fbjs.js
+flow-typed/sketch.js
+
+[options]
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(2[0-0]\\|1[0-9]\\|[0-9]\\).[0-9]\\)? *\\)
+
+esproposal.class_static_fields=enable

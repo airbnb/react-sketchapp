@@ -1,0 +1,493 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Examples · react-sketchapp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="guides/" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Table of Contents</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="examples.html">
+            
+                <a href="examples.html">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="guides/">
+            
+                <a href="guides/">
+            
+                    
+                    Guides
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="guides/data-fetching.html">
+            
+                <a href="guides/data-fetching.html">
+            
+                    
+                    Data Fetching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="guides/universal-rendering.html">
+            
+                <a href="guides/universal-rendering.html">
+            
+                    
+                    Universal Rendering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="styling.html">
+            
+                <a href="styling.html">
+            
+                    
+                    Styling
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="API.html">
+            
+                <a href="API.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="API.html">
+            
+                <a href="API.html#renderelement-container">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="API.html">
+            
+                <a href="API.html#rendertojsonelement">
+            
+                    
+                    renderToJSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="API.html">
+            
+                <a href="API.html#artboard">
+            
+                    
+                    Artboard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="API.html">
+            
+                <a href="API.html#image">
+            
+                    
+                    Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="API.html">
+            
+                <a href="API.html#redbox">
+            
+                    
+                    RedBox
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="API.html">
+            
+                <a href="API.html#text">
+            
+                    
+                    Text
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="API.html">
+            
+                <a href="API.html#view">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="API.html">
+            
+                <a href="API.html#platform">
+            
+                    
+                    Platform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="API.html">
+            
+                <a href="API.html#stylesheet">
+            
+                    
+                    StyleSheet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="API.html">
+            
+                <a href="API.html#textstyles">
+            
+                    
+                    TextStyles
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../CHANGELOG.html">
+            
+                <a href="../CHANGELOG.html">
+            
+                    
+                    Change Log
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="FAQ.html">
+            
+                <a href="FAQ.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../CONTRIBUTING.html">
+            
+                <a href="../CONTRIBUTING.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Examples</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="examples">Examples</h1>
+<p><code>react-sketchapp</code> is bundled with lots of examples!</p>
+<h3 id="basic-setup"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/basic-setup" target="_blank">Basic setup</a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778192/1f0684ec-1ade-11e7-866b-b11bb60ac109.png" alt="examples-basic"></p>
+<h3 id="styleguide"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/styleguide" target="_blank">Styleguide</a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778196/2a4ef41a-1ade-11e7-9805-8d974bbfd708.png" alt="examples-styleguide"></p>
+<h3 id="profile-cards"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards" target="_blank">Profile Cards</a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778173/0dd7c03c-1ade-11e7-8bad-1ad51fe1033e.png" alt="examples-profile-cards"></p>
+<h3 id="profile-cards-on-web--sketch-w-react-primitives"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards-primitives" target="_blank">Profile Cards on Web + Sketch w/ <code>react-primitives</code></a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778174/0dd9d214-1ade-11e7-9372-fa8b578a0b48.png" alt="examples-primitives"></p>
+<h3 id="profile-cards-w-react-with-styles"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards-primitives" target="_blank">Profile Cards w/ <code>react-with-styles</code></a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778174/0dd9d214-1ade-11e7-9372-fa8b578a0b48.png" alt="examples-primitives"></p>
+<h3 id="profile-cards-w-graphql"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/profile-cards-graphql" target="_blank">Profile Cards w/ GraphQL</a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778175/0dda21d8-1ade-11e7-9545-13b472263ff6.png" alt="examples-profile-cards-gql"></p>
+<h3 id="venue-search-on-web--sketch-w-react-primitives-foursquare--google-maps"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/foursquare-maps" target="_blank">Venue Search on Web + Sketch w/ <code>react-primitives</code>, Foursquare &amp; Google Maps</a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/25052095/f666928e-2104-11e7-805c-a3c73ffcabcb.png" alt="foursquare-maps"></p>
+<h3 id="generative-colors-w-chroma-js"><a href="https://github.com/airbnb/react-sketchapp/tree/master/examples/colors" target="_blank">Generative Colors w/ chroma-js</a></h3>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24778153/efc76cdc-1add-11e7-93dd-0351f8f428c0.png" alt="examples-colors"></p>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="guides/" class="navigation navigation-next " aria-label="Next page: Guides">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Examples","level":"1.2","depth":1,"next":{"title":"Guides","level":"1.3","depth":1,"path":"docs/guides/README.md","ref":"docs/guides/README.md","articles":[{"title":"Data Fetching","level":"1.3.1","depth":2,"path":"docs/guides/data-fetching.md","ref":"docs/guides/data-fetching.md","articles":[]},{"title":"Universal Rendering","level":"1.3.2","depth":2,"path":"docs/guides/universal-rendering.md","ref":"docs/guides/universal-rendering.md","articles":[]},{"title":"Styling","level":"1.3.3","depth":2,"path":"docs/styling.md","ref":"docs/styling.md","articles":[]}]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","-search","codeblock-disable-glossary","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/airbnb/react-sketchapp/"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/airbnb/react-sketchapp/tree/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"react-sketchapp","gitbook":">= 3.2.1"},"file":{"path":"docs/examples.md","mtime":"2017-04-25T04:02:01.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-25T04:02:13.345Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "@jongold/eslint-config-sketch"
+  ],
+  "globals": {
+    "React$Component": true,
+    "React$Element": true,
+    "ReactClass": true,
+    "ReactComponent": true,
+    "NSColor": true,
+    "MSJSONDataArchiver": true,
+    "NSAttributedString": true,
+    "NSDate": true,
+    "NSDataBase64EncodingEndLineWithCarriageReturn": true,
+  },
+  "rules": {
+    "class-methods-use-this": 0,
+    "no-underscore-dangle": 0,
+    "new-cap": 0,
+    "no-duplicate-imports": [0],
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+  },
+  "env": {
+    "node": true,
+    "jest": true
+  }
+}
