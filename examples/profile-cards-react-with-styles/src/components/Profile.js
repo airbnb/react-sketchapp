@@ -5,7 +5,7 @@ import { css, withStyles } from '../withStyles';
 
 const Profile = ({ user, styles }) => (
   <View {...css(styles.container)}>
-    {/* <Image source={user.profile_image_url} {...css(styles.avatar)} /> */}
+    <Image source={user.profile_image_url} {...css(styles.avatar)} />
     <View {...css(styles.titleWrapper)}>
       <Text {...css(styles.title)}>{user.name}</Text>
       <Text {...css(styles.subtitle)}>{`@${user.screen_name}`}</Text>
