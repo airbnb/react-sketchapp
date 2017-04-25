@@ -19,6 +19,8 @@ cd react-sketchapp/examples/basic-setup && npm install
 npm run render
 ```
 
+Next, <a href="https://github.com/airbnb/react-sketchapp/tree/master/examples">check out some more examples!</a>
+
 ![readme-intro](https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png)
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
@@ -54,6 +56,8 @@ export default (context) => {
 * **Build new tools on top of Sketch—** the easiest way to use Sketch as a canvas for custom design tooling
 
 Found a novel use? We'd love to hear about it!
+
+<a href="http://airbnb.design/painting-with-code/">Read more about why we built it</a>
 
 ## Documentation
 
