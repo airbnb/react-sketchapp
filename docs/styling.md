@@ -69,7 +69,6 @@ Components use CSS styles + flexbox layout.
 | `borderBottomWidth` | `number` | ✅ |
 | `borderLeftWidth` | `number` | ✅ |
 | `opacity` | `number` | ✅ |
-};
 
 #### Type Styles
 | property | type | supported? |
