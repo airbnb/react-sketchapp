@@ -29,7 +29,7 @@ Returns the top-level rendered Sketch object.
 ##### `element` (required)
 
 ##### `container` (required)
-The element to render into - will be replaced. Should either be a Group or a Page — usually you should use `context.document.currentPage()`
+The element to render into - will be replaced. Should either be a Group or a Page — usually you should use `context.document.currentPage()`.
 
 ### returns
 The top-most rendered native Sketch layer.
@@ -57,7 +57,7 @@ The top-most Sketch layer as JSON.
 
 ## Components
 ### `<Artboard>`
-Wrapper for Sketch's artboards.
+Wrapper for Sketch's Artboards.
 
 #### props
 | Prop | Type | Default | Note |
@@ -107,7 +107,7 @@ type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
 
 
 ### `<RedBox>`
-A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react)
+A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react).
 --SUGGESTION: can you give a screenshot of what this looks like?
 
 #### Props
@@ -195,13 +195,13 @@ View primitives
 Compared to single-use `style` objects, `StyleSheets` enable creation of re-usable, optimized style references.
 
 ### `hairlineWidth`
-The platform's global 'hairline width'
+The platform's global 'hairline width'.
 
 ### `absoluteFill`
 A constant 'absolute fill' style.
 
 ### `create(styles)`
-Create an optimized StyleSheet reference from a style object.
+Create an optimized `StyleSheet` reference from a style object.
 
 #### params
 ##### `styles`
@@ -254,7 +254,7 @@ StyleSheet.flatten(styles.foo);
 ```
 
 ### `resolve(style)`
-Resolve one style
+Resolve one style.
 
 #### params
 ##### `style`
