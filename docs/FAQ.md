@@ -8,7 +8,7 @@ If you're using `skpm`, use `console.log` as usual.
 
 You can view the logs using `Console.app -> ~/Library/Logs -> com.bohemiancoding.sketch -> Plugin Output.log`, or in the terminal
 ```bash
-tail -f ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
+tail -F ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
 ```
 
 Occasionally this file disappears — in that case, run this and then try `tail`ing again.
