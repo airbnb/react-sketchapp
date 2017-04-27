@@ -66,7 +66,7 @@ Given equivalent API support it would be possible to simultaneously render to `r
 
 Rather than tying us into one design tools, reasoning about design in cross-platform primitives _frees us_ to use the tooling we want.
 
-#### Can I use [Flow](flowtype.org) or [TypeScript](https://www.typescriptlang.org/)?
+#### Can I use [Flow](https://flow.org) or [TypeScript](https://www.typescriptlang.org/)?
 Of course!
 
 Flow definitions are published with the npm package in `lib/*.flow.js`.
