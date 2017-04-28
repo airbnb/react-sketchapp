@@ -1,4 +1,11 @@
-import { generateID, makeColorFromCSS, makeColorFill, makeRect } from '../../src/jsonUtils/models';
+import {
+  generateID,
+  makeColorFromCSS,
+  makeColorFill,
+  makeRect,
+  makeSymbolInstance,
+  makeSymbolMaster,
+} from '../../src/jsonUtils/models';
 
 describe('generateID', () => {
   it('is unique', () => {
@@ -78,5 +85,31 @@ describe('makeRect', () => {
     expect(group).toHaveProperty('y', 200);
     expect(group).toHaveProperty('width', 300);
     expect(group).toHaveProperty('height', 400);
+  });
+});
+
+describe('makeSymbolInstance', () => {
+  it('is correctly constructed', () => {
+    const instance = makeSymbolInstance(
+      makeRect(0, 0, 100, 100),
+      'this is the symbol id',
+      'this is the name'
+    );
+
+    expect(instance).toHaveProperty('symbolID', 'this is the symbol id');
+    expect(instance).toHaveProperty('name', 'this is the name');
+  });
+});
+
+describe('makeSymbolMaster', () => {
+  it('is correctly constructed', () => {
+    const master = makeSymbolMaster(
+      makeRect(0, 0, 100, 100),
+      'this is the symbol id',
+      'this is the name'
+    );
+
+    expect(master).toHaveProperty('symbolID', 'this is the symbol id');
+    expect(master).toHaveProperty('name', 'this is the name');
   });
 });

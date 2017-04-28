@@ -7,6 +7,8 @@ const renderers: { [key: string]: any } = {
   image: require('./ImageRenderer'),
   text: require('./TextRenderer'),
   view: require('./ViewRenderer'),
+  symbolinstance: require('./SymbolInstanceRenderer'),
+  symbolmaster: require('./SymbolMasterRenderer'),
 };
 
 module.exports = renderers;

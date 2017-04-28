@@ -11,11 +11,11 @@ for (let i = 0; i < 256; i += 1) {
 }
 // Hack (http://stackoverflow.com/a/21963136)
 function e7() {
-  const d0 = Math.random() * 0xffffffff | 0;
-  const d1 = Math.random() * 0xffffffff | 0;
-  const d2 = Math.random() * 0xffffffff | 0;
-  const d3 = Math.random() * 0xffffffff | 0;
-  return `${lut[d0 & 0xff] + lut[d0 >> 8 & 0xff] + lut[d0 >> 16 & 0xff] + lut[d0 >> 24 & 0xff]}-${lut[d1 & 0xff]}${lut[d1 >> 8 & 0xff]}-${lut[d1 >> 16 & 0x0f | 0x40]}${lut[d1 >> 24 & 0xff]}-${lut[d2 & 0x3f | 0x80]}${lut[d2 >> 8 & 0xff]}-${lut[d2 >> 16 & 0xff]}${lut[d2 >> 24 & 0xff]}${lut[d3 & 0xff]}${lut[d3 >> 8 & 0xff]}${lut[d3 >> 16 & 0xff]}${lut[d3 >> 24 & 0xff]}`;
+  const d0 = (Math.random() * 0xffffffff) | 0;
+  const d1 = (Math.random() * 0xffffffff) | 0;
+  const d2 = (Math.random() * 0xffffffff) | 0;
+  const d3 = (Math.random() * 0xffffffff) | 0;
+  return `${lut[d0 & 0xff] + lut[(d0 >> 8) & 0xff] + lut[(d0 >> 16) & 0xff] + lut[(d0 >> 24) & 0xff]}-${lut[d1 & 0xff]}${lut[(d1 >> 8) & 0xff]}-${lut[((d1 >> 16) & 0x0f) | 0x40]}${lut[(d1 >> 24) & 0xff]}-${lut[(d2 & 0x3f) | 0x80]}${lut[(d2 >> 8) & 0xff]}-${lut[(d2 >> 16) & 0xff]}${lut[(d2 >> 24) & 0xff]}${lut[d3 & 0xff]}${lut[(d3 >> 8) & 0xff]}${lut[(d3 >> 16) & 0xff]}${lut[(d3 >> 24) & 0xff]}`;
 }
 
 export function generateID(): string {
@@ -59,7 +59,7 @@ export const makeColorFill = (cssColor: Color): SJFill => ({
 
 export const makeImageFill = (
   image: SJImageDataReference,
-  patternFillType: 0 | 1 | 2 | 3 = 1,
+  patternFillType: 0 | 1 | 2 | 3 = 1
 ): SJFill => ({
   _class: 'fill',
   isEnabled: true,
@@ -79,4 +79,28 @@ export const makeRect = (x: number, y: number, width: number, height: number): S
   y,
   width,
   height,
+});
+
+export const makeSymbolInstance = (frame: SJRect, symbolID: string, name: string) => ({
+  _class: 'symbolInstance',
+  horizontalSpacing: 0,
+  verticalSpacing: 0,
+  nameIsFixed: true,
+  isVisible: true,
+  do_objectID: generateID(),
+  name,
+  symbolID,
+  frame,
+});
+
+export const makeSymbolMaster = (frame: SJRect, symbolID: string, name: string) => ({
+  _class: 'symbolMaster',
+  do_objectID: generateID(),
+  nameIsFixed: true,
+  isVisible: true,
+  backgroundColor: makeColorFromCSS('white'),
+  hasBackgroundColor: false,
+  name,
+  symbolID,
+  frame,
 });
