@@ -17,7 +17,7 @@ const displayName = (Component: React$Component): string =>
 
 const mastersRegistry = {};
 
-const symbolize = (Component: React$Component): React$Component => {
+export const makeSymbol = (Component: React$Component): React$Component => {
   const innerName = displayName(Component);
   const symbolId = generateID();
 
@@ -55,7 +55,7 @@ const pageListToArray = (pageList) => {
   return out;
 };
 
-const inject = (context: SketchContext) => {
+export const injectSymbols = (context: SketchContext) => {
   const pages = context.document.pages();
   const array = pageListToArray(pages);
 
@@ -76,9 +76,4 @@ const inject = (context: SketchContext) => {
 
   symbolsPage.replaceAllLayersWithLayers(layers);
   context.document.setCurrentPage(notSymbolsPage);
-};
-
-export default {
-  symbolize,
-  inject,
 };
