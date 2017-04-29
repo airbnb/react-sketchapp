@@ -17,7 +17,7 @@ type StackFrame = {
   functionName?: string,
   source?: string,
   args?: any[],
-  evalOrigin?: StackFrame,
+  evalOrigin?: StackFrame
 };
 
 const styles = {
@@ -41,7 +41,7 @@ const styles = {
 };
 
 const propTypes = {
-  error: PropTypes.instanceOf(Error).isRequired,
+  error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string]).isRequired,
   // filename: PropTypes.string,
   // editorScheme: PropTypes.string,
   // useLines: PropTypes.bool,
@@ -60,6 +60,14 @@ class RedBox extends React.Component {
 
   render() {
     const { error } = this.props;
+
+    if (typeof error === 'string') {
+      return (
+        <View name="RedBox" style={styles.redbox}>
+          <Text name="Message" style={styles.message}>{`Error: ${error}`}</Text>
+        </View>
+      );
+    }
 
     let frames;
     let parseError;
