@@ -23,8 +23,8 @@ class TextBox extends Component {
 
   render() {
     return (
-      <div style={{...styles.formElement}}>
-        <label style={{...styles.label}}>{this.props.label}</label>
+      <div style={styles.formElement}>
+        <label style={styles.label}>{this.props.label}</label>
         <input
           style={{...styles.textbox, lineHeight: '100%'}}
           type={this.props.type}
