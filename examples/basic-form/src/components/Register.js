@@ -44,12 +44,13 @@ const Register = ({ sessions, isWeb }: Props) => (
           <TextBoxPrimitive
             label={"Password"}
             value={session.password}
-          />
-          {session.password.length > 0 &&
-            <StrengthMeter
-              password={session.password}
-            />
-          }
+          >
+            {session.password.length > 0 &&
+              <StrengthMeter
+                password={session.password}
+              />
+            }
+          </TextBoxPrimitive>
           <Button
             label={"Register"}
             backgroundColor={colors.Purple}

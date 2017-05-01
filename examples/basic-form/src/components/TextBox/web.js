@@ -30,9 +30,11 @@ class TextBox extends Component {
           value={this.state.value}
           onChange={this.handleChange}
         />
-        <StrengthMeter
-          password={this.state.value}
-        />
+        { this.props.type === 'password' && this.state.value.length > 0 &&
+          <StrengthMeter
+            password={this.state.value}
+          />
+        }
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
-import { colors } from '../designSystem';
+import { colors, spacing } from '../designSystem';
 
 const strengths = {
   short: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: 300,
     boxSizing: 'border-box',
     backgroundColor: '#ddd',
-    marginTop: 0,
+    marginTop: spacing.Medium,
     marginBottom: 40,
     borderRadius: 5
   },
