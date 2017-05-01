@@ -4,7 +4,8 @@ export const colors = {
   Rose: '#ff4289',
   Green: '#005b4c',
   Black: '#222223',
-  LightGrey: '#eeeeee'
+  LightGrey: '#eeeeee',
+  White: '#ffffff'
 };
 
 export const spacing = {

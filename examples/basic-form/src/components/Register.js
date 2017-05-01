@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
-import { spacing } from '../designSystem';
+import { colors, spacing } from '../designSystem';
 
 import TextBox from './primitives/TextBox';
+import Button from './button';
 
 
 const styles = StyleSheet.create({
@@ -36,6 +37,10 @@ const Register = ({ sessions }: Props) => (
         <TextBox
           label={"Password"}
           value={session.password}
+        />
+        <Button
+          label={"Register"}
+          backgroundColor={colors.Rose}
         />
       </View>
     ))}
