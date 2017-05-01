@@ -11,6 +11,7 @@ import Space from './components/Space';
 import TextBox from './components/TextBox/primitive';
 import Button from './components/Button';
 
+
 const styles = StyleSheet.create({
   register: {
     backgroundColor: colors.LightGrey,
