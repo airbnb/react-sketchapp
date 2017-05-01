@@ -18,10 +18,9 @@ export const spacing = {
   xLarge: 64
 };
 
-// http://www.modularscale.com/?16&px&1.5
 export const typeRamp = {
   xSmall: 7,
-  Small: 10,
+  Small: 12,
   Medium: 16,
   Large: 24,
   xLarge: 36

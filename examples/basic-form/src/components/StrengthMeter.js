@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-primitives';
-import { colors, spacing } from '../designSystem';
+import { View, Text } from 'react-primitives';
+import { colors, fontFamily, spacing, typeRamp } from '../designSystem';
 
 const strengths = {
   short: {
@@ -25,34 +25,34 @@ const strengths = {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   meter: {
     boxSizing: 'border-box',
     height: 5,
     width: 300,
-    boxSizing: 'border-box',
     backgroundColor: '#ddd',
     marginTop: spacing.Medium,
-    marginBottom: 40,
+    marginBottom: spacing.Medium,
     borderRadius: 5
   },
   innerMeter: {
+    boxSizing: 'border-box',
     height: 5,
-    width: 100,
-    backgroundColor: 'yellow',
-    borderRadius: 5
+    borderRadius: 5,
   },
   meterLabel: {
+    display: 'block',
+    fontFamily: fontFamily,
     textAlign: 'right',
     width: 300,
-    fontSize: 13,
+    fontSize: typeRamp.Small,
     marginTop: 5
   }
-});
+};
 
 const passwordStrength = (password) => {
 
-  // Faux strength checking
+  // Faux password checking
 
   if(password.length <= 5) {
     return 'short';
@@ -69,21 +69,18 @@ const StrengthMeter = ({ password }: Props) => (
   <View style={styles.meter}>
     <View 
       style={{
-        boxSizing: 'border-box',
-        height: 5,
+        ...styles.innerMeter,
         width: strengths[passwordStrength(password)].width,
         backgroundColor: strengths[passwordStrength(password)].backgroundColor,
-        borderRadius: 5
       }}>
     </View>
     <Text style={{
-      textAlign: 'right',
-      width: 300,
-      fontSize: 13,
-      marginTop: 5,
-      fontFamily: 'GT Walsheim',
-      color: strengths[passwordStrength(password)].backgroundColor,
-    }}>{strengths[passwordStrength(password)].label}</Text>
+      ...styles.meterLabel,
+      color: strengths[passwordStrength(password)].backgroundColor
+    }}
+    >
+      {strengths[passwordStrength(password)].label}
+    </Text>
   </View>
 );
 
