@@ -24,11 +24,6 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    // TODO(akp): handle opacity #sketch43
-    // if (style.opacity !== undefined) {
-    //   layer.style().contextSettings().opacity = style.opacity;
-    // }
-
     const opacity = style.opacity || DEFAULT_OPACITY;
 
     return {
