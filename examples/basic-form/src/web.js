@@ -1,6 +1,6 @@
-import { StyleSheet, Text } from 'react-primitives';
-import React from 'react'; import { colors, spacing, typeRamp, typography, fontFamily } from './designSystem';
-import DATA from './data';
+import { Text } from 'react-primitives';
+import React from 'react';
+import { colors, spacing, typeRamp, typography, fontFamily } from './designSystem';
 import Register from './components/Register';
 import Space from './components/Space';
 import TextBox from './components/TextBox/web';
