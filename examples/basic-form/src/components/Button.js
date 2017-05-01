@@ -7,9 +7,10 @@ const buttonStyle = {
   boxSizing: 'border-box',
   color: colors.White,
   fontFamily: fontFamily,
+  fontWeight: 'bold',
   padding: spacing.Medium,
   textAlign: 'center',
-  width: 260
+  width: 300
 }
 
 

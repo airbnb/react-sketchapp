@@ -18,6 +18,6 @@ export default {
     fontSize: 16,
     lineHeight: 14,
     padding: spacing.Medium,
-    width: 260,
+    width: 300,
   }
 };

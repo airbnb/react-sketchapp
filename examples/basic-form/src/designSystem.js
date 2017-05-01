@@ -32,7 +32,7 @@ export const typography = {
   }
 };
 
-export const fontFamily = "'SF UI Display', 'San Francisco', sans-serif";
+export const fontFamily = '-apple-system,".SFNSText-Regular",BlinkMacSystemFont,"San Francisco","Roboto","Segoe UI","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Lucida Grande",sans-serif';
 
 export default {
   colors,

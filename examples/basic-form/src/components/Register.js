@@ -1,49 +1,77 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
-import { colors, spacing } from '../designSystem';
+import { colors, spacing, typeRamp, fontFamily } from '../designSystem';
 
-import TextBox from './primitives/TextBox';
-import Button from './button';
+import TextBoxPrimitive from './TextBox/primitive';
+import TextBoxWeb from './TextBox/web';
+import Button from './Button';
+import StrengthMeter from './StrengthMeter';
 
 
 const styles = StyleSheet.create({
-  formElement: {
-    marginBottom: spacing.Medium
+  register: {
+    backgroundColor: colors.LightGrey,
+    padding: spacing.Large
   },
-  label: {
-    marginBottom: spacing.Small,
-    fontSize: 14,
-  },
-  textbox: {
-    boxSizing: 'border-box',
-    backgroundColor: '#fff',
-    fontFamily: 'GT Walsheim',
-    fontSize: 16,
-    lineHeight: 14,
-    padding: spacing.Medium,
-    width: 260,
+  heading: {
+    color: colors.Purple,
+    fontSize: typeRamp.Medium,
+    fontFamily: fontFamily,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: spacing.Medium,
+    width: 300
   }
 });
 
 
-const Register = ({ sessions }: Props) => (
-  <View style={styles.formElement}>
-    {sessions.map(session => (
-      <View>
-        <TextBox
+const Register = ({ sessions, isWeb }: Props) => (
+  <View>
+    {!isWeb && sessions.map(session => (
+      <View style={styles.register}>
+        <Text style={styles.heading}>Register an Account</Text>
+        <TextBoxPrimitive
           label={"Email"}
           value={session.email}
         />
-        <TextBox
+        <TextBoxPrimitive
           label={"Password"}
           value={session.password}
         />
+        {session.password.length > 0 &&
+          <StrengthMeter
+            password={session.password}
+          />
+        }
         <Button
           label={"Register"}
-          backgroundColor={colors.Rose}
+          backgroundColor={colors.Purple}
         />
       </View>
     ))}
+
+    {isWeb && 
+      <View style={styles.register}>
+        <Text style={styles.heading}>Register an Account</Text>
+        <TextBoxWeb
+          label={"Email"}
+          value={""}
+          type={"email"}
+        />
+        <TextBoxWeb
+          label={"Password"}
+          value={""}
+          type={"password"}
+        />
+        <StrengthMeter
+          password={""}
+        />
+        <Button
+          label={"Register"}
+          backgroundColor={colors.Purple}
+        />
+      </View>
+    }
   </View>
 );
 
