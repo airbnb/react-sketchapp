@@ -13,6 +13,9 @@ export default {
   },
   textbox: {
     boxSizing: 'border-box',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: colors.Grey,
     backgroundColor: colors.White,
     fontFamily: fontFamily,
     fontSize: typeRamp.Medium,
