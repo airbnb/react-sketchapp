@@ -32,7 +32,7 @@ const styles = {
     width: 300,
     backgroundColor: '#ddd',
     marginTop: spacing.Medium,
-    marginBottom: spacing.Medium,
+    marginBottom: spacing.Large,
     borderRadius: 5
   },
   innerMeter: {
