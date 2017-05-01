@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-primitives';
-import { spacing, fontFamily } from '../../designSystem';
+import { colors, spacing, fontFamily, typeRamp } from '../../designSystem';
 
 export default {
   formElement: {
@@ -9,14 +9,14 @@ export default {
     display: 'block',
     fontFamily: fontFamily,
     marginBottom: spacing.Small,
-    fontSize: 14,
+    fontSize: typeRamp.Medium - 2,
   },
   textbox: {
     boxSizing: 'border-box',
-    backgroundColor: '#fff',
+    backgroundColor: colors.White,
     fontFamily: fontFamily,
-    fontSize: 16,
-    lineHeight: 14,
+    fontSize: typeRamp.Medium,
+    lineHeight: typeRamp.Medium,
     padding: spacing.Medium,
     width: 300,
   }

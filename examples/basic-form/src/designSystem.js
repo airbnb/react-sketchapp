@@ -34,7 +34,7 @@ export const typography = {
   }
 };
 
-export const fontFamily = '-apple-system,".SFNSText-Regular",BlinkMacSystemFont,"San Francisco","Roboto","Segoe UI","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Lucida Grande",sans-serif';
+export const fontFamily = 'Helvetica';
 
 export default {
   colors,
