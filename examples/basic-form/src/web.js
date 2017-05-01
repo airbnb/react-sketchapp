@@ -36,13 +36,8 @@ export default () => (
       <h1
         style={{
           ...typography.Heading,
-          fontFamily: fontFamily,
-          marginBottom: 0
-        }}>Basic Form w/ DOM elements and React Primitives</h1>
-      <p style={{
-        fontFamily: fontFamily,
-        textAlign: 'center'
-      }}>Type a password! 👀</p>
+          fontFamily: fontFamily
+        }}>Basic Form w/ DOM elements and React Primitives. Type a password! 👀</h1>
       <Register>
         <div style={styles.register}>
           <Text style={{...styles.heading}}>Register an Account</Text>
