@@ -1,6 +1,13 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
 /* @flow */
-import type { SJColor, SJFill, SJImageDataReference, SJRect } from 'sketchapp-json-flow-types';
+import type {
+  SJColor,
+  SJFill,
+  SJImageDataReference,
+  SJRect,
+  SJSymbolMaster,
+  SJSymbolInstanceLayer,
+} from 'sketchapp-json-flow-types';
 import { FillType } from 'sketch-constants';
 import normalizeColor from 'normalize-css-color';
 import type { Color } from '../types';
@@ -81,7 +88,28 @@ export const makeRect = (x: number, y: number, width: number, height: number): S
   height,
 });
 
-export const makeSymbolInstance = (frame: SJRect, symbolID: string, name: string) => ({
+export const makeJSONDataReference = (image: MSImageData): SJImageDataReference => ({
+  _class: 'MSJSONOriginalDataReference',
+  _ref: `images/${generateID()}`,
+  _ref_class: 'MSImageData',
+  data: {
+    _data: image
+      .data()
+      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+    // TODO(gold): can I just declare this as a var instead of using Cocoa?
+  },
+  sha1: {
+    _data: image
+      .sha1()
+      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+  },
+});
+
+export const makeSymbolInstance = (
+  frame: SJRect,
+  symbolID: string,
+  name: string
+): SJSymbolInstanceLayer => ({
   _class: 'symbolInstance',
   horizontalSpacing: 0,
   verticalSpacing: 0,
@@ -93,7 +121,11 @@ export const makeSymbolInstance = (frame: SJRect, symbolID: string, name: string
   frame,
 });
 
-export const makeSymbolMaster = (frame: SJRect, symbolID: string, name: string) => ({
+export const makeSymbolMaster = (
+  frame: SJRect,
+  symbolID: string,
+  name: string
+): SJSymbolMaster => ({
   _class: 'symbolMaster',
   do_objectID: generateID(),
   nameIsFixed: true,

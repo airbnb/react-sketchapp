@@ -1,5 +1,5 @@
 /* @flow */
-import type { SJShapeGroupLayer, SJImageDataReference } from 'sketchapp-json-flow-types';
+import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
 import { PatternFillType } from '../utils/constants';
 import SketchRenderer from './SketchRenderer';
@@ -10,7 +10,7 @@ import {
   makeColorFromCSS,
   makeColorFill,
   makeImageFill,
-  generateID,
+  makeJSONDataReference,
 } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import {
@@ -36,23 +36,6 @@ function extractURLFromSource(source) {
   return source.uri;
 }
 
-const makeJSONDataReference = (image): SJImageDataReference => ({
-  _class: 'MSJSONOriginalDataReference',
-  _ref: `images/${generateID()}`,
-  _ref_class: 'MSImageData',
-  data: {
-    _data: image
-      .data()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
-    // TODO(gold): can I just declare this as a var instead of using Cocoa?
-  },
-  sha1: {
-    _data: image
-      .sha1()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
-  },
-});
-
 class ImageRenderer extends SketchRenderer {
   renderBackingLayers(
     layout: LayoutInfo,
@@ -60,7 +43,7 @@ class ImageRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    value: ?string
   ): Array<SJShapeGroupLayer> {
     const layers = [];
 
@@ -160,7 +143,7 @@ class ImageRenderer extends SketchRenderer {
           0,
           layout.height,
           borderRightWidth,
-          borderRightColor,
+          borderRightColor
         );
         rightBorder.name = 'Border (right)';
 
@@ -178,7 +161,7 @@ class ImageRenderer extends SketchRenderer {
           layout.height - borderBottomWidth,
           layout.width,
           borderBottomWidth,
-          borderBottomColor,
+          borderBottomColor
         );
         bottomBorder.name = 'Border (bottom)';
 
@@ -196,7 +179,7 @@ class ImageRenderer extends SketchRenderer {
           0,
           layout.height,
           borderLeftWidth,
-          borderLeftColor,
+          borderLeftColor
         );
         leftBorder.name = 'Border (left)';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { render, Artboard, Text, View } from 'react-sketchapp';
+import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
@@ -32,6 +32,21 @@ const Swatch = ({ name, hex }) => (
   </View>
 );
 
+Swatch.defaultProps = {
+  name: 'Name',
+  hex: '#000'
+}
+
+const SwatchSym = makeSymbol(Swatch);
+
+const ImageSym = makeSymbol(() =>
+  <Image
+    source="https://pbs.twimg.com/profile_images/763033229993574400/6frGyDyA_400x400.jpg"
+    name="myImage"
+    style={{ width: 100, height: 100 }}
+  />
+);
+
 const Color = {
   hex: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -49,6 +64,8 @@ const Document = ({ colors }) => (
     }}
   >
     {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
+    <SwatchSym style={{ width: 104, height: 104 }} overrides={{ 'Name': 'Hello' }}/>
+    <ImageSym style={{ width: 100, height: 100 }} overrides={{ 'myImage': 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg' }} />
   </Artboard>
 );
 
@@ -57,6 +74,8 @@ Document.propTypes = {
 };
 
 export default (context) => {
+  injectSymbols(context);
+
   const colorList = {
     Haus: '#F3F4F4',
     Night: '#333',

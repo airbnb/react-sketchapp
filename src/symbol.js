@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
 import { fromSJSONDictionary } from 'sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
@@ -7,7 +8,6 @@ import ViewStylePropTypes from './components/ViewStylePropTypes';
 import type { SketchContext } from './types';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
-import compose from './utils/compose';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -21,10 +21,12 @@ export const makeSymbol = (Component: React$Component): React$Component => {
   const innerName = displayName(Component);
   const symbolId = generateID();
 
-  mastersRegistry[innerName] = () => (
-    <symbolmaster symbolID={symbolId} name={innerName}>
-      <Component />
-    </symbolmaster>
+  mastersRegistry[innerName] = flexToSketchJSON(
+    buildTree(
+      <symbolmaster symbolID={symbolId} name={innerName}>
+        <Component />
+      </symbolmaster>
+    )
   );
 
   return class extends React.Component {
@@ -32,6 +34,7 @@ export const makeSymbol = (Component: React$Component): React$Component => {
 
     static propTypes = {
       style: PropTypes.shape(ViewStylePropTypes),
+      overrides: PropTypes.object,
     };
 
     render() {
@@ -40,6 +43,7 @@ export const makeSymbol = (Component: React$Component): React$Component => {
           symbolID={symbolId}
           name={innerName}
           style={StyleSheet.flatten(this.props.style)}
+          overrides={this.props.overrides}
         />
       );
     }
@@ -70,10 +74,10 @@ export const injectSymbols = (context: SketchContext) => {
     notSymbolsPage = context.document.addBlankPage();
   }
 
-  const layers = Object.keys(mastersRegistry).map(k =>
-    compose(fromSJSONDictionary, flexToSketchJSON, buildTree, mastersRegistry[k])()
-  );
+  const layers = Object.keys(mastersRegistry).map(k => fromSJSONDictionary(mastersRegistry[k]));
 
   symbolsPage.replaceAllLayersWithLayers(layers);
   context.document.setCurrentPage(notSymbolsPage);
 };
+
+export const getMasterByName = (name: string): ?SJSymbolMaster => mastersRegistry[name];
