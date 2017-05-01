@@ -6,6 +6,7 @@ import TextBoxPrimitive from './TextBox/primitive';
 import TextBoxWeb from './TextBox/web';
 import Button from './Button';
 import StrengthMeter from './StrengthMeter';
+import Space from './Space';
 
 
 const styles = StyleSheet.create({
@@ -26,28 +27,35 @@ const styles = StyleSheet.create({
 
 
 const Register = ({ sessions, isWeb }: Props) => (
-  <View>
+  <View
+    style={{
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    }}
+  >
     {!isWeb && sessions.map(session => (
-      <View style={styles.register}>
-        <Text style={styles.heading}>Register an Account</Text>
-        <TextBoxPrimitive
-          label={"Email"}
-          value={session.email}
-        />
-        <TextBoxPrimitive
-          label={"Password"}
-          value={session.password}
-        />
-        {session.password.length > 0 &&
-          <StrengthMeter
-            password={session.password}
+      <Space key={session.password} h={spacing.Large} v={spacing.Large}>
+        <View style={styles.register}>
+          <Text style={styles.heading}>Register an Account</Text>
+          <TextBoxPrimitive
+            label={"Email"}
+            value={session.email}
           />
-        }
-        <Button
-          label={"Register"}
-          backgroundColor={colors.Purple}
-        />
-      </View>
+          <TextBoxPrimitive
+            label={"Password"}
+            value={session.password}
+          />
+          {session.password.length > 0 &&
+            <StrengthMeter
+              password={session.password}
+            />
+          }
+          <Button
+            label={"Register"}
+            backgroundColor={colors.Purple}
+          />
+        </View>
+      </Space>
     ))}
 
     {isWeb && 

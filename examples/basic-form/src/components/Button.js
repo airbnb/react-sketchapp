@@ -6,6 +6,7 @@ const buttonStyle = {
   borderRadius: 3,
   boxSizing: 'border-box',
   color: colors.White,
+  cursor: 'pointer',
   fontFamily: fontFamily,
   fontWeight: 'bold',
   padding: spacing.Medium,

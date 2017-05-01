@@ -28,7 +28,9 @@ export const typeRamp = {
 
 export const typography = {
   Heading: {
-    fontSize: typeRamp.Large
+    fontSize: typeRamp.Large,
+    textAlign: 'center',
+    marginBottom: spacing.Large
   }
 };
 

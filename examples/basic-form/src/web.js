@@ -1,12 +1,10 @@
 import React from 'react';
-// import Register from './components/Register';
+import Register from './components/Register';
+import { typography, fontFamily } from './designSystem';
+import DATA from './data';
 
 const containerStyle = {
-  display: 'flex',
-  flexDirection: 'row',
-  width: 960,
-  flexWrap: 'wrap',
-  justifyContent: 'center',
+  width: 364,
   marginLeft: 'auto',
   marginRight: 'auto'
 }
@@ -19,7 +17,13 @@ const containerStyle = {
 export default () => (
   <div>
     <div style={containerStyle}>
-      <h1 style={{ fontFamily: "'SF UI Display', 'San Francisco', sans-serif" }}>Register</h1>
+      <h1
+        style={{...typography.Heading, fontFamily: fontFamily}}>
+        Basic Form w/ DOM elements and React Primitives</h1>
+      <Register
+        sessions={DATA}
+        isWeb
+      />
     </div>
   </div>
 );
