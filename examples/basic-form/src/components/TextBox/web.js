@@ -20,6 +20,7 @@ class TextBox extends Component {
     this.setState({value: event.target.value});
   }
 
+
   render() {
     return (
       <div style={{...styles.formElement}}>
