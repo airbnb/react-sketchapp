@@ -34,8 +34,15 @@ export default () => (
   <div>
     <div style={styles.containerStyle}>
       <h1
-        style={{...typography.Heading, fontFamily: fontFamily}}>
-        Basic Form w/ DOM elements and React Primitives</h1>
+        style={{
+          ...typography.Heading,
+          fontFamily: fontFamily,
+          marginBottom: 0
+        }}>Basic Form w/ DOM elements and React Primitives</h1>
+      <p style={{
+        fontFamily: fontFamily,
+        textAlign: 'center'
+      }}>Type a password! 👀</p>
       <Register>
         <div style={styles.register}>
           <Text style={{...styles.heading}}>Register an Account</Text>
