@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './style';
+import StrengthMeter from '../StrengthMeter';
 
 class TextBox extends Component {
 
   constructor(props) {
     super(props);
 
-    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      passwordStrength: false
+      value: ''
     }
   }
 
 
-  handleKeyDown() {
-    // const element = React
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -26,6 +27,11 @@ class TextBox extends Component {
         <input
           style={{...styles.textbox, lineHeight: '100%'}}
           type={this.props.type}
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+        <StrengthMeter
+          password={this.state.value}
         />
       </div>
     )

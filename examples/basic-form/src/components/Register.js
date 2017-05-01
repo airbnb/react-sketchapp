@@ -71,9 +71,6 @@ const Register = ({ sessions, isWeb }: Props) => (
           value={""}
           type={"password"}
         />
-        <StrengthMeter
-          password={""}
-        />
         <Button
           label={"Register"}
           backgroundColor={colors.Purple}
