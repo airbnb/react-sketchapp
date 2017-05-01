@@ -1,4 +1,5 @@
 export const colors = {
+  Purple: '#5700A2',
   Yellow: '#f9cc00',
   Orange: '#fd6134',
   Rose: '#ff4289',
@@ -29,11 +30,14 @@ export const typography = {
   Heading: {
     fontSize: typeRamp.Large
   }
-}
+};
+
+export const fontFamily = "'SF UI Display', 'San Francisco', sans-serif";
 
 export default {
   colors,
   spacing,
   typeRamp,
-  typography
-}
+  typography,
+  fontFamily
+};

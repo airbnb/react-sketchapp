@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
-import { spacing, colors } from '../designSystem';
+import { spacing, colors, fontFamily } from '../designSystem';
 
 const buttonStyle = {
   borderRadius: 3,
   boxSizing: 'border-box',
   color: colors.White,
+  fontFamily: fontFamily,
   padding: spacing.Medium,
   textAlign: 'center',
   width: 260
