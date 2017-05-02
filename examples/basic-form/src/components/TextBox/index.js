@@ -1,9 +1,15 @@
+/* @flow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './style';
 import StrengthMeter from '../StrengthMeter';
 
 class TextBox extends Component {
+
+  props: {
+    label: string,
+    type: string,
+  }
 
   constructor(props) {
     super(props);
@@ -35,11 +41,6 @@ class TextBox extends Component {
       </div>
     )
   }
-}
-
-TextBox.propTypes = {
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
 }
 
 export default TextBox;

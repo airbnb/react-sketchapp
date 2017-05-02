@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
 import styles from './style';
