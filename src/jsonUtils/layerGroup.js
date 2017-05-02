@@ -2,7 +2,7 @@
 
 import { generateID, makeRect } from './models';
 
-const layerGroup = (x: number, y: number, width: number, height: number, opacity: number) => ({
+const layerGroup = (x: number, y: number, width: number, height: number) => ({
   _class: 'group',
   do_objectID: generateID(),
   exportOptions: {
@@ -28,11 +28,6 @@ const layerGroup = (x: number, y: number, width: number, height: number, opacity
     endDecorationType: 0,
     miterLimit: 10,
     startDecorationType: 0,
-    contextSettings: {
-      _class: 'graphicsContextSettings',
-      blendMode: 0,
-      opacity,
-    },
   },
   hasClickThrough: false,
   layers: [],

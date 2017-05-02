@@ -3,8 +3,6 @@ import layerGroup from '../jsonUtils/layerGroup';
 
 import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON } from '../types';
 
-const DEFAULT_OPACITY = 1.0;
-
 class SketchRenderer {
   getDefaultGroupName(/* props: any, value: ?string */) {
     return 'Group';
@@ -15,7 +13,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): SketchJSON {
     // Default SketchRenderer just renders an empty group
 
@@ -24,10 +22,13 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    const opacity = style.opacity || DEFAULT_OPACITY;
+    // TODO(akp): handle opacity #sketch43
+    // if (style.opacity !== undefined) {
+    //   layer.style().contextSettings().opacity = style.opacity;
+    // }
 
     return {
-      ...layerGroup(layout.left, layout.top, layout.width, layout.height, opacity),
+      ...layerGroup(layout.left, layout.top, layout.width, layout.height),
       name: props.name || this.getDefaultGroupName(props, value),
     };
   }
@@ -37,7 +38,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    value: ?string,
   ): Array<SketchJSON> {
     return [];
   }
