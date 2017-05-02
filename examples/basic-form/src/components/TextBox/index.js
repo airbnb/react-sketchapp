@@ -1,15 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styles from './style';
-import StrengthMeter from '../StrengthMeter';
 
 class TextBox extends Component {
-
-  props: {
-    label: string,
-    type: string,
-  }
 
   constructor(props) {
     super(props);
@@ -17,29 +10,42 @@ class TextBox extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: this.props.value
-    }
+      value: this.props.value,
+    };
   }
 
+  props: {
+    label: string,
+    type: string,
+    value: string,
+    children?: React$Element<any>,
+  };
+
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
   render() {
     return (
       <div style={styles.formElement}>
-        <label style={styles.label}>{this.props.label}</label>
+        <label
+          style={styles.label}
+          htmlFor={this.props.type}
+        >
+          {this.props.label}
+        </label>
         <input
-          style={{...styles.textbox, lineHeight: '100%'}}
+          id={this.props.type}
+          style={{ ...styles.textbox, lineHeight: '100%' }}
           type={this.props.type}
           value={this.state.value}
           onChange={this.handleChange}
         />
-          {this.props.children &&
-            React.cloneElement(this.props.children, {password: this.state.value})
-          }
+        {this.props.children &&
+          React.cloneElement(this.props.children, { password: this.state.value })
+        }
       </div>
-    )
+    );
   }
 }
 

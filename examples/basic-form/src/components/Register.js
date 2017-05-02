@@ -15,38 +15,38 @@ const styles = StyleSheet.create({
   register: {
     backgroundColor: colors.LightGrey,
     padding: spacing.Large,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
   },
   heading: {
     color: colors.Purple,
     fontSize: typeRamp.Medium,
-    fontFamily: fontFamily,
+    fontFamily,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: spacing.Medium,
-    width: 300
-  }
+    width: 300,
+  },
 });
 
 const Register = ({ session }: Props) => (
   <View style={styles.register}>
     <Text style={styles.heading}>Register an Account</Text>
     <TextBox
-      label={"Email"}
+      label={'Email'}
       value={session.email}
-      type={"email"}
+      type={'email'}
     />
     <TextBox
-      label={"Password"}
+      label={'Password'}
       value={session.password}
-      type={"password"}
+      type={'password'}
     >
       <StrengthMeter
         password={session.password}
       />
     </TextBox>
     <Button
-      label={"Register"}
+      label={'Register'}
       backgroundColor={colors.Purple}
     />
   </View>
@@ -55,9 +55,9 @@ const Register = ({ session }: Props) => (
 Register.defaultProps = {
   session: {
     email: '',
-    password: ''
-  }
-}
-
+    password: '',
+  },
+};
 
 export default Register;
+

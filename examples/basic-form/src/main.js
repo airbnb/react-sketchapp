@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { render, StyleSheet, View } from 'react-sketchapp';
+import { render, View } from 'react-sketchapp';
 import { Text } from 'react-primitives';
-import { colors, typography, spacing, typeRamp, fontFamily } from './designSystem';
+import { typography, spacing } from './designSystem';
 import type { Session } from './types';
 import DATA from './data';
 import Register from './components/Register';
@@ -19,7 +18,7 @@ const Page = ({ sessions }: { sessions: Array<Session> }) => (
     >
       {sessions.map(session => (
         <Space key={session.password} h={spacing.Large} v={spacing.Large}>
-          <Register 
+          <Register
             session={session}
           />
         </Space>
@@ -30,4 +29,4 @@ const Page = ({ sessions }: { sessions: Array<Session> }) => (
 
 export default (context) => {
   render(<Page sessions={DATA} />, context.document.currentPage());
-}
+};

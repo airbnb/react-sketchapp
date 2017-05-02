@@ -13,15 +13,15 @@ const buttonStyle = {
   boxSizing: 'border-box',
   color: colors.White,
   cursor: 'pointer',
-  fontFamily: fontFamily,
+  fontFamily,
   fontWeight: 'bold',
   padding: spacing.Medium,
   textAlign: 'center',
-  width: 300
-}
+  width: 300,
+};
 
 const Button = ({ label, backgroundColor }: Props) => (
-  <Text style={{...buttonStyle, backgroundColor: backgroundColor}}>
+  <Text style={{ ...buttonStyle, backgroundColor }}>
     {label}
   </Text>
 );

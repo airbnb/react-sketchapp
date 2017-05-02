@@ -7,7 +7,7 @@ export const colors = {
   Black: '#222223',
   LightGrey: '#eeeeee',
   Grey: '#cccccc',
-  White: '#ffffff'
+  White: '#ffffff',
 };
 
 export const spacing = {
@@ -15,7 +15,7 @@ export const spacing = {
   Small: 8,
   Medium: 16,
   Large: 32,
-  xLarge: 64
+  xLarge: 64,
 };
 
 export const typeRamp = {
@@ -23,15 +23,15 @@ export const typeRamp = {
   Small: 12,
   Medium: 16,
   Large: 24,
-  xLarge: 36
+  xLarge: 36,
 };
 
 export const typography = {
   Heading: {
     fontSize: typeRamp.Large,
     textAlign: 'center',
-    marginBottom: spacing.Large
-  }
+    marginBottom: spacing.Large,
+  },
 };
 
 export const fontFamily = 'Helvetica';
@@ -41,5 +41,5 @@ export default {
   spacing,
   typeRamp,
   typography,
-  fontFamily
+  fontFamily,
 };
