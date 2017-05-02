@@ -58,9 +58,9 @@ const passwordStrength = (password) => {
 
   // Faux password checking
 
-  if(password.length <= 5) {
+  if(password.length <= 6) {
     return 'short';
-  } else if (password.length <= 10) {
+  } else if (password.length <= 9) {
     return 'fair';
   } else if (password.length <= 12) {
     return 'good';
