@@ -19,6 +19,6 @@
     "react-with-styles": "^1.4.0"
   },
   "devDependencies": {
-    "skpm": "^0.8.0"
+    "skpm": "^0.9.0"
   }
 }

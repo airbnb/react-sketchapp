@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import Client from 'gql-sketch';
-import 'sketch-module-fetch-polyfill';
 import type { User } from './types';
 import { fonts, spacing } from './designSystem';
 import Profile from './components/Profile';

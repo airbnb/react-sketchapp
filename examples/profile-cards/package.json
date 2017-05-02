@@ -18,6 +18,6 @@
     "react-test-renderer": "^15.4.2"
   },
   "devDependencies": {
-    "skpm": "^0.8.0"
+    "skpm": "^0.9.0"
   }
 }
