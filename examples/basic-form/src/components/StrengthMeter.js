@@ -46,7 +46,6 @@ const styles = {
     borderRadius: 5,
   },
   meterLabel: {
-    display: 'block',
     fontFamily: fontFamily,
     textAlign: 'right',
     width: 300,

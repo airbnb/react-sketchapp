@@ -17,7 +17,7 @@ class TextBox extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: ''
+      value: this.props.value
     }
   }
 

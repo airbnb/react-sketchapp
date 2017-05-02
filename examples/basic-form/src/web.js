@@ -11,11 +11,6 @@ const styles = {
   }
 };
 
-const session = {
-  email: '',
-  password: ''
-}
-
 export default () => (
   <div>
     <div style={styles.containerStyle}>
@@ -24,8 +19,7 @@ export default () => (
           ...typography.Heading,
           fontFamily: fontFamily
         }}>Basic Form w/ DOM elements and React Primitives. Type a password! 👀</h1>
-      <Register
-        session={session}/>
+      <Register />
     </div>
   </div>
 );

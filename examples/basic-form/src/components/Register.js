@@ -52,5 +52,12 @@ const Register = ({ session }: Props) => (
   </View>
 );
 
+Register.defaultProps = {
+  session: {
+    email: '',
+    password: ''
+  }
+}
+
 
 export default Register;
