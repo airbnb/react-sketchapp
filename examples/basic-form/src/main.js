@@ -8,7 +8,7 @@ import DATA from './data';
 
 import Register from './components/Register';
 import Space from './components/Space';
-import TextBox from './components/TextBox/primitive';
+import TextBox from './components/TextBox';
 import Button from './components/Button';
 
 

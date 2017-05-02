@@ -3,7 +3,7 @@ import React from 'react';
 import { colors, spacing, typeRamp, typography, fontFamily } from './designSystem';
 import Register from './components/Register';
 import Space from './components/Space';
-import TextBox from './components/TextBox/web';
+import TextBox from './components/TextBox';
 import Button from './components/Button';
 
 
