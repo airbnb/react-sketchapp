@@ -3,16 +3,9 @@ import PropTypes from 'prop-types';
 import { render, StyleSheet, View } from 'react-sketchapp';
 import { Text } from 'react-primitives';
 import { colors, typography, spacing, typeRamp, fontFamily } from './designSystem';
-import type { User } from './types';
+import type { Session } from './types';
 import DATA from './data';
-
 import Register from './components/Register';
-import Space from './components/Space';
-import TextBox from './components/TextBox';
-import Button from './components/Button';
-
-
-
 
 const Page = ({ sessions }: { sessions: Array<Session> }) => (
   <View>

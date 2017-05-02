@@ -1,5 +1,5 @@
 /* eslint-disable */
 export type Session = {
-  user_name: string,
+  username: string,
   password: string,
 };

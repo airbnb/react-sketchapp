@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
 import { spacing, colors, typeRamp, fontFamily } from '../designSystem';
+import type { Session } from '../types';
 import Space from './Space';
 import TextBox from './TextBox';
 import Button from './Button';
+
+type Props = {
+  session: Session,
+};
 
 const styles = StyleSheet.create({
   register: {
