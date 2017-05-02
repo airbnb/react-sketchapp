@@ -4,6 +4,7 @@ import { spacing, colors, typeRamp, fontFamily } from '../designSystem';
 import type { Session } from '../types';
 import Space from './Space';
 import TextBox from './TextBox';
+import StrengthMeter from './StrengthMeter';
 import Button from './Button';
 
 type Props = {
@@ -45,7 +46,11 @@ const Register = ({ session }: Props) => (
           label={"Password"}
           value={session.password}
           type={"password"}
-        />
+        >
+          <StrengthMeter
+            password={session.password}
+          />
+        </TextBox>
         <Button
           label={"Register"}
           backgroundColor={colors.Purple}

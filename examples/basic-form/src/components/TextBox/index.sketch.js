@@ -7,17 +7,14 @@ type Props = {
   label: string,
   value: string,
   type: string,
+  children?: React$Element<any>,
 };
 
-const TextBox = ({ label, value, type }: Props) => (
+const TextBox = ({ label, value, type, children }: Props) => (
   <View style={styles.formElement}>
     <Text style={styles.label}>{label}</Text>
     <View style={styles.textbox}>{value}</View>
-    {type === "password" && value.length > 0 && 
-      <StrengthMeter
-        password={value}
-      />
-    }
+      {children}
   </View>
 );
 

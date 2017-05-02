@@ -70,21 +70,25 @@ const passwordStrength = (password) => {
 }
 
 const StrengthMeter = ({ password }: Props) => (
-  <View style={styles.meter}>
-    <View 
-      style={{
-        ...styles.innerMeter,
-        width: strengths[passwordStrength(password)].width,
-        backgroundColor: strengths[passwordStrength(password)].backgroundColor,
-      }}>
-    </View>
-    <Text style={{
-      ...styles.meterLabel,
-      color: strengths[passwordStrength(password)].backgroundColor
-    }}
-    >
-      {strengths[passwordStrength(password)].label}
-    </Text>
+  <View>
+    {password.length > 0 &&
+      <View style={styles.meter}>
+        <View 
+          style={{
+            ...styles.innerMeter,
+            width: strengths[passwordStrength(password)].width,
+            backgroundColor: strengths[passwordStrength(password)].backgroundColor,
+          }}>
+        </View>
+        <Text style={{
+          ...styles.meterLabel,
+          color: strengths[passwordStrength(password)].backgroundColor
+          }}
+        >
+          {strengths[passwordStrength(password)].label}
+        </Text>
+      </View>
+    }
   </View>
 );
 
