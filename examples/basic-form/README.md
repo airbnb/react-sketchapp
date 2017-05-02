@@ -26,4 +26,6 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Form`
 
 ## The idea behind the example
 
-`react-sketchapp` makes it simple generate different states of the same component.
+`react-sketchapp` makes it simple to render all potential states of a web component to sketch.
+
+![examples-basic-form](https://cloud.githubusercontent.com/assets/1606253/25585002/5cff9264-2e90-11e7-80dc-101f10ecad6d.png)
