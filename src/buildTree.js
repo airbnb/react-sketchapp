@@ -3,7 +3,6 @@ import computeLayout from 'css-layout';
 import Context from './utils/Context';
 import createStringMeasurer from './utils/createStringMeasurer';
 import type { TreeNode } from './types';
-import { timeFunction } from './debug';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
 
@@ -67,11 +66,8 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
-  const tree = timeFunction(
-    () => reactTreeToFlexTree(json, new Context()),
-    '- reactTreeToFlexTree',
-  );
-  timeFunction(() => computeLayout(tree), '- computeLayout');
+  const tree = reactTreeToFlexTree(json, new Context());
+  computeLayout(tree);
 
   return tree;
 };
