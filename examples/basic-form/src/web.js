@@ -3,8 +3,6 @@ import React from 'react';
 import { colors, spacing, typeRamp, typography, fontFamily } from './designSystem';
 import Register from './components/Register';
 
-
-
 const styles = {
   containerStyle: {
     width: 364,
@@ -13,6 +11,10 @@ const styles = {
   }
 };
 
+const session = {
+  email: '',
+  password: ''
+}
 
 export default () => (
   <div>
@@ -23,7 +25,7 @@ export default () => (
           fontFamily: fontFamily
         }}>Basic Form w/ DOM elements and React Primitives. Type a password! 👀</h1>
       <Register
-        session={{email: '', password: ''}}/>
+        session={session}/>
     </div>
   </div>
 );
