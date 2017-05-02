@@ -24,7 +24,7 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    const opacity = style.opacity || DEFAULT_OPACITY;
+    const opacity = style.opacity !== undefined ? style.opacity : DEFAULT_OPACITY;
 
     return {
       ...layerGroup(layout.left, layout.top, layout.width, layout.height, opacity),
