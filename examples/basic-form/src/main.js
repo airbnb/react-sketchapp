@@ -6,15 +6,25 @@ import { colors, typography, spacing, typeRamp, fontFamily } from './designSyste
 import type { Session } from './types';
 import DATA from './data';
 import Register from './components/Register';
+import Space from './components/Space';
 
 const Page = ({ sessions }: { sessions: Array<Session> }) => (
   <View>
     <Text style={typography.Heading}>Basic Form w/ DOM elements and React Primitives</Text>
-    {sessions.map(session => (
-      <Register 
-        session={session}
-      />
-    ))}
+    <View
+      style={{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+      }}
+    >
+      {sessions.map(session => (
+        <Space key={session.password} h={spacing.Large} v={spacing.Large}>
+          <Register 
+            session={session}
+          />
+        </Space>
+      ))}
+    </View>
   </View>
 );
 

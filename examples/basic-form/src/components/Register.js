@@ -3,7 +3,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
 import { spacing, colors, typeRamp, fontFamily } from '../designSystem';
 import type { Session } from '../types';
-import Space from './Space';
 import TextBox from './TextBox';
 import StrengthMeter from './StrengthMeter';
 import Button from './Button';
@@ -15,7 +14,8 @@ type Props = {
 const styles = StyleSheet.create({
   register: {
     backgroundColor: colors.LightGrey,
-    padding: spacing.Large
+    padding: spacing.Large,
+    boxSizing: 'border-box'
   },
   heading: {
     color: colors.Purple,
@@ -29,35 +29,26 @@ const styles = StyleSheet.create({
 });
 
 const Register = ({ session }: Props) => (
-  <View
-    style={{
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-    }}
-  >
-    <Space key={session.password} h={spacing.Large} v={spacing.Large}>
-      <View style={styles.register}>
-        <Text style={styles.heading}>Register an Account</Text>
-        <TextBox
-          label={"Email"}
-          value={session.email}
-          type={"email"}
-        />
-        <TextBox
-          label={"Password"}
-          value={session.password}
-          type={"password"}
-        >
-          <StrengthMeter
-            password={session.password}
-          />
-        </TextBox>
-        <Button
-          label={"Register"}
-          backgroundColor={colors.Purple}
-        />
-      </View>
-    </Space>
+  <View style={styles.register}>
+    <Text style={styles.heading}>Register an Account</Text>
+    <TextBox
+      label={"Email"}
+      value={session.email}
+      type={"email"}
+    />
+    <TextBox
+      label={"Password"}
+      value={session.password}
+      type={"password"}
+    >
+      <StrengthMeter
+        password={session.password}
+      />
+    </TextBox>
+    <Button
+      label={"Register"}
+      backgroundColor={colors.Purple}
+    />
   </View>
 );
 
