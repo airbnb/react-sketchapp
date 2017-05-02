@@ -38,6 +38,6 @@ Open a browser to `http://localhost:3000`
 
 Creating maps with live data into Sketch is notoriously difficult — until now ;)
 
-This example is created with `react-primitives` and renders simultaneously to Sketch & Web, and polyfills `fetch` in Sketch with [`sketch-module-fetch-polyfill`](https://github.com/mathieudutour/sketch-module-fetch-polyfill) (automatically imported by `skpm`).
+This example is created with `react-primitives` and renders simultaneously to Sketch & Web — maps are provided by [react-primitives-google-static-map](https://www.npmjs.com/package/react-primitives-google-static-map).
 
 ![foursquare-maps](https://cloud.githubusercontent.com/assets/591643/25052095/f666928e-2104-11e7-805c-a3c73ffcabcb.png)
