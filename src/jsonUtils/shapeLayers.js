@@ -133,26 +133,29 @@ export const makeRectShapeLayer = (
   width: number,
   height: number,
   radii: Radii = [0, 0, 0, 0],
-) => ({
-  _class: 'rectangle',
-  do_objectID: generateID(),
-  frame: makeRect(x, y, width, height),
-  isFlippedHorizontal: false,
-  isFlippedVertical: false,
-  isLocked: false,
-  isVisible: true,
-  layerListExpandedType: 0,
-  name: 'Path',
-  nameIsFixed: false,
-  resizingType: 0,
-  rotation: 0,
-  shouldBreakMaskChain: false,
-  booleanOperation: -1,
-  edited: false,
-  path: makeRectPath(radii),
-  fixedRadius: 8,
-  hasConvertedToNewRoundCorners: true,
-});
+) => {
+  const fixedRadius = radii[0] || 0;
+  return {
+    _class: 'rectangle',
+    do_objectID: generateID(),
+    frame: makeRect(x, y, width, height),
+    isFlippedHorizontal: false,
+    isFlippedVertical: false,
+    isLocked: false,
+    isVisible: true,
+    layerListExpandedType: 0,
+    name: 'Path',
+    nameIsFixed: false,
+    resizingType: 0,
+    rotation: 0,
+    shouldBreakMaskChain: false,
+    booleanOperation: -1,
+    edited: false,
+    path: makeRectPath(radii),
+    fixedRadius,
+    hasConvertedToNewRoundCorners: true,
+  };
+};
 
 export const makeShapeGroup = (
   frame: SJRect,
