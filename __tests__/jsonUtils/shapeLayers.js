@@ -37,6 +37,7 @@ describe('makeRectShapeLayer', () => {
     expect(shapeLayer).toHaveProperty('frame.y', 200);
     expect(shapeLayer).toHaveProperty('frame.width', 300);
     expect(shapeLayer).toHaveProperty('frame.height', 400);
+    expect(shapeLayer).toHaveProperty('fixedRadius', 10);
   });
 });
 
