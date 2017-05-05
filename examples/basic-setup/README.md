@@ -26,6 +26,6 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic skpm Examp
 
 ## The idea behind the example
 
-Using skpm to build `react-sketchapp` apps requires a little bit of configuration - use this as an example.
+[`skpm`](https://github.com/sketch-pm/skpm) is the easiest way to build `react-sketchapp` projects - this is a minimal example of it in use.
 
 ![examples-basic](https://cloud.githubusercontent.com/assets/591643/24778192/1f0684ec-1ade-11e7-866b-b11bb60ac109.png)
