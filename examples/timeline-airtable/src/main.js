@@ -51,7 +51,7 @@ const VerticalLine = ({ height, color = '#46D2B3' }) => (
 );
 
 const Header = ({ title }) => (
-  <View style={[styles.rowContainer, { backgroundColor: '#fff'}]}>
+  <View style={[styles.rowContainer, { backgroundColor: '#fff' }]}>
     <View style={styles.rowLeftArea}>
       <VerticalLine height={120} />
     </View>
