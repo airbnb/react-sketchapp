@@ -37,7 +37,12 @@ Swatch.defaultProps = {
   hex: '#000'
 }
 
-const SwatchSym = makeSymbol(Swatch);
+Swatch.propTypes = Color;
+
+const Color = {
+  hex: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 const ImageSym = makeSymbol(() =>
   <Image
@@ -47,12 +52,29 @@ const ImageSym = makeSymbol(() =>
   />
 );
 
-const Color = {
-  hex: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-};
+const OtherSymbol = makeSymbol(() =>
+  <View
+    name="A square"
+    style={{
+      height: 100,
+      width: 100,
+      backgroundColor: 'blue'
+    }}
+  >
+    hi
+  </View>
+)
 
-Swatch.propTypes = Color;
+const NestedSymbolSymbol = makeSymbol(() =>
+  <View
+    style={{
+      height: 104,
+      width: 104,
+    }}
+  >
+    <ImageSym name="A nested symbol" style={{ width: 100, height: 100 }} />
+  </View>
+)
 
 const Document = ({ colors }) => (
   <Artboard
@@ -64,8 +86,13 @@ const Document = ({ colors }) => (
     }}
   >
     {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
-    <SwatchSym style={{ width: 104, height: 104 }} overrides={{ 'Name': 'Hello' }}/>
-    <ImageSym style={{ width: 100, height: 100 }} overrides={{ 'myImage': 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg' }} />
+    <NestedSymbolSymbol
+      style={{ width: 104, height: 104 }}
+      overrides={{
+        'A nested symbol': OtherSymbol,
+        hi: 'hello!'
+      }}
+    />
   </Artboard>
 );
 
