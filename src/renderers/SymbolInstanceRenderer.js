@@ -3,7 +3,7 @@ import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from 'sketchapp-json-
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
-import { getMasterByName } from '../symbol';
+import { getMasterByName, getMasterBySymbolId } from '../symbol';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 
 type OverrideReferenceBase = {
@@ -13,7 +13,13 @@ type OverrideReferenceBase = {
 
 type OverrideReference =
   | ({ type: 'text' } & OverrideReferenceBase)
-  | ({ type: 'image' } & OverrideReferenceBase);
+  | ({ type: 'image' } & OverrideReferenceBase)
+  | ({
+    type: 'symbolInstance',
+    symbolId: string,
+    width: number,
+    height: number
+  } & OverrideReferenceBase);
 
 const extractOverridesHelp = (subLayer: SJLayer, output: Array<OverrideReference>) => {
   if (subLayer._class === 'text') {
@@ -33,6 +39,17 @@ const extractOverridesHelp = (subLayer: SJLayer, output: Array<OverrideReference
         output.push({ type: 'image', objectId: shapeGroup.do_objectID, name: subLayer.name });
       }
     }
+  }
+
+  if (subLayer._class === 'symbolInstance') {
+    output.push({
+      type: 'symbolInstance',
+      objectId: subLayer.do_objectID,
+      name: subLayer.name,
+      symbolId: subLayer.symbolID,
+      width: subLayer.frame.width,
+      height: subLayer.frame.height,
+    });
   }
 
   if (
@@ -76,23 +93,68 @@ class SymbolInstanceRenderer extends SketchRenderer {
     }
 
     const overridableLayers = extractOverrides(masterTree.layers);
-    console.log(overridableLayers);
 
-    const overrides = Object.keys(props.overrides).reduce((memo, next) => {
-      const overrideKey = next;
-      const overrideValue = props.overrides[next];
+    const overrides = overridableLayers.reduce(function inject(memo, reference) {
+      if (reference.type === 'symbolInstance') {
+        if (props.overrides.hasOwnProperty(reference.name)) {
+          // eslint-disable-line
+          const overrideValue = props.overrides[reference.name];
+          if (typeof overrideValue !== 'function' || typeof overrideValue.symbolId !== 'string') {
+            throw new Error(
+              '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL'
+            );
+          }
 
-      const reference = overridableLayers.find(l => l.name === overrideKey);
-      if (!reference) {
-        throw new Error('##FIXME## TRIED TO OVERRIDE NON-EXISTENT LAYER');
+          const originalMaster = getMasterBySymbolId(reference.symbolId);
+          const replacementMaster = getMasterBySymbolId(overrideValue.symbolId);
+
+          if (
+            originalMaster.frame.width !== replacementMaster.frame.width ||
+            originalMaster.frame.height !== replacementMaster.frame.height
+          ) {
+            throw new Error(
+              '##FIXME## SYMBOL MASTER SUBSTITUTIONS REQUIRE THAT MASTERS HAVE THE SAME DIMENSIONS'
+            );
+          }
+
+          const nestedOverrides = extractOverrides(
+            getMasterBySymbolId(overrideValue.symbolId).layers
+          ).reduce(inject, {});
+
+          return {
+            ...memo,
+            [reference.objectId]: {
+              symbolID: overrideValue.symbolId,
+              ...nestedOverrides,
+            },
+          };
+        }
+
+        const nestedOverrides = extractOverrides(
+          getMasterBySymbolId(reference.symbolId).layers
+        ).reduce(inject, {});
+
+        return {
+          ...memo,
+          [reference.objectId]: nestedOverrides,
+        };
       }
+
+      if (!props.overrides.hasOwnProperty(reference.name)) {
+        // eslint-disable-line
+        return memo;
+      }
+
+      const overrideValue = props.overrides[reference.name];
 
       if (reference.type === 'text') {
         if (typeof overrideValue !== 'string') {
           throw new Error('##FIXME## TEXT OVERRIDE VALUES MUST BE STRINGS');
         }
         return { ...memo, [reference.objectId]: overrideValue };
-      } else if (reference.type === 'image') {
+      }
+
+      if (reference.type === 'image') {
         if (typeof overrideValue !== 'string') {
           throw new Error('##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS');
         }

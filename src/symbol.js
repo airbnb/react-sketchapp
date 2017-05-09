@@ -15,13 +15,14 @@ const nextId = () => ++id; // eslint-disable-line
 const displayName = (Component: React$Component): string =>
   Component.displayName || Component.name || `Unknown_${nextId()}`;
 
-const mastersRegistry = {};
+const mastersNameRegistry = {};
+const mastersSymbolIdRegistry = {};
 
 export const makeSymbol = (Component: React$Component): React$Component => {
   const innerName = displayName(Component);
   const symbolId = generateID();
 
-  mastersRegistry[innerName] = flexToSketchJSON(
+  mastersNameRegistry[innerName] = mastersSymbolIdRegistry[symbolId] = flexToSketchJSON(
     buildTree(
       <symbolmaster symbolID={symbolId} name={innerName}>
         <Component />
@@ -34,14 +35,17 @@ export const makeSymbol = (Component: React$Component): React$Component => {
 
     static propTypes = {
       style: PropTypes.shape(ViewStylePropTypes),
-      overrides: PropTypes.object,
+      name: PropTypes.string,
+      overrides: PropTypes.object // eslint-disable-line
     };
+
+    static symbolId = symbolId;
 
     render() {
       return (
         <symbolinstance
           symbolID={symbolId}
-          name={innerName}
+          name={this.props.name || innerName}
           style={StyleSheet.flatten(this.props.style)}
           overrides={this.props.overrides}
         />
@@ -74,10 +78,20 @@ export const injectSymbols = (context: SketchContext) => {
     notSymbolsPage = context.document.addBlankPage();
   }
 
-  const layers = Object.keys(mastersRegistry).map(k => fromSJSONDictionary(mastersRegistry[k]));
+  const layers = Object.keys(mastersNameRegistry).map(k =>
+    fromSJSONDictionary(mastersNameRegistry[k])
+  );
 
   symbolsPage.replaceAllLayersWithLayers(layers);
   context.document.setCurrentPage(notSymbolsPage);
 };
 
-export const getMasterByName = (name: string): ?SJSymbolMaster => mastersRegistry[name];
+export const getMasterByName = (name: string): ?SJSymbolMaster => mastersNameRegistry[name];
+
+export const getMasterBySymbolId = (symbolId: string): SJSymbolMaster => {
+  if (!mastersSymbolIdRegistry.hasOwnProperty(symbolId)) {
+    // eslint-disable-line
+    throw new Error('##FIXME## NO MASTER FOR THIS SYMBOL ID');
+  }
+  return mastersSymbolIdRegistry[symbolId];
+};
