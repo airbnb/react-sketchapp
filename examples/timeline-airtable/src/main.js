@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { render, Artboard, Text, View, StyleSheet } from 'react-sketchapp';
 
-const API_ENDPOINT_URL = 'https://api.airtable.com/v0/appFs7J3WdgHYCDxD/Features?api_key=keyKPNRi8BoNPPBWR&&sort%5B0%5D%5Bfield%5D=Target+Launch+Date&sort%5B0%5D%5Bdirection%5D=asc';
+const API_ENDPOINT_URL =
+  'https://api.airtable.com/v0/appFs7J3WdgHYCDxD/Features?api_key=keyKPNRi8BoNPPBWR&&sort%5B0%5D%5Bfield%5D=Target+Launch+Date&sort%5B0%5D%5Bdirection%5D=asc';
 
 const styles = StyleSheet.create({
   artboard: {
@@ -16,26 +18,30 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: '#46D2B3',
-    margin: 2,
   },
   dotCompleted: {
     backgroundColor: '#46D2B3',
-  },
-  rowContainer: {
-    width: 800,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 30,
-    paddingRight: 30,
   },
   title: {
     fontSize: 48,
     fontWeight: 200,
     color: '#000',
   },
+  rowContainer: {
+    width: 800,
+    flexDirection: 'row',
+    flex: 1,
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
+  rowDescription: {
+    fontSize: 16,
+    width: 400,
+  },
   rowLeftArea: {
-    width: 100,
+    width: 99, // odd number to avoid antialiasing
     alignItems: 'center',
+    height: 150,
   },
   rowDate: {
     fontSize: 10,
@@ -46,20 +52,31 @@ const styles = StyleSheet.create({
   },
 });
 
-const VerticalLine = ({ height, color = '#46D2B3' }) => (
-  <View style={[styles.verticalLine, { height, backgroundColor: color }]} />
+const VerticalLine = ({ height = 1, color = '#46D2B3' }) => (
+  <View
+    style={[styles.verticalLine, { flex: height, backgroundColor: color }]}
+  />
 );
+
+VerticalLine.propTypes = {
+  height: PropTypes.number,
+  color: PropTypes.string,
+}
 
 const Header = ({ title }) => (
   <View style={[styles.rowContainer, { backgroundColor: '#fff' }]}>
     <View style={styles.rowLeftArea}>
-      <VerticalLine height={120} />
+      <VerticalLine />
     </View>
     <View>
       <Text style={styles.title}>{title}</Text>
     </View>
   </View>
 );
+
+Header.propTypes = {
+  title: PropTypes.string,
+};
 
 const Footer = () => (
   <View style={styles.rowContainer}>
@@ -69,41 +86,63 @@ const Footer = () => (
   </View>
 );
 
-const Row = ({ title, completed, date, status }) => (
+const Dot = ({ completed }) =>
+  <View name="Dot" style={[styles.dot, completed && styles.dotCompleted]} />
+
+Dot.propTypes = {
+  completed: PropTypes.bool,
+};
+
+const Row = ({ title, description, completed, date, status }) => (
   <View style={styles.rowContainer}>
-    <View style={styles.rowLeftArea}>
-      <VerticalLine height={30} />
-      <View style={[styles.dot, completed && styles.dotCompleted]} />
-      <VerticalLine height={30} />
+    <View name="Row Left" style={styles.rowLeftArea}>
+      <VerticalLine />
+      <Dot completed={completed} />
+      <VerticalLine height={4} />
     </View>
-    <View style={{opacity: completed ? 1 : 0.5 }}>
-      <Text style={styles.rowDate}>{`${status} on ${date}`}</Text>
-      <Text style={styles.rowTitle}>{title}</Text>
+    <View name="Row Body" style={{ opacity: completed ? 1 : 0.5 }}>
+      <Text
+        name="Row Date"
+        style={styles.rowDate}
+      >{`${status} on ${date}`}</Text>
+      <Text name="Row Title" style={styles.rowTitle}>{title}</Text>
+      <Text name="Row Description" style={styles.rowDescription}>
+        {description}
+      </Text>
     </View>
   </View>
 );
 
-const Timeline = ({ data }) => (
+Row.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  completed: PropTypes.bool,
+  date: PropTypes.string,
+  status: PropTypes.string,
+};
+
+const Timeline = props => (
   <Artboard style={styles.artboard}>
-    <Header title='Product Timeline' />
-    {
-      data.records.map(({ id, fields }, index) => {
-        return (
-          <Row
-            key={id}
-            topLineHeight={24}
-            bottomLineHeight={48}
-            title={fields['Feature']}
-            status={fields['Launched?'] ? 'Launched' : fields['Feature Status']}
-            completed={fields['Launched?']}
-            date={fields['Target Launch Date']}
-          />
-        );
-      })
-    }
+    <Header title="Product Timeline" />
+    {props.data.records.map(({ id, fields }) => (
+      <Row
+        key={id}
+        title={fields.Feature}
+        description={fields['Feature Description']}
+        status={fields['Launched?'] ? 'Launched' : fields['Feature Status']}
+        completed={fields['Launched?']}
+        date={fields['Target Launch Date']}
+      />
+      ))}
     <Footer />
   </Artboard>
 );
+
+Timeline.propTypes = {
+  data: PropTypes.shape({
+    records: PropTypes.array,
+  }),
+};
 
 export default (context) => {
   fetch(API_ENDPOINT_URL)
@@ -111,5 +150,5 @@ export default (context) => {
     .then((data) => {
       render(<Timeline data={data} />, context.document.currentPage());
     })
-    .catch(e => console.error(e));
+    .catch(e => console.error(e)); // eslint-disable-line no-console
 };
