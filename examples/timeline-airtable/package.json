@@ -8,7 +8,6 @@
     "watch": "skpm build --watch",
     "render": "skpm build --watch --run",
     "render:once": "skpm build --run",
-    "web": "react run src/web.js",
     "link-plugin": "skpm link"
   },
   "author": "David E. Chen <dchen@alumni.cmu.edu>",
@@ -16,8 +15,6 @@
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-native": "^0.42.3",
     "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.1"
   },
