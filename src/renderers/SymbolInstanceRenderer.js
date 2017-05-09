@@ -3,7 +3,7 @@ import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from 'sketchapp-json-
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
-import { getMasterByName, getMasterBySymbolId } from '../symbol';
+import { getMasterBySymbolId } from '../symbol';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 
 type OverrideReferenceBase = {
@@ -87,17 +87,13 @@ class SymbolInstanceRenderer extends SketchRenderer {
       return symbolInstance;
     }
 
-    const masterTree = getMasterByName(props.name);
-    if (!masterTree) {
-      throw new Error('##FIXME### NO MASTER BY THAT NAME');
-    }
-
+    const masterTree = getMasterBySymbolId(props.symbolID);
     const overridableLayers = extractOverrides(masterTree.layers);
 
     const overrides = overridableLayers.reduce(function inject(memo, reference) {
       if (reference.type === 'symbolInstance') {
+        // eslint-disable-next-line
         if (props.overrides.hasOwnProperty(reference.name)) {
-          // eslint-disable-line
           const overrideValue = props.overrides[reference.name];
           if (typeof overrideValue !== 'function' || typeof overrideValue.symbolId !== 'string') {
             throw new Error(
@@ -140,8 +136,8 @@ class SymbolInstanceRenderer extends SketchRenderer {
         };
       }
 
+      // eslint-disable-next-line
       if (!props.overrides.hasOwnProperty(reference.name)) {
-        // eslint-disable-line
         return memo;
       }
 

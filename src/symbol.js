@@ -86,11 +86,9 @@ export const injectSymbols = (context: SketchContext) => {
   context.document.setCurrentPage(notSymbolsPage);
 };
 
-export const getMasterByName = (name: string): ?SJSymbolMaster => mastersNameRegistry[name];
-
 export const getMasterBySymbolId = (symbolId: string): SJSymbolMaster => {
+  // eslint-disable-next-line
   if (!mastersSymbolIdRegistry.hasOwnProperty(symbolId)) {
-    // eslint-disable-line
     throw new Error('##FIXME## NO MASTER FOR THIS SYMBOL ID');
   }
   return mastersSymbolIdRegistry[symbolId];
