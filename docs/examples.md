@@ -25,3 +25,6 @@
 
 ### [Generative Colors w/ chroma-js](https://github.com/airbnb/react-sketchapp/tree/master/examples/colors)
 ![examples-colors](https://cloud.githubusercontent.com/assets/591643/24778153/efc76cdc-1add-11e7-93dd-0351f8f428c0.png)
+
+### [Timeline w/ Airtable](https://github.com/airbnb/react-sketchapp/tree/master/examples/timeline-airtable)
+![timeline-airtable](https://cloud.githubusercontent.com/assets/21080/25830456/cdc67bf8-3411-11e7-8998-fdef507ab0d2.png)
