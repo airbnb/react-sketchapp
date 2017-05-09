@@ -14,13 +14,10 @@
   "author": "David E. Chen <dchen@alumni.cmu.edu>",
   "license": "MIT",
   "dependencies": {
-    "nwb": "^0.15.6",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-native": "^0.42.3",
-    "react-primitives": "^0.3.4",
-    "react-primitives-google-static-map": "^1.0.1",
     "react-sketchapp": "^0.10.0",
     "react-test-renderer": "^15.4.1"
   },
