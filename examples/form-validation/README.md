@@ -22,7 +22,7 @@ Or, to install as a Sketch plugin:
 npm run build
 npm run link-plugin
 ```
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Form`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Form Validation`
 
 ## The idea behind the example
 
