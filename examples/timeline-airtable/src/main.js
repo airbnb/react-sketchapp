@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { render, Artboard, Text, View, StyleSheet } from 'react-sketchapp';
 
 const API_ENDPOINT_URL =
-  'https://api.airtable.com/v0/appFs7J3WdgHYCDxD/Features?api_key=keyKPNRi8BoNPPBWR&&sort%5B0%5D%5Bfield%5D=Target+Launch+Date&sort%5B0%5D%5Bdirection%5D=asc';
+  'https://api.airtable.com/v0/appFs7J3WdgHYCDxD/Features?api_key=keyu4dudakWLI0vAh&&sort%5B0%5D%5Bfield%5D=Target+Launch+Date&sort%5B0%5D%5Bdirection%5D=asc';
 
 const styles = StyleSheet.create({
   artboard: {
