@@ -14,7 +14,6 @@
   "author": "Lloyd Wheeler <lloyd@lloydwheeler.co.uk>",
   "license": "MIT",
   "dependencies": {
-    "nwb": "^0.15.6",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -24,6 +23,8 @@
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
+    "extract-text-webpack-plugin": "^2.1.0",
+    "nwb": "^0.15.6",
     "skpm": "^0.9.0"
   }
 }
