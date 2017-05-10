@@ -4,7 +4,7 @@
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
 ```
 curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/timeline-airtable
-cd colors
+cd timeline-airtable
 ```
 
 Install the dependencies
