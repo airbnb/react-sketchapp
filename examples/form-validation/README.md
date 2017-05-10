@@ -1,10 +1,10 @@
-# Basic form input
+# Form Validation
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
 ```
-curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/basic-form
-cd basic-form
+curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/form-validation
+cd form-validation
 ```
 
 Install the dependencies
@@ -28,4 +28,4 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic Form`
 
 `react-sketchapp` makes it simple to render all potential states of a web component to sketch.
 
-![examples-basic-form](https://cloud.githubusercontent.com/assets/1606253/25585002/5cff9264-2e90-11e7-80dc-101f10ecad6d.png)
+![examples-form-validation](https://cloud.githubusercontent.com/assets/1606253/25585002/5cff9264-2e90-11e7-80dc-101f10ecad6d.png)

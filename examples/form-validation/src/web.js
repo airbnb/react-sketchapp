@@ -19,7 +19,7 @@ export default () => (
           fontFamily,
         }}
       >
-        Basic Form w/ DOM elements and React Primitives. Type a password! 👀
+        Form Validation w/ DOM elements and React Primitives. Type a password! 👀
       </h1>
       <Register />
     </div>

@@ -1,7 +1,7 @@
 {
-  "name": "basic-form",
+  "name": "form-validation",
   "private": true,
-  "main": "basic-form.sketchplugin",
+  "main": "form-validation.sketchplugin",
   "manifest": "src/manifest.json",
   "scripts": {
     "build": "skpm build",
