@@ -15,20 +15,25 @@ const nextId = () => ++id; // eslint-disable-line
 const displayName = (Component: React$Component): string =>
   Component.displayName || Component.name || `Unknown_${nextId()}`;
 
-const mastersNameRegistry = {};
 const mastersSymbolIdRegistry = {};
+
+let masterLeftOffset = 0;
 
 export const makeSymbol = (Component: React$Component): React$Component => {
   const innerName = displayName(Component);
   const symbolId = generateID();
 
-  mastersNameRegistry[innerName] = mastersSymbolIdRegistry[symbolId] = flexToSketchJSON(
+  const renderedMaster = flexToSketchJSON(
     buildTree(
       <symbolmaster symbolID={symbolId} name={innerName}>
         <Component />
       </symbolmaster>
     )
   );
+
+  renderedMaster.frame.x = masterLeftOffset;
+  masterLeftOffset += renderedMaster.frame.width + 100;
+  mastersSymbolIdRegistry[symbolId] = renderedMaster;
 
   return class extends React.Component {
     static displayName = `SymbolInstance(${innerName})`;
@@ -78,8 +83,8 @@ export const injectSymbols = (context: SketchContext) => {
     notSymbolsPage = context.document.addBlankPage();
   }
 
-  const layers = Object.keys(mastersNameRegistry).map(k =>
-    fromSJSONDictionary(mastersNameRegistry[k])
+  const layers = Object.keys(mastersSymbolIdRegistry).map(k =>
+    fromSJSONDictionary(mastersSymbolIdRegistry[k])
   );
 
   symbolsPage.replaceAllLayersWithLayers(layers);
