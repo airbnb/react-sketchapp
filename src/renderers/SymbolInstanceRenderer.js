@@ -105,8 +105,6 @@ class SymbolInstanceRenderer extends SketchRenderer {
           const originalMaster = getSymbolMasterById(reference.symbolId);
           const replacementMaster = getSymbolMasterByName(overrideValue.masterName);
 
-          console.log(originalMaster);
-
           if (
             originalMaster.frame.width !== replacementMaster.frame.width ||
             originalMaster.frame.height !== replacementMaster.frame.height
@@ -123,7 +121,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
           return {
             ...memo,
             [reference.objectId]: {
-              symbolID: overrideValue.symbolId,
+              symbolID: replacementMaster.symbolID,
               ...nestedOverrides,
             },
           };
@@ -165,6 +163,8 @@ class SymbolInstanceRenderer extends SketchRenderer {
 
       return memo;
     }, {});
+
+    console.log(overrides[Object.keys(overrides)[1]]);
 
     symbolInstance.overrides = {};
     symbolInstance.overrides['0'] = overrides;
