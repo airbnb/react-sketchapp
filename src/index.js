@@ -8,7 +8,7 @@ import RedBox from './components/RedBox';
 import View from './components/View';
 import Text from './components/Text';
 import TextStyles from './sharedStyles/TextStyles';
-import { makeSymbol, injectSymbols } from './symbol';
+import { makeSymbol, injectSymbols, makeSymbolByName } from './symbol';
 
 module.exports = {
   render,
@@ -23,4 +23,5 @@ module.exports = {
   Platform,
   makeSymbol,
   injectSymbols,
+  makeSymbolByName,
 };

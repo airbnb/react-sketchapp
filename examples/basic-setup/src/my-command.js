@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols } from 'react-sketchapp';
+import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols, makeSymbolByName } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
@@ -44,12 +44,17 @@ const Color = {
   name: PropTypes.string.isRequired,
 };
 
+// const ImageSym = makeSymbol(() =>
+//   <Image
+//     source="https://pbs.twimg.com/profile_images/763033229993574400/6frGyDyA_400x400.jpg"
+//     name="myImage"
+//     style={{ width: 100, height: 100 }}
+//   />
+// );
 const ImageSym = makeSymbol(() =>
-  <Image
-    source="https://pbs.twimg.com/profile_images/763033229993574400/6frGyDyA_400x400.jpg"
-    name="myImage"
-    style={{ width: 100, height: 100 }}
-  />
+  <View style={{ widht: 100, height: 100 }}>
+    myImage
+  </View>
 );
 
 const OtherSymbol = makeSymbol(() =>
@@ -64,6 +69,8 @@ const OtherSymbol = makeSymbol(() =>
     hi
   </View>
 )
+
+// const SwatchHaus = makeSymbolByName('Swatch Haus')
 
 const NestedSymbolSymbol = makeSymbol(() =>
   <View
