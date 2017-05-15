@@ -22,7 +22,7 @@ Or, to install as a Sketch plugin:
 npm run build
 npm run link-plugin
 ```
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic skpm Example`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Symbol Support`
 
 ## The idea behind the example
 
