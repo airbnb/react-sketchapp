@@ -14,7 +14,9 @@ const textColor = (hex) => {
 
 const RedSquare = () => (
   <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
-    Red Square
+    <Text name="Red Square Text">
+      Red Square
+    </Text>
   </View>
 );
 
@@ -22,7 +24,9 @@ const RedSquareSym = makeSymbol(RedSquare);
 
 const BlueSquare = () => (
   <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
-    Blue Square
+    <Text name="Blue Square Text">
+      Blue Square
+    </Text>
   </View>
 );
 
@@ -54,7 +58,7 @@ const Document = () => (
       style={{ width: 75, height: 150 }}
       overrides={{
         'Red Square Instance': BlueSquareSym,
-        'Blue Square': 'hello world',
+        'Blue Square Text': 'hello world',
         Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg'
       }}
     />

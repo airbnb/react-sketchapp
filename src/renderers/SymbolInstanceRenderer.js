@@ -22,13 +22,28 @@ type OverrideReference =
   } & OverrideReferenceBase);
 
 const extractOverridesHelp = (subLayer: SJLayer, output: Array<OverrideReference>) => {
-  if (subLayer._class === 'text') {
+  if (subLayer._class === 'text' && !output.some(r => r.objectId === subLayer.do_objectID)) {
     output.push({ type: 'text', objectId: subLayer.do_objectID, name: subLayer.name });
     return;
   }
 
   if (subLayer._class === 'group') {
     if (subLayer.layers && subLayer.layers.length) {
+      // here we're doing some look-ahead to see if this group contains a group
+      // that contains text. this is the structure that will appear if the user
+      // creates a `<Text />` element with a custom name
+      const subGroup = subLayer.layers.find(l => l._class === 'group');
+      const textLayer = subGroup && subGroup.layers
+        ? subGroup.layers.find(l => l._class === 'text')
+        : null;
+      if (textLayer) {
+        output.push({ type: 'text', objectId: textLayer.do_objectID, name: subLayer.name });
+        return;
+      }
+
+      // here we're doing look-ahead to see if this group contains a shapeGroup
+      // with an image fill. if it does we can do an image override on that
+      // fill
       const shapeGroup = subLayer.layers.find(l => l._class === 'shapeGroup');
       if (
         shapeGroup &&
@@ -163,8 +178,6 @@ class SymbolInstanceRenderer extends SketchRenderer {
 
       return memo;
     }, {});
-
-    console.log(overrides[Object.keys(overrides)[1]]);
 
     symbolInstance.overrides = {};
     symbolInstance.overrides['0'] = overrides;
