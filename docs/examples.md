@@ -28,3 +28,6 @@
 
 ### [Timeline w/ Airtable](https://github.com/airbnb/react-sketchapp/tree/master/examples/timeline-airtable)
 ![timeline-airtable](https://cloud.githubusercontent.com/assets/21080/25830456/cdc67bf8-3411-11e7-8998-fdef507ab0d2.png)
+
+## [Simple UI](https://github.com/airbnb/react-sketchapp/tree/master/examples/simple-ui)
+![simple-ui](https://cloud.githubusercontent.com/assets/591643/26658949/2d565576-4622-11e7-9350-4b6aac7096b8.png)
