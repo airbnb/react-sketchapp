@@ -360,8 +360,8 @@ export default (context) => {
 
   const Document = () =>
     <View>
-      <Text style={TextStyle.get('Headline')}>Headline text</Text>
-      <Text style={TextStyle.get('Body')}>Body text</Text>
+      <Text style={TextStyles.get('Headline')}>Headline text</Text>
+      <Text style={TextStyles.get('Body')}>Body text</Text>
     </View>
 
   render(<Document />, context.document.currentPage());
