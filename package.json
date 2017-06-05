@@ -38,7 +38,7 @@
     "normalize-css-color": "^1.0.1",
     "prop-types": "^15.5.8",
     "sketch-constants": "^1.0.2",
-    "sketchapp-json-flow-types": "^0.0.3",
+    "sketchapp-json-flow-types": "git://github.com/lukewestby/sketchapp-json-flow-types.git#address_5_comments",
     "sketchapp-json-plugin": "^0.0.3"
   },
   "peerDependencies": {

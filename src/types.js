@@ -6,30 +6,45 @@ export type SketchLayer = any;
 
 export type SketchStyle = any;
 
+export type MSArray<T> = {
+  [key: number]: T,
+  length: number
+};
+
+type NSString = any;
+
+export type SketchPage = {
+  name: () => NSString
+};
+
 export type SketchSharedStyleContainer = {
   setObjects: (objects: Array<SketchStyle>) => void,
-  addSharedStyleWithName_firstInstance: (name: string, ins: SketchStyle) => void,
+  addSharedStyleWithName_firstInstance: (name: string, ins: SketchStyle) => void
 };
 
 type MSGradient = any;
 
 type SketchAssetCollection = {
   colors: () => Array<MSColor>,
-  gradients: () => Array<MSGradient>,
+  gradients: () => Array<MSGradient>
 };
 
 export type SketchDocumentData = {
   layerStyles: () => void,
   layerTextStyles: () => SketchSharedStyleContainer,
   layerSymbols: () => void,
-  assets: () => SketchAssetCollection,
+  assets: () => SketchAssetCollection
 };
 
 export type SketchDocument = {
   documentData: () => SketchDocumentData,
+  pages: () => MSArray<SketchPage>,
+  addBlankPage: () => SketchPage,
+  currentPage: SketchPage
 };
+
 export type SketchContext = {
-  document: SketchDocument,
+  document: SketchDocument
 };
 
 // Reacty things
@@ -50,7 +65,7 @@ export type LayoutInfo = {
   left: number,
   right: number,
   bottom: number,
-  direction: 'ltr' | 'rtl',
+  direction: 'ltr' | 'rtl'
 };
 
 export type ViewStyle = {
@@ -118,7 +133,7 @@ export type ViewStyle = {
   borderRightWidth: number,
   borderBottomWidth: number,
   borderLeftWidth: number,
-  opacity: number,
+  opacity: number
 };
 
 export type TextStyle = {
@@ -134,7 +149,7 @@ export type TextStyle = {
   letterSpacing: number,
   lineHeight: number,
   textAlign: 'auto' | 'left' | 'right' | 'center' | 'justify',
-  writingDirection: 'auto' | 'ltr' | 'rtl',
+  writingDirection: 'auto' | 'ltr' | 'rtl'
 };
 
 export type TreeNode = {
@@ -144,7 +159,7 @@ export type TreeNode = {
   layout: LayoutInfo,
   value: ?string,
   props: any,
-  children: ?Array<TreeNode>,
+  children: ?Array<TreeNode>
 };
 
 export type LayerCreator = (
@@ -152,5 +167,5 @@ export type LayerCreator = (
   layout: LayoutInfo,
   textStyle: TextStyle,
   props: any,
-  value: ?string,
+  value: ?string
 ) => SketchLayer;
