@@ -1,16 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols } from '../../../';
-import chroma from 'chroma-js';
-
-// take a hex and give us a nice text color to put over it
-const textColor = (hex) => {
-  const vsWhite = chroma.contrast(hex, 'white');
-  if (vsWhite > 4) {
-    return '#FFF';
-  }
-  return chroma(hex).darken(3).hex();
-};
+import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols } from 'react-sketchapp';
 
 const RedSquare = () => (
   <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
@@ -47,7 +36,7 @@ const Nested = () => (
     <PhotoSym name="Photo Instance" style={{ width: 75, height: 75 }} />
     <RedSquareSym name="Red Square Instance" style={{ width: 75, height: 75 }} />
   </View>
-)
+);
 
 const NestedSym = makeSymbol(Nested);
 
@@ -58,7 +47,7 @@ const Document = () => (
       style={{ width: 75, height: 150 }}
       overrides={{
         'Red Square Instance': BlueSquareSym,
-        'Blue Square Text': 'hello world',
+        'Blue Square Text': 'TESTING',
         Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg'
       }}
     />
@@ -69,4 +58,4 @@ const Document = () => (
 export default (context) => {
   injectSymbols(context);
   render(<Document />, context.document.currentPage());
-}
+};
