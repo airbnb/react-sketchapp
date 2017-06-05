@@ -26,4 +26,4 @@ Then, open Sketch and navigate to `Plugins → react-sketchapp: Symbol Support`
 
 ## The idea behind the example
 
-[`skpm`](https://github.com/sketch-pm/skpm) is the easiest way to build `react-sketchapp` projects - this is a minimal example of it in use.
+`react-sketchapp@^0.11.0` introduces an API for creating Sketch symbols — this example shows them in use with React components.
