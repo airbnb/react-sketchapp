@@ -15,7 +15,7 @@
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
-    "react-sketchapp": "^0.10.0",
+    "react-sketchapp": "^0.11.0",
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {

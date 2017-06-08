@@ -22,7 +22,7 @@
     "react-native": "^0.42.3",
     "react-primitives": "^0.3.4",
     "react-primitives-google-static-map": "^1.0.1",
-    "react-sketchapp": "^0.10.0",
+    "react-sketchapp": "^0.11.0",
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
