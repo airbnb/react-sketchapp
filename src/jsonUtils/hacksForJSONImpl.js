@@ -69,11 +69,17 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
     }
   }
 
+  let image;
+
   if (!fetchedData) {
-    return null;
+    const errorUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
+    image = NSImage.alloc().initWithContentsOfURL(
+      NSURL.URLWithString(errorUrl)
+    );
+  } else {
+    image = NSImage.alloc().initWithData(fetchedData);
   }
 
-  const image = NSImage.alloc().initWithData(fetchedData);
   return MSImageData.alloc().initWithImage_convertColorSpace(image, false);
 };
 
