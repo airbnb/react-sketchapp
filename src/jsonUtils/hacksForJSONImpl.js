@@ -62,7 +62,7 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
       firstByte != '<89>' &&
       firstByte != '<47>' &&
       firstByte != '<49>' &&
-      firstByte != '<4D>'
+      firstByte != '<4d>'
       /* eslint-enable eqeqeq */
     ) {
       fetchedData = null;
