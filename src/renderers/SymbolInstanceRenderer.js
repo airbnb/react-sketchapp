@@ -1,58 +1,76 @@
 /* @flow */
-import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from 'sketchapp-json-flow-types';
+// import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from 'sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
-import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
+import {
+  makeSymbolInstance,
+  makeRect,
+  makeJSONDataReference,
+} from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import { getSymbolMasterByName, getSymbolMasterById } from '../symbol';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 
-type OverrideReferenceBase = {
-  objectId: SJObjectId,
-  name: string
-};
+// type OverrideReferenceBase = {
+//   objectId: SJObjectId,
+//   name: string
+// };
 
-type OverrideReference =
-  | ({ type: 'text' } & OverrideReferenceBase)
-  | ({ type: 'image' } & OverrideReferenceBase)
-  | ({
-    type: 'symbolInstance',
-    symbolId: string,
-    width: number,
-    height: number
-  } & OverrideReferenceBase);
+// type OverrideReference =
+//   | ({ type: 'text' } & OverrideReferenceBase)
+//   | ({ type: 'image' } & OverrideReferenceBase)
+//   | ({
+//     type: 'symbolInstance',
+//     symbolId: string,
+//     width: number,
+//     height: number
+//   } & OverrideReferenceBase);
 
-const extractOverridesHelp = (subLayer: SJLayer, output: Array<OverrideReference>) => {
-  if (subLayer._class === 'text' && !output.some(r => r.objectId === subLayer.do_objectID)) {
-    output.push({ type: 'text', objectId: subLayer.do_objectID, name: subLayer.name });
+const extractOverridesHelp = (subLayer: any, output: any) => {
+  if (
+    subLayer._class === 'text' &&
+    !output.some(r => r.objectId === subLayer.do_objectID)
+  ) {
+    output.push({
+      type: 'text',
+      objectId: subLayer.do_objectID,
+      name: subLayer.name,
+    });
     return;
   }
 
-  if (subLayer._class === 'group') {
-    if (subLayer.layers && subLayer.layers.length) {
-      // here we're doing some look-ahead to see if this group contains a group
-      // that contains text. this is the structure that will appear if the user
-      // creates a `<Text />` element with a custom name
-      const subGroup = subLayer.layers.find(l => l._class === 'group');
-      const textLayer = subGroup && subGroup.layers
-        ? subGroup.layers.find(l => l._class === 'text')
-        : null;
-      if (textLayer) {
-        output.push({ type: 'text', objectId: textLayer.do_objectID, name: subLayer.name });
-        return;
-      }
+  if (subLayer._class === 'group' && subLayer.layers) {
+    // here we're doing some look-ahead to see if this group contains a group
+    // that contains text. this is the structure that will appear if the user
+    // creates a `<Text />` element with a custom name
+    const subGroup = subLayer.layers.find(l => l._class === 'group');
+    const textLayer = subGroup && subGroup.layers
+      ? subGroup.layers.find(l => l._class === 'text')
+      : null;
+    if (textLayer) {
+      output.push({
+        type: 'text',
+        objectId: textLayer.do_objectID,
+        name: subLayer.name,
+      });
+      return;
+    }
 
-      // here we're doing look-ahead to see if this group contains a shapeGroup
-      // with an image fill. if it does we can do an image override on that
-      // fill
-      const shapeGroup = subLayer.layers.find(l => l._class === 'shapeGroup');
-      if (
-        shapeGroup &&
-        shapeGroup._class === 'shapeGroup' &&
-        shapeGroup.style &&
-        shapeGroup.style.fills.some(f => f.image)
-      ) {
-        output.push({ type: 'image', objectId: shapeGroup.do_objectID, name: subLayer.name });
-      }
+    const shapeGroup =
+      subLayer.layers && subLayer.layers.find(l => l._class === 'shapeGroup');
+    // here we're doing look-ahead to see if this group contains a shapeGroup
+    // with an image fill. if it does we can do an image override on that
+    // fill
+    if (
+      shapeGroup &&
+      shapeGroup._class === 'shapeGroup' &&
+      shapeGroup.style != null &&
+      shapeGroup.style.fills.some(f => f.image)
+    ) {
+      output.push({
+        type: 'image',
+        objectId: shapeGroup.do_objectID,
+        name: subLayer.name,
+      });
     }
   }
 
@@ -73,11 +91,13 @@ const extractOverridesHelp = (subLayer: SJLayer, output: Array<OverrideReference
       subLayer._class === 'group') &&
     subLayer.layers
   ) {
-    subLayer.layers.forEach(subSubLayer => extractOverridesHelp(subSubLayer, output));
+    subLayer.layers.forEach(subSubLayer =>
+      extractOverridesHelp(subSubLayer, output),
+    );
   }
 };
 
-const extractOverrides = (subLayers: Array<SJLayer>): Array<OverrideReference> => {
+const extractOverrides = (subLayers: any) => {
   const output = [];
   subLayers.forEach(subLayer => extractOverridesHelp(subLayer, output));
   return output;
@@ -90,14 +110,14 @@ class SymbolInstanceRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
-  ): SJSymbolInstanceLayer {
+    value: ?string,
+  ): any {
     const masterTree = getSymbolMasterByName(props.masterName);
 
     const symbolInstance = makeSymbolInstance(
       makeRect(layout.left, layout.top, layout.width, layout.height),
       masterTree.symbolID,
-      props.name
+      props.name,
     );
 
     if (!props.overrides) {
@@ -106,31 +126,39 @@ class SymbolInstanceRenderer extends SketchRenderer {
 
     const overridableLayers = extractOverrides(masterTree.layers);
 
-    const overrides = overridableLayers.reduce(function inject(memo, reference) {
+    const overrides = overridableLayers.reduce(function inject(
+      memo,
+      reference,
+    ) {
       if (reference.type === 'symbolInstance') {
         // eslint-disable-next-line
         if (props.overrides.hasOwnProperty(reference.name)) {
           const overrideValue = props.overrides[reference.name];
-          if (typeof overrideValue !== 'function' || typeof overrideValue.masterName !== 'string') {
+          if (
+            typeof overrideValue !== 'function' ||
+            typeof overrideValue.masterName !== 'string'
+          ) {
             throw new Error(
-              '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL'
+              '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL',
             );
           }
 
           const originalMaster = getSymbolMasterById(reference.symbolId);
-          const replacementMaster = getSymbolMasterByName(overrideValue.masterName);
+          const replacementMaster = getSymbolMasterByName(
+            overrideValue.masterName,
+          );
 
           if (
             originalMaster.frame.width !== replacementMaster.frame.width ||
             originalMaster.frame.height !== replacementMaster.frame.height
           ) {
             throw new Error(
-              '##FIXME## SYMBOL MASTER SUBSTITUTIONS REQUIRE THAT MASTERS HAVE THE SAME DIMENSIONS'
+              '##FIXME## SYMBOL MASTER SUBSTITUTIONS REQUIRE THAT MASTERS HAVE THE SAME DIMENSIONS',
             );
           }
 
           const nestedOverrides = extractOverrides(
-            getSymbolMasterByName(overrideValue.masterName).layers
+            getSymbolMasterByName(overrideValue.masterName).layers,
           ).reduce(inject, {});
 
           return {
@@ -143,7 +171,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
         }
 
         const nestedOverrides = extractOverrides(
-          getSymbolMasterById(reference.symbolId).layers
+          getSymbolMasterById(reference.symbolId).layers,
         ).reduce(inject, {});
 
         return {
@@ -168,11 +196,15 @@ class SymbolInstanceRenderer extends SketchRenderer {
 
       if (reference.type === 'image') {
         if (typeof overrideValue !== 'string') {
-          throw new Error('##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS');
+          throw new Error(
+            '##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS',
+          );
         }
         return {
           ...memo,
-          [reference.objectId]: makeJSONDataReference(makeImageDataFromUrl(overrideValue)),
+          [reference.objectId]: makeJSONDataReference(
+            makeImageDataFromUrl(overrideValue),
+          ),
         };
       }
 
