@@ -47,9 +47,40 @@ function makeParagraphStyle(textStyle) {
 }
 
 export const makeImageDataFromUrl = (url: string): MSImageData => {
-  const imageData = NSImage.alloc().initWithContentsOfURL(NSURL.URLWithString(url));
+  let fetchedData = NSData.dataWithContentsOfURL(NSURL.URLWithString(url));
 
-  return MSImageData.alloc().initWithImage_convertColorSpace(imageData, false);
+  if (fetchedData) {
+    const firstByte = fetchedData
+      .subdataWithRange(NSMakeRange(0, 1))
+      .description();
+
+    // Check for first byte. Must use non-type-exact matching (!=).
+    // 0xFF = JPEG, 0x89 = PNG, 0x47 = GIF, 0x49 = TIFF, 0x4D = TIFF
+    if (
+      /* eslint-disable eqeqeq */
+      firstByte != '<ff>' &&
+      firstByte != '<89>' &&
+      firstByte != '<47>' &&
+      firstByte != '<49>' &&
+      firstByte != '<4D>'
+      /* eslint-enable eqeqeq */
+    ) {
+      fetchedData = null;
+    }
+  }
+
+  let image;
+
+  if (!fetchedData) {
+    const errorUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
+    image = NSImage.alloc().initWithContentsOfURL(
+      NSURL.URLWithString(errorUrl)
+    );
+  } else {
+    image = NSImage.alloc().initWithData(fetchedData);
+  }
+
+  return MSImageData.alloc().initWithImage_convertColorSpace(image, false);
 };
 
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(

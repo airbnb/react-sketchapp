@@ -14,6 +14,8 @@
     "NSAttributedString": true,
     "NSDate": true,
     "NSDataBase64EncodingEndLineWithCarriageReturn": true,
+    "NSData": true,
+    "NSMakeRange": true,
   },
   "rules": {
     "class-methods-use-this": 0,
