@@ -1,19 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<View /> name defaults to View 1`] = `
 <view
   name="View"
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<View /> name passes its name 1`] = `
 <view
   name="foo"
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<View /> passes its children 1`] = `
 <view
   name="View"
-  style={undefined}>
+  style={undefined}
+>
   foo
 </view>
 `;

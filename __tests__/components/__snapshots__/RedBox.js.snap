@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<RedBox /> renders simple errors 1`] = `
 <view
   name="RedBox"
@@ -10,7 +12,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
       "paddingTop": 10,
       "width": 480,
     }
-  }>
+  }
+>
   <text
     name="Message"
     style={
@@ -20,7 +23,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
         "fontWeight": "bold",
         "lineHeight": 19.2,
       }
-    }>
+    }
+  >
     Invariant Violation: THIS IS AN ERROR
   </text>
   <view
@@ -31,7 +35,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
         "fontFamily": "Monaco",
         "marginTop": 20,
       }
-    }>
+    }
+  >
     <text
       name="Text"
       style={
@@ -40,7 +45,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
+      }
+    >
       invariant
     </text>
     <text
@@ -51,8 +57,9 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
-      Object.<anonymous>
+      }
+    >
+      Object.&lt;anonymous&gt;
     </text>
     <text
       name="Text"
@@ -62,8 +69,9 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
-      Object.<anonymous>
+      }
+    >
+      Object.&lt;anonymous&gt;
     </text>
     <text
       name="Text"
@@ -73,7 +81,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
+      }
+    >
       attemptAsync
     </text>
     <text
@@ -84,7 +93,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
+      }
+    >
       QueueRunner.run
     </text>
     <text
@@ -95,7 +105,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      } />
+      }
+    />
     <text
       name="Text"
       style={
@@ -104,7 +115,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      } />
+      }
+    />
     <text
       name="Text"
       style={
@@ -113,7 +125,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
+      }
+    >
       Object.fn
     </text>
     <text
@@ -124,7 +137,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
+      }
+    >
       attemptAsync
     </text>
     <text
@@ -135,7 +149,8 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "fontFamily": "Monaco",
           "marginTop": 20,
         }
-      }>
+      }
+    >
       QueueRunner.run
     </text>
   </view>
@@ -154,7 +169,8 @@ exports[`<RedBox /> renders string errors 1`] = `
       "paddingTop": 10,
       "width": 480,
     }
-  }>
+  }
+>
   <text
     name="Message"
     style={
@@ -164,7 +180,8 @@ exports[`<RedBox /> renders string errors 1`] = `
         "fontWeight": "bold",
         "lineHeight": 19.2,
       }
-    }>
+    }
+  >
     Error: String only error
   </text>
 </view>

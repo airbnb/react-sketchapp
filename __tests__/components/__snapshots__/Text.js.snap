@@ -1,19 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Text /> name defaults to Text 1`] = `
 <text
   name="Text"
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<Text /> name passes its name 1`] = `
 <text
   name="foo"
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<Text /> passes its children 1`] = `
 <text
   name="Text"
-  style={undefined}>
+  style={undefined}
+>
   foo
 </text>
 `;
