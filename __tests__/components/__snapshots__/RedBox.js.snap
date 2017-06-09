@@ -71,7 +71,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      Object.&lt;anonymous&gt;
+      Object.asyncFn
     </text>
     <text
       name="Text"
@@ -83,7 +83,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      attemptAsync
+      resolve
     </text>
     <text
       name="Text"
@@ -95,39 +95,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      QueueRunner.run
-    </text>
-    <text
-      name="Text"
-      style={
-        Object {
-          "color": "white",
-          "fontFamily": "Monaco",
-          "marginTop": 20,
-        }
-      }
-    />
-    <text
-      name="Text"
-      style={
-        Object {
-          "color": "white",
-          "fontFamily": "Monaco",
-          "marginTop": 20,
-        }
-      }
-    />
-    <text
-      name="Text"
-      style={
-        Object {
-          "color": "white",
-          "fontFamily": "Monaco",
-          "marginTop": 20,
-        }
-      }
-    >
-      Object.fn
+      mapper
     </text>
     <text
       name="Text"
@@ -139,7 +107,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      attemptAsync
+      Promise.resolve.then.el
     </text>
     <text
       name="Text"
@@ -151,7 +119,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      QueueRunner.run
+      process._tickCallback
     </text>
   </view>
 </view>
