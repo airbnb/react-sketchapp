@@ -25,8 +25,8 @@
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "prepublishOnly": "npm run clean && npm run check && npm run build",
-    "test": "jest --config .jestrc",
-    "test:ci": "jest --config .jestrc --runInBand",
+    "test": "jest",
+    "test:ci": "jest --runInBand",
     "test:watch": "npm run test -- --watch",
     "watch": "npm run build:react -- --watch"
   },
