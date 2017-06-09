@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "license": "MIT",
   "author": "Jon Gold <jon.gold@airbnb.com> (http://jon.gold)",
+  "engines": {
+    "node": "^8",
+    "npm": "^5"
+  },
   "contributors": [
     "Ben Wilkins <ben.wilkins@airbnb.com>",
     "Leland Richardson <leland.richardson@airbnb.com>"
