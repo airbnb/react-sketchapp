@@ -45,6 +45,9 @@
     "react": "*",
     "react-test-renderer": "*"
   },
+  "files": [
+    "lib"
+  ],
   "keywords": [
     "sketch",
     "sketchapp",
