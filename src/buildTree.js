@@ -22,10 +22,14 @@ const INHERITABLE_STYLES = [
   'writingDirection',
 ];
 
+const allStringsOrNumbers = xs =>
+  xs.every(x => typeof x === 'string' || typeof x === 'number');
+
+const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
+
 const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
   if (typeof node === 'string') {
     const textStyle = context.getInheritedStyles();
-    // string node
     return {
       type: 'text',
       style: {
@@ -42,7 +46,11 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
   const style = node.props.style || {};
 
   let textStyle;
-  if (node.type === 'text' && node.props.style && hasAnyDefined(style, INHERITABLE_STYLES)) {
+  if (
+    node.type === 'text' &&
+    node.props.style &&
+    hasAnyDefined(style, INHERITABLE_STYLES)
+  ) {
     const inheritableStyles = pick(style, INHERITABLE_STYLES);
     context.addInheritableStyles(inheritableStyles);
     textStyle = {
@@ -59,7 +67,9 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     textStyle,
     props: node.props,
     value: null,
-    children: children.map(child => reactTreeToFlexTree(child, context.forChildren())),
+    children: processChildren(children).map(child =>
+      reactTreeToFlexTree(child, context.forChildren())
+    ),
   };
 };
 
