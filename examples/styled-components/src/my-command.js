@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'react-primitives';
 import styled from 'styled-components/primitives';
 import { render } from 'react-sketchapp';
 import chroma from 'chroma-js';
@@ -15,11 +14,13 @@ const textColor = (hex) => {
 };
 
 const SwatchTile = styled.View`
-  height: 96px;
-  width: 96px;
+  height: 250px;
+  width: 250px;
+  border-radius: 4px;
   margin: 4px;
   background-color: ${props => props.hex};
-  padding: 8px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SwatchName = styled.Text`
@@ -27,18 +28,26 @@ const SwatchName = styled.Text`
   font-weight: bold;
 `;
 
-const SwatchHex = styled.Text`
-  color: ${props => textColor(props.hex)};
+const Ampersand = styled.Text`
+  color: #f3f3f3;
+  font-size: 120px;
+  font-family: Himalaya;
+  line-height: 144px;
 `;
+
+const Title = styled.Text`
+  font-size: 24px;
+  font-family: "GT America";
+  font-weight: bold;
+  padding: 4px;
+`
 
 const Swatch = ({ name, hex }) => (
   <SwatchTile name={`Swatch ${name}`} hex={hex}>
     <SwatchName name="Swatch Name" hex={hex}>
       {name}
     </SwatchName>
-    <SwatchHex name="Swatch Hex" hex={hex}>
-      {hex}
-    </SwatchHex>
+    <Ampersand hex={hex}>&</Ampersand>
   </SwatchTile>
 );
 
@@ -53,10 +62,12 @@ const Artboard = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   width: ${(96 + 8) * 4}px;
+  justify-content: center;
 `;
 
 const Document = ({ colors }) => (
   <Artboard name="Swatches">
+    <Title>Max’s Sweaters</Title>
     {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
   </Artboard>
 );
@@ -67,14 +78,8 @@ Document.propTypes = {
 
 export default (context) => {
   const colorList = {
-    Haus: '#F3F4F4',
-    Night: '#333',
-    Sur: '#96DBE4',
-    'Sur Dark': '#24828F',
-    Peach: '#EFADA0',
-    'Peach Dark': '#E37059',
-    Pear: '#93DAAB',
-    'Pear Dark': '#2E854B',
+    Classic: '#96324E',
+    Neue: '#21304E',
   };
 
   render(<Document colors={colorList} />, context.document.currentPage());
