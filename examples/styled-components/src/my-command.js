@@ -24,7 +24,7 @@ const SwatchTile = styled.View`
 
 const SwatchName = styled.Text`
   color: ${props => textColor(props.hex)};
-  font-weight: 'bold';
+  font-weight: bold;
 `;
 
 const SwatchHex = styled.Text`
