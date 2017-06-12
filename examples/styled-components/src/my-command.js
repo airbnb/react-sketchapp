@@ -15,20 +15,20 @@ const textColor = (hex) => {
 };
 
 const SwatchTile = styled.View`
-  height: 96,
-  width: 96,
-  margin: 4,
-  backgroundColor: ${props => props.hex},
-  padding: 8,
+  height: 96px;
+  width: 96px;
+  margin: 4px;
+  background-color: ${props => props.hex};
+  padding: 8px;
 `;
 
 const SwatchName = styled.Text`
-  color: ${props => textColor(props.hex)},
-  fontWeight: 'bold',
+  color: ${props => textColor(props.hex)};
+  font-weight: 'bold';
 `;
 
 const SwatchHex = styled.Text`
-  color: ${props => textColor(props.hex)},
+  color: ${props => textColor(props.hex)};
 `;
 
 const Swatch = ({ name, hex }) => (
@@ -50,9 +50,9 @@ const Color = {
 Swatch.propTypes = Color;
 
 const Artboard = styled.View`
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  width: ${(96 + 8) * 4}
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: ${(96 + 8) * 4}px;
 `;
 
 const Document = ({ colors }) => (
