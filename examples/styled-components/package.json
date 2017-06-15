@@ -23,6 +23,6 @@
     "react-primitives": "^0.4.2",
     "react-sketchapp": "^0.11.0",
     "react-test-renderer": "^15.4.2",
-    "styled-components": "git+https://github.com/mathieudutour/styled-components.git#built"
+    "styled-components": "^2.1.0"
   }
 }
