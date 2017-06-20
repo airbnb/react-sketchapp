@@ -9,7 +9,7 @@
 </div>
 
 ## Quickstart 🏃‍
-First, make sure you have installed [Sketch](http://sketchapp.com) version 43 **(v44 is broken currently)**, & a recent [npm](https://nodejs.org/en/download/).
+First, make sure you have installed [Sketch](http://sketchapp.com) version 43 **(v44 is broken currently)**, & a recent [npm](https://nodejs.org/en/download/). - npm means Node.js (note for non-developers from a designer.) 
 
 Open a new Sketch file, then in a terminal:
 ```bash
