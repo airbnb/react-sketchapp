@@ -16,6 +16,44 @@ const displayName = (Component: React$Component): string =>
   Component.displayName || Component.name || `UnknownSymbol${nextId()}`;
 
 const mastersNameRegistry = {};
+let existingSymbols = null;
+
+const msListToArray = (pageList) => {
+  const out = [];
+  // eslint-disable-next-line
+  for (let i = 0; i < pageList.length; i++) {
+    out.push(pageList[i]);
+  }
+  return out;
+};
+
+export const getExistingSymbols = (context: SketchContext) => {
+  const pages = context.document.pages();
+  const array = msListToArray(pages);
+  if (existingSymbols === null) {
+    let symbolsPage = array.find(p => String(p.name()) === 'Symbols');
+    if (!symbolsPage) {
+      symbolsPage = context.document.addBlankPage();
+      symbolsPage.setName('Symbols');
+    }
+
+    existingSymbols = msListToArray(symbolsPage.layers()).map(x =>
+      JSON.parse(toSJSON(x))
+    );
+  }
+  return existingSymbols;
+};
+
+export const getSymbolId = (masterName: string, symbols): string => {
+  let symbolId = generateID();
+
+  symbols.forEach((symbolMaster) => {
+    if (symbolMaster.name === masterName) {
+      symbolId = symbolMaster.symbolID;
+    }
+  });
+  return symbolId;
+};
 
 export const makeSymbolByName = (masterName: string): React$Component =>
   class extends React.Component {
@@ -41,27 +79,23 @@ export const makeSymbolByName = (masterName: string): React$Component =>
     }
   };
 
-export const makeSymbol = (Component: React$Component): React$Component => {
+export const makeSymbol = (
+  Component: React$Component,
+  context: SketchContext
+): React$Component => {
   const masterName = displayName(Component);
+  const symbols = getExistingSymbols(context);
+  const symbolId = getSymbolId(masterName, symbols);
 
   mastersNameRegistry[masterName] = flexToSketchJSON(
     buildTree(
-      <symbolmaster symbolID={generateID()} name={masterName}>
+      <symbolmaster symbolID={symbolId} name={masterName}>
         <Component />
       </symbolmaster>
     )
   );
 
   return makeSymbolByName(masterName);
-};
-
-const msListToArray = (pageList) => {
-  const out = [];
-  // eslint-disable-next-line
-  for (let i = 0; i < pageList.length; i++) {
-    out.push(pageList[i]);
-  }
-  return out;
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
@@ -93,8 +127,8 @@ export const injectSymbols = (context: SketchContext) => {
     symbolsPage = context.document.addBlankPage();
     symbolsPage.setName('Symbols');
   }
+  getExistingSymbols(context);
 
-  const existingSymbols = msListToArray(symbolsPage.layers()).map(x => JSON.parse(toSJSON(x)));
   existingSymbols.forEach((symbolMaster) => {
     if (symbolMaster._class !== 'symbolMaster') return;
     if (symbolMaster.name in mastersNameRegistry) return;
