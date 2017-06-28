@@ -1,36 +1,34 @@
 import React from 'react';
 import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols } from 'react-sketchapp';
 
+const RedSquare = () => (
+  <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
+    <Text name="Red Square Text">
+      Red Square
+    </Text>
+  </View>
+);
+const BlueSquare = () => (
+  <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
+    <Text name="Blue Square Text">
+      Blue Square
+    </Text>
+  </View>
+);
+
+const Photo = () => (
+  <Image
+    name="Photo"
+    source="https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg"
+    style={{ width: 100, height: 100 }}
+  />
+);
 
 export default (context) => {
 
-  const RedSquare = () => (
-    <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
-      <Text name="Red Square Text">
-        Red Square
-      </Text>
-    </View>
-  );
-
   const RedSquareSym = makeSymbol(RedSquare, context);
 
-  const BlueSquare = () => (
-    <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
-      <Text name="Blue Square Text">
-        Blue Square
-      </Text>
-    </View>
-  );
-
   const BlueSquareSym = makeSymbol(BlueSquare, context);
-
-  const Photo = () => (
-    <Image
-      name="Photo"
-      source="https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg"
-      style={{ width: 100, height: 100 }}
-    />
-  );
 
   const PhotoSym = makeSymbol(Photo, context);
 
