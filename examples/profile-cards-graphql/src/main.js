@@ -1,5 +1,3 @@
-// polyfill fetch
-import 'sketch-module-fetch-polyfill';
 import React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
