@@ -42,10 +42,9 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     };
   }
 
-  let children = node.children || [];
-  if (node.type !== 'image') {
-    children = processChildren(children);
-  }
+  const children = Array.isArray(node.children)
+    ? processChildren(node.children)
+    : [];
   const style = node.props.style || {};
 
   let textStyle;
