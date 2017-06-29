@@ -9,7 +9,7 @@
 </div>
 
 ## Quickstart 🏃‍
-First, make sure you have installed [Sketch](http://sketchapp.com) version 43-44 **(v45 is broken currently)**, & a recent [npm](https://nodejs.org/en/download/).
+First, make sure you have installed [Sketch](http://sketchapp.com) version 43+, & a recent [npm](https://nodejs.org/en/download/).
 
 Open a new Sketch file, then in a terminal:
 ```bash
@@ -24,9 +24,9 @@ Next, <a href="https://github.com/airbnb/react-sketchapp/tree/master/examples">c
 ![readme-intro](https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png)
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
-[![CircleCI](https://circleci.com/gh/airbnb/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec4590117b466fc)](https://circleci.com/gh/airbnb/react-sketchapp)
-![Sketch.app](https://img.shields.io/badge/Sketch.app-43--44-brightgreen.svg)
-![Sketch.app](https://img.shields.io/badge/Sketch.app-45-red.svg)
+[![CircleCI](https://circleci.com/gh/airbnb/react-sketchapp.svg?style=shield&circle-token=6a90e014d72c4b27b87b0fc43ec
+90117b466fc)](https://circleci.com/gh/airbnb/react-sketchapp)
+![Sketch.app](https://img.shields.io/badge/Sketch.app-43--45-brightgreen.svg)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-sketchapp/Lobby)
 
 ## Why?!
