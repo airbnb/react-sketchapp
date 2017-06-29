@@ -13,8 +13,10 @@
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "dependencies": {
-    "gql-sketch": "^1.0.1",
+    "apollo-client": "^1.4.2",
+    "graphql-tag": "^2.4.0",
     "react": "^15.4.2",
+    "react-apollo": "^1.4.2",
     "react-sketchapp": "^0.11.0",
     "react-test-renderer": "^15.4.2"
   },
