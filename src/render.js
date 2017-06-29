@@ -22,11 +22,20 @@ const renderToSketch = (
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
 
+  if (container.addLayers === undefined) {
+    throw new Error(`
+     React SketchApp cannot render into this layer. You may be trying to render into a layer
+     that does not take children. Try rendering into a LayerGroup, Artboard, or Page.
+    `);
+  }
+
   if (container.containsLayers()) {
     const loop = container.children().objectEnumerator();
     let currLayer = loop.nextObject();
     while (currLayer) {
-      currLayer.removeFromParent();
+      if (currLayer !== container) {
+        currLayer.removeFromParent();
+      }
       currLayer = loop.nextObject();
     }
   }
