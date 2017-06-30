@@ -5,7 +5,6 @@ import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
-import type { SketchContext } from './types';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 
@@ -15,8 +14,10 @@ const nextId = () => ++id; // eslint-disable-line
 const displayName = (Component: React$Component): string =>
   Component.displayName || Component.name || `UnknownSymbol${nextId()}`;
 
-const mastersNameRegistry = {};
+let mastersNameRegistry = null;
 let existingSymbols = null;
+const layers = {};
+const globalContext = context; // eslint-disable-line
 
 const msListToArray = (pageList) => {
   const out = [];
@@ -27,32 +28,73 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getExistingSymbols = (context: SketchContext) => {
-  const pages = context.document.pages();
+export const getExistingSymbols = () => {
+  const pages = globalContext.document.pages();
   const array = msListToArray(pages);
   if (existingSymbols === null) {
     let symbolsPage = array.find(p => String(p.name()) === 'Symbols');
     if (!symbolsPage) {
-      symbolsPage = context.document.addBlankPage();
+      symbolsPage = globalContext.document.addBlankPage();
       symbolsPage.setName('Symbols');
     }
 
-    existingSymbols = msListToArray(symbolsPage.layers()).map(x =>
-      JSON.parse(toSJSON(x))
-    );
+    existingSymbols = msListToArray(symbolsPage.layers()).map((x) => {
+      const symbolJson = JSON.parse(toSJSON(x));
+      layers[symbolJson.symbolID] = x;
+      return symbolJson;
+    });
+
+    mastersNameRegistry = {};
+    existingSymbols.forEach((symbolMaster) => {
+      if (symbolMaster._class !== 'symbolMaster') return;
+      if (symbolMaster.name in mastersNameRegistry) return;
+      mastersNameRegistry[symbolMaster.name] = symbolMaster;
+    });
   }
   return existingSymbols;
 };
 
-export const getSymbolId = (masterName: string, symbols): string => {
+export const getSymbolId = (masterName: string): string => {
   let symbolId = generateID();
 
-  symbols.forEach((symbolMaster) => {
+  existingSymbols.forEach((symbolMaster) => {
     if (symbolMaster.name === masterName) {
       symbolId = symbolMaster.symbolID;
     }
   });
   return symbolId;
+};
+
+const injectSymbols = () => {
+  const pages = globalContext.document.pages();
+  const array = msListToArray(pages);
+
+  let symbolsPage = array.find(p => String(p.name()) === 'Symbols');
+  if (!symbolsPage) {
+    symbolsPage = globalContext.document.addBlankPage();
+    symbolsPage.setName('Symbols');
+  }
+
+  let left = 0;
+  Object.keys(mastersNameRegistry).forEach((key) => {
+    const symbolMaster = mastersNameRegistry[key];
+    symbolMaster.frame.y = 0;
+    symbolMaster.frame.x = left;
+    left += symbolMaster.frame.width + 20;
+
+    const newLayer = fromSJSONDictionary(symbolMaster);
+    symbolsPage.insertLayer_afterLayerOrAtEnd(newLayer, null);
+    if (Object.hasOwnProperty.call(layers, symbolMaster.symbolID)) {
+      layers[symbolMaster.symbolID].removeFromParent();
+    }
+    layers[symbolMaster.symbolID] = newLayer;
+  });
+
+  let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
+  if (!notSymbolsPage) {
+    notSymbolsPage = globalContext.document.addBlankPage();
+  }
+  globalContext.document.setCurrentPage(notSymbolsPage);
 };
 
 export const makeSymbolByName = (masterName: string): React$Component =>
@@ -79,13 +121,13 @@ export const makeSymbolByName = (masterName: string): React$Component =>
     }
   };
 
-export const makeSymbol = (
-  Component: React$Component,
-  context: SketchContext
-): React$Component => {
+export const makeSymbol = (Component: React$Component): React$Component => {
   const masterName = displayName(Component);
-  const symbols = getExistingSymbols(context);
-  const symbolId = getSymbolId(masterName, symbols);
+
+  if (mastersNameRegistry === null) {
+    getExistingSymbols();
+  }
+  const symbolId = getSymbolId(masterName);
 
   mastersNameRegistry[masterName] = flexToSketchJSON(
     buildTree(
@@ -95,7 +137,9 @@ export const makeSymbol = (
     )
   );
 
-  return makeSymbolByName(masterName);
+  const symbol = makeSymbolByName(masterName);
+  injectSymbols();
+  return symbol;
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
@@ -116,42 +160,4 @@ export const getSymbolMasterById = (symbolId: string): SJSymbolMaster => {
   }
 
   return mastersNameRegistry[masterName];
-};
-
-export const injectSymbols = (context: SketchContext) => {
-  const pages = context.document.pages();
-  const array = msListToArray(pages);
-
-  let symbolsPage = array.find(p => String(p.name()) === 'Symbols');
-  if (!symbolsPage) {
-    symbolsPage = context.document.addBlankPage();
-    symbolsPage.setName('Symbols');
-  }
-  getExistingSymbols(context);
-
-  existingSymbols.forEach((symbolMaster) => {
-    if (symbolMaster._class !== 'symbolMaster') return;
-    if (symbolMaster.name in mastersNameRegistry) return;
-    mastersNameRegistry[symbolMaster.name] = symbolMaster;
-  });
-
-  let left = 0;
-  Object.keys(mastersNameRegistry).forEach((key) => {
-    const symbolMaster = mastersNameRegistry[key];
-    symbolMaster.frame.y = 0;
-    symbolMaster.frame.x = left;
-    left += symbolMaster.frame.width + 20;
-  });
-
-  let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
-  if (!notSymbolsPage) {
-    notSymbolsPage = context.document.addBlankPage();
-  }
-
-  const layers = Object.keys(mastersNameRegistry).map(k =>
-    fromSJSONDictionary(mastersNameRegistry[k])
-  );
-
-  symbolsPage.replaceAllLayersWithLayers(layers);
-  context.document.setCurrentPage(notSymbolsPage);
 };
