@@ -42,7 +42,9 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     };
   }
 
-  const children = node.children || [];
+  const children = Array.isArray(node.children)
+    ? processChildren(node.children)
+    : [];
   const style = node.props.style || {};
 
   let textStyle;
@@ -67,7 +69,7 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     textStyle,
     props: node.props,
     value: null,
-    children: processChildren(children).map(child =>
+    children: children.map(child =>
       reactTreeToFlexTree(child, context.forChildren())
     ),
   };
