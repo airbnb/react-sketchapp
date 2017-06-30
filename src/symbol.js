@@ -7,6 +7,7 @@ import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
+import { replaceAllLayersWithLayers } from './render';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -83,12 +84,17 @@ const injectSymbols = () => {
     left += symbolMaster.frame.width + 20;
 
     const newLayer = fromSJSONDictionary(symbolMaster);
-    symbolsPage.insertLayer_afterLayerOrAtEnd(newLayer, null);
-    if (Object.hasOwnProperty.call(layers, symbolMaster.symbolID)) {
-      layers[symbolMaster.symbolID].removeFromParent();
-    }
+    // symbolsPage.insertLayer_afterLayerOrAtEnd(newLayer, null);
+    // if (Object.hasOwnProperty.call(layers, symbolMaster.symbolID)) {
+    //   layers[symbolMaster.symbolID].removeFromParent();
+    // }
     layers[symbolMaster.symbolID] = newLayer;
   });
+
+  replaceAllLayersWithLayers(
+    Object.keys(layers).map(k => layers[k]),
+    symbolsPage
+  );
 
   let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
   if (!notSymbolsPage) {
