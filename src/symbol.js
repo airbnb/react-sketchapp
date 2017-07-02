@@ -18,7 +18,6 @@ const displayName = (Component: React$Component): string =>
 let mastersNameRegistry = null;
 let existingSymbols = null;
 const layers = {};
-const globalContext = context; // eslint-disable-line
 
 const msListToArray = (pageList) => {
   const out = [];
@@ -30,6 +29,7 @@ const msListToArray = (pageList) => {
 };
 
 export const getExistingSymbols = () => {
+  const globalContext = context; // eslint-disable-line
   const pages = globalContext.document.pages();
   const array = msListToArray(pages);
   if (existingSymbols === null) {
@@ -67,6 +67,7 @@ export const getSymbolId = (masterName: string): string => {
 };
 
 const injectSymbols = () => {
+  const globalContext = context; // eslint-disable-line
   const pages = globalContext.document.pages();
   const array = msListToArray(pages);
 
@@ -84,17 +85,14 @@ const injectSymbols = () => {
     left += symbolMaster.frame.width + 20;
 
     const newLayer = fromSJSONDictionary(symbolMaster);
-    // symbolsPage.insertLayer_afterLayerOrAtEnd(newLayer, null);
+    symbolsPage.insertLayer_afterLayerOrAtEnd(newLayer, null);
     // if (Object.hasOwnProperty.call(layers, symbolMaster.symbolID)) {
     //   layers[symbolMaster.symbolID].removeFromParent();
     // }
     layers[symbolMaster.symbolID] = newLayer;
   });
 
-  replaceAllLayersWithLayers(
-    Object.keys(layers).map(k => layers[k]),
-    symbolsPage
-  );
+  // replaceAllLayersWithLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 
   let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
   if (!notSymbolsPage) {
