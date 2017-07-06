@@ -38,7 +38,7 @@ const Nested = () => (
   </View>
 );
 
-const NestedSym = makeSymbol(Nested, context);
+const NestedSym = makeSymbol(Nested);
 
 export default (context) => {
 
