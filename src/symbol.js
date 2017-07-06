@@ -85,10 +85,6 @@ const injectSymbols = () => {
     left += symbolMaster.frame.width + 20;
 
     const newLayer = fromSJSONDictionary(symbolMaster);
-    // symbolsPage.insertLayer_afterLayerOrAtEnd(newLayer, null);
-    // if (Object.hasOwnProperty.call(layers, symbolMaster.symbolID)) {
-    //   layers[symbolMaster.symbolID].removeFromParent();
-    // }
     layers[symbolMaster.symbolID] = newLayer;
   });
 
