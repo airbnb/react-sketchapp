@@ -94,7 +94,9 @@ export const injectSymbols = (context: SketchContext) => {
     symbolsPage.setName('Symbols');
   }
 
-  const existingSymbols = msListToArray(symbolsPage.layers()).map(x => JSON.parse(toSJSON(x)));
+  const existingSymbols = msListToArray(symbolsPage.layers()).map(x =>
+    JSON.parse(toSJSON(x))
+  );
   existingSymbols.forEach((symbolMaster) => {
     if (symbolMaster._class !== 'symbolMaster') return;
     if (symbolMaster.name in mastersNameRegistry) return;
@@ -118,6 +120,6 @@ export const injectSymbols = (context: SketchContext) => {
     fromSJSONDictionary(mastersNameRegistry[k])
   );
 
-  symbolsPage.replaceAllLayersWithLayers(layers);
+  symbolsPage.addLayers(layers);
   context.document.setCurrentPage(notSymbolsPage);
 };
