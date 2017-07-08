@@ -1,6 +1,10 @@
 /* @flow */
 import { BorderPosition } from 'sketch-constants';
-import type { SJBorderOptions, SJShadow, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type {
+  SJBorderOptions,
+  SJShadow,
+  SJShapeGroupLayer,
+} from 'sketchapp-json-flow-types';
 import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import {
   makeHorizontalPath,
@@ -12,7 +16,10 @@ import type { Color, ViewStyle } from '../types';
 
 const DEFAULT_SHADOW_COLOR = '#000';
 
-const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): Array<number> => {
+const makeDashPattern = (
+  style: "dashed" | "dotted" | "solid",
+  width: number
+): Array<number> => {
   switch (style) {
     case 'dashed':
       return [width * 3, width * 3];
@@ -26,8 +33,8 @@ const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): A
 };
 
 export const makeBorderOptions = (
-  style: 'dashed' | 'dotted' | 'solid',
-  width: number,
+  style: "dashed" | "dotted" | "solid",
+  width: number
 ): SJBorderOptions => ({
   _class: 'borderOptions',
   isEnabled: false,
@@ -46,11 +53,11 @@ export const makeShadow = (style: ViewStyle): SJShadow => {
     _class: 'shadow',
     isEnabled: true,
     blurRadius: radius,
-    color: makeColorFromCSS(color),
+    color: makeColorFromCSS(color, opacity),
     contextSettings: {
       _class: 'graphicsContextSettings',
       blendMode: 0,
-      opacity,
+      opacity: 1,
     },
     offsetX,
     offsetY,
@@ -63,7 +70,7 @@ export const makeVerticalBorder = (
   y: number,
   length: number,
   thickness: number,
-  color: Color,
+  color: Color
 ): SJShapeGroupLayer => {
   const frame = makeRect(x, y, thickness, length);
   const shapeFrame = makeRect(0, 0, thickness, length);
@@ -87,7 +94,7 @@ export const makeHorizontalBorder = (
   y: number,
   length: number,
   thickness: number,
-  color: Color,
+  color: Color
 ): SJShapeGroupLayer => {
   const frame = makeRect(x, y, length, thickness);
   const shapeFrame = makeRect(0, 0, length, thickness);
