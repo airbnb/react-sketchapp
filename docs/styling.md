@@ -78,6 +78,7 @@ Components use CSS styles + flexbox layout.
 | `fontSize` | `number` | ✅ |
 | `fontStyle` | `normal` &#124; `italic` | ✅ |
 | `fontWeight` | `string` | ✅ |
+| `textDecorationLine` | `none` &#124; `underline` &#124; `double` &#124; `line-through`  | ✅ |
 | `textShadowOffset` | `{ width: number, height: number }` | ⛔️ |
 | `textShadowRadius` | `number` | ⛔️ |
 | `textShadowColor` | `Color` | ⛔️ |

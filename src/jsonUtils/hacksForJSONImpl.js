@@ -15,6 +15,17 @@ export const TEXT_ALIGN = {
   justify: TextAlignment.Justified,
 };
 
+export const TEXT_DECORATION_UNDERLINE = {
+  none: 0,
+  underline: 1,
+  double: 9,
+};
+
+export const TEXT_DECORATION_LINETHROUGH = {
+  none: 0,
+  'line-through': 1,
+};
+
 // this doesn't exist in constants
 export const TEXT_TRANSFORM = {
   uppercase: 1,
@@ -72,7 +83,8 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
   let image;
 
   if (!fetchedData) {
-    const errorUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
+    const errorUrl =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
     image = NSImage.alloc().initWithContentsOfURL(
       NSURL.URLWithString(errorUrl)
     );
@@ -96,8 +108,10 @@ export function makeAttributedString(string: ?string, textStyle: TextStyle) {
       color.red,
       color.green,
       color.blue,
-      color.alpha,
+      color.alpha
     ),
+    NSUnderline: TEXT_DECORATION_UNDERLINE[textStyle.textDecoration] || 0,
+    NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyle.textDecoration] || 0,
   };
 
   if (textStyle.letterSpacing !== undefined) {
@@ -105,11 +119,17 @@ export function makeAttributedString(string: ?string, textStyle: TextStyle) {
   }
 
   if (textStyle.textTransform !== undefined) {
-    attribs.MSAttributedStringTextTransformAttribute = TEXT_TRANSFORM[textStyle.textTransform] * 1;
+    attribs.MSAttributedStringTextTransformAttribute =
+      TEXT_TRANSFORM[textStyle.textTransform] * 1;
   }
 
-  const attribStr = NSAttributedString.attributedStringWithString_attributes_(string, attribs);
-  const msAttribStr = MSAttributedString.alloc().initWithAttributedString(attribStr);
+  const attribStr = NSAttributedString.attributedStringWithString_attributes_(
+    string,
+    attribs
+  );
+  const msAttribStr = MSAttributedString.alloc().initWithAttributedString(
+    attribStr
+  );
 
   return encodeSketchJSON(msAttribStr);
 }
@@ -130,14 +150,13 @@ export function makeTextStyle(textStyle: TextStyle) {
           color.red,
           color.green,
           color.blue,
-          color.alpha,
-        ),
+          color.alpha
+        )
       ),
       NSParagraphStyle: encodeSketchJSON(pStyle),
       NSKern: textStyle.letterSpacing || 0,
-      MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[
-        textStyle.textTransform || 'initial'
-      ] * 1,
+      MSAttributedStringTextTransformAttribute:
+        TEXT_TRANSFORM[textStyle.textTransform || 'initial'] * 1,
     },
   };
 

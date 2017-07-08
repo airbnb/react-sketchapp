@@ -12,13 +12,14 @@ const INHERITABLE_STYLES = [
   'fontSize',
   'fontStyle',
   'fontWeight',
+  'textAlign',
+  'textDecoration',
   'textShadowOffset',
   'textShadowRadius',
   'textShadowColor',
   'textTransform',
   'letterSpacing',
   'lineHeight',
-  'textAlign',
   'writingDirection',
 ];
 
