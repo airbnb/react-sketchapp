@@ -22,7 +22,16 @@ function e7() {
   const d1 = (Math.random() * 0xffffffff) | 0;
   const d2 = (Math.random() * 0xffffffff) | 0;
   const d3 = (Math.random() * 0xffffffff) | 0;
-  return `${lut[d0 & 0xff] + lut[(d0 >> 8) & 0xff] + lut[(d0 >> 16) & 0xff] + lut[(d0 >> 24) & 0xff]}-${lut[d1 & 0xff]}${lut[(d1 >> 8) & 0xff]}-${lut[((d1 >> 16) & 0x0f) | 0x40]}${lut[(d1 >> 24) & 0xff]}-${lut[(d2 & 0x3f) | 0x80]}${lut[(d2 >> 8) & 0xff]}-${lut[(d2 >> 16) & 0xff]}${lut[(d2 >> 24) & 0xff]}${lut[d3 & 0xff]}${lut[(d3 >> 8) & 0xff]}${lut[(d3 >> 16) & 0xff]}${lut[(d3 >> 24) & 0xff]}`;
+  return `${lut[d0 & 0xff] +
+    lut[(d0 >> 8) & 0xff] +
+    lut[(d0 >> 16) & 0xff] +
+    lut[(d0 >> 24) & 0xff]}-${lut[d1 & 0xff]}${lut[(d1 >> 8) & 0xff]}-${lut[
+    ((d1 >> 16) & 0x0f) | 0x40
+  ]}${lut[(d1 >> 24) & 0xff]}-${lut[(d2 & 0x3f) | 0x80]}${lut[
+    (d2 >> 8) & 0xff
+  ]}-${lut[(d2 >> 16) & 0xff]}${lut[(d2 >> 24) & 0xff]}${lut[d3 & 0xff]}${lut[
+    (d3 >> 8) & 0xff
+  ]}${lut[(d3 >> 16) & 0xff]}${lut[(d3 >> 24) & 0xff]}`;
 }
 
 export function generateID(): string {
@@ -38,7 +47,7 @@ const safeToLower = (input: Color): Color => {
 };
 
 // Takes colors as CSS hex, name, rgb, rgba, hsl or hsla
-export const makeColorFromCSS = (input: Color): SJColor => {
+export const makeColorFromCSS = (input: Color, alpha: number = 1): SJColor => {
   const nullableColor: ?number = normalizeColor(safeToLower(input));
   const colorInt: number = nullableColor == null ? 0x00000000 : nullableColor;
   const { r, g, b, a } = normalizeColor.rgba(colorInt);
@@ -48,7 +57,7 @@ export const makeColorFromCSS = (input: Color): SJColor => {
     red: r / 255,
     green: g / 255,
     blue: b / 255,
-    alpha: a,
+    alpha: a * alpha,
   };
 };
 
@@ -79,7 +88,12 @@ export const makeImageFill = (
 });
 
 // Used in frames, etc
-export const makeRect = (x: number, y: number, width: number, height: number): SJRect => ({
+export const makeRect = (
+  x: number,
+  y: number,
+  width: number,
+  height: number
+): SJRect => ({
   _class: 'rect',
   constrainProportions: false,
   x,
@@ -88,20 +102,26 @@ export const makeRect = (x: number, y: number, width: number, height: number): S
   height,
 });
 
-export const makeJSONDataReference = (image: MSImageData): SJImageDataReference => ({
+export const makeJSONDataReference = (
+  image: MSImageData
+): SJImageDataReference => ({
   _class: 'MSJSONOriginalDataReference',
   _ref: `images/${generateID()}`,
   _ref_class: 'MSImageData',
   data: {
     _data: image
       .data()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+      .base64EncodedStringWithOptions(
+        NSDataBase64EncodingEndLineWithCarriageReturn
+      ),
     // TODO(gold): can I just declare this as a var instead of using Cocoa?
   },
   sha1: {
     _data: image
       .sha1()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+      .base64EncodedStringWithOptions(
+        NSDataBase64EncodingEndLineWithCarriageReturn
+      ),
   },
 });
 

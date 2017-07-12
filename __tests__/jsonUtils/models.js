@@ -57,6 +57,12 @@ describe('makeColorFromCSS', () => {
     expect(makeColorFromCSS('rgba(102, 51, 153, 1)')).toEqual(PURPLE);
   });
 
+  it('multiplies rgba components with an alpha', () => {
+    expect(makeColorFromCSS('rgba(0, 0, 0, 0.5)').alpha).toBeCloseTo(0.5);
+    expect(makeColorFromCSS('rgba(0, 0, 0, 1)', 0.5).alpha).toBeCloseTo(0.5);
+    expect(makeColorFromCSS('rgba(0, 0, 0, 0.5)', 0.5).alpha).toBeCloseTo(0.25);
+  });
+
   it('works with hsl colors', () => {
     expect(makeColorFromCSS('hsl(0, 0%, 0%)')).toEqual(BLACK);
     expect(makeColorFromCSS('hsl(0, 0%, 100%)')).toEqual(WHITE);
