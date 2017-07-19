@@ -25,6 +25,6 @@
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
     "nwb": "^0.15.6",
-    "skpm": "^0.9.0"
+    "skpm": "^0.10.2"
   }
 }
