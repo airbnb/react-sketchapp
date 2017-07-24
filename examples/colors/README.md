@@ -12,7 +12,7 @@ Install the dependencies
 npm install
 ```
 
-Run with live reloading in Sketch
+Run with live reloading in Sketch, need a new sketch doc open
 ```
 npm run render
 ```

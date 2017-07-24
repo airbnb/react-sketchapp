@@ -42,4 +42,4 @@ export default (context: any) => {
   );
 
   render(<Document system={designSystem} />, context.document.currentPage());
-}
+};

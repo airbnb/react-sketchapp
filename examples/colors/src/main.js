@@ -26,8 +26,8 @@ const Document = ({ colors, steps }) => {
           style={{
             backgroundColor: val,
             margin: 2,
-            height: 96 - 2 * i,
-            width: 96 - 2 * i,
+            height: 96 - (2 * i),
+            width: 96 - (2 * i),
             borderRadius: 2 * i,
           }}
         />

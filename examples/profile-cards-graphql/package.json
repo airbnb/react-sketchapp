@@ -1,5 +1,6 @@
 {
   "name": "profile-cards-gql",
+  "version": "1.0.0",
   "main": "profile-cards-gql.sketchplugin",
   "manifest": "src/manifest.json",
   "private": true,

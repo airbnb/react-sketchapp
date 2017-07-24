@@ -1,5 +1,6 @@
 {
   "name": "foursquare-maps",
+  "version": "1.0.0",
   "private": true,
   "main": "foursquare-maps.sketchplugin",
   "manifest": "src/manifest.json",

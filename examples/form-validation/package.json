@@ -1,5 +1,6 @@
 {
   "name": "form-validation",
+  "version": "1.0.0",
   "private": true,
   "main": "form-validation.sketchplugin",
   "manifest": "src/manifest.json",
