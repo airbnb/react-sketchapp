@@ -15,18 +15,17 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
   return flexToSketchJSON(tree);
 };
 
-const renderToSketch = (
-  node: TreeNode,
+export const replaceAllLayersWithLayers = (
+  layers,
   container: SketchLayer
 ): SketchLayer => {
-  const json = flexToSketchJSON(node);
-  const layer = fromSJSONDictionary(json);
-
   if (container.addLayers === undefined) {
-    throw new Error(`
+    throw new Error(
+      `
      React SketchApp cannot render into this layer. You may be trying to render into a layer
      that does not take children. Try rendering into a LayerGroup, Artboard, or Page.
-    `);
+    `
+    );
   }
 
   if (container.containsLayers()) {
@@ -40,8 +39,18 @@ const renderToSketch = (
     }
   }
 
-  container.addLayers([layer]);
+  container.addLayers(layers);
   return container;
+};
+
+const renderToSketch = (
+  node: TreeNode,
+  container: SketchLayer
+): SketchLayer => {
+  const json = flexToSketchJSON(node);
+  const layer = fromSJSONDictionary(json);
+
+  return replaceAllLayersWithLayers([layer], container);
 };
 
 export const render = (

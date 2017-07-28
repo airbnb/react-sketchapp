@@ -40,22 +40,21 @@ const Nested = () => (
 
 const NestedSym = makeSymbol(Nested);
 
-const Document = () => (
-  <Artboard name="Swatches" style={{ display: 'flex' }}>
-    <NestedSym
-      name="Nested Symbol"
-      style={{ width: 75, height: 150 }}
-      overrides={{
-        'Red Square Instance': BlueSquareSym,
-        'Blue Square Text': 'TESTING',
-        Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg'
-      }}
-    />
-  </Artboard>
-);
-
-
 export default (context) => {
-  injectSymbols(context);
+
+  const Document = () => (
+    <Artboard name="Swatches" style={{ display: 'flex' }}>
+      <NestedSym
+        name="Nested Symbol"
+        style={{ width: 75, height: 150 }}
+        overrides={{
+          'Red Square Instance': BlueSquareSym,
+          'Blue Square Text': 'TESTING',
+          Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg'
+        }}
+      />
+    </Artboard>
+  );
+
   render(<Document />, context.document.currentPage());
 };
