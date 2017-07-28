@@ -9,7 +9,7 @@ const RedSquare = () => (
   </View>
 );
 
-const RedSquareSym = makeSymbol(RedSquare);
+const RedSquareSym = makeSymbol(RedSquare, 'squares/red');
 
 const BlueSquare = () => (
   <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
@@ -19,7 +19,7 @@ const BlueSquare = () => (
   </View>
 );
 
-const BlueSquareSym = makeSymbol(BlueSquare);
+const BlueSquareSym = makeSymbol(BlueSquare, 'squares/blue');
 
 const Photo = () => (
   <Image
