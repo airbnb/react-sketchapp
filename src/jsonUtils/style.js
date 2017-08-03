@@ -47,6 +47,7 @@ export const makeShadow = (style: ViewStyle): SJShadow => {
   const opacity = style.shadowOpacity !== undefined ? style.shadowOpacity : 1;
   const color = style.shadowColor || style.color || DEFAULT_SHADOW_COLOR;
   const radius = style.shadowRadius !== undefined ? style.shadowRadius : 1;
+  const spread = style.shadowSpread !== undefined ? style.shadowSpread : 0;
   const { width: offsetX = 0, height: offsetY = 0 } = style.shadowOffset || {};
 
   return {
@@ -61,7 +62,7 @@ export const makeShadow = (style: ViewStyle): SJShadow => {
     },
     offsetX,
     offsetY,
-    spread: 0,
+    spread,
   };
 };
 
