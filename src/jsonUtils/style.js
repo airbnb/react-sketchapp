@@ -47,10 +47,11 @@ export const makeShadow = (style: ViewStyle): SJShadow => {
   const opacity = style.shadowOpacity !== undefined ? style.shadowOpacity : 1;
   const color = style.shadowColor || style.color || DEFAULT_SHADOW_COLOR;
   const radius = style.shadowRadius !== undefined ? style.shadowRadius : 1;
+  const _class = style.shadowInner !== undefined ? 'innerShadow' : 'shadow';
   const { width: offsetX = 0, height: offsetY = 0 } = style.shadowOffset || {};
 
   return {
-    _class: 'shadow',
+    _class,
     isEnabled: true,
     blurRadius: radius,
     color: makeColorFromCSS(color, opacity),
