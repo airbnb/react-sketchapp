@@ -6,7 +6,6 @@ import {
   View,
   Image,
   makeSymbol,
-  injectSymbols,
 } from 'react-sketchapp';
 
 const RedSquare = () => (
@@ -65,7 +64,7 @@ export default (context) => {
         overrides={{
           'Red Square Instance': BlueSquareSym,
           'Blue Square Text': 'TESTING',
-          Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg'
+          Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
         }}
       />
     </Artboard>
