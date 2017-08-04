@@ -1,21 +1,31 @@
 import React from 'react';
-import { render, Artboard, Text, View, Image, makeSymbol, injectSymbols } from 'react-sketchapp';
+import {
+  render,
+  Artboard,
+  Text,
+  View,
+  Image,
+  makeSymbol,
+  injectSymbols,
+} from 'react-sketchapp';
 
 const RedSquare = () => (
-  <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
-    <Text name="Red Square Text">
-      Red Square
-    </Text>
+  <View
+    name="Square"
+    style={{ width: 100, height: 100, backgroundColor: 'red' }}
+  >
+    <Text name="Red Square Text">Red Square</Text>
   </View>
 );
 
 const RedSquareSym = makeSymbol(RedSquare);
 
 const BlueSquare = () => (
-  <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
-    <Text name="Blue Square Text">
-      Blue Square
-    </Text>
+  <View
+    name="Square"
+    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+  >
+    <Text name="Blue Square Text">Blue Square</Text>
   </View>
 );
 
@@ -32,16 +42,21 @@ const Photo = () => (
 const PhotoSym = makeSymbol(Photo);
 
 const Nested = () => (
-  <View name="Multi" style={{ display: 'flex', flexDirection: 'column', width: 75, height: 150 }}>
+  <View
+    name="Multi"
+    style={{ display: 'flex', flexDirection: 'column', width: 75, height: 150 }}
+  >
     <PhotoSym name="Photo Instance" style={{ width: 75, height: 75 }} />
-    <RedSquareSym name="Red Square Instance" style={{ width: 75, height: 75 }} />
+    <RedSquareSym
+      name="Red Square Instance"
+      style={{ width: 75, height: 75 }}
+    />
   </View>
 );
 
 const NestedSym = makeSymbol(Nested);
 
 export default (context) => {
-
   const Document = () => (
     <Artboard name="Swatches" style={{ display: 'flex' }}>
       <NestedSym

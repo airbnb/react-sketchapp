@@ -1,5 +1,6 @@
 {
   "name": "colors",
+  "version": "1.0.0",
   "private": true,
   "main": "colors.sketchplugin",
   "manifest": "src/manifest.json",
