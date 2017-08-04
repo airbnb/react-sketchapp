@@ -53,4 +53,4 @@ export default (context) => {
   ];
 
   render(<Page users={DATA} />, context.document.currentPage());
-}
+};

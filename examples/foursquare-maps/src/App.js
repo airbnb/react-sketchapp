@@ -49,6 +49,7 @@ const LatLong = PropTypes.shape({
 const Venue = {
   name: PropTypes.string,
   location: PropTypes.shape({
+    // eslint-disable-next-line react/no-unused-prop-types
     address: PropTypes.string,
   }),
 };
@@ -63,7 +64,10 @@ const Row = ({ name, location }) => (
 Row.propTypes = Venue;
 
 const App = ({ center, venues }) => {
-  const pins = venues.map(v => ({ latitude: v.location.lat, longitude: v.location.lng }));
+  const pins = venues.map(v => ({
+    latitude: v.location.lat,
+    longitude: v.location.lng,
+  }));
   return (
     <View style={styles.container} name="Wrapper">
       <Map
@@ -84,6 +88,7 @@ const App = ({ center, venues }) => {
     </View>
   );
 };
+
 App.propTypes = {
   center: LatLong,
   venues: PropTypes.arrayOf(PropTypes.shape(Venue)),

@@ -69,4 +69,4 @@ export default (context) => {
   };
 
   render(<Document colors={colorList} />, context.document.currentPage());
-}
+};
