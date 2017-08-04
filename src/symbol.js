@@ -71,11 +71,9 @@ const injectSymbols = () => {
   const pages = globalContext.document.pages();
   const array = msListToArray(pages);
 
-  let symbolsPage = array.find(p => String(p.name()) === 'Symbols');
-  if (!symbolsPage) {
-    symbolsPage = globalContext.document.addBlankPage();
-    symbolsPage.setName('Symbols');
-  }
+  const symbolsPage = globalContext.document
+    .documentData()
+    .symbolsPageOrCreateIfNecessary();
 
   let left = 0;
   Object.keys(mastersNameRegistry).forEach((key) => {
@@ -124,8 +122,11 @@ export const makeSymbolByName = (masterName: string): React$Component =>
     }
   };
 
-export const makeSymbol = (Component: React$Component): React$Component => {
-  const masterName = displayName(Component);
+export const makeSymbol = (
+  Component: React$Component,
+  name: string
+): React$Component => {
+  const masterName = name || displayName(Component);
 
   if (mastersNameRegistry === null) {
     getExistingSymbols();
