@@ -19,7 +19,7 @@
     "react-dom": "^15.4.2",
     "react-native": "^0.42.3",
     "react-primitives": "^0.3.4",
-    "react-sketchapp": "^0.11.0",
+    "react-sketchapp": "^0.12.0",
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
