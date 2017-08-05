@@ -40,7 +40,7 @@ const Title = styled.Text`
   font-family: "GT America";
   font-weight: bold;
   padding: 4px;
-`
+`;
 
 const Swatch = ({ name, hex }) => (
   <SwatchTile name={`Swatch ${name}`} hex={hex}>

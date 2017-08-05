@@ -61,7 +61,7 @@ const VerticalLine = ({ height = 1, color = '#46D2B3' }) => (
 VerticalLine.propTypes = {
   height: PropTypes.number,
   color: PropTypes.string,
-}
+};
 
 const Header = ({ title }) => (
   <View style={[styles.rowContainer, { backgroundColor: '#fff' }]}>
@@ -87,7 +87,7 @@ const Footer = () => (
 );
 
 const Dot = ({ completed }) =>
-  <View name="Dot" style={[styles.dot, completed && styles.dotCompleted]} />
+  <View name="Dot" style={[styles.dot, completed && styles.dotCompleted]} />;
 
 Dot.propTypes = {
   completed: PropTypes.bool,
