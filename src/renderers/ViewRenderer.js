@@ -64,6 +64,7 @@ class ViewRenderer extends SketchRenderer {
     // eslint-disable-next-line no-unused-vars
     value: ?string
   ): Array<SJShapeGroupLayer> {
+    // console.log(props);
     const layers = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
     const {
@@ -106,8 +107,10 @@ class ViewRenderer extends SketchRenderer {
       0,
       layout.width,
       layout.height,
-      radii
+      radii,
+      props.resizeConstraints
     );
+    // console.log(shapeLayer);
 
     const fill = makeColorFill(backgroundColor);
     const content = makeShapeGroup(frame, [shapeLayer], [fill]);

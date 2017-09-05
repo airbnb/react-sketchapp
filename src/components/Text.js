@@ -12,6 +12,7 @@ const propTypes = {
     ...TextStylePropTypes,
   }),
   name: PropTypes.string,
+  resizeConstraints: PropTypes.objectOf(PropTypes.bool),
   children: PropTypes.node,
 };
 
@@ -28,7 +29,11 @@ class Text extends React.Component {
 
   render() {
     return (
-      <text name={this.props.name} style={StyleSheet.flatten(this.props.style)}>
+      <text
+        name={this.props.name}
+        style={StyleSheet.flatten(this.props.style)}
+        resizeConstraints={this.props.resizeConstraints}
+      >
         {this.props.children}
       </text>
     );

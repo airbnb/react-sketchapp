@@ -10,6 +10,7 @@ const propTypes = {
     ...ViewStylePropTypes,
   }),
   name: PropTypes.string,
+  resizeConstraints: PropTypes.objectOf(PropTypes.bool),
   children: PropTypes.node,
 };
 
@@ -20,7 +21,11 @@ class View extends React.Component {
 
   render() {
     return (
-      <view name={this.props.name} style={StyleSheet.flatten(this.props.style)}>
+      <view
+        name={this.props.name}
+        style={StyleSheet.flatten(this.props.style)}
+        resizeConstraints={this.props.resizeConstraints}
+      >
         {this.props.children}
       </view>
     );

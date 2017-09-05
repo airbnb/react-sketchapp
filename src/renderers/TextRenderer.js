@@ -15,15 +15,21 @@ class TextRenderer extends SketchRenderer {
     style: ViewStyle,
     textStyle: TextStyle,
     props: any,
-    value: ?string,
+    value: ?string
   ): Array<SketchLayer> {
     if (value === null) {
       const viewRenderer = new ViewRenderer();
-      return viewRenderer.renderBackingLayers(layout, style, textStyle, props, value);
+      return viewRenderer.renderBackingLayers(
+        layout,
+        style,
+        textStyle,
+        props,
+        value
+      );
     }
 
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const layer = makeTextLayer(frame, value, textStyle);
+    const layer = makeTextLayer(frame, value, textStyle, props);
 
     const resolvedStyle = TextStyles.resolve(textStyle);
     if (resolvedStyle) {

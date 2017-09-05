@@ -8,6 +8,7 @@ const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
   height: PropTypes.number,
   width: PropTypes.number,
+  resizeConstraints: PropTypes.objectOf(PropTypes.bool),
   // bundle: PropTypes.string,
   // method: PropTypes.string,
   // headers: PropTypes.objectOf(PropTypes.string),
@@ -58,11 +59,19 @@ class Image extends React.Component {
   };
 
   render() {
-    const { children, source, defaultSource, resizeMode, name } = this.props;
+    const {
+      children,
+      source,
+      defaultSource,
+      resizeMode,
+      name,
+      resizeConstraints,
+    } = this.props;
 
     let style = StyleSheet.flatten(this.props.style) || {};
 
-    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
+    const sketchResizeMode =
+      ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
     if (source && typeof source !== 'string') {
       style = {
         height: source.height,
@@ -77,6 +86,7 @@ class Image extends React.Component {
         source={source || defaultSource}
         name={name}
         resizeMode={sketchResizeMode}
+        resizeConstraints={resizeConstraints}
       >
         {children}
       </image>
