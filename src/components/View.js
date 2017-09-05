@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
+import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 
 const propTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
@@ -10,7 +11,9 @@ const propTypes = {
     ...ViewStylePropTypes,
   }),
   name: PropTypes.string,
-  resizingConstraint: PropTypes.objectOf(PropTypes.bool),
+  resizingConstraint: PropTypes.shape({
+    ...ResizingConstraintPropTypes,
+  }),
   children: PropTypes.node,
 };
 

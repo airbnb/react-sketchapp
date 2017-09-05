@@ -3,12 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
+import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
   height: PropTypes.number,
   width: PropTypes.number,
-  resizingConstraint: PropTypes.objectOf(PropTypes.bool),
+  resizingConstraint: PropTypes.shape({
+    ...ResizingConstraintPropTypes,
+  }),
   // bundle: PropTypes.string,
   // method: PropTypes.string,
   // headers: PropTypes.objectOf(PropTypes.string),
