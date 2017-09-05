@@ -28,7 +28,6 @@ const Swatch = ({ name, hex }) => (
     <Text
       name="Swatch Name"
       style={{ color: textColor(hex), fontWeight: 'bold' }}
-      resizingConstraint={{ left: true }}
     >
       {name}
     </Text>
