@@ -10,7 +10,7 @@ const layerGroup = (
   width: number,
   height: number,
   opacity: number,
-  resizeConstraints?: ResizeConstraints
+  resizingConstraint?: ResizeConstraints
 ) => ({
   _class: 'group',
   do_objectID: generateID(),
@@ -29,7 +29,7 @@ const layerGroup = (
   layerListExpandedType: 2,
   name: 'Group',
   nameIsFixed: false,
-  resizingConstraint: makeResizeConstraint(resizeConstraints),
+  resizingConstraint: makeResizeConstraint(resizingConstraint),
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,

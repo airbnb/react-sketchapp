@@ -108,7 +108,7 @@ class ViewRenderer extends SketchRenderer {
       layout.width,
       layout.height,
       radii,
-      props.resizeConstraints
+      props.resizingConstraint
     );
     // console.log(shapeLayer);
 

@@ -118,7 +118,7 @@ export const makeRectPath = (radii: Radii = [0, 0, 0, 0]): SJPath => {
 export const makeShapePath = (
   frame: SJRect,
   path: SJPath,
-  resizeConstraints?: ResizeConstraints
+  resizingConstraint?: ResizeConstraints
 ) => ({
   _class: 'shapePath',
   frame,
@@ -130,7 +130,7 @@ export const makeShapePath = (
   layerListExpandedType: 0,
   name: 'Path',
   nameIsFixed: false,
-  resizingConstraint: makeResizeConstraint(resizeConstraints),
+  resizingConstraint: makeResizeConstraint(resizingConstraint),
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,
@@ -145,7 +145,7 @@ export const makeRectShapeLayer = (
   width: number,
   height: number,
   radii: Radii = [0, 0, 0, 0],
-  resizeConstraints: Object // TODO: Define type
+  resizingConstraint: Object // TODO: Define type
 ) => {
   const fixedRadius = radii[0] || 0;
   return {
@@ -159,7 +159,7 @@ export const makeRectShapeLayer = (
     layerListExpandedType: 0,
     name: 'Path',
     nameIsFixed: false,
-    resizingConstraint: makeResizeConstraint(resizeConstraints),
+    resizingConstraint: makeResizeConstraint(resizingConstraint),
     resizingType: 0,
     rotation: 0,
     shouldBreakMaskChain: false,
@@ -175,7 +175,7 @@ export const makeShapeGroup = (
   frame: SJRect,
   layers: Array<any> = [],
   fills?: Array<SJFill> = [],
-  resizeConstraints?: ResizeConstraints
+  resizingConstraint?: ResizeConstraints
 ): SJShapeGroupLayer => ({
   _class: 'shapeGroup',
   do_objectID: generateID(),
@@ -184,7 +184,7 @@ export const makeShapeGroup = (
   isVisible: true,
   name: 'ShapeGroup',
   nameIsFixed: false,
-  resizingConstraint: makeResizeConstraint(resizeConstraints),
+  resizingConstraint: makeResizeConstraint(resizingConstraint),
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,

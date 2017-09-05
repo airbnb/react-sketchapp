@@ -20,7 +20,7 @@ const makeTextLayer = (
   layerListExpandedType: 0,
   name: text,
   nameIsFixed: false,
-  resizingConstraint: makeResizeConstraint(props.resizeConstraints),
+  resizingConstraint: makeResizeConstraint(props.resizingConstraint),
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,

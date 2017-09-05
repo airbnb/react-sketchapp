@@ -160,10 +160,10 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
 };
 
 export function makeResizeConstraint(
-  resizeConstraints: ?ResizeConstraints
+  resizingConstraint: ?ResizeConstraints
 ): number {
-  console.log(resizeConstraints); // eslint-disable-line
-  if (resizeConstraints) {
+  console.log(resizingConstraint); // eslint-disable-line
+  if (resizingConstraint) {
     const constraints = [];
     const {
       top,
@@ -172,7 +172,7 @@ export function makeResizeConstraint(
       left,
       fixedHeight,
       fixedWidth,
-    } = resizeConstraints;
+    } = resizingConstraint;
 
     if (top) {
       constraints.push('top');
