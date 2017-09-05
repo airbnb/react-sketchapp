@@ -145,7 +145,7 @@ export const makeRectShapeLayer = (
   width: number,
   height: number,
   radii: Radii = [0, 0, 0, 0],
-  resizingConstraint: Object // TODO: Define type
+  resizingConstraint: ?ResizeConstraints
 ) => {
   const fixedRadius = radii[0] || 0;
   return {
