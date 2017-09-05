@@ -9,7 +9,7 @@ class SketchRenderer {
   getDefaultGroupName(
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    value: ?string
   ) {
     return 'Group';
   }
@@ -19,7 +19,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    value: ?string
   ): SketchJSON {
     // Default SketchRenderer just renders an empty group
 
@@ -28,9 +28,8 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    const opacity = style.opacity !== undefined
-      ? style.opacity
-      : DEFAULT_OPACITY;
+    const opacity =
+      style.opacity !== undefined ? style.opacity : DEFAULT_OPACITY;
 
     return {
       ...layerGroup(
@@ -39,6 +38,7 @@ class SketchRenderer {
         layout.width,
         layout.height,
         opacity,
+        props.resizingConstraint
       ),
       name: props.name || this.getDefaultGroupName(props, value),
     };
@@ -49,7 +49,7 @@ class SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    value: ?string
   ): Array<SketchJSON> {
     return [];
   }

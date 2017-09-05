@@ -162,7 +162,6 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
 export function makeResizeConstraint(
   resizingConstraint: ?ResizeConstraints
 ): number {
-  console.log(resizingConstraint); // eslint-disable-line
   if (resizingConstraint) {
     const constraints = [];
     const {
