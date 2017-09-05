@@ -9,9 +9,6 @@ const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
   height: PropTypes.number,
   width: PropTypes.number,
-  resizingConstraint: PropTypes.shape({
-    ...ResizingConstraintPropTypes,
-  }),
   // bundle: PropTypes.string,
   // method: PropTypes.string,
   // headers: PropTypes.objectOf(PropTypes.string),
@@ -44,6 +41,9 @@ const propTypes = {
   style: PropTypes.shape({
     ...ViewStylePropTypes,
     resizeMode: ResizeModePropType,
+  }),
+  resizingConstraint: PropTypes.shape({
+    ...ResizingConstraintPropTypes,
   }),
 };
 
