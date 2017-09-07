@@ -533,7 +533,7 @@ export default (context) => {
 }
 ```
 
-### `injectSymbols(node, name)`
+### `injectSymbols(context)`
 Injects the symbols into Sketch's symbol page. **Call this before rendering**.
 
 ```js
