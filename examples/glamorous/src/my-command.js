@@ -1,36 +1,40 @@
 import React from 'react';
 import glamorous from 'glamorous-primitives';
 import { render } from 'react-sketchapp';
-import chroma from 'chroma-js';
 
 const Container = glamorous.view({
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 const Image = glamorous.image({
-	width: 400,
-	height: 400,
+  width: 400,
+  height: 400,
 });
 
 const Description = glamorous.text({
-	fontSize: 35,
-	padding: 40,
-	color: '#a4a4c1',
+  fontSize: 35,
+  padding: 40,
+  color: '#a4a4c1',
 });
 
 class App extends React.Component {
-	render() {
-		return (
-			<Container>
-				<Image source={{ uri: 'https://github.com/paypal/glamorous/raw/master/other/logo/full.png' }} />
-				<Description>Maintainable CSS with React</Description>
-			</Container>
-		);
-	}
+  render() {
+    return (
+      <Container>
+        <Image
+          source={{
+            uri:
+              'https://github.com/paypal/glamorous/raw/master/other/logo/full.png',
+          }}
+        />
+        <Description>Maintainable CSS with React</Description>
+      </Container>
+    );
+  }
 }
 
-export default context => {
-	render(<App />, context.document.currentPage());
+export default (context) => {
+  render(<App />, context.document.currentPage());
 };
