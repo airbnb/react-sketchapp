@@ -195,8 +195,6 @@ export function makeResizeConstraint(
     if (constraints.length > 0) {
       return RESIZE_CONSTRAINTS[constraints.join('_')];
     }
-
-    return RESIZE_CONSTRAINTS.none; // No constraints
   }
 
   return RESIZE_CONSTRAINTS.none; // No constraints
