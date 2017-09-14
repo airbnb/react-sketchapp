@@ -1,7 +1,7 @@
 /* @flow */
-class DocumentRenderer {
+class PageRenderer {
   renderGroupLayer() {}
   renderBackingLayers() {}
 }
 
-module.exports = DocumentRenderer;
+module.exports = PageRenderer;
