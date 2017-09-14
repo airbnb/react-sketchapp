@@ -35,8 +35,10 @@ function createPages(tree: TreeNode): ?Array<Object> {
       }
 
       if (tree.children.length > 1) {
-        return tree.children.forEach((child) => {
-          // console.log(child);
+        return tree.children.forEach((child, index) => {
+          if (index === 0) {
+            return;
+          }
           if (child.props.name) {
             // Create new page
             const newPage = document.addBlankPage();
@@ -57,7 +59,7 @@ function createPages(tree: TreeNode): ?Array<Object> {
     return null;
   }
   // eslint-disable-next-line
-  console.error("No <Document>.");
+  console.error("No <Document> component found at root.");
   return null;
 }
 
