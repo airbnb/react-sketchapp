@@ -3,6 +3,7 @@ import { render, renderToJSON } from './render';
 import Platform from './Platform';
 import StyleSheet from './stylesheet';
 import Artboard from './components/Artboard';
+import Document from './components/Document';
 import Image from './components/Image';
 import RedBox from './components/RedBox';
 import View from './components/View';
@@ -15,6 +16,7 @@ module.exports = {
   renderToJSON,
   StyleSheet,
   Artboard,
+  Document,
   Image,
   RedBox,
   Text,
