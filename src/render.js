@@ -62,7 +62,10 @@ const findPageData = (
   return accumulated;
 };
 
-const buildDocuments = (tree: TreeNode, context: Object) => {
+const buildDocuments = (
+  tree: TreeNode,
+  context: Object
+): ?SketchLayer | Array<?SketchLayer> => {
   const pageData = findPageData(tree, 0);
 
   if (pageData.length === 0) {
@@ -95,10 +98,15 @@ const buildDocuments = (tree: TreeNode, context: Object) => {
       resetPage(page);
       data.children.forEach(child => renderToSketch(child, page));
     }
+
+    return data.children;
   });
 };
 
-export const render = (element: React$Element<any>, context: Object) => {
+export const render = (
+  element: React$Element<any>,
+  context: Object
+): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
     try {
       // Clear out document to prepare for re-render
