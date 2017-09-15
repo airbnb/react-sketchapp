@@ -28,6 +28,7 @@ const QUERY = gql`
   }
 `;
 
+// eslint-disable-next-line
 const props = ({ data }) =>
   data.loading ? { users: [] } : { users: data.allProfiles };
 const withUsers = graphql(QUERY, { props });
