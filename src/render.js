@@ -40,7 +40,7 @@ export const renderToSketch = (
   return renderLayers([layer], container);
 };
 
-const findDocumentData = (
+const findPageData = (
   current,
   depth,
   accumulated = []
@@ -48,13 +48,6 @@ const findDocumentData = (
   const children = current.children;
   for (let i = 0, len = children.length; i < len; i += 1) {
     const node = children[i];
-
-    if (node.type === 'document') {
-      accumulated.push({
-        type: 'document',
-        children: node.children,
-      });
-    }
 
     if (node.type === 'page') {
       accumulated.push({
@@ -64,15 +57,15 @@ const findDocumentData = (
       });
     }
 
-    findDocumentData(children[i], depth + 1);
+    findPageData(children[i], depth + 1);
   }
   return accumulated;
 };
 
 const buildDocuments = (tree: TreeNode, context: Object) => {
-  const documentData = findDocumentData(tree, 0);
+  const pageData = findPageData(tree, 0);
 
-  if (documentData.length === 0) {
+  if (pageData.length === 0) {
     return renderToSketch(tree, context.document.currentPage());
   }
 
@@ -80,29 +73,27 @@ const buildDocuments = (tree: TreeNode, context: Object) => {
   // Starts at `1` because there is always one default page per document
   let pageTotal = 1;
 
-  return documentData.forEach((data) => {
-    if (data.type === 'page') {
-      // Get Document
-      const document = context.document;
-      let page = document.currentPage();
+  return pageData.forEach((data) => {
+    // Get Document
+    const document = context.document;
+    let page = document.currentPage();
 
-      if (pageTotal > 1) {
-        // Create new page
-        page = document.addBlankPage();
-      } else {
-        pageTotal += 1;
-      }
+    if (pageTotal > 1) {
+      // Create new page
+      page = document.addBlankPage();
+    } else {
+      pageTotal += 1;
+    }
 
-      if (data.name) {
-        // Name new page
-        page.setName(data.name);
-      }
+    if (data.name) {
+      // Name new page
+      page.setName(data.name);
+    }
 
-      if (data.children && data.children.length > 0) {
-        // Clear out page layers to prepare for re-render
-        resetPage(page);
-        data.children.forEach(child => renderToSketch(child, page));
-      }
+    if (data.children && data.children.length > 0) {
+      // Clear out page layers to prepare for re-render
+      resetPage(page);
+      data.children.forEach(child => renderToSketch(child, page));
     }
   });
 };
