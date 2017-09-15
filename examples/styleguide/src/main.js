@@ -15,8 +15,8 @@ const Document = ({ system }: { system: DesignSystem }) => (
   <View>
     <View name="Intro" style={{ width: 420, marginBottom: system.spacing * 4 }}>
       <Label>
-        This is an example react-sketchapp document, showing how to
-        render a styleguide from a data representation of your design system.
+        This is an example react-sketchapp document, showing how to render a
+        styleguide from a data representation of your design system.
       </Label>
     </View>
 
@@ -38,8 +38,8 @@ export default (context: any) => {
       context,
       clearExistingStyles: true,
     },
-    designSystem.fonts,
+    designSystem.fonts
   );
 
-  render(<Document system={designSystem} />, context.document.currentPage());
+  render(<Document system={designSystem} />, context);
 };

@@ -26,8 +26,8 @@ const Document = ({ colors, steps }) => {
           style={{
             backgroundColor: val,
             margin: 2,
-            height: 96 - (2 * i),
-            width: 96 - (2 * i),
+            height: 96 - 2 * i,
+            width: 96 - 2 * i,
             borderRadius: 2 * i,
           }}
         />
@@ -43,7 +43,7 @@ Document.propTypes = {
 const onRun = (context) => {
   render(
     <Document colors={['#01FFD8', '#C137E3', '#8702ED']} steps={50} />,
-    context.document.currentPage(),
+    context
   );
 };
 

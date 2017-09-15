@@ -86,8 +86,9 @@ const Footer = () => (
   </View>
 );
 
-const Dot = ({ completed }) =>
-  <View name="Dot" style={[styles.dot, completed && styles.dotCompleted]} />;
+const Dot = ({ completed }) => (
+  <View name="Dot" style={[styles.dot, completed && styles.dotCompleted]} />
+);
 
 Dot.propTypes = {
   completed: PropTypes.bool,
@@ -105,7 +106,9 @@ const Row = ({ title, description, completed, date, status }) => (
         name="Row Date"
         style={styles.rowDate}
       >{`${status} on ${date}`}</Text>
-      <Text name="Row Title" style={styles.rowTitle}>{title}</Text>
+      <Text name="Row Title" style={styles.rowTitle}>
+        {title}
+      </Text>
       <Text name="Row Description" style={styles.rowDescription}>
         {description}
       </Text>
@@ -133,7 +136,7 @@ const Timeline = props => (
         completed={fields['Launched?']}
         date={fields['Target Launch Date']}
       />
-      ))}
+    ))}
     <Footer />
   </Artboard>
 );
@@ -148,7 +151,7 @@ export default (context) => {
   fetch(API_ENDPOINT_URL)
     .then(res => res.json())
     .then((data) => {
-      render(<Timeline data={data} />, context.document.currentPage());
+      render(<Timeline data={data} />, context);
     })
     .catch(e => console.error(e)); // eslint-disable-line no-console
 };
