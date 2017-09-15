@@ -41,7 +41,7 @@ class Document extends React.Component {
   render() {
     const { sketchContext } = this.props;
 
-    this.resetPages(sketchContext);
+    this.resetPages();
 
     return (
       <document sketchContext={sketchContext}>{this.props.children}</document>

@@ -60,6 +60,8 @@ export const render = (
 ): ?SketchLayer => {
   if (appVersionSupported()) {
     try {
+      // If no container/mount point is given, assume that <Document> and <Page>
+      // components are being used
       if (!container) {
         return TestRenderer.create(element);
       }
