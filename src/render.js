@@ -108,6 +108,9 @@ export const render = (
   context: Object
 ): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
+    if (!context) {
+      throw new Error('No sketch "context" passed into render function.');
+    }
     try {
       // Clear out document to prepare for re-render
       resetDocument(context);
