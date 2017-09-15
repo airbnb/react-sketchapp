@@ -26,8 +26,10 @@ const Document = ({ colors, steps }) => {
           style={{
             backgroundColor: val,
             margin: 2,
-            height: 96 - 2 * i,
-            width: 96 - 2 * i,
+            // prettier-ignore
+            height: 96 - (2 * i),
+            // prettier-ignore
+            width: 96 - (2 * i),
             borderRadius: 2 * i,
           }}
         />
