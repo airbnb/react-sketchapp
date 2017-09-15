@@ -3,8 +3,6 @@
 // import type SketchRenderer from './SketchRenderer';
 
 const renderers: { [key: string]: any } = {
-  document: require('./DocumentRenderer'),
-  page: require('./PageRenderer'),
   artboard: require('./ArtboardRenderer'),
   image: require('./ImageRenderer'),
   text: require('./TextRenderer'),

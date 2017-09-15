@@ -29,19 +29,6 @@ const allStringsOrNumbers = xs =>
 const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
 
 const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
-  if (node.type === 'document' || node.type === 'page') {
-    throw new Error(
-      `
-     Problem occured when trying to build sketch layers.
-     This error will occur if <Document> and/or <Page> components are being used incorrectly.
-     Steps to resolve:
-       1. Remove the mount parameter in your render function.
-       2. Only use <Document> at the root of your application
-       3. Make sure only <Page> components are used as children of <Document>
-    `
-    );
-  }
-
   if (typeof node === 'string') {
     const textStyle = context.getInheritedStyles();
     return {

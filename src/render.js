@@ -1,5 +1,4 @@
 import React from 'react';
-import TestRenderer from 'react-test-renderer';
 import type { SJLayer } from 'sketchapp-json-flow-types';
 import {
   appVersionSupported,
@@ -7,6 +6,7 @@ import {
 } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
+import { resetDocument, resetPage } from './resets';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
@@ -16,10 +16,7 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
   return flexToSketchJSON(tree);
 };
 
-export const replaceAllLayersWithLayers = (
-  layers,
-  container: SketchLayer
-): SketchLayer => {
+export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {
     throw new Error(
       `
@@ -27,17 +24,6 @@ export const replaceAllLayersWithLayers = (
      that does not take children. Try rendering into a LayerGroup, Artboard, or Page.
     `
     );
-  }
-
-  if (container.containsLayers()) {
-    const loop = container.children().objectEnumerator();
-    let currLayer = loop.nextObject();
-    while (currLayer) {
-      if (currLayer !== container) {
-        currLayer.removeFromParent();
-      }
-      currLayer = loop.nextObject();
-    }
   }
 
   container.addLayers(layers);
@@ -51,26 +37,90 @@ export const renderToSketch = (
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
 
-  return replaceAllLayersWithLayers([layer], container);
+  return renderLayers([layer], container);
 };
 
-export const render = (
-  element: React$Element<any>,
-  container: SketchLayer
-): ?SketchLayer => {
-  if (appVersionSupported()) {
-    try {
-      // If container cannot add sketch layers, we can assume that
-      // <Document> and <Page> components are being used.
-      if (container && !container.addLayers) {
-        return TestRenderer.create(element);
+const findDocumentData = (
+  current,
+  depth,
+  accumulated = []
+): Array<{ type: string, children: Object, name?: string }> => {
+  const children = current.children;
+  for (let i = 0, len = children.length; i < len; i += 1) {
+    const node = children[i];
+
+    if (node.type === 'document') {
+      accumulated.push({
+        type: 'document',
+        children: node.children,
+      });
+    }
+
+    if (node.type === 'page') {
+      accumulated.push({
+        type: 'page',
+        name: node.props.name,
+        children: node.children,
+      });
+    }
+
+    findDocumentData(children[i], depth + 1);
+  }
+  return accumulated;
+};
+
+const buildDocuments = (tree: TreeNode, context: Object) => {
+  const documentData = findDocumentData(tree, 0);
+
+  if (documentData.length === 0) {
+    return renderToSketch(tree, context.document.currentPage());
+  }
+
+  // Keep track of created pages
+  // Starts at `1` because there is always one default page per document
+  let pageTotal = 1;
+
+  return documentData.forEach((data) => {
+    if (data.type === 'page') {
+      // Get Document
+      const document = context.document;
+      let page = document.currentPage();
+
+      if (pageTotal > 1) {
+        // Create new page
+        page = document.addBlankPage();
+      } else {
+        pageTotal += 1;
       }
 
+      if (data.name) {
+        // Name new page
+        page.setName(data.name);
+      }
+
+      if (data.children && data.children.length > 0) {
+        // Clear out page layers to prepare for re-render
+        resetPage(page);
+        data.children.forEach(child => renderToSketch(child, page));
+      }
+    }
+  });
+};
+
+export const render = (element: React$Element<any>, context: Object) => {
+  if (appVersionSupported()) {
+    try {
+      // Clear out document to prepare for re-render
+      resetDocument(context);
+
+      // Build out sketch compatible tree representation
       const tree = buildTree(element);
-      return renderToSketch(tree, container);
+
+      // Traverse tree to create documents and pages, then render their children.
+      return buildDocuments(tree, context);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(tree, container);
+      return renderToSketch(tree, context.document.currentPage());
     }
   }
   return null;
