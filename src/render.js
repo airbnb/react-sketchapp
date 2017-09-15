@@ -60,9 +60,9 @@ export const render = (
 ): ?SketchLayer => {
   if (appVersionSupported()) {
     try {
-      // If no container/mount point is given, assume that <Document> and <Page>
-      // components are being used
-      if (!container) {
+      // If container cannot add sketch layers, we can assume that
+      // <Document> and <Page> components are being used.
+      if (container && !container.addLayers) {
         return TestRenderer.create(element);
       }
 

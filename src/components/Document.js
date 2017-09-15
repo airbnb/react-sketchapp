@@ -16,6 +16,7 @@ class Document extends React.Component {
     return { sketchContext: this.props.sketchContext };
   }
 
+  // Clear out sketch document, so we have a clean slate to re-render
   resetPages() {
     const { sketchContext } = this.props;
 
@@ -40,6 +41,16 @@ class Document extends React.Component {
 
   render() {
     const { sketchContext } = this.props;
+
+    if (!sketchContext) {
+      throw new Error(
+        `
+       Error building sketch file.
+       'sketchContext' prop was not provided to the <Document> component.
+       Try the following: <Document sketchContext={context}>
+      `
+      );
+    }
 
     this.resetPages();
 
