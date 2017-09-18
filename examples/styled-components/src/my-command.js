@@ -80,11 +80,11 @@ Document.propTypes = {
   colors: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default (context) => {
+export default () => {
   const colorList = {
     Classic: '#96324E',
     Neue: '#21304E',
   };
 
-  render(<Document colors={colorList} />, context);
+  render(<Document colors={colorList} />);
 };

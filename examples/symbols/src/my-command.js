@@ -55,7 +55,7 @@ const Nested = () => (
 
 const NestedSym = makeSymbol(Nested);
 
-export default (context) => {
+export default () => {
   const Document = () => (
     <Artboard name="Swatches" style={{ display: 'flex' }}>
       <NestedSym
@@ -71,5 +71,5 @@ export default (context) => {
     </Artboard>
   );
 
-  render(<Document />, context);
+  render(<Document />);
 };

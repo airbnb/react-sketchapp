@@ -62,8 +62,8 @@ const App = () => (
   </ApolloProvider>
 );
 
-export default (context) => {
+export default () => {
   getDataFromTree(App)
-    .then(() => render(<App />, context))
+    .then(() => render(<App />))
     .catch(console.log); // eslint-disable-line no-console
 };

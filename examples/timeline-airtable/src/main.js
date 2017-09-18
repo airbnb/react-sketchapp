@@ -147,11 +147,11 @@ Timeline.propTypes = {
   }),
 };
 
-export default (context) => {
+export default () => {
   fetch(API_ENDPOINT_URL)
     .then(res => res.json())
     .then((data) => {
-      render(<Timeline data={data} />, context);
+      render(<Timeline data={data} />);
     })
     .catch(e => console.error(e)); // eslint-disable-line no-console
 };

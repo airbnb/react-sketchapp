@@ -32,7 +32,7 @@ const Document = ({ system }: { system: DesignSystem }) => (
   </View>
 );
 
-export default (context: any) => {
+export default () => {
   TextStyles.create(
     {
       context,
@@ -41,5 +41,5 @@ export default (context: any) => {
     designSystem.fonts
   );
 
-  render(<Document system={designSystem} />, context);
+  render(<Document system={designSystem} />);
 };

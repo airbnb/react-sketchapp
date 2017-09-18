@@ -24,7 +24,7 @@ const Page = ({ users }: { users: Array<User> }) => (
   </View>
 );
 
-export default (context) => {
+export default () => {
   const DATA = [
     {
       screen_name: 'mxstbr',
@@ -58,5 +58,5 @@ export default (context) => {
     },
   ];
 
-  render(<Page users={DATA} />, context);
+  render(<Page users={DATA} />);
 };

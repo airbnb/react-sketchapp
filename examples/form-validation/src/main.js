@@ -27,6 +27,6 @@ const Page = ({ sessions }: { sessions: Array<Session> }) => (
   </View>
 );
 
-export default (context) => {
-  render(<Page sessions={DATA} />, context);
+export default () => {
+  render(<Page sessions={DATA} />);
 };
