@@ -7,7 +7,8 @@ import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
-import { replaceAllLayersWithLayers } from './render';
+import { renderLayers } from './render';
+import { resetPage } from './resets';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -28,12 +29,17 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getExistingSymbols = () => {
-  const globalContext = context; // eslint-disable-line
+export const getSymbolsPage = () => {
+  const globalContext = context;
   const pages = globalContext.document.pages();
   const array = msListToArray(pages);
+  return array.find(p => String(p.name()) === 'Symbols');
+};
+
+export const getExistingSymbols = () => {
+  const globalContext = context;
   if (existingSymbols === null) {
-    let symbolsPage = array.find(p => String(p.name()) === 'Symbols');
+    let symbolsPage = getSymbolsPage();
     if (!symbolsPage) {
       symbolsPage = globalContext.document.addBlankPage();
       symbolsPage.setName('Symbols');
@@ -86,10 +92,10 @@ const injectSymbols = () => {
     layers[symbolMaster.symbolID] = newLayer;
   });
 
-  replaceAllLayersWithLayers(
-    Object.keys(layers).map(k => layers[k]),
-    symbolsPage
-  );
+  // Clear out page layers to prepare for re-render
+  resetPage(symbolsPage);
+
+  renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 
   let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
   if (!notSymbolsPage) {

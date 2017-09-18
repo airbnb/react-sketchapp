@@ -1,0 +1,7 @@
+exports[`<Document /> renders children 1`] = `
+<document>
+  <foo>
+    <bar />
+  </foo>
+</document>
+`;

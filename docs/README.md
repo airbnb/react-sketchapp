@@ -9,6 +9,8 @@
 * [API Reference](/docs/API.md)
     * [render](/docs/API.md#renderelement-container)
     * [renderToJSON](/docs/API.md#rendertojsonelement)
+    * [Document](/docs/API.md#document)
+    * [Page](/docs/API.md#page)
     * [Artboard](/docs/API.md#artboard)
     * [Image](/docs/API.md#image)
     * [RedBox](/docs/API.md#redbox)

@@ -35,6 +35,6 @@ class App extends React.Component {
   }
 }
 
-export default (context) => {
+export default () => {
   render(<App />, context.document.currentPage());
 };
