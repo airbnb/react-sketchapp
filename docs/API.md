@@ -27,14 +27,28 @@
   * [`makeSymbol`](#makesymbolnode-name)
   * [`injectSymbols`](#injectsymbols)
 
-### `render(element)`
+### `render(element, container)`
 Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
 
 #### params
 ##### `element` (required)
+Top-level React component that defines your Sketch document.
 
-##### `container` (required)
-The element to render into - will be replaced. Should either be a Group or a Page — usually you should use `context.document.currentPage()`.
+Example:
+```
+<Document>
+  <Page name="Mobile">
+    <Artboard name="iPhone">
+      <View><Text>Hello World</Text></View>
+    </Artboard>
+  </Page>
+</Document>
+```
+
+##### `container` (optional)
+The element to render into - will be replaced. Should either be a Sketch Group or Page Object.
+
+Example: `context.document.currentPage()`.
 
 ### returns
 The top-most rendered native Sketch layer.
@@ -100,7 +114,7 @@ Wrapper for Sketch's Pages. Requires a [`<Document>`](#document) component as a 
 ```
 
 ### `<Artboard>`
-Wrapper for Sketch's Artboards.
+Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a parent if you would like to use multiple of these components.
 
 #### props
 | Prop | Type | Default | Note |
