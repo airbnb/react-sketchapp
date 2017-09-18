@@ -17,6 +17,7 @@
     * [Platform](/docs/API.md#platform)
     * [StyleSheet](/docs/API.md#stylesheet)
     * [TextStyles](/docs/API.md#textstyles)
+    * [Symbols](/docs/API.md#symbols)
 * [Change Log](/CHANGELOG.md)
 * [FAQ](/docs/FAQ.md)
 * [Contributing](/CONTRIBUTING.md)
