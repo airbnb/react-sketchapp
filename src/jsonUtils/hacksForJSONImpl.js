@@ -156,7 +156,10 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
     image = NSImage.alloc().initWithData(fetchedData);
   }
 
-  return MSImageData.alloc().initWithImage_convertColorSpace(image, false);
+  if (MSImageData.alloc().initWithImage_convertColorSpace !== undefined) {
+    return MSImageData.alloc().initWithImage_convertColorSpace(image, false);
+  }
+  return MSImageData.alloc().initWithImage(image);
 };
 
 export function makeResizeConstraint(
