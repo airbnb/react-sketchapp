@@ -28,5 +28,5 @@ const Page = ({ sessions }: { sessions: Array<Session> }) => (
 );
 
 export default () => {
-  render(<Page sessions={DATA} />);
+  render(<Page sessions={DATA} />, context.document.currentPage());
 };

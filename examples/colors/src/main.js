@@ -43,7 +43,10 @@ Document.propTypes = {
 };
 
 const onRun = () => {
-  render(<Document colors={['#01FFD8', '#C137E3', '#8702ED']} steps={50} />);
+  render(
+    <Document colors={['#01FFD8', '#C137E3', '#8702ED']} steps={50} />,
+    context.document.currentPage()
+  );
 };
 
 module.exports = onRun;

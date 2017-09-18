@@ -58,5 +58,5 @@ export default () => {
     },
   ];
 
-  render(<Page users={DATA} />);
+  render(<Page users={DATA} />, context.document.currentPage());
 };

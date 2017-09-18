@@ -27,5 +27,5 @@ const Page = ({ users }: { users: Array<User> }) => (
 );
 
 export default () => {
-  render(<Page users={DATA} />);
+  render(<Page users={DATA} />, context.document.currentPage());
 };

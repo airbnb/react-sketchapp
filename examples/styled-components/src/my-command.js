@@ -86,5 +86,5 @@ export default () => {
     Neue: '#21304E',
   };
 
-  render(<Document colors={colorList} />);
+  render(<Document colors={colorList} />, context.document.currentPage());
 };

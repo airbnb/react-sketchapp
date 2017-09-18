@@ -41,5 +41,5 @@ export default () => {
     designSystem.fonts
   );
 
-  render(<Document system={designSystem} />);
+  render(<Document system={designSystem} />, context.document.currentPage());
 };

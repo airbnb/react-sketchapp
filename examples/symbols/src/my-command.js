@@ -71,5 +71,5 @@ export default () => {
     </Artboard>
   );
 
-  render(<Document />);
+  render(<Document />, context.document.currentPage());
 };

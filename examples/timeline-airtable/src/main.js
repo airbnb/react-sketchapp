@@ -151,7 +151,7 @@ export default () => {
   fetch(API_ENDPOINT_URL)
     .then(res => res.json())
     .then((data) => {
-      render(<Timeline data={data} />);
+      render(<Timeline data={data} />, context.document.currentPage());
     })
     .catch(e => console.error(e)); // eslint-disable-line no-console
 };

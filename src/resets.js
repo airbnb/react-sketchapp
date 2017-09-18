@@ -11,10 +11,7 @@ export const resetPage = (page: Object) => {
 };
 
 // Clear out all document pages and layers
-export const resetDocument = (context: Object) => {
-  // Get Document
-  const document = context.document;
-
+export const resetDocument = () => {
   // Get Pages and delete them all (Except Symbols Page)
   const pages = context.document.pages();
   for (let index = pages.length - 1; index >= 0; index -= 1) {
@@ -24,7 +21,7 @@ export const resetDocument = (context: Object) => {
     // eslint-disable-next-line
     if (page.name() != "Symbols") {
       if (pages.length > 1) {
-        document.documentData().removePageAtIndex(index);
+        context.document.documentData().removePageAtIndex(index);
       } else {
         resetPage(pages[index]);
       }

@@ -75,5 +75,5 @@ export default () => {
     'Pear Dark': '#2E854B',
   };
 
-  render(<Document colors={colorList} />);
+  render(<Document colors={colorList} />, context.document.currentPage());
 };

@@ -8,7 +8,8 @@ export default () => {
     render(
       <Artboard>
         <App venues={venues} center={{ latitude, longitude }} />
-      </Artboard>
+      </Artboard>,
+      context.document.currentPage()
     );
   });
 };

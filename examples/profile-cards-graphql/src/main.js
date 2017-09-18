@@ -64,6 +64,6 @@ const App = () => (
 
 export default () => {
   getDataFromTree(App)
-    .then(() => render(<App />))
+    .then(() => render(<App />, context.document.currentPage()))
     .catch(console.log); // eslint-disable-line no-console
 };

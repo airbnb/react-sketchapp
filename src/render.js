@@ -41,9 +41,10 @@ const renderToSketch = (
   return renderLayers([layer], container);
 };
 
+// Crawl tree data to find all <Page> components
 const findPageData = (
   current,
-  depth,
+  depth = 0,
   accumulated = []
 ): Array<{ type: string, children: Object, name?: string }> => {
   const children = current.children;
@@ -65,27 +66,31 @@ const findPageData = (
 
 const buildPages = (
   tree: TreeNode,
-  context: Object
+  container: ?SketchLayer
 ): ?SketchLayer | Array<?SketchLayer> => {
-  const pageData = findPageData(tree, 0);
+  const pageData = findPageData(tree);
   const symbolPage = getSymbolsPage();
 
-  if (pageData.length === 0 && !symbolPage) {
-    return renderToSketch(tree, context.document.currentPage());
+  if (pageData.length === 0) {
+    const _container = container || context.document.currentPage();
+    const page = !symbolPage ? _container : context.document.addBlankPage();
+
+    return renderToSketch(tree, page);
   }
 
   // Keep track of created pages
   // Starts at `1` by default, because there is always one default page per document
   let pageTotal = symbolPage ? 2 : 1;
+  // Keep track of existing and created pages to pass back to function caller
+  const pages = [];
 
-  return pageData.forEach((data) => {
-    // Get Document
-    const document = context.document;
-    let page = document.currentPage();
+  pageData.forEach((data) => {
+    // Get Current Page
+    let page = context.document.currentPage();
 
     if (pageTotal > 1) {
       // Create new page
-      page = document.addBlankPage();
+      page = context.document.addBlankPage();
     } else {
       pageTotal += 1;
     }
@@ -98,26 +103,31 @@ const buildPages = (
     if (data.children && data.children.length > 0) {
       // Clear out page layers to prepare for re-render
       resetPage(page);
-      data.children.forEach(child => renderToSketch(child, page));
+      data.children.forEach((child) => {
+        renderToSketch(child, page);
+      });
     }
 
-    return data.children;
+    pages.push(page);
   });
+
+  return pages;
 };
 
 export const render = (
-  element: React$Element<any>
+  element: React$Element<any>,
+  container?: ?SketchLayer
 ): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
     try {
       // Clear out document to prepare for re-render
-      resetDocument(context);
+      resetDocument();
 
       // Build out sketch compatible tree representation
       const tree = buildTree(element);
 
       // Traverse tree to create pages and render their children.
-      return buildPages(tree, context);
+      return buildPages(tree, container);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
       return renderToSketch(tree, context.document.currentPage());
