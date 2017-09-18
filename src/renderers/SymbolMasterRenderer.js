@@ -14,7 +14,7 @@ class SymbolMasterRenderer extends SketchRenderer {
     value: ?string
   ): SJSymbolMaster {
     return makeSymbolMaster(
-      makeRect(layout.top, layout.left, layout.width, layout.height),
+      makeRect(layout.left, layout.top, layout.width, layout.height),
       props.symbolID,
       props.name
     );
