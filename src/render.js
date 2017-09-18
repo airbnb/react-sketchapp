@@ -6,6 +6,8 @@ import {
 } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
+import { resetDocument, resetPage } from './resets';
+import { getSymbolsPage } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
@@ -15,10 +17,7 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
   return flexToSketchJSON(tree);
 };
 
-export const replaceAllLayersWithLayers = (
-  layers,
-  container: SketchLayer
-): SketchLayer => {
+export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {
     throw new Error(
       `
@@ -26,17 +25,6 @@ export const replaceAllLayersWithLayers = (
      that does not take children. Try rendering into a LayerGroup, Artboard, or Page.
     `
     );
-  }
-
-  if (container.containsLayers()) {
-    const loop = container.children().objectEnumerator();
-    let currLayer = loop.nextObject();
-    while (currLayer) {
-      if (currLayer !== container) {
-        currLayer.removeFromParent();
-      }
-      currLayer = loop.nextObject();
-    }
   }
 
   container.addLayers(layers);
@@ -50,20 +38,99 @@ const renderToSketch = (
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
 
-  return replaceAllLayersWithLayers([layer], container);
+  return renderLayers([layer], container);
+};
+
+// Crawl tree data to find all <Page> components
+const findPageData = (
+  current,
+  depth = 0,
+  accumulated = []
+): Array<{ type: string, children: Object, name?: string }> => {
+  const children = current.children;
+  for (let i = 0, len = children.length; i < len; i += 1) {
+    const node = children[i];
+
+    if (node.type === 'page') {
+      accumulated.push({
+        type: 'page',
+        name: node.props.name,
+        children: node.children,
+      });
+    }
+
+    findPageData(children[i], depth + 1);
+  }
+  return accumulated;
+};
+
+const buildPages = (
+  tree: TreeNode,
+  container: ?SketchLayer
+): ?SketchLayer | Array<?SketchLayer> => {
+  const pageData = findPageData(tree);
+  const symbolPage = getSymbolsPage();
+
+  if (pageData.length === 0) {
+    const _container = container || context.document.currentPage();
+    const page = !symbolPage ? _container : context.document.addBlankPage();
+
+    return renderToSketch(tree, page);
+  }
+
+  // Keep track of created pages
+  // Starts at `1` by default, because there is always one default page per document
+  let pageTotal = symbolPage ? 2 : 1;
+  // Keep track of existing and created pages to pass back to function caller
+  const pages = [];
+
+  pageData.forEach((data) => {
+    // Get Current Page
+    let page = context.document.currentPage();
+
+    if (pageTotal > 1) {
+      // Create new page
+      page = context.document.addBlankPage();
+    } else {
+      pageTotal += 1;
+    }
+
+    if (data.name) {
+      // Name new page
+      page.setName(data.name);
+    }
+
+    if (data.children && data.children.length > 0) {
+      // Clear out page layers to prepare for re-render
+      resetPage(page);
+      data.children.forEach((child) => {
+        renderToSketch(child, page);
+      });
+    }
+
+    pages.push(page);
+  });
+
+  return pages;
 };
 
 export const render = (
   element: React$Element<any>,
-  container: SketchLayer
-): ?SketchLayer => {
+  container?: ?SketchLayer
+): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
     try {
+      // Clear out document to prepare for re-render
+      resetDocument();
+
+      // Build out sketch compatible tree representation
       const tree = buildTree(element);
-      return renderToSketch(tree, container);
+
+      // Traverse tree to create pages and render their children.
+      return buildPages(tree, container);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(tree, container);
+      return renderToSketch(tree, context.document.currentPage());
     }
   }
   return null;

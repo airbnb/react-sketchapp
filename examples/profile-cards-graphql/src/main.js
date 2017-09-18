@@ -28,13 +28,15 @@ const QUERY = gql`
   }
 `;
 
-const props = ({ data }) => (data.loading ? { users: [] } : { users: data.allProfiles });
+// eslint-disable-next-line
+const props = ({ data }) =>
+  data.loading ? { users: [] } : { users: data.allProfiles };
 const withUsers = graphql(QUERY, { props });
 
-const Page = ({ users }: { users: Array<User> }) =>
+const Page = ({ users }: { users: Array<User> }) => (
   <View>
     <Text style={fonts['Title 1']}>Profile Cards w/ GraphQL</Text>
-    {users &&
+    {users && (
       <View
         style={{
           flexDirection: 'row',
@@ -42,22 +44,25 @@ const Page = ({ users }: { users: Array<User> }) =>
           width: users.length * 300,
         }}
       >
-        {users.map(user =>
+        {users.map(user => (
           <Space key={user.screen_name} h={spacing} v={spacing}>
             <Profile user={user} />
           </Space>
-        )}
-      </View>}
-  </View>;
+        ))}
+      </View>
+    )}
+  </View>
+);
 
 const PageWithUsers = withUsers(Page);
 
-const App = () =>
+const App = () => (
   <ApolloProvider client={client}>
     <PageWithUsers />
-  </ApolloProvider>;
+  </ApolloProvider>
+);
 
-export default (context) => {
+export default () => {
   getDataFromTree(App)
     .then(() => render(<App />, context.document.currentPage()))
     .catch(console.log); // eslint-disable-line no-console

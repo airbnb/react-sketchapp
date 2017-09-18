@@ -3,6 +3,8 @@
 * [`render`](#renderelement-container)
 * [`renderToJSON`](#rendertojsonelement)
 * [Components](#components)
+  * [`<Document>`](#document)
+  * [`<Page>`](#page)
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
   * [`<RedBox>`](#redbox)
@@ -26,13 +28,27 @@
   * [`injectSymbols`](#injectsymbols)
 
 ### `render(element, container)`
-Returns the top-level rendered Sketch object.
+Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
 
 #### params
 ##### `element` (required)
+Top-level React component that defines your Sketch document.
 
-##### `container` (required)
-The element to render into - will be replaced. Should either be a Group or a Page — usually you should use `context.document.currentPage()`.
+Example:
+```
+<Document>
+  <Page name="Mobile">
+    <Artboard name="iPhone">
+      <View><Text>Hello World</Text></View>
+    </Artboard>
+  </Page>
+</Document>
+```
+
+##### `container` (optional)
+The element to render into - will be replaced. Should either be a Sketch Group or Page Object.
+
+Example: `context.document.currentPage()`.
 
 ### returns
 The top-most rendered native Sketch layer.
@@ -59,8 +75,46 @@ Returns a Sketch JSON object for further consumption - doesn't add to the page.
 The top-most Sketch layer as JSON.
 
 ## Components
+### `<Document>`
+Wrapper for Sketch's Documents. Must be used at the root of your application and is required if you would like to have multiple pages.
+
+#### props
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `children` | `Node` | | Can only be [`<Page>`](#page) components |
+
+#### Example
+```js
+<Document>
+  <Page>
+    <Text>Hello world!</Text>
+  </Page>
+  <Page>
+    <Text>Hello second world!!</Text>
+  </Page>
+</Document>
+```
+
+### `<Page>`
+Wrapper for Sketch's Pages. Requires a [`<Document>`](#document) component as a parent if you would like to use multiple of these components.
+
+#### props
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `name` | `String` | | The name to be displayed in the Sketch Page List |
+| `children` | `Node` | | |
+
+#### Example
+```js
+<Page
+  name='My Page'
+>
+  <Text>Hello world!</Text>
+</Page>
+```
+
 ### `<Artboard>`
-Wrapper for Sketch's Artboards.
+Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a parent if you would like to use multiple of these components.
 
 #### props
 | Prop | Type | Default | Note |
