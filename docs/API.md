@@ -27,7 +27,7 @@
   * [`makeSymbol`](#makesymbolnode-name)
   * [`injectSymbols`](#injectsymbols)
 
-### `render(element, context)`
+### `render(element)`
 Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
 
 #### params
