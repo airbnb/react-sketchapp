@@ -31,7 +31,7 @@ export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
   return container;
 };
 
-export const renderToSketch = (
+const renderToSketch = (
   node: TreeNode,
   container: SketchLayer
 ): SketchLayer => {
