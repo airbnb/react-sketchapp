@@ -7,6 +7,7 @@ import {
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetDocument, resetPage } from './resets';
+import { getSymbolsPage } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
@@ -62,19 +63,20 @@ const findPageData = (
   return accumulated;
 };
 
-const buildDocuments = (
+const buildPages = (
   tree: TreeNode,
   context: Object
 ): ?SketchLayer | Array<?SketchLayer> => {
   const pageData = findPageData(tree, 0);
+  const symbolPage = getSymbolsPage();
 
-  if (pageData.length === 0) {
+  if (pageData.length === 0 && !symbolPage) {
     return renderToSketch(tree, context.document.currentPage());
   }
 
   // Keep track of created pages
-  // Starts at `1` because there is always one default page per document
-  let pageTotal = 1;
+  // Starts at `1` by default, because there is always one default page per document
+  let pageTotal = symbolPage ? 2 : 1;
 
   return pageData.forEach((data) => {
     // Get Document
@@ -104,13 +106,9 @@ const buildDocuments = (
 };
 
 export const render = (
-  element: React$Element<any>,
-  context: Object
+  element: React$Element<any>
 ): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
-    if (!context) {
-      throw new Error('No sketch "context" passed into render function.');
-    }
     try {
       // Clear out document to prepare for re-render
       resetDocument(context);
@@ -118,8 +116,8 @@ export const render = (
       // Build out sketch compatible tree representation
       const tree = buildTree(element);
 
-      // Traverse tree to create documents and pages, then render their children.
-      return buildDocuments(tree, context);
+      // Traverse tree to create pages and render their children.
+      return buildPages(tree, context);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
       return renderToSketch(tree, context.document.currentPage());
