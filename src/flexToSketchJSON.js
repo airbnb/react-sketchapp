@@ -6,12 +6,32 @@ const flexToSketchJSON = (node: TreeNode) => {
   const { type, style, textStyle, layout, value, props, children } = node;
   const Renderer = renderers[type];
   if (Renderer == null) {
-    throw new Error(`Could not find renderer for type '${type}'`);
+    // Give some insight as to why there might be issues
+    // specific to Application and Document components
+    const additionalNotes =
+      type === 'document'
+        ? '\nBe sure to only have <Page> components as children of <Document>.'
+        : '';
+    throw new Error(
+      `Could not find renderer for type '${type}'. ${additionalNotes}`
+    );
   }
 
   const renderer = new Renderer();
-  const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props, value);
-  const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, value);
+  const groupLayer = renderer.renderGroupLayer(
+    layout,
+    style,
+    textStyle,
+    props,
+    value
+  );
+  const backingLayers = renderer.renderBackingLayers(
+    layout,
+    style,
+    textStyle,
+    props,
+    value
+  );
 
   const sublayers = children.map(child => flexToSketchJSON(child));
 

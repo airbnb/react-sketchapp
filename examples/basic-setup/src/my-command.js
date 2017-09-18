@@ -63,7 +63,7 @@ Document.propTypes = {
   colors: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default (context) => {
+export default () => {
   const colorList = {
     Haus: '#F3F4F4',
     Night: '#333',

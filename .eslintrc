@@ -17,6 +17,7 @@
     "NSDataBase64EncodingEndLineWithCarriageReturn": true,
     "NSData": true,
     "NSMakeRange": true,
+    "context": true
   },
   "rules": {
     "class-methods-use-this": 0,
