@@ -55,7 +55,7 @@ const Nested = () => (
 
 const NestedSym = makeSymbol(Nested);
 
-export default (context) => {
+export default () => {
   const Document = () => (
     <Artboard name="Swatches" style={{ display: 'flex' }}>
       <NestedSym
@@ -64,7 +64,8 @@ export default (context) => {
         overrides={{
           'Red Square Instance': BlueSquareSym,
           'Blue Square Text': 'TESTING',
-          Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
+          Photo:
+            'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
         }}
       />
     </Artboard>

@@ -3,7 +3,7 @@ import { Artboard, render } from 'react-sketchapp';
 import App from './App';
 import getVenues from './getVenues';
 
-export default (context) => {
+export default () => {
   getVenues().then(({ venues, latitude, longitude }) => {
     render(
       <Artboard>

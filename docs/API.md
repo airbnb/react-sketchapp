@@ -3,6 +3,8 @@
 * [`render`](#renderelement-container)
 * [`renderToJSON`](#rendertojsonelement)
 * [Components](#components)
+  * [`<Document>`](#document)
+  * [`<Page>`](#page)
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
   * [`<RedBox>`](#redbox)
@@ -21,15 +23,32 @@
 * [`TextStyles`](#textstyles)
   * [`create`](#createstyleoptionsstyles)
   * [`resolve`](#resolvestyle)
+* [`Symbols`](#symbols)
+  * [`makeSymbol`](#makesymbolnode-name)
+  * [`injectSymbols`](#injectsymbols)
 
 ### `render(element, container)`
-Returns the top-level rendered Sketch object.
+Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
 
 #### params
 ##### `element` (required)
+Top-level React component that defines your Sketch document.
 
-##### `container` (required)
-The element to render into - will be replaced. Should either be a Group or a Page — usually you should use `context.document.currentPage()`.
+Example:
+```
+<Document>
+  <Page name="Mobile">
+    <Artboard name="iPhone">
+      <View><Text>Hello World</Text></View>
+    </Artboard>
+  </Page>
+</Document>
+```
+
+##### `container` (optional)
+The element to render into - will be replaced. Should either be a Sketch Group or Page Object.
+
+Example: `context.document.currentPage()`.
 
 ### returns
 The top-most rendered native Sketch layer.
@@ -56,8 +75,46 @@ Returns a Sketch JSON object for further consumption - doesn't add to the page.
 The top-most Sketch layer as JSON.
 
 ## Components
+### `<Document>`
+Wrapper for Sketch's Documents. Must be used at the root of your application and is required if you would like to have multiple pages.
+
+#### props
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `children` | `Node` | | Can only be [`<Page>`](#page) components |
+
+#### Example
+```js
+<Document>
+  <Page>
+    <Text>Hello world!</Text>
+  </Page>
+  <Page>
+    <Text>Hello second world!!</Text>
+  </Page>
+</Document>
+```
+
+### `<Page>`
+Wrapper for Sketch's Pages. Requires a [`<Document>`](#document) component as a parent if you would like to use multiple of these components.
+
+#### props
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| `name` | `String` | | The name to be displayed in the Sketch Page List |
+| `children` | `Node` | | |
+
+#### Example
+```js
+<Page
+  name='My Page'
+>
+  <Text>Hello world!</Text>
+</Page>
+```
+
 ### `<Artboard>`
-Wrapper for Sketch's Artboards.
+Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a parent if you would like to use multiple of these components.
 
 #### props
 | Prop | Type | Default | Note |
@@ -370,3 +427,187 @@ export default (context) => {
 
 ### `clear`
 Reset the registered styles.
+
+## Symbols
+An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
+
+### `makeSymbol(node, name)`
+Returns a Sketch symbol given a node and an optional name.
+
+#### Parameters
+| Parameter | Type | Default | Note |
+|---|---|---|---|
+| `node` | `Node` | | The node object that will be rendered as a symbol |
+| `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
+
+#### Symbol example
+```js
+const BlueSquare = () => (
+  <View
+    name="Blue Square"
+    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+  />
+);
+
+const BlueSquareSymbol = makeSymbol(BlueSquare);
+
+const Document = () => (
+  <Artboard>
+    <BlueSquareSymbol />
+  </Artboard>
+);
+
+export default (context) => {
+  render(<Document />, context.document.currentPage());
+}
+```
+
+#### Text override example
+Text overrides use the name paramater to target a specific Text primitive. When no name is given the value within the Text primitive can be used to override the value.
+
+```js
+const BlueSquare = () => (
+  <View
+    name="Blue Square"
+    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+  >
+    <Text>Blue Square Text</Text>
+  </View>
+);
+
+const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
+
+const Document = () => (
+  <Artboard>
+    <BlueSquareSymbol overrides={{
+      'Blue Square Text': 'Override Text',
+    }} />
+  </Artboard>
+);
+
+export default (context) => {
+  render(<Document />, context.document.currentPage());
+}
+```
+
+#### Image override example
+Image overrides use the name paramater to target a specific Image primitive.
+
+```js
+const BlueSquare = () => (
+  <View
+    name="Blue Square"
+    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+  >
+    <Image name="Blue Square Image" source="https://hello.world/image.jpg" />
+  </View>
+);
+
+const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
+
+const Document = () => (
+  <Artboard>
+    <BlueSquareSymbol overrides={{
+      'Blue Square Image': 'https://hello.world/different.jpg',
+    }} />
+  </Artboard>
+);
+
+export default (context) => {
+  render(<Document />, context.document.currentPage());
+}
+```
+
+#### Nested symbol + override example
+
+```js
+const RedSquare = () => (
+  <View
+    name="Red Square"
+    style={{ width: 100, height: 100, backgroundColor: 'red' }}
+  >
+    <Text name="Red Square Text">Red Square</Text>
+  </View>
+);
+
+const RedSquareSymbol = makeSymbol(RedSquare, 'squares/red');
+
+const BlueSquare = () => (
+  <View
+    name="Blue Square"
+    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+  >
+    <Text name="Blue Square Text">Blue Square</Text>
+  </View>
+);
+
+const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
+
+const Photo = () => (
+  <Image
+    name="Photo"
+    source="https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg"
+    style={{ width: 100, height: 100 }}
+  />
+);
+
+const PhotoSymbol = makeSymbol(Photo);
+
+const Nested = () => (
+  <View
+    name="Nested"
+    style={{ display: 'flex', flexDirection: 'column', width: 75, height: 150 }}
+  >
+    <PhotoSymbol name="Photo Instance" style={{ width: 75, height: 75 }} />
+    <RedSquareSymbol
+      name="Red Square Instance"
+      style={{ width: 75, height: 75 }}
+    />
+  </View>
+);
+
+const NestedSymbol = makeSymbol(Nested);
+
+const Document = () => (
+  <Artboard style={{ display: 'flex' }}>
+    <NestedSymbol
+      name="Nested Symbol"
+      style={{ width: 75, height: 150 }}
+      overrides={{
+        'Red Square Instance': BlueSquareSymbol,
+        'Blue Square Text': 'Text override',
+        Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
+      }}
+    />
+  </Artboard>
+);
+
+export default (context) => {
+  render(<Document />, context.document.currentPage());
+}
+```
+
+### `injectSymbols(context)`
+Injects the symbols into Sketch's symbol page. **Call this before rendering**.
+
+```js
+const BlueSquare = () => (
+  <View
+    name="Blue Square"
+    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+  />
+);
+
+const BlueSquareSymbol = makeSymbol(BlueSquare);
+
+const Document = () => (
+  <Artboard>
+    <BlueSquareSymbol />
+  </Artboard>
+);
+
+export default (context) => {
+  injectSymbols(context);
+  render(<Document />, context.document.currentPage());
+}
+```

@@ -55,6 +55,7 @@
     "React$Component": true,
     "React$Element": true,
     "ReactClass": true,
-    "ReactComponent": true
+    "ReactComponent": true,
+    "context": true
   }
 }
