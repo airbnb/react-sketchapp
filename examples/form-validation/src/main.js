@@ -20,15 +20,13 @@ const Page = ({ sessions }: { sessions: Array<Session> }) => (
     >
       {sessions.map(session => (
         <Space key={session.password} h={spacing.Large} v={spacing.Large}>
-          <Register
-            session={session}
-          />
+          <Register session={session} />
         </Space>
       ))}
     </View>
   </View>
 );
 
-export default (context) => {
+export default () => {
   render(<Page sessions={DATA} />, context.document.currentPage());
 };

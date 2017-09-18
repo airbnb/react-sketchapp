@@ -9,7 +9,9 @@ const textColor = (hex) => {
   if (vsWhite > 4) {
     return '#FFF';
   }
-  return chroma(hex).darken(3).hex();
+  return chroma(hex)
+    .darken(3)
+    .hex();
 };
 
 const Swatch = ({ name, hex }) => (
@@ -23,7 +25,10 @@ const Swatch = ({ name, hex }) => (
       padding: 8,
     }}
   >
-    <Text name="Swatch Name" style={{ color: textColor(hex), fontWeight: 'bold' }}>
+    <Text
+      name="Swatch Name"
+      style={{ color: textColor(hex), fontWeight: 'bold' }}
+    >
       {name}
     </Text>
     <Text name="Swatch Hex" style={{ color: textColor(hex) }}>
@@ -48,7 +53,9 @@ const Document = ({ colors }) => (
       width: (96 + 8) * 4,
     }}
   >
-    {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
+    {Object.keys(colors).map(color => (
+      <Swatch name={color} hex={colors[color]} key={color} />
+    ))}
   </Artboard>
 );
 
@@ -56,7 +63,7 @@ Document.propTypes = {
   colors: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default (context) => {
+export default () => {
   const colorList = {
     Haus: '#F3F4F4',
     Night: '#333',
