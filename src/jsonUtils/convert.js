@@ -15,14 +15,14 @@ export const SketchToJSObject = (sketchObj: SketchLayer): Object => {
 
 // Converts a JS Object tree into it's Sketch page object equivalent
 export const JSObjectToSketch = (jsTree: Object): SketchLayer => {
-  const decoded = MSJSONDictionaryUnarchiver.unarchiveObjectFromDictionary_asVersion_corruptionDetected_error(
+  const decodedData = MSJSONDictionaryUnarchiver.unarchiveObjectFromDictionary_asVersion_corruptionDetected_error(
     jsTree,
-    88, // 88 = Sketch v43
+    88, // 88 = Sketch v43+
     null,
     null
   );
-  const mutableClass = decoded.class().mutableClass();
-  return mutableClass.alloc().initWithImmutableModelObject(decoded);
+  const mutable = decodedData.class().mutableClass();
+  return mutable.alloc().initWithImmutableModelObject(decodedData);
 };
 
 // Converts a JSON tree into it's Sketch page object equivalent
