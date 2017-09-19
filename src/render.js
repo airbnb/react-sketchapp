@@ -1,15 +1,13 @@
 import React from 'react';
 import type { SJLayer } from 'sketchapp-json-flow-types';
-import {
-  appVersionSupported,
-  fromSJSONDictionary,
-} from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetDocument, resetPage } from './resets';
 import { getSymbolsPage } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
+import { JSObjectToSketch } from './jsonUtils/convert';
+import { sketchVersionIsCompatible } from './utils/compat';
 import RedBox from './components/RedBox';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
@@ -36,7 +34,7 @@ const renderToSketch = (
   container: SketchLayer
 ): SketchLayer => {
   const json = flexToSketchJSON(node);
-  const layer = fromSJSONDictionary(json);
+  const layer = JSObjectToSketch(json);
 
   return renderLayers([layer], container);
 };
@@ -118,7 +116,7 @@ export const render = (
   element: React$Element<any>,
   container?: ?SketchLayer
 ): ?SketchLayer | Array<?SketchLayer> => {
-  if (appVersionSupported()) {
+  if (sketchVersionIsCompatible()) {
     try {
       // Clear out document to prepare for re-render
       resetDocument();

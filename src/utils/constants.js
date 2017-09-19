@@ -8,3 +8,5 @@ export const PatternFillType = {
   Stretch: 2,
   Fit: 3,
 };
+
+export const SKETCH_VERSION_COMPATIBILITY = '43';

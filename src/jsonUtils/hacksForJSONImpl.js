@@ -2,10 +2,10 @@
 // We need native macOS fonts and colors for these hacks so import the old utils
 import type { SJTextStyle } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
-import { toSJSON } from 'sketchapp-json-plugin';
 import findFont from '../utils/findFont';
 import type { TextStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
+import { SketchToJSObject } from './convert';
 
 export const TEXT_ALIGN = {
   auto: TextAlignment.Left,
@@ -35,13 +35,6 @@ export const TEXT_TRANSFORM = {
   none: 0,
   capitalize: 0,
 };
-
-// NOTE(gold): toSJSON doesn't recursively parse JS objects
-// https://github.com/airbnb/react-sketchapp/pull/73#discussion_r108529703
-function encodeSketchJSON(sketchObj) {
-  const encoded = toSJSON(sketchObj);
-  return JSON.parse(encoded);
-}
 
 function makeParagraphStyle(textStyle) {
   const pStyle = NSMutableParagraphStyle.alloc().init();
@@ -134,7 +127,7 @@ export function makeAttributedString(string: ?string, textStyle: TextStyle) {
     attribStr
   );
 
-  return encodeSketchJSON(msAttribStr);
+  return SketchToJSObject(msAttribStr);
 }
 
 export function makeTextStyle(textStyle: TextStyle) {
@@ -147,8 +140,8 @@ export function makeTextStyle(textStyle: TextStyle) {
   const value: SJTextStyle = {
     _class: 'textStyle',
     encodedAttributes: {
-      MSAttributedStringFontAttribute: encodeSketchJSON(font.fontDescriptor()),
-      NSColor: encodeSketchJSON(
+      MSAttributedStringFontAttribute: SketchToJSObject(font.fontDescriptor()),
+      NSColor: SketchToJSObject(
         NSColor.colorWithDeviceRed_green_blue_alpha(
           color.red,
           color.green,
@@ -156,7 +149,7 @@ export function makeTextStyle(textStyle: TextStyle) {
           color.alpha
         )
       ),
-      NSParagraphStyle: encodeSketchJSON(pStyle),
+      NSParagraphStyle: SketchToJSObject(pStyle),
       NSKern: textStyle.letterSpacing || 0,
       MSAttributedStringTextTransformAttribute:
         TEXT_TRANSFORM[textStyle.textTransform || 'initial'] * 1,

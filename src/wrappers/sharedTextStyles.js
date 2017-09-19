@@ -1,8 +1,8 @@
 /* @flow */
 import invariant from 'invariant';
-import { fromSJSONDictionary } from 'sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext } from '../types';
+import { JSObjectToSketch } from '../jsonUtils/convert';
 
 class TextStyles {
   _context: ?SketchContext;
@@ -21,7 +21,10 @@ class TextStyles {
   setStyles(styles: Array<any>) {
     invariant(this._context, 'Please provide a context');
 
-    this._context.document.documentData().layerTextStyles().setObjects(styles);
+    this._context.document
+      .documentData()
+      .layerTextStyles()
+      .setObjects(styles);
 
     return this;
   }
@@ -29,7 +32,7 @@ class TextStyles {
   addStyle(name: string, style: SJStyle) {
     invariant(this._context, 'Please provide a context');
 
-    const textStyle = fromSJSONDictionary(style);
+    const textStyle = JSObjectToSketch(style);
 
     // Flow doesn't pick up invariant truthies
     const context: SketchContext = this._context;

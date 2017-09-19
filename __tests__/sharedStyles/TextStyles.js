@@ -5,10 +5,9 @@ let sharedTextStyles;
 
 beforeEach(() => {
   jest.resetModules();
-  jest.mock('sketchapp-json-plugin', () => ({
-    appVersionSupported: jest.fn(() => true),
-    fromSJSONDictionary: jest.fn(),
-    toSJSON: jest.fn(),
+
+  jest.mock('../../src/utils/compat', () => ({
+    sketchVersionIsCompatible: jest.fn(() => true),
   }));
 
   TextStyles = require('../../src/sharedStyles/TextStyles').default;
@@ -30,7 +29,9 @@ describe('create', () => {
     it('it errors', () => {
       const styles = {};
 
-      expect(() => TextStyles.create({}, styles)).toThrowError(/Please provide a context/);
+      expect(() => TextStyles.create({}, styles)).toThrowError(
+        /Please provide a context/
+      );
     });
   });
 
@@ -41,7 +42,7 @@ describe('create', () => {
           clearExistingStyles: true,
           context,
         },
-        {},
+        {}
       );
 
       expect(sharedTextStyles.setStyles).toHaveBeenCalled();
@@ -53,7 +54,7 @@ describe('create', () => {
           clearExistingStyles: false,
           context,
         },
-        {},
+        {}
       );
       expect(sharedTextStyles.setStyles).not.toHaveBeenCalled();
     });
@@ -126,14 +127,14 @@ describe('create', () => {
           ...acc,
           [key]: true,
         }),
-        {},
+        {}
       );
 
       const res = TextStyles.create(
         {
           context,
         },
-        { foo: input },
+        { foo: input }
       );
 
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
@@ -155,7 +156,7 @@ describe('resolve', () => {
       {
         context,
       },
-      {},
+      {}
     );
   });
 

@@ -1,8 +1,9 @@
 /* @flow */
 import invariant from 'invariant';
-import { appVersionSupported } from 'sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext, SketchStyle, TextStyle } from '../types';
+import { sketchVersionIsCompatible } from '../utils/compat';
+import { SKETCH_VERSION_COMPATIBILITY } from '../utils/constants';
 import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/hacksForJSONImpl';
@@ -33,7 +34,7 @@ type RegisteredStyle = {|
   cssStyle: TextStyle,
   name: string,
   sketchStyle: SJStyle,
-  sharedObjectID: SketchObjectID,
+  sharedObjectID: SketchObjectID
 |};
 
 let _styles: StyleHash = {};
@@ -58,17 +59,22 @@ const registerStyle = (name: string, style: TextStyle): void => {
 
 type Options = {
   clearExistingStyles?: boolean,
-  context: SketchContext,
+  context: SketchContext
 };
 
-const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
+const create = (
+  options: Options,
+  styles: { [key: string]: TextStyle }
+): StyleHash => {
   const { clearExistingStyles, context } = options;
 
-  if (!appVersionSupported()) {
-    return context.document.showMessage('💎 Requires Sketch 43+ 💎');
-  }
-
   invariant(options && options.context, 'Please provide a context');
+
+  if (!sketchVersionIsCompatible()) {
+    return context.document.showMessage(
+      `💎 Requires Sketch ${SKETCH_VERSION_COMPATIBILITY}+ 💎`
+    );
+  }
 
   sharedTextStyles.setContext(context);
 
