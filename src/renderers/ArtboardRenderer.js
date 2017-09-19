@@ -11,7 +11,7 @@ class ArtboardRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    value: ?string
   ): SJArtboardLayer {
     let color;
     if (style.backgroundColor !== undefined) {
@@ -21,7 +21,7 @@ class ArtboardRenderer extends SketchRenderer {
     return {
       _class: 'artboard',
       do_objectID: generateID(),
-      frame: makeRect(layout.top, layout.left, layout.width, layout.height),
+      frame: makeRect(layout.left, layout.top, layout.width, layout.height),
       // "layerListExpandedType": 0,
       name: props.name || 'Artboard',
       nameIsFixed: props.name !== undefined,
