@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
-import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
@@ -9,6 +8,7 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetPage } from './resets';
+import { JSObjectToSketch, SketchToJSObject } from './jsonUtils/convert';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -46,9 +46,9 @@ export const getExistingSymbols = () => {
     }
 
     existingSymbols = msListToArray(symbolsPage.layers()).map((x) => {
-      const symbolJson = JSON.parse(toSJSON(x));
-      layers[symbolJson.symbolID] = x;
-      return symbolJson;
+      const symbol = SketchToJSObject(x);
+      layers[symbol.symbolID] = x;
+      return symbol;
     });
 
     mastersNameRegistry = {};
@@ -88,7 +88,7 @@ const injectSymbols = () => {
     symbolMaster.frame.x = left;
     left += symbolMaster.frame.width + 20;
 
-    const newLayer = fromSJSONDictionary(symbolMaster);
+    const newLayer = JSObjectToSketch(symbolMaster);
     layers[symbolMaster.symbolID] = newLayer;
   });
 
