@@ -1,9 +1,9 @@
 // @flow
-import { SKETCH_VERSION_COMPATIBILITY } from './constants';
+import { SKETCH_APP_LOWEST_COMPATIBLE_VERSION } from './constants';
 
-// Verify Sketch version is compatible
+// Verify Sketch app version is compatible
 // eslint-disable-next-line
 export const sketchVersionIsCompatible = (): boolean => {
   const sketch = context.api();
-  return sketch._metadata.appVersion >= SKETCH_VERSION_COMPATIBILITY;
+  return sketch._metadata.appVersion >= SKETCH_APP_LOWEST_COMPATIBLE_VERSION;
 };

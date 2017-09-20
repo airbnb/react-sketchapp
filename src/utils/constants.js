@@ -9,4 +9,8 @@ export const PatternFillType = {
   Fit: 3,
 };
 
-export const SKETCH_VERSION_COMPATIBILITY = '43';
+// More info on Sketch Build numbers: http://sketchplugins.com/d/316-sketch-version
+// Public Sketh App Version
+export const SKETCH_APP_LOWEST_COMPATIBLE_VERSION = '43';
+// Internal Sketch Version
+export const SKETCH_LOWEST_COMPATIBLE_VERSION = '88';

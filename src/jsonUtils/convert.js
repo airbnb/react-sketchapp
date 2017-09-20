@@ -1,5 +1,6 @@
 // @flow
 import type { SketchLayer } from '../types';
+import { SKETCH_LOWEST_COMPATIBLE_VERSION } from '../utils/constants';
 
 // Converts a Sketch page object into it's JSON equivalent
 export const SketchToJSON = (sketchObj: SketchLayer): string => {
@@ -19,7 +20,7 @@ export const JSObjectToSketch = (jsTree: Object): SketchLayer => {
   const decodedData = MSJSONDictionaryUnarchiver
     .unarchiveObjectFromDictionary_asVersion_corruptionDetected_error(
       jsTree,
-      88, // 88 = Sketch v43+
+      SKETCH_LOWEST_COMPATIBLE_VERSION,
       null,
       null
     );
