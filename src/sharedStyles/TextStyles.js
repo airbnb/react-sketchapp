@@ -3,7 +3,7 @@ import invariant from 'invariant';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext, SketchStyle, TextStyle } from '../types';
 import { sketchVersionIsCompatible } from '../utils/compat';
-import { SKETCH_APP_LOWEST_COMPATIBLE_VERSION } from '../utils/constants';
+import { SKETCH_LOWEST_COMPATIBLE_APP_VERSION } from '../utils/constants';
 import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/hacksForJSONImpl';
@@ -72,7 +72,7 @@ const create = (
 
   if (!sketchVersionIsCompatible()) {
     return context.document.showMessage(
-      `💎 Requires Sketch ${SKETCH_APP_LOWEST_COMPATIBLE_VERSION}+ 💎`
+      `💎 Requires Sketch ${SKETCH_LOWEST_COMPATIBLE_APP_VERSION}+ 💎`
     );
   }
 
