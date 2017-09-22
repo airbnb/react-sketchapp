@@ -6,9 +6,10 @@ import ViewStylePropTypes from './ViewStylePropTypes';
 
 const propTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
-  style: PropTypes.shape({
-    ...ViewStylePropTypes,
-  }),
+  style: PropTypes.oneOfType([
+    PropTypes.shape({ ...ViewStylePropTypes }),
+    PropTypes.arrayOf(PropTypes.shape({ ...ViewStylePropTypes })),
+  ]),
   name: PropTypes.string,
   children: PropTypes.node,
 };
