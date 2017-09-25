@@ -5,6 +5,7 @@ import createStringMeasurer from './utils/createStringMeasurer';
 import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
+import * as yoga from 'yoga-layout';
 
 const INHERITABLE_STYLES = [
   'color',
@@ -81,6 +82,7 @@ const buildTree = (element: React$Element<any>): TreeNode => {
   const json: TreeNode = renderer.toJSON();
   const tree = reactTreeToFlexTree(json, new Context());
   computeLayout(tree);
+  console.log(yoga);
 
   return tree;
 };
