@@ -1,4 +1,7 @@
 language: node_js
+compiler:
+  - clang
+  - gcc
 cache:
   directories:
     - node_modules
