@@ -28,7 +28,9 @@
     "test": "jest --config .jestrc",
     "test:ci": "jest --config .jestrc --runInBand",
     "test:watch": "npm run test -- --watch",
-    "watch": "npm run build:react -- --watch"
+    "watch": "npm run build:react -- --watch",
+    "postinstall": "npm run yogafix",
+    "yogafix": "node ./yogafix"
   },
   "dependencies": {
     "error-stack-parser": "^2.0.0",
