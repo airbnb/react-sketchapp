@@ -30,7 +30,7 @@ const computeNode = (node: TreeNode, context: Context) => {
   if (hasStyle) {
     // http://facebook.github.io/react-native/releases/0.48/docs/layout-props.html
 
-    // Height & Width
+    // Width
     if (style.width) {
       if (isPercent(style.width)) {
         yogaNode.setWidthPercent(style.width);
@@ -40,6 +40,8 @@ const computeNode = (node: TreeNode, context: Context) => {
         yogaNode.setWidth(style.width);
       }
     }
+
+    // Height
     if (style.height) {
       if (isPercent(style.height)) {
         yogaNode.setHeightPercent(style.height);
@@ -50,6 +52,7 @@ const computeNode = (node: TreeNode, context: Context) => {
       }
     }
 
+    // Min-Height
     if (style.minHeight) {
       if (isPercent(style.minHeight)) {
         yogaNode.setMinHeightPercent(style.minHeight);
@@ -57,6 +60,8 @@ const computeNode = (node: TreeNode, context: Context) => {
         yogaNode.setMinHeight(style.minHeight);
       }
     }
+
+    // Min-Width
     if (style.minWidth) {
       if (isPercent(style.minWidth)) {
         yogaNode.setMinWidthPercent(style.minWidth);
@@ -65,6 +70,7 @@ const computeNode = (node: TreeNode, context: Context) => {
       }
     }
 
+    // Max-Height
     if (style.maxHeight) {
       if (isPercent(style.maxHeight)) {
         yogaNode.setMaxHeightPercent(style.maxHeight);
@@ -72,6 +78,8 @@ const computeNode = (node: TreeNode, context: Context) => {
         yogaNode.setMaxHeight(style.maxHeight);
       }
     }
+
+    // Min-Width
     if (style.maxWidth) {
       if (isPercent(style.maxWidth)) {
         yogaNode.setMaxWidthPercent(style.maxWidth);

@@ -3,7 +3,7 @@ import * as yoga from 'yoga-layout';
 import computeNode from './computeNode';
 import Context from '../utils/Context';
 
-const recurseTree = (tree: yoga.NodeInstance, context: Context) => {
+const walkTree = (tree: yoga.NodeInstance, context: Context) => {
   const node = computeNode(tree, context);
 
   if (tree.children) {
@@ -11,7 +11,7 @@ const recurseTree = (tree: yoga.NodeInstance, context: Context) => {
       const childComponent = tree.children[index];
       // Ignore Text nodes
       if (!(typeof childComponent === 'string')) {
-        const childNode = recurseTree(childComponent, context.forChildren());
+        const childNode = walkTree(childComponent, context.forChildren());
         node.insertChild(childNode, index);
       }
     }
@@ -20,6 +20,6 @@ const recurseTree = (tree: yoga.NodeInstance, context: Context) => {
   return node;
 };
 const treeToNodes = (root: yoga.NodeInstance, context: Context) =>
-  recurseTree(root, context);
+  walkTree(root, context);
 
 export default treeToNodes;
