@@ -1,5 +1,6 @@
 {
   "testEnvironment": "node",
+  "browser": true,
   "testPathIgnorePatterns": [
     "/node_modules/",
     "<rootDir>/_book",

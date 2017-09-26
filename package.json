@@ -31,7 +31,6 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
-    "css-layout": "^1.1.1",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",

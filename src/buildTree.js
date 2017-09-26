@@ -1,11 +1,11 @@
 import TestRenderer from 'react-test-renderer';
-import computeLayout from 'css-layout';
+import * as yoga from 'yoga-layout';
 import Context from './utils/Context';
 import createStringMeasurer from './utils/createStringMeasurer';
 import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
-import * as yoga from 'yoga-layout';
+import computeTree from './jsonUtils/computeTree';
 
 const INHERITABLE_STYLES = [
   'color',
@@ -29,27 +29,37 @@ const allStringsOrNumbers = xs =>
 
 const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
 
-const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
-  if (typeof node === 'string') {
-    const textStyle = context.getInheritedStyles();
+const reactTreeToFlexTree = (node, yogaNode, context) => {
+  const children = Array.isArray(node.children)
+    ? processChildren(node.children)
+    : [];
+  let textStyle;
+
+  if (typeof node === 'string' || typeof node === 'number') {
+    textStyle = context.getInheritedStyles();
+    const measure = createStringMeasurer(node, textStyle)();
     return {
       type: 'text',
       style: {
-        measure: createStringMeasurer(node, textStyle),
+        measure,
+      },
+      layout: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        width: measure.width,
+        height: measure.height,
       },
       textStyle,
       props: {},
       value: node,
-      children: [],
+      children,
     };
   }
 
-  const children = Array.isArray(node.children)
-    ? processChildren(node.children)
-    : [];
   const style = node.props.style || {};
 
-  let textStyle;
   if (
     node.type === 'text' &&
     node.props.style &&
@@ -69,10 +79,22 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
     type: node.type,
     style,
     textStyle,
+    layout: {
+      left: yogaNode.getComputedLeft(),
+      right: yogaNode.getComputedRight(),
+      top: yogaNode.getComputedTop(),
+      bottom: yogaNode.getComputedBottom(),
+      width: yogaNode.getComputedWidth(),
+      height: yogaNode.getComputedHeight(),
+    },
     props: node.props,
     value: null,
-    children: children.map(child =>
-      reactTreeToFlexTree(child, context.forChildren())
+    children: children.map((child, index) =>
+      reactTreeToFlexTree(
+        child,
+        yogaNode.getChild(index),
+        context.forChildren()
+      )
     ),
   };
 };
@@ -80,9 +102,9 @@ const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
-  const tree = reactTreeToFlexTree(json, new Context());
-  computeLayout(tree);
-  console.log(yoga);
+  const yogaNode = computeTree(json, new Context());
+  yogaNode.calculateLayout(yoga.UNDEFINED, yoga.UNDEFINED, yoga.DIRECTION_LTR);
+  const tree = reactTreeToFlexTree(json, yogaNode, new Context());
 
   return tree;
 };
