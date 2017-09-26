@@ -18,6 +18,10 @@ const getStyles = (node: TreeNode): ViewStyle | Object => {
   return style;
 };
 
+const isPercent = (value: number | string) => /%/.test(String(value));
+
+const isAuto = (value: number | string) => String(value) === 'auto';
+
 const computeNode = (node: TreeNode, context: Context) => {
   const yogaNode = yoga.Node.create();
   const hasStyle = node.props && node.props.style;
@@ -28,64 +32,194 @@ const computeNode = (node: TreeNode, context: Context) => {
 
     // Height & Width
     if (style.width) {
-      yogaNode.setWidth(style.width);
+      if (isPercent(style.width)) {
+        yogaNode.setWidthPercent(style.width);
+      } else if (isAuto(style.width)) {
+        yogaNode.setWidthAuto();
+      } else {
+        yogaNode.setWidth(style.width);
+      }
     }
     if (style.height) {
-      yogaNode.setHeight(style.height);
+      if (isPercent(style.height)) {
+        yogaNode.setHeightPercent(style.height);
+      } else if (isAuto(style.height)) {
+        yogaNode.setHeightAuto();
+      } else {
+        yogaNode.setHeight(style.height);
+      }
     }
 
     if (style.minHeight) {
-      yogaNode.setMinHeight(style.minHeight);
+      if (isPercent(style.minHeight)) {
+        yogaNode.setMinHeightPercent(style.minHeight);
+      } else {
+        yogaNode.setMinHeight(style.minHeight);
+      }
     }
     if (style.minWidth) {
-      yogaNode.setMinWidth(style.minWidth);
+      if (isPercent(style.minWidth)) {
+        yogaNode.setMinWidthPercent(style.minWidth);
+      } else {
+        yogaNode.setMinWidth(style.minWidth);
+      }
     }
 
     if (style.maxHeight) {
-      yogaNode.setMaxHeight(style.maxHeight);
+      if (isPercent(style.maxHeight)) {
+        yogaNode.setMaxHeightPercent(style.maxHeight);
+      } else {
+        yogaNode.setMaxHeight(style.maxHeight);
+      }
     }
     if (style.maxWidth) {
-      yogaNode.setMaxWidth(style.maxWidth);
+      if (isPercent(style.maxWidth)) {
+        yogaNode.setMaxWidthPercent(style.maxWidth);
+      } else {
+        yogaNode.setMaxWidth(style.maxWidth);
+      }
     }
 
     // Margin
     if (style.marginTop) {
-      yogaNode.setMargin(yoga.EDGE_TOP, style.marginTop);
+      if (isPercent(style.marginTop)) {
+        yogaNode.setMarginPercent(yoga.EDGE_TOP, style.marginTop);
+      } else if (isAuto(style.marginTop)) {
+        yogaNode.setMarginAuto(yoga.EDGE_TOP);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_TOP, style.marginTop);
+      }
     }
     if (style.marginBottom) {
-      yogaNode.setMargin(yoga.EDGE_BOTTOM, style.marginBottom);
+      if (isPercent(style.marginBottom)) {
+        yogaNode.setMarginPercent(yoga.EDGE_BOTTOM, style.marginBottom);
+      } else if (isAuto(style.marginBottom)) {
+        yogaNode.setMarginAuto(yoga.EDGE_BOTTOM);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_BOTTOM, style.marginBottom);
+      }
     }
     if (style.marginLeft) {
-      yogaNode.setMargin(yoga.EDGE_LEFT, style.marginLeft);
+      if (isPercent(style.marginLeft)) {
+        yogaNode.setMarginPercent(yoga.EDGE_LEFT, style.marginLeft);
+      } else if (isAuto(style.marginLeft)) {
+        yogaNode.setMarginAuto(yoga.EDGE_LEFT);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_LEFT, style.marginLeft);
+      }
     }
     if (style.marginRight) {
-      yogaNode.setMargin(yoga.EDGE_RIGHT, style.marginRight);
+      if (isPercent(style.marginRight)) {
+        yogaNode.setMarginPercent(yoga.EDGE_RIGHT, style.marginRight);
+      } else if (isAuto(style.marginRight)) {
+        yogaNode.setMarginAuto(yoga.EDGE_RIGHT);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_RIGHT, style.marginRight);
+      }
     }
     if (style.marginVertical) {
-      yogaNode.setMargin(yoga.EDGE_VERTICAL, style.marginVertical);
+      if (isPercent(style.marginVertical)) {
+        yogaNode.setMarginPercent(yoga.EDGE_VERTICAL, style.marginVertical);
+      } else if (isAuto(style.marginVertical)) {
+        yogaNode.setMarginAuto(yoga.EDGE_VERTICAL);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_VERTICAL, style.marginVertical);
+      }
     }
     if (style.marginHorizontal) {
-      yogaNode.setMargin(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
+      if (isPercent(style.marginHorizontal)) {
+        yogaNode.setMarginPercent(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
+      } else if (isAuto(style.marginHorizontal)) {
+        yogaNode.setMarginAuto(yoga.EDGE_HORIZONTAL);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
+      }
+    }
+    if (style.margin) {
+      if (isPercent(style.margin)) {
+        yogaNode.setMarginPercent(yoga.EDGE_ALL, style.margin);
+      } else if (isAuto(style.margin)) {
+        yogaNode.setMarginAuto(yoga.EDGE_ALL);
+      } else {
+        yogaNode.setMargin(yoga.EDGE_ALL, style.margin);
+      }
     }
 
     // Padding
     if (style.paddingTop) {
-      yogaNode.setPadding(yoga.EDGE_TOP, style.paddingTop);
+      if (isPercent(style.paddingTop)) {
+        yogaNode.setPaddingPercent(yoga.EDGE_TOP, style.paddingTop);
+      } else {
+        yogaNode.setPadding(yoga.EDGE_TOP, style.paddingTop);
+      }
     }
     if (style.paddingBottom) {
-      yogaNode.setPadding(yoga.EDGE_BOTTOM, style.paddingBottom);
+      if (isPercent(style.paddingBottom)) {
+        yogaNode.setPaddingPercent(yoga.EDGE_BOTTOM, style.paddingBottom);
+      } else {
+        yogaNode.setPadding(yoga.EDGE_BOTTOM, style.paddingBottom);
+      }
     }
     if (style.paddingLeft) {
-      yogaNode.setPadding(yoga.EDGE_LEFT, style.paddingLeft);
+      if (isPercent(style.paddingLeft)) {
+        yogaNode.setPaddingPercent(yoga.EDGE_LEFT, style.paddingLeft);
+      } else {
+        yogaNode.setPadding(yoga.EDGE_LEFT, style.paddingLeft);
+      }
     }
     if (style.paddingRight) {
-      yogaNode.setPadding(yoga.EDGE_RIGHT, style.paddingRight);
+      if (isPercent(style.paddingRight)) {
+        yogaNode.setPaddingPercent(yoga.EDGE_RIGHT, style.paddingRight);
+      } else {
+        yogaNode.setPadding(yoga.EDGE_RIGHT, style.paddingRight);
+      }
     }
     if (style.paddingVertical) {
-      yogaNode.setPadding(yoga.EDGE_VERTICAL, style.paddingVertical);
+      if (isPercent(style.paddingVertical)) {
+        yogaNode.setPaddingPercent(yoga.EDGE_VERTICAL, style.paddingVertical);
+      } else {
+        yogaNode.setPadding(yoga.EDGE_VERTICAL, style.paddingVertical);
+      }
     }
     if (style.paddingHorizontal) {
-      yogaNode.setPadding(yoga.EDGE_HORIZONTAL, style.paddingHorizontal);
+      if (isPercent(style.paddingHorizontal)) {
+        yogaNode.setPaddingPercent(
+          yoga.EDGE_HORIZONTAL,
+          style.paddingHorizontal
+        );
+      } else {
+        yogaNode.setPadding(yoga.EDGE_HORIZONTAL, style.paddingHorizontal);
+      }
+    }
+    if (style.padding) {
+      if (isPercent(style.padding)) {
+        yogaNode.setPaddingPercent(yoga.EDGE_ALL, style.padding);
+      } else {
+        yogaNode.setPadding(yoga.EDGE_ALL, style.padding);
+      }
+    }
+
+    // Border
+    if (style.borderTop) {
+      yogaNode.setBorder(yoga.EDGE_TOP, style.borderTop);
+    }
+    if (style.borderBottom) {
+      yogaNode.setBorder(yoga.EDGE_BOTTOM, style.borderBottom);
+    }
+    if (style.borderLeft) {
+      yogaNode.setBorder(yoga.EDGE_LEFT, style.borderLeft);
+    }
+    if (style.borderRight) {
+      yogaNode.setBorder(yoga.EDGE_RIGHT, style.borderRight);
+    }
+    if (style.borderVertical) {
+      yogaNode.setBorder(yoga.EDGE_VERTICAL, style.borderVertical);
+    }
+    if (style.borderHorizontal) {
+      yogaNode.setBorder(yoga.EDGE_HORIZONTAL, style.borderHorizontal);
+    }
+    if (style.border) {
+      yogaNode.setBorder(yoga.EDGE_ALL, style.border);
     }
 
     // Flex
@@ -106,17 +240,62 @@ const computeNode = (node: TreeNode, context: Context) => {
     if (style.position === 'absolute') {
       yogaNode.setPositionType(yoga.POSITION_TYPE_ABSOLUTE);
     }
+    if (style.position === 'relative') {
+      yogaNode.setPositionType(yoga.POSITION_TYPE_RELATIVE);
+    }
+
     if (style.top) {
-      yogaNode.setPosition(yoga.EDGE_TOP, style.top);
+      if (isPercent(style.top)) {
+        yogaNode.setPositionPercent(yoga.EDGE_TOP, style.top);
+      } else {
+        yogaNode.setPosition(yoga.EDGE_TOP, style.top);
+      }
     }
     if (style.left) {
-      yogaNode.setPosition(yoga.EDGE_LEFT, style.left);
+      if (isPercent(style.left)) {
+        yogaNode.setPositionPercent(yoga.EDGE_LEFT, style.left);
+      } else {
+        yogaNode.setPosition(yoga.EDGE_LEFT, style.left);
+      }
     }
     if (style.right) {
-      yogaNode.setPosition(yoga.EDGE_RIGHT, style.right);
+      if (isPercent(style.right)) {
+        yogaNode.setPositionPercent(yoga.EDGE_RIGHT, style.right);
+      } else {
+        yogaNode.setPosition(yoga.EDGE_RIGHT, style.right);
+      }
     }
     if (style.bottom) {
-      yogaNode.setPosition(yoga.EDGE_BOTTOM, style.bottom);
+      if (isPercent(style.bottom)) {
+        yogaNode.setPositionPercent(yoga.EDGE_BOTTOM, style.bottom);
+      } else {
+        yogaNode.setPosition(yoga.EDGE_BOTTOM, style.bottom);
+      }
+    }
+
+    // Display
+    const display = style.display;
+    if (display) {
+      if (display === 'flex') {
+        yogaNode.setDisplay(yoga.DISPLAY_FLEX);
+      }
+      if (display === 'none') {
+        yogaNode.setDisplay(yoga.DISPLAY_NONE);
+      }
+    }
+
+    // Overflow
+    const overflow = style.overflow;
+    if (overflow) {
+      if (overflow === 'visible') {
+        yogaNode.setDisplay(yoga.OVERFLOW_VISIBLE);
+      }
+      if (overflow === 'scroll') {
+        yogaNode.setDisplay(yoga.OVERFLOW_SCROLL);
+      }
+      if (overflow === 'hidden') {
+        yogaNode.setDisplay(yoga.OVERFLOW_HIDDEN);
+      }
     }
 
     // Flex direction
@@ -156,11 +335,40 @@ const computeNode = (node: TreeNode, context: Context) => {
       }
     }
 
+    // Align Content
+    const alignContent = style.alignContent;
+    if (alignContent) {
+      if (alignContent === 'flex-start') {
+        yogaNode.setAlignContent(yoga.ALIGN_FLEX_START);
+      }
+      if (alignContent === 'flex-end') {
+        yogaNode.setAlignContent(yoga.ALIGN_FLEX_END);
+      }
+      if (alignContent === 'center') {
+        yogaNode.setAlignContent(yoga.ALIGN_CENTER);
+      }
+      if (alignContent === 'stretch') {
+        yogaNode.setAlignContent(yoga.ALIGN_STRETCH);
+      }
+      if (alignContent === 'baseline') {
+        yogaNode.setAlignContent(yoga.ALIGN_BASELINE);
+      }
+      if (alignContent === 'space-between') {
+        yogaNode.setAlignContent(yoga.ALIGN_SPACE_BETWEEN);
+      }
+      if (alignContent === 'space-around') {
+        yogaNode.setAlignContent(yoga.ALIGN_SPACE_AROUND);
+      }
+      if (alignContent === 'auto') {
+        yogaNode.setAlignContent(yoga.ALIGN_AUTO);
+      }
+    }
+
     // Align Items
     const alignItems = style.alignItems;
     if (alignItems) {
       if (alignItems === 'flex-start') {
-        yogaNode.setAlignItems(yoga.ALIGN_FLEX_END);
+        yogaNode.setAlignItems(yoga.ALIGN_FLEX_START);
       }
       if (alignItems === 'flex-end') {
         yogaNode.setAlignItems(yoga.ALIGN_FLEX_END);
