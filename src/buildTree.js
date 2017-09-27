@@ -1,7 +1,6 @@
 import TestRenderer from 'react-test-renderer';
 import * as yoga from 'yoga-layout';
 import Context from './utils/Context';
-import createStringMeasurer from './utils/createStringMeasurer';
 import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
@@ -37,19 +36,16 @@ const reactTreeToFlexTree = (node, yogaNode, context) => {
 
   if (typeof node === 'string' || typeof node === 'number') {
     textStyle = context.getInheritedStyles();
-    const measure = createStringMeasurer(node, textStyle)();
     return {
       type: 'text',
-      style: {
-        measure,
-      },
+      style: {},
       layout: {
         left: 0,
         right: 0,
         top: 0,
         bottom: 0,
-        width: measure.width,
-        height: measure.height,
+        width: 0,
+        height: 0,
       },
       textStyle,
       props: {},

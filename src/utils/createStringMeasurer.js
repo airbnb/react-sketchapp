@@ -6,10 +6,10 @@ import findFont from './findFont';
 const FLOAT_MAX = 999999;
 
 const createStringMeasurer = (string: string, style: TextStyle) => (
-  width?: number = 0
-  // widthMode: MeasureMode
+  width: number
+  // widthMode,
   // height: number,
-  // heightMode: MeasureMode
+  // heightMode,
 ): Size => {
   const font = findFont(style);
   const attributes = {

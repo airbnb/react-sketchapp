@@ -431,18 +431,8 @@ const computeNode = (node: TreeNode, context: Context) => {
   ) {
     const content = String(node.children[0]);
     const textStyle = context.getInheritedStyles();
-    const measure = createStringMeasurer(content, textStyle)();
 
-    if (!style.height) {
-      yogaNode.setHeight(measure.height);
-    }
-
-    // Use hardcoded width if present
-    if (style.width || typeof style.width === 'number') {
-      return yogaNode;
-    }
-
-    yogaNode.setWidth(measure.width);
+    yogaNode.setMeasureFunc(createStringMeasurer(content, textStyle));
   }
 
   return yogaNode;
