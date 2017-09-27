@@ -32,23 +32,19 @@ const reactTreeToFlexTree = (
   node: TreeNode,
   yogaNode: yoga.NodeInstance,
   context: Context,
-  parentNode: ?TreeNode,
-  parentYogaNode: ?yoga.NodeInstance
+  parentNode: ?TreeNode
 ) => {
-  const children = Array.isArray(node.children)
-    ? processChildren(node.children)
-    : [];
   let textStyle;
 
-  if (typeof node === 'string' || typeof node === 'number') {
+  if (typeof node === 'string') {
     textStyle = context.getInheritedStyles();
     // Grab parent node's details to make sure child text nodes match
     const style = parentNode ? parentNode.props.style : {};
-    const layout = parentYogaNode ? parentYogaNode.getComputedLayout() : {};
+    const layout = yogaNode ? yogaNode.getComputedLayout() : {};
 
     return {
       type: 'text',
-      style,
+      style: style || {},
       layout: {
         left: 0,
         right: 0,
@@ -60,7 +56,7 @@ const reactTreeToFlexTree = (
       textStyle,
       props: {},
       value: node,
-      children,
+      children: [],
     };
   }
 
@@ -81,6 +77,25 @@ const reactTreeToFlexTree = (
     textStyle = context.getInheritedStyles();
   }
 
+  const children = Array.isArray(node.children)
+    ? processChildren(node.children)
+    : null;
+  const newChildren = [];
+
+  if (children) {
+    for (let index = 0; index < children.length; index += 1) {
+      const childComponent = children[index];
+      const childNode = yogaNode.getChild(index);
+      const renderedChildComponent = reactTreeToFlexTree(
+        childComponent,
+        childNode,
+        context.forChildren(),
+        node
+      );
+      newChildren.push(renderedChildComponent);
+    }
+  }
+
   return {
     type: node.type,
     style,
@@ -95,15 +110,7 @@ const reactTreeToFlexTree = (
     },
     props: node.props,
     value: null,
-    children: children.map((child, index) =>
-      reactTreeToFlexTree(
-        child,
-        yogaNode.getChild(index),
-        context.forChildren(),
-        node,
-        yogaNode
-      )
-    ),
+    children: newChildren,
   };
 };
 

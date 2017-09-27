@@ -9,11 +9,8 @@ const walkTree = (tree: yoga.NodeInstance, context: Context) => {
   if (tree.children) {
     for (let index = 0; index < tree.children.length; index += 1) {
       const childComponent = tree.children[index];
-      // Ignore Text nodes
-      if (!(typeof childComponent === 'string')) {
-        const childNode = walkTree(childComponent, context.forChildren());
-        node.insertChild(childNode, index);
-      }
+      const childNode = walkTree(childComponent, context.forChildren());
+      node.insertChild(childNode, index);
     }
   }
 

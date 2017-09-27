@@ -421,18 +421,9 @@ const computeNode = (node: TreeNode, context: Context) => {
     }
   }
 
-  // if Text node
-  if (
-    node &&
-    node.type === 'text' &&
-    node.children &&
-    (typeof node.children[0] === 'string' ||
-      typeof node.children[0] === 'number')
-  ) {
-    const content = String(node.children[0]);
+  if (typeof node === 'string' || typeof node === 'number') {
     const textStyle = context.getInheritedStyles();
-
-    yogaNode.setMeasureFunc(createStringMeasurer(node, content, textStyle));
+    yogaNode.setMeasureFunc(createStringMeasurer(node, node, textStyle));
   }
 
   return yogaNode;
