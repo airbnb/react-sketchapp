@@ -432,7 +432,7 @@ const computeNode = (node: TreeNode, context: Context) => {
     const content = String(node.children[0]);
     const textStyle = context.getInheritedStyles();
 
-    yogaNode.setMeasureFunc(createStringMeasurer(content, textStyle));
+    yogaNode.setMeasureFunc(createStringMeasurer(node, content, textStyle));
   }
 
   return yogaNode;

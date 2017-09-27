@@ -1,11 +1,15 @@
 /* @flow */
-import { TextStyle, Size } from '../types';
+import type { TextStyle, Size, TreeNode } from '../types';
 import findFont from './findFont';
 
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const createStringMeasurer = (string: string, style: TextStyle) => (
+const createStringMeasurer = (
+  node: TreeNode,
+  string: string,
+  style: TextStyle
+) => (
   width: number
   // widthMode,
   // height: number,

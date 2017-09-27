@@ -28,7 +28,13 @@ const allStringsOrNumbers = xs =>
 
 const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
 
-const reactTreeToFlexTree = (node, yogaNode, context) => {
+const reactTreeToFlexTree = (
+  node: TreeNode,
+  yogaNode: yoga.NodeInstance,
+  context: Context,
+  parentNode: ?TreeNode,
+  parentYogaNode: ?yoga.NodeInstance
+) => {
   const children = Array.isArray(node.children)
     ? processChildren(node.children)
     : [];
@@ -36,16 +42,20 @@ const reactTreeToFlexTree = (node, yogaNode, context) => {
 
   if (typeof node === 'string' || typeof node === 'number') {
     textStyle = context.getInheritedStyles();
+    // Grab parent node's details to make sure child text nodes match
+    const style = parentNode ? parentNode.props.style : {};
+    const layout = parentYogaNode ? parentYogaNode.getComputedLayout() : {};
+
     return {
       type: 'text',
-      style: {},
+      style,
       layout: {
         left: 0,
         right: 0,
         top: 0,
         bottom: 0,
-        width: 0,
-        height: 0,
+        width: layout.width || 0,
+        height: layout.height || 0,
       },
       textStyle,
       props: {},
@@ -89,7 +99,9 @@ const reactTreeToFlexTree = (node, yogaNode, context) => {
       reactTreeToFlexTree(
         child,
         yogaNode.getChild(index),
-        context.forChildren()
+        context.forChildren(),
+        node,
+        yogaNode
       )
     ),
   };
