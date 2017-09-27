@@ -369,8 +369,8 @@ export default (context) => {
 
   const Document = () =>
     <View>
-      <Text style={styles.Headline}>Headline text</Text>
-      <Text style={styles.Body}>Body text</Text>
+      <Text style={typeStyles.Headline}>Headline text</Text>
+      <Text style={typeStyles.Body}>Body text</Text>
     </View>
 
   render(<Document />, context.document.currentPage());
