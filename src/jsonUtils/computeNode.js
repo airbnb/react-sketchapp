@@ -21,10 +21,6 @@ const getStyles = (node: TreeNode): ViewStyle | Object => {
   return style;
 };
 
-const isPercent = (value: number | string) => /%/.test(String(value));
-
-const isAuto = (value: number | string) => String(value) === 'auto';
-
 const isNullOrUndefined = (value: any) => value === null || value === undefined;
 
 const computeNode = (node: TreeNode, context: Context) => {
@@ -37,179 +33,78 @@ const computeNode = (node: TreeNode, context: Context) => {
 
     // Width
     if (!isNullOrUndefined(style.width)) {
-      if (isPercent(style.width)) {
-        yogaNode.setWidthPercent(style.width);
-      } else if (isAuto(style.width)) {
-        yogaNode.setWidthAuto();
-      } else {
-        yogaNode.setWidth(style.width);
-      }
+      yogaNode.setWidth(style.width);
     }
 
     // Height
     if (!isNullOrUndefined(style.height)) {
-      if (isPercent(style.height)) {
-        yogaNode.setHeightPercent(style.height);
-      } else if (isAuto(style.height)) {
-        yogaNode.setHeightAuto();
-      } else {
-        yogaNode.setHeight(style.height);
-      }
+      yogaNode.setHeight(style.height);
     }
 
     // Min-Height
     if (!isNullOrUndefined(style.minHeight)) {
-      if (isPercent(style.minHeight)) {
-        yogaNode.setMinHeightPercent(style.minHeight);
-      } else {
-        yogaNode.setMinHeight(style.minHeight);
-      }
+      yogaNode.setMinHeight(style.minHeight);
     }
 
     // Min-Width
     if (!isNullOrUndefined(style.minWidth)) {
-      if (isPercent(style.minWidth)) {
-        yogaNode.setMinWidthPercent(style.minWidth);
-      } else {
-        yogaNode.setMinWidth(style.minWidth);
-      }
+      yogaNode.setMinWidth(style.minWidth);
     }
 
     // Max-Height
     if (!isNullOrUndefined(style.maxHeight)) {
-      if (isPercent(style.maxHeight)) {
-        yogaNode.setMaxHeightPercent(style.maxHeight);
-      } else {
-        yogaNode.setMaxHeight(style.maxHeight);
-      }
+      yogaNode.setMaxHeight(style.maxHeight);
     }
 
     // Min-Width
     if (!isNullOrUndefined(style.maxWidth)) {
-      if (isPercent(style.maxWidth)) {
-        yogaNode.setMaxWidthPercent(style.maxWidth);
-      } else {
-        yogaNode.setMaxWidth(style.maxWidth);
-      }
+      yogaNode.setMaxWidth(style.maxWidth);
     }
 
     // Margin
     if (!isNullOrUndefined(style.marginTop)) {
-      if (isPercent(style.marginTop)) {
-        yogaNode.setMarginPercent(yoga.EDGE_TOP, style.marginTop);
-      } else if (isAuto(style.marginTop)) {
-        yogaNode.setMarginAuto(yoga.EDGE_TOP);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_TOP, style.marginTop);
-      }
+      yogaNode.setMargin(yoga.EDGE_TOP, style.marginTop);
     }
     if (!isNullOrUndefined(style.marginBottom)) {
-      if (isPercent(style.marginBottom)) {
-        yogaNode.setMarginPercent(yoga.EDGE_BOTTOM, style.marginBottom);
-      } else if (isAuto(style.marginBottom)) {
-        yogaNode.setMarginAuto(yoga.EDGE_BOTTOM);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_BOTTOM, style.marginBottom);
-      }
+      yogaNode.setMargin(yoga.EDGE_BOTTOM, style.marginBottom);
     }
     if (!isNullOrUndefined(style.marginLeft)) {
-      if (isPercent(style.marginLeft)) {
-        yogaNode.setMarginPercent(yoga.EDGE_LEFT, style.marginLeft);
-      } else if (isAuto(style.marginLeft)) {
-        yogaNode.setMarginAuto(yoga.EDGE_LEFT);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_LEFT, style.marginLeft);
-      }
+      yogaNode.setMargin(yoga.EDGE_LEFT, style.marginLeft);
     }
     if (!isNullOrUndefined(style.marginRight)) {
-      if (isPercent(style.marginRight)) {
-        yogaNode.setMarginPercent(yoga.EDGE_RIGHT, style.marginRight);
-      } else if (isAuto(style.marginRight)) {
-        yogaNode.setMarginAuto(yoga.EDGE_RIGHT);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_RIGHT, style.marginRight);
-      }
+      yogaNode.setMargin(yoga.EDGE_RIGHT, style.marginRight);
     }
     if (!isNullOrUndefined(style.marginVertical)) {
-      if (isPercent(style.marginVertical)) {
-        yogaNode.setMarginPercent(yoga.EDGE_VERTICAL, style.marginVertical);
-      } else if (isAuto(style.marginVertical)) {
-        yogaNode.setMarginAuto(yoga.EDGE_VERTICAL);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_VERTICAL, style.marginVertical);
-      }
+      yogaNode.setMargin(yoga.EDGE_VERTICAL, style.marginVertical);
     }
     if (!isNullOrUndefined(style.marginHorizontal)) {
-      if (isPercent(style.marginHorizontal)) {
-        yogaNode.setMarginPercent(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
-      } else if (isAuto(style.marginHorizontal)) {
-        yogaNode.setMarginAuto(yoga.EDGE_HORIZONTAL);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
-      }
+      yogaNode.setMargin(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
     }
     if (!isNullOrUndefined(style.margin)) {
-      if (isPercent(style.margin)) {
-        yogaNode.setMarginPercent(yoga.EDGE_ALL, style.margin);
-      } else if (isAuto(style.margin)) {
-        yogaNode.setMarginAuto(yoga.EDGE_ALL);
-      } else {
-        yogaNode.setMargin(yoga.EDGE_ALL, style.margin);
-      }
+      yogaNode.setMargin(yoga.EDGE_ALL, style.margin);
     }
 
     // Padding
     if (!isNullOrUndefined(style.paddingTop)) {
-      if (isPercent(style.paddingTop)) {
-        yogaNode.setPaddingPercent(yoga.EDGE_TOP, style.paddingTop);
-      } else {
-        yogaNode.setPadding(yoga.EDGE_TOP, style.paddingTop);
-      }
+      yogaNode.setPadding(yoga.EDGE_TOP, style.paddingTop);
     }
     if (!isNullOrUndefined(style.paddingBottom)) {
-      if (isPercent(style.paddingBottom)) {
-        yogaNode.setPaddingPercent(yoga.EDGE_BOTTOM, style.paddingBottom);
-      } else {
-        yogaNode.setPadding(yoga.EDGE_BOTTOM, style.paddingBottom);
-      }
+      yogaNode.setPadding(yoga.EDGE_BOTTOM, style.paddingBottom);
     }
     if (!isNullOrUndefined(style.paddingLeft)) {
-      if (isPercent(style.paddingLeft)) {
-        yogaNode.setPaddingPercent(yoga.EDGE_LEFT, style.paddingLeft);
-      } else {
-        yogaNode.setPadding(yoga.EDGE_LEFT, style.paddingLeft);
-      }
+      yogaNode.setPadding(yoga.EDGE_LEFT, style.paddingLeft);
     }
     if (!isNullOrUndefined(style.paddingRight)) {
-      if (isPercent(style.paddingRight)) {
-        yogaNode.setPaddingPercent(yoga.EDGE_RIGHT, style.paddingRight);
-      } else {
-        yogaNode.setPadding(yoga.EDGE_RIGHT, style.paddingRight);
-      }
+      yogaNode.setPadding(yoga.EDGE_RIGHT, style.paddingRight);
     }
     if (!isNullOrUndefined(style.paddingVertical)) {
-      if (isPercent(style.paddingVertical)) {
-        yogaNode.setPaddingPercent(yoga.EDGE_VERTICAL, style.paddingVertical);
-      } else {
-        yogaNode.setPadding(yoga.EDGE_VERTICAL, style.paddingVertical);
-      }
+      yogaNode.setPadding(yoga.EDGE_VERTICAL, style.paddingVertical);
     }
     if (!isNullOrUndefined(style.paddingHorizontal)) {
-      if (isPercent(style.paddingHorizontal)) {
-        yogaNode.setPaddingPercent(
-          yoga.EDGE_HORIZONTAL,
-          style.paddingHorizontal
-        );
-      } else {
-        yogaNode.setPadding(yoga.EDGE_HORIZONTAL, style.paddingHorizontal);
-      }
+      yogaNode.setPadding(yoga.EDGE_HORIZONTAL, style.paddingHorizontal);
     }
     if (!isNullOrUndefined(style.padding)) {
-      if (isPercent(style.padding)) {
-        yogaNode.setPaddingPercent(yoga.EDGE_ALL, style.padding);
-      } else {
-        yogaNode.setPadding(yoga.EDGE_ALL, style.padding);
-      }
+      yogaNode.setPadding(yoga.EDGE_ALL, style.padding);
     }
 
     // Border
@@ -258,32 +153,16 @@ const computeNode = (node: TreeNode, context: Context) => {
     }
 
     if (!isNullOrUndefined(style.top)) {
-      if (isPercent(style.top)) {
-        yogaNode.setPositionPercent(yoga.EDGE_TOP, style.top);
-      } else {
-        yogaNode.setPosition(yoga.EDGE_TOP, style.top);
-      }
+      yogaNode.setPosition(yoga.EDGE_TOP, style.top);
     }
     if (!isNullOrUndefined(style.left)) {
-      if (isPercent(style.left)) {
-        yogaNode.setPositionPercent(yoga.EDGE_LEFT, style.left);
-      } else {
-        yogaNode.setPosition(yoga.EDGE_LEFT, style.left);
-      }
+      yogaNode.setPosition(yoga.EDGE_LEFT, style.left);
     }
     if (!isNullOrUndefined(style.right)) {
-      if (isPercent(style.right)) {
-        yogaNode.setPositionPercent(yoga.EDGE_RIGHT, style.right);
-      } else {
-        yogaNode.setPosition(yoga.EDGE_RIGHT, style.right);
-      }
+      yogaNode.setPosition(yoga.EDGE_RIGHT, style.right);
     }
     if (!isNullOrUndefined(style.bottom)) {
-      if (isPercent(style.bottom)) {
-        yogaNode.setPositionPercent(yoga.EDGE_BOTTOM, style.bottom);
-      } else {
-        yogaNode.setPosition(yoga.EDGE_BOTTOM, style.bottom);
-      }
+      yogaNode.setPosition(yoga.EDGE_BOTTOM, style.bottom);
     }
 
     // Display
