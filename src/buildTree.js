@@ -5,23 +5,10 @@ import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
 import computeTree from './jsonUtils/computeTree';
-
-const INHERITABLE_STYLES = [
-  'color',
-  'fontFamily',
-  'fontSize',
-  'fontStyle',
-  'fontWeight',
-  'textAlign',
-  'textDecoration',
-  'textShadowOffset',
-  'textShadowRadius',
-  'textShadowColor',
-  'textTransform',
-  'letterSpacing',
-  'lineHeight',
-  'writingDirection',
-];
+import {
+  INHERITABLE_FONT_STYLES,
+  SKETCH_TREE_OBJECT_STUB,
+} from './utils/constants';
 
 const allStringsOrNumbers = xs =>
   xs.every(x => typeof x === 'string' || typeof x === 'number');
@@ -31,20 +18,16 @@ const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
 const reactTreeToFlexTree = (
   node: TreeNode,
   yogaNode: yoga.NodeInstance,
-  context: Context,
-  parentNode: ?TreeNode
+  context: Context
 ) => {
   let textStyle;
 
   if (typeof node === 'string') {
     textStyle = context.getInheritedStyles();
-    // Grab parent node's details to make sure child text nodes match
-    const style = parentNode ? parentNode.props.style : {};
     const layout = yogaNode ? yogaNode.getComputedLayout() : {};
 
-    return {
+    return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
       type: 'text',
-      style: style || {},
       layout: {
         left: 0,
         right: 0,
@@ -54,10 +37,8 @@ const reactTreeToFlexTree = (
         height: layout.height || 0,
       },
       textStyle,
-      props: {},
       value: node,
-      children: [],
-    };
+    });
   }
 
   const style = node.props.style || {};
@@ -65,9 +46,9 @@ const reactTreeToFlexTree = (
   if (
     node.type === 'text' &&
     node.props.style &&
-    hasAnyDefined(style, INHERITABLE_STYLES)
+    hasAnyDefined(style, INHERITABLE_FONT_STYLES)
   ) {
-    const inheritableStyles = pick(style, INHERITABLE_STYLES);
+    const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
     context.addInheritableStyles(inheritableStyles);
     textStyle = {
       ...context.getInheritedStyles(),
@@ -89,14 +70,13 @@ const reactTreeToFlexTree = (
       const renderedChildComponent = reactTreeToFlexTree(
         childComponent,
         childNode,
-        context.forChildren(),
-        node
+        context.forChildren()
       );
       newChildren.push(renderedChildComponent);
     }
   }
 
-  return {
+  return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
     type: node.type,
     style,
     textStyle,
@@ -109,9 +89,8 @@ const reactTreeToFlexTree = (
       height: yogaNode.getComputedHeight(),
     },
     props: node.props,
-    value: null,
     children: newChildren,
-  };
+  });
 };
 
 const buildTree = (element: React$Element<any>): TreeNode => {

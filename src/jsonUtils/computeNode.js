@@ -3,6 +3,9 @@ import * as yoga from 'yoga-layout';
 import type { TreeNode, ViewStyle } from '../types';
 import Context from '../utils/Context';
 import createStringMeasurer from '../utils/createStringMeasurer';
+import hasAnyDefined from '../utils/hasAnyDefined';
+import pick from '../utils/pick';
+import { INHERITABLE_FONT_STYLES } from '../utils/constants';
 
 // flatten all styles (including nested) into one object
 const getStyles = (node: TreeNode): ViewStyle | Object => {
@@ -421,9 +424,19 @@ const computeNode = (node: TreeNode, context: Context) => {
     }
   }
 
-  if (typeof node === 'string' || typeof node === 'number') {
+  if (typeof node === 'string') {
     const textStyle = context.getInheritedStyles();
-    yogaNode.setMeasureFunc(createStringMeasurer(node, node, textStyle));
+    yogaNode.setMeasureFunc(createStringMeasurer(node, textStyle));
+    return yogaNode;
+  }
+
+  if (
+    node.type === 'text' &&
+    node.props.style &&
+    hasAnyDefined(style, INHERITABLE_FONT_STYLES)
+  ) {
+    const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
+    context.addInheritableStyles(inheritableStyles);
   }
 
   return yogaNode;
