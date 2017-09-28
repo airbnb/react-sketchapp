@@ -43,6 +43,9 @@ const reactTreeToFlexTree = (
 
   const style = node.props.style || {};
 
+  // If current node is a Text node, add text styles to Context to pass down to
+  // child nodes and pass along all current context styles
+  // else, just pass along all current context styles
   if (
     node.type === 'text' &&
     node.props.style &&

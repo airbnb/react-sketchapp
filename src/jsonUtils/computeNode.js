@@ -309,6 +309,8 @@ const computeNode = (node: TreeNode, context: Context) => {
     return yogaNode;
   }
 
+  // If current node is a Text node, add text styles to Context to pass down to
+  // child nodes.
   if (
     node.type === 'text' &&
     node.props.style &&
