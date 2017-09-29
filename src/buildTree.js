@@ -23,26 +23,6 @@ const reactTreeToFlexTree = (
   context: Context
 ) => {
   let textStyle;
-
-  // if (typeof node === 'string') {
-  //   textStyle = context.getInheritedStyles();
-  //   const layout = yogaNode ? yogaNode.getComputedLayout() : {};
-
-  // return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
-  //   type: 'text',
-  //   layout: {
-  //     left: 0,
-  //     right: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     width: layout.width || 0,
-  //     height: layout.height || 0,
-  //   },
-  //   textStyle,
-  //   value: node,
-  // });
-  // }
-
   const style = node.props.style || {};
 
   // If current node is a Text node, add text styles to Context to pass down to
@@ -92,7 +72,9 @@ const reactTreeToFlexTree = (
     return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
       type: 'text',
       style,
-      textNodes,
+      props: {
+        textNodes,
+      },
       layout: {
         left: 0,
         right: 0,
