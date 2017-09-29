@@ -5,33 +5,8 @@ import Context from '../utils/Context';
 import createStringMeasurer from '../utils/createStringMeasurer';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import pick from '../utils/pick';
+import computeTextTree from './computeTextTree';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
-
-const walkTextTree = (
-  textTree: TreeNode,
-  context: Context,
-  textNodes: Array<Object>
-) => {
-  if (typeof textTree === 'string') {
-    textNodes.push({
-      textStyles: context.getInheritedStyles(),
-      content: textTree,
-    });
-  }
-
-  if (textTree.children) {
-    for (let index = 0; index < textTree.children.length; index += 1) {
-      const textComponent = textTree.children[index];
-      walkTextTree(textComponent, context.forChildren(), textNodes);
-    }
-  }
-};
-
-const textTreeToNodes = (
-  root: TreeNode,
-  context: Context,
-  textNodes: Array<Object>
-) => walkTextTree(root, context, textNodes);
 
 // flatten all styles (including nested) into one object
 const getStyles = (node: TreeNode): ViewStyle | Object => {
@@ -332,12 +307,6 @@ const computeNode = (
     }
   }
 
-  // if (typeof node === 'string') {
-  //   const textStyle = context.getInheritedStyles();
-  //   yogaNode.setMeasureFunc(createStringMeasurer(node, textStyle));
-  //   return yogaNode;
-  // }
-
   if (node.type === 'text') {
     // If current node is a Text node, add text styles to Context to pass down to
     // child nodes.
@@ -347,24 +316,8 @@ const computeNode = (
     }
 
     // Handle Text Children
-    if (node.children && node.children.length > 0) {
-      const textNodes = [];
-      const childContext = context.forChildren();
-      // console.log(node.children);
-      for (let index = 0; index < node.children.length; index += 1) {
-        const textNode = node.children[index];
-        if (typeof textNode === 'string') {
-          textNodes.push({
-            content: textNode,
-            textStyles: childContext.getInheritedStyles(),
-          });
-        } else if (textNode.children && textNode.children.length > 0) {
-          console.log(textNode);
-          textTreeToNodes(textNode, childContext, textNodes);
-        }
-      }
-      console.log(textNodes);
-    }
+    const textNodes = computeTextTree(node, context);
+    yogaNode.setMeasureFunc(createStringMeasurer(textNodes));
 
     return { node: yogaNode, stop: true };
   }

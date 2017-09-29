@@ -5,33 +5,32 @@ import findFont from './findFont';
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const createStringMeasurer = (string: string, style: TextStyle) => (
+const measureString = (
+  textNode: { content: string, textStyles: TextStyle },
   width: number
-  // widthMode,
-  // height: number,
-  // heightMode,
-): Size => {
-  const font = findFont(style);
+) => {
+  const { content, textStyles } = textNode;
+  const font = findFont(textStyles);
   const attributes = {
     [NSFontAttributeName]: font,
   };
 
-  if (style.lineHeight !== undefined) {
+  if (textStyles.lineHeight !== undefined) {
     // NOTE(gold): Visual explanation of NSParagraphStyle
     // https://medium.com/@at_underscore/nsparagraphstyle-explained-visually-a8659d1fbd6f
     const paragraphStyle = NSMutableParagraphStyle.alloc().init();
-    paragraphStyle.minimumLineHeight = style.lineHeight;
+    paragraphStyle.minimumLineHeight = textStyles.lineHeight;
     paragraphStyle.lineHeightMultiple = 1.0;
-    paragraphStyle.maximumLineHeight = style.lineHeight;
+    paragraphStyle.maximumLineHeight = textStyles.lineHeight;
     attributes[NSParagraphStyleAttributeName] = paragraphStyle;
   }
 
-  if (style.letterSpacing !== undefined) {
-    attributes[NSKernAttributeName] = style.letterSpacing;
+  if (textStyles.letterSpacing !== undefined) {
+    attributes[NSKernAttributeName] = textStyles.letterSpacing;
   }
 
   const rect = NSString.alloc()
-    .initWithString(string)
+    .initWithString(content)
     .boundingRectWithSize_options_attributes_context(
       CGSizeMake(width, FLOAT_MAX),
       NSStringDrawingUsesLineFragmentOrigin,
@@ -45,6 +44,33 @@ const createStringMeasurer = (string: string, style: TextStyle) => (
     width: 0 + rect.size.width,
     height: 0 + rect.size.height,
   };
+};
+
+const createStringMeasurer = (
+  textNodes: Array<{ content: string, textStyles: TextStyle }>
+) => (
+  width: number
+  // widthMode,
+  // height: number,
+  // heightMode,
+): Size => {
+  let newHeight = 0;
+  let newWidth = 0;
+
+  if (textNodes.length > 0) {
+    const measurements = textNodes.map(textNode =>
+      measureString(textNode, width)
+    );
+    measurements.forEach((measure) => {
+      const { height: measureHeight, width: measureWidth } = measure;
+      newWidth += measureWidth;
+      if (measureHeight > newHeight) {
+        newHeight = measureHeight;
+      }
+    });
+  }
+
+  return { width: newWidth, height: newHeight };
 };
 
 module.exports = createStringMeasurer;
