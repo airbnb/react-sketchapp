@@ -23,7 +23,10 @@ const getStyles = (node: TreeNode): ViewStyle | Object => {
 
 const isNullOrUndefined = (value: any) => value === null || value === undefined;
 
-const computeNode = (node: TreeNode, context: Context) => {
+const computeNode = (
+  node: TreeNode,
+  context: Context
+): { node: yoga.NodeInstance, stop?: boolean } => {
   const yogaNode = yoga.Node.create();
   const hasStyle = node.props && node.props.style;
   const style: ViewStyle | Object = hasStyle ? getStyles(node) : {};
@@ -303,24 +306,29 @@ const computeNode = (node: TreeNode, context: Context) => {
     }
   }
 
-  if (typeof node === 'string') {
-    const textStyle = context.getInheritedStyles();
-    yogaNode.setMeasureFunc(createStringMeasurer(node, textStyle));
-    return yogaNode;
+  // if (typeof node === 'string') {
+  //   const textStyle = context.getInheritedStyles();
+  //   yogaNode.setMeasureFunc(createStringMeasurer(node, textStyle));
+  //   return yogaNode;
+  // }
+
+  if (node.type === 'text') {
+    // If current node is a Text node, add text styles to Context to pass down to
+    // child nodes.
+    if (node.props.style && hasAnyDefined(style, INHERITABLE_FONT_STYLES)) {
+      const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
+      context.addInheritableStyles(inheritableStyles);
+    }
+
+    // Handle Text Children
+    if (node.children && node.children.length > 0) {
+      console.log(node.children);
+    }
+
+    return { node: yogaNode, stop: true };
   }
 
-  // If current node is a Text node, add text styles to Context to pass down to
-  // child nodes.
-  if (
-    node.type === 'text' &&
-    node.props.style &&
-    hasAnyDefined(style, INHERITABLE_FONT_STYLES)
-  ) {
-    const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
-    context.addInheritableStyles(inheritableStyles);
-  }
-
-  return yogaNode;
+  return { node: yogaNode };
 };
 
 export default computeNode;
