@@ -17,6 +17,7 @@
     "NSDataBase64EncodingEndLineWithCarriageReturn": true,
     "NSData": true,
     "NSMakeRange": true,
+    "NSMutableAttributedString": true,
     "context": true
   },
   "rules": {

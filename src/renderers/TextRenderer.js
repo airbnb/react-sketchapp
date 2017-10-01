@@ -7,31 +7,33 @@ import { makeRect } from '../jsonUtils/models';
 import TextStyles from '../sharedStyles/TextStyles';
 
 class TextRenderer extends SketchRenderer {
-  getDefaultGroupName(props: any, value: ?string) {
-    return value || 'Text';
+  getDefaultGroupName(props: any) {
+    return props.name || 'Text';
   }
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
-    value: ?string
+    props: any
   ): Array<SketchLayer> {
-    if (value === null) {
+    // Append all text nodes's content into one string
+    let name = '';
+    props.textNodes.forEach((textNode) => {
+      name += textNode.content;
+    });
+    if (name === '') {
       const viewRenderer = new ViewRenderer();
       return viewRenderer.renderBackingLayers(
         layout,
         style,
         textStyle,
         props,
-        value
+        name
       );
     }
 
-    console.log(props.textNodes);
-
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const layer = makeTextLayer(frame, value, textStyle);
+    const layer = makeTextLayer(frame, name, props.textNodes);
 
     const resolvedStyle = TextStyles.resolve(textStyle);
     if (resolvedStyle) {

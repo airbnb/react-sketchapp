@@ -1,14 +1,11 @@
 /* @flow */
-import type { TextStyle, Size } from '../types';
+import type { TextNode, TextNodes, Size } from '../types';
 import findFont from './findFont';
 
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const measureString = (
-  textNode: { content: string, textStyles: TextStyle },
-  width: number
-) => {
+const measureString = (textNode: TextNode, width: number) => {
   const { content, textStyles } = textNode;
   const font = findFont(textStyles);
   const attributes = {
@@ -46,9 +43,7 @@ const measureString = (
   };
 };
 
-const createStringMeasurer = (
-  textNodes: Array<{ content: string, textStyles: TextStyle }>
-) => (
+const createStringMeasurer = (textNodes: TextNodes) => (
   width: number
   // widthMode,
   // height: number,

@@ -25,25 +25,6 @@ const reactTreeToFlexTree = (
   let textStyle;
   const style = node.props.style || {};
 
-  // If current node is a Text node, add text styles to Context to pass down to
-  // child nodes and pass along all current context styles
-  // else, just pass along all current context styles
-  if (
-    node.type === 'text' &&
-    node.props.style &&
-    hasAnyDefined(style, INHERITABLE_FONT_STYLES)
-  ) {
-    const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
-    inheritableStyles.flexDirection = 'row';
-    context.addInheritableStyles(inheritableStyles);
-    textStyle = {
-      ...context.getInheritedStyles(),
-      ...inheritableStyles,
-    };
-  } else {
-    textStyle = context.getInheritedStyles();
-  }
-
   if (node.type === 'text') {
     // If current node is a Text node, add text styles to Context to pass down to
     // child nodes.
@@ -64,15 +45,12 @@ const reactTreeToFlexTree = (
     // Handle Text Children
     const textNodes = computeTextTree(node, context);
     const layout = createStringMeasurer(textNodes)(0);
-    let value = '';
-    textNodes.forEach((textNode) => {
-      value += textNode.content;
-    });
 
     return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
       type: 'text',
       style,
       props: {
+        ...node.props,
         textNodes,
       },
       layout: {
@@ -84,7 +62,6 @@ const reactTreeToFlexTree = (
         height: layout.height || 0,
       },
       textStyle,
-      value,
     });
   }
 
