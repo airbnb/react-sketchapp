@@ -47,6 +47,7 @@ function makeParagraphStyle(textStyle) {
   const pStyle = NSMutableParagraphStyle.alloc().init();
   if (textStyle.lineHeight !== undefined) {
     pStyle.minimumLineHeight = textStyle.lineHeight;
+    pStyle.lineHeightMultiple = 1.0;
     pStyle.maximumLineHeight = textStyle.lineHeight;
   }
 
@@ -98,8 +99,7 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
   return MSImageData.alloc().initWithImage(image);
 };
 
-function createString(textNode: TextNode): NSAttributedString {
-  const { content, textStyles } = textNode;
+export function createStringAttributes(textStyles: TextStyle): Object {
   const font = findFont(textStyles);
 
   const color = makeColorFromCSS(textStyles.color || 'black');
@@ -126,6 +126,14 @@ function createString(textNode: TextNode): NSAttributedString {
       TEXT_TRANSFORM[textStyles.textTransform] * 1;
   }
 
+  return attribs;
+}
+
+function createAttributedString(textNode: TextNode): NSAttributedString {
+  const { content, textStyles } = textNode;
+
+  const attribs = createStringAttributes(textStyles);
+
   return NSAttributedString.attributedStringWithString_attributes_(
     content,
     attribs
@@ -137,7 +145,7 @@ export function makeAttributedString(textNodes: TextNodes) {
   const fullStr = NSMutableAttributedString.alloc().init();
 
   textNodes.forEach((textNode) => {
-    const newString = createString(textNode);
+    const newString = createAttributedString(textNode);
     fullStr.appendAttributedString(newString);
   });
 

@@ -5,9 +5,11 @@ import findFont from './findFont';
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const measureString = (textNode: TextNode, width: number) => {
+const measureString = (textNode: TextNode) => {
   const { content, textStyles } = textNode;
+
   const font = findFont(textStyles);
+
   const attributes = {
     [NSFontAttributeName]: font,
   };
@@ -29,7 +31,7 @@ const measureString = (textNode: TextNode, width: number) => {
   const rect = NSString.alloc()
     .initWithString(content)
     .boundingRectWithSize_options_attributes_context(
-      CGSizeMake(width, FLOAT_MAX),
+      CGSizeMake(0, FLOAT_MAX),
       NSStringDrawingUsesLineFragmentOrigin,
       attributes,
       null
@@ -55,11 +57,15 @@ const createStringMeasurer = (textNodes: TextNodes) => (
     );
     measurements.forEach((measure) => {
       const { height: measureHeight, width: measureWidth } = measure;
-      newWidth += measureWidth;
+      // Add up all measured widths
+      newWidth += Math.ceil(measureWidth);
+      // Find the largest measured height
       if (measureHeight > newHeight) {
         newHeight = measureHeight;
       }
     });
+    // Calculate height based on number of line wraps
+    newHeight *= Math.ceil(newWidth / width);
   }
 
   return { width: newWidth, height: newHeight };
