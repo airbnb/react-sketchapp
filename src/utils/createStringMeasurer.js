@@ -45,9 +45,6 @@ const measureString = (textNode: TextNode, width: number) => {
 
 const createStringMeasurer = (textNodes: TextNodes) => (
   width: number
-  // widthMode,
-  // height: number,
-  // heightMode,
 ): Size => {
   let newHeight = 0;
   let newWidth = 0;

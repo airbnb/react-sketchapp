@@ -5,7 +5,6 @@ import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
 import computeTree from './jsonUtils/computeTree';
-import createStringMeasurer from './utils/createStringMeasurer';
 import computeTextTree from './jsonUtils/computeTextTree';
 import {
   INHERITABLE_FONT_STYLES,
@@ -44,7 +43,7 @@ const reactTreeToFlexTree = (
 
     // Handle Text Children
     const textNodes = computeTextTree(node, context);
-    const layout = createStringMeasurer(textNodes)(0);
+    const layout = yogaNode ? yogaNode.getComputedLayout() : {};
 
     return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
       type: 'text',
