@@ -26,28 +26,8 @@ export const INHERITABLE_FONT_STYLES = [
   'writingDirection',
 ];
 
-export const SKETCH_TREE_OBJECT_STUB = {
-  type: null,
-  style: {},
-  layout: {
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: 0,
-    height: 0,
-  },
-  textStyle: {},
-  props: {},
-  value: null,
-  children: [],
-};
+// Only components that are allowed as children of <Text> components
+export const VALID_TEXT_CHILDREN_TYPES = ['text'];
 
-// Components that are not allowed within <Text> components
-export const INVALID_TEXT_CHILDREN_TYPES = [
-  'image',
-  'artboard',
-  'view',
-  'document',
-  'page',
-];
+// Font displayed if San Francisco fonts are not found
+export const APPLE_BROKEN_SYSTEM_FONT = '.AppleSystemUIFont';

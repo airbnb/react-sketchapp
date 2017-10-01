@@ -6,10 +6,7 @@ import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
 import computeTree from './jsonUtils/computeTree';
 import computeTextTree from './jsonUtils/computeTextTree';
-import {
-  INHERITABLE_FONT_STYLES,
-  SKETCH_TREE_OBJECT_STUB,
-} from './utils/constants';
+import { INHERITABLE_FONT_STYLES } from './utils/constants';
 
 const allStringsOrNumbers = xs =>
   xs.every(x => typeof x === 'string' || typeof x === 'number');
@@ -63,7 +60,7 @@ const reactTreeToFlexTree = (
     }
   }
 
-  return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
+  return {
     type,
     style,
     textStyle,
@@ -80,7 +77,7 @@ const reactTreeToFlexTree = (
       textNodes,
     },
     children: newChildren,
-  });
+  };
 };
 
 const buildTree = (element: React$Element<any>): TreeNode => {
