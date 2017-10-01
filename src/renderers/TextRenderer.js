@@ -18,9 +18,12 @@ class TextRenderer extends SketchRenderer {
   ): Array<SketchLayer> {
     // Append all text nodes's content into one string
     let name = '';
-    props.textNodes.forEach((textNode) => {
-      name += textNode.content;
-    });
+    if (props.textNodes) {
+      props.textNodes.forEach((textNode) => {
+        name += textNode.content;
+      });
+    }
+
     if (name === '') {
       const viewRenderer = new ViewRenderer();
       return viewRenderer.renderBackingLayers(
