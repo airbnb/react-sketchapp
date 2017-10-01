@@ -42,3 +42,12 @@ export const SKETCH_TREE_OBJECT_STUB = {
   value: null,
   children: [],
 };
+
+// Components that are not allowed within <Text> components
+export const INVALID_TEXT_CHILDREN_TYPES = [
+  'image',
+  'artboard',
+  'view',
+  'document',
+  'page',
+];

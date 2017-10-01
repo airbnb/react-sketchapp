@@ -21,8 +21,14 @@ const reactTreeToFlexTree = (
   yogaNode: yoga.NodeInstance,
   context: Context
 ) => {
-  let textStyle;
+  let textNodes;
+  let textStyle = context.getInheritedStyles();
   const style = node.props.style || {};
+
+  const children = Array.isArray(node.children)
+    ? processChildren(node.children)
+    : null;
+  const newChildren = [];
 
   if (node.type === 'text') {
     // If current node is a Text node, add text styles to Context to pass down to
@@ -41,37 +47,9 @@ const reactTreeToFlexTree = (
       };
     }
 
-    // Handle Text Children
-    const textNodes = computeTextTree(node, context);
-    const layout = yogaNode ? yogaNode.getComputedLayout() : {};
-
-    return Object.assign({}, SKETCH_TREE_OBJECT_STUB, {
-      type: 'text',
-      style,
-      props: {
-        ...node.props,
-        textNodes,
-      },
-      layout: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        width: layout.width || 0,
-        height: layout.height || 0,
-      },
-      textStyle,
-    });
-  }
-
-  textStyle = context.getInheritedStyles();
-
-  const children = Array.isArray(node.children)
-    ? processChildren(node.children)
-    : null;
-  const newChildren = [];
-
-  if (children && node.type !== 'text') {
+    // Compute Text Children
+    textNodes = computeTextTree(node, context);
+  } else if (children) {
     for (let index = 0; index < children.length; index += 1) {
       const childComponent = children[index];
       const childNode = yogaNode.getChild(index);
@@ -96,7 +74,10 @@ const reactTreeToFlexTree = (
       width: yogaNode.getComputedWidth(),
       height: yogaNode.getComputedHeight(),
     },
-    props: node.props,
+    props: {
+      ...node.props,
+      textNodes,
+    },
     children: newChildren,
   });
 };

@@ -1,12 +1,19 @@
 // @flow
 import type { TreeNode } from '../types';
 import type Context from '../utils/Context';
+import { INVALID_TEXT_CHILDREN_TYPES } from '../utils/constants';
 
 const walkTextTree = (
   textTree: TreeNode,
   context: Context,
   textNodes: Array<Object>
 ) => {
+  if (INVALID_TEXT_CHILDREN_TYPES.includes(textTree.type)) {
+    throw new Error(
+      `"${textTree.type}" is not a valid child for Text components`
+    );
+  }
+
   if (typeof textTree === 'string') {
     textNodes.push({
       textStyles: context.getInheritedStyles(),
