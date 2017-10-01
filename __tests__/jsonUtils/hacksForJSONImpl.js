@@ -5,8 +5,8 @@ describe('API', () => {
     expect(hacks.makeImageDataFromUrl).toBeInstanceOf(Function);
   });
 
-  it('exports makeAttributedString', () => {
-    expect(hacks.makeAttributedString).toBeInstanceOf(Function);
+  it('exports makeEncodedAttributedString', () => {
+    expect(hacks.makeEncodedAttributedString).toBeInstanceOf(Function);
   });
 
   it('exports makeTextStyle', () => {

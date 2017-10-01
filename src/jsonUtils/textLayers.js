@@ -1,6 +1,6 @@
 /* @flow */
 import type { SJRect, SJTextLayer } from 'sketchapp-json-flow-types';
-import { makeAttributedString } from './hacksForJSONImpl';
+import { makeEncodedAttributedString } from './hacksForJSONImpl';
 import type { TextNode } from '../types';
 import { generateID } from './models';
 
@@ -22,7 +22,7 @@ const makeTextLayer = (
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,
-  attributedString: makeAttributedString(textNodes),
+  attributedString: makeEncodedAttributedString(textNodes),
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,
   // NOTE(akp): I haven't fully figured out the meaning of glyphBounds

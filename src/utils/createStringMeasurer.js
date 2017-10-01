@@ -1,71 +1,36 @@
 /* @flow */
-import type { TextNode, TextNodes, Size } from '../types';
-import findFont from './findFont';
+import type { TextNodes, Size } from '../types';
+import { createAttributedString } from '../jsonUtils/hacksForJSONImpl';
 
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const measureString = (textNode: TextNode) => {
-  const { content, textStyles } = textNode;
-
-  const font = findFont(textStyles);
-
-  const attributes = {
-    [NSFontAttributeName]: font,
-  };
-
-  if (textStyles.lineHeight !== undefined) {
-    // NOTE(gold): Visual explanation of NSParagraphStyle
-    // https://medium.com/@at_underscore/nsparagraphstyle-explained-visually-a8659d1fbd6f
-    const paragraphStyle = NSMutableParagraphStyle.alloc().init();
-    paragraphStyle.minimumLineHeight = textStyles.lineHeight;
-    paragraphStyle.lineHeightMultiple = 1.0;
-    paragraphStyle.maximumLineHeight = textStyles.lineHeight;
-    attributes[NSParagraphStyleAttributeName] = paragraphStyle;
-  }
-
-  if (textStyles.letterSpacing !== undefined) {
-    attributes[NSKernAttributeName] = textStyles.letterSpacing;
-  }
-
-  const rect = NSString.alloc()
-    .initWithString(content)
-    .boundingRectWithSize_options_attributes_context(
-      CGSizeMake(0, FLOAT_MAX),
-      NSStringDrawingUsesLineFragmentOrigin,
-      attributes,
-      null
-    );
-
-  // TODO(lmr): handle other widthModes, and height/heightModes
-
-  return {
-    width: 0 + rect.size.width,
-    height: 0 + rect.size.height,
-  };
-};
-
 const createStringMeasurer = (textNodes: TextNodes) => (
-  width: number
+  width: number = 0
 ): Size => {
+  // width would be obj-c NaN and the only way to check for it is by comparing
+  // width to itself (because NaN !== NaN)
+  // eslint-disable-next-line no-self-compare
+  const _width = width !== width ? 0 : width;
   let newHeight = 0;
-  let newWidth = 0;
+  let newWidth = _width;
 
   if (textNodes.length > 0) {
-    const measurements = textNodes.map(textNode =>
-      measureString(textNode, width)
-    );
-    measurements.forEach((measure) => {
-      const { height: measureHeight, width: measureWidth } = measure;
-      // Add up all measured widths
-      newWidth += Math.ceil(measureWidth);
-      // Find the largest measured height
-      if (measureHeight > newHeight) {
-        newHeight = measureHeight;
-      }
+    const fullStr = NSMutableAttributedString.alloc().init();
+    textNodes.forEach((textNode) => {
+      const newString = createAttributedString(textNode);
+      fullStr.appendAttributedString(newString);
     });
-    // Calculate height based on number of line wraps
-    newHeight *= Math.ceil(newWidth / width);
+    const {
+      height: measureHeight,
+      width: measureWidth,
+    } = fullStr.boundingRectWithSize_options_context(
+      CGSizeMake(_width, FLOAT_MAX),
+      NSStringDrawingUsesLineFragmentOrigin,
+      null
+    ).size;
+    newHeight = measureHeight;
+    newWidth = measureWidth;
   }
 
   return { width: newWidth, height: newHeight };

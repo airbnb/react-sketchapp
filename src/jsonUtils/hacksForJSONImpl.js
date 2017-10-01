@@ -106,6 +106,7 @@ export function createStringAttributes(textStyles: TextStyle): Object {
 
   const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
+    NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
     NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
       color.red,
@@ -129,7 +130,7 @@ export function createStringAttributes(textStyles: TextStyle): Object {
   return attribs;
 }
 
-function createAttributedString(textNode: TextNode): NSAttributedString {
+export function createAttributedString(textNode: TextNode): NSAttributedString {
   const { content, textStyles } = textNode;
 
   const attribs = createStringAttributes(textStyles);
@@ -141,7 +142,7 @@ function createAttributedString(textNode: TextNode): NSAttributedString {
 }
 
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(
-export function makeAttributedString(textNodes: TextNodes) {
+export function makeEncodedAttributedString(textNodes: TextNodes) {
   const fullStr = NSMutableAttributedString.alloc().init();
 
   textNodes.forEach((textNode) => {
@@ -167,6 +168,7 @@ export function makeTextStyle(textStyle: TextStyle) {
     _class: 'textStyle',
     encodedAttributes: {
       MSAttributedStringFontAttribute: encodeSketchJSON(font.fontDescriptor()),
+      NSFont: font,
       NSColor: encodeSketchJSON(
         NSColor.colorWithDeviceRed_green_blue_alpha(
           color.red,
