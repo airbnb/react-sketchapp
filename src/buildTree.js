@@ -8,11 +8,6 @@ import computeTree from './jsonUtils/computeTree';
 import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
 
-const allStringsOrNumbers = xs =>
-  xs.every(x => typeof x === 'string' || typeof x === 'number');
-
-const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
-
 const reactTreeToFlexTree = (
   node: TreeNode,
   yogaNode: yoga.NodeInstance,
@@ -23,9 +18,6 @@ const reactTreeToFlexTree = (
   const style = node.props && node.props.style ? node.props.style : {};
   const type = node.type || 'text';
 
-  const children = Array.isArray(node.children)
-    ? processChildren(node.children)
-    : null;
   const newChildren = [];
 
   if (type === 'text') {
@@ -47,10 +39,18 @@ const reactTreeToFlexTree = (
 
     // Compute Text Children
     textNodes = computeTextTree(node, context);
-  } else if (children) {
-    for (let index = 0; index < children.length; index += 1) {
-      const childComponent = children[index];
-      const childNode = yogaNode.getChild(index);
+  } else if (node.children && node.children.length > 0) {
+    // Recursion reverses the render stacking order, this corrects that.
+    node.children.reverse();
+
+    for (let index = 0; index < node.children.length; index += 1) {
+      const childComponent = node.children[index];
+
+      // Since we reversed the order of node.children above, we need to keep
+      // track of a decrementing index to get the correct Yoga node
+      const decrementIndex = node.children.length - 1 - index;
+      const childNode = yogaNode.getChild(decrementIndex);
+
       const renderedChildComponent = reactTreeToFlexTree(
         childComponent,
         childNode,
