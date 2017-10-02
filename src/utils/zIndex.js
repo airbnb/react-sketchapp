@@ -10,9 +10,13 @@ const zIndex = (nodes: Array<TreeNode>, reverse: boolean = false) =>
     }))
     .sort((a, b) => {
       const aIndex =
-        a.props.style && a.props.style.zIndex ? a.props.style.zIndex : 0;
+        a.props && a.props.style && a.props.style.zIndex
+          ? a.props.style.zIndex
+          : 0;
       const bIndex =
-        b.props.style && b.props.style.zIndex ? b.props.style.zIndex : 0;
+        b.props && b.props.style && b.props.style.zIndex
+          ? b.props.style.zIndex
+          : 0;
       return reverse ? aIndex - bIndex : bIndex - aIndex;
     });
 

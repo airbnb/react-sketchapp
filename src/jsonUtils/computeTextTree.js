@@ -8,7 +8,10 @@ const walkTextTree = (
   context: Context,
   textNodes: Array<Object>
 ) => {
-  if (!VALID_TEXT_CHILDREN_TYPES.includes(textTree.type)) {
+  if (
+    typeof textTree !== 'string' &&
+    !VALID_TEXT_CHILDREN_TYPES.includes(textTree.type)
+  ) {
     throw new Error(
       `"${textTree.type}" is not a valid child for Text components`
     );
@@ -22,7 +25,7 @@ const walkTextTree = (
   }
 
   if (textTree.children) {
-    if (textTree.props.style) {
+    if (textTree.props && textTree.props.style) {
       context.addInheritableStyles(textTree.props.style);
     }
     for (let index = 0; index < textTree.children.length; index += 1) {
