@@ -41,10 +41,7 @@ const Photo = () => (
 const PhotoSym = makeSymbol(Photo);
 
 const Nested = () => (
-  <View
-    name="Multi"
-    style={{ display: 'flex', flexDirection: 'column', width: 75, height: 150 }}
-  >
+  <View name="Multi" style={{ display: 'flex', flexDirection: 'column' }}>
     <PhotoSym name="Photo Instance" style={{ width: 75, height: 75 }} />
     <RedSquareSym
       name="Red Square Instance"
@@ -60,7 +57,6 @@ export default () => {
     <Artboard name="Swatches" style={{ display: 'flex' }}>
       <NestedSym
         name="Nested Symbol"
-        style={{ width: 75, height: 150 }}
         overrides={{
           'Red Square Instance': BlueSquareSym,
           'Blue Square Text': 'TESTING',

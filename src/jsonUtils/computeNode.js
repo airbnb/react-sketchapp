@@ -7,6 +7,7 @@ import hasAnyDefined from '../utils/hasAnyDefined';
 import pick from '../utils/pick';
 import computeTextTree from './computeTextTree';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
+import { getSymbolMasterByName } from '../symbol';
 
 // flatten all styles (including nested) into one object
 const getStyles = (node: TreeNode): ViewStyle | Object => {
@@ -31,6 +32,14 @@ const computeNode = (
   const yogaNode = yoga.Node.create();
   const hasStyle = node.props && node.props.style;
   const style: ViewStyle | Object = hasStyle ? getStyles(node) : {};
+
+  // Setup default symbol instance dimensions
+  if (node.type === 'symbolinstance') {
+    const symbolProps = node.props;
+    const { frame } = getSymbolMasterByName(symbolProps.masterName);
+    yogaNode.setWidth(frame.width);
+    yogaNode.setHeight(frame.height);
+  }
 
   if (hasStyle) {
     // http://facebook.github.io/react-native/releases/0.48/docs/layout-props.html
