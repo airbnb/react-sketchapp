@@ -100,7 +100,7 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
 };
 
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(
-export function createStringAttributes(textStyles: TextStyle): Object {
+function createStringAttributes(textStyles: TextStyle): Object {
   const font = findFont(textStyles);
 
   const color = makeColorFromCSS(textStyles.color || 'black');

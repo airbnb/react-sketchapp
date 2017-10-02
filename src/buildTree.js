@@ -4,7 +4,7 @@ import Context from './utils/Context';
 import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
-import computeTree from './jsonUtils/computeTree';
+import computeYogaTree from './jsonUtils/computeYogaTree';
 import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
 import zIndex from './utils/zIndex';
@@ -41,18 +41,19 @@ const reactTreeToFlexTree = (
     // Compute Text Children
     textNodes = computeTextTree(node, context);
   } else if (node.children && node.children.length > 0) {
-    // Recursion reverses the render stacking order, this corrects that and
+    // Recursion reverses the render stacking order, this corrects that
     node.children.reverse();
 
     // Calculates zIndex order
-    const children = zIndex(node.children);
+    const children = zIndex(node.children, true);
 
     for (let index = 0; index < children.length; index += 1) {
       const childComponent = children[index];
 
-      // Since we reversed the order of node.children above, we need to keep
-      // track of a decrementing index to get the correct Yoga node
-      const decrementIndex = children.length - 1 - index;
+      // Since we reversed the order of children and sorted by zIndex, we need
+      // to keep track of a decrementing index using the original index of the
+      // TreeNode to get the correct nodes
+      const decrementIndex = children.length - 1 - childComponent.oIndex;
       const childNode = yogaNode.getChild(decrementIndex);
 
       const renderedChildComponent = reactTreeToFlexTree(
@@ -87,7 +88,7 @@ const reactTreeToFlexTree = (
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
-  const yogaNode = computeTree(json, new Context());
+  const yogaNode = computeYogaTree(json, new Context());
   yogaNode.calculateLayout(yoga.UNDEFINED, yoga.UNDEFINED, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());
 

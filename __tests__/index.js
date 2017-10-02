@@ -17,6 +17,12 @@ describe('public API', () => {
   it('exports StyleSheet', () => {
     expect(ReactSketch.StyleSheet).toBeDefined();
   });
+  it('exports Document', () => {
+    expect(ReactSketch.Document).toBeDefined();
+  });
+  it('exports Page', () => {
+    expect(ReactSketch.Page).toBeDefined();
+  });
   it('exports Artboard', () => {
     expect(ReactSketch.Artboard).toBeDefined();
   });

@@ -7,10 +7,11 @@ import hasAnyDefined from '../utils/hasAnyDefined';
 import pick from '../utils/pick';
 import computeTextTree from './computeTextTree';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
+import isNullOrUndefined from '../utils/isNullOrUndefined';
 import { getSymbolMasterByName } from '../symbol';
 
 // flatten all styles (including nested) into one object
-const getStyles = (node: TreeNode): ViewStyle | Object => {
+export const getStyles = (node: TreeNode): ViewStyle | Object => {
   let style = node.props.style;
 
   if (Array.isArray(style)) {
@@ -23,12 +24,10 @@ const getStyles = (node: TreeNode): ViewStyle | Object => {
   return style;
 };
 
-const isNullOrUndefined = (value: any) => value === null || value === undefined;
-
-const computeNode = (
+const computeYogaNode = (
   node: TreeNode,
   context: Context
-): { node: yoga.NodeInstance, stop?: boolean } => {
+): { node: TreeNode, stop?: boolean } => {
   const yogaNode = yoga.Node.create();
   const hasStyle = node.props && node.props.style;
   const style: ViewStyle | Object = hasStyle ? getStyles(node) : {};
@@ -334,4 +333,4 @@ const computeNode = (
   return { node: yogaNode };
 };
 
-export default computeNode;
+export default computeYogaNode;

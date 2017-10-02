@@ -5,6 +5,10 @@ describe('API', () => {
     expect(hacks.makeImageDataFromUrl).toBeInstanceOf(Function);
   });
 
+  it('exports makeImageDataFromUrl', () => {
+    expect(hacks.createAttributedString).toBeInstanceOf(Function);
+  });
+
   it('exports makeEncodedAttributedString', () => {
     expect(hacks.makeEncodedAttributedString).toBeInstanceOf(Function);
   });

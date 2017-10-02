@@ -7,25 +7,10 @@ import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/hacksForJSONImpl';
 import pick from '../utils/pick';
+import { INHERITABLE_FONT_STYLES } from '../utils/constants';
 
 type MurmurHash = number;
 type SketchObjectID = string;
-// stored styles
-const INHERITABLE_STYLES = [
-  'color',
-  'fontFamily',
-  'fontSize',
-  'fontStyle',
-  'fontWeight',
-  'textShadowOffset',
-  'textShadowRadius',
-  'textShadowColor',
-  'textTransform',
-  'letterSpacing',
-  'lineHeight',
-  'textAlign',
-  'writingDirection',
-];
 
 type StyleHash = { [key: MurmurHash]: SketchStyle };
 
@@ -33,14 +18,14 @@ type RegisteredStyle = {|
   cssStyle: TextStyle,
   name: string,
   sketchStyle: SJStyle,
-  sharedObjectID: SketchObjectID,
+  sharedObjectID: SketchObjectID
 |};
 
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
 
 const registerStyle = (name: string, style: TextStyle): void => {
-  const safeStyle = pick(style, INHERITABLE_STYLES);
+  const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
   const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
@@ -58,10 +43,13 @@ const registerStyle = (name: string, style: TextStyle): void => {
 
 type Options = {
   clearExistingStyles?: boolean,
-  context: SketchContext,
+  context: SketchContext
 };
 
-const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
+const create = (
+  options: Options,
+  styles: { [key: string]: TextStyle }
+): StyleHash => {
   const { clearExistingStyles, context } = options;
 
   if (!appVersionSupported()) {

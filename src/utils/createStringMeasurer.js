@@ -36,4 +36,4 @@ const createStringMeasurer = (textNodes: TextNodes) => (
   return { width: newWidth, height: newHeight };
 };
 
-module.exports = createStringMeasurer;
+export default createStringMeasurer;
