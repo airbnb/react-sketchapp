@@ -28,5 +28,5 @@ fs.readFile(filePath, 'utf8', (err, data) => {
   });
 
   //eslint-disable-next-line
-  return console.log("Successfully read yoga-layout asm.js file");
+  return console.log("Reading yoga-layout asm.js file...");
 });
