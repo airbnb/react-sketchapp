@@ -1,14 +1,19 @@
 // @flow
 import * as yoga from 'yoga-layout';
 import computeNode from './computeNode';
+import type { TreeNode } from '../types';
 import Context from '../utils/Context';
+import zIndex from '../utils/zIndex';
 
-const walkTree = (tree: yoga.NodeInstance, context: Context) => {
+const walkTree = (tree: TreeNode, context: Context) => {
   const { node, stop } = computeNode(tree, context);
 
   if (tree.children && tree.children.length > 0) {
-    for (let index = 0; index < tree.children.length; index += 1) {
-      const childComponent = tree.children[index];
+    // Calculates zIndex order
+    const children = zIndex(tree.children, true);
+
+    for (let index = 0; index < children.length; index += 1) {
+      const childComponent = children[index];
       // Avoid going into <text> node's children
       if (!stop) {
         const childNode = walkTree(childComponent, context.forChildren());
@@ -19,7 +24,7 @@ const walkTree = (tree: yoga.NodeInstance, context: Context) => {
 
   return node;
 };
-const treeToNodes = (root: yoga.NodeInstance, context: Context) =>
+const treeToNodes = (root: TreeNode, context: Context): yoga.NodeInstance =>
   walkTree(root, context);
 
 export default treeToNodes;

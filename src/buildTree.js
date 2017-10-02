@@ -7,6 +7,7 @@ import pick from './utils/pick';
 import computeTree from './jsonUtils/computeTree';
 import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
+import zIndex from './utils/zIndex';
 
 const reactTreeToFlexTree = (
   node: TreeNode,
@@ -40,15 +41,18 @@ const reactTreeToFlexTree = (
     // Compute Text Children
     textNodes = computeTextTree(node, context);
   } else if (node.children && node.children.length > 0) {
-    // Recursion reverses the render stacking order, this corrects that.
+    // Recursion reverses the render stacking order, this corrects that and
     node.children.reverse();
 
-    for (let index = 0; index < node.children.length; index += 1) {
-      const childComponent = node.children[index];
+    // Calculates zIndex order
+    const children = zIndex(node.children);
+
+    for (let index = 0; index < children.length; index += 1) {
+      const childComponent = children[index];
 
       // Since we reversed the order of node.children above, we need to keep
       // track of a decrementing index to get the correct Yoga node
-      const decrementIndex = node.children.length - 1 - index;
+      const decrementIndex = children.length - 1 - index;
       const childNode = yogaNode.getChild(decrementIndex);
 
       const renderedChildComponent = reactTreeToFlexTree(
