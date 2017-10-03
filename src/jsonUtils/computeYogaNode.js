@@ -120,26 +120,20 @@ const computeYogaNode = (
     }
 
     // Border
-    if (!isNullOrUndefined(style.borderTop)) {
-      yogaNode.setBorder(yoga.EDGE_TOP, style.borderTop);
+    if (!isNullOrUndefined(style.borderTopWidth)) {
+      yogaNode.setBorder(yoga.EDGE_TOP, style.borderTopWidth);
     }
-    if (!isNullOrUndefined(style.borderBottom)) {
-      yogaNode.setBorder(yoga.EDGE_BOTTOM, style.borderBottom);
+    if (!isNullOrUndefined(style.borderBottomWidth)) {
+      yogaNode.setBorder(yoga.EDGE_BOTTOM, style.borderBottomWidth);
     }
-    if (!isNullOrUndefined(style.borderLeft)) {
-      yogaNode.setBorder(yoga.EDGE_LEFT, style.borderLeft);
+    if (!isNullOrUndefined(style.borderLeftWidth)) {
+      yogaNode.setBorder(yoga.EDGE_LEFT, style.borderLeftWidth);
     }
-    if (!isNullOrUndefined(style.borderRight)) {
-      yogaNode.setBorder(yoga.EDGE_RIGHT, style.borderRight);
+    if (!isNullOrUndefined(style.borderRightWidth)) {
+      yogaNode.setBorder(yoga.EDGE_RIGHT, style.borderRightWidth);
     }
-    if (!isNullOrUndefined(style.borderVertical)) {
-      yogaNode.setBorder(yoga.EDGE_VERTICAL, style.borderVertical);
-    }
-    if (!isNullOrUndefined(style.borderHorizontal)) {
-      yogaNode.setBorder(yoga.EDGE_HORIZONTAL, style.borderHorizontal);
-    }
-    if (!isNullOrUndefined(style.border)) {
-      yogaNode.setBorder(yoga.EDGE_ALL, style.border);
+    if (!isNullOrUndefined(style.borderWidth)) {
+      yogaNode.setBorder(yoga.EDGE_ALL, style.borderWidth);
     }
 
     // Flex

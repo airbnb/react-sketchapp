@@ -145,7 +145,7 @@ describe('Compute Yoga Node', () => {
   });
 
   it('correctly handles border', () => {
-    const stylesToTest = [{ border: 10 }, { border: 0 }];
+    const stylesToTest = [{ borderWidth: 10 }, { borderWidth: 0 }];
     const [numberNode, noneNode] = createYogaNodes(stylesToTest);
 
     expect(numberNode).toEqual({
