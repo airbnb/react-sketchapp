@@ -1,6 +1,5 @@
 /* @flow */
 import SketchRenderer from './SketchRenderer';
-import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 import makeTextLayer from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
@@ -22,17 +21,6 @@ class TextRenderer extends SketchRenderer {
       props.textNodes.forEach((textNode) => {
         name += textNode.content;
       });
-    }
-
-    if (name === '') {
-      const viewRenderer = new ViewRenderer();
-      return viewRenderer.renderBackingLayers(
-        layout,
-        style,
-        textStyle,
-        props,
-        name
-      );
     }
 
     const frame = makeRect(0, 0, layout.width, layout.height);
