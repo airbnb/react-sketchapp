@@ -104,7 +104,7 @@ const RESIZE_CONSTRAINTS = {
 // https://github.com/airbnb/react-sketchapp/pull/73#discussion_r108529703
 function encodeSketchJSON(sketchObj) {
   const encoded = toSJSON(sketchObj);
-  return JSON.parse(encoded);
+  return encoded ? JSON.parse(encoded) : {};
 }
 
 function makeParagraphStyle(textStyle) {
@@ -196,7 +196,17 @@ export function makeResizeConstraint(
     }
 
     if (constraints.length > 0) {
-      return RESIZE_CONSTRAINTS[constraints.join('_')];
+      const constraint = RESIZE_CONSTRAINTS[constraints.join('_')];
+      if (!constraint) {
+        throw new Error(
+          `\n${JSON.stringify(
+            resizingConstraint,
+            null,
+            2
+          )}\nconstraint is not a valid combination.`
+        );
+      }
+      return constraint;
     }
   }
 
