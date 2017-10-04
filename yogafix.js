@@ -5,11 +5,14 @@
  * the script to compile correctly.
 */
 const fs = require('fs');
+const path = require('path');
 
 // Location of asm.js yoga-layout file
-const filePath = './node_modules/yoga-layout/build/Release/nbind.js';
+const asmPath = 'node_modules/yoga-layout/build/Release/nbind.js';
+const filePath = path.join(__dirname, asmPath);
+const workspaceFilePath = path.join(__dirname, '../../', asmPath);
 // Regex for {}("")
-const contentToReplacce = /\{\}\(""\)/g;
+const contentToReplace = /\{\}\(""\)/g;
 const replacement = '{}';
 const fileEncoding = 'utf8';
 
@@ -17,13 +20,13 @@ const SUCCESS_MESSAGE = 'Successfully fixed yoga-layout asm.js file';
 
 fs.readFile(filePath, 'utf8', (err, data) => {
   if (err) {
-    return fs.readFile(filePath, 'utf8', (err2, data2) => {
+    return fs.readFile(workspaceFilePath, 'utf8', (err2, data2) => {
       if (err2) {
         return console.error(err2); //eslint-disable-line
       }
 
-      const result = data2.replace(contentToReplacce, replacement);
-      return fs.writeFile(filePath, result, fileEncoding, (error) => {
+      const result = data2.replace(contentToReplace, replacement);
+      return fs.writeFile(workspaceFilePath, result, fileEncoding, (error) => {
         if (error) {
           return console.error(error); //eslint-disable-line
         }
@@ -33,7 +36,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     });
   }
 
-  const result = data.replace(contentToReplacce, replacement);
+  const result = data.replace(contentToReplace, replacement);
   fs.writeFile(filePath, result, fileEncoding, (error) => {
     if (error) {
       return console.error(error); //eslint-disable-line
