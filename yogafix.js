@@ -13,9 +13,24 @@ const contentToReplacce = /\{\}\(""\)/g;
 const replacement = '{}';
 const fileEncoding = 'utf8';
 
+const SUCCESS_MESSAGE = 'Successfully fixed yoga-layout asm.js file';
+
 fs.readFile(filePath, 'utf8', (err, data) => {
   if (err) {
-    return console.error(err); //eslint-disable-line
+    return fs.readFile(filePath, 'utf8', (err2, data2) => {
+      if (err2) {
+        return console.error(err2); //eslint-disable-line
+      }
+
+      const result = data2.replace(contentToReplacce, replacement);
+      return fs.writeFile(filePath, result, fileEncoding, (error) => {
+        if (error) {
+          return console.error(error); //eslint-disable-line
+        }
+        //eslint-disable-next-line
+        return console.log(SUCCESS_MESSAGE);
+      });
+    });
   }
 
   const result = data.replace(contentToReplacce, replacement);
@@ -24,7 +39,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
       return console.error(error); //eslint-disable-line
     }
     //eslint-disable-next-line
-    return console.log("Successfully fixed yoga-layout asm.js file");
+    return console.log(SUCCESS_MESSAGE);
   });
 
   //eslint-disable-next-line
