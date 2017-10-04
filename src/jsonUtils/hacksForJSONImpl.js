@@ -102,7 +102,7 @@ const RESIZE_CONSTRAINTS = {
 
 // NOTE(gold): toSJSON doesn't recursively parse JS objects
 // https://github.com/airbnb/react-sketchapp/pull/73#discussion_r108529703
-function encodeSketchJSON(sketchObj) {
+function encodeSketchJSON(sketchObj): Object {
   const encoded = toSJSON(sketchObj);
   return encoded ? JSON.parse(encoded) : {};
 }
@@ -214,7 +214,10 @@ export function makeResizeConstraint(
 }
 
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(
-export function makeAttributedString(string: ?string, textStyle: TextStyle) {
+export function makeAttributedString(
+  string: ?string,
+  textStyle: TextStyle
+): MSAttributedString {
   const font = findFont(textStyle);
 
   const color = makeColorFromCSS(textStyle.color || 'black');
