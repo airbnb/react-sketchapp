@@ -166,6 +166,38 @@ describe('Compute Yoga Node', () => {
     });
   });
 
+  it('correctly handles flex: 0, number', () => {
+    const stylesToTest = [{ flex: 1 }, { flex: 0 }];
+    const [numberNode, noneNode] = createYogaNodes(stylesToTest);
+
+    expect(numberNode.width).toEqual(0);
+    expect(noneNode.width).toEqual(0);
+  });
+
+  it('correctly handles flexGrow: 0, number', () => {
+    const stylesToTest = [{ flexGrow: 1 }, { flexGrow: 0 }];
+    const [numberNode, noneNode] = createYogaNodes(stylesToTest);
+
+    expect(numberNode.width).toEqual(0);
+    expect(noneNode.width).toEqual(0);
+  });
+
+  it('correctly handles flexShrink: 0, number', () => {
+    const stylesToTest = [{ flexShrink: 1 }, { flexShrink: 0 }];
+    const [numberNode, noneNode] = createYogaNodes(stylesToTest);
+
+    expect(numberNode.width).toEqual(0);
+    expect(noneNode.width).toEqual(0);
+  });
+
+  it('correctly handles flexBasis: 0, number', () => {
+    const stylesToTest = [{ flexBasis: 1 }, { flexBasis: 0 }];
+    const [numberNode, noneNode] = createYogaNodes(stylesToTest);
+
+    expect(numberNode.width).toEqual(0);
+    expect(noneNode.width).toEqual(0);
+  });
+
   it('correctly handles position: relative & absolute', () => {
     const stylesToTest = [
       { position: 'relative', left: 10 },
