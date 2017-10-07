@@ -279,7 +279,7 @@ const computeYogaNode = (
     // Align Self
     if (style.alignSelf) {
       if (style.alignSelf === 'flex-start') {
-        yogaNode.setAlignSelf(yoga.ALIGN_FLEX_END);
+        yogaNode.setAlignSelf(yoga.ALIGN_FLEX_START);
       }
       if (style.alignSelf === 'flex-end') {
         yogaNode.setAlignSelf(yoga.ALIGN_FLEX_END);
