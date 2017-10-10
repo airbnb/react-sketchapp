@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react';
-import { Text } from 'react-primitives';
+import { Text, View } from 'react-primitives';
 import { spacing, colors, fontFamily } from '../designSystem';
 
 type Props = {
   label: string,
-  backgroundColor: string,
+  backgroundColor: string
 };
 
 const buttonStyle = {
@@ -13,17 +13,21 @@ const buttonStyle = {
   boxSizing: 'border-box',
   color: colors.White,
   cursor: 'pointer',
-  fontFamily,
-  fontWeight: 'bold',
   padding: spacing.Medium,
-  textAlign: 'center',
   width: 300,
 };
 
+const textStyle = {
+  color: colors.White,
+  fontFamily,
+  fontWeight: 'bold',
+  textAlign: 'center',
+};
+
 const Button = ({ label, backgroundColor }: Props) => (
-  <Text style={{ ...buttonStyle, backgroundColor }}>
-    {label}
-  </Text>
+  <View style={{ ...buttonStyle, backgroundColor }}>
+    <Text style={{ ...textStyle }}>{label}</Text>
+  </View>
 );
 
 export default Button;

@@ -546,7 +546,7 @@ const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
 const Photo = () => (
   <Image
     name="Photo"
-    source="https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg"
+    source="https://pbs.twimg.com/profile_images/895665264464764930/7Mb3QtEB_400x400.jpg"
     style={{ width: 100, height: 100 }}
   />
 );

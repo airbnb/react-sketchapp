@@ -1,51 +1,39 @@
 /* @flow */
-import { TextStyle, Size } from '../types';
-import findFont from './findFont';
+import type { TextNodes, Size } from '../types';
+import { createAttributedString } from '../jsonUtils/hacksForJSONImpl';
 
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const createStringMeasurer = (string: string, style: TextStyle) =>
-  (
-    width: number,
-    // widthMode: MeasureMode
-    // height: number,
-    // heightMode: MeasureMode
-  ): Size => {
-    const font = findFont(style);
-    const attributes = {
-      [NSFontAttributeName]: font,
-    };
+const createStringMeasurer = (textNodes: TextNodes) => (
+  width: number = 0
+): Size => {
+  // width would be obj-c NaN and the only way to check for it is by comparing
+  // width to itself (because NaN !== NaN)
+  // eslint-disable-next-line no-self-compare
+  const _width = width !== width ? 0 : width;
+  let newHeight = 0;
+  let newWidth = _width;
 
-    if (style.lineHeight !== undefined) {
-      // NOTE(gold): Visual explanation of NSParagraphStyle
-      // https://medium.com/@at_underscore/nsparagraphstyle-explained-visually-a8659d1fbd6f
-      const paragraphStyle = NSMutableParagraphStyle.alloc().init();
-      paragraphStyle.minimumLineHeight = style.lineHeight;
-      paragraphStyle.lineHeightMultiple = 1.0;
-      paragraphStyle.maximumLineHeight = style.lineHeight;
-      attributes[NSParagraphStyleAttributeName] = paragraphStyle;
-    }
+  if (textNodes.length > 0) {
+    const fullStr = NSMutableAttributedString.alloc().init();
+    textNodes.forEach((textNode) => {
+      const newString = createAttributedString(textNode);
+      fullStr.appendAttributedString(newString);
+    });
+    const {
+      height: measureHeight,
+      width: measureWidth,
+    } = fullStr.boundingRectWithSize_options_context(
+      CGSizeMake(_width, FLOAT_MAX),
+      NSStringDrawingUsesLineFragmentOrigin,
+      null
+    ).size;
+    newHeight = measureHeight;
+    newWidth = measureWidth;
+  }
 
-    if (style.letterSpacing !== undefined) {
-      attributes[NSKernAttributeName] = style.letterSpacing;
-    }
+  return { width: newWidth, height: newHeight };
+};
 
-    const rect = NSString.alloc()
-      .initWithString(string)
-      .boundingRectWithSize_options_attributes_context(
-        CGSizeMake(width, FLOAT_MAX),
-        NSStringDrawingUsesLineFragmentOrigin,
-        attributes,
-        null,
-      );
-
-    // TODO(lmr): handle other widthModes, and height/heightModes
-
-    return {
-      width: 0 + rect.size.width,
-      height: 0 + rect.size.height,
-    };
-  };
-
-module.exports = createStringMeasurer;
+export default createStringMeasurer;

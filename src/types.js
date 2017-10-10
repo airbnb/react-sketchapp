@@ -157,12 +157,14 @@ export type TextStyle = {
   writingDirection: "auto" | "ltr" | "rtl"
 };
 
+export type TextNode = { content: string, textStyles: TextStyle };
+export type TextNodes = Array<TextNode>;
+
 export type TreeNode = {
   type: string,
   style: ViewStyle,
   textStyle: TextStyle,
   layout: LayoutInfo,
-  value: ?string,
   props: any,
   children: ?Array<TreeNode>
 };

@@ -1,5 +1,6 @@
 {
   "testEnvironment": "node",
+  "browser": true,
   "testPathIgnorePatterns": [
     "/node_modules/",
     "<rootDir>/_book",
@@ -52,6 +53,7 @@
     "NSTextView": true,
     "NSURL": true,
     "NSView": true,
+    "NSMutableAttributedString": true,
     "React$Component": true,
     "React$Element": true,
     "ReactClass": true,

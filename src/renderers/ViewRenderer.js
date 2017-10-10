@@ -4,7 +4,6 @@ import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
-// import processTransform from './processTransform';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 import {
   makeBorderOptions,
@@ -60,9 +59,8 @@ class ViewRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string
+    props: any
   ): Array<SJShapeGroupLayer> {
     const layers = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
