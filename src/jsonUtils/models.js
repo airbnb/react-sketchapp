@@ -34,6 +34,22 @@ function e7() {
   ]}${lut[(d3 >> 16) & 0xff]}${lut[(d3 >> 24) & 0xff]}`;
 }
 
+// Keep track on previous numbers that are generated
+let previousNumber = 1;
+
+// Will always produce a unique Number (Int) based on of the current date
+function generateIdNumber() {
+  let date = Date.now();
+
+  if (date <= previousNumber) {
+    date = previousNumber += 1;
+  } else {
+    previousNumber = date;
+  }
+
+  return date;
+}
+
 export function generateID(): string {
   return e7();
 }
@@ -153,6 +169,7 @@ export const makeSymbolMaster = (
   backgroundColor: makeColorFromCSS('white'),
   hasBackgroundColor: false,
   name,
+  changeIdentifier: generateIdNumber(),
   symbolID,
   frame,
 });

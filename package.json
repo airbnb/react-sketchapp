@@ -40,7 +40,7 @@
     "prop-types": "^15.5.8",
     "sketch-constants": "^1.0.2",
     "sketchapp-json-flow-types": "^0.2.0",
-    "sketchapp-json-plugin": "^0.0.3",
+    "sketchapp-json-plugin": "^0.1.2",
     "yoga-layout": "1.6.0"
   },
   "peerDependencies": {
