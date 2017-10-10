@@ -7,9 +7,8 @@ const DEFAULT_OPACITY = 1.0;
 
 class SketchRenderer {
   getDefaultGroupName(
-    props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    props: any
   ) {
     return 'Group';
   }
@@ -17,9 +16,7 @@ class SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
-    // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    props: any
   ): SketchJSON {
     // Default SketchRenderer just renders an empty group
 
@@ -28,9 +25,8 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    const opacity = style.opacity !== undefined
-      ? style.opacity
-      : DEFAULT_OPACITY;
+    const opacity =
+      style.opacity !== undefined ? style.opacity : DEFAULT_OPACITY;
 
     return {
       ...layerGroup(
@@ -38,18 +34,17 @@ class SketchRenderer {
         layout.top,
         layout.width,
         layout.height,
-        opacity,
+        opacity
       ),
-      name: props.name || this.getDefaultGroupName(props, value),
+      name: props.name || this.getDefaultGroupName(props),
     };
   }
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
     // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    props: any
   ): Array<SketchJSON> {
     return [];
   }
