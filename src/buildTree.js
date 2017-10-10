@@ -1,86 +1,106 @@
 import TestRenderer from 'react-test-renderer';
-import computeLayout from 'css-layout';
+import * as yoga from 'yoga-layout';
 import Context from './utils/Context';
-import createStringMeasurer from './utils/createStringMeasurer';
 import type { TreeNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
+import computeYogaTree from './jsonUtils/computeYogaTree';
+import computeTextTree from './jsonUtils/computeTextTree';
+import { INHERITABLE_FONT_STYLES } from './utils/constants';
+import zIndex from './utils/zIndex';
 
-const INHERITABLE_STYLES = [
-  'color',
-  'fontFamily',
-  'fontSize',
-  'fontStyle',
-  'fontWeight',
-  'textAlign',
-  'textDecoration',
-  'textShadowOffset',
-  'textShadowRadius',
-  'textShadowColor',
-  'textTransform',
-  'letterSpacing',
-  'lineHeight',
-  'writingDirection',
-];
+const reactTreeToFlexTree = (
+  node: TreeNode,
+  yogaNode: yoga.NodeInstance,
+  context: Context
+) => {
+  let textNodes;
+  let textStyle = context.getInheritedStyles();
+  const style = node.props && node.props.style ? node.props.style : {};
+  const type = node.type || 'text';
 
-const allStringsOrNumbers = xs =>
-  xs.every(x => typeof x === 'string' || typeof x === 'number');
+  const newChildren = [];
 
-const processChildren = xs => (allStringsOrNumbers(xs) ? [xs.join('')] : xs);
+  if (type === 'text') {
+    // If current node is a Text node, add text styles to Context to pass down to
+    // child nodes.
+    if (
+      node.props &&
+      node.props.style &&
+      hasAnyDefined(style, INHERITABLE_FONT_STYLES)
+    ) {
+      const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
+      inheritableStyles.flexDirection = 'row';
+      context.addInheritableStyles(inheritableStyles);
+      textStyle = {
+        ...context.getInheritedStyles(),
+        ...inheritableStyles,
+      };
+    }
 
-const reactTreeToFlexTree = (node: TreeNode, context: Context): TreeNode => {
-  if (typeof node === 'string') {
-    const textStyle = context.getInheritedStyles();
-    return {
-      type: 'text',
-      style: {
-        measure: createStringMeasurer(node, textStyle),
-      },
-      textStyle,
-      props: {},
-      value: node,
-      children: [],
-    };
-  }
+    // Compute Text Children
+    textNodes = computeTextTree(node, context);
+  } else if (node.children && node.children.length > 0) {
+    // Recursion reverses the render stacking order, this corrects that
+    node.children.reverse();
 
-  const children = Array.isArray(node.children)
-    ? processChildren(node.children)
-    : [];
-  const style = node.props.style || {};
+    // Calculates zIndex order
+    const children = zIndex(node.children, true);
 
-  let textStyle;
-  if (
-    node.type === 'text' &&
-    node.props.style &&
-    hasAnyDefined(style, INHERITABLE_STYLES)
-  ) {
-    const inheritableStyles = pick(style, INHERITABLE_STYLES);
-    context.addInheritableStyles(inheritableStyles);
-    textStyle = {
-      ...context.getInheritedStyles(),
-      ...inheritableStyles,
-    };
-  } else {
-    textStyle = context.getInheritedStyles();
+    for (let index = 0; index < children.length; index += 1) {
+      const childComponent = children[index];
+      const childStyles =
+        childComponent.props && childComponent.props.styles
+          ? childComponent.props.styles
+          : {};
+
+      // Since we reversed the order of children and sorted by zIndex, we need
+      // to keep track of a decrementing index using the original index of the
+      // TreeNode to get the correct layout.
+      // NOTE: position: absolute handles zIndexes outside of flex layout, so we
+      // need to use the current child index and not it's original index (from
+      // before zIndex sorting).
+      const decrementIndex =
+        children.length -
+        1 -
+        (childStyles.position === 'absolute' ? index : childComponent.oIndex);
+      const childNode = yogaNode.getChild(decrementIndex);
+
+      const renderedChildComponent = reactTreeToFlexTree(
+        childComponent,
+        childNode,
+        context.forChildren()
+      );
+      newChildren.push(renderedChildComponent);
+    }
   }
 
   return {
-    type: node.type,
+    type,
     style,
     textStyle,
-    props: node.props,
-    value: null,
-    children: children.map(child =>
-      reactTreeToFlexTree(child, context.forChildren())
-    ),
+    layout: {
+      left: yogaNode.getComputedLeft(),
+      right: yogaNode.getComputedRight(),
+      top: yogaNode.getComputedTop(),
+      bottom: yogaNode.getComputedBottom(),
+      width: yogaNode.getComputedWidth(),
+      height: yogaNode.getComputedHeight(),
+    },
+    props: {
+      ...node.props,
+      textNodes,
+    },
+    children: newChildren,
   };
 };
 
 const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
-  const tree = reactTreeToFlexTree(json, new Context());
-  computeLayout(tree);
+  const yogaNode = computeYogaTree(json, new Context());
+  yogaNode.calculateLayout(yoga.UNDEFINED, yoga.UNDEFINED, yoga.DIRECTION_LTR);
+  const tree = reactTreeToFlexTree(json, yogaNode, new Context());
 
   return tree;
 };

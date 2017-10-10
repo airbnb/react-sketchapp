@@ -44,7 +44,7 @@ export default () => {
       location: 'Toronto, ON',
       url: 'cargocollective.com/jackiesaik',
       profile_image_url:
-        'https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg',
+        'https://pbs.twimg.com/profile_images/895665264464764930/7Mb3QtEB_400x400.jpg',
     },
     {
       screen_name: 'jongold',

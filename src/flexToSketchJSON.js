@@ -3,7 +3,7 @@ import renderers from './renderers';
 import type { TreeNode } from './types';
 
 const flexToSketchJSON = (node: TreeNode) => {
-  const { type, style, textStyle, layout, value, props, children } = node;
+  const { type, style, textStyle, layout, props, children } = node;
   const Renderer = renderers[type];
   if (Renderer == null) {
     // Give some insight as to why there might be issues
@@ -18,19 +18,12 @@ const flexToSketchJSON = (node: TreeNode) => {
   }
 
   const renderer = new Renderer();
-  const groupLayer = renderer.renderGroupLayer(
-    layout,
-    style,
-    textStyle,
-    props,
-    value
-  );
+  const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props);
   const backingLayers = renderer.renderBackingLayers(
     layout,
     style,
     textStyle,
-    props,
-    value
+    props
   );
 
   const sublayers = children.map(child => flexToSketchJSON(child));

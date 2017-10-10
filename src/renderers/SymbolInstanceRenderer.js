@@ -43,9 +43,10 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
     // that contains text. this is the structure that will appear if the user
     // creates a `<Text />` element with a custom name
     const subGroup = subLayer.layers.find(l => l._class === 'group');
-    const textLayer = subGroup && subGroup.layers
-      ? subGroup.layers.find(l => l._class === 'text')
-      : null;
+    const textLayer =
+      subGroup && subGroup.layers
+        ? subGroup.layers.find(l => l._class === 'text')
+        : null;
     if (textLayer) {
       output.push({
         type: 'text',
@@ -92,7 +93,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
     subLayer.layers
   ) {
     subLayer.layers.forEach(subSubLayer =>
-      extractOverridesHelp(subSubLayer, output),
+      extractOverridesHelp(subSubLayer, output)
     );
   }
 };
@@ -108,16 +109,14 @@ class SymbolInstanceRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
-    // eslint-disable-next-line no-unused-vars
-    value: ?string,
+    props: any
   ): any {
     const masterTree = getSymbolMasterByName(props.masterName);
 
     const symbolInstance = makeSymbolInstance(
       makeRect(layout.left, layout.top, layout.width, layout.height),
       masterTree.symbolID,
-      props.name,
+      props.name
     );
 
     if (!props.overrides) {
@@ -128,7 +127,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
 
     const overrides = overridableLayers.reduce(function inject(
       memo,
-      reference,
+      reference
     ) {
       if (reference.type === 'symbolInstance') {
         // eslint-disable-next-line
@@ -139,13 +138,13 @@ class SymbolInstanceRenderer extends SketchRenderer {
             typeof overrideValue.masterName !== 'string'
           ) {
             throw new Error(
-              '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL',
+              '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL'
             );
           }
 
           const originalMaster = getSymbolMasterById(reference.symbolId);
           const replacementMaster = getSymbolMasterByName(
-            overrideValue.masterName,
+            overrideValue.masterName
           );
 
           if (
@@ -153,12 +152,12 @@ class SymbolInstanceRenderer extends SketchRenderer {
             originalMaster.frame.height !== replacementMaster.frame.height
           ) {
             throw new Error(
-              '##FIXME## SYMBOL MASTER SUBSTITUTIONS REQUIRE THAT MASTERS HAVE THE SAME DIMENSIONS',
+              '##FIXME## SYMBOL MASTER SUBSTITUTIONS REQUIRE THAT MASTERS HAVE THE SAME DIMENSIONS'
             );
           }
 
           const nestedOverrides = extractOverrides(
-            getSymbolMasterByName(overrideValue.masterName).layers,
+            getSymbolMasterByName(overrideValue.masterName).layers
           ).reduce(inject, {});
 
           return {
@@ -171,7 +170,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
         }
 
         const nestedOverrides = extractOverrides(
-          getSymbolMasterById(reference.symbolId).layers,
+          getSymbolMasterById(reference.symbolId).layers
         ).reduce(inject, {});
 
         return {
@@ -197,13 +196,13 @@ class SymbolInstanceRenderer extends SketchRenderer {
       if (reference.type === 'image') {
         if (typeof overrideValue !== 'string') {
           throw new Error(
-            '##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS',
+            '##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS'
           );
         }
         return {
           ...memo,
           [reference.objectId]: makeJSONDataReference(
-            makeImageDataFromUrl(overrideValue),
+            makeImageDataFromUrl(overrideValue)
           ),
         };
       }
