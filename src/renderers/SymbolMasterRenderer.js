@@ -9,9 +9,7 @@ class SymbolMasterRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
-    // eslint-disable-next-line no-unused-vars
-    value: ?string
+    props: any
   ): SJSymbolMaster {
     return makeSymbolMaster(
       makeRect(layout.left, layout.top, layout.width, layout.height),

@@ -53,5 +53,6 @@ declare var NSTextField: any;
 declare var NSTextView: any;
 declare var NSURL: any;
 declare var NSView: any;
+declare var NSMutableAttributedString: any;
 declare var log: any;
 declare var context: any;

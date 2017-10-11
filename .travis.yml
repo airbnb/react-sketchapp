@@ -1,3 +1,5 @@
+os: osx
+osx_image: xcode8.2
 language: node_js
 cache:
   directories:

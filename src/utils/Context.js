@@ -21,4 +21,4 @@ class Context {
   }
 }
 
-module.exports = Context;
+export default Context;

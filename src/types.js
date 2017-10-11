@@ -54,7 +54,7 @@ export type Size = { width: number, height: number };
 // undefined: max content
 // exactly: fill available space
 // at-most: fit content
-export type MeasureMode = 'undefined' | 'exactly' | 'at-most';
+export type MeasureMode = "undefined" | "exactly" | "at-most";
 
 export type Color = string | number;
 
@@ -65,7 +65,7 @@ export type LayoutInfo = {
   left: number,
   right: number,
   bottom: number,
-  direction: 'ltr' | 'rtl'
+  direction: "ltr" | "rtl"
 };
 
 export type ViewStyle = {
@@ -102,20 +102,25 @@ export type ViewStyle = {
   borderRightWidth: number,
   borderBottomWidth: number,
   borderLeftWidth: number,
-  position: 'absolute' | 'relative',
-  flexDirection: 'row' | 'row-reverse' | 'column' | 'column-reverse',
-  flexWrap: 'wrap' | 'nowrap',
-  justifyContent: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around',
-  alignItems: 'flex-start' | 'flex-end' | 'center' | 'stretch',
-  alignSelf: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch',
-  overflow: 'visible' | 'hidden' | 'scroll',
+  position: "absolute" | "relative",
+  flexDirection: "row" | "row-reverse" | "column" | "column-reverse",
+  flexWrap: "wrap" | "nowrap",
+  justifyContent:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around",
+  alignItems: "flex-start" | "flex-end" | "center" | "stretch",
+  alignSelf: "auto" | "flex-start" | "flex-end" | "center" | "stretch",
+  overflow: "visible" | "hidden" | "scroll",
   flex: number,
   flexGrow: number,
   flexShrink: number,
   flexBasis: number,
   aspectRatio: number,
   zIndex: number,
-  backfaceVisibility: 'visible' | 'hidden',
+  backfaceVisibility: "visible" | "hidden",
   backgroundColor: Color,
   borderColor: Color,
   borderTopColor: Color,
@@ -127,7 +132,7 @@ export type ViewStyle = {
   borderTopRightRadius: number,
   borderBottomLeftRadius: number,
   borderBottomRightRadius: number,
-  borderStyle: 'solid' | 'dotted' | 'dashed',
+  borderStyle: "solid" | "dotted" | "dashed",
   borderWidth: number,
   borderTopWidth: number,
   borderRightWidth: number,
@@ -140,24 +145,26 @@ export type TextStyle = {
   color: Color,
   fontFamily: string,
   fontSize: number,
-  fontStyle: 'normal' | 'italic',
+  fontStyle: "normal" | "italic",
   fontWeight: string,
   textShadowOffset: { width: number, height: number },
   textShadowRadius: number,
   textShadowColor: Color,
-  textTransform: 'uppercase' | 'lowercase',
+  textTransform: "uppercase" | "lowercase",
   letterSpacing: number,
   lineHeight: number,
-  textAlign: 'auto' | 'left' | 'right' | 'center' | 'justify',
-  writingDirection: 'auto' | 'ltr' | 'rtl'
+  textAlign: "auto" | "left" | "right" | "center" | "justify",
+  writingDirection: "auto" | "ltr" | "rtl"
 };
+
+export type TextNode = { content: string, textStyles: TextStyle };
+export type TextNodes = Array<TextNode>;
 
 export type TreeNode = {
   type: string,
   style: ViewStyle,
   textStyle: TextStyle,
   layout: LayoutInfo,
-  value: ?string,
   props: any,
   children: ?Array<TreeNode>
 };

@@ -369,8 +369,8 @@ export default (context) => {
 
   const Document = () =>
     <View>
-      <Text style={styles.Headline}>Headline text</Text>
-      <Text style={styles.Body}>Body text</Text>
+      <Text style={typeStyles.Headline}>Headline text</Text>
+      <Text style={typeStyles.Body}>Body text</Text>
     </View>
 
   render(<Document />, context.document.currentPage());
@@ -546,7 +546,7 @@ const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
 const Photo = () => (
   <Image
     name="Photo"
-    source="https://pbs.twimg.com/profile_images/756488692135526400/JUCawBiW_400x400.jpg"
+    source="https://pbs.twimg.com/profile_images/895665264464764930/7Mb3QtEB_400x400.jpg"
     style={{ width: 100, height: 100 }}
   />
 );
