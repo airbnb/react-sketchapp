@@ -104,7 +104,8 @@ class ViewRenderer extends SketchRenderer {
       0,
       layout.width,
       layout.height,
-      radii
+      radii,
+      props.resizingConstraint
     );
 
     const fill = makeColorFill(backgroundColor);

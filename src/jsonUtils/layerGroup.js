@@ -1,8 +1,17 @@
 /* @flow */
 
+import { makeResizeConstraint } from './hacksForJSONImpl';
 import { generateID, makeRect } from './models';
+import type { ResizeConstraints } from '../types';
 
-const layerGroup = (x: number, y: number, width: number, height: number, opacity: number) => ({
+const layerGroup = (
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  opacity: number,
+  resizingConstraint?: ResizeConstraints
+) => ({
   _class: 'group',
   do_objectID: generateID(),
   exportOptions: {
@@ -20,6 +29,7 @@ const layerGroup = (x: number, y: number, width: number, height: number, opacity
   layerListExpandedType: 2,
   name: 'Group',
   nameIsFixed: false,
+  resizingConstraint: makeResizeConstraint(resizingConstraint),
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,

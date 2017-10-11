@@ -1,6 +1,7 @@
 exports[`<RedBox /> renders simple errors 1`] = `
 <view
   name="RedBox"
+  resizingConstraint={undefined}
   style={
     Object {
       "backgroundColor": "rgb(204, 0, 0)",
@@ -13,6 +14,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
   }>
   <text
     name="Message"
+    resizingConstraint={undefined}
     style={
       Object {
         "color": "white",
@@ -25,6 +27,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
   </text>
   <view
     name="Frames"
+    resizingConstraint={undefined}
     style={
       Object {
         "color": "white",
@@ -34,6 +37,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     }>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -45,6 +49,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -56,6 +61,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -67,6 +73,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -78,6 +85,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -89,6 +97,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -98,6 +107,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       } />
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -107,6 +117,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       } />
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -118,6 +129,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -129,6 +141,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     </text>
     <text
       name="Text"
+      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -145,6 +158,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
 exports[`<RedBox /> renders string errors 1`] = `
 <view
   name="RedBox"
+  resizingConstraint={undefined}
   style={
     Object {
       "backgroundColor": "rgb(204, 0, 0)",
@@ -157,6 +171,7 @@ exports[`<RedBox /> renders string errors 1`] = `
   }>
   <text
     name="Message"
+    resizingConstraint={undefined}
     style={
       Object {
         "color": "white",

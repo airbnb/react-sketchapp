@@ -34,7 +34,8 @@ class SketchRenderer {
         layout.top,
         layout.width,
         layout.height,
-        opacity
+        opacity,
+        props.resizingConstraint
       ),
       name: props.name || this.getDefaultGroupName(props),
     };

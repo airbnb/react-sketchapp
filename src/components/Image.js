@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
+import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
@@ -41,6 +42,9 @@ const propTypes = {
     ...ViewStylePropTypes,
     resizeMode: ResizeModePropType,
   }),
+  resizingConstraint: PropTypes.shape({
+    ...ResizingConstraintPropTypes,
+  }),
 };
 
 const ResizeModes = {
@@ -58,11 +62,19 @@ class Image extends React.Component {
   };
 
   render() {
-    const { children, source, defaultSource, resizeMode, name } = this.props;
+    const {
+      children,
+      source,
+      defaultSource,
+      resizeMode,
+      name,
+      resizingConstraint,
+    } = this.props;
 
     let style = StyleSheet.flatten(this.props.style) || {};
 
-    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
+    const sketchResizeMode =
+      ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
     if (source && typeof source !== 'string') {
       style = {
         height: source.height,
@@ -77,6 +89,7 @@ class Image extends React.Component {
         source={source || defaultSource}
         name={name}
         resizeMode={sketchResizeMode}
+        resizingConstraint={resizingConstraint}
       >
         {children}
       </image>

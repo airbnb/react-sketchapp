@@ -10,7 +10,8 @@ import type {
 } from 'sketchapp-json-flow-types';
 import { FillType } from 'sketch-constants';
 import normalizeColor from 'normalize-css-color';
-import type { Color } from '../types';
+import type { Color, ResizeConstraints } from '../types';
+import { makeResizeConstraint } from './hacksForJSONImpl';
 
 const lut = [];
 for (let i = 0; i < 256; i += 1) {
@@ -144,7 +145,8 @@ export const makeJSONDataReference = (
 export const makeSymbolInstance = (
   frame: SJRect,
   symbolID: string,
-  name: string
+  name: string,
+  resizingConstraint?: ResizeConstraints
 ): SJSymbolInstanceLayer => ({
   _class: 'symbolInstance',
   horizontalSpacing: 0,
@@ -152,6 +154,7 @@ export const makeSymbolInstance = (
   nameIsFixed: true,
   isVisible: true,
   do_objectID: generateID(),
+  resizingConstraint: makeResizeConstraint(resizingConstraint),
   name,
   symbolID,
   frame,

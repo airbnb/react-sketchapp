@@ -111,7 +111,8 @@ export const makeSymbolByName = (masterName: string): React$Component =>
     static propTypes = {
       style: PropTypes.shape(ViewStylePropTypes),
       name: PropTypes.string,
-      overrides: PropTypes.object // eslint-disable-line
+      overrides: PropTypes.object, // eslint-disable-line
+      resizingConstraint: PropTypes.object // eslint-disable-line
     };
 
     static masterName = masterName;
@@ -122,6 +123,7 @@ export const makeSymbolByName = (masterName: string): React$Component =>
           masterName={masterName}
           name={this.props.name || masterName}
           style={StyleSheet.flatten(this.props.style)}
+          resizingConstraint={this.props.resizingConstraint}
           overrides={this.props.overrides}
         />
       );

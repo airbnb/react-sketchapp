@@ -176,3 +176,12 @@ export type LayerCreator = (
   props: any,
   value: ?string
 ) => SketchLayer;
+
+export type ResizeConstraints = {
+  top: boolean,
+  right: boolean,
+  bottom: boolean,
+  left: boolean,
+  fixedHeight: boolean,
+  fixedWidth: boolean
+};

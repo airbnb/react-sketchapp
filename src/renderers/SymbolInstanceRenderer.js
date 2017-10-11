@@ -116,7 +116,8 @@ class SymbolInstanceRenderer extends SketchRenderer {
     const symbolInstance = makeSymbolInstance(
       makeRect(layout.left, layout.top, layout.width, layout.height),
       masterTree.symbolID,
-      props.name
+      props.name,
+      props.resizingConstraint
     );
 
     if (!props.overrides) {
@@ -208,7 +209,8 @@ class SymbolInstanceRenderer extends SketchRenderer {
       }
 
       return memo;
-    }, {});
+    },
+    {});
 
     symbolInstance.overrides = {};
     symbolInstance.overrides['0'] = overrides;
