@@ -1,4 +1,5 @@
 // @flow
+import type { SketchLayer } from './types';
 
 // Clear out all page layers
 export const resetPage = (page: Object) => {
@@ -26,5 +27,14 @@ export const resetDocument = () => {
         resetPage(pages[index]);
       }
     }
+  }
+};
+
+export const resetContainer = (container: SketchLayer) => {
+  const layers = container.children();
+  // Skip last child since it is the container itself
+  for (let l = 0; l < layers.count() - 1; l += 1) {
+    const layer = layers.objectAtIndex(l);
+    layer.removeFromParent();
   }
 };
