@@ -104,7 +104,7 @@ const injectSymbols = () => {
   globalContext.document.setCurrentPage(notSymbolsPage);
 };
 
-export const makeSymbolByName = (masterName: string): React$Component =>
+export const getSymbolComponentByName = (masterName: string): React$Component =>
   class extends React.Component {
     static displayName = `SymbolInstance(${masterName})`;
 
@@ -149,7 +149,7 @@ export const makeSymbol = (
     )
   );
 
-  const symbol = makeSymbolByName(masterName);
+  const symbol = getSymbolComponentByName(masterName);
   injectSymbols();
   return symbol;
 };
