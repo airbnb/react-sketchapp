@@ -211,8 +211,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
       return memo;
     }, {});
 
-    symbolInstance.overrides = {};
-    symbolInstance.overrides['0'] = overrides;
+    symbolInstance.overrides = overrides;
 
     return symbolInstance;
   }
