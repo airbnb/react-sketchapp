@@ -6,7 +6,6 @@ import {
   View,
   Image,
   makeSymbol,
-  getSymbolComponentByName,
 } from 'react-sketchapp';
 
 const RedSquare = () =>
