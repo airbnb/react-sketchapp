@@ -467,13 +467,18 @@ Reset the registered styles.
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
 ### `makeSymbol(node, name)`
-Returns a Sketch symbol given a node and an optional name.
+Creates a new symbol and injects it into the `Symbols` page. The name of the symbol can be optionally provided and will default to the display name of the component.
+
+Returns a react component which is an can be used to render instances of the symbol.
 
 #### Parameters
 | Parameter | Type | Default | Note |
 |---|---|---|---|
 | `node` | `Node` | | The node object that will be rendered as a symbol |
 | `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
+
+### `getSymbolComponentByName(name)`
+Returns a react component which can be used to render the symbol that is associated with that name.
 
 #### Symbol example
 ```js
@@ -618,31 +623,6 @@ const Document = () => (
 );
 
 export default (context) => {
-  render(<Document />, context.document.currentPage());
-}
-```
-
-### `injectSymbols(context)`
-Injects the symbols into Sketch's symbol page. **Call this before rendering**.
-
-```js
-const BlueSquare = () => (
-  <View
-    name="Blue Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  />
-);
-
-const BlueSquareSymbol = makeSymbol(BlueSquare);
-
-const Document = () => (
-  <Artboard>
-    <BlueSquareSymbol />
-  </Artboard>
-);
-
-export default (context) => {
-  injectSymbols(context);
   render(<Document />, context.document.currentPage());
 }
 ```
