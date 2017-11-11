@@ -2,14 +2,16 @@
   "name": "form-validation",
   "version": "1.0.0",
   "private": true,
-  "main": "form-validation.sketchplugin",
-  "manifest": "src/manifest.json",
+  "skpm": {
+    "main": "form-validation.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
   "scripts": {
-    "build": "skpm build",
-    "watch": "skpm build --watch",
-    "render": "skpm build --watch --run",
-    "render:once": "skpm build --run",
-    "link-plugin": "skpm link",
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link",
     "web": "react run src/web.js"
   },
   "author": "Lloyd Wheeler <lloyd@lloydwheeler.co.uk>",
@@ -26,6 +28,6 @@
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
     "nwb": "^0.15.6",
-    "skpm": "^0.10.2"
+    "@skpm/builder": "^0.2.0"
   }
 }
