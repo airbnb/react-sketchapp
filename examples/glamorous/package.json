@@ -4,7 +4,7 @@
   "description": "",
   "skpm": {
     "main": "glamorous.sketchplugin",
-    "manifest": "src/manifest.json",
+    "manifest": "src/manifest.json"
   },
   "scripts": {
     "build": "skpm-build",
