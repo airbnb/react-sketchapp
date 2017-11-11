@@ -19,9 +19,11 @@ const reactTreeToFlexTree = (
   const style = node.props && node.props.style ? node.props.style : {};
   const type = node.type || 'text';
 
-  const newChildren = [];
+  let newChildren = [];
 
-  if (type === 'text') {
+  if (type === 'svg') {
+    newChildren = node.children;
+  } else if (type === 'text') {
     // If current node is a Text node, add text styles to Context to pass down to
     // child nodes.
     if (

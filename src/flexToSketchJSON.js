@@ -7,11 +7,13 @@ const flexToSketchJSON = (node: TreeNode) => {
   const Renderer = renderers[type];
   if (Renderer == null) {
     // Give some insight as to why there might be issues
-    // specific to Application and Document components
+    // specific to Page and Document components or SVG components
     const additionalNotes =
       type === 'document'
         ? '\nBe sure to only have <Page> components as children of <Document>.'
-        : '';
+        : type.indexOf('svg') === 0
+          ? '\nBe sure to always have <Svg.*> components as children of <Svg>.'
+          : '';
     throw new Error(
       `Could not find renderer for type '${type}'. ${additionalNotes}`
     );
@@ -23,10 +25,12 @@ const flexToSketchJSON = (node: TreeNode) => {
     layout,
     style,
     textStyle,
-    props
+    props,
+    children
   );
 
-  const sublayers = children.map(child => flexToSketchJSON(child));
+  const sublayers =
+    type !== 'svg' ? children.map(child => flexToSketchJSON(child)) : [];
 
   // Filter out anything null, undefined
   const layers = [...backingLayers, ...sublayers].filter(l => l);
