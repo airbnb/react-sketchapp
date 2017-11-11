@@ -1,10 +1,10 @@
-# Basic setup
+# Basic SVG example
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
 ```
-curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/basic-setup
-cd basic-setup
+curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/basic-svg
+cd basic-svg
 ```
 
 Install the dependencies
@@ -22,7 +22,7 @@ Or, to install as a Sketch plugin:
 npm run build
 npm run link-plugin
 ```
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic skpm Example`
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Basic SVG Example`
 
 ## The idea behind the example
 

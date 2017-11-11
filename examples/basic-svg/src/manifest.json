@@ -3,7 +3,7 @@
 	"bundleVersion": 1,
 	"commands": [
 		{
-			"name": "react-sketchapp: Basic Svg",
+			"name": "react-sketchapp: Basic SVG",
 			"identifier": "main",
 			"script": "./my-command.js"
 		}
