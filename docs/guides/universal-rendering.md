@@ -26,7 +26,7 @@ import React from 'react';
 const Row = props =>
   <View>
     <Text>{ props.title }</Text>
-    <Text>{ props.description }</Text>
+    <Text>{ props.subtitle }</Text>
   </View>
 
 export default Row;
