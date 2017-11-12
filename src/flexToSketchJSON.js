@@ -8,12 +8,15 @@ const flexToSketchJSON = (node: TreeNode) => {
   if (Renderer == null) {
     // Give some insight as to why there might be issues
     // specific to Page and Document components or SVG components
-    const additionalNotes =
-      type === 'document'
-        ? '\nBe sure to only have <Page> components as children of <Document>.'
-        : type.indexOf('svg') === 0
-          ? '\nBe sure to always have <Svg.*> components as children of <Svg>.'
-          : '';
+    let additionalNotes = '';
+    if (type === 'document') {
+      additionalNotes =
+        '\nBe sure to only have <Page> components as children of <Document>.';
+    } else if (type.indexOf('svg') === 0) {
+      // the svg renderer should stop the walk down the tree so it shouldn't happen
+      additionalNotes =
+        '\nBe sure to always have <Svg.*> components as children of <Svg>.';
+    }
     throw new Error(
       `Could not find renderer for type '${type}'. ${additionalNotes}`
     );
@@ -29,6 +32,7 @@ const flexToSketchJSON = (node: TreeNode) => {
     children
   );
 
+  // stopping the walk down the tree if we have an svg
   const sublayers =
     type !== 'svg' ? children.map(child => flexToSketchJSON(child)) : [];
 
