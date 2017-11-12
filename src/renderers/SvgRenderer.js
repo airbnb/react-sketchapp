@@ -20,7 +20,7 @@ const snakeExceptions = [
   'specularConstant',
   'surfaceScale',
 ];
-function toSnakeCase(string: String) {
+function toSnakeCase(string: string) {
   if (string === 'href') {
     return 'xlink:href';
   }

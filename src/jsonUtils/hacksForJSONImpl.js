@@ -315,7 +315,7 @@ export function makeTextStyle(textStyle: TextStyle) {
   };
 }
 
-export function makeSvgLayer(layout: LayoutInfo, name: String, svg: String) {
+export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
   const svgString = NSString.stringWithString(svg);
   const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
   const svgImporter = MSSVGImporter.svgImporter();
