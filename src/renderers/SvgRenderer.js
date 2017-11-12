@@ -9,18 +9,41 @@ import type {
 } from '../types';
 import { makeSvgLayer } from '../jsonUtils/hacksForJSONImpl';
 
+const snakeExceptions = [
+  'gradientUnits',
+  'gradientTransform',
+  'patternUnits',
+  'patternTransform',
+  'stdDeviation',
+  'numOctaves',
+  'specularExponent',
+  'specularConstant',
+  'surfaceScale',
+];
 function toSnakeCase(string: String) {
+  if (string === 'href') {
+    return 'xlink:href';
+  }
+  if (snakeExceptions.indexOf(string) !== -1) {
+    return string;
+  }
   return string.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
 }
 
-function makeSvgString({ type, props, children }) {
+function makeSvgString(el) {
+  if (typeof el === 'string') {
+    return el;
+  }
+  const { type, props, children } = el;
+
   if (props && props.textNodes) {
     return props.textNodes.reduce(
       (prev, textNode) => prev + textNode.content,
       ''
     );
   }
-  if (type.indexOf('svg_') !== 0) {
+
+  if (!type || type.indexOf('svg_') !== 0) {
     throw new Error(
       `Could not render type '${
         type
@@ -34,9 +57,20 @@ function makeSvgString({ type, props, children }) {
     ''
   );
 
-  return `<${cleanedType} ${attributes}>
-  ${(children || []).reduce((prev, c) => prev + makeSvgString(c), '')}
-</${cleanedType}>`;
+  let string = `<${cleanedType}${attributes}`;
+
+  if (!children || !children.length) {
+    string += '/>\n';
+  } else {
+    string += '>\n';
+    string += (children || []).reduce(
+      (prev, c) => `${prev}  ${makeSvgString(c)}`,
+      ''
+    );
+    string += `</${cleanedType}>\n`;
+  }
+
+  return string;
 }
 
 class SvgRenderer extends ViewRenderer {
@@ -58,11 +92,16 @@ class SvgRenderer extends ViewRenderer {
       children
     );
 
+    // add the "xmlns:xlink" namespace to we can use `href`
+    // eslint-disable-next-line
+    props["xmlns:xlink"] = "http://www.w3.org/1999/xlink";
+
     const svgString = makeSvgString({
       type: 'svg_svg',
       props,
       children,
     });
+
     const svgLayer = makeSvgLayer(layout, 'Shape', svgString);
 
     layers.push(svgLayer);

@@ -1,0 +1,23 @@
+module.exports = require('./Svg');
+
+module.exports.Svg = require('./Svg');
+module.exports.Circle = require('./Circle');
+module.exports.ClipPath = require('./ClipPath');
+module.exports.Defs = require('./Defs');
+module.exports.Ellipse = require('./Ellipse');
+module.exports.G = require('./G');
+module.exports.Image = require('./Image');
+module.exports.Line = require('./Line');
+module.exports.LinearGradient = require('./LinearGradient');
+module.exports.Path = require('./Path');
+module.exports.Pattern = require('./Pattern');
+module.exports.Polygon = require('./Polygon');
+module.exports.Polyline = require('./Polyline');
+module.exports.RadialGradient = require('./RadialGradient');
+module.exports.Rect = require('./Rect');
+module.exports.Stop = require('./Stop');
+module.exports.Symbol = require('./Symbol');
+module.exports.Text = require('./Text');
+module.exports.TextPath = require('./TextPath');
+module.exports.TSpan = require('./TSpan');
+module.exports.Use = require('./Use');
