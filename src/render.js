@@ -6,7 +6,7 @@ import {
 } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
-import { resetLayer } from './resets';
+import { resetLayer, resetDocument } from './resets';
 import { getSymbolsPage } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
@@ -120,8 +120,12 @@ export const render = (
 ): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
     try {
-      // Clear out container to prepare for re-render
-      resetLayer(container);
+      // Clear out document or layer to prepare for re-render
+      if (!container) {
+        resetDocument();
+      } else {
+        resetLayer(container);
+      }
 
       // Build out sketch compatible tree representation
       const tree = buildTree(element);
