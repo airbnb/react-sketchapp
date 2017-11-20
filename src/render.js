@@ -1,9 +1,12 @@
 import React from 'react';
 import type { SJLayer } from 'sketchapp-json-flow-types';
-import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
+import {
+  appVersionSupported,
+  fromSJSONDictionary,
+} from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
-import { resetContainer, resetPage } from './resets';
+import { resetLayer } from './resets';
 import { getSymbolsPage } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
@@ -28,7 +31,10 @@ export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
   return container;
 };
 
-const renderToSketch = (node: TreeNode, container: SketchLayer): SketchLayer => {
+const renderToSketch = (
+  node: TreeNode,
+  container: SketchLayer
+): SketchLayer => {
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
 
@@ -96,7 +102,7 @@ const buildPages = (
 
     if (data.children && data.children.length > 0) {
       // Clear out page layers to prepare for re-render
-      resetPage(page);
+      resetLayer(page);
       data.children.forEach((child) => {
         renderToSketch(child, page);
       });
@@ -115,7 +121,7 @@ export const render = (
   if (appVersionSupported()) {
     try {
       // Clear out container to prepare for re-render
-      resetContainer(container);
+      resetLayer(container);
 
       // Build out sketch compatible tree representation
       const tree = buildTree(element);
