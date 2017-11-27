@@ -2,19 +2,21 @@
   "name": "glamorous-example",
   "version": "1.0.0",
   "description": "",
-  "main": "glamorous.sketchplugin",
-  "manifest": "src/manifest.json",
+  "skpm": {
+    "main": "glamorous.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
   "scripts": {
-    "build": "skpm build",
-    "watch": "skpm build --watch",
-    "render": "skpm build --watch --run",
-    "render:once": "skpm build --run",
-    "link-plugin": "skpm link"
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link"
   },
   "author": "Nitin Tulswani <tulswani19@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "skpm": "^0.10.5"
+    "@skpm/builder": "^0.2.0"
   },
   "dependencies": {
     "chroma-js": "^1.3.4",

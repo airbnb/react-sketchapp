@@ -2,15 +2,17 @@
   "name": "foursquare-maps",
   "version": "1.0.0",
   "private": true,
-  "main": "foursquare-maps.sketchplugin",
-  "manifest": "src/manifest.json",
+  "skpm": {
+    "main": "foursquare-maps.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
   "scripts": {
-    "build": "skpm build",
-    "watch": "skpm build --watch",
-    "render": "skpm build --watch --run",
-    "render:once": "skpm build --run",
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
     "web": "react run src/web.js",
-    "link-plugin": "skpm link"
+    "postinstall": "npm run build && skpm-link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
@@ -27,6 +29,6 @@
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
-    "skpm": "^0.10.2"
+    "@skpm/builder": "^0.2.0"
   }
 }

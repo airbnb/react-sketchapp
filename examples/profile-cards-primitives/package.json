@@ -1,14 +1,16 @@
 {
   "name": "profile-cards-primitives",
   "private": true,
-  "main": "profile-cards-primitives.sketchplugin",
-  "manifest": "src/manifest.json",
+  "skpm": {
+    "main": "profile-cards-primitives.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
   "scripts": {
-    "build": "skpm build",
-    "watch": "skpm build --watch",
-    "render": "skpm build --watch --run",
-    "render:once": "skpm build --run",
-    "link-plugin": "skpm link",
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link",
     "web": "react run src/web.js"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
@@ -23,6 +25,6 @@
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
-    "skpm": "^0.10.2"
+    "@skpm/builder": "^0.2.0"
   }
 }
