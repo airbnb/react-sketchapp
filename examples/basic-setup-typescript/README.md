@@ -1,6 +1,6 @@
 # Basic setup with Typescript
 
-> NOTICE: you may also use the typings *without* using typescript if you editor supports it. [See here](../docs/guides/community-provided-tooling.md).
+> **NOTE:** you may also use the typings *without* using typescript if you editor supports it. [See here](../../docs/guides/community-provided-tooling.md).
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
@@ -19,7 +19,7 @@ Run with live reloading in Sketch, need a new sketch doc open
 npm start
 ```
 
-> If you're on windows you may need to run the following commands in different command-prompt windows:
+> **NOTE:** If you're on windows you may need to run the following commands in different command-prompt windows:
 
 This starts the typescript compiler in watch mode:
 
