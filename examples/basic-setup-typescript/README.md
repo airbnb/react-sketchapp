@@ -21,20 +21,6 @@ Run with live reloading in Sketch, need a new sketch doc open
 npm start
 ```
 
-> **NOTE:** If you're on windows you may need to run the following commands in different command-prompt windows:
-
-This starts the typescript compiler in watch mode:
-
-```
-npm run typescript
-```
-
-And this starts skpm in watch mode:
-
-```
-npm run render
-```
-
 ## How the typescript works
 
 This example compiles the typescript into javascript that can be used by `skpm`. The compiled typescript files get output into the `.ts-compiled` directory. The `manifest.json` of `skpm` then simply points to the compiled javascript. To get live re-loading working, use the typescript compiler in watch mode. Whenever you save a typescript file, the typescript compiler will output javascript to the `.ts-compiled` directory. Once `skpm` notices the javascript file in `.ts-compiled` changes, it will re-build and re-render.
