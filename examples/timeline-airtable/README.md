@@ -12,17 +12,12 @@ Install the dependencies
 npm install
 ```
 
+Then, open Sketch and navigate to `Plugins → react-sketchapp: Timeline w/ Airtable`
+
 Run with live reloading in Sketch
 ```
 npm run render
 ```
-
-Or, to install as a Sketch plugin:
-```
-npm run build
-npm run link-plugin
-```
-Then, open Sketch and navigate to `Plugins → react-sketchapp: Timeline w/ Airtable`
 
 ## The idea behind the example
 
