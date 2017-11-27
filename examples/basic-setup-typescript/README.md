@@ -1,5 +1,7 @@
 # Basic setup with Typescript
 
+This example was adapted from the [basic-setup example](../basic-setup).
+
 > **NOTE:** you may also use the typings *without* using typescript if you editor supports it. [See here](../../docs/guides/community-provided-tooling.md).
 
 ## How to use
@@ -55,9 +57,3 @@ Here is a reference `tsconfig.json`:
   ]
 }
 ```
-
-## The idea behind the example
-
-[`skpm`](https://github.com/sketch-pm/skpm) is the easiest way to build `react-sketchapp` projects - this is a minimal example of it in use.
-
-![examples-basic](https://cloud.githubusercontent.com/assets/591643/24778192/1f0684ec-1ade-11e7-866b-b11bb60ac109.png)
