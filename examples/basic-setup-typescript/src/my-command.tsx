@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
-const textColor = (hex) => {
+const textColor = (hex: string) => {
   const vsWhite = chroma.contrast(hex, 'white');
   if (vsWhite > 4) {
     return '#FFF';
@@ -14,7 +13,12 @@ const textColor = (hex) => {
     .hex();
 };
 
-const Swatch = ({ name, hex }) => (
+interface SwatchProps {
+  name: string,
+  hex: string,
+}
+
+const Swatch = ({ name, hex }: SwatchProps) => (
   <View
     name={`Swatch ${name}`}
     style={{
@@ -37,14 +41,11 @@ const Swatch = ({ name, hex }) => (
   </View>
 );
 
-const Color = {
-  hex: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-};
+interface DocumentProps {
+  colors: { [colorKey: string]: string }
+}
 
-Swatch.propTypes = Color;
-
-const Document = ({ colors }) => (
+const Document = ({ colors }: DocumentProps) => (
   <Artboard
     name="Swatches"
     style={{
@@ -59,10 +60,6 @@ const Document = ({ colors }) => (
   </Artboard>
 );
 
-Document.propTypes = {
-  colors: PropTypes.objectOf(PropTypes.string).isRequired,
-};
-
 export default () => {
   const colorList = {
     Haus: '#F3F4F4',
@@ -75,5 +72,5 @@ export default () => {
     'Pear Dark': '#2E854B',
   };
 
-  render(<Document colors={colorList} />, context.document.currentPage());
+  render(<Document colors={colorList} />, (context.document as any).currentPage());
 };

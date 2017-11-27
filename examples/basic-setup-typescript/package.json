@@ -1,24 +1,30 @@
 {
-  "name": "basic-setup",
+  "name": "basic-setup-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "basic-setup.sketchplugin",
-  "manifest": "src/manifest.json",
+  "main": "basic-setup-typescript.sketchplugin",
+  "manifest": "./manifest.json",
   "scripts": {
     "build": "skpm build",
     "watch": "skpm build --watch",
+    "start": "npm run typescript & npm run render",
     "render": "skpm build --watch --run",
     "render:once": "skpm build --run",
-    "link-plugin": "skpm link"
+    "link-plugin": "skpm link",
+    "typescript": "./node_modules/.bin/tsc --watch",
+    "typescript:once": "./node_modules/.bin/tsc"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "devDependencies": {
-    "skpm": "^0.10.2"
+    "@types/chroma-js": "^1.3.3",
+    "@types/react": "^16.0.25",
+    "@types/react-sketchapp": "^0.12.0",
+    "skpm": "^0.10.2",
+    "typescript": "^2.6.1"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",
-    "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-sketchapp": "^0.12.1",
     "react-test-renderer": "^15.4.2"
