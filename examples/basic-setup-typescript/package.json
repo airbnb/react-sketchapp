@@ -12,7 +12,8 @@
     "render:once": "skpm build --run",
     "link-plugin": "skpm link",
     "typescript": "./node_modules/.bin/tsc --watch",
-    "typescript:once": "./node_modules/.bin/tsc"
+    "typescript:once": "./node_modules/.bin/tsc",
+    "typescript:clean": "rm -rf ./.ts-compiled"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
