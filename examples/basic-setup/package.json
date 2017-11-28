@@ -2,19 +2,21 @@
   "name": "basic-setup",
   "version": "1.0.0",
   "description": "",
-  "main": "basic-setup.sketchplugin",
-  "manifest": "src/manifest.json",
+  "skpm": {
+    "main": "basic-setup.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
   "scripts": {
-    "build": "skpm build",
-    "watch": "skpm build --watch",
-    "render": "skpm build --watch --run",
-    "render:once": "skpm build --run",
-    "link-plugin": "skpm link"
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "devDependencies": {
-    "skpm": "^0.10.2"
+    "@skpm/builder": "^0.2.0"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",

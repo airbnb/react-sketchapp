@@ -6,15 +6,21 @@
 #### How do I `console.log`?
 If you're using `skpm`, use `console.log` as usual.
 
-You can view the logs using `Console.app -> ~/Library/Logs -> com.bohemiancoding.sketch -> Plugin Output.log`, or in the terminal
-```bash
-tail -F ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
-```
-
-Occasionally this file disappears — in that case, run this and then try `tail`ing again.
-```bash
-touch ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
-```
+You have multiple options to view the logs:
+* Using the [sketch-dev-tools](https://github.com/skpm/sketch-dev-tools)
+* `Console.app -> ~/Library/Logs -> com.bohemiancoding.sketch -> Plugin Output.log`
+* in the terminal
+    ```bash
+    skpm log -f
+    ```
+* in the terminal
+    ```bash
+    tail -F ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
+    ```
+  Occasionally this file disappears — in that case, run this and then try `tail`ing again.
+  ```bash
+  touch ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
+  ```
 
 Outside of `skpm`, use `log` instead of `console.log`.
 
