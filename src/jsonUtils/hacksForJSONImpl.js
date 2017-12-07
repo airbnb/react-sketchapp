@@ -270,8 +270,10 @@ export function makeEncodedAttributedString(textNodes: TextNodes) {
     fullStr.appendAttributedString(newString);
   });
 
-  const msAttribStr = MSAttributedString.alloc().initWithAttributedString(
-    fullStr
+  const encodedAttribStr = MSAttributedString.encodeAttributedString(fullStr);
+
+  const msAttribStr = MSAttributedString.alloc().initWithEncodedAttributedString(
+    encodedAttribStr
   );
 
   return encodeSketchJSON(msAttribStr);
