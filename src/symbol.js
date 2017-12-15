@@ -8,7 +8,7 @@ import ViewStylePropTypes from './components/ViewStylePropTypes';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
-import { resetPage } from './resets';
+import { resetLayer } from './resets';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -93,7 +93,7 @@ const injectSymbols = () => {
   });
 
   // Clear out page layers to prepare for re-render
-  resetPage(symbolsPage);
+  resetLayer(symbolsPage);
 
   renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 

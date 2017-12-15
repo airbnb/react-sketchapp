@@ -7,6 +7,7 @@ import Page from './components/Page';
 import Artboard from './components/Artboard';
 import Image from './components/Image';
 import RedBox from './components/RedBox';
+import Svg from './components/Svg';
 import View from './components/View';
 import Text from './components/Text';
 import TextStyles from './sharedStyles/TextStyles';
@@ -21,6 +22,7 @@ module.exports = {
   Artboard,
   Image,
   RedBox,
+  Svg,
   Text,
   TextStyles,
   View,

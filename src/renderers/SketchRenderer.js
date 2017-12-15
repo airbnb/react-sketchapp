@@ -1,7 +1,13 @@
 /* @flow */
 import layerGroup from '../jsonUtils/layerGroup';
 
-import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON } from '../types';
+import type {
+  LayoutInfo,
+  ViewStyle,
+  TextStyle,
+  SketchJSON,
+  TreeNode,
+} from '../types';
 
 const DEFAULT_OPACITY = 1.0;
 
@@ -45,7 +51,9 @@ class SketchRenderer {
     style: ViewStyle,
     textStyle: TextStyle,
     // eslint-disable-next-line no-unused-vars
-    props: any
+    props: any,
+    // eslint-disable-next-line no-unused-vars
+    children: ?Array<TreeNode>
   ): Array<SketchJSON> {
     return [];
   }

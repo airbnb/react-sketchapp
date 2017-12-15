@@ -6,7 +6,7 @@ Pull real data from an API with `fetch` or GraphQL.
 
 [Full example](https://github.com/airbnb/react-sketchapp/tree/master/examples/foursquare-maps)
 
-`skpm` automatically provides the [Sketch `fetch` polyfill](https://github.com/mathieudutour/sketch-module-fetch-polyfill) — just use `fetch` as usual.
+`skpm` automatically provides the [Sketch `fetch` polyfill](https://github.com/skpm/sketch-polyfill-fetch) — just use `fetch` as usual.
 
 ```js
 import fetch from 'sketch-module-fetch-polyfill'

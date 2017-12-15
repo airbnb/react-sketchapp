@@ -3,6 +3,7 @@
 * [Introduction](/README.md)
 * [Examples](/docs/examples.md)
 * [Guides](/docs/guides/README.md)
+    * [Using `skpm` as a build system](/docs/guides/using-skpm.md)
     * [Data Fetching](/docs/guides/data-fetching.md)
     * [Universal Rendering](/docs/guides/universal-rendering.md)
     * [Styling](/docs/styling.md)
