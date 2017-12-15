@@ -20,7 +20,10 @@ class Artboard extends React.Component {
 
   render() {
     return (
-      <artboard style={StyleSheet.flatten(this.props.style)} name={this.props.name}>
+      <artboard
+        style={StyleSheet.flatten(this.props.style)}
+        name={this.props.name}
+      >
         {this.props.children}
       </artboard>
     );

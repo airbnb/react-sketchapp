@@ -47,7 +47,7 @@ const findPageData = (
   depth = 0,
   accumulated = []
 ): Array<{ type: string, children: Object, name?: string }> => {
-  const children = current.children;
+  const children = current.children || [];
   for (let i = 0, len = children.length; i < len; i += 1) {
     const node = children[i];
 
