@@ -9,6 +9,7 @@ import type {
   TextNode,
   TextStyle,
   ResizeConstraints,
+  LayoutInfo,
 } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 
@@ -314,4 +315,24 @@ export function makeTextStyle(textStyle: TextStyle) {
     endDecorationType: 0,
     textStyle: value,
   };
+}
+
+export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
+  const svgString = NSString.stringWithString(svg);
+  const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
+  const svgImporter = MSSVGImporter.svgImporter();
+  svgImporter.prepareToImportFromData(svgData);
+  const svgLayer = svgImporter.importAsLayer();
+  svgLayer.name = name;
+  svgLayer.rect = {
+    origin: {
+      x: 0,
+      y: 0,
+    },
+    size: {
+      width: layout.width,
+      height: layout.height,
+    },
+  };
+  return encodeSketchJSON(svgLayer);
 }

@@ -8,6 +8,11 @@ import zIndex from '../utils/zIndex';
 const walkTree = (tree: TreeNode, context: Context) => {
   const { node, stop } = computeYogaNode(tree, context);
 
+  if (tree.type === 'svg') {
+    // handle svg node, eg: stop here, we will handle the children in the renderer
+    return node;
+  }
+
   if (tree.children && tree.children.length > 0) {
     // Calculates zIndex order
     const children = zIndex(tree.children);
