@@ -8,6 +8,7 @@
   * [`<Artboard>`](#artboard)
   * [`<Image>`](#image)
   * [`<RedBox>`](#redbox)
+  * [`<Svg>`](#svg)
   * [`<Text>`](#text)
   * [`<View>`](#view)
 * [`Platform`](#platform)
