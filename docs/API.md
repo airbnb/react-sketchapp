@@ -467,7 +467,7 @@ Reset the registered styles.
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
 ### `makeSymbol(node, name)`
-Returns a Sketch symbol given a node and an optional name.
+Returns a react component which is an can be used to render instances of the symbol. In order for the symbol to be used, it must be rendered to the `Symbols` page with [`injectSymbols`](#injectsymbols).
 
 #### Parameters
 | Parameter | Type | Default | Note |
@@ -492,7 +492,9 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+injectSymbols();
+
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -520,7 +522,9 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+injectSymbols();
+
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -548,7 +552,9 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+injectSymbols();
+
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -617,12 +623,14 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+injectSymbols();
+
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
 
-### `injectSymbols(context)`
+### `injectSymbols()`
 Injects the symbols into Sketch's symbol page. **Call this before rendering**.
 
 ```js
@@ -641,8 +649,9 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
-  injectSymbols(context);
+injectSymbols();
+
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```

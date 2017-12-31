@@ -72,7 +72,7 @@ export const getSymbolId = (masterName: string): string => {
   return symbolId;
 };
 
-const injectSymbols = () => {
+export const injectSymbols = () => {
   const globalContext = context; // eslint-disable-line
   const pages = globalContext.document.pages();
   const array = msListToArray(pages);
@@ -149,9 +149,7 @@ export const makeSymbol = (
     )
   );
 
-  const symbol = makeSymbolByName(masterName);
-  injectSymbols();
-  return symbol;
+  return makeSymbolByName(masterName);
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
