@@ -49,8 +49,6 @@ const Nested = () =>
 
 const NestedSym = makeSymbol(Nested);
 
-injectSymbols();
-
 export default () => {
   const Document = () =>
     <Artboard name="Swatches" style={{ display: 'flex' }}>

@@ -7,7 +7,7 @@ import {
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
-import { getSymbolsPage } from './symbol';
+import { getSymbolsPage, injectSymbols } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
@@ -70,6 +70,7 @@ const buildPages = (
 ): ?SketchLayer | Array<?SketchLayer> => {
   const pageData = findPageData(tree);
   const symbolPage = getSymbolsPage();
+  injectSymbols();
 
   if (pageData.length === 0) {
     const _container = container || context.document.currentPage();
