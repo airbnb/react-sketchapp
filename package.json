@@ -28,9 +28,7 @@
     "test": "jest --config .jestrc",
     "test:ci": "jest --config .jestrc --runInBand",
     "test:watch": "npm run test -- --watch",
-    "watch": "npm run build:react -- --watch",
-    "postinstall": "npm run yogafix",
-    "yogafix": "node ./yogafix"
+    "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
     "error-stack-parser": "^2.0.0",
@@ -41,7 +39,7 @@
     "sketch-constants": "^1.0.2",
     "sketchapp-json-flow-types": "^0.2.0",
     "sketchapp-json-plugin": "^0.1.2",
-    "yoga-layout": "1.6.0"
+    "yoga-layout": "1.8.0"
   },
   "peerDependencies": {
     "react": "*",
