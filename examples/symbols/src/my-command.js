@@ -6,7 +6,6 @@ import {
   View,
   Image,
   makeSymbol,
-  injectSymbols,
 } from 'react-sketchapp';
 
 const RedSquare = () =>
