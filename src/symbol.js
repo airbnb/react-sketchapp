@@ -31,7 +31,10 @@ const msListToArray = (pageList) => {
 
 const getDocument = (ctx) => {
   const doc =
-    ctx.document || ctx.actionContext.document || MSDocument.currentDocument();
+    ctx.document ||
+    ctx.actionContext.document ||
+    NSDocumentController.sharedDocumentController().currentDocument() ||
+    MSDocument.currentDocument();
   return doc;
 };
 
