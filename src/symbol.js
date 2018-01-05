@@ -29,9 +29,15 @@ const msListToArray = (pageList) => {
   return out;
 };
 
+const getDocument = (ctx) => {
+  const doc =
+    ctx.document || ctx.actionContext.document || MSDocument.currentDocument();
+  return doc;
+};
+
 export const getSymbolsPage = () => {
   const globalContext = context;
-  const pages = globalContext.document.pages();
+  const pages = getDocument(globalContext).pages();
   const array = msListToArray(pages);
   return array.find(p => String(p.name()) === 'Symbols');
 };
@@ -41,7 +47,7 @@ export const getExistingSymbols = () => {
   if (existingSymbols === null) {
     let symbolsPage = getSymbolsPage();
     if (!symbolsPage) {
-      symbolsPage = globalContext.document.addBlankPage();
+      symbolsPage = getDocument(globalContext).addBlankPage();
       symbolsPage.setName('Symbols');
     }
 
@@ -74,10 +80,10 @@ export const getSymbolId = (masterName: string): string => {
 
 const injectSymbols = () => {
   const globalContext = context; // eslint-disable-line
-  const pages = globalContext.document.pages();
+  const pages = getDocument(globalContext).pages();
   const array = msListToArray(pages);
 
-  const symbolsPage = globalContext.document
+  const symbolsPage = getDocument(globalContext)
     .documentData()
     .symbolsPageOrCreateIfNecessary();
 
@@ -99,9 +105,9 @@ const injectSymbols = () => {
 
   let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
   if (!notSymbolsPage) {
-    notSymbolsPage = globalContext.document.addBlankPage();
+    notSymbolsPage = getDocument(globalContext).addBlankPage();
   }
-  globalContext.document.setCurrentPage(notSymbolsPage);
+  getDocument(globalContext).setCurrentPage(notSymbolsPage);
 };
 
 export const makeSymbolByName = (masterName: string): React$Component =>
