@@ -73,9 +73,8 @@ export const getSymbolId = (masterName: string): string => {
 };
 
 export const injectSymbols = () => {
-  const globalContext = context; // eslint-disable-line
-  const pages = globalContext.document.pages();
-  const array = msListToArray(pages);
+  const globalContext = context;
+  const currentPage = globalContext.document.currentPage();
 
   if (mastersNameRegistry !== null) {
     // if mastersNameRegistry is not an object then makeSymbol was not called
@@ -99,11 +98,7 @@ export const injectSymbols = () => {
 
     renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 
-    let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
-    if (!notSymbolsPage) {
-      notSymbolsPage = globalContext.document.addBlankPage();
-    }
-    globalContext.document.setCurrentPage(notSymbolsPage);
+    globalContext.document.setCurrentPage(currentPage);
   }
 };
 
