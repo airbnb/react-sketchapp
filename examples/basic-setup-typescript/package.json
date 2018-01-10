@@ -7,7 +7,7 @@
     "manifest": "./manifest.json"
   },
   "scripts": {
-    "build": "npm run typescript && skpm-build",
+    "build": "npm run typescript:once && skpm-build",
     "watch": "skpm-build --watch & npm run typescript",
     "render": "skpm-build --watch --run & npm run typescript",
     "render:once": "npm run typescript:once && skpm-build --run",
