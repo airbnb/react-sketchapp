@@ -6,12 +6,14 @@ This example was adapted from the [basic-setup example](../basic-setup).
 
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
+
 ```
 curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/basic-setup-typescript
 cd basic-setup-typescript
 ```
 
 Install the dependencies
+
 ```
 npm install
 ```
@@ -24,13 +26,13 @@ If you're running this for the first time, you'll need to run the command
 npm run typescript:once
 ```
 
-then you can run this command every time after
+then you can run this command:
 
 ```
-npm start
+npm run render
 ```
 
-To clean the `.ts-compiled` directory, you can run 
+To clean the `.ts-compiled` directory, you can run:
 
 ```
 npm run typescript:clean
@@ -47,7 +49,8 @@ Here is a reference `tsconfig.json`:
   "compilerOptions": {
     "target": "es2015",
     "module": "es2015",
-    "jsx": "preserve",
+    "jsx": "react-native",
+    "allowJs": true,
     "strict": true,
     "outDir": "./.ts-compiled",
     "rootDir": "./src",

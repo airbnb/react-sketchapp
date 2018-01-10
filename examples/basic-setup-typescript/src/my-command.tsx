@@ -42,9 +42,8 @@ const Swatch = ({ name, hex }: SwatchProps) => (
 );
 
 interface DocumentProps {
-  colors: { [colorKey: string]: string }
+  colors: { [key: string]: string }
 }
-
 const Document = ({ colors }: DocumentProps) => (
   <Artboard
     name="Swatches"
@@ -60,6 +59,7 @@ const Document = ({ colors }: DocumentProps) => (
   </Artboard>
 );
 
+
 export default () => {
   const colorList = {
     Haus: '#F3F4F4',
@@ -72,5 +72,5 @@ export default () => {
     'Pear Dark': '#2E854B',
   };
 
-  render(<Document colors={colorList} />, (context.document as any).currentPage());
+  render(<Document colors={colorList} />, context.document.currentPage());
 };

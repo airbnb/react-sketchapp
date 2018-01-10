@@ -1,33 +1,34 @@
 {
-  "name": "basic-setup-typescript",
+  "name": "basic-setup",
   "version": "1.0.0",
   "description": "",
-  "main": "basic-setup-typescript.sketchplugin",
-  "manifest": "./manifest.json",
+  "skpm": {
+    "main": "basic-setup.sketchplugin",
+    "manifest": "./manifest.json"
+  },
   "scripts": {
-    "build": "skpm build",
-    "watch": "skpm build --watch",
-    "start": "npm run typescript & npm run render",
-    "render": "skpm build --watch --run",
-    "render:once": "skpm build --run",
-    "link-plugin": "skpm link",
-    "typescript": "./node_modules/.bin/tsc --watch",
-    "typescript:once": "./node_modules/.bin/tsc",
+    "build": "npm run typescript && skpm-build",
+    "watch": "skpm-build --watch & npm run typescript",
+    "render": "skpm-build --watch --run & npm run typescript",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link",
+    "typescript": "tsc --watch",
+    "typescript:once": "tsc",
     "typescript:clean": "rm -rf ./.ts-compiled"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "devDependencies": {
+    "@skpm/builder": "^0.2.0",
     "@types/chroma-js": "^1.3.3",
-    "@types/react": "^16.0.25",
-    "@types/react-sketchapp": "^0.12.0",
-    "skpm": "^0.10.2",
-    "typescript": "^2.6.1"
+    "@types/react-sketchapp": "^0.12.1",
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",
+    "prop-types": "^15.5.8",
     "react": "^15.4.2",
-    "react-sketchapp": "^0.12.1",
+    "react-sketchapp": "^1.0.0",
     "react-test-renderer": "^15.4.2"
   }
 }

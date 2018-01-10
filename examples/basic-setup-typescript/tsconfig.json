@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "es2015",
     "module": "es2015",
-    "jsx": "preserve",
+    "jsx": "react-native",
+    "allowJs": true,
     "strict": true,
     "outDir": "./.ts-compiled",
     "rootDir": "./src",

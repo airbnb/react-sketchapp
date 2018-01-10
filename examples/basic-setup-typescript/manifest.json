@@ -3,9 +3,9 @@
 	"bundleVersion": 1,
 	"commands": [
 		{
-			"name": "react-sketchapp: Basic Setup Typescript",
+			"name": "react-sketchapp: Basic Setup with Typescript",
 			"identifier": "main",
-			"script": "./.ts-compiled/my-command.jsx"
+			"script": "./.ts-compiled/my-command.js"
 		}
 	],
 	"menu": {
