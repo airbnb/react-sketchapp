@@ -70,6 +70,7 @@ export default () => {
     'Peach Dark': '#E37059',
     Pear: '#93DAAB',
     'Pear Dark': '#2E854B',
+    'TypeScript Blue': '#007ACC',
   };
 
   render(<Document colors={colorList} />, context.document.currentPage());

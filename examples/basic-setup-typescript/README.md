@@ -18,15 +18,7 @@ Install the dependencies
 npm install
 ```
 
-Run with live reloading in Sketch, need a new sketch doc open
-
-If you're running this for the first time, you'll need to run the command
-
-```
-npm run typescript:once
-```
-
-then you can run this command:
+Run with live reloading in Sketch, need a new sketch doc open. This will put both skpm and the Typescript compiler in watch mode:
 
 ```
 npm run render
