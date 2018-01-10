@@ -18,6 +18,7 @@
     "NSData": true,
     "NSMakeRange": true,
     "NSMutableAttributedString": true,
+    "NSUTF8StringEncoding": true,
     "context": true
   },
   "rules": {

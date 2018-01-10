@@ -40,6 +40,19 @@ const computeYogaNode = (
     yogaNode.setHeight(frame.height);
   }
 
+  if (node.type === 'svg') {
+    const svgProps = node.props;
+    // Width
+    if (!isNullOrUndefined(svgProps.width)) {
+      yogaNode.setWidth(svgProps.width);
+    }
+
+    // Height
+    if (!isNullOrUndefined(svgProps.height)) {
+      yogaNode.setHeight(svgProps.height);
+    }
+  }
+
   if (hasStyle) {
     // http://facebook.github.io/react-native/releases/0.48/docs/layout-props.html
 

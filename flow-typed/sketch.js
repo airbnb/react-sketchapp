@@ -56,3 +56,5 @@ declare var NSView: any;
 declare var NSMutableAttributedString: any;
 declare var log: any;
 declare var context: any;
+declare var NSUTF8StringEncoding: any;
+declare var MSSVGImporter: any;

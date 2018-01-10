@@ -1,10 +1,9 @@
 // @flow
 
-// Clear out all page layers
-export const resetPage = (page: Object) => {
-  // Can't delete the last page. Remove all layers instead
-  const layers = page.children();
-  for (let l = 0; l < layers.count(); l += 1) {
+export const resetLayer = (container: Object) => {
+  const layers = container.children();
+  // Skip last child since it is the container itself
+  for (let l = 0; l < layers.count() - 1; l += 1) {
     const layer = layers.objectAtIndex(l);
     layer.removeFromParent();
   }
@@ -23,7 +22,7 @@ export const resetDocument = () => {
       if (pages.length > 1) {
         context.document.documentData().removePageAtIndex(index);
       } else {
-        resetPage(pages[index]);
+        resetLayer(pages[index]);
       }
     }
   }

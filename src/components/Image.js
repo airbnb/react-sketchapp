@@ -17,7 +17,7 @@ const ImageURISourcePropType = PropTypes.shape({
   // scale: PropTypes.number,
 });
 
-const ImageSourcePropType = PropTypes.oneOfType([
+export const ImageSourcePropType = PropTypes.oneOfType([
   ImageURISourcePropType,
   // PropTypes.arrayOf(ImageURISourcePropType), // TODO: handle me
   PropTypes.string,
