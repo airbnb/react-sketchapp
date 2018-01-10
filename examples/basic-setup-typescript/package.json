@@ -10,7 +10,7 @@
     "build": "npm run typescript && skpm-build",
     "watch": "skpm-build --watch & npm run typescript",
     "render": "skpm-build --watch --run & npm run typescript",
-    "render:once": "skpm-build --run",
+    "render:once": "npm run typescript:once && skpm-build --run",
     "postinstall": "npm run build && skpm-link",
     "typescript": "tsc --watch",
     "typescript:once": "tsc",
