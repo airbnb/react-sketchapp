@@ -21,7 +21,10 @@ class TextStyles {
   setStyles(styles: Array<any>) {
     invariant(this._context, 'Please provide a context');
 
-    this._context.document.documentData().layerTextStyles().setObjects(styles);
+    this._context.document
+      .documentData()
+      .layerTextStyles()
+      .setObjects(styles);
 
     return this;
   }
