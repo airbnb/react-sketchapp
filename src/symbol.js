@@ -9,6 +9,7 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
+import getDocument from './utils/getDocument';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -27,15 +28,6 @@ const msListToArray = (pageList) => {
     out.push(pageList[i]);
   }
   return out;
-};
-
-const getDocument = (ctx) => {
-  const doc =
-    ctx.document ||
-    ctx.actionContext.document ||
-    NSDocumentController.sharedDocumentController().currentDocument() ||
-    MSDocument.currentDocument();
-  return doc;
 };
 
 export const getSymbolsPage = () => {
