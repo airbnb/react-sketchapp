@@ -52,8 +52,8 @@ export const reactTreeToFlexTree = (
     for (let index = 0; index < children.length; index += 1) {
       const childComponent = children[index];
       const childStyles =
-        childComponent.props && childComponent.props.styles
-          ? childComponent.props.styles
+        childComponent.props && childComponent.props.style
+          ? childComponent.props.style
           : {};
 
       // Since we reversed the order of children and sorted by zIndex, we need
@@ -62,7 +62,10 @@ export const reactTreeToFlexTree = (
       // NOTE: position: absolute handles zIndexes outside of flex layout, so we
       // need to use the current child index and not it's original index (from
       // before zIndex sorting).
-      const decrementIndex = children.length - 1 - index;
+      const decrementIndex =
+        children.length -
+        1 -
+        (childStyles.position === 'absolute' ? index : childComponent.oIndex);
       const childNode = yogaNode.getChild(decrementIndex);
 
       const renderedChildComponent = reactTreeToFlexTree(
