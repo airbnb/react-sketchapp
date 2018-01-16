@@ -9,7 +9,7 @@ import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
 import zIndex from './utils/zIndex';
 
-const reactTreeToFlexTree = (
+export const reactTreeToFlexTree = (
   node: TreeNode,
   yogaNode: yoga.NodeInstance,
   context: Context
@@ -62,10 +62,7 @@ const reactTreeToFlexTree = (
       // NOTE: position: absolute handles zIndexes outside of flex layout, so we
       // need to use the current child index and not it's original index (from
       // before zIndex sorting).
-      const decrementIndex =
-        children.length -
-        1 -
-        (childStyles.position === 'absolute' ? index : childComponent.oIndex);
+      const decrementIndex = children.length - 1 - index;
       const childNode = yogaNode.getChild(decrementIndex);
 
       const renderedChildComponent = reactTreeToFlexTree(
