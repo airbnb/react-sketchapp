@@ -9,7 +9,13 @@ const propTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
   style: PropTypes.oneOfType([
     PropTypes.shape({ ...ViewStylePropTypes }),
-    PropTypes.arrayOf(PropTypes.shape({ ...ViewStylePropTypes })),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.shape({ ...ViewStylePropTypes }),
+        PropTypes.number,
+      ])
+    ),
+    PropTypes.number,
   ]),
   name: PropTypes.string,
   resizingConstraint: PropTypes.shape({
