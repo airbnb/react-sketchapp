@@ -74,7 +74,9 @@ const buildPages = (
   if (pageData.length === 0) {
     const _container = container || context.document.currentPage();
     const page =
-      _container !== symbolPage ? _container : context.document.addBlankPage();
+      !symbolPage || _container !== symbolPage
+        ? _container
+        : context.document.addBlankPage();
 
     return renderToSketch(tree, page);
   }
