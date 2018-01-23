@@ -72,36 +72,34 @@ export const getSymbolId = (masterName: string): string => {
   return symbolId;
 };
 
-const injectSymbols = () => {
-  const globalContext = context; // eslint-disable-line
-  const pages = globalContext.document.pages();
-  const array = msListToArray(pages);
+export const injectSymbols = () => {
+  const globalContext = context;
+  const currentPage = globalContext.document.currentPage();
 
-  const symbolsPage = globalContext.document
-    .documentData()
-    .symbolsPageOrCreateIfNecessary();
+  if (mastersNameRegistry !== null) {
+    // if mastersNameRegistry is not an object then makeSymbol was not called
+    const symbolsPage = globalContext.document
+      .documentData()
+      .symbolsPageOrCreateIfNecessary();
 
-  let left = 0;
-  Object.keys(mastersNameRegistry).forEach((key) => {
-    const symbolMaster = mastersNameRegistry[key];
-    symbolMaster.frame.y = 0;
-    symbolMaster.frame.x = left;
-    left += symbolMaster.frame.width + 20;
+    let left = 0;
+    Object.keys(mastersNameRegistry).forEach((key) => {
+      const symbolMaster = mastersNameRegistry[key];
+      symbolMaster.frame.y = 0;
+      symbolMaster.frame.x = left;
+      left += symbolMaster.frame.width + 20;
 
-    const newLayer = fromSJSONDictionary(symbolMaster);
-    layers[symbolMaster.symbolID] = newLayer;
-  });
+      const newLayer = fromSJSONDictionary(symbolMaster);
+      layers[symbolMaster.symbolID] = newLayer;
+    });
 
-  // Clear out page layers to prepare for re-render
-  resetLayer(symbolsPage);
+    // Clear out page layers to prepare for re-render
+    resetLayer(symbolsPage);
 
-  renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
+    renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 
-  let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
-  if (!notSymbolsPage) {
-    notSymbolsPage = globalContext.document.addBlankPage();
+    globalContext.document.setCurrentPage(currentPage);
   }
-  globalContext.document.setCurrentPage(notSymbolsPage);
 };
 
 export const makeSymbolByName = (masterName: string): React$Component =>
@@ -149,9 +147,7 @@ export const makeSymbol = (
     )
   );
 
-  const symbol = makeSymbolByName(masterName);
-  injectSymbols();
-  return symbol;
+  return makeSymbolByName(masterName);
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
