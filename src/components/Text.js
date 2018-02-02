@@ -8,10 +8,17 @@ import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 
 const propTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
-  style: PropTypes.shape({
-    ...ViewStylePropTypes,
-    ...TextStylePropTypes,
-  }),
+  style: PropTypes.oneOfType([
+    PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
+        PropTypes.number,
+      ])
+    ),
+    PropTypes.number,
+  ]),
+
   name: PropTypes.string,
   resizingConstraint: PropTypes.shape({
     ...ResizingConstraintPropTypes,
