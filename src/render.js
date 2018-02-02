@@ -11,6 +11,7 @@ import { getSymbolsPage } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
+import getDocument from './utils/getDocument';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
   const tree = buildTree(element);
@@ -72,11 +73,11 @@ const buildPages = (
   const symbolPage = getSymbolsPage();
 
   if (pageData.length === 0) {
-    const _container = container || context.document.currentPage();
+    const _container = container || getDocument(context).currentPage();
     const page =
       !symbolPage || _container !== symbolPage
         ? _container
-        : context.document.addBlankPage();
+        : getDocument(context).addBlankPage();
 
     return renderToSketch(tree, page);
   }
@@ -89,11 +90,11 @@ const buildPages = (
 
   pageData.forEach((data) => {
     // Get Current Page
-    let page = context.document.currentPage();
+    let page = getDocument(context).currentPage();
 
     if (pageTotal > 1) {
       // Create new page
-      page = context.document.addBlankPage();
+      page = getDocument(context).addBlankPage();
     } else {
       pageTotal += 1;
     }
@@ -137,7 +138,7 @@ export const render = (
       return buildPages(tree, container);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(tree, context.document.currentPage());
+      return renderToSketch(tree, getDocument(context).currentPage());
     }
   }
   return null;
