@@ -9,7 +9,7 @@ import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
 import zIndex from './utils/zIndex';
 
-const reactTreeToFlexTree = (
+export const reactTreeToFlexTree = (
   node: TreeNode,
   yogaNode: yoga.NodeInstance,
   context: Context
@@ -52,8 +52,8 @@ const reactTreeToFlexTree = (
     for (let index = 0; index < children.length; index += 1) {
       const childComponent = children[index];
       const childStyles =
-        childComponent.props && childComponent.props.styles
-          ? childComponent.props.styles
+        childComponent.props && childComponent.props.style
+          ? childComponent.props.style
           : {};
 
       // Since we reversed the order of children and sorted by zIndex, we need

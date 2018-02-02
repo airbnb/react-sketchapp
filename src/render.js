@@ -74,7 +74,10 @@ const buildPages = (
 
   if (pageData.length === 0) {
     const _container = container || getDocument(context).currentPage();
-    const page = !symbolPage ? _container : getDocument(context).addBlankPage();
+    const page =
+      !symbolPage || _container !== symbolPage
+        ? _container
+        : getDocument(context).addBlankPage();
 
     return renderToSketch(tree, page);
   }
