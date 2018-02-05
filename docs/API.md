@@ -465,7 +465,7 @@ Reset the registered styles.
 ## Symbols
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
-### `makeSymbol(node, name)`
+### `makeSymbol(node, name, document)`
 Returns a react component which is an can be used to render instances of the symbol.
 
 #### Parameters
@@ -473,6 +473,7 @@ Returns a react component which is an can be used to render instances of the sym
 |---|---|---|---|
 | `node` | `Node` | | The node object that will be rendered as a symbol |
 | `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
+| `document` | `Object` | The current document | The Sketch document to make the symbol in |
 
 #### Symbol example
 ```js

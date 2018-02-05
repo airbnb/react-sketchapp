@@ -9,7 +9,7 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
-import getDocument from './utils/getDocument';
+import { getDocumentFromContext } from './utils/getDocument';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -36,12 +36,11 @@ export const getSymbolsPage = (document: any) => {
   return array.find(p => String(p.name()) === 'Symbols');
 };
 
-export const getExistingSymbols = () => {
-  const globalContext = context;
+const getExistingSymbols = (document: any) => {
   if (existingSymbols === null) {
-    let symbolsPage = getSymbolsPage();
+    let symbolsPage = getSymbolsPage(document);
     if (!symbolsPage) {
-      symbolsPage = getDocument(globalContext).addBlankPage();
+      symbolsPage = document.addBlankPage();
       symbolsPage.setName('Symbols');
     }
 
@@ -61,7 +60,7 @@ export const getExistingSymbols = () => {
   return existingSymbols;
 };
 
-export const getSymbolId = (masterName: string): string => {
+const getSymbolId = (masterName: string): string => {
   let symbolId = generateID();
 
   existingSymbols.forEach((symbolMaster) => {
@@ -73,6 +72,9 @@ export const getSymbolId = (masterName: string): string => {
 };
 
 export const injectSymbols = (document: any) => {
+  if (!document) {
+    document = getDocumentFromContext(context); // eslint-disable-line
+  }
   const currentPage = document.currentPage();
 
   if (mastersNameRegistry !== null) {
@@ -129,12 +131,13 @@ export const makeSymbolByName = (masterName: string): React$Component =>
 
 export const makeSymbol = (
   Component: React$Component,
-  name: string
+  name: string,
+  document?: any
 ): React$Component => {
   const masterName = name || displayName(Component);
 
   if (mastersNameRegistry === null) {
-    getExistingSymbols();
+    getExistingSymbols(document || getDocumentFromContext(context));
   }
   const symbolId = getSymbolId(masterName);
 
