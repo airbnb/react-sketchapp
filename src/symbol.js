@@ -9,6 +9,7 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
+import getDocument from './utils/getDocument';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -31,7 +32,7 @@ const msListToArray = (pageList) => {
 
 export const getSymbolsPage = () => {
   const globalContext = context;
-  const pages = globalContext.document.pages();
+  const pages = getDocument(globalContext).pages();
   const array = msListToArray(pages);
   return array.find(p => String(p.name()) === 'Symbols');
 };
@@ -41,7 +42,7 @@ export const getExistingSymbols = () => {
   if (existingSymbols === null) {
     let symbolsPage = getSymbolsPage();
     if (!symbolsPage) {
-      symbolsPage = globalContext.document.addBlankPage();
+      symbolsPage = getDocument(globalContext).addBlankPage();
       symbolsPage.setName('Symbols');
     }
 
@@ -74,11 +75,12 @@ export const getSymbolId = (masterName: string): string => {
 
 export const injectSymbols = () => {
   const globalContext = context;
-  const currentPage = globalContext.document.currentPage();
+  const document = getDocument(globalContext);
+  const currentPage = document.currentPage();
 
   if (mastersNameRegistry !== null) {
     // if mastersNameRegistry is not an object then makeSymbol was not called
-    const symbolsPage = globalContext.document
+    const symbolsPage = document
       .documentData()
       .symbolsPageOrCreateIfNecessary();
 
@@ -98,7 +100,7 @@ export const injectSymbols = () => {
 
     renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 
-    globalContext.document.setCurrentPage(currentPage);
+    document.setCurrentPage(currentPage);
   }
 };
 

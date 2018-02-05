@@ -20,3 +20,37 @@ exports[`<Text /> passes its children 1`] = `
   foo
 </text>
 `;
+
+exports[`<Text /> style accepts a StyleSheet ordinal 1`] = `
+<text
+  name="Text"
+  resizingConstraint={undefined}
+  style={
+    Object {
+      "flex": 1,
+    }
+  } />
+`;
+
+exports[`<Text /> style accepts a plain object 1`] = `
+<text
+  name="Text"
+  resizingConstraint={undefined}
+  style={
+    Object {
+      "flex": 1,
+    }
+  } />
+`;
+
+exports[`<Text /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
+<text
+  name="Text"
+  resizingConstraint={undefined}
+  style={
+    Object {
+      "flex": 1,
+      "flexGrow": 1,
+    }
+  } />
+`;

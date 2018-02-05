@@ -19,3 +19,34 @@ exports[`<Artboard /> renders children 1`] = `
   </foo>
 </artboard>
 `;
+
+exports[`<Artboard /> style accepts a StyleSheet ordinal 1`] = `
+<artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+    }
+  } />
+`;
+
+exports[`<Artboard /> style accepts a plain object 1`] = `
+<artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+    }
+  } />
+`;
+
+exports[`<Artboard /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
+<artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+      "flexGrow": 1,
+    }
+  } />
+`;
