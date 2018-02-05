@@ -11,6 +11,10 @@ import { getSymbolsPage, injectSymbols } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
+import {
+  getDocumentFromContainer,
+  getDocumentFromContext,
+} from './utils/getDocument';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
   const tree = buildTree(element);
@@ -68,13 +72,17 @@ const buildPages = (
   tree: TreeNode,
   container: ?SketchLayer
 ): ?SketchLayer | Array<?SketchLayer> => {
+  const document = getDocumentFromContainer(container);
   const pageData = findPageData(tree);
-  const symbolPage = getSymbolsPage();
-  injectSymbols();
+  const symbolPage = getSymbolsPage(document);
+  injectSymbols(document);
 
   if (pageData.length === 0) {
-    const _container = container || context.document.currentPage();
-    const page = !symbolPage ? _container : context.document.addBlankPage();
+    const _container = container || document.currentPage();
+    const page =
+      !symbolPage || _container !== symbolPage
+        ? _container
+        : document.addBlankPage();
 
     return renderToSketch(tree, page);
   }
@@ -87,11 +95,11 @@ const buildPages = (
 
   pageData.forEach((data) => {
     // Get Current Page
-    let page = context.document.currentPage();
+    let page = document.currentPage();
 
     if (pageTotal > 1) {
       // Create new page
-      page = context.document.addBlankPage();
+      page = document.addBlankPage();
     } else {
       pageTotal += 1;
     }
@@ -123,7 +131,7 @@ export const render = (
     try {
       // Clear out document or layer to prepare for re-render
       if (!container) {
-        resetDocument();
+        resetDocument(getDocumentFromContext(context));
       } else {
         resetLayer(container);
       }
@@ -135,7 +143,10 @@ export const render = (
       return buildPages(tree, container);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(tree, context.document.currentPage());
+      return renderToSketch(
+        tree,
+        getDocumentFromContext(context).currentPage()
+      );
     }
   }
   return null;

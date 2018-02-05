@@ -30,9 +30,8 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getSymbolsPage = () => {
-  const globalContext = context;
-  const pages = getDocument(globalContext).pages();
+export const getSymbolsPage = (document: any) => {
+  const pages = document.pages();
   const array = msListToArray(pages);
   return array.find(p => String(p.name()) === 'Symbols');
 };
@@ -73,9 +72,7 @@ export const getSymbolId = (masterName: string): string => {
   return symbolId;
 };
 
-export const injectSymbols = () => {
-  const globalContext = context;
-  const document = getDocument(globalContext);
+export const injectSymbols = (document: any) => {
   const currentPage = document.currentPage();
 
   if (mastersNameRegistry !== null) {
