@@ -26,17 +26,15 @@ class Page extends React.Component {
 
   render() {
     const { name, children, style, ...otherProps } = this.props;
+    const _name =
+      name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name;
+    const _style = StyleSheet.flatten(style);
 
-    const pageProps = {
-      name: name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name,
-      ...otherProps,
-    };
-
-    if (style) {
-      pageProps.style = StyleSheet.flatten(style);
-    }
-
-    return <page {...pageProps}>{children}</page>;
+    return (
+      <page name={_name} style={_style} {...otherProps}>
+        {children}
+      </page>
+    );
   }
 }
 
