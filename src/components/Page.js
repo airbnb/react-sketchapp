@@ -1,10 +1,22 @@
 /* @flow */
 import React from 'react';
 import PropTypes from 'prop-types';
+import StyleSheet from '../stylesheet';
+import PageStylePropTypes from './PageStylePropTypes';
 
 const propTypes = {
   name: PropTypes.string,
   children: PropTypes.node,
+  style: PropTypes.oneOfType([
+    PropTypes.shape({ ...PageStylePropTypes }),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.shape({ ...PageStylePropTypes }),
+        PropTypes.number,
+      ])
+    ),
+    PropTypes.number,
+  ]),
 };
 
 class Page extends React.Component {
@@ -13,11 +25,18 @@ class Page extends React.Component {
   };
 
   render() {
-    const { name, children } = this.props;
-    const _name =
-      name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name;
+    const { name, children, style, ...otherProps } = this.props;
 
-    return <page name={_name}>{children}</page>;
+    const pageProps = {
+      name: name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name,
+      ...otherProps,
+    };
+
+    if (style) {
+      pageProps.style = StyleSheet.flatten(style);
+    }
+
+    return <page {...pageProps}>{children}</page>;
   }
 }
 
