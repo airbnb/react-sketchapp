@@ -15,6 +15,7 @@
     * [Artboard](/docs/API.md#artboard)
     * [Image](/docs/API.md#image)
     * [RedBox](/docs/API.md#redbox)
+    * [Svg](/docs/API.md#svg)
     * [Text](/docs/API.md#text)
     * [View](/docs/API.md#view)
     * [Platform](/docs/API.md#platform)
