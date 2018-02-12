@@ -86,6 +86,7 @@ Components use CSS styles + flexbox layout.
 | `lineHeight` | `number` | ✅ |
 | `textAlign` | `auto` &#124; `left` &#124; `right` &#124; `center` &#124; `justify` | ✅ |
 | `writingDirection` | `auto` &#124; `ltr` &#124; `rtl` | ⛔️ |
+| `opacity` | `number` | ✅ |
 
 Styles can be passed to components as plain objects, or via [`StyleSheet`](/docs/API.md).
 
