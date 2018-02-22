@@ -1,4 +1,5 @@
 import React from 'react';
+import path from 'path';
 import { render, Text, View } from 'react-sketchapp';
 import type { User } from './types';
 import { fonts, spacing } from './designSystem';
@@ -33,8 +34,10 @@ export default () => {
         '⚛️ Makes styled-components, react-boilerplate, @KeystoneJS and CarteBlanche. ✌ Open source developer @thethinkmill. ☕ Speciality coffee geek, skier, traveller.',
       location: 'Vienna, Austria',
       url: 'mxstbr.com',
-      profile_image_url:
-        'https://pbs.twimg.com/profile_images/763033229993574400/6frGyDyA_400x400.jpg',
+      profile_image_url: `file://${path.resolve(
+        __dirname,
+        '../../docs/assets/Logo.png'
+      )}`,
     },
     {
       name: '- ̗̀Jackie ̖́-',
