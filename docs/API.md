@@ -142,19 +142,39 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | `children` | `Node` | | |
-| `source` | `ImageSource` | | |
+| `source` | `ImageSource` | | supports: jpg, png, gif, tiff |
+| `defaultSource` | `ImageSource` | | Same as ```source``` |
 | `style` | [`Style`](/docs/styling.md) | | |
-| `resizeMode` | `ResizeMode` | `contain` | |
+| `resizeMode` | `ResizeMode` | `contain` | | |
 
 ```
-type ImageSource = String | { src: String }
+type ImageSource = URI | { uri: URI, width: number, height: number }
 type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
 ```
+```URI``` can be an http://, https:// or file:// prefixed string. If specifying a local file, the absolute path to
+the file should be used.
 
-#### Example
+Note that file:// will typically require a leading slash.
+
+Image height and width must be specified in either the ImageSource object, or
+the style object (or defaults to zero).  Style properties override ImageSource properties.
+
+#### Example (network URL)
 ```js
 <Image
   source='http://placekitten.com/400'
+  resizeMode='contain'
+  style={{
+    height: 400,
+    width: 400,
+  }}
+/>
+```
+
+#### Example (local file)
+```js
+<Image
+  source='file:///absolute/path/to/image.jpg'
   resizeMode='contain'
   style={{
     height: 400,
