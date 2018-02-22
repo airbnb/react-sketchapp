@@ -142,19 +142,71 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | `children` | `Node` | | |
-| `source` | `ImageSource` | | |
+| `source` | `ImageSource` | | supports: jpg, png, gif, tiff |
+| `defaultSource` | `ImageSource` | | Same as `source` |
 | `style` | [`Style`](/docs/styling.md) | | |
-| `resizeMode` | `ResizeMode` | `contain` | |
+| `resizeMode` | `ResizeMode` | `contain` | | |
 
 ```
-type ImageSource = String | { src: String }
+type ImageSource = URI | { uri: URI, width: number, height: number }
 type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
 ```
 
-#### Example
+```URI``` can be an http://, https:// or file:// prefixed string. If specifying a local file, the absolute path to
+the file should be used.
+
+Note that file:// will typically require a leading slash.
+
+Image height and width must be specified in either the ImageSource object, or
+the style object (or defaults to zero).  Style properties override ImageSource properties.
+
+### Important!
+
+Webpack is used to bundle the Sketch plugin output, and in the process the
+usual __dirname and __filename globals are left undefined.  As a result, its
+not possible to use these to build an absolute path to the image resource.
+
+You should create a webpack config module, which:
+
+1. Must be named `webpack.skpm.config.js`
+2. Must be located in the project root (same as `package.json`)
+
+This will ensure that `__dirname` is defined, BUT, it will be the directory
+of the project root (location on the `webpack.skpm.config.js`) and NOT the
+location of the module in which you use it.  When you reference `__dirname`
+in your code, you will need to calculate the location of your image resource
+relative to this directory.
+
+webpack.skpm.config.js:
+```js
+const webpack = require('webpack')
+
+module.exports = function (config) {
+  config.plugins = config.plugins || []
+  config.plugins.push(new webpack.DefinePlugin({
+    "__dirname": JSON.stringify(__dirname)
+  }))
+};
+```
+
+#### Example (network URL)
+
 ```js
 <Image
   source='http://placekitten.com/400'
+  resizeMode='contain'
+  style={{
+    height: 400,
+    width: 400,
+  }}
+/>
+```
+
+#### Example (local file)
+
+```js
+<Image
+  source='file:///absolute/path/to/image.jpg'
   resizeMode='contain'
   style={{
     height: 400,

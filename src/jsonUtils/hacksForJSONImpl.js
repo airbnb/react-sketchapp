@@ -129,7 +129,12 @@ function makeParagraphStyle(textStyle) {
 }
 
 export const makeImageDataFromUrl = (url: string): MSImageData => {
-  let fetchedData = NSData.dataWithContentsOfURL(NSURL.URLWithString(url));
+  let fetchedData = null;
+  if (url.slice(0, 7) === 'file://') {
+    fetchedData = NSData.dataWithContentsOfFile(url.slice(7));
+  } else {
+    fetchedData = NSData.dataWithContentsOfURL(NSURL.URLWithString(url));
+  }
 
   if (fetchedData) {
     const firstByte = fetchedData
