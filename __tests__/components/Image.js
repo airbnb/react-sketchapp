@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Image from '../../src/components/Image';
+import StyleSheet from '../../src/stylesheet';
 
 describe('<Image />', () => {
   it('renders children', () => {
@@ -161,6 +162,34 @@ describe('<Image />', () => {
             style={{ height: 400, width: 300 }}
           />
         )
+        .toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
+  describe('style', () => {
+    const styles = StyleSheet.create({
+      view: {
+        flex: 1,
+      },
+    });
+
+    it('accepts a plain object', () => {
+      const tree = renderer.create(<Image style={{ flex: 1 }} />).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('accepts a StyleSheet ordinal', () => {
+      const tree = renderer.create(<Image style={styles.view} />).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('accepts an array of plain objects and/or StyleSheet ordinals', () => {
+      const tree = renderer
+        .create(<Image style={[{ flexGrow: 1 }, styles.view]} />)
         .toJSON();
 
       expect(tree).toMatchSnapshot();
