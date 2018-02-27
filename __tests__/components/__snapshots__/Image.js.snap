@@ -209,3 +209,43 @@ exports[`<Image /> source sets width from source 1`] = `
     }
   } />
 `;
+
+exports[`<Image /> style accepts a StyleSheet ordinal 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  resizingConstraint={undefined}
+  source={undefined}
+  style={
+    Object {
+      "flex": 1,
+    }
+  } />
+`;
+
+exports[`<Image /> style accepts a plain object 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  resizingConstraint={undefined}
+  source={undefined}
+  style={
+    Object {
+      "flex": 1,
+    }
+  } />
+`;
+
+exports[`<Image /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
+<image
+  name="Image"
+  resizeMode="Fill"
+  resizingConstraint={undefined}
+  source={undefined}
+  style={
+    Object {
+      "flex": 1,
+      "flexGrow": 1,
+    }
+  } />
+`;
