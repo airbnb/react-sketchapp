@@ -2,9 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
-import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ResizeModePropTypes from './ResizeModePropTypes';
+import ImageStylePropTypes from './ImageStylePropTypes';
 
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
@@ -23,11 +23,6 @@ export const ImageSourcePropType = PropTypes.oneOfType([
   // PropTypes.arrayOf(ImageURISourcePropType), // TODO: handle me
   PropTypes.string,
 ]);
-
-const ImageStylePropTypes = {
-  ...ViewStylePropTypes,
-  resizeMode: ResizeModePropTypes,
-};
 
 const propTypes = {
   name: PropTypes.string,
