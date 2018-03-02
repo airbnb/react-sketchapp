@@ -1,0 +1,17 @@
+{
+	"compatibleVersion": 3,
+	"bundleVersion": 1,
+	"commands": [
+		{
+			"name": "react-sketchapp: Basic Setup with Typescript",
+			"identifier": "main",
+			"script": "./.ts-compiled/my-command.js"
+		}
+	],
+	"menu": {
+		"isRoot": true,
+		"items": [
+			"main"
+		]
+	}
+}
