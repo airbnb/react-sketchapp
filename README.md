@@ -1,7 +1,7 @@
 > This project is currently in **beta and APIs are subject to change**.
 
 <div align="center">
-  <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" height="163px" />
+  <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" style="max-height:163px; width:100; height: auto; max-width:100%" />
 </div>
 
 <div align="center">
@@ -34,6 +34,7 @@ Managing the assets of design systems in Sketch is complex, error-prone and time
 
 ## What does the code look like?
 ```js
+import React from 'react';
 import { render, Text, Artboard } from 'react-sketchapp';
 
 const App = props => (
@@ -45,7 +46,7 @@ const App = props => (
 );
 
 export default (context) => {
-  render(<App message="Hello world!" />, context);
+  render(<App message="Hello world!" />, context.document.currentPage());
 }
 ```
 
