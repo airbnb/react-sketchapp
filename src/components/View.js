@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import ShadowGroupPropTypes from './ShadowGroupPropTypes';
 
 const propTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
@@ -21,6 +22,11 @@ const propTypes = {
   resizingConstraint: PropTypes.shape({
     ...ResizingConstraintPropTypes,
   }),
+  shadowGroup: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...ShadowGroupPropTypes,
+    })
+  ),
   children: PropTypes.node,
 };
 
@@ -35,6 +41,7 @@ class View extends React.Component {
         name={this.props.name}
         style={StyleSheet.flatten(this.props.style)}
         resizingConstraint={this.props.resizingConstraint}
+        shadowGroup={this.props.shadowGroup}
       >
         {this.props.children}
       </view>
