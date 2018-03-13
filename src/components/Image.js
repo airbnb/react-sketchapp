@@ -2,8 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
-import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import ResizeModePropTypes from './ResizeModePropTypes';
+import ImageStylePropTypes from './ImageStylePropTypes';
 
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
@@ -23,25 +24,22 @@ export const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.string,
 ]);
 
-const ResizeModePropType = PropTypes.oneOf([
-  'contain',
-  'cover',
-  'stretch',
-  'center',
-  'repeat',
-  'none',
-]);
-
 const propTypes = {
   name: PropTypes.string,
   children: PropTypes.any,
   defaultSource: ImageSourcePropType,
-  resizeMode: ResizeModePropType,
+  resizeMode: ResizeModePropTypes,
   source: ImageSourcePropType,
-  style: PropTypes.shape({
-    ...ViewStylePropTypes,
-    resizeMode: ResizeModePropType,
-  }),
+  style: PropTypes.oneOfType([
+    PropTypes.shape(ImageStylePropTypes),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.shape(ImageStylePropTypes),
+        PropTypes.number,
+      ])
+    ),
+    PropTypes.number,
+  ]),
   resizingConstraint: PropTypes.shape({
     ...ResizingConstraintPropTypes,
   }),
