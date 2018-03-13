@@ -43,30 +43,16 @@ export const reactTreeToFlexTree = (
     // Compute Text Children
     textNodes = computeTextTree(node, context);
   } else if (node.children && node.children.length > 0) {
-    // Recursion reverses the render stacking order, this corrects that
-    node.children.reverse();
+    // Recursion reverses the render stacking order
+    // but that's actually fine because Sketch renders the first on top
 
-    // Calculates zIndex order
-    const children = zIndex(node.children, true);
+    // Calculates zIndex order to match yoga
+    const children = zIndex(node.children);
 
     for (let index = 0; index < children.length; index += 1) {
       const childComponent = children[index];
-      const childStyles =
-        childComponent.props && childComponent.props.style
-          ? childComponent.props.style
-          : {};
 
-      // Since we reversed the order of children and sorted by zIndex, we need
-      // to keep track of a decrementing index using the original index of the
-      // TreeNode to get the correct layout.
-      // NOTE: position: absolute handles zIndexes outside of flex layout, so we
-      // need to use the current child index and not it's original index (from
-      // before zIndex sorting).
-      const decrementIndex =
-        children.length -
-        1 -
-        (childStyles.position === 'absolute' ? index : childComponent.oIndex);
-      const childNode = yogaNode.getChild(decrementIndex);
+      const childNode = yogaNode.getChild(index);
 
       const renderedChildComponent = reactTreeToFlexTree(
         childComponent,
