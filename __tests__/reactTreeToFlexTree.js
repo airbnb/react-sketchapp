@@ -29,24 +29,24 @@ const treeRootStub = {
     {
       type: 'view',
       props: {
-        name: 'Layer 2',
-        style: {
-          height: 200,
-          position: 'absolute',
-          width: 200,
-          zIndex: 2,
-        },
-      },
-    },
-    {
-      type: 'view',
-      props: {
         name: 'Layer 3',
         style: {
           height: 300,
           position: 'absolute',
           width: 300,
           zIndex: 3,
+        },
+      },
+    },
+    {
+      type: 'view',
+      props: {
+        name: 'Layer 2',
+        style: {
+          height: 200,
+          position: 'absolute',
+          width: 200,
+          zIndex: 2,
         },
       },
     },
@@ -89,6 +89,7 @@ describe('Compute Flex Tree', () => {
             width: 100,
             zIndex: 1,
           },
+          textNodes: undefined,
         },
         children: [],
       },
@@ -117,6 +118,7 @@ describe('Compute Flex Tree', () => {
             width: 200,
             zIndex: 2,
           },
+          textNodes: undefined,
         },
         children: [],
       },
@@ -145,6 +147,7 @@ describe('Compute Flex Tree', () => {
             width: 300,
             zIndex: 3,
           },
+          textNodes: undefined,
         },
         children: [],
       },
