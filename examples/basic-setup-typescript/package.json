@@ -19,7 +19,7 @@
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "devDependencies": {
-    "@skpm/builder": "^0.2.0",
+    "@skpm/builder": "^0.4.0",
     "@types/chroma-js": "^1.3.3",
     "@types/react-sketchapp": "^0.12.1",
     "typescript": "^2.6.2"
