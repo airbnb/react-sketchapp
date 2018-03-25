@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
 });
 
 type ProfileP = {
-  user: User,
+  user: User
 };
 
 type AvatarP = {
-  url: string,
+  url: string
 };
 const Avatar = ({ url }: AvatarP): React$Element<any> => (
   <Image source={url} style={styles.avatar} />
@@ -34,21 +34,15 @@ const Avatar = ({ url }: AvatarP): React$Element<any> => (
 
 type TextP = { children?: string };
 const Title = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.title}>
-    {children}
-  </Text>
+  <Text style={styles.title}>{children}</Text>
 );
 
 const Subtitle = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.subtitle}>
-    {children}
-  </Text>
+  <Text style={styles.subtitle}>{children}</Text>
 );
 
 const Body = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.body}>
-    {children}
-  </Text>
+  <Text style={styles.body}>{children}</Text>
 );
 
 const Profile = (props: ProfileP): React$Element<any> => (
@@ -56,7 +50,7 @@ const Profile = (props: ProfileP): React$Element<any> => (
     <Avatar url={props.user.profileImageUrl} />
     <View style={{ marginBottom: spacing }}>
       <Title>{props.user.name}</Title>
-      <Subtitle>{`@${props.user.screenname}`}</Subtitle>
+      <Subtitle>@{props.user.screenname}</Subtitle>
     </View>
     <Body>{props.user.description}</Body>
     <Body>{props.user.location}</Body>
