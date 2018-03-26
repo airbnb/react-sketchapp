@@ -1,8 +1,8 @@
 // @flow
 import type { TreeNode } from '../types';
 
-// Sort z-index values highest to lowest (opposite if `reverse` is true)
-const zIndex = (nodes: Array<TreeNode>, reverse: boolean = false) =>
+// Sort z-index values lowest to highest
+const zIndex = (nodes: Array<TreeNode>) =>
   nodes
     .map((node: TreeNode, index: number) => ({
       ...node,
@@ -17,7 +17,7 @@ const zIndex = (nodes: Array<TreeNode>, reverse: boolean = false) =>
         b.props && b.props.style && b.props.style.zIndex
           ? b.props.style.zIndex
           : 0;
-      return reverse ? aIndex - bIndex : bIndex - aIndex;
+      return aIndex - bIndex;
     });
 
 export default zIndex;

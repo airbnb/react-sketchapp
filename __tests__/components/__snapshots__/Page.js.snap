@@ -1,21 +1,32 @@
 exports[`<Page /> name defaults to Page 1`] = `
 <page
-  name="Page 1" />
+  name="Page 1"
+  style={undefined} />
 `;
 
 exports[`<Page /> name passes its name 1`] = `
 <page
-  name="bar" />
+  name="bar"
+  style={undefined} />
 `;
 
 exports[`<Page /> name passes its name and avoids Symbol page conflict 1`] = `
 <page
-  name="Symbols (renamed to avoid conflict)" />
+  name="Symbols (renamed to avoid conflict)"
+  style={undefined} />
+`;
+
+exports[`<Page /> name passes otherProps 1`] = `
+<page
+  name="Page 1"
+  propName="something"
+  style={Object {}} />
 `;
 
 exports[`<Page /> renders children 1`] = `
 <page
-  name="Page 1">
+  name="Page 1"
+  style={undefined}>
   <foo>
     <bar />
   </foo>
