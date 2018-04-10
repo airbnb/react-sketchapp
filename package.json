@@ -32,6 +32,11 @@
   },
   "dependencies": {
     "error-stack-parser": "^2.0.0",
+    "gitbook-plugin-anchorjs": "^2.0.0",
+    "gitbook-plugin-codeblock-disable-glossary": "0.0.1",
+    "gitbook-plugin-edit-link": "^2.0.2",
+    "gitbook-plugin-github": "^2.0.0",
+    "gitbook-plugin-prism": "^2.3.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
     "normalize-css-color": "^1.0.1",
