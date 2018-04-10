@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "license": "MIT",
