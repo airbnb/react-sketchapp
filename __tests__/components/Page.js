@@ -35,5 +35,13 @@ describe('<Page />', () => {
 
       expect(tree).toMatchSnapshot();
     });
+
+    it('passes otherProps', () => {
+      const tree = renderer
+        .create(<Page propName="something" style={{}} />)
+        .toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
   });
 });
