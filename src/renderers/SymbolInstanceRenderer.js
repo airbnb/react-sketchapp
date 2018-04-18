@@ -37,59 +37,59 @@ const removeDuplicateOverrides = (overrides: Array<Override>): Array<Override> =
   });
 };
 
-const extractOverridesHelp = (subLayer: any, output: any) => {
-  if (subLayer._class === 'text') {
-    output.push(overrideProps(subLayer));
-    return;
+const extractOverridesReducer = (
+  overrides: Array<Override>,
+  layer: SketchLayer,
+): Array<Override> => {
+  if (layer._class === 'text') {
+    return overrides.concat(overrideProps(layer));
   }
 
-  if (subLayer._class === 'group') {
+  if (layer._class === 'group') {
     // here we're doing some look-ahead to see if this group contains a group
     // that contains text. this is the structure that will appear if the user
     // creates a `<Text />` element with a custom name
-    const subGroup = findInGroup(subLayer, 'group');
+    const subGroup = findInGroup(layer, 'group');
     const textLayer = findInGroup(subGroup, 'text');
     if (textLayer) {
-      output.push(overrideProps(textLayer));
-      return;
+      return overrides.concat(overrideProps(textLayer));
     }
 
     // here we're doing look-ahead to see if this group contains a shapeGroup
     // with an image fill. if it does we can do an image override on that
     // fill
-    const shapeGroup = findInGroup(subLayer, 'shapeGroup');
+    const shapeGroup = findInGroup(layer, 'shapeGroup');
     if (shapeGroup && hasImageFill(shapeGroup)) {
-      output.push({
+      return overrides.concat({
         ...overrideProps(shapeGroup),
         type: 'image',
-        name: subLayer.name,
+        name: layer.name,
       });
     }
   }
 
-  if (subLayer._class === 'symbolInstance') {
-    output.push({
-      ...overrideProps(subLayer),
-      symbolId: subLayer.symbolID,
-      width: subLayer.frame.width,
-      height: subLayer.frame.height,
+  if (layer._class === 'symbolInstance') {
+    return overrides.concat({
+      ...overrideProps(layer),
+      symbolId: layer.symbolID,
+      width: layer.frame.width,
+      height: layer.frame.height,
     });
   }
 
   if (
-    (subLayer._class === 'shapeGroup' ||
-      subLayer._class === 'artboard' ||
-      subLayer._class === 'group') &&
-    subLayer.layers
+    (layer._class === 'shapeGroup' || layer._class === 'artboard' || layer._class === 'group') &&
+    layer.layers
   ) {
-    subLayer.layers.forEach(subSubLayer => extractOverridesHelp(subSubLayer, output));
+    return layer.layers.reduce(extractOverridesReducer, overrides);
   }
+
+  return overrides;
 };
 
-const extractOverrides = (subLayers: any) => {
-  const output = [];
-  subLayers.forEach(subLayer => extractOverridesHelp(subLayer, output));
-  return removeDuplicateOverrides(output);
+const extractOverrides = (layers: Array<SketchLayer> = []): Array<Override> => {
+  const overrides = layers.reduce(extractOverridesReducer, []);
+  return removeDuplicateOverrides(overrides);
 };
 
 class SymbolInstanceRenderer extends SketchRenderer {
