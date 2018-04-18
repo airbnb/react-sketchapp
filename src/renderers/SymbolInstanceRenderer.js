@@ -23,6 +23,9 @@ import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 const findInGroup = (layer: ?SketchLayer, type: string): ?SketchLayer =>
   layer && layer.layers && layer.layers.find(l => l._class === type);
 
+const hasImageFill = (layer: SketchLayer): boolean =>
+  !!(layer.style && layer.style.fills && layer.style.fills.some(f => f.image));
+
 const extractOverridesHelp = (subLayer: any, output: any) => {
   if (subLayer._class === 'text' && !output.some(r => r.objectId === subLayer.do_objectID)) {
     output.push({
@@ -52,12 +55,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
     // with an image fill. if it does we can do an image override on that
     // fill
     const shapeGroup = findInGroup(subLayer, 'shapeGroup');
-    if (
-      shapeGroup &&
-      shapeGroup._class === 'shapeGroup' &&
-      shapeGroup.style != null &&
-      shapeGroup.style.fills.some(f => f.image)
-    ) {
+    if (shapeGroup && hasImageFill(shapeGroup)) {
       output.push({
         type: 'image',
         objectId: shapeGroup.do_objectID,
