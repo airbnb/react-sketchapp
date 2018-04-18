@@ -1,7 +1,7 @@
 /* @flow */
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
-import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import type { ViewStyle, LayoutInfo, SketchLayer, TextStyle } from '../types';
 import { getSymbolMasterByName, getSymbolMasterById } from '../symbol';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 
@@ -20,6 +20,9 @@ import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 //     height: number
 //   } & OverrideReferenceBase);
 
+const findInGroup = (layer: ?SketchLayer, type: string): ?SketchLayer =>
+  layer && layer.layers && layer.layers.find(l => l._class === type);
+
 const extractOverridesHelp = (subLayer: any, output: any) => {
   if (subLayer._class === 'text' && !output.some(r => r.objectId === subLayer.do_objectID)) {
     output.push({
@@ -30,13 +33,12 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
     return;
   }
 
-  if (subLayer._class === 'group' && subLayer.layers) {
+  if (subLayer._class === 'group') {
     // here we're doing some look-ahead to see if this group contains a group
     // that contains text. this is the structure that will appear if the user
     // creates a `<Text />` element with a custom name
-    const subGroup = subLayer.layers.find(l => l._class === 'group');
-    const textLayer =
-      subGroup && subGroup.layers ? subGroup.layers.find(l => l._class === 'text') : null;
+    const subGroup = findInGroup(subLayer, 'group');
+    const textLayer = findInGroup(subGroup, 'text');
     if (textLayer) {
       output.push({
         type: 'text',
@@ -46,10 +48,10 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
       return;
     }
 
-    const shapeGroup = subLayer.layers && subLayer.layers.find(l => l._class === 'shapeGroup');
     // here we're doing look-ahead to see if this group contains a shapeGroup
     // with an image fill. if it does we can do an image override on that
     // fill
+    const shapeGroup = findInGroup(subLayer, 'shapeGroup');
     if (
       shapeGroup &&
       shapeGroup._class === 'shapeGroup' &&
