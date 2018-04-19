@@ -33,10 +33,6 @@ const propTypes = {
  * </Text>
  */
 class Text extends React.Component {
-  static defaultProps = {
-    name: 'Text',
-  };
-
   render() {
     return (
       <text

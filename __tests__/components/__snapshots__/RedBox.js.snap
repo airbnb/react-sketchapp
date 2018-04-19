@@ -36,7 +36,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       }
     }>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -48,7 +48,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       invariant
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -60,7 +60,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       Object.<anonymous>
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -72,7 +72,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       Object.<anonymous>
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -84,7 +84,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       attemptAsync
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -96,7 +96,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       QueueRunner.run
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -106,7 +106,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       } />
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -116,7 +116,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       } />
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -128,7 +128,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       Object.fn
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
@@ -140,7 +140,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       attemptAsync
     </text>
     <text
-      name="Text"
+      name={undefined}
       resizingConstraint={undefined}
       style={
         Object {
