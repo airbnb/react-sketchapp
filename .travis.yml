@@ -9,6 +9,10 @@ notifications:
 node_js:
   - '7'
   - '6'
+before_install:
+  - npm i -g npm@latest
+install:
+  - npm ci
 before_script:
   - npm prune
 script:
