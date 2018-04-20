@@ -9,5 +9,4 @@ _book
 
 # only apps should have lockfiles
 yarn.lock
-package-lock.json
 npm-shrinkwrap.json
