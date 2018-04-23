@@ -11,8 +11,6 @@ export type MSArray<T> = {
   length: number
 };
 
-export type MSSharedStyle = any;
-
 type NSString = any;
 
 export type SketchPage = {
