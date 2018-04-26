@@ -19,7 +19,12 @@ cd react-sketchapp/examples/basic-setup && npm install
 npm run render
 ```
 
+## Slow start 🐢
+
+If any of the above looks confusing to you or something isn't working, try following the steps **[here](./docs/examples.md#running-the-examples-from-scratch)**
+
 Next, <a href="https://github.com/airbnb/react-sketchapp/tree/master/examples">check out some more examples!</a>
+
 
 ![readme-intro](https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png)
 
