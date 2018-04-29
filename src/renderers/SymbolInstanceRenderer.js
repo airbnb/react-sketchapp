@@ -51,7 +51,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
       output.push({
         type: 'text',
         objectId: textLayer.do_objectID,
-        name: subLayer.name,
+        name: subGroup.name,
       });
       return;
     }
@@ -209,11 +209,9 @@ class SymbolInstanceRenderer extends SketchRenderer {
       }
 
       return memo;
-    },
-    {});
+    }, {});
 
-    symbolInstance.overrides = {};
-    symbolInstance.overrides['0'] = overrides;
+    symbolInstance.overrides = overrides;
 
     return symbolInstance;
   }
