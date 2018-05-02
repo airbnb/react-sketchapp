@@ -59,3 +59,4 @@ declare var context: any;
 declare var NSUTF8StringEncoding: any;
 declare var MSSVGImporter: any;
 declare var MSSharedStyle: any;
+declare var NSBundle: any;
