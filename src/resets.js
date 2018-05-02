@@ -22,9 +22,7 @@ export const resetDocument = (document: SketchDocument) => {
   for (let index = pages.length - 1; index >= 0; index -= 1) {
     const page = pages[index];
     // Don't delete symbols page
-    // NOTE: Must use != instead of !== due to page.name() being a MSBoxedObject
-    // eslint-disable-next-line
-    if (page.name() != "Symbols") {
+    if (String(page.name()) !== 'Symbols') {
       if (pages.length > 1) {
         document.documentData().removePageAtIndex(index);
       } else {
