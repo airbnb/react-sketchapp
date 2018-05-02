@@ -1,10 +1,10 @@
 /* @flow */
 
-export default function getSketchVersion() {
+export default function getSketchVersion(): number {
   if (typeof NSBundle !== 'undefined') {
     return parseFloat(
       NSBundle.mainBundle().infoDictionary().CFBundleShortVersionString
     );
   }
-  return undefined;
+  return 0;
 }
