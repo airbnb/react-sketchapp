@@ -30,8 +30,10 @@ describe('<Page />', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('defaults to Page', () => {
-      const tree = renderer.create(<Page />).toJSON();
+    it('passes otherProps', () => {
+      const tree = renderer
+        .create(<Page propName="something" style={{}} />)
+        .toJSON();
 
       expect(tree).toMatchSnapshot();
     });
