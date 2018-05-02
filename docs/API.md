@@ -26,7 +26,6 @@
   * [`resolve`](#resolvestyle)
 * [`Symbols`](#symbols)
   * [`makeSymbol`](#makesymbolnode-name)
-  * [`injectSymbols`](#injectsymbols)
 
 ### `render(element, container)`
 Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
@@ -466,14 +465,15 @@ Reset the registered styles.
 ## Symbols
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
-### `makeSymbol(node, name)`
-Returns a Sketch symbol given a node and an optional name.
+### `makeSymbol(node, name, document)`
+Returns a react component which is an can be used to render instances of the symbol.
 
 #### Parameters
 | Parameter | Type | Default | Note |
 |---|---|---|---|
 | `node` | `Node` | | The node object that will be rendered as a symbol |
 | `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
+| `document` | `Object` | The current document | The Sketch document to make the symbol in |
 
 #### Symbol example
 ```js
@@ -492,7 +492,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -520,7 +520,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -548,7 +548,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -617,32 +617,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
-  render(<Document />, context.document.currentPage());
-}
-```
-
-### `injectSymbols(context)`
-Injects the symbols into Sketch's symbol page. **Call this before rendering**.
-
-```js
-const BlueSquare = () => (
-  <View
-    name="Blue Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  />
-);
-
-const BlueSquareSymbol = makeSymbol(BlueSquare);
-
-const Document = () => (
-  <Artboard>
-    <BlueSquareSymbol />
-  </Artboard>
-);
-
-export default (context) => {
-  injectSymbols(context);
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
