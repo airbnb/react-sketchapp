@@ -7,11 +7,14 @@ import {
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
-import { getSymbolsPage } from './symbol';
+import { getSymbolsPage, injectSymbols } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
-import getDocument from './utils/getDocument';
+import {
+  getDocumentFromContainer,
+  getDocumentFromContext,
+} from './utils/getDocument';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
   const tree = buildTree(element);
@@ -69,15 +72,17 @@ const buildPages = (
   tree: TreeNode,
   container: ?SketchLayer
 ): ?SketchLayer | Array<?SketchLayer> => {
+  const document = getDocumentFromContainer(container);
   const pageData = findPageData(tree);
-  const symbolPage = getSymbolsPage();
+  const symbolPage = getSymbolsPage(document);
+  injectSymbols(document);
 
   if (pageData.length === 0) {
-    const _container = container || getDocument(context).currentPage();
+    const _container = container || document.currentPage();
     const page =
       !symbolPage || _container !== symbolPage
         ? _container
-        : getDocument(context).addBlankPage();
+        : document.addBlankPage();
 
     return renderToSketch(tree, page);
   }
@@ -90,11 +95,11 @@ const buildPages = (
 
   pageData.forEach((data) => {
     // Get Current Page
-    let page = getDocument(context).currentPage();
+    let page = document.currentPage();
 
     if (pageTotal > 1) {
       // Create new page
-      page = getDocument(context).addBlankPage();
+      page = document.addBlankPage();
     } else {
       pageTotal += 1;
     }
@@ -126,7 +131,7 @@ export const render = (
     try {
       // Clear out document or layer to prepare for re-render
       if (!container) {
-        resetDocument();
+        resetDocument(getDocumentFromContext(context));
       } else {
         resetLayer(container);
       }
@@ -138,7 +143,10 @@ export const render = (
       return buildPages(tree, container);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(tree, getDocument(context).currentPage());
+      return renderToSketch(
+        tree,
+        getDocumentFromContext(context).currentPage()
+      );
     }
   }
   return null;
