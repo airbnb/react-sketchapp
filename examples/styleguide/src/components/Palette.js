@@ -6,7 +6,7 @@ import Swatch from './Swatch';
 const SWATCH_WIDTH = 100;
 
 type P = {
-  colors: any,
+  colors: any
 };
 const Palette = ({ colors }: P) => (
   <View
@@ -16,7 +16,9 @@ const Palette = ({ colors }: P) => (
       flexDirection: 'row',
     }}
   >
-    {Object.keys(colors).map(name => <Swatch color={colors[name]} name={name} />)}
+    {Object.keys(colors).map(name => (
+      <Swatch key={name} color={colors[name]} name={name} />
+    ))}
   </View>
 );
 
