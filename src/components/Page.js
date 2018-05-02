@@ -20,10 +20,6 @@ const propTypes = {
 };
 
 class Page extends React.Component {
-  static defaultProps = {
-    name: 'Page 1',
-  };
-
   render() {
     const { name, children, style, ...otherProps } = this.props;
     const _name =

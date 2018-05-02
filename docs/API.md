@@ -26,7 +26,6 @@
   * [`resolve`](#resolvestyle)
 * [`Symbols`](#symbols)
   * [`makeSymbol`](#makesymbolnode-name)
-  * [`injectSymbols`](#injectsymbols)
 
 ### `render(element, container)`
 Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
@@ -466,7 +465,7 @@ Reset the registered styles.
 ## Symbols
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
-### `makeSymbol(node, name)`
+### `makeSymbol(node, name, document)`
 Creates a new symbol and injects it into the `Symbols` page. The name of the symbol can be optionally provided and will default to the display name of the component.
 
 Returns a react component which is an can be used to render instances of the symbol.
@@ -476,6 +475,7 @@ Returns a react component which is an can be used to render instances of the sym
 |---|---|---|---|
 | `node` | `Node` | | The node object that will be rendered as a symbol |
 | `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
+| `document` | `Object` | The current document | The Sketch document to make the symbol in |
 
 ### `getSymbolComponentByName(name)`
 Returns a react component which can be used to render the symbol that is associated with that name.
@@ -497,7 +497,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -525,7 +525,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -553,7 +553,7 @@ const Document = () => (
   </Artboard>
 );
 
-export default (context) => {
+export default () => {
   render(<Document />, context.document.currentPage());
 }
 ```
@@ -621,6 +621,7 @@ const Document = () => (
     />
   </Artboard>
 );
+
 
 export default (context) => {
   render(<Document />, context.document.currentPage());
