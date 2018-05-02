@@ -1,7 +1,9 @@
 // @flow
+import type { SketchDocument } from './types';
+import isNativeDocument from './utils/isNativeDocument';
 
 export const resetLayer = (container: Object) => {
-  if (container && typeof container.pages === 'function') {
+  if (isNativeDocument(container)) {
     resetDocument(container); // eslint-disable-line
     return;
   }
@@ -14,7 +16,7 @@ export const resetLayer = (container: Object) => {
 };
 
 // Clear out all document pages and layers
-export const resetDocument = (document: any) => {
+export const resetDocument = (document: SketchDocument) => {
   // Get Pages and delete them all (Except Symbols Page)
   const pages = document.pages();
   for (let index = pages.length - 1; index >= 0; index -= 1) {
