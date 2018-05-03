@@ -236,7 +236,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
   const color = makeColorFromCSS(textStyles.color || 'black');
 
   if (getSketchVersion() >= 50) {
-    attribs.MSAttributedStringColorAttribute = color
+    attribs.MSAttributedStringColorAttribute = color;
   } else {
     attribs.NSColor = NSColor.colorWithDeviceRed_green_blue_alpha(
       color.red,
