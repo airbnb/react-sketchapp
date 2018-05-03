@@ -16,14 +16,17 @@
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "dependencies": {
-    "apollo-client": "^1.4.2",
+    "apollo-cache-inmemory": "^1.1.11",
+    "apollo-client": "^2.2.7",
+    "apollo-link-http": "^1.5.3",
+    "graphql": "^0.13.2",
     "graphql-tag": "^2.4.0",
-    "react": "^15.4.2",
-    "react-apollo": "^1.4.2",
+    "react": "^16.2.0",
+    "react-apollo": "^2.1.0",
     "react-sketchapp": "^1.0.0",
-    "react-test-renderer": "^15.4.2"
+    "react-test-renderer": "^16.2.0"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.2.0"
+    "@skpm/builder": "^0.4.0"
   }
 }

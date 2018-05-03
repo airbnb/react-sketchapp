@@ -22,7 +22,7 @@ const Document = ({ system }: { system: DesignSystem }) => (
 
     <Section title="Type Styles">
       {Object.keys(system.fonts).map(name => (
-        <TypeSpecimen name={name} style={TextStyles.get(name)} />
+        <TypeSpecimen key={name} name={name} style={TextStyles.get(name)} />
       ))}
     </Section>
 
