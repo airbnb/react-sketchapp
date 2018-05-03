@@ -28,6 +28,6 @@
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
     "nwb": "^0.15.6",
-    "@skpm/builder": "^0.2.0"
+    "@skpm/builder": "^0.4.0"
   }
 }
