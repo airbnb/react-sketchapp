@@ -230,12 +230,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
-    NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
-      color.red,
-      color.green,
-      color.blue,
-      color.alpha
-    ),
+    MSAttributedStringColorAttribute: color,
     NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
     NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
   };

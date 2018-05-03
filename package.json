@@ -31,6 +31,7 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
+    "babel-plugin-react-sketchapp-svg": "^1.0.0-beta4",
     "error-stack-parser": "^2.0.0",
     "gitbook-plugin-anchorjs": "^2.0.0",
     "gitbook-plugin-codeblock-disable-glossary": "0.0.1",
