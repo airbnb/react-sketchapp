@@ -232,7 +232,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
     NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
     NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
   };
-  
+
   const color = makeColorFromCSS(textStyles.color || 'black');
 
   if (getSketchVersion() >= 50) {
