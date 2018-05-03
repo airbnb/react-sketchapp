@@ -7,8 +7,11 @@ cache:
 notifications:
   email: false
 node_js:
-  - '7'
   - '6'
+  - '8'
+  - '10'
+before_install:
+  - nvm install-latest-npm
 before_script:
   - npm prune
 script:
