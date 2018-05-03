@@ -4,6 +4,7 @@ import type { SJTextStyle } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from 'sketchapp-json-plugin';
 import findFont from '../utils/findFont';
+import getSketchVersion from '../utils/getSketchVersion';
 import type {
   TextNodes,
   TextNode,
@@ -226,16 +227,21 @@ function createStringAttributes(textStyles: TextStyle): Object {
 
   const color = makeColorFromCSS(textStyles.color || 'black');
 
+  const colorAttribute =
+    getSketchVersion() >= 50
+      ? color
+      : NSColor.colorWithDeviceRed_green_blue_alpha(
+          color.red,
+          color.green,
+          color.blue,
+          color.alpha
+        );
+
   const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
-    NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
-      color.red,
-      color.green,
-      color.blue,
-      color.alpha
-    ),
+    MSAttributedStringColorAttribute: colorAttribute,
     NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
     NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
   };
