@@ -39,6 +39,10 @@ const renderToSketch = (
   node: TreeNode,
   container: SketchLayer
 ): SketchLayer => {
+  if (node.type === 'canvas') {
+    return node.children.map(child => renderToSketch(child, container));
+  }
+
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
 

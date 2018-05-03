@@ -4,6 +4,7 @@ import Platform from './Platform';
 import StyleSheet from './stylesheet';
 import Document from './components/Document';
 import Page from './components/Page';
+import Canvas from './components/Canvas';
 import Artboard from './components/Artboard';
 import Image from './components/Image';
 import RedBox from './components/RedBox';
@@ -19,6 +20,7 @@ module.exports = {
   StyleSheet,
   Document,
   Page,
+  Canvas,
   Artboard,
   Image,
   RedBox,
