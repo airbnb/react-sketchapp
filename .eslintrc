@@ -20,7 +20,8 @@
     "NSMakeRange": true,
     "NSMutableAttributedString": true,
     "NSUTF8StringEncoding": true,
-    "context": true
+    "context": true,
+    "NSBundle": true
   },
   "rules": {
     "class-methods-use-this": 0,
@@ -28,7 +29,7 @@
     "new-cap": 0,
     "no-duplicate-imports": [0],
     "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": 0,
+    "react/jsx-filename-extension": 0
   },
   "env": {
     "node": true,

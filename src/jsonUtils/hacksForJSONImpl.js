@@ -4,6 +4,7 @@ import type { SJTextStyle } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from 'sketchapp-json-plugin';
 import findFont from '../utils/findFont';
+import getSketchVersion from '../utils/getSketchVersion';
 import type {
   TextNodes,
   TextNode,
@@ -224,21 +225,26 @@ export function makeResizeConstraint(
 function createStringAttributes(textStyles: TextStyle): Object {
   const font = findFont(textStyles);
 
-  const color = makeColorFromCSS(textStyles.color || 'black');
-
   const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
-    NSColor: NSColor.colorWithDeviceRed_green_blue_alpha(
+    NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
+    NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
+  };
+
+  const color = makeColorFromCSS(textStyles.color || 'black');
+
+  if (getSketchVersion() >= 50) {
+    attribs.MSAttributedStringColorAttribute = color;
+  } else {
+    attribs.NSColor = NSColor.colorWithDeviceRed_green_blue_alpha(
       color.red,
       color.green,
       color.blue,
       color.alpha
-    ),
-    NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
-    NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
-  };
+    );
+  }
 
   if (textStyles.letterSpacing !== undefined) {
     attribs.NSKern = textStyles.letterSpacing;
