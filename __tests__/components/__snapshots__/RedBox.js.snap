@@ -27,7 +27,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
       }
     }
   >
-    Invariant Violation: THIS IS AN ERROR
+    Error: THIS IS AN ERROR
   </text>
   <view
     name="Frames"
@@ -40,19 +40,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       }
     }
   >
-    <text
-      name="Text"
-      resizingConstraint={undefined}
-      style={
-        Object {
-          "color": "white",
-          "fontFamily": "Monaco",
-          "marginTop": 20,
-        }
-      }
-    >
-      invariant
-    </text>
     <text
       name="Text"
       resizingConstraint={undefined}

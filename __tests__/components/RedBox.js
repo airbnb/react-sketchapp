@@ -1,17 +1,12 @@
 import React from 'react';
-import invariant from 'invariant';
 import renderer from 'react-test-renderer';
 import RedBox from '../../src/components/RedBox';
 
 describe('<RedBox />', () => {
   it('renders simple errors', () => {
-    try {
-      invariant(false, 'THIS IS AN ERROR');
-    } catch (e) {
-      const tree = renderer.create(<RedBox error={e} />).toJSON();
+    const tree = renderer.create(<RedBox error={new Error('THIS IS AN ERROR')} />).toJSON();
 
-      expect(tree).toMatchSnapshot();
-    }
+    expect(tree).toMatchSnapshot();
   });
 
   it('renders string errors', () => {
