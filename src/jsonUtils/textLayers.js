@@ -1,9 +1,6 @@
 /* @flow */
 import type { SJRect, SJTextLayer } from 'sketchapp-json-flow-types';
-import {
-  makeEncodedAttributedString,
-  makeResizeConstraint,
-} from './hacksForJSONImpl';
+import { makeEncodedAttributedString, makeResizeConstraint } from './hacksForJSONImpl';
 import type { TextNode, ResizeConstraints } from '../types';
 import { generateID } from './models';
 
@@ -11,7 +8,7 @@ const makeTextLayer = (
   frame: SJRect,
   name: string,
   textNodes: TextNode,
-  resizingConstraint: ?ResizeConstraints
+  resizingConstraint: ?ResizeConstraints,
 ): SJTextLayer => ({
   _class: 'text',
   do_objectID: generateID(),

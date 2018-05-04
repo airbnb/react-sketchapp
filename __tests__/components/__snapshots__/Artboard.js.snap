@@ -1,19 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Artboard /> name defaults to Artboard 1`] = `
 <artboard
   name="Artboard"
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<Artboard /> name passes its name 1`] = `
 <artboard
   name="bar"
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<Artboard /> renders children 1`] = `
 <artboard
   name="Artboard"
-  style={undefined}>
+  style={undefined}
+>
   <foo>
     <bar />
   </foo>
@@ -27,7 +32,8 @@ exports[`<Artboard /> style accepts a StyleSheet ordinal 1`] = `
     Object {
       "flex": 1,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Artboard /> style accepts a plain object 1`] = `
@@ -37,7 +43,8 @@ exports[`<Artboard /> style accepts a plain object 1`] = `
     Object {
       "flex": 1,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Artboard /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
@@ -48,5 +55,6 @@ exports[`<Artboard /> style accepts an array of plain objects and/or StyleSheet 
       "flex": 1,
       "flexGrow": 1,
     }
-  } />
+  }
+/>
 `;

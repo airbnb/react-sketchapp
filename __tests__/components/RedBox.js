@@ -15,7 +15,7 @@ describe('<RedBox />', () => {
   });
 
   it('renders string errors', () => {
-    const tree = renderer.create(<RedBox error={'String only error'} />).toJSON();
+    const tree = renderer.create(<RedBox error="String only error" />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

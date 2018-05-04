@@ -69,7 +69,7 @@ const passwordStrength = (password) => {
 
 const StrengthMeter = ({ password }: Props) => (
   <View>
-    {password.length > 0 &&
+    {password.length > 0 && (
       <View style={styles.meter}>
         <View
           style={{
@@ -87,7 +87,7 @@ const StrengthMeter = ({ password }: Props) => (
           {strengths[passwordStrength(password)].label}
         </Text>
       </View>
-    }
+    )}
   </View>
 );
 

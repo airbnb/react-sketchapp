@@ -17,7 +17,7 @@ type StackFrame = {
   functionName?: string,
   source?: string,
   args?: any[],
-  evalOrigin?: StackFrame
+  evalOrigin?: StackFrame,
 };
 
 const styles = {
@@ -41,26 +41,28 @@ const styles = {
 };
 
 const propTypes = {
-  error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string])
-    .isRequired,
+  error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string]).isRequired,
   // filename: PropTypes.string,
   // editorScheme: PropTypes.string,
   // useLines: PropTypes.bool,
   // useColumns: PropTypes.bool,
 };
 
+// $FlowFixMe
 class RedBox extends React.Component {
   static defaultProps = {
     useLines: true,
     useColumns: true,
   };
 
-  renderFrames(frames: Array<StackFrame>) {
+  renderFrames(frames: Array<StackFrame>): Array<any> {
+    /* eslint-disable react/no-array-index-key */
     return frames.map((f, index) => (
       <Text key={index} style={styles.stack}>
         {f.functionName}
       </Text>
     ));
+    /* eslint-enable */
   }
 
   render() {
@@ -82,9 +84,7 @@ class RedBox extends React.Component {
     try {
       frames = ErrorStackParser.parse(error);
     } catch (e) {
-      parseError = new Error(
-        'Failed to parse stack trace. Stack trace information unavailable.'
-      );
+      parseError = new Error('Failed to parse stack trace. Stack trace information unavailable.');
     }
 
     if (parseError) {
@@ -101,9 +101,9 @@ class RedBox extends React.Component {
 
     return (
       <View name="RedBox" style={styles.redbox}>
-        <Text name="Message" style={styles.message}>{`${error.name}: ${
-          error.message
-        }`}</Text>
+        <Text name="Message" style={styles.message}>
+          {`${error.name}: ${error.message}`}
+        </Text>
         <View name="Frames" style={styles.stack}>
           {frameChildren}
         </View>

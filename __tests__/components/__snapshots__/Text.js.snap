@@ -1,22 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Text /> name defaults to Text 1`] = `
 <text
   name="Text"
   resizingConstraint={undefined}
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<Text /> name passes its name 1`] = `
 <text
   name="foo"
   resizingConstraint={undefined}
-  style={undefined} />
+  style={undefined}
+/>
 `;
 
 exports[`<Text /> passes its children 1`] = `
 <text
   name="Text"
   resizingConstraint={undefined}
-  style={undefined}>
+  style={undefined}
+>
   foo
 </text>
 `;
@@ -29,7 +34,8 @@ exports[`<Text /> style accepts a StyleSheet ordinal 1`] = `
     Object {
       "flex": 1,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Text /> style accepts a plain object 1`] = `
@@ -40,7 +46,8 @@ exports[`<Text /> style accepts a plain object 1`] = `
     Object {
       "flex": 1,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Text /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
@@ -52,5 +59,6 @@ exports[`<Text /> style accepts an array of plain objects and/or StyleSheet ordi
       "flex": 1,
       "flexGrow": 1,
     }
-  } />
+  }
+/>
 `;

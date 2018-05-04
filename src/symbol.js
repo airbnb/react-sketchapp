@@ -79,9 +79,7 @@ export const injectSymbols = (document: any) => {
 
   if (mastersNameRegistry !== null) {
     // if mastersNameRegistry is not an object then makeSymbol was not called
-    const symbolsPage = document
-      .documentData()
-      .symbolsPageOrCreateIfNecessary();
+    const symbolsPage = document.documentData().symbolsPageOrCreateIfNecessary();
 
     let left = 0;
     Object.keys(mastersNameRegistry).forEach((key) => {
@@ -111,7 +109,7 @@ export const makeSymbolByName = (masterName: string): React$Component =>
       style: PropTypes.shape(ViewStylePropTypes),
       name: PropTypes.string,
       overrides: PropTypes.object, // eslint-disable-line
-      resizingConstraint: PropTypes.object // eslint-disable-line
+      resizingConstraint: PropTypes.object, // eslint-disable-line
     };
 
     static masterName = masterName;
@@ -132,7 +130,7 @@ export const makeSymbolByName = (masterName: string): React$Component =>
 export const makeSymbol = (
   Component: React$Component,
   name: string,
-  document?: any
+  document?: any,
 ): React$Component => {
   const masterName = name || displayName(Component);
 
@@ -145,8 +143,8 @@ export const makeSymbol = (
     buildTree(
       <symbolmaster symbolID={symbolId} name={masterName}>
         <Component />
-      </symbolmaster>
-    )
+      </symbolmaster>,
+    ),
   );
 
   return makeSymbolByName(masterName);
@@ -162,7 +160,7 @@ export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
 
 export const getSymbolMasterById = (symbolId: string): SJSymbolMaster => {
   const masterName = Object.keys(mastersNameRegistry).find(
-    key => String(mastersNameRegistry[key].symbolID) === symbolId
+    key => String(mastersNameRegistry[key].symbolID) === symbolId,
   );
 
   if (typeof masterName === 'undefined') {

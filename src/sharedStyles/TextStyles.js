@@ -18,7 +18,7 @@ type RegisteredStyle = {|
   cssStyle: TextStyle,
   name: string,
   sketchStyle: SJStyle,
-  sharedObjectID: SketchObjectID
+  sharedObjectID: SketchObjectID,
 |};
 
 let _styles: StyleHash = {};
@@ -43,13 +43,10 @@ const registerStyle = (name: string, style: TextStyle): void => {
 
 type Options = {
   clearExistingStyles?: boolean,
-  context: SketchContext
+  context: SketchContext,
 };
 
-const create = (
-  options: Options,
-  styles: { [key: string]: TextStyle }
-): StyleHash => {
+const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
   const { clearExistingStyles, context } = options;
 
   if (!appVersionSupported()) {

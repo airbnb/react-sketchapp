@@ -4,13 +4,7 @@ import type { SJTextStyle } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from 'sketchapp-json-plugin';
 import findFont from '../utils/findFont';
-import type {
-  TextNodes,
-  TextNode,
-  TextStyle,
-  ResizeConstraints,
-  LayoutInfo,
-} from '../types';
+import type { TextNodes, TextNode, TextStyle, ResizeConstraints, LayoutInfo } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 
 export const TEXT_ALIGN = {
@@ -132,9 +126,7 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
   let fetchedData = NSData.dataWithContentsOfURL(NSURL.URLWithString(url));
 
   if (fetchedData) {
-    const firstByte = fetchedData
-      .subdataWithRange(NSMakeRange(0, 1))
-      .description();
+    const firstByte = fetchedData.subdataWithRange(NSMakeRange(0, 1)).description();
 
     // Check for first byte. Must use non-type-exact matching (!=).
     // 0xFF = JPEG, 0x89 = PNG, 0x47 = GIF, 0x49 = TIFF, 0x4D = TIFF
@@ -156,9 +148,7 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
   if (!fetchedData) {
     const errorUrl =
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
-    image = NSImage.alloc().initWithContentsOfURL(
-      NSURL.URLWithString(errorUrl)
-    );
+    image = NSImage.alloc().initWithContentsOfURL(NSURL.URLWithString(errorUrl));
   } else {
     image = NSImage.alloc().initWithData(fetchedData);
   }
@@ -169,18 +159,11 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
   return MSImageData.alloc().initWithImage(image);
 };
 
-export function makeResizeConstraint(
-  resizingConstraint: ?ResizeConstraints
-): number {
+export function makeResizeConstraint(resizingConstraint: ?ResizeConstraints): number {
   if (resizingConstraint) {
     const constraints = [];
     const {
-      top,
-      right,
-      bottom,
-      left,
-      fixedHeight,
-      fixedWidth,
+      top, right, bottom, left, fixedHeight, fixedWidth,
     } = resizingConstraint;
 
     if (top) {
@@ -209,8 +192,8 @@ export function makeResizeConstraint(
           `\n${JSON.stringify(
             resizingConstraint,
             null,
-            2
-          )}\nconstraint is not a valid combination.`
+            2,
+          )}\nconstraint is not a valid combination.`,
         );
       }
       return constraint;
@@ -234,7 +217,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
       color.red,
       color.green,
       color.blue,
-      color.alpha
+      color.alpha,
     ),
     NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
     NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
@@ -245,8 +228,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
   }
 
   if (textStyles.textTransform !== undefined) {
-    attribs.MSAttributedStringTextTransformAttribute =
-      TEXT_TRANSFORM[textStyles.textTransform] * 1;
+    attribs.MSAttributedStringTextTransformAttribute = TEXT_TRANSFORM[textStyles.textTransform] * 1;
   }
 
   return attribs;
@@ -257,10 +239,7 @@ export function createAttributedString(textNode: TextNode): NSAttributedString {
 
   const attribs = createStringAttributes(textStyles);
 
-  return NSAttributedString.attributedStringWithString_attributes_(
-    content,
-    attribs
-  );
+  return NSAttributedString.attributedStringWithString_attributes_(content, attribs);
 }
 
 export function makeEncodedAttributedString(textNodes: TextNodes) {
@@ -273,9 +252,7 @@ export function makeEncodedAttributedString(textNodes: TextNodes) {
 
   const encodedAttribStr = MSAttributedString.encodeAttributedString(fullStr);
 
-  const msAttribStr = MSAttributedString.alloc().initWithEncodedAttributedString(
-    encodedAttribStr
-  );
+  const msAttribStr = MSAttributedString.alloc().initWithEncodedAttributedString(encodedAttribStr);
 
   return encodeSketchJSON(msAttribStr);
 }
@@ -297,8 +274,8 @@ export function makeTextStyle(textStyle: TextStyle) {
           color.red,
           color.green,
           color.blue,
-          color.alpha
-        )
+          color.alpha,
+        ),
       ),
       NSParagraphStyle: encodeSketchJSON(pStyle),
       NSKern: textStyle.letterSpacing || 0,

@@ -3,18 +3,9 @@ import type { TreeNode } from '../types';
 import type Context from '../utils/Context';
 import { VALID_TEXT_CHILDREN_TYPES } from '../utils/constants';
 
-const walkTextTree = (
-  textTree: TreeNode,
-  context: Context,
-  textNodes: Array<Object>
-) => {
-  if (
-    typeof textTree !== 'string' &&
-    !VALID_TEXT_CHILDREN_TYPES.includes(textTree.type)
-  ) {
-    throw new Error(
-      `"${textTree.type}" is not a valid child for Text components`
-    );
+const walkTextTree = (textTree: TreeNode, context: Context, textNodes: Array<Object>) => {
+  if (typeof textTree !== 'string' && !VALID_TEXT_CHILDREN_TYPES.includes(textTree.type)) {
+    throw new Error(`"${textTree.type}" is not a valid child for Text components`);
   }
 
   if (typeof textTree === 'string') {
@@ -35,11 +26,7 @@ const walkTextTree = (
   }
 };
 
-const computeTextTree = (
-  node: TreeNode,
-  context: Context,
-  textNodes: Array<Object> = []
-) => {
+const computeTextTree = (node: TreeNode, context: Context, textNodes: Array<Object> = []) => {
   if (node.children) {
     const childContext = context.forChildren();
     for (let index = 0; index < node.children.length; index += 1) {

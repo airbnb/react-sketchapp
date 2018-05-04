@@ -18,9 +18,7 @@ module.exports = class Use extends React.Component {
 
     if (!href || !matched) {
       console.warn(
-        `Invalid \`href\` prop for \`Use\` element, expected a href like \`"#id"\`, but got: "${
-          href
-        }"`
+        `Invalid \`href\` prop for \`Use\` element, expected a href like \`"#id"\`, but got: "${href}"`,
       );
     }
     const { children, ...rest } = this.props;

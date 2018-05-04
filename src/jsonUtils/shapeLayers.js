@@ -1,10 +1,5 @@
 /* @flow */
-import type {
-  SJFill,
-  SJPath,
-  SJRect,
-  SJShapeGroupLayer,
-} from 'sketchapp-json-flow-types';
+import type { SJFill, SJPath, SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import { makeResizeConstraint } from './hacksForJSONImpl';
 import { generateID, makeRect } from './models';
 import type { ResizeConstraints } from '../types';
@@ -118,7 +113,7 @@ export const makeRectPath = (radii: Radii = [0, 0, 0, 0]): SJPath => {
 export const makeShapePath = (
   frame: SJRect,
   path: SJPath,
-  resizingConstraint?: ResizeConstraints
+  resizingConstraint?: ResizeConstraints,
 ) => ({
   _class: 'shapePath',
   frame,
@@ -145,7 +140,7 @@ export const makeRectShapeLayer = (
   width: number,
   height: number,
   radii: Radii = [0, 0, 0, 0],
-  resizingConstraint: ?ResizeConstraints
+  resizingConstraint: ?ResizeConstraints,
 ) => {
   const fixedRadius = radii[0] || 0;
   return {
@@ -175,7 +170,7 @@ export const makeShapeGroup = (
   frame: SJRect,
   layers: Array<any> = [],
   fills?: Array<SJFill> = [],
-  resizingConstraint?: ResizeConstraints
+  resizingConstraint?: ResizeConstraints,
 ): SJShapeGroupLayer => ({
   _class: 'shapeGroup',
   do_objectID: generateID(),

@@ -13,8 +13,20 @@ describe('generateID', () => {
   });
 });
 
-const BLACK = { _class: 'color', red: 0, green: 0, blue: 0, alpha: 1 };
-const WHITE = { _class: 'color', red: 1, green: 1, blue: 1, alpha: 1 };
+const BLACK = {
+  _class: 'color',
+  red: 0,
+  green: 0,
+  blue: 0,
+  alpha: 1,
+};
+const WHITE = {
+  _class: 'color',
+  red: 1,
+  green: 1,
+  blue: 1,
+  alpha: 1,
+};
 const GOLD = {
   _class: 'color',
   red: 0.8745098039215686,
@@ -22,7 +34,13 @@ const GOLD = {
   blue: 0.4117647058823529,
   alpha: 1,
 };
-const PURPLE = { _class: 'color', red: 0.4, green: 0.2, blue: 0.6, alpha: 1 };
+const PURPLE = {
+  _class: 'color',
+  red: 0.4,
+  green: 0.2,
+  blue: 0.6,
+  alpha: 1,
+};
 
 describe('makeColorFromCSS', () => {
   it('works with hex colors', () => {
@@ -99,7 +117,7 @@ describe('makeSymbolInstance', () => {
     const instance = makeSymbolInstance(
       makeRect(0, 0, 100, 100),
       'this is the symbol id',
-      'this is the name'
+      'this is the name',
     );
 
     expect(instance).toHaveProperty('symbolID', 'this is the symbol id');
@@ -112,7 +130,7 @@ describe('makeSymbolMaster', () => {
     const master = makeSymbolMaster(
       makeRect(0, 0, 100, 100),
       'this is the symbol id',
-      'this is the name'
+      'this is the name',
     );
 
     expect(master).toHaveProperty('symbolID', 'this is the symbol id');

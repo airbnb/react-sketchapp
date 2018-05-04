@@ -11,7 +11,7 @@ module.exports = class TextPath extends React.Component {
       console.warn(
         `Invalid \`href\` prop for \`TextPath\` element, expected a href like \`"#id"\`, but got: "${
           this.props.href
-        }"`
+        }"`,
       );
     }
 

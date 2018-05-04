@@ -10,20 +10,19 @@ const propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.shape({ ...PageStylePropTypes }),
     PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.shape({ ...PageStylePropTypes }),
-        PropTypes.number,
-      ])
+      PropTypes.oneOfType([PropTypes.shape({ ...PageStylePropTypes }), PropTypes.number]),
     ),
     PropTypes.number,
   ]),
 };
 
+// $FlowFixMe
 class Page extends React.Component {
   render() {
-    const { name, children, style, ...otherProps } = this.props;
-    const _name =
-      name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name;
+    const {
+      name, children, style, ...otherProps
+    } = this.props;
+    const _name = name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name;
     const _style = StyleSheet.flatten(style);
 
     return (

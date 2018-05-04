@@ -6,9 +6,7 @@ import { css, withStyles } from './withStyles';
 
 const Title = withStyles(({ fonts }) => ({
   titleText: fonts['Title 1'],
-}))(({ children, styles }) => (
-  <Text {...css(styles.titleText)}>{children}</Text>
-));
+}))(({ children, styles }) => <Text {...css(styles.titleText)}>{children}</Text>);
 
 const Page = ({ users }) => (
   <View>
@@ -33,8 +31,7 @@ export default () => {
       description: 'Engineer @PalmerGroupHQ',
       location: 'New York, NY',
       url: 'github.com/jaredpalmer',
-      profile_image_url:
-        'https://pbs.twimg.com/profile_images/662984079638405120/Y6oncSaf.jpg',
+      profile_image_url: 'https://pbs.twimg.com/profile_images/662984079638405120/Y6oncSaf.jpg',
     },
     {
       name: '- ̗̀Jackie ̖́-',
@@ -53,8 +50,7 @@ export default () => {
         'an equal command of technology and form • functional programming (oc)cultist • design tools @airbnbdesign',
       location: 'California',
       url: 'weirdwideweb.jon.gold',
-      profile_image_url:
-        'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
+      profile_image_url: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
     },
   ];
 
