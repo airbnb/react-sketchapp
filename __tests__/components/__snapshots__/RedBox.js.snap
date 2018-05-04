@@ -50,8 +50,19 @@ exports[`<RedBox /> renders simple errors 1`] = `
           "marginTop": 20,
         }
       }
+    />
+    <text
+      name="Text"
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
     >
-      Object.&lt;anonymous&gt;
+      Script.runInThisContext
     </text>
     <text
       name="Text"
@@ -64,7 +75,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      Object.asyncFn
+      REPLServer.defaultEval
     </text>
     <text
       name="Text"
@@ -77,7 +88,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      resolve
+      bound
     </text>
     <text
       name="Text"
@@ -90,7 +101,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      mapper
+      REPLServer.runBound [as eval]
     </text>
     <text
       name="Text"
@@ -103,7 +114,59 @@ exports[`<RedBox /> renders simple errors 1`] = `
         }
       }
     >
-      promise.then
+      REPLServer.onLine
+    </text>
+    <text
+      name="Text"
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.emit
+    </text>
+    <text
+      name="Text"
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.emit
+    </text>
+    <text
+      name="Text"
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.Interface._onLine
+    </text>
+    <text
+      name="Text"
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.Interface._line
     </text>
   </view>
 </view>
