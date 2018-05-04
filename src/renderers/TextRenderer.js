@@ -31,10 +31,16 @@ class TextRenderer extends SketchRenderer {
       props.resizingConstraint
     );
 
-    const resolvedStyle = TextStyles.resolve(textStyle);
-    if (resolvedStyle) {
-      layer.style = resolvedStyle.sketchStyle;
-      layer.style.sharedObjectID = resolvedStyle.sharedObjectID;
+    const resolvedTextStyle = TextStyles.resolve(textStyle);
+    if (resolvedTextStyle) {
+      layer.style = resolvedTextStyle.sketchStyle;
+      layer.style.sharedObjectID = resolvedTextStyle.sharedObjectID;
+    } else {
+      const resolvedStyle = TextStyles.resolve(props.style);
+      if (resolvedStyle) {
+        layer.style = resolvedStyle.sketchStyle;
+        layer.style.sharedObjectID = resolvedStyle.sharedObjectID;
+      }
     }
 
     return [layer];
