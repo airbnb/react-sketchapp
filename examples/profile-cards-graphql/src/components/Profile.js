@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
 });
 
 type ProfileP = {
-  user: User
+  user: User,
 };
 
 type AvatarP = {
-  url: string
+  url: string,
 };
 const Avatar = ({ url }: AvatarP): React$Element<any> => (
   <Image source={url} style={styles.avatar} />

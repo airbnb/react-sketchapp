@@ -1,5 +1,5 @@
 /* eslint max-len:0 no-nested-ternary:0 */
-const hasOwnProperty = Object.prototype.hasOwnProperty;
+const { hasOwnProperty } = Object.prototype;
 
 const styleShortHands = {
   borderColor: {

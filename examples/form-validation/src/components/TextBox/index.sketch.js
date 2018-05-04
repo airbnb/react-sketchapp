@@ -6,7 +6,7 @@ import styles from './style';
 type Props = {
   label: string,
   value: string,
-  children?: React$Element<any>
+  children?: React$Element<any>,
 };
 
 const TextBox = ({ label, value, children }: Props) => (

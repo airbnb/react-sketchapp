@@ -24,7 +24,7 @@ const createTreeNode = (style: { [key: string]: number | string }) => ({
 const createYogaNodes = (
   styles: Array<{ [key: string]: number | string }>,
   containerWidth: number,
-  containerHeight: number
+  containerHeight: number,
 ) => {
   const yogaNodes = [];
   styles.forEach((style) => {
@@ -33,7 +33,7 @@ const createYogaNodes = (
     node.calculateLayout(
       containerWidth || yoga.UNDEFINED,
       containerHeight || yoga.UNDEFINED,
-      yoga.DIRECTION_LTR
+      yoga.DIRECTION_LTR,
     );
     yogaNodes.push(node.getComputedLayout());
   });
@@ -199,10 +199,7 @@ describe('Compute Yoga Node', () => {
   });
 
   it('correctly handles position: relative & absolute', () => {
-    const stylesToTest = [
-      { position: 'relative', left: 10 },
-      { position: 'absolute', top: 10 },
-    ];
+    const stylesToTest = [{ position: 'relative', left: 10 }, { position: 'absolute', top: 10 }];
     const [relativeNode, absoluteNode] = createYogaNodes(stylesToTest);
 
     expect(relativeNode).toEqual({
@@ -254,9 +251,7 @@ describe('Compute Yoga Node', () => {
       { flexDirection: 'row-reverse', ...widthAndHeightStylesStub },
       { flexDirection: 'column-reverse', ...widthAndHeightStylesStub },
     ];
-    const [rowNode, colNode, rowReverseNode, colReverseNode] = createYogaNodes(
-      stylesToTest
-    );
+    const [rowNode, colNode, rowReverseNode, colReverseNode] = createYogaNodes(stylesToTest);
 
     expect(rowNode).toEqual(widthAndHeightStylesStubFixture);
     expect(colNode).toEqual(widthAndHeightStylesStubFixture);
@@ -272,13 +267,9 @@ describe('Compute Yoga Node', () => {
       { justifyContent: 'space-between', ...widthAndHeightStylesStub },
       { justifyContent: 'space-around', ...widthAndHeightStylesStub },
     ];
-    const [
-      startNode,
-      endNode,
-      centerNode,
-      spaceBetweenNode,
-      spaceAroundNode,
-    ] = createYogaNodes(stylesToTest);
+    const [startNode, endNode, centerNode, spaceBetweenNode, spaceAroundNode] = createYogaNodes(
+      stylesToTest,
+    );
 
     expect(startNode).toEqual(widthAndHeightStylesStubFixture);
     expect(endNode).toEqual(widthAndHeightStylesStubFixture);
@@ -327,13 +318,9 @@ describe('Compute Yoga Node', () => {
       { alignItems: 'stretch', ...widthAndHeightStylesStub },
       { alignItems: 'baseline', ...widthAndHeightStylesStub },
     ];
-    const [
-      startNode,
-      endNode,
-      centerNode,
-      stretchNode,
-      baselineNode,
-    ] = createYogaNodes(stylesToTest);
+    const [startNode, endNode, centerNode, stretchNode, baselineNode] = createYogaNodes(
+      stylesToTest,
+    );
 
     expect(startNode).toEqual(widthAndHeightStylesStubFixture);
     expect(endNode).toEqual(widthAndHeightStylesStubFixture);
@@ -350,13 +337,9 @@ describe('Compute Yoga Node', () => {
       { alignSelf: 'stretch', ...widthAndHeightStylesStub },
       { alignSelf: 'baseline', ...widthAndHeightStylesStub },
     ];
-    const [
-      startNode,
-      endNode,
-      centerNode,
-      stretchNode,
-      baselineNode,
-    ] = createYogaNodes(stylesToTest);
+    const [startNode, endNode, centerNode, stretchNode, baselineNode] = createYogaNodes(
+      stylesToTest,
+    );
 
     expect(startNode).toEqual(widthAndHeightStylesStubFixture);
     expect(endNode).toEqual(widthAndHeightStylesStubFixture);
@@ -371,9 +354,7 @@ describe('Compute Yoga Node', () => {
       { flexWrap: 'wrap', ...widthAndHeightStylesStub },
       { flexWrap: 'wrap-reverse', ...widthAndHeightStylesStub },
     ];
-    const [noWrapNode, wrapNode, wrapReverseNode] = createYogaNodes(
-      stylesToTest
-    );
+    const [noWrapNode, wrapNode, wrapReverseNode] = createYogaNodes(stylesToTest);
 
     expect(noWrapNode).toEqual(widthAndHeightStylesStubFixture);
     expect(wrapNode).toEqual(widthAndHeightStylesStubFixture);

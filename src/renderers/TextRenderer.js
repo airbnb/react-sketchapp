@@ -13,7 +13,7 @@ class TextRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): Array<SketchLayer> {
     // Append all text nodes's content into one string
     let name = '';
@@ -24,12 +24,7 @@ class TextRenderer extends SketchRenderer {
     }
 
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const layer = makeTextLayer(
-      frame,
-      name,
-      props.textNodes,
-      props.resizingConstraint
-    );
+    const layer = makeTextLayer(frame, name, props.textNodes, props.resizingConstraint);
 
     const resolvedTextStyle = TextStyles.resolve(textStyle);
     if (resolvedTextStyle) {

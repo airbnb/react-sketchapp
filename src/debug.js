@@ -1,69 +1,65 @@
 /* @flow */
 
 export const dump = (obj: any) => {
-  log(
-    '#####################################################################################'
-  );
+  log('#####################################################################################');
   log(`## Dumping object ${obj}`);
   log(`## obj class is: ${obj.className()}`);
-  log(
-    '#####################################################################################'
-  );
+  log('#####################################################################################');
   log('obj.properties:');
   log(
     obj
       .class()
       .mocha()
-      .properties()
+      .properties(),
   );
   log('obj.propertiesWithAncestors:');
   log(
     obj
       .class()
       .mocha()
-      .propertiesWithAncestors()
+      .propertiesWithAncestors(),
   );
   log('obj.classMethods:');
   log(
     obj
       .class()
       .mocha()
-      .classMethods()
+      .classMethods(),
   );
   log('obj.classMethodsWithAncestors:');
   log(
     obj
       .class()
       .mocha()
-      .classMethodsWithAncestors()
+      .classMethodsWithAncestors(),
   );
   log('obj.instanceMethods:');
   log(
     obj
       .class()
       .mocha()
-      .instanceMethods()
+      .instanceMethods(),
   );
   log('obj.instanceMethodsWithAncestors:');
   log(
     obj
       .class()
       .mocha()
-      .instanceMethodsWithAncestors()
+      .instanceMethodsWithAncestors(),
   );
   log('obj.protocols:');
   log(
     obj
       .class()
       .mocha()
-      .protocols()
+      .protocols(),
   );
   log('obj.protocolsWithAncestors:');
   log(
     obj
       .class()
       .mocha()
-      .protocolsWithAncestors()
+      .protocolsWithAncestors(),
   );
   log('obj.treeAsDictionary():');
   log(obj.treeAsDictionary());

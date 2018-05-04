@@ -8,8 +8,6 @@ module.exports = class ClipPath extends React.Component {
   };
 
   render() {
-    return (
-      <svg_clipPath id={this.props.id}>{this.props.children}</svg_clipPath>
-    );
+    return <svg_clipPath id={this.props.id}>{this.props.children}</svg_clipPath>;
   }
 };

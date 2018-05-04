@@ -24,10 +24,7 @@ const AccessibilityBadge = ({ level }: P) => {
     default:
       text = null;
   }
-  return text &&
-    <Badge>
-      {text}
-    </Badge>;
+  return text && <Badge>{text}</Badge>;
 };
 
 export default AccessibilityBadge;

@@ -29,7 +29,6 @@ const walkTree = (tree: TreeNode, context: Context) => {
 
   return node;
 };
-const treeToNodes = (root: TreeNode, context: Context): yoga.NodeInstance =>
-  walkTree(root, context);
+const treeToNodes = (root: TreeNode, context: Context): yoga.Yoga$Node => walkTree(root, context);
 
 export default treeToNodes;

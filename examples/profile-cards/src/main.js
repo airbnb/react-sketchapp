@@ -53,8 +53,7 @@ export default () => {
         'an equal command of technology and form • functional programming (oc)cultist • design tools @airbnbdesign',
       location: 'California',
       url: 'weirdwideweb.jon.gold',
-      profile_image_url:
-        'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
+      profile_image_url: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
     },
   ];
 

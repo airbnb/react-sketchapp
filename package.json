@@ -7,7 +7,9 @@
   "author": "Jon Gold <jon.gold@airbnb.com> (http://jon.gold)",
   "contributors": [
     "Ben Wilkins <ben.wilkins@airbnb.com>",
-    "Leland Richardson <leland.richardson@airbnb.com>"
+    "Leland Richardson <leland.richardson@airbnb.com>",
+    "Mathieu Dutour <mathieu@dutour.me>",
+    "Jarid Margolin <jaridmargolin@gmail.com>"
   ],
   "pre-commit": "lint-staged",
   "scripts": {
@@ -25,18 +27,13 @@
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "prepublishOnly": "npm run clean && npm run check && npm run build",
-    "test": "jest --config .jestrc",
-    "test:ci": "jest --config .jestrc --runInBand",
+    "test": "jest --config .jestrc.json",
+    "test:ci": "jest --config .jestrc.json --runInBand",
     "test:watch": "npm run test -- --watch",
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
     "error-stack-parser": "^2.0.0",
-    "gitbook-plugin-anchorjs": "^2.0.0",
-    "gitbook-plugin-codeblock-disable-glossary": "0.0.1",
-    "gitbook-plugin-edit-link": "^2.0.2",
-    "gitbook-plugin-github": "^2.0.0",
-    "gitbook-plugin-prism": "^2.3.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
     "normalize-css-color": "^1.0.1",
@@ -44,7 +41,7 @@
     "sketch-constants": "^1.0.2",
     "sketchapp-json-flow-types": "^0.2.0",
     "sketchapp-json-plugin": "^0.1.2",
-    "yoga-layout": "1.8.0"
+    "yoga-layout": "^1.9.3"
   },
   "peerDependencies": {
     "react": "*",
@@ -67,33 +64,38 @@
   "homepage": "https://github.com/airbnb/react-sketchapp",
   "lint-staged": {
     "*.js": [
-      "prettier-eslint --write \"src/**/*.js\"",
+      "prettier-eslint --write \"src/**/*.js\" \"examples/**/*.js\" \"__tests__/**/*.js\"",
       "git add"
     ]
   },
   "devDependencies": {
-    "@jongold/eslint-config-sketch": "^1.0.0-2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.0.0",
-    "babel-eslint": "^7.1.0",
-    "babel-jest": "^18.0.0",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^22.4.3",
     "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "eslint": "^3.9.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1",
-    "flow-bin": "^0.36.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-sketch": "^0.2.4",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "flow-bin": "^0.71.0",
     "flow-copy-source": "^1.1.0",
     "gitbook-cli": "^2.3.0",
-    "jest-cli": "^18.1.0",
-    "lint-staged": "^3.4.0",
+    "gitbook-plugin-anchorjs": "^2.0.0",
+    "gitbook-plugin-codeblock-disable-glossary": "0.0.1",
+    "gitbook-plugin-edit-link": "^2.0.2",
+    "gitbook-plugin-github": "^3.0.0",
+    "gitbook-plugin-prism": "^2.3.0",
+    "jest-cli": "^22.4.3",
+    "lint-staged": "^7.0.5",
     "pre-commit": "^1.2.2",
-    "prettier-eslint-cli": "^3.1.2",
+    "prettier-eslint-cli": "^4.7.1",
     "react": "^15.4.1",
     "react-test-renderer": "^15.4.1",
     "rimraf": "^2.5.4"

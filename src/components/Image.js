@@ -26,17 +26,14 @@ export const ImageSourcePropType = PropTypes.oneOfType([
 
 const propTypes = {
   name: PropTypes.string,
-  children: PropTypes.any,
+  children: PropTypes.node,
   defaultSource: ImageSourcePropType,
   resizeMode: ResizeModePropTypes,
   source: ImageSourcePropType,
   style: PropTypes.oneOfType([
     PropTypes.shape(ImageStylePropTypes),
     PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.shape(ImageStylePropTypes),
-        PropTypes.number,
-      ])
+      PropTypes.oneOfType([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
     ),
     PropTypes.number,
   ]),
@@ -54,6 +51,7 @@ const ResizeModes = {
   none: 'Fill',
 };
 
+// $FlowFixMe
 class Image extends React.Component {
   static defaultProps = {
     name: 'Image',
@@ -61,18 +59,12 @@ class Image extends React.Component {
 
   render() {
     const {
-      children,
-      source,
-      defaultSource,
-      resizeMode,
-      name,
-      resizingConstraint,
+      children, source, defaultSource, resizeMode, name, resizingConstraint,
     } = this.props;
 
     let style = StyleSheet.flatten(this.props.style) || {};
 
-    const sketchResizeMode =
-      ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
+    const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
     if (source && typeof source !== 'string') {
       style = {
         height: source.height,

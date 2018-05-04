@@ -14,7 +14,7 @@ const propTypes = {
       PropTypes.oneOfType([
         PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
         PropTypes.number,
-      ])
+      ]),
     ),
     PropTypes.number,
   ]),
@@ -32,6 +32,7 @@ const propTypes = {
  *   Hello World!
  * </Text>
  */
+// $FlowFixMe
 class Text extends React.Component {
   static defaultProps = {
     name: 'Text',

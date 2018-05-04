@@ -82,9 +82,7 @@ const App = ({ center, venues }) => {
         }}
         markers={pins}
       />
-      <View name="ListView">
-        {venues.map(v => <Row key={v.id} {...v} />)}
-      </View>
+      <View name="ListView">{venues.map(v => <Row key={v.id} {...v} />)}</View>
     </View>
   );
 };

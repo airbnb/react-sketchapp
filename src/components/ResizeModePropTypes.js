@@ -1,10 +1,3 @@
 import PropTypes from 'prop-types';
 
-export default PropTypes.oneOf([
-  'contain',
-  'cover',
-  'stretch',
-  'center',
-  'repeat',
-  'none',
-]);
+export default PropTypes.oneOf(['contain', 'cover', 'stretch', 'center', 'repeat', 'none']);

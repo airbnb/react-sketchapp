@@ -5,5 +5,5 @@ export type User = {
   description: string,
   profileImageUrl: string,
   location: string,
-  url: string
+  url: string,
 };
