@@ -105,19 +105,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
     >
       promise.then
     </text>
-    <text
-      name="Text"
-      resizingConstraint={undefined}
-      style={
-        Object {
-          "color": "white",
-          "fontFamily": "Monaco",
-          "marginTop": 20,
-        }
-      }
-    >
-      process._tickCallback
-    </text>
   </view>
 </view>
 `;
