@@ -1,20 +1,14 @@
 /* @flow */
 import layerGroup from '../jsonUtils/layerGroup';
 
-import type {
-  LayoutInfo,
-  ViewStyle,
-  TextStyle,
-  SketchJSON,
-  TreeNode,
-} from '../types';
+import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON, TreeNode } from '../types';
 
 const DEFAULT_OPACITY = 1.0;
 
 class SketchRenderer {
   getDefaultGroupName(
     // eslint-disable-next-line no-unused-vars
-    props: any
+    props: any,
   ) {
     return 'Group';
   }
@@ -22,7 +16,7 @@ class SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): SketchJSON {
     // Default SketchRenderer just renders an empty group
 
@@ -31,8 +25,7 @@ class SketchRenderer {
     //   processTransform(layer, layout, style.transform);
     // }
 
-    const opacity =
-      style.opacity !== undefined ? style.opacity : DEFAULT_OPACITY;
+    const opacity = style.opacity !== undefined ? style.opacity : DEFAULT_OPACITY;
 
     return {
       ...layerGroup(
@@ -41,7 +34,7 @@ class SketchRenderer {
         layout.width,
         layout.height,
         opacity,
-        props.resizingConstraint
+        props.resizingConstraint,
       ),
       name: props.name || this.getDefaultGroupName(props),
     };
@@ -53,7 +46,7 @@ class SketchRenderer {
     // eslint-disable-next-line no-unused-vars
     props: any,
     // eslint-disable-next-line no-unused-vars
-    children: ?Array<TreeNode>
+    children: ?Array<TreeNode>,
   ): Array<SketchJSON> {
     return [];
   }

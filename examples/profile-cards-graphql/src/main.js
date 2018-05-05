@@ -10,8 +10,7 @@ import { fonts, spacing } from './designSystem';
 import Profile from './components/Profile';
 import Space from './components/Space';
 
-const GRAPHQL_ENDPOINT =
-  'https://api.graph.cool/simple/v1/cj09zm1k4jcpc0115ecsoc1k4';
+const GRAPHQL_ENDPOINT = 'https://api.graph.cool/simple/v1/cj09zm1k4jcpc0115ecsoc1k4';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: GRAPHQL_ENDPOINT }),
@@ -33,8 +32,7 @@ const QUERY = gql`
 `;
 
 // eslint-disable-next-line
-const props = ({ data }) =>
-  data.loading ? { users: [] } : { users: data.allProfiles };
+const props = ({ data }) => (data.loading ? { users: [] } : { users: data.allProfiles });
 const withUsers = graphql(QUERY, { props });
 
 const Page = ({ users }: { users: Array<User> }) => (

@@ -1,9 +1,6 @@
 import React from 'react';
 import type { SJLayer } from 'sketchapp-json-flow-types';
-import {
-  appVersionSupported,
-  fromSJSONDictionary,
-} from 'sketchapp-json-plugin';
+import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
@@ -11,10 +8,7 @@ import { getSymbolsPage, injectSymbols } from './symbol';
 
 import type { SketchLayer, TreeNode } from './types';
 import RedBox from './components/RedBox';
-import {
-  getDocumentFromContainer,
-  getDocumentFromContext,
-} from './utils/getDocument';
+import { getDocumentFromContainer, getDocumentFromContext } from './utils/getDocument';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
   const tree = buildTree(element);
@@ -23,22 +17,17 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
 
 export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {
-    throw new Error(
-      `
+    throw new Error(`
      React SketchApp cannot render into this layer. You may be trying to render into a layer
      that does not take children. Try rendering into a LayerGroup, Artboard, or Page.
-    `
-    );
+    `);
   }
 
   container.addLayers(layers);
   return container;
 };
 
-const renderToSketch = (
-  node: TreeNode,
-  container: SketchLayer
-): SketchLayer => {
+const renderToSketch = (node: TreeNode, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(node);
   const layer = fromSJSONDictionary(json);
 
@@ -49,7 +38,7 @@ const renderToSketch = (
 const findPageData = (
   current,
   depth = 0,
-  accumulated = []
+  accumulated = [],
 ): Array<{ type: string, children: Object, name?: string }> => {
   const children = current.children || [];
   for (let i = 0, len = children.length; i < len; i += 1) {
@@ -70,7 +59,7 @@ const findPageData = (
 
 const buildPages = (
   tree: TreeNode,
-  container: ?SketchLayer
+  container: ?SketchLayer,
 ): ?SketchLayer | Array<?SketchLayer> => {
   const document = getDocumentFromContainer(container);
   const pageData = findPageData(tree);
@@ -79,10 +68,7 @@ const buildPages = (
 
   if (pageData.length === 0) {
     const _container = container || document.currentPage();
-    const page =
-      !symbolPage || _container !== symbolPage
-        ? _container
-        : document.addBlankPage();
+    const page = !symbolPage || _container !== symbolPage ? _container : document.addBlankPage();
 
     return renderToSketch(tree, page);
   }
@@ -125,7 +111,7 @@ const buildPages = (
 
 export const render = (
   element: React$Element<any>,
-  container?: ?SketchLayer
+  container?: ?SketchLayer,
 ): ?SketchLayer | Array<?SketchLayer> => {
   if (appVersionSupported()) {
     try {
@@ -143,10 +129,7 @@ export const render = (
       return buildPages(tree, container);
     } catch (err) {
       const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(
-        tree,
-        getDocumentFromContext(context).currentPage()
-      );
+      return renderToSketch(tree, getDocumentFromContext(context).currentPage());
     }
   }
   return null;

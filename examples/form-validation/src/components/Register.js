@@ -31,24 +31,11 @@ const styles = StyleSheet.create({
 const Register = ({ session }: Props) => (
   <View style={styles.register}>
     <Text style={styles.heading}>Register an Account</Text>
-    <TextBox
-      label={'Email'}
-      value={session.email}
-      type={'email'}
-    />
-    <TextBox
-      label={'Password'}
-      value={session.password}
-      type={'password'}
-    >
-      <StrengthMeter
-        password={session.password}
-      />
+    <TextBox label="Email" value={session.email} type="email" />
+    <TextBox label="Password" value={session.password} type="password">
+      <StrengthMeter password={session.password} />
     </TextBox>
-    <Button
-      label={'Register'}
-      backgroundColor={colors.Purple}
-    />
+    <Button label="Register" backgroundColor={colors.Purple} />
   </View>
 );
 
@@ -60,4 +47,3 @@ Register.defaultProps = {
 };
 
 export default Register;
-

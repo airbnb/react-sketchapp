@@ -5,7 +5,7 @@ import { spacing, colors, fontFamily } from '../designSystem';
 
 type Props = {
   label: string,
-  backgroundColor: string
+  backgroundColor: string,
 };
 
 const buttonStyle = {

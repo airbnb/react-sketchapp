@@ -9,12 +9,12 @@ class SymbolMasterRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): SJSymbolMaster {
     return makeSymbolMaster(
       makeRect(layout.left, layout.top, layout.width, layout.height),
       props.symbolID,
-      props.name
+      props.name,
     );
   }
 }

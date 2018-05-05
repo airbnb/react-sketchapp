@@ -5,9 +5,7 @@ import { createAttributedString } from '../jsonUtils/hacksForJSONImpl';
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-const createStringMeasurer = (textNodes: TextNodes) => (
-  width: number = 0
-): Size => {
+const createStringMeasurer = (textNodes: TextNodes) => (width: number = 0): Size => {
   // width would be obj-c NaN and the only way to check for it is by comparing
   // width to itself (because NaN !== NaN)
   // eslint-disable-next-line no-self-compare
@@ -27,7 +25,7 @@ const createStringMeasurer = (textNodes: TextNodes) => (
     } = fullStr.boundingRectWithSize_options_context(
       CGSizeMake(_width, FLOAT_MAX),
       NSStringDrawingUsesLineFragmentOrigin,
-      null
+      null,
     ).size;
     newHeight = measureHeight;
     newWidth = measureWidth;

@@ -11,7 +11,7 @@ describe('<Artboard />', () => {
           <foo>
             <bar />
           </foo>
-        </Artboard>
+        </Artboard>,
       )
       .toJSON();
 
@@ -54,9 +54,7 @@ describe('<Artboard />', () => {
     });
 
     it('accepts an array of plain objects and/or StyleSheet ordinals', () => {
-      const tree = renderer
-        .create(<Artboard style={[{ flexGrow: 1 }, styles.view]} />)
-        .toJSON();
+      const tree = renderer.create(<Artboard style={[{ flexGrow: 1 }, styles.view]} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });

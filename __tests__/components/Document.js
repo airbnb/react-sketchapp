@@ -10,7 +10,7 @@ describe('<Document />', () => {
           <foo>
             <bar />
           </foo>
-        </Document>
+        </Document>,
       )
       .toJSON();
 

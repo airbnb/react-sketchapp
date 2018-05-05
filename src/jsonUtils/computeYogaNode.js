@@ -12,7 +12,7 @@ import { getSymbolMasterByName } from '../symbol';
 
 // flatten all styles (including nested) into one object
 export const getStyles = (node: TreeNode): ViewStyle | Object => {
-  let style = node.props.style;
+  let { style } = node.props;
 
   if (Array.isArray(style)) {
     const flattened = Array.prototype.concat.apply([], style);
@@ -24,10 +24,7 @@ export const getStyles = (node: TreeNode): ViewStyle | Object => {
   return style;
 };
 
-const computeYogaNode = (
-  node: TreeNode,
-  context: Context
-): { node: TreeNode, stop?: boolean } => {
+const computeYogaNode = (node: TreeNode, context: Context): { node: TreeNode, stop?: boolean } => {
   const yogaNode = yoga.Node.create();
   const hasStyle = node.props && node.props.style;
   const style: ViewStyle | Object = hasStyle ? getStyles(node) : {};

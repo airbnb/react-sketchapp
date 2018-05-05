@@ -27,12 +27,7 @@ const TRANSPARENT = 'transparent';
 const DEFAULT_BORDER_COLOR = TRANSPARENT;
 const DEFAULT_BORDER_STYLE = 'solid';
 
-const SHADOW_STYLES = [
-  'shadowColor',
-  'shadowOffset',
-  'shadowOpacity',
-  'shadowRadius',
-];
+const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
 function extractURLFromSource(source) {
   if (typeof source === 'string') {
@@ -46,7 +41,7 @@ class ImageRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): Array<SJShapeGroupLayer> {
     const layers = [];
 
@@ -83,13 +78,7 @@ class ImageRenderer extends SketchRenderer {
       borderBottomRightRadius,
       borderBottomLeftRadius,
     ];
-    const shapeLayer = makeRectShapeLayer(
-      0,
-      0,
-      layout.width,
-      layout.height,
-      radii
-    );
+    const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
 
     const fills = [makeImageFill(fillImage, PatternFillType[props.resizeMode])];
 
@@ -104,18 +93,8 @@ class ImageRenderer extends SketchRenderer {
     }
 
     if (
-      same(
-        borderTopWidth,
-        borderRightWidth,
-        borderBottomWidth,
-        borderLeftWidth
-      ) &&
-      same(
-        borderTopColor,
-        borderRightColor,
-        borderBottomColor,
-        borderLeftColor
-      ) &&
+      same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
+      same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
       same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)
     ) {
       // all sides have same border width
@@ -145,13 +124,7 @@ class ImageRenderer extends SketchRenderer {
       layers.push(content);
 
       if (borderTopWidth > 0) {
-        const topBorder = makeHorizontalBorder(
-          0,
-          0,
-          layout.width,
-          borderTopWidth,
-          borderTopColor
-        );
+        const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
         topBorder.name = 'Border (top)';
 
         const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
@@ -168,14 +141,11 @@ class ImageRenderer extends SketchRenderer {
           0,
           layout.height,
           borderRightWidth,
-          borderRightColor
+          borderRightColor,
         );
         rightBorder.name = 'Border (right)';
 
-        const borderOptions = makeBorderOptions(
-          borderRightStyle,
-          borderRightWidth
-        );
+        const borderOptions = makeBorderOptions(borderRightStyle, borderRightWidth);
         if (borderOptions) {
           rightBorder.style.borderOptions = borderOptions;
         }
@@ -189,14 +159,11 @@ class ImageRenderer extends SketchRenderer {
           layout.height - borderBottomWidth,
           layout.width,
           borderBottomWidth,
-          borderBottomColor
+          borderBottomColor,
         );
         bottomBorder.name = 'Border (bottom)';
 
-        const borderOptions = makeBorderOptions(
-          borderBottomStyle,
-          borderBottomWidth
-        );
+        const borderOptions = makeBorderOptions(borderBottomStyle, borderBottomWidth);
         if (borderOptions) {
           bottomBorder.style.borderOptions = borderOptions;
         }
@@ -210,14 +177,11 @@ class ImageRenderer extends SketchRenderer {
           0,
           layout.height,
           borderLeftWidth,
-          borderLeftColor
+          borderLeftColor,
         );
         leftBorder.name = 'Border (left)';
 
-        const borderOptions = makeBorderOptions(
-          borderLeftStyle,
-          borderLeftWidth
-        );
+        const borderOptions = makeBorderOptions(borderLeftStyle, borderLeftWidth);
         if (borderOptions) {
           leftBorder.style.borderOptions = borderOptions;
         }

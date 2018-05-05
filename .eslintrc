@@ -3,25 +3,14 @@
   "root": true,
   "extends": [
     "airbnb",
-    "@jongold/eslint-config-sketch"
+    "sketch"
   ],
   "globals": {
     "React$Component": true,
     "React$Element": true,
     "ReactClass": true,
     "ReactComponent": true,
-    "NSColor": true,
-    "MSJSONDataArchiver": true,
-    "NSAttributedString": true,
-    "NSDate": true,
-    "NSDataBase64EncodingEndLineWithCarriageReturn": true,
-    "NSData": true,
-    "NSDocumentController": true,
-    "NSMakeRange": true,
-    "NSMutableAttributedString": true,
-    "NSUTF8StringEncoding": true,
-    "context": true,
-    "NSBundle": true
+    "context": true
   },
   "rules": {
     "class-methods-use-this": 0,
@@ -29,7 +18,11 @@
     "new-cap": 0,
     "no-duplicate-imports": [0],
     "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": 0
+    "react/jsx-filename-extension": 0,
+    "function-paren-newline": 0,
+    "react/require-default-props": 0,
+    "react/default-props-match-prop-types": 0,
+    "jsx-a11y/label-has-for": 0
   },
   "env": {
     "node": true,

@@ -9,7 +9,7 @@ describe('<Image />', () => {
       .create(
         <Image source="foo">
           <foo />
-        </Image>
+        </Image>,
       )
       .toJSON();
 
@@ -34,49 +34,37 @@ describe('<Image />', () => {
 
   describe('resizeMode', () => {
     it('translates contain', () => {
-      const tree = renderer
-        .create(<Image source="foo" resizeMode="contain" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" resizeMode="contain" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('translates cover', () => {
-      const tree = renderer
-        .create(<Image source="foo" resizeMode="cover" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" resizeMode="cover" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('translates stretch', () => {
-      const tree = renderer
-        .create(<Image source="foo" resizeMode="stretch" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" resizeMode="stretch" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('translates center', () => {
-      const tree = renderer
-        .create(<Image source="foo" resizeMode="center" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" resizeMode="center" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('translates repeat', () => {
-      const tree = renderer
-        .create(<Image source="foo" resizeMode="repeat" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" resizeMode="repeat" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('translates none', () => {
-      const tree = renderer
-        .create(<Image source="foo" resizeMode="none" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" resizeMode="none" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -89,13 +77,7 @@ describe('<Image />', () => {
 
     it('prefers prop to style', () => {
       const tree = renderer
-        .create(
-          <Image
-            source="foo"
-            resizeMode="cover"
-            style={{ resizeMode: 'contain' }}
-          />
-        )
+        .create(<Image source="foo" resizeMode="cover" style={{ resizeMode: 'contain' }} />)
         .toJSON();
 
       expect(tree).toMatchSnapshot();
@@ -112,9 +94,7 @@ describe('<Image />', () => {
 
   describe('source', () => {
     it('prefers source over defaultSource', () => {
-      const tree = renderer
-        .create(<Image source="foo" defaultSource="bar" />)
-        .toJSON();
+      const tree = renderer.create(<Image source="foo" defaultSource="bar" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -126,29 +106,20 @@ describe('<Image />', () => {
     });
 
     it('sets height from source', () => {
-      const tree = renderer
-        .create(<Image source={{ uri: 'foo', height: 500 }} />)
-        .toJSON();
+      const tree = renderer.create(<Image source={{ uri: 'foo', height: 500 }} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('sets width from source', () => {
-      const tree = renderer
-        .create(<Image source={{ uri: 'foo', width: 500 }} />)
-        .toJSON();
+      const tree = renderer.create(<Image source={{ uri: 'foo', width: 500 }} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('favors style over source for height', () => {
       const tree = renderer
-        .create(
-          <Image
-            source={{ uri: 'foo', height: 500 }}
-            style={{ height: 400, width: 300 }}
-          />
-        )
+        .create(<Image source={{ uri: 'foo', height: 500 }} style={{ height: 400, width: 300 }} />)
         .toJSON();
 
       expect(tree).toMatchSnapshot();
@@ -156,12 +127,7 @@ describe('<Image />', () => {
 
     it('favors style over source for width', () => {
       const tree = renderer
-        .create(
-          <Image
-            source={{ uri: 'foo', width: 500 }}
-            style={{ height: 400, width: 300 }}
-          />
-        )
+        .create(<Image source={{ uri: 'foo', width: 500 }} style={{ height: 400, width: 300 }} />)
         .toJSON();
 
       expect(tree).toMatchSnapshot();
@@ -188,9 +154,7 @@ describe('<Image />', () => {
     });
 
     it('accepts an array of plain objects and/or StyleSheet ordinals', () => {
-      const tree = renderer
-        .create(<Image style={[{ flexGrow: 1 }, styles.view]} />)
-        .toJSON();
+      const tree = renderer.create(<Image style={[{ flexGrow: 1 }, styles.view]} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
