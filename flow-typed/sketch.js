@@ -14,6 +14,7 @@ declare var MSJSONDataArchiver;
 declare var MSLayerGroup: any;
 declare var MSMoment: any;
 declare var MSOvalShape: any;
+declare var MSPage: any;
 declare var MSRect: any;
 declare var MSRectangleShape: any;
 declare var MSShapeGroup: any;
