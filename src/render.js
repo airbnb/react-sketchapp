@@ -4,11 +4,13 @@ import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin'
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
-import { getSymbolsPage, injectSymbols } from './symbol';
+import { injectSymbols } from './symbol';
 
-import type { SketchLayer, TreeNode } from './types';
+import type { SketchDocument, SketchLayer, SketchPage, TreeNode } from './types';
 import RedBox from './components/RedBox';
 import { getDocumentFromContainer, getDocumentFromContext } from './utils/getDocument';
+import isNativeDocument from './utils/isNativeDocument';
+import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
   const tree = buildTree(element);
@@ -27,110 +29,87 @@ export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
   return container;
 };
 
-const renderToSketch = (node: TreeNode, container: SketchLayer): SketchLayer => {
-  const json = flexToSketchJSON(node);
+const getDefaultPage = (): SketchLayer => {
+  const doc = getDocumentFromContext(context);
+  const currentPage = doc.currentPage();
+
+  return isNativeSymbolsPage(currentPage) ? doc.addBlankPage() : currentPage;
+};
+
+const renderContents = (tree: TreeNode, container: SketchLayer = getDefaultPage()): SketchLayer => {
+  const json = flexToSketchJSON(tree);
   const layer = fromSJSONDictionary(json);
 
+  resetLayer(container);
   return renderLayers([layer], container);
 };
 
-// Crawl tree data to find all <Page> components
-const findPageData = (
-  current,
-  depth = 0,
-  accumulated = [],
-): Array<{ type: string, children: Object, name?: string }> => {
-  const children = current.children || [];
-  for (let i = 0, len = children.length; i < len; i += 1) {
-    const node = children[i];
-
-    if (node.type === 'page') {
-      accumulated.push({
-        type: 'page',
-        name: node.props.name,
-        children: node.children,
-      });
-    }
-
-    findPageData(children[i], depth + 1);
+const renderPage = (tree: TreeNode, page: SketchPage = getDefaultPage()): Array<SketchLayer> => {
+  // assume if name is set on this nested page, the intent is to overwrite
+  // the name of the page it is getting rendered into
+  if (tree.props.name) {
+    page.setName(tree.props.name);
   }
-  return accumulated;
+
+  return tree.children.map(child => renderContents(child, page));
 };
 
-const buildPages = (
+const renderDocument = (
   tree: TreeNode,
-  container: ?SketchLayer,
-): ?SketchLayer | Array<?SketchLayer> => {
-  const document = getDocumentFromContainer(container);
-  const pageData = findPageData(tree);
-  const symbolPage = getSymbolsPage(document);
-  injectSymbols(document);
-
-  if (pageData.length === 0) {
-    const _container = container || document.currentPage();
-    const page = !symbolPage || _container !== symbolPage ? _container : document.addBlankPage();
-
-    return renderToSketch(tree, page);
+  doc: SketchDocument = getDocumentFromContext(context),
+): Array<SketchLayer> => {
+  if (!isNativeDocument(doc)) {
+    throw new Error('Cannot render a Document into a child of Document');
   }
 
-  // Keep track of created pages
-  // Starts at `1` by default, because there is always one default page per document
-  let pageTotal = symbolPage ? 2 : 1;
-  // Keep track of existing and created pages to pass back to function caller
-  const pages = [];
+  resetDocument(doc);
 
-  pageData.forEach((data) => {
-    // Get Current Page
-    let page = document.currentPage();
+  const initialPage = doc.currentPage();
+  const shouldRenderInitialPage = !isNativeSymbolsPage(initialPage);
 
-    if (pageTotal > 1) {
-      // Create new page
-      page = document.addBlankPage();
-    } else {
-      pageTotal += 1;
+  return tree.children.map((child, i) => {
+    if (child.type !== 'page') {
+      throw new Error('Document children must be of type Page');
     }
 
-    if (data.name) {
-      // Name new page
-      page.setName(data.name);
-    }
-
-    if (data.children && data.children.length > 0) {
-      // Clear out page layers to prepare for re-render
-      resetLayer(page);
-      data.children.forEach((child) => {
-        renderToSketch(child, page);
-      });
-    }
-
-    pages.push(page);
+    const page = i === 0 && shouldRenderInitialPage ? initialPage : doc.addBlankPage();
+    return renderPage(child, page);
   });
+};
 
-  return pages;
+const renderTree = (tree: TreeNode, container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
+  if (tree.type === 'document') {
+    return renderDocument(tree, container);
+  } else if (tree.type === 'page') {
+    return renderPage(tree, container);
+  }
+
+  return renderContents(tree, container);
 };
 
 export const render = (
   element: React$Element<any>,
-  container?: ?SketchLayer,
-): ?SketchLayer | Array<?SketchLayer> => {
-  if (appVersionSupported()) {
-    try {
-      // Clear out document or layer to prepare for re-render
-      if (!container) {
-        resetDocument(getDocumentFromContext(context));
-      } else {
-        resetLayer(container);
-      }
+  container?: SketchLayer,
+): SketchLayer | Array<SketchLayer> => {
+  if (!appVersionSupported()) {
+    return null;
 
-      // Build out sketch compatible tree representation
-      const tree = buildTree(element);
-
-      // Traverse tree to create pages and render their children.
-      return buildPages(tree, container);
-    } catch (err) {
-      const tree = buildTree(<RedBox error={err} />);
-      return renderToSketch(tree, getDocumentFromContext(context).currentPage());
-    }
+    // The Symbols page holds a special meaning within Sketch / react-sketchapp
+    // and due to how `makeSymbol` works, we cannot render into it
+  } else if (isNativeSymbolsPage(container)) {
+    throw Error('Cannot render into Symbols page');
   }
-  return null;
+
+  try {
+    const tree = buildTree(element);
+
+    injectSymbols(
+      container ? getDocumentFromContainer(container) : getDocumentFromContext(context),
+    );
+
+    return renderTree(tree, container);
+  } catch (err) {
+    const tree = buildTree(<RedBox error={err} />);
+    return renderContents(tree, container);
+  }
 };
