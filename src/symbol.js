@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
+import type { SJSymbolMaster } from '@skpm/sketchapp-json-flow-types';
 import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
@@ -101,7 +101,7 @@ export const injectSymbols = (document: any) => {
   }
 };
 
-export const makeSymbolByName = (masterName: string): React$Component =>
+export const getSymbolComponentByName = (masterName: string): React$Component =>
   class extends React.Component {
     static displayName = `SymbolInstance(${masterName})`;
 
@@ -146,8 +146,7 @@ export const makeSymbol = (
       </symbolmaster>,
     ),
   );
-
-  return makeSymbolByName(masterName);
+  return getSymbolComponentByName(masterName);
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {

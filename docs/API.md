@@ -466,6 +466,8 @@ Reset the registered styles.
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
 ### `makeSymbol(node, name, document)`
+Creates a new symbol and injects it into the `Symbols` page. The name of the symbol can be optionally provided and will default to the display name of the component.
+
 Returns a react component which is an can be used to render instances of the symbol.
 
 #### Parameters
@@ -474,6 +476,9 @@ Returns a react component which is an can be used to render instances of the sym
 | `node` | `Node` | | The node object that will be rendered as a symbol |
 | `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
 | `document` | `Object` | The current document | The Sketch document to make the symbol in |
+
+### `getSymbolComponentByName(name)`
+Returns a react component which can be used to render the symbol that is associated with that name.
 
 #### Symbol example
 ```js
@@ -617,7 +622,8 @@ const Document = () => (
   </Artboard>
 );
 
-export default () => {
+
+export default (context) => {
   render(<Document />, context.document.currentPage());
 }
 ```

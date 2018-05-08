@@ -34,10 +34,6 @@ const propTypes = {
  */
 // $FlowFixMe
 class Text extends React.Component {
-  static defaultProps = {
-    name: 'Text',
-  };
-
   render() {
     return (
       <text
