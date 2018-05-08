@@ -15,7 +15,7 @@ class TextRenderer extends SketchRenderer {
     textStyle: TextStyle,
     props: any,
   ): Array<SketchLayer> {
-    let name = props.name;
+    let { name } = props;
 
     // Append all text nodes's content into one string
     if (!name && props.textNodes) {
