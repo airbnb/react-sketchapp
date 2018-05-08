@@ -6,6 +6,7 @@ const propTypes = {
   children: PropTypes.node,
 };
 
+// $FlowFixMe
 class Document extends React.Component {
   render() {
     return <document>{this.props.children}</document>;

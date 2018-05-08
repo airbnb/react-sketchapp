@@ -1,18 +1,21 @@
 import React from 'react';
 import { render, Text, View } from 'react-sketchapp';
-import { ApolloClient, createNetworkInterface } from 'apollo-client';
-import { graphql, ApolloProvider, getDataFromTree } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { graphql, ApolloProvider } from 'react-apollo';
 import gql from 'graphql-tag';
 import type { User } from './types';
 import { fonts, spacing } from './designSystem';
 import Profile from './components/Profile';
 import Space from './components/Space';
 
-const GRAPHQL_ENDPOINT =
-  'https://api.graph.cool/simple/v1/cj09zm1k4jcpc0115ecsoc1k4';
+const GRAPHQL_ENDPOINT = 'https://api.graph.cool/simple/v1/cj09zm1k4jcpc0115ecsoc1k4';
 
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface({ uri: GRAPHQL_ENDPOINT }),
+  link: new HttpLink({ uri: GRAPHQL_ENDPOINT }),
+  ssrMode: true,
+  cache: new InMemoryCache(),
 });
 
 const QUERY = gql`
@@ -29,8 +32,7 @@ const QUERY = gql`
 `;
 
 // eslint-disable-next-line
-const props = ({ data }) =>
-  data.loading ? { users: [] } : { users: data.allProfiles };
+const props = ({ data }) => (data.loading ? { users: [] } : { users: data.allProfiles });
 const withUsers = graphql(QUERY, { props });
 
 const Page = ({ users }: { users: Array<User> }) => (
@@ -45,7 +47,7 @@ const Page = ({ users }: { users: Array<User> }) => (
         }}
       >
         {users.map(user => (
-          <Space key={user.screen_name} h={spacing} v={spacing}>
+          <Space key={user.screenname} h={spacing} v={spacing}>
             <Profile user={user} />
           </Space>
         ))}
@@ -63,7 +65,8 @@ const App = () => (
 );
 
 export default () => {
-  getDataFromTree(App)
+  client
+    .query({ query: QUERY })
     .then(() => render(<App />, context.document.currentPage()))
     .catch(console.log); // eslint-disable-line no-console
 };

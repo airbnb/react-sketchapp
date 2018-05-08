@@ -44,9 +44,7 @@ describe('<Text />', () => {
     });
 
     it('accepts an array of plain objects and/or StyleSheet ordinals', () => {
-      const tree = renderer
-        .create(<Text style={[{ flexGrow: 1 }, styles.view]} />)
-        .toJSON();
+      const tree = renderer.create(<Text style={[{ flexGrow: 1 }, styles.view]} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });

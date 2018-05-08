@@ -9,7 +9,7 @@ class ArtboardRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): SJArtboardLayer {
     let color;
     if (style.backgroundColor !== undefined) {

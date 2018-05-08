@@ -1,10 +1,6 @@
 /* @flow */
 import { BorderPosition } from 'sketch-constants';
-import type {
-  SJBorderOptions,
-  SJShadow,
-  SJShapeGroupLayer,
-} from 'sketchapp-json-flow-types';
+import type { SJBorderOptions, SJShadow, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import {
   makeHorizontalPath,
@@ -16,10 +12,7 @@ import type { Color, ViewStyle } from '../types';
 
 const DEFAULT_SHADOW_COLOR = '#000';
 
-const makeDashPattern = (
-  style: "dashed" | "dotted" | "solid",
-  width: number
-): Array<number> => {
+const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): Array<number> => {
   switch (style) {
     case 'dashed':
       return [width * 3, width * 3];
@@ -33,8 +26,8 @@ const makeDashPattern = (
 };
 
 export const makeBorderOptions = (
-  style: "dashed" | "dotted" | "solid",
-  width: number
+  style: 'dashed' | 'dotted' | 'solid',
+  width: number,
 ): SJBorderOptions => ({
   _class: 'borderOptions',
   isEnabled: false,
@@ -72,7 +65,7 @@ export const makeVerticalBorder = (
   y: number,
   length: number,
   thickness: number,
-  color: Color
+  color: Color,
 ): SJShapeGroupLayer => {
   const frame = makeRect(x, y, thickness, length);
   const shapeFrame = makeRect(0, 0, thickness, length);
@@ -96,7 +89,7 @@ export const makeHorizontalBorder = (
   y: number,
   length: number,
   thickness: number,
-  color: Color
+  color: Color,
 ): SJShapeGroupLayer => {
   const frame = makeRect(x, y, length, thickness);
   const shapeFrame = makeRect(0, 0, length, thickness);

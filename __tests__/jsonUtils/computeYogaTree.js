@@ -40,11 +40,7 @@ computeYogaTree(treeRootStub, new Context());
 describe('Compute Yoga Tree', () => {
   it('correctly create yoga nodes into layout tree', () => {
     const yogaTree = computeYogaTree(treeRootStub, new Context());
-    yogaTree.calculateLayout(
-      yoga.UNDEFINED,
-      yoga.UNDEFINED,
-      yoga.DIRECTION_LTR
-    );
+    yogaTree.calculateLayout(yoga.UNDEFINED, yoga.UNDEFINED, yoga.DIRECTION_LTR);
     expect(yogaTree.getComputedLayout()).toEqual({
       bottom: 0,
       height: 104,

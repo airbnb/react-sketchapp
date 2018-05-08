@@ -12,7 +12,7 @@ import zIndex from './utils/zIndex';
 export const reactTreeToFlexTree = (
   node: TreeNode,
   yogaNode: yoga.NodeInstance,
-  context: Context
+  context: Context,
 ) => {
   let textNodes;
   let textStyle = context.getInheritedStyles();
@@ -26,11 +26,7 @@ export const reactTreeToFlexTree = (
   } else if (type === 'text') {
     // If current node is a Text node, add text styles to Context to pass down to
     // child nodes.
-    if (
-      node.props &&
-      node.props.style &&
-      hasAnyDefined(style, INHERITABLE_FONT_STYLES)
-    ) {
+    if (node.props && node.props.style && hasAnyDefined(style, INHERITABLE_FONT_STYLES)) {
       const inheritableStyles = pick(style, INHERITABLE_FONT_STYLES);
       inheritableStyles.flexDirection = 'row';
       context.addInheritableStyles(inheritableStyles);
@@ -57,7 +53,7 @@ export const reactTreeToFlexTree = (
       const renderedChildComponent = reactTreeToFlexTree(
         childComponent,
         childNode,
-        context.forChildren()
+        context.forChildren(),
       );
       newChildren.push(renderedChildComponent);
     }

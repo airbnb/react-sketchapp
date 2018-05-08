@@ -1,6 +1,6 @@
 import expandStyle from './expandStyle';
 
-const hasOwnProperty = Object.prototype.hasOwnProperty;
+const { hasOwnProperty } = Object.prototype;
 
 let _id = 0;
 // eslint-disable-next-line no-plusplus

@@ -12,9 +12,7 @@ const Section = ({ title, children }: P) => (
     <View style={{ width: 200 }}>
       <Label bold>{title}</Label>
     </View>
-    <View>
-      {children}
-    </View>
+    <View>{children}</View>
   </View>
 );
 

@@ -25,10 +25,7 @@ const Swatch = ({ name, hex }) => (
       padding: 8,
     }}
   >
-    <Text
-      name="Swatch Name"
-      style={{ color: textColor(hex), fontWeight: 'bold' }}
-    >
+    <Text name="Swatch Name" style={{ color: textColor(hex), fontWeight: 'bold' }}>
       {name}
     </Text>
     <Text name="Swatch Hex" style={{ color: textColor(hex) }}>
@@ -53,9 +50,7 @@ const Document = ({ colors }) => (
       width: (96 + 8) * 4,
     }}
   >
-    {Object.keys(colors).map(color => (
-      <Swatch name={color} hex={colors[color]} key={color} />
-    ))}
+    {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
   </Artboard>
 );
 

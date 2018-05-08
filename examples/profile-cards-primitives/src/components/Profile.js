@@ -34,21 +34,15 @@ const Avatar = ({ url }: AvatarP): React$Element<any> => (
 
 type TextP = { children?: string };
 const Title = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.title}>
-    {children}
-  </Text>
+  <Text style={styles.title}>{children}</Text>
 );
 
 const Subtitle = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.subtitle}>
-    {children}
-  </Text>
+  <Text style={styles.subtitle}>{children}</Text>
 );
 
 const Body = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.body}>
-    {children}
-  </Text>
+  <Text style={styles.body}>{children}</Text>
 );
 
 const Profile = (props: ProfileP): React$Element<any> => (

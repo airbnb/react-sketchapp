@@ -9,9 +9,7 @@ import Space from './components/Space';
 
 const Page = ({ sessions }: { sessions: Array<Session> }) => (
   <View>
-    <Text style={typography.Heading}>
-      Form Validation w/ DOM elements and React Primitives
-    </Text>
+    <Text style={typography.Heading}>Form Validation w/ DOM elements and React Primitives</Text>
     <View
       style={{
         flexDirection: 'row',

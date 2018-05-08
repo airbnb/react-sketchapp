@@ -1,5 +1,5 @@
 os: osx
-osx_image: xcode8.2
+osx_image: xcode8.3
 language: node_js
 cache:
   directories:
@@ -7,8 +7,11 @@ cache:
 notifications:
   email: false
 node_js:
-  - '7'
   - '6'
+  - '8'
+  - '10'
+before_install:
+  - nvm install-latest-npm
 before_script:
   - npm prune
 script:

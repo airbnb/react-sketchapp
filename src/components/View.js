@@ -10,10 +10,7 @@ const propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.shape({ ...ViewStylePropTypes }),
     PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.shape({ ...ViewStylePropTypes }),
-        PropTypes.number,
-      ])
+      PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
     ),
     PropTypes.number,
   ]),
@@ -24,6 +21,7 @@ const propTypes = {
   children: PropTypes.node,
 };
 
+// $FlowFixMe
 class View extends React.Component {
   static defaultProps = {
     name: 'View',
