@@ -11,7 +11,7 @@ import Svg from './components/Svg';
 import View from './components/View';
 import Text from './components/Text';
 import TextStyles from './sharedStyles/TextStyles';
-import { makeSymbol, makeSymbolByName, injectSymbols } from './symbol';
+import { makeSymbol, getSymbolComponentByName, injectSymbols } from './symbol';
 
 module.exports = {
   render,
@@ -28,6 +28,6 @@ module.exports = {
   View,
   Platform,
   makeSymbol,
+  getSymbolComponentByName,
   injectSymbols,
-  makeSymbolByName,
 };

@@ -7,7 +7,7 @@ import type {
   SJRect,
   SJSymbolMaster,
   SJSymbolInstanceLayer,
-} from 'sketchapp-json-flow-types';
+} from '@skpm/sketchapp-json-flow-types';
 import { FillType } from 'sketch-constants';
 import normalizeColor from 'normalize-css-color';
 import type { Color, ResizeConstraints } from '../types';

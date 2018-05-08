@@ -1,5 +1,4 @@
 /* @flow */
-// import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from 'sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
@@ -42,7 +41,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
       output.push({
         type: 'text',
         objectId: textLayer.do_objectID,
-        name: subLayer.name,
+        name: textLayer.name,
       });
       return;
     }
@@ -182,8 +181,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
       return memo;
     }, {});
 
-    symbolInstance.overrides = {};
-    symbolInstance.overrides['0'] = overrides;
+    symbolInstance.overrides = overrides;
 
     return symbolInstance;
   }

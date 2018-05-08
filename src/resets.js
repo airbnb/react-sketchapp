@@ -1,6 +1,7 @@
 // @flow
 import type { SketchDocument } from './types';
 import isNativeDocument from './utils/isNativeDocument';
+import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
 export const resetLayer = (container: Object) => {
   if (isNativeDocument(container)) {
@@ -22,11 +23,11 @@ export const resetDocument = (document: SketchDocument) => {
   for (let index = pages.length - 1; index >= 0; index -= 1) {
     const page = pages[index];
     // Don't delete symbols page
-    if (String(page.name()) !== 'Symbols') {
+    if (!isNativeSymbolsPage(page)) {
       if (pages.length > 1) {
         document.documentData().removePageAtIndex(index);
       } else {
-        resetLayer(pages[index]);
+        resetLayer(page);
       }
     }
   }

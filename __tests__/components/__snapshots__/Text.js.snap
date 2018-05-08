@@ -2,7 +2,7 @@
 
 exports[`<Text /> name defaults to Text 1`] = `
 <text
-  name="Text"
+  name={undefined}
   resizingConstraint={undefined}
   style={undefined}
 />
@@ -18,7 +18,7 @@ exports[`<Text /> name passes its name 1`] = `
 
 exports[`<Text /> passes its children 1`] = `
 <text
-  name="Text"
+  name={undefined}
   resizingConstraint={undefined}
   style={undefined}
 >
@@ -28,7 +28,7 @@ exports[`<Text /> passes its children 1`] = `
 
 exports[`<Text /> style accepts a StyleSheet ordinal 1`] = `
 <text
-  name="Text"
+  name={undefined}
   resizingConstraint={undefined}
   style={
     Object {
@@ -40,7 +40,7 @@ exports[`<Text /> style accepts a StyleSheet ordinal 1`] = `
 
 exports[`<Text /> style accepts a plain object 1`] = `
 <text
-  name="Text"
+  name={undefined}
   resizingConstraint={undefined}
   style={
     Object {
@@ -52,7 +52,7 @@ exports[`<Text /> style accepts a plain object 1`] = `
 
 exports[`<Text /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
 <text
-  name="Text"
+  name={undefined}
   resizingConstraint={undefined}
   style={
     Object {
