@@ -33,13 +33,13 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
+    "@skpm/sketchapp-json-flow-types": "^0.2.1",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
     "normalize-css-color": "^1.0.1",
     "prop-types": "^15.5.8",
     "sketch-constants": "^1.0.2",
-    "sketchapp-json-flow-types": "^0.2.0",
     "sketchapp-json-plugin": "^0.1.2",
     "yoga-layout": "^1.9.3"
   },
