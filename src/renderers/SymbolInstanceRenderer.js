@@ -1,5 +1,5 @@
 /* @flow */
-// import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from 'sketchapp-json-flow-types';
+// import type { SJSymbolInstanceLayer, SJLayer, SJObjectId } from '@skpm/sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';

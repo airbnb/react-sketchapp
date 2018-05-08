@@ -1,6 +1,6 @@
 /* @flow */
 import { BorderPosition, FillType } from 'sketch-constants';
-import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type { SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
