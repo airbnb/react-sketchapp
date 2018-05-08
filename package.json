@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@skpm/sketchapp-json-flow-types": "^0.2.1",
+    "babel-plugin-react-sketchapp-svg": "^1.0.0-beta4",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
