@@ -16,7 +16,7 @@ Open a new Sketch file, then in a terminal:
 
 ```bash
 git clone https://github.com/airbnb/react-sketchapp.git
-cd react-sketchapp/examples/basic-setup && npm install
+cd react-sketchapp/examples/basic-setup && npm installLobby
 
 npm run render
 ```
@@ -26,9 +26,9 @@ Next, [check out some more examples](https://github.com/airbnb/react-sketchapp/t
 ![readme-intro](https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png)
 
 [![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp)
-![Sketch.app](https://img.shields.io/badge/Sketch.app-43--45-brightgreen.svg)
+![Sketch.app](https://img.shields.io/badge/Sketch.app-43--50-brightgreen.svg)
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/airbnb/react-sketchapp)
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-sketchapp/Lobby)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-sketchapp/)
 
 ## Why?!
 
