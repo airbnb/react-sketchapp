@@ -36,15 +36,14 @@ const getDefaultPage = (): SketchLayer => {
   return isNativeSymbolsPage(currentPage) ? doc.addBlankPage() : currentPage;
 };
 
-const renderContents = (tree: TreeNode, container: SketchLayer = getDefaultPage()): SketchLayer => {
+const renderContents = (tree: TreeNode, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(tree);
   const layer = fromSJSONDictionary(json);
 
-  resetLayer(container);
   return renderLayers([layer], container);
 };
 
-const renderPage = (tree: TreeNode, page: SketchPage = getDefaultPage()): Array<SketchLayer> => {
+const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
   // assume if name is set on this nested page, the intent is to overwrite
   // the name of the page it is getting rendered into
   if (tree.props.name) {
@@ -54,15 +53,10 @@ const renderPage = (tree: TreeNode, page: SketchPage = getDefaultPage()): Array<
   return tree.children.map(child => renderContents(child, page));
 };
 
-const renderDocument = (
-  tree: TreeNode,
-  doc: SketchDocument = getDocumentFromContext(context),
-): Array<SketchLayer> => {
+const renderDocument = (tree: TreeNode, doc: SketchDocument): Array<SketchLayer> => {
   if (!isNativeDocument(doc)) {
     throw new Error('Cannot render a Document into a child of Document');
   }
-
-  resetDocument(doc);
 
   const initialPage = doc.currentPage();
   const shouldRenderInitialPage = !isNativeSymbolsPage(initialPage);
@@ -77,14 +71,18 @@ const renderDocument = (
   });
 };
 
-const renderTree = (tree: TreeNode, container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
+const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
   if (tree.type === 'document') {
-    return renderDocument(tree, container);
-  } else if (tree.type === 'page') {
-    return renderPage(tree, container);
+    const doc = _container || getDocumentFromContext(context);
+
+    resetDocument(doc);
+    return renderDocument(tree, doc);
   }
 
-  return renderContents(tree, container);
+  const container = _container || getDefaultPage();
+
+  resetLayer(container);
+  return tree.type === 'page' ? renderPage(tree, container) : renderContents(tree, container);
 };
 
 export const render = (
