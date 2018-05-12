@@ -11,7 +11,7 @@
     "Mathieu Dutour <mathieu@dutour.me>",
     "Jarid Margolin <jaridmargolin@gmail.com>"
   ],
-  "pre-commit": "lint-staged",
+  "pre-commit": ["flow", "lint-staged"],
   "scripts": {
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
