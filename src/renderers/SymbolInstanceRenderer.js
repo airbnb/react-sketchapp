@@ -5,20 +5,14 @@ import type { ViewStyle, LayoutInfo, SketchLayer, TextStyle } from '../types';
 import { getSymbolMasterByName, getSymbolMasterById } from '../symbol';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 
-// type OverrideReferenceBase = {
-//   objectId: SJObjectId,
-//   name: string
-// };
-
-// type OverrideReference =
-//   | ({ type: 'text' } & OverrideReferenceBase)
-//   | ({ type: 'image' } & OverrideReferenceBase)
-//   | ({
-//     type: 'symbolInstance',
-//     symbolId: string,
-//     width: number,
-//     height: number
-//   } & OverrideReferenceBase);
+type Override = {
+  type: string,
+  objectId: string,
+  name: string,
+  symbolId?: string,
+  width?: number,
+  height?: number,
+};
 
 const findInGroup = (layer: ?SketchLayer, type: string): ?SketchLayer =>
   layer && layer.layers && layer.layers.find(l => l._class === type);
@@ -26,13 +20,15 @@ const findInGroup = (layer: ?SketchLayer, type: string): ?SketchLayer =>
 const hasImageFill = (layer: SketchLayer): boolean =>
   !!(layer.style && layer.style.fills && layer.style.fills.some(f => f.image));
 
+const overrideProps = (layer: SketchLayer): Override => ({
+  type: layer._class,
+  objectId: layer.do_objectID,
+  name: layer.name,
+});
+
 const extractOverridesHelp = (subLayer: any, output: any) => {
   if (subLayer._class === 'text' && !output.some(r => r.objectId === subLayer.do_objectID)) {
-    output.push({
-      type: 'text',
-      objectId: subLayer.do_objectID,
-      name: subLayer.name,
-    });
+    output.push(overrideProps(subLayer));
     return;
   }
 
@@ -43,11 +39,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
     const subGroup = findInGroup(subLayer, 'group');
     const textLayer = findInGroup(subGroup, 'text');
     if (textLayer) {
-      output.push({
-        type: 'text',
-        objectId: textLayer.do_objectID,
-        name: textLayer.name,
-      });
+      output.push(overrideProps(textLayer));
       return;
     }
 
@@ -57,8 +49,8 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
     const shapeGroup = findInGroup(subLayer, 'shapeGroup');
     if (shapeGroup && hasImageFill(shapeGroup)) {
       output.push({
+        ...overrideProps(shapeGroup),
         type: 'image',
-        objectId: shapeGroup.do_objectID,
         name: subLayer.name,
       });
     }
@@ -66,9 +58,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
 
   if (subLayer._class === 'symbolInstance') {
     output.push({
-      type: 'symbolInstance',
-      objectId: subLayer.do_objectID,
-      name: subLayer.name,
+      ...overrideProps(subLayer),
       symbolId: subLayer.symbolID,
       width: subLayer.frame.width,
       height: subLayer.frame.height,
