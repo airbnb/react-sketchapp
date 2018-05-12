@@ -23,7 +23,7 @@
     "graphql-tag": "^2.4.0",
     "react": "^16.2.0",
     "react-apollo": "^2.1.0",
-    "react-sketchapp": "^1.0.0",
+    "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^16.2.0"
   },
   "devDependencies": {
