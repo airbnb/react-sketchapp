@@ -26,8 +26,19 @@ const overrideProps = (layer: SketchLayer): Override => ({
   name: layer.name,
 });
 
+const removeDuplicateOverrides = (overrides: Array<Override>): Array<Override> => {
+  const seen = {};
+
+  return overrides.filter(({ objectId }) => {
+    const isDuplicate = typeof seen[objectId] !== 'undefined';
+    seen[objectId] = true;
+
+    return !isDuplicate;
+  });
+};
+
 const extractOverridesHelp = (subLayer: any, output: any) => {
-  if (subLayer._class === 'text' && !output.some(r => r.objectId === subLayer.do_objectID)) {
+  if (subLayer._class === 'text') {
     output.push(overrideProps(subLayer));
     return;
   }
@@ -78,7 +89,7 @@ const extractOverridesHelp = (subLayer: any, output: any) => {
 const extractOverrides = (subLayers: any) => {
   const output = [];
   subLayers.forEach(subLayer => extractOverridesHelp(subLayer, output));
-  return output;
+  return removeDuplicateOverrides(output);
 };
 
 class SymbolInstanceRenderer extends SketchRenderer {
