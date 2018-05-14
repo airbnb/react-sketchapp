@@ -8,7 +8,7 @@ import pick from '../utils/pick';
 import computeTextTree from './computeTextTree';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
 import isNullOrUndefined from '../utils/isNullOrUndefined';
-import { getSymbolMasterByName } from '../symbol';
+import { getSymbolMasterById } from '../symbol';
 
 // flatten all styles (including nested) into one object
 export const getStyles = (node: TreeNode): ViewStyle | Object => {
@@ -32,7 +32,7 @@ const computeYogaNode = (node: TreeNode, context: Context): { node: TreeNode, st
   // Setup default symbol instance dimensions
   if (node.type === 'symbolinstance') {
     const symbolProps = node.props;
-    const { frame } = getSymbolMasterByName(symbolProps.masterName);
+    const { frame } = getSymbolMasterById(symbolProps.symbolID);
     yogaNode.setWidth(frame.width);
     yogaNode.setHeight(frame.height);
   }

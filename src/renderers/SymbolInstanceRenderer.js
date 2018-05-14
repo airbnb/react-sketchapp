@@ -2,14 +2,14 @@
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, SketchLayer, TextStyle } from '../types';
-import { getSymbolMasterByName, getSymbolMasterById } from '../symbol';
+import { getSymbolMasterById } from '../symbol';
 import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
 
 type Override = {
   type: string,
   objectId: string,
   name: string,
-  symbolId?: string,
+  symbolID?: string,
   width?: number,
   height?: number,
 };
@@ -71,7 +71,7 @@ const extractOverridesReducer = (
   if (layer._class === 'symbolInstance') {
     return overrides.concat({
       ...overrideProps(layer),
-      symbolId: layer.symbolID,
+      symbolID: layer.symbolID,
       width: layer.frame.width,
       height: layer.frame.height,
     });
@@ -94,7 +94,7 @@ const extractOverrides = (layers: Array<SketchLayer> = []): Array<Override> => {
 
 class SymbolInstanceRenderer extends SketchRenderer {
   renderGroupLayer(layout: LayoutInfo, style: ViewStyle, textStyle: TextStyle, props: any): any {
-    const masterTree = getSymbolMasterByName(props.masterName);
+    const masterTree = getSymbolMasterById(props.symbolID);
 
     const symbolInstance = makeSymbolInstance(
       makeRect(layout.left, layout.top, layout.width, layout.height),
@@ -114,14 +114,14 @@ class SymbolInstanceRenderer extends SketchRenderer {
         // eslint-disable-next-line
         if (props.overrides.hasOwnProperty(reference.name)) {
           const overrideValue = props.overrides[reference.name];
-          if (typeof overrideValue !== 'function' || typeof overrideValue.masterName !== 'string') {
+          if (typeof overrideValue !== 'function' || typeof overrideValue.symbolID !== 'string') {
             throw new Error(
               '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL',
             );
           }
 
-          const originalMaster = getSymbolMasterById(reference.symbolId);
-          const replacementMaster = getSymbolMasterByName(overrideValue.masterName);
+          const originalMaster = getSymbolMasterById(reference.symbolID);
+          const replacementMaster = getSymbolMasterById(overrideValue.symbolID);
 
           if (
             originalMaster.frame.width !== replacementMaster.frame.width ||
@@ -133,7 +133,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
           }
 
           const nestedOverrides = extractOverrides(
-            getSymbolMasterByName(overrideValue.masterName).layers,
+            getSymbolMasterById(overrideValue.symbolID).layers,
           ).reduce(inject, {});
 
           return {
@@ -146,7 +146,7 @@ class SymbolInstanceRenderer extends SketchRenderer {
         }
 
         const nestedOverrides = extractOverrides(
-          getSymbolMasterById(reference.symbolId).layers,
+          getSymbolMasterById(reference.symbolID).layers,
         ).reduce(inject, {});
 
         return {
