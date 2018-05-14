@@ -17,7 +17,7 @@ const nextId = () => ++id; // eslint-disable-line
 const displayName = (Component: React$Component): string =>
   Component.displayName || Component.name || `UnknownSymbol${nextId()}`;
 
-let mastersNameRegistry = null;
+let symbolsRegistry = null;
 let existingSymbols = null;
 const layers = {};
 
@@ -50,17 +50,17 @@ const getExistingSymbols = (document: any) => {
       return symbolJson;
     });
 
-    mastersNameRegistry = {};
+    symbolsRegistry = {};
     existingSymbols.forEach((symbolMaster) => {
       if (symbolMaster._class !== 'symbolMaster') return;
-      if (symbolMaster.name in mastersNameRegistry) return;
-      mastersNameRegistry[symbolMaster.name] = symbolMaster;
+      if (symbolMaster.name in symbolsRegistry) return;
+      symbolsRegistry[symbolMaster.name] = symbolMaster;
     });
   }
   return existingSymbols;
 };
 
-const getSymbolId = (masterName: string): string => {
+const getSymbolID = (masterName: string): string => {
   let symbolId = generateID();
 
   existingSymbols.forEach((symbolMaster) => {
@@ -77,13 +77,13 @@ export const injectSymbols = (document: any) => {
   }
   const currentPage = document.currentPage();
 
-  if (mastersNameRegistry !== null) {
-    // if mastersNameRegistry is not an object then makeSymbol was not called
+  if (symbolsRegistry !== null) {
+    // if symbolsRegistry is not an object then makeSymbol was not called
     const symbolsPage = document.documentData().symbolsPageOrCreateIfNecessary();
 
     let left = 0;
-    Object.keys(mastersNameRegistry).forEach((key) => {
-      const symbolMaster = mastersNameRegistry[key];
+    Object.keys(symbolsRegistry).forEach((key) => {
+      const symbolMaster = symbolsRegistry[key];
       symbolMaster.frame.y = 0;
       symbolMaster.frame.x = left;
       left += symbolMaster.frame.width + 20;
@@ -101,9 +101,11 @@ export const injectSymbols = (document: any) => {
   }
 };
 
-export const getSymbolComponentByName = (masterName: string): React$Component =>
+export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React$Component<any> =>
   class extends React.Component {
-    static displayName = `SymbolInstance(${masterName})`;
+    static symbolID = symbolMaster.symbolID;
+    static masterName = symbolMaster.name;
+    static displayName = `SymbolInstance(${symbolMaster.name})`;
 
     static propTypes = {
       style: PropTypes.shape(ViewStylePropTypes),
@@ -112,13 +114,11 @@ export const getSymbolComponentByName = (masterName: string): React$Component =>
       resizingConstraint: PropTypes.object, // eslint-disable-line
     };
 
-    static masterName = masterName;
-
     render() {
       return (
         <symbolinstance
-          masterName={masterName}
-          name={this.props.name || masterName}
+          symbolID={symbolMaster.symbolID}
+          name={this.props.name || symbolMaster.name}
           style={StyleSheet.flatten(this.props.style)}
           resizingConstraint={this.props.resizingConstraint}
           overrides={this.props.overrides}
@@ -132,39 +132,44 @@ export const makeSymbol = (
   name: string,
   document?: any,
 ): React$Component => {
-  const masterName = name || displayName(Component);
-
-  if (mastersNameRegistry === null) {
+  if (symbolsRegistry === null) {
     getExistingSymbols(document || getDocumentFromContext(context));
   }
-  const symbolId = getSymbolId(masterName);
 
-  mastersNameRegistry[masterName] = flexToSketchJSON(
+  const masterName = name || displayName(Component);
+  const symbolID = getSymbolID(masterName);
+  const symbolMaster = flexToSketchJSON(
     buildTree(
-      <symbolmaster symbolID={symbolId} name={masterName}>
+      <symbolmaster symbolID={symbolID} name={masterName}>
         <Component />
       </symbolmaster>,
     ),
   );
-  return getSymbolComponentByName(masterName);
+
+  symbolsRegistry[symbolID] = symbolMaster;
+  return createSymbolInstanceClass(symbolMaster);
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
-  // eslint-disable-next-line
-  if (!mastersNameRegistry.hasOwnProperty(name)) {
-    throw new Error('##FIXME## NO MASTER FOR THIS SYMBOL NAME');
-  }
-  return mastersNameRegistry[name];
-};
-
-export const getSymbolMasterById = (symbolId: string): SJSymbolMaster => {
-  const masterName = Object.keys(mastersNameRegistry).find(
-    key => String(mastersNameRegistry[key].symbolID) === symbolId,
+  const symbolID = Object.keys(symbolsRegistry).find(
+    key => String(symbolsRegistry[key].name) === name,
   );
 
-  if (typeof masterName === 'undefined') {
+  if (typeof symbolID === 'undefined') {
+    throw new Error('##FIXME## NO MASTER FOR THIS SYMBOL NAME');
+  }
+
+  return symbolsRegistry[symbolID];
+};
+
+export const getSymbolMasterById = (symbolID: string): SJSymbolMaster => {
+  const symbolMaster = symbolsRegistry[symbolID];
+  if (typeof symbolMaster === 'undefined') {
     throw new Error('##FIXME## NO MASTER WITH THAT SYMBOL ID');
   }
 
-  return mastersNameRegistry[masterName];
+  return symbolMaster;
 };
+
+export const getSymbolComponentByName = (masterName: string): React$Component =>
+  createSymbolInstanceClass(getSymbolMasterByName(masterName));
