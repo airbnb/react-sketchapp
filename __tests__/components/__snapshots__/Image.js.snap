@@ -1,10 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Image /> name defaults to Image 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> name passes its name 1`] = `
@@ -13,7 +16,8 @@ exports[`<Image /> name passes its name 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> renders children 1`] = `
@@ -22,7 +26,8 @@ exports[`<Image /> renders children 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}}>
+  style={Object {}}
+>
   <foo />
 </image>
 `;
@@ -37,7 +42,8 @@ exports[`<Image /> resizeMode falls back to a resizeMode from style 1`] = `
     Object {
       "resizeMode": "contain",
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> resizeMode falls back to cover 1`] = `
@@ -46,7 +52,8 @@ exports[`<Image /> resizeMode falls back to cover 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> resizeMode prefers prop to style 1`] = `
@@ -59,7 +66,8 @@ exports[`<Image /> resizeMode prefers prop to style 1`] = `
     Object {
       "resizeMode": "contain",
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> resizeMode translates center 1`] = `
@@ -68,7 +76,8 @@ exports[`<Image /> resizeMode translates center 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> resizeMode translates contain 1`] = `
@@ -77,7 +86,8 @@ exports[`<Image /> resizeMode translates contain 1`] = `
   resizeMode="Fit"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> resizeMode translates cover 1`] = `
@@ -86,7 +96,8 @@ exports[`<Image /> resizeMode translates cover 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> resizeMode translates none 1`] = `
@@ -95,7 +106,8 @@ exports[`<Image /> resizeMode translates none 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> resizeMode translates repeat 1`] = `
@@ -104,7 +116,8 @@ exports[`<Image /> resizeMode translates repeat 1`] = `
   resizeMode="Tile"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> resizeMode translates stretch 1`] = `
@@ -113,7 +126,8 @@ exports[`<Image /> resizeMode translates stretch 1`] = `
   resizeMode="Stretch"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> source falls back to defaultSource if available 1`] = `
@@ -122,7 +136,8 @@ exports[`<Image /> source falls back to defaultSource if available 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> source favors style over source for height 1`] = `
@@ -141,7 +156,8 @@ exports[`<Image /> source favors style over source for height 1`] = `
       "height": 400,
       "width": 300,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> source favors style over source for width 1`] = `
@@ -160,7 +176,8 @@ exports[`<Image /> source favors style over source for width 1`] = `
       "height": 400,
       "width": 300,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> source prefers source over defaultSource 1`] = `
@@ -169,7 +186,8 @@ exports[`<Image /> source prefers source over defaultSource 1`] = `
   resizeMode="Fill"
   resizingConstraint={undefined}
   source="foo"
-  style={Object {}} />
+  style={Object {}}
+/>
 `;
 
 exports[`<Image /> source sets height from source 1`] = `
@@ -188,7 +206,8 @@ exports[`<Image /> source sets height from source 1`] = `
       "height": 500,
       "width": undefined,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> source sets width from source 1`] = `
@@ -207,7 +226,8 @@ exports[`<Image /> source sets width from source 1`] = `
       "height": undefined,
       "width": 500,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> style accepts a StyleSheet ordinal 1`] = `
@@ -220,7 +240,8 @@ exports[`<Image /> style accepts a StyleSheet ordinal 1`] = `
     Object {
       "flex": 1,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> style accepts a plain object 1`] = `
@@ -233,7 +254,8 @@ exports[`<Image /> style accepts a plain object 1`] = `
     Object {
       "flex": 1,
     }
-  } />
+  }
+/>
 `;
 
 exports[`<Image /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
@@ -247,5 +269,6 @@ exports[`<Image /> style accepts an array of plain objects and/or StyleSheet ord
       "flex": 1,
       "flexGrow": 1,
     }
-  } />
+  }
+/>
 `;

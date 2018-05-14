@@ -17,10 +17,10 @@
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
-    "react-sketchapp": "^1.0.0",
+    "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^15.4.1"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.2.0"
+    "@skpm/builder": "^0.4.0"
   }
 }

@@ -1,6 +1,13 @@
 // @flow
+import type { SketchDocument } from './types';
+import isNativeDocument from './utils/isNativeDocument';
+import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
 export const resetLayer = (container: Object) => {
+  if (isNativeDocument(container)) {
+    resetDocument(container); // eslint-disable-line
+    return;
+  }
   const layers = container.children();
   // Skip last child since it is the container itself
   for (let l = 0; l < layers.count() - 1; l += 1) {
@@ -10,19 +17,17 @@ export const resetLayer = (container: Object) => {
 };
 
 // Clear out all document pages and layers
-export const resetDocument = () => {
+export const resetDocument = (document: SketchDocument) => {
   // Get Pages and delete them all (Except Symbols Page)
-  const pages = context.document.pages();
+  const pages = document.pages();
   for (let index = pages.length - 1; index >= 0; index -= 1) {
     const page = pages[index];
     // Don't delete symbols page
-    // NOTE: Must use != instead of !== due to page.name() being a MSBoxedObject
-    // eslint-disable-next-line
-    if (page.name() != "Symbols") {
+    if (!isNativeSymbolsPage(page)) {
       if (pages.length > 1) {
-        context.document.documentData().removePageAtIndex(index);
+        document.documentData().removePageAtIndex(index);
       } else {
-        resetLayer(pages[index]);
+        resetLayer(page);
       }
     }
   }

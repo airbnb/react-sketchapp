@@ -3,8 +3,8 @@
 ## How to use
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
 ```
-curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/profile-cards-gql
-cd profile-cards-gql
+curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/profile-cards-graphql
+cd profile-cards-graphql
 ```
 
 Install the dependencies

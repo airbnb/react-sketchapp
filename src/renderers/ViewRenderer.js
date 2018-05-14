@@ -1,6 +1,6 @@
 /* @flow */
 import { BorderPosition, FillType } from 'sketch-constants';
-import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type { SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
@@ -51,12 +51,7 @@ const VISIBLE_STYLES = [
 
 const OVERFLOW_STYLES = ['overflow', 'overflowX', 'overflowY'];
 
-const SHADOW_STYLES = [
-  'shadowColor',
-  'shadowOffset',
-  'shadowOpacity',
-  'shadowRadius',
-];
+const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
 class ViewRenderer extends SketchRenderer {
   getDefaultGroupName() {
@@ -67,10 +62,7 @@ class ViewRenderer extends SketchRenderer {
     style: ViewStyle,
     textStyle: TextStyle,
     // eslint-disable-next-line no-unused-vars
-    props: {
-      resizingConstraint: ?ResizeConstraints,
-      shadowGroup: ?SketchShadowGroup
-    }
+    props: any
   ): Array<SJShapeGroupLayer> {
     const layers = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
@@ -115,7 +107,7 @@ class ViewRenderer extends SketchRenderer {
       layout.width,
       layout.height,
       radii,
-      props.resizingConstraint
+      props.resizingConstraint,
     );
 
     const fill = makeColorFill(backgroundColor);
@@ -150,18 +142,8 @@ class ViewRenderer extends SketchRenderer {
     }
 
     if (
-      same(
-        borderTopWidth,
-        borderRightWidth,
-        borderBottomWidth,
-        borderLeftWidth
-      ) &&
-      same(
-        borderTopColor,
-        borderRightColor,
-        borderBottomColor,
-        borderLeftColor
-      ) &&
+      same(borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth) &&
+      same(borderTopColor, borderRightColor, borderBottomColor, borderLeftColor) &&
       same(borderTopStyle, borderRightStyle, borderBottomStyle, borderLeftStyle)
     ) {
       // all sides have same border width
@@ -191,13 +173,7 @@ class ViewRenderer extends SketchRenderer {
       layers.push(content);
 
       if (borderTopWidth > 0) {
-        const topBorder = makeHorizontalBorder(
-          0,
-          0,
-          layout.width,
-          borderTopWidth,
-          borderTopColor
-        );
+        const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
         topBorder.name = 'Border (top)';
 
         const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
@@ -214,14 +190,11 @@ class ViewRenderer extends SketchRenderer {
           0,
           layout.height,
           borderRightWidth,
-          borderRightColor
+          borderRightColor,
         );
         rightBorder.name = 'Border (right)';
 
-        const borderOptions = makeBorderOptions(
-          borderRightStyle,
-          borderRightWidth
-        );
+        const borderOptions = makeBorderOptions(borderRightStyle, borderRightWidth);
         if (borderOptions) {
           rightBorder.style.borderOptions = borderOptions;
         }
@@ -235,14 +208,11 @@ class ViewRenderer extends SketchRenderer {
           layout.height - borderBottomWidth,
           layout.width,
           borderBottomWidth,
-          borderBottomColor
+          borderBottomColor,
         );
         bottomBorder.name = 'Border (bottom)';
 
-        const borderOptions = makeBorderOptions(
-          borderBottomStyle,
-          borderBottomWidth
-        );
+        const borderOptions = makeBorderOptions(borderBottomStyle, borderBottomWidth);
         if (borderOptions) {
           bottomBorder.style.borderOptions = borderOptions;
         }
@@ -256,14 +226,11 @@ class ViewRenderer extends SketchRenderer {
           0,
           layout.height,
           borderLeftWidth,
-          borderLeftColor
+          borderLeftColor,
         );
         leftBorder.name = 'Border (left)';
 
-        const borderOptions = makeBorderOptions(
-          borderLeftStyle,
-          borderLeftWidth
-        );
+        const borderOptions = makeBorderOptions(borderLeftStyle, borderLeftWidth);
         if (borderOptions) {
           leftBorder.style.borderOptions = borderOptions;
         }

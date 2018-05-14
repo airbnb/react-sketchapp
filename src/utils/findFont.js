@@ -68,9 +68,7 @@ const weightOfFont = (font: NSFont): number => {
 
 const fontNamesForFamilyName = (familyName: string): Array<string> => {
   const manager = NSFontManager.sharedFontManager();
-  const members = NSArray.arrayWithArray(
-    manager.availableMembersOfFontFamily(familyName)
-  );
+  const members = NSArray.arrayWithArray(manager.availableMembersOfFontFamily(familyName));
 
   const results = [];
   for (let i = 0; i < members.length; i += 1) {
@@ -99,21 +97,15 @@ const findFont = (style: TextStyle): NSFont => {
   const defaultFontWeight = NSFontWeightRegular;
   const defaultFontSize = 14;
 
-  let fontSize = defaultFontSize;
-  let fontWeight = defaultFontWeight;
+  const fontSize = style.fontSize ? style.fontSize : defaultFontSize;
+  let fontWeight = style.fontWeight ? FONT_WEIGHTS[style.fontWeight] : defaultFontWeight;
   // Default to Helvetica if fonts are missing
   let familyName =
     // Must use two equals (==) for compatibility with Cocoascript
     // eslint-disable-next-line eqeqeq
-    defaultFontFamily == APPLE_BROKEN_SYSTEM_FONT
-      ? 'Helvetica'
-      : defaultFontFamily;
+    defaultFontFamily == APPLE_BROKEN_SYSTEM_FONT ? 'Helvetica' : defaultFontFamily;
   let isItalic = false;
   let isCondensed = false;
-
-  if (style.fontSize) {
-    fontSize = style.fontSize;
-  }
 
   if (style.fontFamily) {
     familyName = style.fontFamily;
@@ -121,10 +113,6 @@ const findFont = (style: TextStyle): NSFont => {
 
   if (style.fontStyle) {
     isItalic = FONT_STYLES[style.fontStyle] || false;
-  }
-
-  if (style.fontWeight) {
-    fontWeight = FONT_WEIGHTS[style.fontWeight] || NSFontWeightRegular;
   }
 
   let didFindFont = false;
@@ -148,9 +136,7 @@ const findFont = (style: TextStyle): NSFont => {
           symbolicTraits |= NSFontCondensedTrait;
         }
 
-        fontDescriptor = fontDescriptor.fontDescriptorWithSymbolicTraits(
-          symbolicTraits
-        );
+        fontDescriptor = fontDescriptor.fontDescriptorWithSymbolicTraits(symbolicTraits);
         font = NSFont.fontWithDescriptor_size(fontDescriptor, fontSize);
       }
     }
@@ -180,15 +166,10 @@ const findFont = (style: TextStyle): NSFont => {
   for (let i = 0; i < fontNames.length; i += 1) {
     const match = NSFont.fontWithName_size(fontNames[i], fontSize);
 
-    if (
-      isItalic === isItalicFont(match) &&
-      isCondensed === isCondensedFont(match)
-    ) {
+    if (isItalic === isItalicFont(match) && isCondensed === isCondensedFont(match)) {
       const testWeight = weightOfFont(match);
 
-      if (
-        Math.abs(testWeight - fontWeight) < Math.abs(closestWeight - fontWeight)
-      ) {
+      if (Math.abs(testWeight - fontWeight) < Math.abs(closestWeight - fontWeight)) {
         font = match;
 
         closestWeight = testWeight;

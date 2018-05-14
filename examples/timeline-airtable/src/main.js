@@ -53,9 +53,7 @@ const styles = StyleSheet.create({
 });
 
 const VerticalLine = ({ height = 1, color = '#46D2B3' }) => (
-  <View
-    style={[styles.verticalLine, { flex: height, backgroundColor: color }]}
-  />
+  <View style={[styles.verticalLine, { flex: height, backgroundColor: color }]} />
 );
 
 VerticalLine.propTypes = {
@@ -94,7 +92,9 @@ Dot.propTypes = {
   completed: PropTypes.bool,
 };
 
-const Row = ({ title, description, completed, date, status }) => (
+const Row = ({
+  title, description, completed, date, status,
+}) => (
   <View style={styles.rowContainer}>
     <View name="Row Left" style={styles.rowLeftArea}>
       <VerticalLine />
@@ -102,10 +102,9 @@ const Row = ({ title, description, completed, date, status }) => (
       <VerticalLine height={4} />
     </View>
     <View name="Row Body" style={{ opacity: completed ? 1 : 0.5 }}>
-      <Text
-        name="Row Date"
-        style={styles.rowDate}
-      >{`${status} on ${date}`}</Text>
+      <Text name="Row Date" style={styles.rowDate}>
+        {`${status} on ${date}`}
+      </Text>
       <Text name="Row Title" style={styles.rowTitle}>
         {title}
       </Text>

@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-  render,
-  Artboard,
-  Text,
-  View,
-  Image,
-  makeSymbol,
-} from 'react-sketchapp';
+import { render, Artboard, Text, View, Image, makeSymbol } from 'react-sketchapp';
 
 const RedSquare = () => (
-  <View
-    name="Square"
-    style={{ width: 100, height: 100, backgroundColor: 'red' }}
-  >
+  <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
     <Text name="Red Square Text">Red Square</Text>
   </View>
 );
@@ -20,10 +10,7 @@ const RedSquare = () => (
 const RedSquareSym = makeSymbol(RedSquare, 'squares/red');
 
 const BlueSquare = () => (
-  <View
-    name="Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  >
+  <View name="Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
     <Text name="Blue Square Text">Blue Square</Text>
   </View>
 );
@@ -43,10 +30,7 @@ const PhotoSym = makeSymbol(Photo);
 const Nested = () => (
   <View name="Multi" style={{ display: 'flex', flexDirection: 'column' }}>
     <PhotoSym name="Photo Instance" style={{ width: 75, height: 75 }} />
-    <RedSquareSym
-      name="Red Square Instance"
-      style={{ width: 75, height: 75 }}
-    />
+    <RedSquareSym name="Red Square Instance" style={{ width: 75, height: 75 }} />
   </View>
 );
 
@@ -60,8 +44,7 @@ export default () => {
         overrides={{
           'Red Square Instance': BlueSquareSym,
           'Blue Square Text': 'TESTING',
-          Photo:
-            'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
+          Photo: 'https://pbs.twimg.com/profile_images/833785170285178881/loBb32g3.jpg',
         }}
       />
     </Artboard>

@@ -25,8 +25,7 @@ class App extends React.Component {
       <Container>
         <Image
           source={{
-            uri:
-              'https://github.com/paypal/glamorous/raw/master/other/logo/full.png',
+            uri: 'https://github.com/paypal/glamorous/raw/master/other/logo/full.png',
           }}
         />
         <Description>Maintainable CSS with React</Description>

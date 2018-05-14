@@ -10,9 +10,7 @@ type P = {
 const TypeSpecimen = ({ name, style }: P) => (
   <View name={`TypeSpecimen-${name}`} style={{ flexDirection: 'row', marginBottom: 24 }}>
     <View style={{ width: 100 }}>
-      <Label>
-        {`${style.fontSize} / ${style.lineHeight}`}
-      </Label>
+      <Label>{`${style.fontSize} / ${style.lineHeight}`}</Label>
     </View>
     <Text
       style={{

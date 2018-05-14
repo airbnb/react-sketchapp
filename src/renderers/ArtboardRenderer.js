@@ -1,5 +1,5 @@
 /* @flow */
-import type { SJArtboardLayer } from 'sketchapp-json-flow-types';
+import type { SJArtboardLayer } from '@skpm/sketchapp-json-flow-types';
 import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
@@ -9,7 +9,7 @@ class ArtboardRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): SJArtboardLayer {
     let color;
     if (style.backgroundColor !== undefined) {

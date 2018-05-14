@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
+import type { SJSymbolMaster } from '@skpm/sketchapp-json-flow-types';
 import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
@@ -9,7 +9,7 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
-import getDocument from './utils/getDocument';
+import { getDocumentFromContext } from './utils/getDocument';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -30,19 +30,17 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getSymbolsPage = () => {
-  const globalContext = context;
-  const pages = getDocument(globalContext).pages();
+export const getSymbolsPage = (document: any) => {
+  const pages = document.pages();
   const array = msListToArray(pages);
   return array.find(p => String(p.name()) === 'Symbols');
 };
 
-export const getExistingSymbols = () => {
-  const globalContext = context;
+const getExistingSymbols = (document: any) => {
   if (existingSymbols === null) {
-    let symbolsPage = getSymbolsPage();
+    let symbolsPage = getSymbolsPage(document);
     if (!symbolsPage) {
-      symbolsPage = getDocument(globalContext).addBlankPage();
+      symbolsPage = document.addBlankPage();
       symbolsPage.setName('Symbols');
     }
 
@@ -62,7 +60,7 @@ export const getExistingSymbols = () => {
   return existingSymbols;
 };
 
-export const getSymbolId = (masterName: string): string => {
+const getSymbolId = (masterName: string): string => {
   let symbolId = generateID();
 
   existingSymbols.forEach((symbolMaster) => {
@@ -73,39 +71,37 @@ export const getSymbolId = (masterName: string): string => {
   return symbolId;
 };
 
-const injectSymbols = () => {
-  const globalContext = context; // eslint-disable-line
-  const pages = getDocument(globalContext).pages();
-  const array = msListToArray(pages);
-
-  const symbolsPage = getDocument(globalContext)
-    .documentData()
-    .symbolsPageOrCreateIfNecessary();
-
-  let left = 0;
-  Object.keys(mastersNameRegistry).forEach((key) => {
-    const symbolMaster = mastersNameRegistry[key];
-    symbolMaster.frame.y = 0;
-    symbolMaster.frame.x = left;
-    left += symbolMaster.frame.width + 20;
-
-    const newLayer = fromSJSONDictionary(symbolMaster);
-    layers[symbolMaster.symbolID] = newLayer;
-  });
-
-  // Clear out page layers to prepare for re-render
-  resetLayer(symbolsPage);
-
-  renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
-
-  let notSymbolsPage = array.find(p => String(p.name()) !== 'Symbols');
-  if (!notSymbolsPage) {
-    notSymbolsPage = getDocument(globalContext).addBlankPage();
+export const injectSymbols = (document: any) => {
+  if (!document) {
+    document = getDocumentFromContext(context); // eslint-disable-line
   }
-  getDocument(globalContext).setCurrentPage(notSymbolsPage);
+  const currentPage = document.currentPage();
+
+  if (mastersNameRegistry !== null) {
+    // if mastersNameRegistry is not an object then makeSymbol was not called
+    const symbolsPage = document.documentData().symbolsPageOrCreateIfNecessary();
+
+    let left = 0;
+    Object.keys(mastersNameRegistry).forEach((key) => {
+      const symbolMaster = mastersNameRegistry[key];
+      symbolMaster.frame.y = 0;
+      symbolMaster.frame.x = left;
+      left += symbolMaster.frame.width + 20;
+
+      const newLayer = fromSJSONDictionary(symbolMaster);
+      layers[symbolMaster.symbolID] = newLayer;
+    });
+
+    // Clear out page layers to prepare for re-render
+    resetLayer(symbolsPage);
+
+    renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
+
+    document.setCurrentPage(currentPage);
+  }
 };
 
-export const makeSymbolByName = (masterName: string): React$Component =>
+export const getSymbolComponentByName = (masterName: string): React$Component =>
   class extends React.Component {
     static displayName = `SymbolInstance(${masterName})`;
 
@@ -113,7 +109,7 @@ export const makeSymbolByName = (masterName: string): React$Component =>
       style: PropTypes.shape(ViewStylePropTypes),
       name: PropTypes.string,
       overrides: PropTypes.object, // eslint-disable-line
-      resizingConstraint: PropTypes.object // eslint-disable-line
+      resizingConstraint: PropTypes.object, // eslint-disable-line
     };
 
     static masterName = masterName;
@@ -133,12 +129,13 @@ export const makeSymbolByName = (masterName: string): React$Component =>
 
 export const makeSymbol = (
   Component: React$Component,
-  name: string
+  name: string,
+  document?: any,
 ): React$Component => {
   const masterName = name || displayName(Component);
 
   if (mastersNameRegistry === null) {
-    getExistingSymbols();
+    getExistingSymbols(document || getDocumentFromContext(context));
   }
   const symbolId = getSymbolId(masterName);
 
@@ -146,13 +143,10 @@ export const makeSymbol = (
     buildTree(
       <symbolmaster symbolID={symbolId} name={masterName}>
         <Component />
-      </symbolmaster>
-    )
+      </symbolmaster>,
+    ),
   );
-
-  const symbol = makeSymbolByName(masterName);
-  injectSymbols();
-  return symbol;
+  return getSymbolComponentByName(masterName);
 };
 
 export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
@@ -165,7 +159,7 @@ export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
 
 export const getSymbolMasterById = (symbolId: string): SJSymbolMaster => {
   const masterName = Object.keys(mastersNameRegistry).find(
-    key => String(mastersNameRegistry[key].symbolID) === symbolId
+    key => String(mastersNameRegistry[key].symbolID) === symbolId,
   );
 
   if (typeof masterName === 'undefined') {

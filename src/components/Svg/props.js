@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 
 const numberProp = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-const numberArrayProp = PropTypes.oneOfType([
-  PropTypes.arrayOf(numberProp),
-  numberProp,
-]);
+const numberArrayProp = PropTypes.oneOfType([PropTypes.arrayOf(numberProp), numberProp]);
 
 const fillProps = {
   fill: PropTypes.string,
@@ -139,13 +136,7 @@ const textAnchor = PropTypes.oneOf(['start', 'middle', 'end']);
 
 // none | underline | overline | line-through | blink | inherit
 // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-decoration
-const textDecoration = PropTypes.oneOf([
-  'none',
-  'underline',
-  'overline',
-  'line-through',
-  'blink',
-]);
+const textDecoration = PropTypes.oneOf(['none', 'underline', 'overline', 'line-through', 'blink']);
 
 // normal | <length> | inherit
 // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/letter-spacing

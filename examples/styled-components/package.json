@@ -16,14 +16,14 @@
   "author": "Mathieu Dutour <mathieu@dutour.me>",
   "license": "MIT",
   "devDependencies": {
-    "@skpm/builder": "^0.2.0"
+    "@skpm/builder": "^0.4.0"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-primitives": "^0.4.2",
-    "react-sketchapp": "^1.0.0",
+    "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^15.4.2",
     "styled-components": "^2.1.0"
   }

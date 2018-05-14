@@ -16,11 +16,11 @@
   "license": "MIT",
   "dependencies": {
     "react": "^15.4.2",
-    "react-sketchapp": "^1.0.0",
+    "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^15.4.2",
     "react-with-styles": "^1.4.0"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.2.0"
+    "@skpm/builder": "^0.4.0"
   }
 }

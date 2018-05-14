@@ -10,7 +10,7 @@ describe('<Page />', () => {
           <foo>
             <bar />
           </foo>
-        </Page>
+        </Page>,
       )
       .toJSON();
 
@@ -30,16 +30,8 @@ describe('<Page />', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('defaults to Page', () => {
-      const tree = renderer.create(<Page />).toJSON();
-
-      expect(tree).toMatchSnapshot();
-    });
-
     it('passes otherProps', () => {
-      const tree = renderer
-        .create(<Page propName="something" style={{}} />)
-        .toJSON();
+      const tree = renderer.create(<Page propName="something" style={{}} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });

@@ -1,12 +1,6 @@
 /* @flow */
 import ViewRenderer from './ViewRenderer';
-import type {
-  SketchLayer,
-  ViewStyle,
-  LayoutInfo,
-  TextStyle,
-  TreeNode,
-} from '../types';
+import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle, TreeNode } from '../types';
 import { makeSvgLayer } from '../jsonUtils/hacksForJSONImpl';
 
 const snakeExceptions = [
@@ -37,24 +31,19 @@ function makeSvgString(el) {
   const { type, props, children } = el;
 
   if (props && props.textNodes) {
-    return props.textNodes.reduce(
-      (prev, textNode) => prev + textNode.content,
-      ''
-    );
+    return props.textNodes.reduce((prev, textNode) => prev + textNode.content, '');
   }
 
   if (!type || type.indexOf('svg_') !== 0) {
     throw new Error(
-      `Could not render type '${
-        type
-      }'. Make sure to only have <Svg.*> components inside <Svg>.`
+      `Could not render type '${type}'. Make sure to only have <Svg.*> components inside <Svg>.`,
     );
   }
 
   const cleanedType = type.slice(4);
   const attributes = Object.keys(props || {}).reduce(
     (prev, k) => (props[k] ? `${prev} ${toSnakeCase(k)}="${props[k]}"` : prev),
-    ''
+    '',
   );
 
   let string = `<${cleanedType}${attributes}`;
@@ -63,10 +52,7 @@ function makeSvgString(el) {
     string += '/>\n';
   } else {
     string += '>\n';
-    string += (children || []).reduce(
-      (prev, c) => `${prev}  ${makeSvgString(c)}`,
-      ''
-    );
+    string += (children || []).reduce((prev, c) => `${prev}  ${makeSvgString(c)}`, '');
     string += `</${cleanedType}>\n`;
   }
 
@@ -82,19 +68,13 @@ class SvgRenderer extends ViewRenderer {
     style: ViewStyle,
     textStyle: TextStyle,
     props: any,
-    children: ?Array<TreeNode>
+    children: ?Array<TreeNode>,
   ): Array<SketchLayer> {
-    const layers = super.renderBackingLayers(
-      layout,
-      style,
-      textStyle,
-      props,
-      children
-    );
+    const layers = super.renderBackingLayers(layout, style, textStyle, props);
 
     // add the "xmlns:xlink" namespace to we can use `href`
     // eslint-disable-next-line
-    props["xmlns:xlink"] = "http://www.w3.org/1999/xlink";
+    props['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
 
     const svgString = makeSvgString({
       type: 'svg_svg',

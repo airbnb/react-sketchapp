@@ -9,10 +9,7 @@ const propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.shape({ ...ViewStylePropTypes }),
     PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.shape({ ...ViewStylePropTypes }),
-        PropTypes.number,
-      ])
+      PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
     ),
     PropTypes.number,
   ]),
@@ -20,6 +17,7 @@ const propTypes = {
   children: PropTypes.node,
 };
 
+// $FlowFixMe
 class Artboard extends React.Component {
   static defaultProps = {
     name: 'Artboard',
@@ -27,10 +25,7 @@ class Artboard extends React.Component {
 
   render() {
     return (
-      <artboard
-        style={StyleSheet.flatten(this.props.style)}
-        name={this.props.name}
-      >
+      <artboard style={StyleSheet.flatten(this.props.style)} name={this.props.name}>
         {this.props.children}
       </artboard>
     );

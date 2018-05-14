@@ -12,10 +12,7 @@ module.exports = class Pattern extends React.Component {
     y2: numberProp,
     patternTransform: PropTypes.string,
     patternUnits: PropTypes.oneOf(['userSpaceOnUse', 'objectBoundingBox']),
-    patternContentUnits: PropTypes.oneOf([
-      'userSpaceOnUse',
-      'objectBoundingBox',
-    ]),
+    patternContentUnits: PropTypes.oneOf(['userSpaceOnUse', 'objectBoundingBox']),
     children: PropTypes.node,
   };
 

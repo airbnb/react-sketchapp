@@ -39,7 +39,7 @@ const Ampersand = styled.Text`
 
 const Title = styled.Text`
   font-size: 24px;
-  font-family: "GT America";
+  font-family: 'GT America';
   font-weight: bold;
   padding: 4px;
 `;
@@ -70,9 +70,7 @@ const Artboard = styled.View`
 const Document = ({ colors }) => (
   <Artboard name="Swatches">
     <Title>Max’s Sweaters</Title>
-    {Object.keys(colors).map(color => (
-      <Swatch name={color} hex={colors[color]} key={color} />
-    ))}
+    {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
   </Artboard>
 );
 

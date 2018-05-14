@@ -1,5 +1,5 @@
 /* @flow */
-import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
+import type { SJSymbolMaster } from '@skpm/sketchapp-json-flow-types';
 import { makeSymbolMaster, makeRect } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
@@ -9,12 +9,12 @@ class SymbolMasterRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any
+    props: any,
   ): SJSymbolMaster {
     return makeSymbolMaster(
       makeRect(layout.left, layout.top, layout.width, layout.height),
       props.symbolID,
-      props.name
+      props.name,
     );
   }
 }
