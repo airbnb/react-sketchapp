@@ -2,7 +2,7 @@
 import type { SJFill, SJPath, SJRect, SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import { makeResizeConstraint } from './hacksForJSONImpl';
 import { generateID, makeRect } from './models';
-import type { ResizeConstraints } from '../types';
+import type { ResizeConstraints, SketchShadowGroup } from '../types';
 
 type Radii = Array<number>;
 

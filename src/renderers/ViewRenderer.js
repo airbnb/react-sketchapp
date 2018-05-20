@@ -4,7 +4,13 @@ import type { SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import SketchRenderer from './SketchRenderer';
 import { makeRect, makeColorFill, makeColorFromCSS } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
-import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import type {
+  ViewStyle,
+  LayoutInfo,
+  TextStyle,
+  SketchShadowGroup,
+  ResizeConstraints,
+} from '../types';
 import {
   makeBorderOptions,
   makeShadow,
@@ -24,6 +30,7 @@ const VISIBLE_STYLES = [
   'shadowOffset',
   'shadowOpacity',
   'shadowRadius',
+  'shadowSpread',
   'backgroundColor',
   'borderColor',
   'borderTopColor',
@@ -55,7 +62,7 @@ class ViewRenderer extends SketchRenderer {
     style: ViewStyle,
     textStyle: TextStyle,
     // eslint-disable-next-line no-unused-vars
-    props: any,
+    props: any
   ): Array<SJShapeGroupLayer> {
     const layers = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
@@ -106,7 +113,13 @@ class ViewRenderer extends SketchRenderer {
     const fill = makeColorFill(backgroundColor);
     const content = makeShapeGroup(frame, [shapeLayer], [fill]);
 
-    if (hasAnyDefined(style, SHADOW_STYLES)) {
+    if (props.shadowGroup) {
+      const shadows = [];
+      props.shadowGroup.map(shadowStyle =>
+        shadows.push(makeShadow(shadowStyle))
+      );
+      content.style.shadows = shadows;
+    } else if (hasAnyDefined(style, SHADOW_STYLES)) {
       const shadow = [makeShadow(style)];
       if (style.shadowInner) {
         content.style.innerShadows = shadow;
