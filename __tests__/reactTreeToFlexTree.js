@@ -56,7 +56,7 @@ const treeRootStub = {
 describe('Compute Flex Tree', () => {
   it('correctly creates flex tree', () => {
     const yogaNode = computeYogaTree(treeRootStub, new Context());
-    yogaNode.calculateLayout(yoga.UNDEFINED, yoga.UNDEFINED, yoga.DIRECTION_LTR);
+    yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
     const tree = reactTreeToFlexTree(treeRootStub, yogaNode, new Context());
 
     expect(tree.children).toEqual([
