@@ -31,8 +31,8 @@ const createYogaNodes = (
     const treeNode = createTreeNode(style);
     const { node } = computeYogaNode(treeNode);
     node.calculateLayout(
-      containerWidth || yoga.UNDEFINED,
-      containerHeight || yoga.UNDEFINED,
+      containerWidth || undefined,
+      containerHeight || undefined,
       yoga.DIRECTION_LTR,
     );
     yogaNodes.push(node.getComputedLayout());
