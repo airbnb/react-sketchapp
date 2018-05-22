@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import layerGroup from '../jsonUtils/layerGroup';
 
 import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON, TreeNode } from '../types';

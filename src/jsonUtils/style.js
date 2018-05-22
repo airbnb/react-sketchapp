@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import { BorderPosition } from 'sketch-constants';
 import type { SJBorderOptions, SJShadow, SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import { makeRect, makeColorFromCSS } from '../jsonUtils/models';

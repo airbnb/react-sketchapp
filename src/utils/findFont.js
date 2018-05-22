@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 /* eslint-disable no-bitwise, quote-props */
 import { TextStyle } from '../types';
 

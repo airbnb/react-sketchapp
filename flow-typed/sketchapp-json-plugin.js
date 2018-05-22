@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 declare module 'sketchapp-json-plugin' {
   declare var fromSJSONDictionary: (json: Object) => any

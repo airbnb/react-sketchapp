@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import SketchRenderer from './SketchRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle } from '../types';
 import makeTextLayer from '../jsonUtils/textLayers';

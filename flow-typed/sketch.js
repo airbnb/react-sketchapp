@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 declare var CGAffineTransformConcat: any;
 declare var CGAffineTransformMakeRotation: any;

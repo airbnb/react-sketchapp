@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import { Text, View } from 'react-primitives';
 import { spacing, colors, fontFamily } from '../designSystem';

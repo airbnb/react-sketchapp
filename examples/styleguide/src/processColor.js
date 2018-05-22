@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 /* eslint-disable import/no-extraneous-dependencies */
 import chroma from 'chroma-js';
 

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { SJSymbolMaster } from '@skpm/sketchapp-json-flow-types';
 import { makeSymbolMaster, makeRect } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';

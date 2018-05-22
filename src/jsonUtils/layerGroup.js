@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { makeResizeConstraint } from './hacksForJSONImpl';
 import { generateID, makeRect } from './models';

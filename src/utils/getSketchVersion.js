@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 export default function getSketchVersion(): number {
   if (typeof NSBundle !== 'undefined') {

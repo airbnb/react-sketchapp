@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { TextNodes, Size } from '../types';
 import { createAttributedString } from '../jsonUtils/hacksForJSONImpl';
 

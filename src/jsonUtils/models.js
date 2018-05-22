@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
-/* @flow */
+// @flow
 import type {
   SJColor,
   SJFill,
