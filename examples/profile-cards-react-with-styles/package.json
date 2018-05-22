@@ -15,9 +15,9 @@
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "dependencies": {
-    "react": "^15.4.2",
+    "react": "^16.3.2",
     "react-sketchapp": "^2.0.0",
-    "react-test-renderer": "^15.4.2",
+    "react-test-renderer": "^16.3.2",
     "react-with-styles": "^1.4.0"
   },
   "devDependencies": {

@@ -21,8 +21,8 @@
   "dependencies": {
     "chroma-js": "^1.3.4",
     "glamorous-primitives": "^2.1.0",
-    "react": "^15.6.1",
+    "react": "^16.3.2",
     "react-sketchapp": "^2.0.0",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "^16.3.2"
   }
 }

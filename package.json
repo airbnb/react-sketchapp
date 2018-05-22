@@ -11,7 +11,10 @@
     "Mathieu Dutour <mathieu@dutour.me>",
     "Jarid Margolin <jaridmargolin@gmail.com>"
   ],
-  "pre-commit": ["flow", "lint-staged"],
+  "pre-commit": [
+    "flow",
+    "lint-staged"
+  ],
   "scripts": {
     "build:react": "babel src -d lib --ignore **/__mocks__/**",
     "build:flow": "flow-copy-source -v -i '**/__tests__/**' src lib",
@@ -96,8 +99,8 @@
     "lint-staged": "^7.0.5",
     "pre-commit": "^1.2.2",
     "prettier-eslint-cli": "^4.7.1",
-    "react": "^15.4.1",
-    "react-test-renderer": "^15.4.1",
+    "react": "^16.3.2",
+    "react-test-renderer": "^16.3.2",
     "rimraf": "^2.5.4"
   }
 }
