@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import invariant from 'invariant';
 import { fromSJSONDictionary } from 'sketchapp-json-plugin';
 import type { SJStyle } from '@skpm/sketchapp-json-flow-types';

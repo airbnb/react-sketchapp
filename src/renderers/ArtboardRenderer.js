@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { SJArtboardLayer } from '@skpm/sketchapp-json-flow-types';
 import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';

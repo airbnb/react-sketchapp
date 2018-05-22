@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 import React from 'react';

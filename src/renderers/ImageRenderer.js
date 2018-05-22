@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import { BorderPosition } from 'sketch-constants';
 import { PatternFillType } from '../utils/constants';

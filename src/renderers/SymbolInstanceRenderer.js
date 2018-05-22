@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import SketchRenderer from './SketchRenderer';
 import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, SketchLayer, TextStyle } from '../types';

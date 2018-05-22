@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import renderers from './renderers';
 import type { TreeNode } from './types';
 

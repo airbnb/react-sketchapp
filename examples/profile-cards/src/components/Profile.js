@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import React from 'react';
 import { Image, View, Text, StyleSheet } from 'react-sketchapp';
 import { colors, fonts, spacing } from '../designSystem';

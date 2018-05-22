@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 declare module 'fbjs/lib/invariant' {
   declare var exports: (

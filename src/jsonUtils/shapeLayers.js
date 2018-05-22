@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { SJFill, SJPath, SJRect, SJShapeGroupLayer } from '@skpm/sketchapp-json-flow-types';
 import { makeResizeConstraint } from './hacksForJSONImpl';
 import { generateID, makeRect } from './models';

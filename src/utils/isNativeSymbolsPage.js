@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import type { SketchLayer } from '../types';
 
 // NOTE: Must cast to string as page.name() returns a MSBoxedObject
