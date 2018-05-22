@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-module.exports = class Symbol extends React.Component {
+export default class Symbol extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     viewBox: PropTypes.string,
@@ -14,4 +14,4 @@ module.exports = class Symbol extends React.Component {
 
     return <svg_symbol {...rest}>{children}</svg_symbol>;
   }
-};
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { textProps } from './props';
 
-module.exports = class TSpan extends React.Component {
+export default class TSpan extends React.Component {
   static propTypes = textProps;
 
   static childContextTypes = {
@@ -25,4 +25,4 @@ module.exports = class TSpan extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_tspan {...rest}>{children}</svg_tspan>;
   }
-};
+}

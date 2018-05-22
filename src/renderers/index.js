@@ -2,7 +2,7 @@
 /* eslint-disable global-require */
 // import type SketchRenderer from './SketchRenderer';
 
-const renderers: { [key: string]: any } = {
+export default {
   artboard: require('./ArtboardRenderer'),
   image: require('./ImageRenderer'),
   svg: require('./SvgRenderer'),
@@ -11,5 +11,3 @@ const renderers: { [key: string]: any } = {
   symbolinstance: require('./SymbolInstanceRenderer'),
   symbolmaster: require('./SymbolMasterRenderer'),
 };
-
-module.exports = renderers;

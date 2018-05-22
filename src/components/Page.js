@@ -4,20 +4,20 @@ import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import PageStylePropTypes from './PageStylePropTypes';
 
-const propTypes = {
-  name: PropTypes.string,
-  children: PropTypes.node,
-  style: PropTypes.oneOfType([
-    PropTypes.shape({ ...PageStylePropTypes }),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.shape({ ...PageStylePropTypes }), PropTypes.number]),
-    ),
-    PropTypes.number,
-  ]),
-};
-
 // $FlowFixMe
-class Page extends React.Component {
+export default class Page extends React.Component {
+  static propTypes = {
+    name: PropTypes.string,
+    children: PropTypes.node,
+    style: PropTypes.oneOfType([
+      PropTypes.shape({ ...PageStylePropTypes }),
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape({ ...PageStylePropTypes }), PropTypes.number]),
+      ),
+      PropTypes.number,
+    ]),
+  };
+
   render() {
     const {
       name, children, style, ...otherProps
@@ -32,7 +32,3 @@ class Page extends React.Component {
     );
   }
 }
-
-Page.propTypes = propTypes;
-
-module.exports = Page;

@@ -6,26 +6,6 @@ import TextStylePropTypes from './TextStylePropTypes';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 
-const propTypes = {
-  // TODO(lmr): do some nice warning stuff like RN does
-  style: PropTypes.oneOfType([
-    PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-        PropTypes.number,
-      ]),
-    ),
-    PropTypes.number,
-  ]),
-
-  name: PropTypes.string,
-  resizingConstraint: PropTypes.shape({
-    ...ResizingConstraintPropTypes,
-  }),
-  children: PropTypes.node,
-};
-
 /**
  * @example
  * <Text name='Foo' style={style}>
@@ -33,7 +13,27 @@ const propTypes = {
  * </Text>
  */
 // $FlowFixMe
-class Text extends React.Component {
+export default class Text extends React.Component {
+  static propTypes = {
+    // TODO(lmr): do some nice warning stuff like RN does
+    style: PropTypes.oneOfType([
+      PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
+          PropTypes.number,
+        ]),
+      ),
+      PropTypes.number,
+    ]),
+
+    name: PropTypes.string,
+    resizingConstraint: PropTypes.shape({
+      ...ResizingConstraintPropTypes,
+    }),
+    children: PropTypes.node,
+  };
+
   render() {
     return (
       <text
@@ -46,7 +46,3 @@ class Text extends React.Component {
     );
   }
 }
-
-Text.propTypes = propTypes;
-
-module.exports = Text;

@@ -5,7 +5,7 @@ import { numberProp } from './props';
 
 // eslint is broken doesn't like when we just check the props without "using" them
 /* eslint-disable react/no-unused-prop-types */
-module.exports = class SVGImage extends React.Component {
+export default class SVGImage extends React.Component {
   static propTypes = {
     x: numberProp,
     y: numberProp,
@@ -28,4 +28,4 @@ module.exports = class SVGImage extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_image {...rest}>{children}</svg_image>;
   }
-};
+}

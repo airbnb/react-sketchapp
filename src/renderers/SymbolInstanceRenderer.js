@@ -92,7 +92,7 @@ const extractOverrides = (layers: Array<SketchLayer> = []): Array<Override> => {
   return removeDuplicateOverrides(overrides);
 };
 
-class SymbolInstanceRenderer extends SketchRenderer {
+export default class SymbolInstanceRenderer extends SketchRenderer {
   renderGroupLayer(layout: LayoutInfo, style: ViewStyle, textStyle: TextStyle, props: any): any {
     const masterTree = getSymbolMasterById(props.symbolID);
 
@@ -187,5 +187,3 @@ class SymbolInstanceRenderer extends SketchRenderer {
     return symbolInstance;
   }
 }
-
-module.exports = SymbolInstanceRenderer;

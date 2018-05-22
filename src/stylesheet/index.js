@@ -102,7 +102,7 @@ const flattenStyle = (input) => {
 /**
  * A StyleSheet is an abstraction similar to CSS StyleSheets. WIP.
  */
-const StyleSheet = {
+export default {
   hairlineWidth: 1, // TODO(lmr): should this be something different?
   absoluteFill: registerStyle({
     position: 'absolute',
@@ -115,5 +115,3 @@ const StyleSheet = {
   flatten: flattenStyle,
   resolve: style => ({ style: flattenStyle(style) }),
 };
-
-module.exports = StyleSheet;

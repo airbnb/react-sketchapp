@@ -87,7 +87,7 @@ const sortProps = propsArray =>
 /**
  * Expand the shorthand properties to isolate every declaration from the others.
  */
-const expandStyle = (style) => {
+export default (style) => {
   if (!style) return style;
   /* eslint no-param-reassign:0 */
   const propsArray = Object.keys(style);
@@ -113,5 +113,3 @@ const expandStyle = (style) => {
   }
   return resolvedStyle;
 };
-
-module.exports = expandStyle;

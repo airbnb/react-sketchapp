@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { pathProps, numberProp } from './props';
 
 const idExpReg = /^#(.+)$/;
-module.exports = class Use extends React.Component {
+export default class Use extends React.Component {
   static propTypes = {
     href: PropTypes.string.isRequired,
     width: numberProp, // Just for reusing `Symbol`
@@ -24,4 +24,4 @@ module.exports = class Use extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_use {...rest}>{children}</svg_use>;
   }
-};
+}

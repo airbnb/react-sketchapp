@@ -4,7 +4,7 @@ import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 
-class ArtboardRenderer extends SketchRenderer {
+export default class ArtboardRenderer extends SketchRenderer {
   renderGroupLayer(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -30,5 +30,3 @@ class ArtboardRenderer extends SketchRenderer {
     };
   }
 }
-
-module.exports = ArtboardRenderer;

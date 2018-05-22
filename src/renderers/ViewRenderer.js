@@ -46,7 +46,7 @@ const OVERFLOW_STYLES = ['overflow', 'overflowX', 'overflowY'];
 
 const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
 
-class ViewRenderer extends SketchRenderer {
+export default class ViewRenderer extends SketchRenderer {
   getDefaultGroupName() {
     return 'View';
   }
@@ -230,5 +230,3 @@ class ViewRenderer extends SketchRenderer {
     return layers;
   }
 }
-
-module.exports = ViewRenderer;

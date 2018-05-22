@@ -25,7 +25,8 @@
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build",
     "docs:watch": "npm run docs:prepare && gitbook serve",
-    "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch git@github.com:airbnb/react-sketchapp.git gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push git@github.com:airbnb/react-sketchapp.git gh-pages --force",
+    "docs:publish":
+      "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch git@github.com:airbnb/react-sketchapp.git gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push git@github.com:airbnb/react-sketchapp.git gh-pages --force",
     "flow": "flow",
     "lint": "eslint .",
     "lint-staged": "lint-staged",
@@ -50,13 +51,7 @@
     "react": "*",
     "react-test-renderer": "*"
   },
-  "keywords": [
-    "sketch",
-    "sketchapp",
-    "react",
-    "reactjs",
-    "renderer"
-  ],
+  "keywords": ["sketch", "sketchapp", "react", "reactjs", "renderer"],
   "repository": {
     "type": "git",
     "url": "https://github.com/airbnb/react-sketchapp"
@@ -76,6 +71,7 @@
     "babel-core": "^6.0.0",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^22.4.3",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",

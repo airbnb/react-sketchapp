@@ -4,7 +4,7 @@ import { makeSymbolMaster, makeRect } from '../jsonUtils/models';
 import SketchRenderer from './SketchRenderer';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 
-class SymbolMasterRenderer extends SketchRenderer {
+export default class SymbolMasterRenderer extends SketchRenderer {
   renderGroupLayer(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -18,5 +18,3 @@ class SymbolMasterRenderer extends SketchRenderer {
     );
   }
 }
-
-module.exports = SymbolMasterRenderer;
