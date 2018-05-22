@@ -1,8 +1,11 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import { pathProps, numberProp } from './props';
 
 const idExpReg = /^#(.+)$/;
+
+// $FlowFixMe
 export default class Use extends React.Component {
   static propTypes = {
     href: PropTypes.string.isRequired,

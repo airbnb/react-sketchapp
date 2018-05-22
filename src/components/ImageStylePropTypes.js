@@ -1,3 +1,4 @@
+// @flow
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizeModePropTypes from './ResizeModePropTypes';
 
