@@ -1,8 +1,10 @@
+// @flow
 import React from 'react';
 import { textPathProps } from './props';
 
 const idExpReg = /^#(.+)$/;
 
+// $FlowFixMe
 export default class TextPath extends React.Component {
   static propTypes = textPathProps;
 

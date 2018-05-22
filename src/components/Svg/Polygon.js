@@ -1,7 +1,9 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import { pathProps } from './props';
 
+// $FlowFixMe
 export default class Polygon extends React.Component {
   static displayName = 'Polygon';
   static propTypes = {

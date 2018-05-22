@@ -1,7 +1,9 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import { textProps } from './props';
 
+// $FlowFixMe
 export default class Text extends React.Component {
   static propTypes = textProps;
 

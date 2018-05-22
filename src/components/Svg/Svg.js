@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import View from '../View';
@@ -22,6 +23,7 @@ import TextPath from './TextPath';
 import TSpan from './TSpan';
 import Use from './Use';
 
+// $FlowFixMe
 export default class Svg extends React.Component {
   static displayName = 'Svg';
   static propTypes = {
@@ -38,7 +40,6 @@ export default class Svg extends React.Component {
     preserveAspectRatio: 'xMidYMid meet',
   };
 
-  static Svg = Svg;
   static Circle = Circle;
   static ClipPath = ClipPath;
   static Defs = Defs;

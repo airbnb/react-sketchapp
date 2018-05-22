@@ -1,7 +1,9 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import { pathProps } from './props';
 
+// $FlowFixMe
 export default class Path extends React.Component {
   static propTypes = {
     ...pathProps,

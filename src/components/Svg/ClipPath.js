@@ -1,6 +1,8 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// $FlowFixMe
 export default class ClipPath extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,

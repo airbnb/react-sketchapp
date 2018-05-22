@@ -1,10 +1,12 @@
+// eslint is broken doesn't like when we just check the props without "using" them
+/* eslint-disable react/no-unused-prop-types */
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from '../Image';
 import { numberProp } from './props';
 
-// eslint is broken doesn't like when we just check the props without "using" them
-/* eslint-disable react/no-unused-prop-types */
+// $FlowFixMe
 export default class SVGImage extends React.Component {
   static propTypes = {
     x: numberProp,

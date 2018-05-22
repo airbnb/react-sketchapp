@@ -1,6 +1,8 @@
+// @flow
 import React from 'react';
 import { pathProps, numberProp } from './props';
 
+// $FlowFixMe
 export default class Line extends React.Component {
   static propTypes = {
     ...pathProps,
