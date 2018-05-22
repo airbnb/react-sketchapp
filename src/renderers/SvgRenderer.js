@@ -59,7 +59,7 @@ function makeSvgString(el) {
   return string;
 }
 
-class SvgRenderer extends ViewRenderer {
+export default class SvgRenderer extends ViewRenderer {
   getDefaultGroupName(props: any) {
     return props.name || 'Svg';
   }
@@ -89,5 +89,3 @@ class SvgRenderer extends ViewRenderer {
     return layers;
   }
 }
-
-module.exports = SvgRenderer;

@@ -5,7 +5,7 @@ import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON, TreeNode } from '../
 
 const DEFAULT_OPACITY = 1.0;
 
-class SketchRenderer {
+export default class SketchRenderer {
   getDefaultGroupName(
     // eslint-disable-next-line no-unused-vars
     props: any,
@@ -51,5 +51,3 @@ class SketchRenderer {
     return [];
   }
 }
-
-module.exports = SketchRenderer;

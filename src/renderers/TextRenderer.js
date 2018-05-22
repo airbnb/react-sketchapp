@@ -5,7 +5,7 @@ import makeTextLayer from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
 import TextStyles from '../sharedStyles/TextStyles';
 
-class TextRenderer extends SketchRenderer {
+export default class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: any) {
     return props.name || 'Text';
   }
@@ -43,5 +43,3 @@ class TextRenderer extends SketchRenderer {
     return [layer];
   }
 }
-
-module.exports = TextRenderer;

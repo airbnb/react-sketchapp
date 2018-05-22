@@ -3,7 +3,7 @@ import { textPathProps } from './props';
 
 const idExpReg = /^#(.+)$/;
 
-module.exports = class TextPath extends React.Component {
+export default class TextPath extends React.Component {
   static propTypes = textPathProps;
 
   render() {
@@ -19,4 +19,4 @@ module.exports = class TextPath extends React.Component {
 
     return <svg_textPath {...rest}>{children}</svg_textPath>;
   }
-};
+}

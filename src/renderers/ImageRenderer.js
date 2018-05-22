@@ -36,7 +36,7 @@ function extractURLFromSource(source) {
   return source.uri;
 }
 
-class ImageRenderer extends SketchRenderer {
+export default class ImageRenderer extends SketchRenderer {
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -195,5 +195,3 @@ class ImageRenderer extends SketchRenderer {
     return layers;
   }
 }
-
-module.exports = ImageRenderer;

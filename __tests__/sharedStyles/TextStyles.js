@@ -11,9 +11,9 @@ beforeEach(() => {
     toSJSON: jest.fn(),
   }));
 
-  TextStyles = require('../../src/sharedStyles/TextStyles').default;
+  TextStyles = require('../../src/sharedStyles/TextStyles');
 
-  sharedTextStyles = require('../../src/wrappers/sharedTextStyles').default;
+  sharedTextStyles = require('../../src/wrappers/sharedTextStyles');
 
   jest.mock('../../src/wrappers/sharedTextStyles');
 

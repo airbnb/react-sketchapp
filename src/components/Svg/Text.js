@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { textProps } from './props';
 
-module.exports = class Text extends React.Component {
+export default class Text extends React.Component {
   static propTypes = textProps;
 
   static childContextTypes = {
@@ -25,4 +25,4 @@ module.exports = class Text extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_text {...rest}>{children}</svg_text>;
   }
-};
+}

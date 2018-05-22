@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-module.exports = class Defs extends React.Component {
+export default class Defs extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
   };
@@ -9,4 +9,4 @@ module.exports = class Defs extends React.Component {
   render() {
     return <svg_defs>{this.props.children}</svg_defs>;
   }
-};
+}

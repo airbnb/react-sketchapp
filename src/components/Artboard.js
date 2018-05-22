@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 
-const propTypes = {
-  // TODO(lmr): do some nice warning stuff like RN does
-  style: PropTypes.oneOfType([
-    PropTypes.shape({ ...ViewStylePropTypes }),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
-    ),
-    PropTypes.number,
-  ]),
-  name: PropTypes.string,
-  children: PropTypes.node,
-};
-
 // $FlowFixMe
-class Artboard extends React.Component {
+export default class Artboard extends React.Component {
+  static propTypes = {
+    // TODO(lmr): do some nice warning stuff like RN does
+    style: PropTypes.oneOfType([
+      PropTypes.shape({ ...ViewStylePropTypes }),
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
+      ),
+      PropTypes.number,
+    ]),
+    name: PropTypes.string,
+    children: PropTypes.node,
+  };
+
   static defaultProps = {
     name: 'Artboard',
   };
@@ -31,7 +31,3 @@ class Artboard extends React.Component {
     );
   }
 }
-
-Artboard.propTypes = propTypes;
-
-module.exports = Artboard;

@@ -42,11 +42,9 @@ Document.propTypes = {
   steps: PropTypes.number,
 };
 
-const onRun = () => {
+export default () => {
   render(
     <Document colors={['#01FFD8', '#C137E3', '#8702ED']} steps={50} />,
     context.document.currentPage(),
   );
 };
-
-module.exports = onRun;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { pathProps, numberProp } from './props';
 
-module.exports = class Line extends React.Component {
+export default class Line extends React.Component {
   static propTypes = {
     ...pathProps,
     x1: numberProp.isRequired,
@@ -21,4 +21,4 @@ module.exports = class Line extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_line {...rest}>{children}</svg_line>;
   }
-};
+}
