@@ -19,9 +19,9 @@
     "chroma-js": "^1.2.2",
     "prop-types": "^15.5.8",
     "ramda": "^0.23.0",
-    "react": "^15.4.2",
+    "react": "^16.3.2",
     "react-sketchapp": "^2.0.0",
-    "react-test-renderer": "^15.4.1",
+    "react-test-renderer": "^16.3.2",
     "webpack-shell-plugin": "^0.5.0"
   },
   "devDependencies": {
