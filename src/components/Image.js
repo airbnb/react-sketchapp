@@ -24,24 +24,6 @@ export const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.string,
 ]);
 
-const propTypes = {
-  name: PropTypes.string,
-  children: PropTypes.node,
-  defaultSource: ImageSourcePropType,
-  resizeMode: ResizeModePropTypes,
-  source: ImageSourcePropType,
-  style: PropTypes.oneOfType([
-    PropTypes.shape(ImageStylePropTypes),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
-    ),
-    PropTypes.number,
-  ]),
-  resizingConstraint: PropTypes.shape({
-    ...ResizingConstraintPropTypes,
-  }),
-};
-
 const ResizeModes = {
   contain: 'Fit',
   cover: 'Fill',
@@ -52,7 +34,25 @@ const ResizeModes = {
 };
 
 // $FlowFixMe
-class Image extends React.Component {
+export default class Image extends React.Component {
+  static propTypes = {
+    name: PropTypes.string,
+    children: PropTypes.node,
+    defaultSource: ImageSourcePropType,
+    resizeMode: ResizeModePropTypes,
+    source: ImageSourcePropType,
+    style: PropTypes.oneOfType([
+      PropTypes.shape(ImageStylePropTypes),
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
+      ),
+      PropTypes.number,
+    ]),
+    resizingConstraint: PropTypes.shape({
+      ...ResizingConstraintPropTypes,
+    }),
+  };
+
   static defaultProps = {
     name: 'Image',
   };
@@ -86,7 +86,3 @@ class Image extends React.Component {
     );
   }
 }
-
-Image.propTypes = propTypes;
-
-export default Image;

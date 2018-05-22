@@ -40,16 +40,16 @@ const styles = {
   },
 };
 
-const propTypes = {
-  error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string]).isRequired,
-  // filename: PropTypes.string,
-  // editorScheme: PropTypes.string,
-  // useLines: PropTypes.bool,
-  // useColumns: PropTypes.bool,
-};
-
 // $FlowFixMe
-class RedBox extends React.Component {
+export default class RedBox extends React.Component {
+  static propTypes = {
+    error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string]).isRequired,
+    // filename: PropTypes.string,
+    // editorScheme: PropTypes.string,
+    // useLines: PropTypes.bool,
+    // useColumns: PropTypes.bool,
+  };
+
   static defaultProps = {
     useLines: true,
     useColumns: true,
@@ -111,7 +111,3 @@ class RedBox extends React.Component {
     );
   }
 }
-
-RedBox.propTypes = propTypes;
-
-export default RedBox;
