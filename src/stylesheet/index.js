@@ -1,4 +1,16 @@
+// @flow
 import expandStyle from './expandStyle';
+import type {
+  RawStyle,
+  RawStyles,
+  Rules,
+  Style,
+  StyleId,
+  StyleSheetInstance,
+  Transform,
+  UserStyle,
+  UserStyles,
+} from './types';
 
 const { hasOwnProperty } = Object.prototype;
 
@@ -7,7 +19,7 @@ let _id = 0;
 const guid = () => _id++;
 const declarationRegistry = {};
 
-const extractRules = (style) => {
+const extractRules = (style: RawStyle): Rules => {
   const declarations = {};
 
   Object.keys(style).forEach((key) => {
@@ -25,7 +37,7 @@ const extractRules = (style) => {
   };
 };
 
-const registerStyle = (style) => {
+const registerStyle = (style: RawStyle): StyleId => {
   // TODO(lmr):
   // do "proptype"-like validation here in non-production build
   const id = guid();
@@ -34,9 +46,9 @@ const registerStyle = (style) => {
   return id;
 };
 
-const getStyle = id => declarationRegistry[id];
+const getStyle = (id: StyleId): Style => declarationRegistry[id];
 
-const create = (styles) => {
+const create = (styles: RawStyles): StyleSheetInstance => {
   const result = {};
   Object.keys(styles).forEach((key) => {
     result[key] = registerStyle(styles[key]);
@@ -44,7 +56,7 @@ const create = (styles) => {
   return result;
 };
 
-const mergeTransforms = (a, b) => {
+const mergeTransforms = (a: Transform, b: Transform): Transform => {
   if (!a || a.length === 0) return b; // in this case, a has nothing to contribute.
   const result = [];
   const transformsInA = a.reduce((hash, t) => {
@@ -68,7 +80,7 @@ const mergeTransforms = (a, b) => {
 // merge two style hashes together. Sort of like `Object.assign`, but is aware of `transform` as a
 // special case.
 // NOTE(lmr): mutates the first argument!
-const mergeStyle = (a, b) => {
+const mergeStyle = (a: Style, b: Style): Style => {
   let key;
   // eslint-disable-next-line no-restricted-syntax
   for (key in b) {
@@ -87,9 +99,9 @@ const mergeStyle = (a, b) => {
   return a;
 };
 
-const flattenStyle = (input) => {
+const flattenStyle = (input?: UserStyles): ?Style => {
   if (Array.isArray(input)) {
-    return input.reduce((acc, val) => mergeStyle(acc, flattenStyle(val)), {});
+    return input.reduce((acc, val) => mergeStyle(acc, flattenStyle(val) || {}), {});
   } else if (typeof input === 'number') {
     return getStyle(input);
   } else if (!input) {
@@ -113,5 +125,5 @@ export default {
   }),
   create,
   flatten: flattenStyle,
-  resolve: style => ({ style: flattenStyle(style) }),
+  resolve: (style: UserStyle) => ({ style: flattenStyle(style) }),
 };

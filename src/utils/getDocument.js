@@ -1,4 +1,5 @@
-export const getDocumentFromContext = ctx =>
+// @flow
+export const getDocumentFromContext = (ctx: context) =>
   ctx.document ||
   ctx.actionContext.document ||
   NSDocumentController.sharedDocumentController().currentDocument();

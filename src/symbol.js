@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import type { SJSymbolMaster } from '@skpm/sketchapp-json-flow-types';
 import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
@@ -14,11 +15,12 @@ import { getDocumentFromContext } from './utils/getDocument';
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
 
-const displayName = (Component: React$Component): string =>
+const displayName = (Component: React.ComponentType<any>): string =>
   Component.displayName || Component.name || `UnknownSymbol${nextId()}`;
 
-let symbolsRegistry = null;
-let existingSymbols = null;
+let hasInitialized = false;
+const symbolsRegistry = {};
+let existingSymbols = [];
 const layers = {};
 
 const msListToArray = (pageList) => {
@@ -37,7 +39,9 @@ export const getSymbolsPage = (document: any) => {
 };
 
 const getExistingSymbols = (document: any) => {
-  if (existingSymbols === null) {
+  if (!hasInitialized) {
+    hasInitialized = true;
+
     let symbolsPage = getSymbolsPage(document);
     if (!symbolsPage) {
       symbolsPage = document.addBlankPage();
@@ -50,7 +54,6 @@ const getExistingSymbols = (document: any) => {
       return symbolJson;
     });
 
-    symbolsRegistry = {};
     existingSymbols.forEach((symbolMaster) => {
       if (symbolMaster._class !== 'symbolMaster') return;
       if (symbolMaster.name in symbolsRegistry) return;
@@ -77,8 +80,8 @@ export const injectSymbols = (document: any) => {
   }
   const currentPage = document.currentPage();
 
-  if (symbolsRegistry !== null) {
-    // if symbolsRegistry is not an object then makeSymbol was not called
+  // if hasInitialized is false then makeSymbol has not yet been called
+  if (hasInitialized) {
     const symbolsPage = document.documentData().symbolsPageOrCreateIfNecessary();
 
     let left = 0;
@@ -101,8 +104,8 @@ export const injectSymbols = (document: any) => {
   }
 };
 
-export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React$Component<any> =>
-  class extends React.Component {
+export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React.ComponentType<any> =>
+  class extends React.Component<any> {
     static symbolID = symbolMaster.symbolID;
     static masterName = symbolMaster.name;
     static displayName = `SymbolInstance(${symbolMaster.name})`;
@@ -128,11 +131,11 @@ export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React$C
   };
 
 export const makeSymbol = (
-  Component: React$Component,
+  Component: React.ComponentType<any>,
   name: string,
   document?: any,
-): React$Component => {
-  if (symbolsRegistry === null) {
+): React.ComponentType<any> => {
+  if (!hasInitialized) {
     getExistingSymbols(document || getDocumentFromContext(context));
   }
 
@@ -162,8 +165,8 @@ export const getSymbolMasterByName = (name: string): SJSymbolMaster => {
   return symbolsRegistry[symbolID];
 };
 
-export const getSymbolMasterById = (symbolID: string): SJSymbolMaster => {
-  const symbolMaster = symbolsRegistry[symbolID];
+export const getSymbolMasterById = (symbolID: ?string): SJSymbolMaster => {
+  const symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;
   if (typeof symbolMaster === 'undefined') {
     throw new Error('##FIXME## NO MASTER WITH THAT SYMBOL ID');
   }
@@ -171,5 +174,5 @@ export const getSymbolMasterById = (symbolID: string): SJSymbolMaster => {
   return symbolMaster;
 };
 
-export const getSymbolComponentByName = (masterName: string): React$Component =>
+export const getSymbolComponentByName = (masterName: string): React.ComponentType<any> =>
   createSymbolInstanceClass(getSymbolMasterByName(masterName));

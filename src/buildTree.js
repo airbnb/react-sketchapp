@@ -1,3 +1,4 @@
+// @flow
 import TestRenderer from 'react-test-renderer';
 import * as yoga from 'yoga-layout';
 import Context from './utils/Context';
@@ -9,11 +10,7 @@ import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
 import zIndex from './utils/zIndex';
 
-export const reactTreeToFlexTree = (
-  node: TreeNode,
-  yogaNode: yoga.NodeInstance,
-  context: Context,
-) => {
+export const reactTreeToFlexTree = (node: TreeNode, yogaNode: yoga.Yoga$Node, context: Context) => {
   let textNodes;
   let textStyle = context.getInheritedStyles();
   const style = node.props && node.props.style ? node.props.style : {};

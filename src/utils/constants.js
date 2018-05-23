@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+// @flow
 
 // out of date in sketch-constants
 // https://github.com/turbobabr/sketch-constants/pull/1

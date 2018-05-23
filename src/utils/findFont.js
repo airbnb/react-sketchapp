@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-bitwise, quote-props */
-import { TextStyle } from '../types';
+import type { TextStyle } from '../types';
 
 import hashStyle from './hashStyle';
 import { APPLE_BROKEN_SYSTEM_FONT } from './constants';

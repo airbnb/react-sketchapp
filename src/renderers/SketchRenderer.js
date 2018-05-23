@@ -1,7 +1,6 @@
 // @flow
 import layerGroup from '../jsonUtils/layerGroup';
-
-import type { LayoutInfo, ViewStyle, TextStyle, SketchJSON, TreeNode } from '../types';
+import type { LayoutInfo, ViewStyle, TextStyle, TreeNode } from '../types';
 
 const DEFAULT_OPACITY = 1.0;
 
@@ -12,12 +11,7 @@ export default class SketchRenderer {
   ) {
     return 'Group';
   }
-  renderGroupLayer(
-    layout: LayoutInfo,
-    style: ViewStyle,
-    textStyle: TextStyle,
-    props: any,
-  ): SketchJSON {
+  renderGroupLayer(layout: LayoutInfo, style: ViewStyle, textStyle: TextStyle, props: any): any {
     // Default SketchRenderer just renders an empty group
 
     // TODO(lmr): applying transform to the group would be ideal, but not sure if it's possible
@@ -47,7 +41,7 @@ export default class SketchRenderer {
     props: any,
     // eslint-disable-next-line no-unused-vars
     children: ?Array<TreeNode>,
-  ): Array<SketchJSON> {
+  ): Array<any> {
     return [];
   }
 }

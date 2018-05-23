@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import type { SJLayer } from '@skpm/sketchapp-json-flow-types';
 import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
@@ -17,7 +18,7 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
   return flexToSketchJSON(tree);
 };
 
-export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
+export const renderLayers = (layers: Array<any>, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {
     throw new Error(`
      React SketchApp cannot render into this layer. You may be trying to render into a layer
@@ -44,13 +45,15 @@ const renderContents = (tree: TreeNode, container: SketchLayer): SketchLayer => 
 };
 
 const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
+  const children = tree.children || [];
+
   // assume if name is set on this nested page, the intent is to overwrite
   // the name of the page it is getting rendered into
   if (tree.props.name) {
     page.setName(tree.props.name);
   }
 
-  return tree.children.map(child => renderContents(child, page));
+  return children.map(child => renderContents(child, page));
 };
 
 const renderDocument = (tree: TreeNode, doc: SketchDocument): Array<SketchLayer> => {
@@ -60,8 +63,9 @@ const renderDocument = (tree: TreeNode, doc: SketchDocument): Array<SketchLayer>
 
   const initialPage = doc.currentPage();
   const shouldRenderInitialPage = !isNativeSymbolsPage(initialPage);
+  const children = tree.children || [];
 
-  return tree.children.map((child, i) => {
+  return children.map((child, i) => {
     if (child.type !== 'page') {
       throw new Error('Document children must be of type Page');
     }

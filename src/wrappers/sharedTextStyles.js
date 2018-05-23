@@ -30,12 +30,13 @@ class TextStyles {
   }
 
   addStyle(name: string, style: SJStyle) {
-    invariant(this._context, 'Please provide a context');
+    const { _context } = this;
+    invariant(_context, 'Please provide a context');
 
     const textStyle = fromSJSONDictionary(style);
 
     // Flow doesn't pick up invariant truthies
-    const context: SketchContext = this._context;
+    const context: SketchContext = _context;
 
     const container = context.document.documentData().layerTextStyles();
 
