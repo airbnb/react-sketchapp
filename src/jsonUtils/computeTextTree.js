@@ -27,10 +27,12 @@ const walkTextTree = (textTree: TreeNode, context: Context, textNodes: Array<Obj
 };
 
 const computeTextTree = (node: TreeNode, context: Context, textNodes: Array<Object> = []) => {
-  if (node.children) {
+  const { children } = node;
+
+  if (children) {
     const childContext = context.forChildren();
-    for (let index = 0; index < node.children.length; index += 1) {
-      const textNode = node.children[index];
+    for (let index = 0; index < children.length; index += 1) {
+      const textNode = children[index];
       if (typeof textNode === 'string') {
         textNodes.push({
           content: textNode,

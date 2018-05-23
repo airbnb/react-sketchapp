@@ -1,3 +1,3 @@
 // @flow
 
-export default (value: any) => value === null || value === undefined;
+export default (value: any): boolean %checks => value === null || value === undefined;

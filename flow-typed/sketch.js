@@ -6,7 +6,7 @@ declare var CGAffineTransformMakeScale: any;
 declare var CGAffineTransformMakeTranslation: any;
 declare var CGSizeMake: any;
 declare var COSAlertWindow: any;
-declare var MSArtboardGroup: any
+declare var MSArtboardGroup: any;
 declare var MSAttributedString: any;
 declare var MSColor: any;
 declare var MSImageData: any;
@@ -25,6 +25,7 @@ declare var NSColor: any;
 declare var NSData: any;
 declare var NSDataBase64EncodingEndLineWithCarriageReturn: any;
 declare var NSDate: any;
+declare var NSDocumentController: any;
 declare var NSFontCondensedTrait: any;
 declare var NSFontItalicTrait: any;
 declare var NSFontManager: any;

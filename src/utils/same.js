@@ -1,3 +1,4 @@
-const same = (a, b, c, d) => a === b && b === c && c === d;
+// @flow
+const same = (a: mixed, b: mixed, c: mixed, d: mixed): boolean => a === b && b === c && c === d;
 
 export default same;

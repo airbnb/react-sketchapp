@@ -25,7 +25,8 @@ const flexToSketchJSON = (node: TreeNode) => {
   const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, children);
 
   // stopping the walk down the tree if we have an svg
-  const sublayers = type !== 'svg' ? children.map(child => flexToSketchJSON(child)) : [];
+  const sublayers =
+    children && type !== 'svg' ? children.map(child => flexToSketchJSON(child)) : [];
 
   // Filter out anything null, undefined
   const layers = [...backingLayers, ...sublayers].filter(l => l);

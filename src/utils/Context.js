@@ -1,10 +1,16 @@
+// @flow
+type Styles = Object;
+
 class Context {
-  constructor(styles = {}) {
+  styles: Styles;
+  staged: Array<Styles>;
+
+  constructor(styles: Styles = {}) {
     this.styles = styles;
     this.staged = [];
   }
 
-  addInheritableStyles(styles) {
+  addInheritableStyles(styles: Styles) {
     this.staged.push(styles);
   }
 

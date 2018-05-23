@@ -1,4 +1,7 @@
 /* eslint max-len:0 no-nested-ternary:0 */
+// @flow
+import type { RawStyle, Style } from './types';
+
 const { hasOwnProperty } = Object.prototype;
 
 const styleShortHands = {
@@ -87,7 +90,7 @@ const sortProps = propsArray =>
 /**
  * Expand the shorthand properties to isolate every declaration from the others.
  */
-export default (style) => {
+export default (style: RawStyle): Style => {
   if (!style) return style;
   /* eslint no-param-reassign:0 */
   const propsArray = Object.keys(style);

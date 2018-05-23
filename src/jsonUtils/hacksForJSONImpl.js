@@ -207,13 +207,14 @@ export function makeResizeConstraint(resizingConstraint: ?ResizeConstraints): nu
 // This shouldn't need to call into Sketch, but it does currently, which is bad for perf :(
 function createStringAttributes(textStyles: TextStyle): Object {
   const font = findFont(textStyles);
+  const { textDecoration } = textStyles;
 
   const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
-    NSUnderline: TEXT_DECORATION_UNDERLINE[textStyles.textDecoration] || 0,
-    NSStrikethrough: TEXT_DECORATION_LINETHROUGH[textStyles.textDecoration] || 0,
+    NSUnderline: textDecoration ? TEXT_DECORATION_UNDERLINE[textDecoration] : 0,
+    NSStrikethrough: textDecoration ? TEXT_DECORATION_LINETHROUGH[textDecoration] : 0,
   };
 
   const color = makeColorFromCSS(textStyles.color || 'black');
