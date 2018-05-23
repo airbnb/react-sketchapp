@@ -1,6 +1,6 @@
 # Using `skpm` as a build system
 
-Sketch is allow arbitrary plugins written in [CocoaScript](http://developer.sketchapp.com/guides/cocoascript) to run. [`skpm`](https://github.com/skpm/skpm) is a utility to create, build and manage Sketch plugins. It takes care of transforming your JavaScript into CocoaScript and make sure the context it is running in is as close as possible as what you are used to when writing JavaScript.
+Sketch allows arbitrary plugins written in [CocoaScript](http://developer.sketchapp.com/guides/cocoascript) to run. [`skpm`](https://github.com/skpm/skpm) is a utility to create, build and manage Sketch plugins. It takes care of transforming your JavaScript into CocoaScript and makes sure the context it is running in is as close as possible to what you are used to when writing JavaScript.
 
 ## Installation
 
