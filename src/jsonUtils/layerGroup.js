@@ -1,5 +1,5 @@
 // @flow
-import type { SJGroupLayer } from '@skpm/sketchapp-json-flow-types';
+import type { SJGroupLayer } from 'sketchapp-json-flow-types';
 import { makeResizeConstraint } from './hacksForJSONImpl';
 import { generateID, makeRect } from './models';
 import type { ResizeConstraints } from '../types';
