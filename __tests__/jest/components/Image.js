@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Image from '../../src/components/Image';
-import StyleSheet from '../../src/stylesheet';
+import Image from '../../../src/components/Image';
+import StyleSheet from '../../../src/stylesheet';
 
 describe('<Image />', () => {
   it('renders children', () => {

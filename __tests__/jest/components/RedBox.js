@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import RedBox from '../../src/components/RedBox';
+import RedBox from '../../../src/components/RedBox';
 
 describe('<RedBox />', () => {
   it('renders simple errors', () => {

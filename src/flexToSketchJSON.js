@@ -20,7 +20,7 @@ const flexToSketchJSON = (node: TreeNode) => {
     throw new Error(`Could not find renderer for type '${type}'. ${additionalNotes}`);
   }
 
-  const renderer = new Renderer();
+  const renderer = new Renderer.default();
   const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props);
   const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, children);
 

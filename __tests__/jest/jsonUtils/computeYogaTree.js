@@ -1,6 +1,6 @@
 import * as yoga from 'yoga-layout';
-import computeYogaTree from '../../src/jsonUtils/computeYogaTree';
-import Context from '../../src/utils/Context';
+import computeYogaTree from '../../../src/jsonUtils/computeYogaTree';
+import Context from '../../../src/utils/Context';
 
 const treeRootStub = {
   type: 'artboard',

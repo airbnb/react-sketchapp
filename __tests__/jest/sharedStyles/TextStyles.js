@@ -11,13 +11,13 @@ beforeEach(() => {
     toSJSON: jest.fn(),
   }));
 
-  TextStyles = require('../../src/sharedStyles/TextStyles');
+  TextStyles = require('../../../src/sharedStyles/TextStyles');
 
-  sharedTextStyles = require('../../src/wrappers/sharedTextStyles');
+  sharedTextStyles = require('../../../src/wrappers/sharedTextStyles');
 
-  jest.mock('../../src/wrappers/sharedTextStyles');
+  jest.mock('../../../src/wrappers/sharedTextStyles');
 
-  jest.mock('../../src/jsonUtils/hacksForJSONImpl');
+  jest.mock('../../../src/jsonUtils/hacksForJSONImpl');
 
   sharedTextStyles.addStyle = jest.fn();
   sharedTextStyles.setStyles = jest.fn();
