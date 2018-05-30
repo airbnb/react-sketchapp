@@ -1,7 +1,7 @@
 // @flow
 import invariant from 'invariant';
 import { appVersionSupported } from 'sketchapp-json-plugin';
-import type { SJStyle } from '@skpm/sketchapp-json-flow-types';
+import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext, SketchStyle, TextStyle } from '../types';
 import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';

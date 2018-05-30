@@ -25,8 +25,7 @@
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build",
     "docs:watch": "npm run docs:prepare && gitbook serve",
-    "docs:publish":
-      "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch git@github.com:airbnb/react-sketchapp.git gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push git@github.com:airbnb/react-sketchapp.git gh-pages --force",
+    "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch git@github.com:airbnb/react-sketchapp.git gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push git@github.com:airbnb/react-sketchapp.git gh-pages --force",
     "flow": "flow",
     "lint": "eslint .",
     "lint-staged": "lint-staged",
@@ -37,7 +36,6 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
-    "@skpm/sketchapp-json-flow-types": "^0.2.1",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
@@ -51,7 +49,13 @@
     "react": "*",
     "react-test-renderer": "*"
   },
-  "keywords": ["sketch", "sketchapp", "react", "reactjs", "renderer"],
+  "keywords": [
+    "sketch",
+    "sketchapp",
+    "react",
+    "reactjs",
+    "renderer"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/airbnb/react-sketchapp"
@@ -97,6 +101,7 @@
     "prettier-eslint-cli": "^4.7.1",
     "react": "^16.3.2",
     "react-test-renderer": "^16.3.2",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "sketchapp-json-flow-types": "^0.3.3"
   }
 }

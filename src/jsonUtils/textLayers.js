@@ -1,5 +1,5 @@
 // @flow
-import type { SJRect, SJTextLayer } from '@skpm/sketchapp-json-flow-types';
+import type { SJRect, SJTextLayer } from 'sketchapp-json-flow-types';
 import { makeEncodedAttributedString, makeResizeConstraint } from './hacksForJSONImpl';
 import type { TextNodes, ResizeConstraints } from '../types';
 import { generateID } from './models';
