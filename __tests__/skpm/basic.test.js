@@ -1,10 +1,6 @@
 import * as React from 'react';
-import sketch from 'sketch'; // eslint-disable-line
-import ReactSketch from '../../src';
-
-const {
-  render, View, Artboard, Text,
-} = ReactSketch;
+import * as sketch from 'sketch'; // eslint-disable-line
+import { render, View, Artboard, Text } from '../../src';
 
 const colorList = {
   Haus: '#F3F4F4',

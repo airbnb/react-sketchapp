@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Artboard, render } from 'react-sketchapp';
 import App from './App';
 import getVenues from './getVenues';

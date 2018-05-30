@@ -19,6 +19,9 @@ beforeEach(() => {
 
   jest.mock('../../../src/jsonUtils/hacksForJSONImpl');
 
+  TextStyles = TextStyles.default;
+  sharedTextStyles = sharedTextStyles.default;
+
   sharedTextStyles.addStyle = jest.fn();
   sharedTextStyles.setStyles = jest.fn();
 

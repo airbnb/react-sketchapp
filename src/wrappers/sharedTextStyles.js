@@ -1,5 +1,5 @@
 // @flow
-import invariant from 'invariant';
+import * as invariant from 'invariant';
 import { fromSJSONDictionary } from 'sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext } from '../types';

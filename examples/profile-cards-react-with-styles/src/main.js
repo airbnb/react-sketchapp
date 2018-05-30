@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import * as React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import Profile from './components/Profile';
 import { css, withStyles } from './withStyles';

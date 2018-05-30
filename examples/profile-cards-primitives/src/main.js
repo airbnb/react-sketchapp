@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render } from 'react-sketchapp';
 import { Text, View } from 'react-primitives';
 import type { User } from './types';

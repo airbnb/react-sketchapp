@@ -1,5 +1,5 @@
 // @flow
-import murmurHash from 'murmur2js';
+import * as murmurHash from 'murmur2js';
 import sortObjectKeys from './sortObjectKeys';
 
 const hashStyle = (obj: Object): number => {

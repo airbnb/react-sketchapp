@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import Image from '../../../src/components/Image';
 import StyleSheet from '../../../src/stylesheet';
 

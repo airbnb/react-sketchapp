@@ -1,5 +1,5 @@
 // @flow
-import renderers from './renderers';
+import * as renderers from './renderers';
 import type { TreeNode } from './types';
 
 const flexToSketchJSON = (node: TreeNode) => {
@@ -20,7 +20,7 @@ const flexToSketchJSON = (node: TreeNode) => {
     throw new Error(`Could not find renderer for type '${type}'. ${additionalNotes}`);
   }
 
-  const renderer = new Renderer.default();
+  const renderer = new Renderer();
   const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props);
   const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, children);
 

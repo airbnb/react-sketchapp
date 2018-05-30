@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-primitives';
 import { spacing, colors, fontFamily } from '../designSystem';
 

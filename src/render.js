@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type { SJLayer } from 'sketchapp-json-flow-types';
 import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
