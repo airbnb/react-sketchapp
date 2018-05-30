@@ -102,6 +102,6 @@
     "react": "^16.3.2",
     "react-test-renderer": "^16.3.2",
     "rimraf": "^2.5.4",
-    "sketchapp-json-flow-types": "^0.3.0"
+    "sketchapp-json-flow-types": "^0.3.3"
   }
 }
