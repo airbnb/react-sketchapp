@@ -113,7 +113,7 @@ export type ViewStyle = {
   borderRightWidth?: number,
   borderBottomWidth?: number,
   borderLeftWidth?: number,
-  position?: 'absolute' | 'relative',
+  position?: 'absolute' | 'relative' | 'fixed',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
   flexWrap?: 'wrap' | 'nowrap',
   justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around',

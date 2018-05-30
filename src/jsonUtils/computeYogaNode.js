@@ -164,7 +164,7 @@ const computeYogaNode = (
     }
 
     // Position
-    if (style.position === 'absolute') {
+    if (style.position === 'absolute' || style.position === 'fixed') {
       yogaNode.setPositionType(yoga.POSITION_TYPE_ABSOLUTE);
     }
     if (style.position === 'relative') {
