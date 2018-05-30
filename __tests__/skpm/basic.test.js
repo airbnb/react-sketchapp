@@ -19,6 +19,7 @@ const colorList = {
 
 test('should render a Page with a rectangle', (context) => {
   const nativePage = context.document.currentPage();
+  // eslint-disable-next-line
   const Swatch = ({ name, hex }) => (
     <View
       name={`Swatch ${name}`}
