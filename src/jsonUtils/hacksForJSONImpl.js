@@ -1,6 +1,6 @@
 // @flow
 // We need native macOS fonts and colors for these hacks so import the old utils
-import type { SJTextStyle } from '@skpm/sketchapp-json-flow-types';
+import type { SJTextStyle } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from 'sketchapp-json-plugin';
 import findFont from '../utils/findFont';

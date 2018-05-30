@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { SJLayer } from '@skpm/sketchapp-json-flow-types';
+import type { SJLayer } from 'sketchapp-json-flow-types';
 import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
