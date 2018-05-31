@@ -5,7 +5,7 @@ import {
   makeRect,
   makeSymbolInstance,
   makeSymbolMaster,
-} from '../../src/jsonUtils/models';
+} from '../../../src/jsonUtils/models';
 
 describe('generateID', () => {
   it('is unique', () => {

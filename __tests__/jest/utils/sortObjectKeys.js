@@ -1,4 +1,4 @@
-import sortObjectKeys from '../../src/utils/sortObjectKeys';
+import sortObjectKeys from '../../../src/utils/sortObjectKeys';
 
 test('simple example', () => {
   const a = {

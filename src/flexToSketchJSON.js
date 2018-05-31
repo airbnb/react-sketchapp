@@ -1,5 +1,5 @@
 // @flow
-import renderers from './renderers';
+import * as renderers from './renderers';
 import type { TreeNode } from './types';
 
 const flexToSketchJSON = (node: TreeNode) => {

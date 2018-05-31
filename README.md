@@ -37,7 +37,7 @@ Managing the assets of design systems in Sketch is complex, error-prone and time
 ## What does the code look like?
 
 ```js
-import React from 'react';
+import * as React from 'react';
 import { render, Text, Artboard } from 'react-sketchapp';
 
 const App = props => (

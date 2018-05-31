@@ -1,4 +1,6 @@
 {
-  "presets": ["es2015", "react", "stage-0"],
-  "plugins": ["add-module-exports"]
+  "presets": ["module:@skpm/babel-preset", "@babel/preset-flow"],
+  "plugins": ["@babel/plugin-proposal-class-properties", ["@babel/plugin-transform-modules-commonjs", {
+    "noInterop": true
+  }]]
 }

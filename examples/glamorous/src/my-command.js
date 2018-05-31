@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import glamorous from 'glamorous-primitives';
 import { render } from 'react-sketchapp';
 

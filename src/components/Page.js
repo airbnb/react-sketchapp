@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import PageStylePropTypes from './PageStylePropTypes';
 

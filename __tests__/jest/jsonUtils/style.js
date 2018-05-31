@@ -1,4 +1,4 @@
-import { makeBorderOptions, makeShadow } from '../../src/jsonUtils/style';
+import { makeBorderOptions, makeShadow } from '../../../src/jsonUtils/style';
 
 describe('makeBorderOptions', () => {
   it('makes solid borders', () => {

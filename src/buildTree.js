@@ -1,5 +1,5 @@
 // @flow
-import TestRenderer from 'react-test-renderer';
+import * as TestRenderer from 'react-test-renderer';
 import * as yoga from 'yoga-layout';
 import Context from './utils/Context';
 import type { TreeNode } from './types';
