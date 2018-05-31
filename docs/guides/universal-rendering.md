@@ -19,7 +19,7 @@ Import base primitives from `react-primitives` rather than `react-sketchapp` / `
  * components/Row.js
  * Define your component using platform-independent primitives
  */
-import * as React from 'react';
+import React from 'react';
 - import { View, Text, StyleSheet } from 'react-sketchapp';
 + import { View, Text, StyleSheet } from 'react-primitives';
 
@@ -44,7 +44,7 @@ Each platform will require an entry point with its respective `render` / registr
   * dom-entry.js
   * Standard ReactDOM setup for the browser
   */
-import * as React from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import Row from './components/Row';
 
@@ -56,7 +56,7 @@ render(<Row title='Foo' subtitle='Bar' />, document.getElementById('root'));
  * native-entry.js
  * Standard ReactNative setup
  */
-import * as React from 'react';
+import React from 'react';
 import { AppRegistry } from 'react-native';
 import Row from './components/Row';
 
@@ -68,7 +68,7 @@ AppRegistry.registerComponent('Row', () => Row);
  * sketch-entry.js
  * same setup as other examples
  */
-import * as React from 'react';
+import React from 'react';
 import { render } from 'react-sketchapp';
 import Row from './components/Row';
 
@@ -84,7 +84,7 @@ React Primitives only provides components that make sense on every platform, so 
  * sketch-entry.js
  * same setup as other examples
  */
-import * as React from 'react';
+import React from 'react';
 import { Artboard, render } from 'react-sketchapp';
 import Row from './components/Row'; // built with react-primitives
 
