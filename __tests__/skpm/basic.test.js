@@ -2,6 +2,10 @@ import * as React from 'react';
 import * as sketch from 'sketch'; // eslint-disable-line
 import { render, View, Artboard, Text } from '../../src';
 
+function getDoc(context) {
+  return context.document || sketch.getSelectedDocument().sketchObject;
+}
+
 const colorList = {
   Haus: '#F3F4F4',
   Night: '#333',
@@ -14,7 +18,7 @@ const colorList = {
 };
 
 test('should render a Page with a rectangle', (context) => {
-  const nativePage = context.document.currentPage();
+  const nativePage = getDoc(context).currentPage();
   // eslint-disable-next-line
   const Swatch = ({ name, hex }) => (
     <View
