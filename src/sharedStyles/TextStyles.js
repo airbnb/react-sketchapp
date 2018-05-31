@@ -50,7 +50,8 @@ const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHa
   const { clearExistingStyles, context } = options;
 
   if (!appVersionSupported()) {
-    return context.document.showMessage('💎 Requires Sketch 43+ 💎');
+    context.document.showMessage('💎 Requires Sketch 43+ 💎');
+    return {};
   }
 
   invariant(options && options.context, 'Please provide a context');

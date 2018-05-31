@@ -11,6 +11,7 @@ import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentFromContext } from './utils/getDocument';
+import type { SketchDocumentData } from './types';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -32,13 +33,13 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getSymbolsPage = (document: any) => {
+export const getSymbolsPage = (document: SketchDocumentData) => {
   const pages = document.pages();
   const array = msListToArray(pages);
   return array.find(p => String(p.name()) === 'Symbols');
 };
 
-const getExistingSymbols = (document: any) => {
+const getExistingSymbols = (document: SketchDocumentData) => {
   if (!hasInitialized) {
     hasInitialized = true;
 
@@ -74,15 +75,15 @@ const getSymbolID = (masterName: string): string => {
   return symbolId;
 };
 
-export const injectSymbols = (document: any) => {
-  if (!document) {
-    document = getDocumentFromContext(context); // eslint-disable-line
-  }
-  const currentPage = document.currentPage();
-
+export const injectSymbols = (document?: SketchDocumentData) => {
   // if hasInitialized is false then makeSymbol has not yet been called
   if (hasInitialized) {
-    const symbolsPage = document.documentData().symbolsPageOrCreateIfNecessary();
+    if (!document) {
+      document = getDocumentFromContext(context); // eslint-disable-line
+    }
+    const currentPage = document.currentPage();
+
+    const symbolsPage = document.symbolsPageOrCreateIfNecessary();
 
     let left = 0;
     Object.keys(symbolsRegistry).forEach((key) => {

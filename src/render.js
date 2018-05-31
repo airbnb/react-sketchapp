@@ -7,7 +7,7 @@ import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
 import { injectSymbols } from './symbol';
 
-import type { SketchDocument, SketchLayer, SketchPage, TreeNode } from './types';
+import type { SketchDocumentData, SketchLayer, SketchPage, TreeNode } from './types';
 import RedBox from './components/RedBox';
 import { getDocumentFromContainer, getDocumentFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
@@ -57,7 +57,7 @@ const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
   return children.map(child => renderContents(child, page));
 };
 
-const renderDocument = (tree: TreeNode, doc: SketchDocument): Array<SketchLayer> => {
+const renderDocument = (tree: TreeNode, doc: SketchDocumentData): Array<SketchLayer> => {
   if (!isNativeDocument(doc)) {
     throw new Error('Cannot render a Document into a child of Document');
   }
@@ -114,9 +114,7 @@ export const render = (
   try {
     const tree = buildTree(element);
 
-    injectSymbols(
-      container ? getDocumentFromContainer(container) : getDocumentFromContext(context),
-    );
+    injectSymbols(getDocumentFromContainer(container));
 
     return renderTree(tree, container);
   } catch (err) {
