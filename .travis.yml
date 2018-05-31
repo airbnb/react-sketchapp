@@ -8,9 +8,7 @@ cache:
 notifications:
   email: false
 node_js:
-  - '6'
-  - '8'
-  - '10'
+  - 'lts/*'
 before_install:
   - brew update
   - brew cask install sketch # install Sketch
