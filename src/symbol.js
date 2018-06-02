@@ -32,21 +32,13 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getSymbolsPage = (document: any) => {
-  const pages = document.pages();
-  const array = msListToArray(pages);
-  return array.find(p => String(p.name()) === 'Symbols');
-};
+const getSymbolsPage = (document: any) => document.documentData().symbolsPageOrCreateIfNecessary();
 
 const getExistingSymbols = (document: any) => {
   if (!hasInitialized) {
     hasInitialized = true;
 
-    let symbolsPage = getSymbolsPage(document);
-    if (!symbolsPage) {
-      symbolsPage = document.addBlankPage();
-      symbolsPage.setName('Symbols');
-    }
+    const symbolsPage = getSymbolsPage(document);
 
     existingSymbols = msListToArray(symbolsPage.layers()).map((x) => {
       const symbolJson = JSON.parse(toSJSON(x));
@@ -82,7 +74,7 @@ export const injectSymbols = (document: any) => {
 
   // if hasInitialized is false then makeSymbol has not yet been called
   if (hasInitialized) {
-    const symbolsPage = document.documentData().symbolsPageOrCreateIfNecessary();
+    const symbolsPage = getSymbolsPage(document);
 
     let left = 0;
     Object.keys(symbolsRegistry).forEach((key) => {
