@@ -1,24 +1,24 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Text from '../../src/components/Text';
-import StyleSheet from '../../src/stylesheet';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import View from '../../../src/components/View';
+import StyleSheet from '../../../src/stylesheet';
 
-describe('<Text />', () => {
+describe('<View />', () => {
   it('passes its children', () => {
-    const tree = renderer.create(<Text>foo</Text>).toJSON();
+    const tree = renderer.create(<View>foo</View>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   describe('name', () => {
     it('passes its name', () => {
-      const tree = renderer.create(<Text name="foo" />).toJSON();
+      const tree = renderer.create(<View name="foo" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
-    it('defaults to Text', () => {
-      const tree = renderer.create(<Text />).toJSON();
+    it('defaults to View', () => {
+      const tree = renderer.create(<View />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -32,19 +32,19 @@ describe('<Text />', () => {
     });
 
     it('accepts a plain object', () => {
-      const tree = renderer.create(<Text style={{ flex: 1 }} />).toJSON();
+      const tree = renderer.create(<View style={{ flex: 1 }} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('accepts a StyleSheet ordinal', () => {
-      const tree = renderer.create(<Text style={styles.view} />).toJSON();
+      const tree = renderer.create(<View style={styles.view} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
 
     it('accepts an array of plain objects and/or StyleSheet ordinals', () => {
-      const tree = renderer.create(<Text style={[{ flexGrow: 1 }, styles.view]} />).toJSON();
+      const tree = renderer.create(<View style={[{ flexGrow: 1 }, styles.view]} />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });

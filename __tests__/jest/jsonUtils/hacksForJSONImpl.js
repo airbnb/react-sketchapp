@@ -1,4 +1,4 @@
-import * as hacks from '../../src/jsonUtils/hacksForJSONImpl';
+import * as hacks from '../../../src/jsonUtils/hacksForJSONImpl';
 
 describe('API', () => {
   it('exports makeImageDataFromUrl', () => {

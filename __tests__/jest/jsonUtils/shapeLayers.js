@@ -3,7 +3,7 @@ import {
   makeShapePath,
   makeRectShapeLayer,
   makeShapeGroup,
-} from '../../src/jsonUtils/shapeLayers';
+} from '../../../src/jsonUtils/shapeLayers';
 
 xdescribe('makeHorizontalPath');
 xdescribe('makeVerticalPath');

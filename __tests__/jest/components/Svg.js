@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Svg from '../../src/components/Svg';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import Svg from '../../../src/components/Svg';
 
 describe('<Svg />', () => {
   it('passes its children', () => {

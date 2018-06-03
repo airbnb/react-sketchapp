@@ -13,7 +13,7 @@ import Text from './components/Text';
 import TextStyles from './sharedStyles/TextStyles';
 import { makeSymbol, getSymbolComponentByName, injectSymbols } from './symbol';
 
-export default {
+module.exports = {
   render,
   renderToJSON,
   StyleSheet,

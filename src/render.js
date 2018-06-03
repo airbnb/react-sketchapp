@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import type { SJLayer } from 'sketchapp-json-flow-types';
 import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
 import buildTree from './buildTree';
@@ -11,6 +11,7 @@ import type { SketchDocument, SketchLayer, SketchPage, TreeNode } from './types'
 import RedBox from './components/RedBox';
 import { getDocumentFromContainer, getDocumentFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
+import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
@@ -76,6 +77,14 @@ const renderDocument = (tree: TreeNode, doc: SketchDocument): Array<SketchLayer>
 };
 
 const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
+  if (isNativeDocument(_container) && tree.type !== 'document') {
+    throw new Error('You need to render a Document into Document');
+  }
+
+  if (!isNativePage(_container) && tree.type === 'page') {
+    throw new Error('You need to render a Page into Page');
+  }
+
   if (tree.type === 'document') {
     const doc = _container || getDocumentFromContext(context);
 
@@ -111,6 +120,7 @@ export const render = (
 
     return renderTree(tree, container);
   } catch (err) {
+    console.error(err);
     const tree = buildTree(<RedBox error={err} />);
     return renderContents(tree, container);
   }

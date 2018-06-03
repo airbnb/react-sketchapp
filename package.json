@@ -32,7 +32,9 @@
     "prepublishOnly": "npm run clean && npm run check && npm run build",
     "test": "jest --config .jestrc.json",
     "test:ci": "jest --config .jestrc.json --runInBand",
+    "test:e2e": "skpm-test",
     "test:watch": "npm run test -- --watch",
+    "test:e2e:watch": "npm run test:e2e -- --watch",
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
@@ -71,16 +73,16 @@
     ]
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.0.0",
+    "@babel/cli": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.49",
+    "@babel/preset-flow": "^7.0.0-beta.49",
+    "@skpm/babel-preset": "^0.1.1",
+    "@skpm/test-runner": "^0.3.1",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.3",
-    "babel-jest": "^22.4.3",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-flow-strip-types": "^6.18.0",
-    "babel-polyfill": "^6.20.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
+    "babel-jest": "^23.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-sketch": "^0.2.4",
@@ -103,5 +105,10 @@
     "react-test-renderer": "^16.3.2",
     "rimraf": "^2.5.4",
     "sketchapp-json-flow-types": "^0.3.3"
+  },
+  "skpm": {
+    "test": {
+      "testRegex": "/__tests__/skpm/.*\\.jsx?$"
+    }
   }
 }

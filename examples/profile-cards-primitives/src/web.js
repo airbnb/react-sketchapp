@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Profile from './components/Profile';
 import Space from './components/Space';
 import { spacing } from './designSystem';

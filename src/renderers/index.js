@@ -1,13 +1,7 @@
 // @flow
-/* eslint-disable global-require */
-// import type SketchRenderer from './SketchRenderer';
-
-export default {
-  artboard: require('./ArtboardRenderer'),
-  image: require('./ImageRenderer'),
-  svg: require('./SvgRenderer'),
-  text: require('./TextRenderer'),
-  view: require('./ViewRenderer'),
-  symbolinstance: require('./SymbolInstanceRenderer'),
-  symbolmaster: require('./SymbolMasterRenderer'),
-};
+export { default as artboard } from './ArtboardRenderer';
+export { default as svg } from './SvgRenderer';
+export { default as text } from './TextRenderer';
+export { default as view } from './ViewRenderer';
+export { default as symbolinstance } from './SymbolInstanceRenderer';
+export { default as symbolmaster } from './SymbolMasterRenderer';

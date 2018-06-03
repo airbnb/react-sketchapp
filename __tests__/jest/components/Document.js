@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Document from '../../src/components/Document';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import Document from '../../../src/components/Document';
 
 describe('<Document />', () => {
   it('renders children', () => {

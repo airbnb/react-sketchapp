@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';

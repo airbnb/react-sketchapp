@@ -1,5 +1,5 @@
 import * as yoga from 'yoga-layout';
-import computeYogaNode from '../../src/jsonUtils/computeYogaNode';
+import computeYogaNode from '../../../src/jsonUtils/computeYogaNode';
 
 const widthAndHeightStylesStub = {
   width: 10,

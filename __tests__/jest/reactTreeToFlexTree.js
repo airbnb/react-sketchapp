@@ -1,7 +1,7 @@
 import * as yoga from 'yoga-layout';
-import computeYogaTree from '../src/jsonUtils/computeYogaTree';
-import Context from '../src/utils/Context';
-import { reactTreeToFlexTree } from '../src/buildTree';
+import computeYogaTree from '../../src/jsonUtils/computeYogaTree';
+import Context from '../../src/utils/Context';
+import { reactTreeToFlexTree } from '../../src/buildTree';
 
 const treeRootStub = {
   type: 'artboard',

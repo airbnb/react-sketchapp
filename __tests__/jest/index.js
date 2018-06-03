@@ -4,8 +4,8 @@ let ReactSketch;
 describe('public API', () => {
   beforeEach(() => {
     // jest.resetModules();
-    jest.mock('../src/jsonUtils/hacksForJSONImpl');
-    ReactSketch = require('../src');
+    jest.mock('../../src/jsonUtils/hacksForJSONImpl');
+    ReactSketch = require('../../src');
   });
 
   it('exports render', () => {
