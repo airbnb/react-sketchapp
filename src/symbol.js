@@ -45,8 +45,10 @@ const getExistingSymbols = (document: SketchDocumentData) => {
 
     let symbolsPage = getSymbolsPage(document);
     if (!symbolsPage) {
+      const currentPage = document.currentPage();
       symbolsPage = document.addBlankPage();
       symbolsPage.setName('Symbols');
+      document.setCurrentPage(currentPage);
     }
 
     existingSymbols = msListToArray(symbolsPage.layers()).map((x) => {
