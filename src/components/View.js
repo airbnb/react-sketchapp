@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import ShadowsPropTypes from './ShadowsPropTypes';
 
 const propTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
