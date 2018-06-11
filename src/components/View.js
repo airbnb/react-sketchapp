@@ -19,6 +19,11 @@ const propTypes = {
   resizingConstraint: PropTypes.shape({
     ...ResizingConstraintPropTypes,
   }),
+  shadows: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...ShadowsPropTypes,
+    }),
+  ),
   children: PropTypes.node,
 };
 
@@ -34,6 +39,7 @@ class View extends React.Component {
         name={this.props.name}
         style={StyleSheet.flatten(this.props.style)}
         resizingConstraint={this.props.resizingConstraint}
+        shadows={this.props.shadows}
       >
         {this.props.children}
       </view>

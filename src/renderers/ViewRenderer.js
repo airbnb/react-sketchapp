@@ -115,6 +115,17 @@ class ViewRenderer extends SketchRenderer {
       }
     }
 
+    if (props.shadows) {
+      props.shadows.map((shadowStyle) => {
+        if (style.shadowInner) {
+          content.style.innerShadows.push(makeShadow(shadowStyle));
+        } else {
+          content.style.shadows.push(makeShadow(shadowStyle));
+        }
+        return shadowStyle;
+      });
+    }
+
     if (hasAnyDefined(style, OVERFLOW_STYLES)) {
       if (
         style.overflow === 'hidden' ||
