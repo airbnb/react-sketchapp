@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
@@ -9,13 +10,7 @@ import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 export default class View extends React.Component {
   static propTypes = {
     // TODO(lmr): do some nice warning stuff like RN does
-    style: PropTypes.oneOfType([
-      PropTypes.shape({ ...ViewStylePropTypes }),
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
-      ),
-      PropTypes.number,
-    ]),
+    style: or([PropTypes.shape(ViewStylePropTypes), PropTypes.number]),
     name: PropTypes.string,
     resizingConstraint: PropTypes.shape({
       ...ResizingConstraintPropTypes,

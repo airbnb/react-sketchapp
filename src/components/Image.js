@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ResizeModePropTypes from './ResizeModePropTypes';
@@ -41,13 +42,7 @@ export default class Image extends React.Component {
     defaultSource: ImageSourcePropType,
     resizeMode: ResizeModePropTypes,
     source: ImageSourcePropType,
-    style: PropTypes.oneOfType([
-      PropTypes.shape(ImageStylePropTypes),
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
-      ),
-      PropTypes.number,
-    ]),
+    style: or([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
     resizingConstraint: PropTypes.shape({
       ...ResizingConstraintPropTypes,
     }),

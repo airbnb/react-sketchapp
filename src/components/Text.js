@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import TextStylePropTypes from './TextStylePropTypes';
 import ViewStylePropTypes from './ViewStylePropTypes';
@@ -16,17 +17,10 @@ import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 export default class Text extends React.Component {
   static propTypes = {
     // TODO(lmr): do some nice warning stuff like RN does
-    style: PropTypes.oneOfType([
+    style: or([
       PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([
-          PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-          PropTypes.number,
-        ]),
-      ),
       PropTypes.number,
     ]),
-
     name: PropTypes.string,
     resizingConstraint: PropTypes.shape({
       ...ResizingConstraintPropTypes,
