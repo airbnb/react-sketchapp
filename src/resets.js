@@ -1,5 +1,5 @@
 // @flow
-import type { SketchDocument } from './types';
+import type { SketchDocumentData } from './types';
 import isNativeDocument from './utils/isNativeDocument';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
@@ -17,15 +17,15 @@ export const resetLayer = (container: Object) => {
 };
 
 // Clear out all document pages and layers
-export const resetDocument = (document: SketchDocument) => {
+export const resetDocument = (documentData: SketchDocumentData) => {
   // Get Pages and delete them all (Except Symbols Page)
-  const pages = document.pages();
+  const pages = documentData.pages();
   for (let index = pages.length - 1; index >= 0; index -= 1) {
     const page = pages[index];
     // Don't delete symbols page
     if (!isNativeSymbolsPage(page)) {
       if (pages.length > 1) {
-        document.documentData().removePageAtIndex(index);
+        documentData.removePageAtIndex(index);
       } else {
         resetLayer(page);
       }
