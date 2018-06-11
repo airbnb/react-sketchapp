@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import PageStylePropTypes from './PageStylePropTypes';
 
@@ -9,13 +10,7 @@ export default class Page extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     children: PropTypes.node,
-    style: PropTypes.oneOfType([
-      PropTypes.shape({ ...PageStylePropTypes }),
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.shape({ ...PageStylePropTypes }), PropTypes.number]),
-      ),
-      PropTypes.number,
-    ]),
+    style: or([PropTypes.shape(PageStylePropTypes), PropTypes.number]),
   };
 
   render() {

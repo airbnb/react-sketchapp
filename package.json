@@ -38,6 +38,7 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
+    "airbnb-prop-types": "^2.10.0",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",

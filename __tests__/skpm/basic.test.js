@@ -2,6 +2,13 @@ import * as React from 'react';
 import * as sketch from 'sketch'; // eslint-disable-line
 import { render, View, Artboard, Text } from '../../src';
 
+// depending on where those tests run, we don't get the things,
+// eg. the context might be empty or there is no selected document
+// This make sure we always get something
+function getDoc(context, document) {
+  return context.document || (sketch.getSelectedDocument() || document).sketchObject;
+}
+
 const colorList = {
   Haus: '#F3F4F4',
   Night: '#333',
@@ -13,8 +20,8 @@ const colorList = {
   'Pear Dark': '#2E854B',
 };
 
-test('should render a Page with a rectangle', (context) => {
-  const nativePage = context.document.currentPage();
+test('should render a Page with a rectangle', (context, document) => {
+  const nativePage = getDoc(context, document).currentPage();
   // eslint-disable-next-line
   const Swatch = ({ name, hex }) => (
     <View

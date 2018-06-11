@@ -10,7 +10,8 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
-import { getDocumentFromContext } from './utils/getDocument';
+import { getDocumentDataFromContext } from './utils/getDocument';
+import type { SketchDocumentData } from './types';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -32,13 +33,14 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-const getSymbolsPage = (document: any) => document.documentData().symbolsPageOrCreateIfNecessary();
+const getSymbolsPage = (documentData: SketchDocumentData) =>
+  document.documentData().symbolsPageOrCreateIfNecessary();
 
-const getExistingSymbols = (document: any) => {
+const getExistingSymbols = (documentData: SketchDocumentData) => {
   if (!hasInitialized) {
     hasInitialized = true;
 
-    const symbolsPage = getSymbolsPage(document);
+    const symbolsPage = getSymbolsPage(documentData);
 
     existingSymbols = msListToArray(symbolsPage.layers()).map((x) => {
       const symbolJson = JSON.parse(toSJSON(x));
@@ -66,15 +68,15 @@ const getSymbolID = (masterName: string): string => {
   return symbolId;
 };
 
-export const injectSymbols = (document: any) => {
-  if (!document) {
-    document = getDocumentFromContext(context); // eslint-disable-line
-  }
-  const currentPage = document.currentPage();
-
+export const injectSymbols = (documentData?: SketchDocumentData) => {
   // if hasInitialized is false then makeSymbol has not yet been called
   if (hasInitialized) {
-    const symbolsPage = getSymbolsPage(document);
+    if (!documentData) {
+      documentData = getDocumentDataFromContext(context); // eslint-disable-line
+    }
+    const currentPage = documentData.currentPage();
+
+    const symbolsPage = getSymbolsPage(documentData);
 
     let left = 0;
     Object.keys(symbolsRegistry).forEach((key) => {
@@ -92,7 +94,7 @@ export const injectSymbols = (document: any) => {
 
     renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
 
-    document.setCurrentPage(currentPage);
+    documentData.setCurrentPage(currentPage);
   }
 };
 
@@ -125,10 +127,10 @@ export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React.C
 export const makeSymbol = (
   Component: React.ComponentType<any>,
   name: string,
-  document?: any,
+  documentData?: any,
 ): React.ComponentType<any> => {
   if (!hasInitialized) {
-    getExistingSymbols(document || getDocumentFromContext(context));
+    getExistingSymbols(documentData || getDocumentDataFromContext(context));
   }
 
   const masterName = name || displayName(Component);
