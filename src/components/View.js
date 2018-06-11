@@ -5,6 +5,7 @@ import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import ShadowsPropTypes from './ShadowsPropTypes';
 
 // $FlowFixMe
 export default class View extends React.Component {
