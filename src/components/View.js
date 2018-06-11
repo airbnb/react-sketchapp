@@ -1,34 +1,34 @@
-/* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ShadowsPropTypes from './ShadowsPropTypes';
 
-const propTypes = {
-  // TODO(lmr): do some nice warning stuff like RN does
-  style: PropTypes.oneOfType([
-    PropTypes.shape({ ...ViewStylePropTypes }),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
-    ),
-    PropTypes.number,
-  ]),
-  name: PropTypes.string,
-  resizingConstraint: PropTypes.shape({
-    ...ResizingConstraintPropTypes,
-  }),
-  shadows: PropTypes.arrayOf(
-    PropTypes.shape({
-      ...ShadowsPropTypes,
-    }),
-  ),
-  children: PropTypes.node,
-};
-
 // $FlowFixMe
-class View extends React.Component {
+export default class View extends React.Component {
+  static propTypes = {
+    // TODO(lmr): do some nice warning stuff like RN does
+    style: PropTypes.oneOfType([
+      PropTypes.shape({ ...ViewStylePropTypes }),
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape({ ...ViewStylePropTypes }), PropTypes.number]),
+      ),
+      PropTypes.number,
+    ]),
+    name: PropTypes.string,
+    resizingConstraint: PropTypes.shape({
+      ...ResizingConstraintPropTypes,
+    }),
+    shadows: PropTypes.arrayOf(
+      PropTypes.shape({
+        ...ShadowsPropTypes,
+      }),
+    ),
+    children: PropTypes.node,
+  };
+
   static defaultProps = {
     name: 'View',
   };
@@ -46,7 +46,3 @@ class View extends React.Component {
     );
   }
 }
-
-View.propTypes = propTypes;
-
-module.exports = View;
