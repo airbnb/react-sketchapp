@@ -2,6 +2,9 @@ import * as React from 'react';
 import * as sketch from 'sketch'; // eslint-disable-line
 import { render, View, Artboard, Text } from '../../src';
 
+// depending on where those tests run, we don't get the things,
+// eg. the context might be empty or there is no selected document
+// This make sure we always get something
 function getDoc(context, document) {
   return context.document || (sketch.getSelectedDocument() || document).sketchObject;
 }

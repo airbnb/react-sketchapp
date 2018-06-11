@@ -9,7 +9,7 @@ import { injectSymbols } from './symbol';
 
 import type { SketchDocumentData, SketchLayer, SketchPage, TreeNode } from './types';
 import RedBox from './components/RedBox';
-import { getDocumentFromContainer, getDocumentFromContext } from './utils/getDocument';
+import { getDocumentDataFromContainer, getDocumentDataFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
 import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
@@ -32,7 +32,7 @@ export const renderLayers = (layers: Array<any>, container: SketchLayer): Sketch
 };
 
 const getDefaultPage = (): SketchLayer => {
-  const doc = getDocumentFromContext(context);
+  const doc = getDocumentDataFromContext(context);
   const currentPage = doc.currentPage();
 
   return isNativeSymbolsPage(currentPage) ? doc.addBlankPage() : currentPage;
@@ -57,12 +57,12 @@ const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
   return children.map(child => renderContents(child, page));
 };
 
-const renderDocument = (tree: TreeNode, doc: SketchDocumentData): Array<SketchLayer> => {
-  if (!isNativeDocument(doc)) {
+const renderDocument = (tree: TreeNode, documentData: SketchDocumentData): Array<SketchLayer> => {
+  if (!isNativeDocument(documentData)) {
     throw new Error('Cannot render a Document into a child of Document');
   }
 
-  const initialPage = doc.currentPage();
+  const initialPage = documentData.currentPage();
   const shouldRenderInitialPage = !isNativeSymbolsPage(initialPage);
   const children = tree.children || [];
 
@@ -71,7 +71,7 @@ const renderDocument = (tree: TreeNode, doc: SketchDocumentData): Array<SketchLa
       throw new Error('Document children must be of type Page');
     }
 
-    const page = i === 0 && shouldRenderInitialPage ? initialPage : doc.addBlankPage();
+    const page = i === 0 && shouldRenderInitialPage ? initialPage : documentData.addBlankPage();
     return renderPage(child, page);
   });
 };
@@ -86,7 +86,7 @@ const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Arr
   }
 
   if (tree.type === 'document') {
-    const doc = _container || getDocumentFromContext(context);
+    const doc = _container || getDocumentDataFromContext(context);
 
     resetDocument(doc);
     return renderDocument(tree, doc);
@@ -114,7 +114,7 @@ export const render = (
   try {
     const tree = buildTree(element);
 
-    injectSymbols(getDocumentFromContainer(container));
+    injectSymbols(getDocumentDataFromContainer(container));
 
     return renderTree(tree, container);
   } catch (err) {
