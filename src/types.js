@@ -17,6 +17,7 @@ type NSString = any;
 export type SketchPage = {
   name: () => NSString,
   setName: string => void,
+  layers: () => Array<SketchLayer>,
 };
 
 export type SketchSharedStyleContainer = {
@@ -37,14 +38,16 @@ export type SketchDocumentData = {
   layerTextStyles: () => SketchSharedStyleContainer,
   layerSymbols: () => void,
   removePageAtIndex: Function,
+  addBlankPage: () => SketchPage,
+  currentPage: () => SketchPage,
+  setCurrentPage: (page: SketchPage) => void,
+  pages: () => MSArray<SketchPage>,
+  symbolsPageOrCreateIfNecessary: () => SketchPage,
 };
 
 export type SketchDocument = {
-  addBlankPage: () => SketchPage,
-  currentPage: () => SketchPage,
   documentData: () => SketchDocumentData,
-  pages: () => MSArray<SketchPage>,
-  showMessage: Function,
+  showMessage: (message: string) => void,
 };
 
 export type SketchContext = {
