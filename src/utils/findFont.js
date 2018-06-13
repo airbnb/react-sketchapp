@@ -16,17 +16,17 @@ const FONT_STYLES = {
 };
 
 const FONT_WEIGHTS = {
-  normal: NSFontWeightRegular,
-  bold: NSFontWeightBold,
-  '100': NSFontWeightUltraLight,
-  '200': NSFontWeightThin,
-  '300': NSFontWeightLight,
-  '400': NSFontWeightRegular,
-  '500': NSFontWeightMedium,
-  '600': NSFontWeightSemibold,
-  '700': NSFontWeightBold,
-  '800': NSFontWeightHeavy,
-  '900': NSFontWeightBlack,
+  normal: 0,
+  bold: 0.4,
+  '100': -0.8,
+  '200': -0.6,
+  '300': -0.4,
+  '400': 0,
+  '500': 0.23,
+  '600': 0.3,
+  '700': 0.4,
+  '800': 0.56,
+  '900': 0.62,
 };
 
 const isItalicFont = (font: NSFont): boolean => {

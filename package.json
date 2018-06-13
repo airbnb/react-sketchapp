@@ -38,6 +38,7 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
+    "@skpm/sketchapp-json-plugin": "^0.2.0",
     "airbnb-prop-types": "^2.10.0",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
@@ -45,7 +46,6 @@
     "normalize-css-color": "^1.0.1",
     "prop-types": "^15.5.8",
     "sketch-constants": "^1.0.2",
-    "sketchapp-json-plugin": "^0.1.2",
     "yoga-layout": "^1.9.3"
   },
   "peerDependencies": {
