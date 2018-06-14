@@ -52,6 +52,9 @@
     "react": "*",
     "react-test-renderer": "*"
   },
+  "optionalDependencies": {
+    "nodobjc": "^2.1.0"
+  },
   "keywords": [
     "sketch",
     "sketchapp",

@@ -5,6 +5,10 @@ import getSketchVersion from '../utils/getSketchVersion';
 import { makeEncodedAttributedString, makeResizeConstraint } from './hacksForJSONImpl';
 import type { TextNode, TextNodes, ResizeConstraints, TextStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
+import { TEXT_TRANSFORM } from '../utils/constants';
+
+import findFontInSketch from '../utils/findFont';
+import { findFontName as findFontInNode } from './hacksForNodObjCImpl';
 
 export const TEXT_DECORATION_UNDERLINE = {
   none: 0,
@@ -61,56 +65,61 @@ export const FONT_WEIGHTS = {
 };
 /* eslint-enable */
 
-const makeFontDescriptor = (style: TextStyle) => {
-  const json = {
-    _class: 'fontDescriptor',
-    attributes: {
-      name: style.fontFamily || '__font_not_found', // will default to the system font
-      size: style.fontSize || 14,
-    },
-  };
-
-  if (style.fontWeight && FONT_WEIGHTS[style.fontWeight] && style.fontFamily) {
-    json.attributes.name += `-${FONT_WEIGHTS[style.fontWeight]}`;
+export const getFontName = (style: TextStyle) => {
+  // if we are running in node
+  if (typeof NSFont === 'undefined') {
+    return findFontInNode(style);
   }
 
-  return json;
+  const font = findFontInSketch(style);
+  return font.fontDescriptor().postscriptName();
 };
 
-const makeAttribute = (node: TextNode, location: number) => {
-  // TODO: italic
-  const style = node.textStyles;
-  return {
-    _class: 'stringAttribute',
-    location,
-    length: node.content.length,
-    attributes: {
-      underlineStyle: style.textDecoration ? TEXT_DECORATION_UNDERLINE[style.textDecoration] : 0,
-      strikethroughStyle: style.textDecoration
-        ? TEXT_DECORATION_LINETHROUGH[style.textDecoration]
-        : 0,
-      paragraphStyle: {
-        _class: 'paragraphStyle',
-        alignment: TEXT_ALIGN[style.textAlign || 'auto'],
-        ...(typeof style.lineHeight !== 'undefined'
-          ? {
-            minimumLineHeight: style.lineHeight,
-            maximumLineHeight: style.lineHeight,
-            lineHeightMultiple: 1.0,
-          }
-          : {}),
-      },
-      ...(typeof style.letterSpacing !== 'undefined'
-        ? {
-          kerning: style.letterSpacing,
-        }
-        : {}),
-      MSAttributedStringFontAttribute: makeFontDescriptor(style),
-      textStyleVerticalAlignmentKey: 0,
-      MSAttributedStringColorAttribute: makeColorFromCSS(style.color || 'black'),
-    },
-  };
-};
+const makeFontDescriptor = (style: TextStyle) => ({
+  _class: 'fontDescriptor',
+  attributes: {
+    name: String(getFontName(style)), // will default to the system font
+    size: style.fontSize || 14,
+  },
+});
+
+const makeTextStyleAttributes = (style: TextStyle) => ({
+  underlineStyle: style.textDecoration ? TEXT_DECORATION_UNDERLINE[style.textDecoration] || 0 : 0,
+  strikethroughStyle: style.textDecoration
+    ? TEXT_DECORATION_LINETHROUGH[style.textDecoration] || 0
+    : 0,
+  paragraphStyle: {
+    _class: 'paragraphStyle',
+    alignment: TEXT_ALIGN[style.textAlign || 'auto'],
+    ...(typeof style.lineHeight !== 'undefined'
+      ? {
+        minimumLineHeight: style.lineHeight,
+        maximumLineHeight: style.lineHeight,
+        lineHeightMultiple: 1.0,
+      }
+      : {}),
+  },
+  ...(typeof style.letterSpacing !== 'undefined'
+    ? {
+      kerning: style.letterSpacing,
+    }
+    : {}),
+  ...(typeof style.textTransform !== 'undefined'
+    ? {
+      MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
+    }
+    : {}),
+  MSAttributedStringFontAttribute: makeFontDescriptor(style),
+  textStyleVerticalAlignmentKey: 0,
+  MSAttributedStringColorAttribute: makeColorFromCSS(style.color || 'black'),
+});
+
+const makeAttribute = (node: TextNode, location: number) => ({
+  _class: 'stringAttribute',
+  location,
+  length: node.content.length,
+  attributes: makeTextStyleAttributes(node.textStyles),
+});
 
 const makeAttributedString = (textNodes: TextNodes): any => {
   const json = {

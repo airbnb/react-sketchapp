@@ -49,17 +49,10 @@ const weightOfFont = (font: NSFont): number => {
   const weight = traits[NSFontWeightTrait].doubleValue();
   if (weight === 0.0) {
     const weights = Object.keys(FONT_WEIGHTS);
-    for (let i = 0; i < weights.length; i += 1) {
-      const w = weights[i];
-
-      if (
-        font
-          .fontName()
-          .toLowerCase()
-          .endsWith(w)
-      ) {
-        return FONT_WEIGHTS[w];
-      }
+    const fontName = String(font.fontName()).toLowerCase();
+    const matchingWeight = weights.find(w => fontName.endsWith(w));
+    if (matchingWeight) {
+      return FONT_WEIGHTS[matchingWeight];
     }
   }
 

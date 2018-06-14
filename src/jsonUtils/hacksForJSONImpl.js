@@ -1,41 +1,17 @@
 // @flow
 // We need native macOS fonts and colors for these hacks so import the old utils
 import type { SJTextStyle } from 'sketchapp-json-flow-types';
-import { TextAlignment } from 'sketch-constants';
 import { toSJSON } from '@skpm/sketchapp-json-plugin';
+import {
+  TEXT_ALIGN,
+  TEXT_DECORATION_UNDERLINE,
+  TEXT_DECORATION_LINETHROUGH,
+  TEXT_TRANSFORM,
+} from '../utils/constants';
 import findFont from '../utils/findFont';
 import getSketchVersion from '../utils/getSketchVersion';
 import type { TextNodes, TextNode, TextStyle, ResizeConstraints, LayoutInfo } from '../types';
 import { generateID, makeColorFromCSS } from './models';
-
-export const TEXT_ALIGN = {
-  auto: TextAlignment.Left,
-  left: TextAlignment.Left,
-  right: TextAlignment.Right,
-  center: TextAlignment.Center,
-  justify: TextAlignment.Justified,
-};
-
-export const TEXT_DECORATION_UNDERLINE = {
-  none: 0,
-  underline: 1,
-  double: 9,
-};
-
-export const TEXT_DECORATION_LINETHROUGH = {
-  none: 0,
-  'line-through': 1,
-};
-
-// this doesn't exist in constants
-export const TEXT_TRANSFORM = {
-  uppercase: 1,
-  lowercase: 2,
-  initial: 0,
-  inherit: 0,
-  none: 0,
-  capitalize: 0,
-};
 
 /*
   RESIZE CONSTRAINT RULES
