@@ -34,7 +34,7 @@ const msListToArray = (pageList) => {
 };
 
 const getSymbolsPage = (documentData: SketchDocumentData) =>
-  document.documentData().symbolsPageOrCreateIfNecessary();
+  documentData.symbolsPageOrCreateIfNecessary();
 
 const getExistingSymbols = (documentData: SketchDocumentData) => {
   if (!hasInitialized) {
