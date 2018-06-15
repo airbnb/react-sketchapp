@@ -194,8 +194,8 @@ function createStringAttributes(textStyles: TextStyle): Object {
   };
 
   const color = makeColorFromCSS(textStyles.color || 'black');
-
-  if (getSketchVersion() >= 50) {
+  const sketchVersion = getSketchVersion();
+  if (sketchVersion === 'NodeJS' || sketchVersion >= 50) {
     attribs.MSAttributedStringColorAttribute = color;
   } else {
     attribs.NSColor = NSColor.colorWithDeviceRed_green_blue_alpha(

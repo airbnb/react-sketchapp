@@ -65,9 +65,11 @@ export const FONT_WEIGHTS = {
 };
 /* eslint-enable */
 
+const sketchVersion = getSketchVersion();
+
 export const getFontName = (style: TextStyle) => {
   // if we are running in node
-  if (typeof NSFont === 'undefined') {
+  if (sketchVersion === 'NodeJS') {
     return findFontInNode(style);
   }
 
@@ -139,6 +141,17 @@ const makeAttributedString = (textNodes: TextNodes): any => {
   return json;
 };
 
+export const makeTextStyle = (style: TextStyle) => ({
+  _class: 'style',
+  miterLimit: 10,
+  startDecorationType: 0,
+  endDecorationType: 0,
+  textStyle: {
+    _class: 'textStyle',
+    encodedAttributes: makeTextStyleAttributes(style),
+  },
+});
+
 const makeTextLayer = (
   frame: SJRect,
   name: string,
@@ -160,9 +173,13 @@ const makeTextLayer = (
   rotation: 0,
   shouldBreakMaskChain: false,
   attributedString:
-    getSketchVersion() >= 49 || getSketchVersion() === 0
+    sketchVersion === 'NodeJS' || sketchVersion >= 49
       ? makeAttributedString(textNodes)
       : makeEncodedAttributedString(textNodes),
+  style:
+    sketchVersion === 'NodeJS' || sketchVersion >= 49
+      ? makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles)
+      : undefined,
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,
   // NOTE(akp): I haven't fully figured out the meaning of glyphBounds

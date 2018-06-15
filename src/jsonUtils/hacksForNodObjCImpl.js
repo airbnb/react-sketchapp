@@ -261,7 +261,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
   );
 
   if (textStyles.letterSpacing !== undefined) {
-    attribs('setValue', textStyles.letterSpacing, 'forKey', $('NSKern'));
+    attribs('setValue', $(textStyles.letterSpacing), 'forKey', $('NSKern'));
   }
 
   if (textStyles.textTransform !== undefined) {

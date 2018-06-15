@@ -1,5 +1,6 @@
 // @flow
 import type { TextNodes, Size } from '../types';
+import getSketchVersion from './getSketchVersion';
 import { createAttributedString } from '../jsonUtils/hacksForJSONImpl';
 import { createNodeJSStringMeasurer } from '../jsonUtils/hacksForNodObjCImpl';
 
@@ -16,7 +17,7 @@ const createStringMeasurer = (textNodes: TextNodes) => (width: number = 0): Size
 
   if (textNodes.length > 0) {
     // if we are running in node
-    if (typeof NSMutableAttributedString === 'undefined') {
+    if (getSketchVersion() === 'NodeJS') {
       return createNodeJSStringMeasurer(textNodes, _width);
     }
     const fullStr = NSMutableAttributedString.alloc().init();

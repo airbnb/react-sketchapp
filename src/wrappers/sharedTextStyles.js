@@ -3,6 +3,7 @@ import * as invariant from 'invariant';
 import { fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext } from '../types';
+import { generateID } from '../jsonUtils/models';
 
 class TextStyles {
   _context: ?SketchContext;
@@ -32,6 +33,10 @@ class TextStyles {
   addStyle(name: string, style: SJStyle) {
     const { _context } = this;
     invariant(_context, 'Please provide a context');
+
+    // generate a dummy shared object id
+    // eslint-disable-next-line
+    style.sharedObjectID = generateID();
 
     const textStyle = fromSJSONDictionary(style);
 
