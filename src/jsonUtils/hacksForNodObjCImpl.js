@@ -19,7 +19,7 @@ function requireNodobjC() {
   if (cached$) {
     return cached$;
   }
-  cached$ = eval("require('nodeobjc')"); // eslint-disable-line
+  cached$ = eval("require('nodobjc')"); // eslint-disable-line
   cached$.framework('Foundation');
   cached$.framework('AppKit');
   cached$.framework('CoreGraphics');
@@ -74,23 +74,24 @@ const fontNamesForFamilyName = (familyName: string): Array<string> => {
   return results;
 };
 
-// TODO:
-// eslint-disable-next-line
 const isItalicFont = (font: NSFont): boolean => {
-  return false;
-  // const traits = font.fontDescriptor().objectForKey(NSFontTraitsAttribute);
-  // const symbolicTraits = traits[NSFontSymbolicTrait].unsignedIntValue();
+  const $ = requireNodobjC();
+  const fontDescriptor = font('valueForKey', $('fontDescriptor'));
+  const traits = fontDescriptor('objectForKey', $('NSCTFontTraitsAttribute'));
+  const symbolicTraits = parseInt(traits('valueForKey', $('NSCTFontSymbolicTrait')).toString(), 10);
 
-  // return (symbolicTraits & NSFontItalicTrait) !== 0;
+  const NSFontItalicTrait = (1 << 0);
+  return (symbolicTraits & NSFontItalicTrait) !== 0;
 };
 
-// eslint-disable-next-line
 const isCondensedFont = (font: NSFont): boolean => {
-  return false;
-  // const traits = font.fontDescriptor().objectForKey(NSFontTraitsAttribute);
-  // const symbolicTraits = traits[NSFontSymbolicTrait].unsignedIntValue();
+  const $ = requireNodobjC();
+  const fontDescriptor = font('valueForKey', $('fontDescriptor'));
+  const traits = fontDescriptor('objectForKey', $('NSCTFontTraitsAttribute'));
+  const symbolicTraits = parseInt(traits('valueForKey', $('NSCTFontSymbolicTrait')).toString(), 10);
 
-  // return (symbolicTraits & NSFontCondensedTrait) !== 0;
+  const NSFontCondensedTrait = (1 << 6);
+  return (symbolicTraits & NSFontCondensedTrait) !== 0;
 };
 
 const weightOfFont = (font: NSFont): number => {
