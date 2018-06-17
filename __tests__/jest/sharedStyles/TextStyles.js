@@ -11,7 +11,9 @@ beforeEach(() => {
     toSJSON: jest.fn(),
   }));
 
-  jest.mock('../../../src/utils/getSketchVersion.js', () => 49);
+  jest.mock('../../../src/utils/getSketchVersion.js', () => ({
+    default: jest.fin(() => 49),
+  }));
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');
 
