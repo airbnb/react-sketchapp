@@ -12,7 +12,7 @@ beforeEach(() => {
   }));
 
   jest.mock('../../../src/utils/getSketchVersion.js', () => ({
-    default: jest.fn(() => 49),
+    default: jest.fn(() => 47),
   }));
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');
