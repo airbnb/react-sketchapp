@@ -2,7 +2,8 @@
 import type { SJRect, SJTextLayer } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
 import getSketchVersion from '../utils/getSketchVersion';
-import { makeEncodedAttributedString, makeResizeConstraint } from './hacksForJSONImpl';
+import makeResizeConstraint from './resizeConstraint';
+import { makeEncodedAttributedString, makeEncodedTextStyleAttributes } from './hacksForJSONImpl';
 import type { TextNode, TextNodes, ResizeConstraints, TextStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { TEXT_TRANSFORM } from '../utils/constants';
@@ -148,7 +149,10 @@ export const makeTextStyle = (style: TextStyle) => ({
   endDecorationType: 0,
   textStyle: {
     _class: 'textStyle',
-    encodedAttributes: makeTextStyleAttributes(style),
+    encodedAttributes:
+      sketchVersion === 'NodeJS' || sketchVersion >= 49
+        ? makeTextStyleAttributes(style)
+        : makeEncodedTextStyleAttributes(style),
   },
 });
 

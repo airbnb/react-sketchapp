@@ -11,7 +11,7 @@ import type {
 import { FillType } from 'sketch-constants';
 import * as normalizeColor from 'normalize-css-color';
 import type { Color, ResizeConstraints } from '../types';
-import { makeResizeConstraint } from './hacksForJSONImpl';
+import makeResizeConstraint from './resizeConstraint';
 
 const lut = [];
 for (let i = 0; i < 256; i += 1) {
