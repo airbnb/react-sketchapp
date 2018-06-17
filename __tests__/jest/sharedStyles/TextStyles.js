@@ -26,6 +26,11 @@ beforeEach(() => {
   TextStyles = TextStyles.default;
   sharedTextStyles = sharedTextStyles.default;
 
+  sharedTextStyles.setContext = jest.fn((ctx) => {
+    if (!ctx) {
+      throw new Error('Please provide a context');
+    }
+  });
   sharedTextStyles.addStyle = jest.fn();
   sharedTextStyles.setStyles = jest.fn();
 
