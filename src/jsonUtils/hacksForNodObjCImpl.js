@@ -11,6 +11,21 @@ import {
 import hashStyle from '../utils/hashStyle';
 import { APPLE_BROKEN_SYSTEM_FONT, TEXT_TRANSFORM } from '../utils/constants';
 
+// This is the ugliest but it's kind of the only way to avoid bundling
+// this module when using skpm (the other solution would be to add an `ignore` option
+// in every client webpack config...)
+let cached$; // cache nodobjc instance
+function requireNodobjC() {
+  if (cached$) {
+    return cached$;
+  }
+  cached$ = eval("require('nodeobjc')"); // eslint-disable-line
+  cached$.framework('Foundation');
+  cached$.framework('AppKit');
+  cached$.framework('CoreGraphics');
+  return cached$;
+}
+
 // this borrows heavily from react-native's RCTFont class
 // thanks y'all
 // https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
@@ -34,8 +49,6 @@ const FONT_WEIGHTS = {
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-let $; // nodobjc instance that will be lazily populated when calling createNodeJSStringMeasurer
-
 const useCache = true;
 const _cache: Map<number, NSFont> = new Map();
 
@@ -45,6 +58,7 @@ const getCached = (key: number): NSFont => {
 };
 
 const fontNamesForFamilyName = (familyName: string): Array<string> => {
+  const $ = requireNodobjC();
   const manager = $.NSFontManager('sharedFontManager');
   const members = manager('availableMembersOfFontFamily', $(familyName));
 
@@ -80,6 +94,7 @@ const isCondensedFont = (font: NSFont): boolean => {
 };
 
 const weightOfFont = (font: NSFont): number => {
+  const $ = requireNodobjC();
   const fontDescriptor = font('valueForKey', $('fontDescriptor'));
   const traits = fontDescriptor('objectForKey', $('NSCTFontTraitsAttribute'));
 
@@ -100,12 +115,7 @@ const weightOfFont = (font: NSFont): number => {
 };
 
 function findFont(style: TextStyle): NSFont {
-  if (!$) {
-    $ = require('nodobjc'); // eslint-disable-line
-    $.framework('Foundation');
-    $.framework('AppKit');
-    $.framework('CoreGraphics');
-  }
+  const $ = requireNodobjC();
   const cacheKey = hashStyle(style);
 
   let font = getCached(cacheKey);
@@ -217,12 +227,14 @@ function findFont(style: TextStyle): NSFont {
 }
 
 export function findFontName(style: TextStyle): String {
+  const $ = requireNodobjC();
   const font = findFont(style);
   const fontDescriptor = font('valueForKey', $('fontDescriptor'));
   return fontDescriptor('valueForKey', $('postscriptName'));
 }
 
 function makeParagraphStyle(textStyle) {
+  const $ = requireNodobjC();
   const pStyle = $.NSMutableParagraphStyle('alloc')('init');
   if (textStyle.lineHeight !== undefined) {
     pStyle('setMinimumLineHeight', textStyle.lineHeight);
@@ -238,6 +250,7 @@ function makeParagraphStyle(textStyle) {
 }
 
 function createStringAttributes(textStyles: TextStyle): Object {
+  const $ = requireNodobjC();
   const font = findFont(textStyles);
   const { textDecoration } = textStyles;
 
@@ -277,6 +290,7 @@ function createStringAttributes(textStyles: TextStyle): Object {
 }
 
 export function createAttributedString(textNode: TextNode): NSAttributedString {
+  const $ = requireNodobjC();
   const { content, textStyles } = textNode;
 
   const attribs = createStringAttributes(textStyles);
@@ -285,10 +299,7 @@ export function createAttributedString(textNode: TextNode): NSAttributedString {
 }
 
 export const createNodeJSStringMeasurer = (textNodes: TextNodes, width: number): Size => {
-  $ = require('nodobjc'); // eslint-disable-line
-  $.framework('Foundation');
-  $.framework('AppKit');
-  $.framework('CoreGraphics');
+  const $ = requireNodobjC();
   const pool = $.NSAutoreleasePool('alloc')('init');
   const fullStr = $.NSMutableAttributedString('alloc')('init');
   textNodes.forEach((textNode) => {
