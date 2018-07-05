@@ -216,8 +216,8 @@ function createStringAttributes(textStyles: TextStyle): Object {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
-    NSUnderline: textDecoration && underline ? underline : 0,
-    NSStrikethrough: textDecoration && strikethrough ? strikethrough : 0,
+    NSUnderline: underline || 0,
+    NSStrikethrough: strikethrough || 0,
   };
 
   const color = makeColorFromCSS(textStyles.color || 'black');
