@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { render, Artboard, Text, View } from 'react-sketchapp';
+import { render, Artboard, Text, View } from 'react-sketchappV2';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
@@ -18,12 +18,23 @@ const Swatch = ({ name, hex }) => (
   <View
     name={`Swatch ${name}`}
     style={{
-      height: 96,
+      height: 66,
       width: 96,
       margin: 4,
       backgroundColor: hex,
       padding: 8,
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.24,
+      shadowRadius: 2,
+      borderRadius: 4,
     }}
+    shadows={[
+      {
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.12,
+        shadowRadius: 2,
+      },
+    ]}
   >
     <Text name="Swatch Name" style={{ color: textColor(hex), fontWeight: 'bold' }}>
       {name}
