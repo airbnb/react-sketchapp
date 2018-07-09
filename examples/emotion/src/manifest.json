@@ -1,0 +1,15 @@
+{
+	"compatibleVersion": 3,
+	"bundleVersion": 1,
+	"commands": [
+		{
+			"name": "react-sketchapp: emotion",
+			"identifier": "main",
+			"script": "./my-command.js"
+		}
+	],
+	"menu": {
+		"isRoot": true,
+		"items": ["main"]
+	}
+}
