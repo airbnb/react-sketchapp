@@ -5,6 +5,7 @@ import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import ShadowsPropTypes from './ShadowsPropTypes';
 
 // $FlowFixMe
 export default class View extends React.Component {
@@ -15,6 +16,11 @@ export default class View extends React.Component {
     resizingConstraint: PropTypes.shape({
       ...ResizingConstraintPropTypes,
     }),
+    shadows: PropTypes.arrayOf(
+      PropTypes.shape({
+        ...ShadowsPropTypes,
+      }),
+    ),
     children: PropTypes.node,
   };
 
@@ -28,6 +34,7 @@ export default class View extends React.Component {
         name={this.props.name}
         style={StyleSheet.flatten(this.props.style)}
         resizingConstraint={this.props.resizingConstraint}
+        shadows={this.props.shadows}
       >
         {this.props.children}
       </view>
