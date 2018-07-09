@@ -1,0 +1,26 @@
+{
+	"name": "emotion-example",
+	"version": "1.0.0",
+	"skpm": {
+		"main": "emotion.sketchplugin",
+		"manifest": "src/manifest.json"
+	},
+	"scripts": {
+		"build": "skpm-build",
+		"watch": "skpm-build --watch",
+		"render": "skpm-build --watch --run",
+		"render:once": "skpm-build --run",
+		"postinstall": "npm run build && skpm-link"
+	},
+	"author": "Nitin Tulswani <tulswani19@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@skpm/builder": "^0.4.3"
+	},
+	"dependencies": {
+		"emotion-primitives": "^1.0.0-beta.6",
+		"react": "^16.4.1",
+		"react-primitives": "^0.6.0",
+		"react-sketchapp": "^2.0.0"
+	}
+}
