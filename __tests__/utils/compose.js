@@ -8,7 +8,11 @@ test('simple example', () => {
       .split('')
       .reverse()
       .join('');
-  const composed = compose(reverse, slice, toUpperCase);
+  const composed = compose(
+    reverse,
+    slice,
+    toUpperCase,
+  );
 
   expect(composed('hello world')).toEqual('OLLEH');
 });

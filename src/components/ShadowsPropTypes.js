@@ -6,4 +6,5 @@ export default {
   shadowOpacity: PropTypes.number,
   shadowRadius: PropTypes.number,
   shadowSpread: PropTypes.number,
+  shadowInner: PropTypes.bool,
 };
