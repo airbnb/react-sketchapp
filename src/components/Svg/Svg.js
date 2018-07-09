@@ -56,7 +56,6 @@ export default class Svg extends React.Component {
     viewBox: PropTypes.string,
     preserveAspectRatio: PropTypes.string,
   };
-
   static defaultProps = {
     preserveAspectRatio: 'xMidYMid meet',
   };

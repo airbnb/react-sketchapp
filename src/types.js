@@ -87,6 +87,7 @@ export type ViewStyle = {
   shadowOffset?: { width: number, height: number },
   shadowOpacity?: number,
   shadowRadius?: number,
+  shadowInner?: boolean,
   width?: number,
   height?: number,
   top?: number,
@@ -201,3 +202,14 @@ export type ResizeConstraints = {
   fixedHeight: boolean,
   fixedWidth: boolean,
 };
+
+export type SketchShadow = {
+  shadowColor: Color,
+  shadowOffset: { width: number, height: number },
+  shadowSpread: number,
+  shadowOpacity: number,
+  shadowRadius: number,
+  shadowInner: boolean,
+};
+
+export type SketchShadows = Array<SketchShadow>;
