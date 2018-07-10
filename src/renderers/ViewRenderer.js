@@ -24,6 +24,7 @@ const VISIBLE_STYLES = [
   'shadowOffset',
   'shadowOpacity',
   'shadowRadius',
+  'shadowSpread',
   'backgroundColor',
   'borderColor',
   'borderTopColor',
@@ -44,7 +45,13 @@ const VISIBLE_STYLES = [
 
 const OVERFLOW_STYLES = ['overflow', 'overflowX', 'overflowY'];
 
-const SHADOW_STYLES = ['shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius'];
+const SHADOW_STYLES = [
+  'shadowColor',
+  'shadowOffset',
+  'shadowOpacity',
+  'shadowRadius',
+  'shadowSpread',
+];
 
 export default class ViewRenderer extends SketchRenderer {
   getDefaultGroupName() {
@@ -106,14 +113,32 @@ export default class ViewRenderer extends SketchRenderer {
     const fill = makeColorFill(backgroundColor);
     const content = makeShapeGroup(frame, [shapeLayer], [fill]);
 
+    let innerShadows = [];
+    let shadows = [];
+
     if (hasAnyDefined(style, SHADOW_STYLES)) {
       const shadow = [makeShadow(style)];
       if (style.shadowInner) {
-        content.style.innerShadows = shadow;
+        innerShadows = shadow;
       } else {
-        content.style.shadows = shadow;
+        shadows = shadow;
       }
     }
+
+    if (props.shadows) {
+      props.shadows.map((shadowStyle) => {
+        const shadow = makeShadow(shadowStyle);
+        if (shadowStyle.shadowInner) {
+          innerShadows.push(shadow);
+        } else {
+          shadows.push(shadow);
+        }
+        return shadowStyle;
+      });
+    }
+
+    content.style.innerShadows = innerShadows;
+    content.style.shadows = shadows;
 
     if (hasAnyDefined(style, OVERFLOW_STYLES)) {
       if (

@@ -25,21 +25,6 @@ import Use from './Use';
 
 // $FlowFixMe
 export default class Svg extends React.Component {
-  static displayName = 'Svg';
-  static propTypes = {
-    ...View.propTypes,
-    opacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    // more detail https://svgwg.org/svg2-draft/coords.html#ViewBoxAttribute
-    viewBox: PropTypes.string,
-    preserveAspectRatio: PropTypes.string,
-  };
-
-  static defaultProps = {
-    preserveAspectRatio: 'xMidYMid meet',
-  };
-
   static Circle = Circle;
   static ClipPath = ClipPath;
   static Defs = Defs;
@@ -60,6 +45,21 @@ export default class Svg extends React.Component {
   static TextPath = TextPath;
   static TSpan = TSpan;
   static Use = Use;
+
+  static displayName = 'Svg';
+  static propTypes = {
+    ...View.propTypes,
+    opacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // more detail https://svgwg.org/svg2-draft/coords.html#ViewBoxAttribute
+    viewBox: PropTypes.string,
+    preserveAspectRatio: PropTypes.string,
+  };
+
+  static defaultProps = {
+    preserveAspectRatio: 'xMidYMid meet',
+  };
 
   render() {
     const { children, ...rest } = this.props;
