@@ -209,12 +209,15 @@ function createStringAttributes(textStyles: TextStyle): Object {
   const font = findFont(textStyles);
   const { textDecoration } = textStyles;
 
+  const underline = textDecoration && TEXT_DECORATION_UNDERLINE[textDecoration];
+  const strikethrough = textDecoration && TEXT_DECORATION_LINETHROUGH[textDecoration];
+
   const attribs: Object = {
     MSAttributedStringFontAttribute: font.fontDescriptor(),
     NSFont: font,
     NSParagraphStyle: makeParagraphStyle(textStyles),
-    NSUnderline: textDecoration ? TEXT_DECORATION_UNDERLINE[textDecoration] : 0,
-    NSStrikethrough: textDecoration ? TEXT_DECORATION_LINETHROUGH[textDecoration] : 0,
+    NSUnderline: underline || 0,
+    NSStrikethrough: strikethrough || 0,
   };
 
   const color = makeColorFromCSS(textStyles.color || 'black');
@@ -260,7 +263,6 @@ export function makeEncodedAttributedString(textNodes: TextNodes) {
   const encodedAttribStr = MSAttributedString.encodeAttributedString(fullStr);
 
   const msAttribStr = MSAttributedString.alloc().initWithEncodedAttributedString(encodedAttribStr);
-
   return encodeSketchJSON(msAttribStr);
 }
 
