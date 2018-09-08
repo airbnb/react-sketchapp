@@ -6,7 +6,7 @@ Contributions are welcome and are greatly appreciated! Every little bit helps, a
 
 **For support or usage questions like “how do I do X with react-sketchapp” and “my code doesn't work”, please search and ask on [StackOverflow with a react-sketchapp tag](http://stackoverflow.com/questions/tagged/react-sketchapp?sort=votes&pageSize=50) first.**
 
-We ask you to do this because StackOverflow has a much better job at keeping popular questions visible. Unfortunately good answers get lost and outdated on GitHub.
+We ask you to do this because StackOverflow does a much better job at keeping popular questions visible. Unfortunately good answers get lost and outdated on GitHub.
 
 Some questions take a long time to get an answer. **If your question gets closed or you don't get a reply on StackOverflow for longer than a few days,** we encourage you to post an issue linking to your question. We will close your issue but this will give people watching the repo an opportunity to see your question and reply to it on StackOverflow if they know the answer.
 
