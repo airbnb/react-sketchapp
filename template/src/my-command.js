@@ -1,3 +1,4 @@
+import sketch from 'sketch';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { render, Artboard, Text, View } from 'react-sketchapp';
@@ -63,5 +64,5 @@ export default () => {
     'Pear Dark': '#2E854B',
   };
 
-  render(<Document colors={colorList} />, context.document.currentPage());
+  render(<Document colors={colorList} />, sketch.getSelectedDocument().selectedPage);
 };

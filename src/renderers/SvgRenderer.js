@@ -63,6 +63,7 @@ export default class SvgRenderer extends ViewRenderer {
   getDefaultGroupName(props: any) {
     return props.name || 'Svg';
   }
+
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,

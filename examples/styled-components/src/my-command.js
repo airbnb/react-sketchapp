@@ -5,7 +5,7 @@ import { render } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
-const textColor = (hex) => {
+const textColor = hex => {
   const vsWhite = chroma.contrast(hex, 'white');
   if (vsWhite > 4) {
     return '#FFF';
@@ -70,7 +70,9 @@ const Artboard = styled.View`
 const Document = ({ colors }) => (
   <Artboard name="Swatches">
     <Title>Max’s Sweaters</Title>
-    {Object.keys(colors).map(color => <Swatch name={color} hex={colors[color]} key={color} />)}
+    {Object.keys(colors).map(color => (
+      <Swatch name={color} hex={colors[color]} key={color} />
+    ))}
   </Artboard>
 );
 

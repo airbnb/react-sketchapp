@@ -54,13 +54,15 @@ const styles = {
   },
 };
 
-const passwordStrength = (password) => {
+const passwordStrength = password => {
   // Faux password checking
   if (password.length <= 6) {
     return 'short';
-  } else if (password.length <= 9) {
+  }
+  if (password.length <= 9) {
     return 'fair';
-  } else if (password.length <= 12) {
+  }
+  if (password.length <= 12) {
     return 'good';
   }
 

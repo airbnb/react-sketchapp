@@ -1,5 +1,3 @@
-// eslint is broken doesn't like when we just check the props without "using" them
-/* eslint-disable react/no-unused-prop-types */
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';

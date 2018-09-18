@@ -11,6 +11,7 @@ export default class SketchRenderer {
   ) {
     return 'Group';
   }
+
   renderGroupLayer(layout: LayoutInfo, style: ViewStyle, textStyle: TextStyle, props: any): any {
     // Default SketchRenderer just renders an empty group
 
@@ -33,15 +34,16 @@ export default class SketchRenderer {
       name: props.name || this.getDefaultGroupName(props),
     };
   }
+
+  /* eslint-disable no-unused-vars */
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    // eslint-disable-next-line no-unused-vars
     props: any,
-    // eslint-disable-next-line no-unused-vars
     children: ?Array<TreeNode>,
   ): Array<any> {
     return [];
   }
+  /* eslint-enable */
 }
