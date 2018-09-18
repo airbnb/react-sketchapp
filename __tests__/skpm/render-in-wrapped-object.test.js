@@ -6,8 +6,8 @@ import { render, View, Artboard, Text } from '../../src';
 // depending on where those tests run, we don't get the things,
 // eg. the context might be empty or there is no selected document
 // This make sure we always get something
-function getDoc(context, document) {
-  return context.document || (sketch.getSelectedDocument() || document).sketchObject;
+function getDoc(document) {
+  return sketch.getSelectedDocument() || document;
 }
 
 const colorList = {
@@ -22,7 +22,7 @@ const colorList = {
 };
 
 test('should render a Page with a rectangle', (context, document) => {
-  const nativePage = getDoc(context, document).currentPage();
+  const { selectedPage } = getDoc(document);
   // eslint-disable-next-line
   const Swatch = ({ name, hex }) => (
     <View
@@ -57,9 +57,8 @@ test('should render a Page with a rectangle', (context, document) => {
         <Swatch name={color} hex={colorList[color]} key={color} />
       ))}
     </Artboard>,
-    nativePage,
+    selectedPage,
   );
 
-  const page = sketch.Page.fromNative(nativePage);
-  expect(page.layers[0].name).toBe('Swatches');
+  expect(selectedPage.layers[0].name).toBe('Swatches');
 });

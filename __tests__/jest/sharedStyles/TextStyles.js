@@ -141,11 +141,11 @@ describe('create', () => {
 
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
-      whitelist.forEach((key) => {
+      whitelist.forEach(key => {
         expect(firstStoredStyle).toHaveProperty(key, true);
       });
 
-      blacklist.forEach((key) => {
+      blacklist.forEach(key => {
         expect(firstStoredStyle).not.toHaveProperty(key);
       });
     });

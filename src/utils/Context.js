@@ -3,6 +3,7 @@ type Styles = Object;
 
 class Context {
   styles: Styles;
+
   staged: Array<Styles>;
 
   constructor(styles: Styles = {}) {

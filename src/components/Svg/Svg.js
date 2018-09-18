@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import View from '../View';
+import { ViewPropTypes } from '../View';
 import Circle from './Circle';
 import ClipPath from './ClipPath';
 import Defs from './Defs';
@@ -26,29 +26,49 @@ import Use from './Use';
 // $FlowFixMe
 export default class Svg extends React.Component {
   static Circle = Circle;
+
   static ClipPath = ClipPath;
+
   static Defs = Defs;
+
   static Ellipse = Ellipse;
+
   static G = G;
+
   static Image = Image;
+
   static Line = Line;
+
   static LinearGradient = LinearGradient;
+
   static Path = Path;
+
   static Pattern = Pattern;
+
   static Polygon = Polygon;
+
   static Polyline = Polyline;
+
   static RadialGradient = RadialGradient;
+
   static Rect = Rect;
+
   static Stop = Stop;
+
   static Symbol = Symbol;
+
   static Text = Text;
+
   static TextPath = TextPath;
+
   static TSpan = TSpan;
+
   static Use = Use;
 
   static displayName = 'Svg';
+
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     opacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

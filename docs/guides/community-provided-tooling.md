@@ -1,6 +1,6 @@
 # Community Provided Tooling
 
-> NOTICE: Keep that mind that the following section is *not* written by the maintainers of this project.
+> NOTICE: Keep that mind that the following section is _not_ written by the maintainers of this project.
 
 ## Code suggestions/intellisense
 
@@ -24,7 +24,7 @@ You can get suggestions by hitting `Ctrl + space`
 
 **Atom**
 
-Unfortunately, [atom-typescript package does *not* support code suggestions/intellisense in .js files](https://github.com/TypeStrong/atom-typescript/issues/1194) but the code suggestions do work in typescript files. See the example below for how to get typescript working.
+Unfortunately, [atom-typescript package does _not_ support code suggestions/intellisense in .js files](https://github.com/TypeStrong/atom-typescript/issues/1194) but the code suggestions do work in typescript files. See the example below for how to get typescript working.
 
 ## Typescript usage
 
