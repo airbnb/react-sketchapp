@@ -100,10 +100,9 @@ const findFont = (style: TextStyle): NSFont => {
   const fontSize = style.fontSize ? style.fontSize : defaultFontSize;
   let fontWeight = style.fontWeight ? FONT_WEIGHTS[style.fontWeight] : defaultFontWeight;
   // Default to Helvetica if fonts are missing
-  let familyName =
-    // Must use two equals (==) for compatibility with Cocoascript
-    // eslint-disable-next-line eqeqeq
-    defaultFontFamily == APPLE_BROKEN_SYSTEM_FONT ? 'Helvetica' : defaultFontFamily;
+  // Must use two equals (==) for compatibility with Cocoascript
+  // eslint-disable-next-line eqeqeq
+  let familyName = defaultFontFamily == APPLE_BROKEN_SYSTEM_FONT ? 'Helvetica' : defaultFontFamily;
   let isItalic = false;
   let isCondensed = false;
 

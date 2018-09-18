@@ -92,9 +92,7 @@ Dot.propTypes = {
   completed: PropTypes.bool,
 };
 
-const Row = ({
-  title, description, completed, date, status,
-}) => (
+const Row = ({ title, description, completed, date, status }) => (
   <View style={styles.rowContainer}>
     <View name="Row Left" style={styles.rowLeftArea}>
       <VerticalLine />
@@ -149,7 +147,7 @@ Timeline.propTypes = {
 export default () => {
   fetch(API_ENDPOINT_URL)
     .then(res => res.json())
-    .then((data) => {
+    .then(data => {
       render(<Timeline data={data} />, context.document.currentPage());
     })
     .catch(e => console.error(e)); // eslint-disable-line no-console

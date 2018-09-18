@@ -1,5 +1,6 @@
+/* eslint-disable import/named, import/no-unresolved */
 import * as React from 'react';
-import * as sketch from 'sketch'; // eslint-disable-line
+import * as sketch from 'sketch';
 import { render, View, Artboard, Text } from '../../src';
 
 // depending on where those tests run, we don't get the things,
