@@ -15,7 +15,7 @@ npm install -g skpm
 ### Creating a new plugin
 
 ```bash
-skpm create my-plugin --template=mathieudutour/skpm-sketchapp
+skpm create my-plugin --template=airbnb/react-sketchapp
 ```
 
 > A note on templates

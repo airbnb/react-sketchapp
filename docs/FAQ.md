@@ -44,7 +44,7 @@ By aligning with react-native's API we:
 Where it makes sense we're open to creating Sketch-specific components —there's no analog for `<Artboard>` on web or mobile—but the goal of `react-sketchapp` is to bring design & engineering closer together.
 
 #### So I can't draw arbitrary shapes?
-Not currently. When we find the right API we'll probably implement an SVG-style abstraction for inserting arbitrary paths & polygons etc.
+You can use the [SVG API](/docs/API.md#svg) to draw arbitrary shapes.
 
 #### Any plans to support Sketch's constraints for layout?
 Not currently. Flexbox is the closest we have to a predictable, cross-platform layout specification — by using it, we can use the same styles on every platform we build for.

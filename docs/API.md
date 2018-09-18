@@ -46,22 +46,25 @@ Example:
 ```
 
 ##### `container` (optional)
-The element to render into - will be replaced. Should either be a Sketch Group or Page Object.
+The element to render into - will be replaced. Should either be a Sketch [Document](https://developer.sketchapp.com/reference/api/#document), Sketch [Group](https://developer.sketchapp.com/reference/api/#group) or Sketch [Page](https://developer.sketchapp.com/reference/api/#page) Object.
 
-Example: `context.document.currentPage()`.
+Example: `sketch.getSelectedDocument().selectedPage`.
 
 ### returns
 The top-most rendered native Sketch layer.
 
 #### Example
 ```js
+import sketch from 'sketch'
+import { View, Text, render } from 'react-sketchapp'
+
 const Document = props =>
   <View>
     <Text>Hello world!</Text>
   </View>;
 
-export default (context) => {
-  render(<Document />, context.document.currentPage());
+export default () => {
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
 
@@ -174,11 +177,15 @@ A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-re
 
 #### Example
 ```js
-export default (context) => {
+import sketch from 'sketch'
+import { RedBox, render } from 'react-sketchapp'
+
+export default () => {
+  const { selectedPage } = sketch.getSelectedDocument()
   try {
-    render(<BrokenComponent />, context.document.currentPage());
+    render(<BrokenComponent />, selectedPage);
   } catch (err) {
-    render(<RedBox error={err} />, context.document.currentPage());
+    render(<RedBox error={err} />, selectedPage);
   }
 }
 ```
@@ -190,7 +197,10 @@ The API is based on [`react-native-svg`](https://github.com/react-native-communi
 
 #### Example
 ```js
-export default (context) => {
+import sketch from 'sketch'
+import { Svg, render } from 'react-sketchapp'
+
+export default () => {
   render(
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +223,7 @@ export default (context) => {
         <Svg.Path fill="#FED305" d="M107 15l-7 145L247 0m140 15l7 145L247 0" />
       </Svg.G>
     </Svg>
-  , context.document.currentPage());
+  , sketch.getSelectedDocument().selectedPage);
 }
 ```
 
@@ -382,7 +392,10 @@ An object of JavaScript styles. The keys will be used as Sketch's Text Style nam
 
 #### Example
 ```js
-export default (context) => {
+import sketch from 'sketch'
+import { TextStyles, View, Text, render } from 'react-sketchapp'
+
+export default () => {
   const typeStyles = {
     Headline: {
       fontSize: 36,
@@ -407,7 +420,7 @@ export default (context) => {
       <Text style={typeStyles.Body}>Body text</Text>
     </View>
 
-  render(<Document />, context.document.currentPage());
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
 
@@ -430,7 +443,10 @@ The style name
 
 #### Example
 ```js
-export default (context) => {
+import sketch from 'sketch'
+import { TextStyles, View, Text, render } from 'react-sketchapp'
+
+export default () => {
   const typeStyles = {
     Headline: {
       fontSize: 36,
@@ -455,7 +471,7 @@ export default (context) => {
       <Text style={TextStyles.get('Body')}>Body text</Text>
     </View>
 
-  render(<Document />, context.document.currentPage());
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
 
@@ -482,6 +498,9 @@ Returns a react component which can be used to render the symbol that is associa
 
 #### Symbol example
 ```js
+import sketch from 'sketch'
+import { View, makeSymbol, Artboard, render } from 'react-sketchapp'
+
 const BlueSquare = () => (
   <View
     name="Blue Square"
@@ -498,14 +517,17 @@ const Document = () => (
 );
 
 export default () => {
-  render(<Document />, context.document.currentPage());
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
 
 #### Text override example
-Text overrides use the name paramater to target a specific Text primitive. When no name is given the value within the Text primitive can be used to override the value.
+Text overrides use the name parameter to target a specific Text primitive. When no name is given the value within the Text primitive can be used to override the value.
 
 ```js
+import sketch from 'sketch'
+import { View, Text, makeSymbol, Artboard, render } from 'react-sketchapp'
+
 const BlueSquare = () => (
   <View
     name="Blue Square"
@@ -526,14 +548,17 @@ const Document = () => (
 );
 
 export default () => {
-  render(<Document />, context.document.currentPage());
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
 
 #### Image override example
-Image overrides use the name paramater to target a specific Image primitive.
+Image overrides use the name parameter to target a specific Image primitive.
 
 ```js
+import sketch from 'sketch'
+import { View, Image, Artboard, makeSymbol, render } from 'react-sketchapp'
+
 const BlueSquare = () => (
   <View
     name="Blue Square"
@@ -554,13 +579,16 @@ const Document = () => (
 );
 
 export default () => {
-  render(<Document />, context.document.currentPage());
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
 
 #### Nested symbol + override example
 
 ```js
+import sketch from 'sketch'
+import { View, Text, makeSymbol, Image, Artboard, render } from 'react-sketchapp'
+
 const RedSquare = () => (
   <View
     name="Red Square"
@@ -623,7 +651,7 @@ const Document = () => (
 );
 
 
-export default (context) => {
-  render(<Document />, context.document.currentPage());
+export default () => {
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
 }
 ```
