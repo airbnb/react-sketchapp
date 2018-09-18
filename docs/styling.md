@@ -9,36 +9,36 @@ Components use CSS styles + flexbox layout.
 | `shadowColor`             | `Color`                                                                                     | ⛔️        |
 | `shadowOffset`            | `{ width: number, height: number }`                                                         | ✅         |
 | `shadowOpacity`           | `number`                                                                                    | ✅         |
-| `shadowRadius`            | `number`                                                                                    | ✅         |
-| `width`                   | `number`                                                                                    | ✅         |
-| `height`                  | `number`                                                                                    | ✅         |
-| `top`                     | `number`                                                                                    | ✅         |
-| `left`                    | `number`                                                                                    | ✅         |
-| `right`                   | `number`                                                                                    | ✅         |
-| `bottom`                  | `number`                                                                                    | ✅         |
-| `minWidth`                | `number`                                                                                    | ✅         |
-| `maxWidth`                | `number`                                                                                    | ✅         |
-| `minHeight`               | `number`                                                                                    | ✅         |
-| `maxHeight`               | `number`                                                                                    | ✅         |
-| `margin`                  | `number`                                                                                    | ✅         |
-| `marginVertical`          | `number`                                                                                    | ✅         |
-| `marginHorizontal`        | `number`                                                                                    | ✅         |
-| `marginTop`               | `number`                                                                                    | ✅         |
-| `marginBottom`            | `number`                                                                                    | ✅         |
-| `marginLeft`              | `number`                                                                                    | ✅         |
-| `marginRight`             | `number`                                                                                    | ✅         |
-| `padding`                 | `number`                                                                                    | ✅         |
-| `paddingVertical`         | `number`                                                                                    | ✅         |
-| `paddingHorizontal`       | `number`                                                                                    | ✅         |
-| `paddingTop`              | `number`                                                                                    | ✅         |
-| `paddingBottom`           | `number`                                                                                    | ✅         |
-| `paddingLeft`             | `number`                                                                                    | ✅         |
-| `paddingRight`            | `number`                                                                                    | ✅         |
-| `borderWidth`             | `number`                                                                                    | ✅         |
-| `borderTopWidth`          | `number`                                                                                    | ✅         |
-| `borderRightWidth`        | `number`                                                                                    | ✅         |
-| `borderBottomWidth`       | `number`                                                                                    | ✅         |
-| `borderLeftWidth`         | `number`                                                                                    | ✅         |
+| `shadowRadius`            | `number` &#124; `percentage`                                                                | ✅         |
+| `width`                   | `number` &#124; `percentage`                                                                | ✅         |
+| `height`                  | `number` &#124; `percentage`                                                                | ✅         |
+| `top`                     | `number` &#124; `percentage`                                                                | ✅         |
+| `left`                    | `number` &#124; `percentage`                                                                | ✅         |
+| `right`                   | `number` &#124; `percentage`                                                                | ✅         |
+| `bottom`                  | `number` &#124; `percentage`                                                                | ✅         |
+| `minWidth`                | `number` &#124; `percentage`                                                                | ✅         |
+| `maxWidth`                | `number` &#124; `percentage`                                                                | ✅         |
+| `minHeight`               | `number` &#124; `percentage`                                                                | ✅         |
+| `maxHeight`               | `number` &#124; `percentage`                                                                | ✅         |
+| `margin`                  | `number` &#124; `percentage`                                                                | ✅         |
+| `marginVertical`          | `number` &#124; `percentage`                                                                | ✅         |
+| `marginHorizontal`        | `number` &#124; `percentage`                                                                | ✅         |
+| `marginTop`               | `number` &#124; `percentage`                                                                | ✅         |
+| `marginBottom`            | `number` &#124; `percentage`                                                                | ✅         |
+| `marginLeft`              | `number` &#124; `percentage`                                                                | ✅         |
+| `marginRight`             | `number` &#124; `percentage`                                                                | ✅         |
+| `padding`                 | `number` &#124; `percentage`                                                                | ✅         |
+| `paddingVertical`         | `number` &#124; `percentage`                                                                | ✅         |
+| `paddingHorizontal`       | `number` &#124; `percentage`                                                                | ✅         |
+| `paddingTop`              | `number` &#124; `percentage`                                                                | ✅         |
+| `paddingBottom`           | `number` &#124; `percentage`                                                                | ✅         |
+| `paddingLeft`             | `number` &#124; `percentage`                                                                | ✅         |
+| `paddingRight`            | `number` &#124; `percentage`                                                                | ✅         |
+| `borderWidth`             | `number` &#124; `percentage`                                                                | ✅         |
+| `borderTopWidth`          | `number` &#124; `percentage`                                                                | ✅         |
+| `borderRightWidth`        | `number` &#124; `percentage`                                                                | ✅         |
+| `borderBottomWidth`       | `number` &#124; `percentage`                                                                | ✅         |
+| `borderLeftWidth`         | `number` &#124; `percentage`                                                                | ✅         |
 | `position`                | `absolute` &#124; `relative`                                                                | ✅         |
 | `flexDirection`           | `row` &#124; `row-reverse` &#124; `column` &#124; `column-reverse`                          | ✅         |
 | `flexWrap`                | `wrap` &#124; `nowrap`                                                                      | ✅         |
@@ -59,17 +59,17 @@ Components use CSS styles + flexbox layout.
 | `borderRightColor`        | `Color`                                                                                     | ✅         |
 | `borderBottomColor`       | `Color`                                                                                     | ✅         |
 | `borderLeftColor`         | `Color`                                                                                     | ✅         |
-| `borderRadius`            | `number`                                                                                    | ✅         |
-| `borderTopLeftRadius`     | `number`                                                                                    | ✅         |
-| `borderTopRightRadius`    | `number`                                                                                    | ✅         |
-| `borderBottomLeftRadius`  | `number`                                                                                    | ✅         |
-| `borderBottomRightRadius` | `number`                                                                                    | ✅         |
+| `borderRadius`            | `number` &#124; `percentage`                                                                | ✅         |
+| `borderTopLeftRadius`     | `number` &#124; `percentage`                                                                | ✅         |
+| `borderTopRightRadius`    | `number` &#124; `percentage`                                                                | ✅         |
+| `borderBottomLeftRadius`  | `number` &#124; `percentage`                                                                | ✅         |
+| `borderBottomRightRadius` | `number` &#124; `percentage`                                                                | ✅         |
 | `borderStyle`             | `solid` &#124; `dotted` &#124; `dashed`                                                     | ✅         |
-| `borderWidth`             | `number`                                                                                    | ✅         |
-| `borderTopWidth`          | `number`                                                                                    | ✅         |
-| `borderRightWidth`        | `number`                                                                                    | ✅         |
-| `borderBottomWidth`       | `number`                                                                                    | ✅         |
-| `borderLeftWidth`         | `number`                                                                                    | ✅         |
+| `borderWidth`             | `number` &#124; `percentage`                                                                | ✅         |
+| `borderTopWidth`          | `number` &#124; `percentage`                                                                | ✅         |
+| `borderRightWidth`        | `number` &#124; `percentage`                                                                | ✅         |
+| `borderBottomWidth`       | `number` &#124; `percentage`                                                                | ✅         |
+| `borderLeftWidth`         | `number` &#124; `percentage`                                                                | ✅         |
 | `opacity`                 | `number`                                                                                    | ✅         |
 
 #### Type Styles
@@ -90,6 +90,7 @@ Components use CSS styles + flexbox layout.
 | `textAlign`          | `auto` &#124; `left` &#124; `right` &#124; `center` &#124; `justify` | ✅         |
 | `writingDirection`   | `auto` &#124; `ltr` &#124; `rtl`                                     | ⛔️        |
 | `opacity`            | `number`                                                             | ✅         |
+| `percentage`         | `points` &#124; `percentages`                                        | ✅         |
 
 Styles can be passed to components as plain objects, or via [`StyleSheet`](/docs/API.md).
 
