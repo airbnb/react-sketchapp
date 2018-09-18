@@ -1,21 +1,25 @@
 # Timeline w/ Airtable
 
 ## How to use
+
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
-```
+
+```bash
 curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/timeline-airtable
 cd timeline-airtable
 ```
 
 Install the dependencies
-```
+
+```bash
 npm install
 ```
 
 Then, open Sketch and navigate to `Plugins → react-sketchapp: Timeline w/ Airtable`
 
 Run with live reloading in Sketch
-```
+
+```bash
 npm run render
 ```
 

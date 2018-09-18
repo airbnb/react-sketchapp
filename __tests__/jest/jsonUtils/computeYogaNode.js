@@ -27,7 +27,7 @@ const createYogaNodes = (
   containerHeight: number,
 ) => {
   const yogaNodes = [];
-  styles.forEach((style) => {
+  styles.forEach(style => {
     const treeNode = createTreeNode(style);
     const { node } = computeYogaNode(treeNode);
     node.calculateLayout(

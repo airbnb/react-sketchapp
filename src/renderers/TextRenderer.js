@@ -9,6 +9,7 @@ export default class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: any) {
     return props.name || 'Text';
   }
+
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -20,7 +21,7 @@ export default class TextRenderer extends SketchRenderer {
     // Append all text nodes's content into one string
     if (!name && props.textNodes) {
       name = '';
-      props.textNodes.forEach((textNode) => {
+      props.textNodes.forEach(textNode => {
         name += textNode.content;
       });
     }

@@ -15,14 +15,14 @@ npm install -g skpm
 ### Creating a new plugin
 
 ```bash
-skpm create my-plugin --template=mathieudutour/skpm-sketchapp
+skpm create my-plugin --template=airbnb/react-sketchapp
 ```
 
 > A note on templates
 >
 > The purpose of skpm templates are to provide opinionated development tooling setups so that users can get started with actual plugin code as fast as possible.
 >
-> * [`airbnb/react-sketchapp`](https://github.com/airbnb/react-sketchapp) is a simple template to get started with `react-sketchapp`
+> - [`airbnb/react-sketchapp`](https://github.com/airbnb/react-sketchapp) is a simple template to get started with `react-sketchapp`
 >
 > 💁 Tip: Any Github repo with a 'template' folder can be used as a custom template: skpm create <project-name> --template=<username>/<repository>
 
@@ -50,13 +50,13 @@ npm run render
 
 To view the output of your `console.log`, you have a few different options:
 
-* Using the [sketch-dev-tools](https://github.com/skpm/sketch-dev-tools)
-* Open Console.app and look for the sketch logs
-* Look at the `~/Library/Logs/com.bohemiancoding.sketch3/Plugin Output.log` file
+- Using the [sketch-dev-tools](https://github.com/skpm/sketch-dev-tools)
+- Open Console.app and look for the sketch logs
+- Look at the `~/Library/Logs/com.bohemiancoding.sketch3/Plugin Output.log` file
 
 Skpm provides a convenient way to do the latter:
 
-```
+```bash
 skpm log
 
   -f, -F        The `-f` option causes tail to not stop when end of file is
@@ -71,9 +71,9 @@ skpm log
 
 To customize Babel, you have two options:
 
-* You may create a [`.babelrc`](https://babeljs.io/docs/usage/babelrc) file in your project's root directory. Any settings you define here will overwrite matching config-keys within skpm preset. For example, if you pass a "presets" object, it will replace & reset all Babel presets that skpm defaults to.
+- You may create a [`.babelrc`](https://babeljs.io/docs/usage/babelrc) file in your project's root directory. Any settings you define here will overwrite matching config-keys within skpm preset. For example, if you pass a "presets" object, it will replace & reset all Babel presets that skpm defaults to.
 
-* If you'd like to modify or add to the existing Babel config, you must use a `webpack.skpm.config.js` file. Visit the [Webpack](#webpack) section for more info.
+- If you'd like to modify or add to the existing Babel config, you must use a `webpack.skpm.config.js` file. Visit the [Webpack](#webpack) section for more info.
 
 ### Webpack
 
@@ -87,7 +87,7 @@ To customize webpack create `webpack.skpm.config.js` file which exports function
  * @param {object} config - original webpack config.
  * @param {boolean} isPluginCommand - wether the config is for a plugin command or a resource
  **/
-module.exports = function (config, isPluginCommand) {
+module.exports = function(config, isPluginCommand) {
   /** you can change config here **/
-}
+};
 ```

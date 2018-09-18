@@ -7,22 +7,24 @@ import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ShadowsPropTypes from './ShadowsPropTypes';
 
+export const ViewPropTypes = {
+  // TODO(lmr): do some nice warning stuff like RN does
+  style: or([PropTypes.shape(ViewStylePropTypes), PropTypes.number]),
+  name: PropTypes.string,
+  resizingConstraint: PropTypes.shape({
+    ...ResizingConstraintPropTypes,
+  }),
+  shadows: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...ShadowsPropTypes,
+    }),
+  ),
+  children: PropTypes.node,
+};
+
 // $FlowFixMe
 export default class View extends React.Component {
-  static propTypes = {
-    // TODO(lmr): do some nice warning stuff like RN does
-    style: or([PropTypes.shape(ViewStylePropTypes), PropTypes.number]),
-    name: PropTypes.string,
-    resizingConstraint: PropTypes.shape({
-      ...ResizingConstraintPropTypes,
-    }),
-    shadows: PropTypes.arrayOf(
-      PropTypes.shape({
-        ...ShadowsPropTypes,
-      }),
-    ),
-    children: PropTypes.node,
-  };
+  static propTypes = ViewPropTypes;
 
   static defaultProps = {
     name: 'View',
