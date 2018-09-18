@@ -2,31 +2,32 @@
 
 This example was adapted from the [basic-setup example](../basic-setup).
 
-> **NOTE:** you may also use the typings *without* using typescript if you editor supports it. [See here](../../docs/guides/community-provided-tooling.md).
+> **NOTE:** you may also use the typings _without_ using typescript if you editor supports it. [See here](../../docs/guides/community-provided-tooling.md).
 
 ## How to use
+
 Download the example or [clone the repo](http://github.com/airbnb/react-sketchapp):
 
-```
+```bash
 curl https://codeload.github.com/airbnb/react-sketchapp/tar.gz/master | tar -xz --strip=2 react-sketchapp-master/examples/basic-setup-typescript
 cd basic-setup-typescript
 ```
 
 Install the dependencies
 
-```
+```bash
 npm install
 ```
 
 Run with live reloading in Sketch, need a new sketch doc open. This will put both skpm and the Typescript compiler in watch mode:
 
-```
+```bash
 npm run render
 ```
 
 To clean the `.ts-compiled` directory, you can run:
 
-```
+```bash
 npm run typescript:clean
 ```
 
@@ -48,8 +49,6 @@ Here is a reference `tsconfig.json`:
     "rootDir": "./src",
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["./src/**/*"]
 }
 ```

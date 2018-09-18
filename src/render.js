@@ -120,7 +120,8 @@ export const render = (
 
     // The Symbols page holds a special meaning within Sketch / react-sketchapp
     // and due to how `makeSymbol` works, we cannot render into it
-  } else if (isNativeSymbolsPage(nativeContainer)) {
+  }
+  if (isNativeSymbolsPage(nativeContainer)) {
     throw Error('Cannot render into Symbols page');
   }
 

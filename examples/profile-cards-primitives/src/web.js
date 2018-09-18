@@ -12,7 +12,13 @@ import DATA from './data';
 export default () => (
   <div>
     <h1 style={{ fontFamily: "'SF UI Display', 'San Francisco'" }}>Cross-platform components!</h1>
-    <p style={{ fontFamily: "'SF UI Text', 'San Francisco'", maxWidth: '28em', lineHeight: 1.5 }}>
+    <p
+      style={{
+        fontFamily: "'SF UI Text', 'San Francisco'",
+        maxWidth: '28em',
+        lineHeight: 1.5,
+      }}
+    >
       &lt;Profile /&gt; is defined with platform-independent components from react-primitives. We
       can use it in our web UI, and continue to use primitives, or mix them with DOM elements
     </p>

@@ -38,7 +38,9 @@ class TextBox extends Component {
           onChange={this.handleChange}
         />
         {this.props.children &&
-          React.cloneElement(this.props.children, { password: this.state.value })}
+          React.cloneElement(this.props.children, {
+            password: this.state.value,
+          })}
       </div>
     );
   }
