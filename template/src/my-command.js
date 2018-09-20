@@ -1,3 +1,4 @@
+import sketch from 'sketch';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { render, Artboard, Text, View } from 'react-sketchapp';
@@ -13,10 +14,7 @@ const Swatch = ({ name, hex }) => (
       padding: 8,
     }}
   >
-    <Text
-      name="Swatch Name"
-      style={{ color: '#FFF', fontWeight: 'bold' }}
-    >
+    <Text name="Swatch Name" style={{ color: '#FFF', fontWeight: 'bold' }}>
       {name}
     </Text>
     <Text name="Swatch Hex" style={{ color: '#FFF' }}>
@@ -63,5 +61,5 @@ export default () => {
     'Pear Dark': '#2E854B',
   };
 
-  render(<Document colors={colorList} />, context.document.currentPage());
+  render(<Document colors={colorList} />, sketch.getSelectedDocument().selectedPage);
 };

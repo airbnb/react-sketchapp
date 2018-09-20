@@ -21,7 +21,7 @@ const createStringMeasurer = (textNodes: TextNodes) => (width: number = 0): Size
       return createNodeJSStringMeasurer(textNodes, _width);
     }
     const fullStr = NSMutableAttributedString.alloc().init();
-    textNodes.forEach((textNode) => {
+    textNodes.forEach(textNode => {
       const newString = createAttributedString(textNode);
       fullStr.appendAttributedString(newString);
     });

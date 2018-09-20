@@ -17,12 +17,12 @@
     "postinstall": "npm run build && skpm-link"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.2.0"
+    "@skpm/builder": "^0.5.10"
   },
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^16.3.2",
-    "react-sketchapp": "^0.12.1",
+    "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^16.3.2"
   }
 }

@@ -80,7 +80,7 @@ const isItalicFont = (font: NSFont): boolean => {
   const traits = fontDescriptor('objectForKey', $('NSCTFontTraitsAttribute'));
   const symbolicTraits = parseInt(traits('valueForKey', $('NSCTFontSymbolicTrait')).toString(), 10);
 
-  const NSFontItalicTrait = (1 << 0);
+  const NSFontItalicTrait = 1 << 0;
   return (symbolicTraits & NSFontItalicTrait) !== 0;
 };
 
@@ -90,7 +90,7 @@ const isCondensedFont = (font: NSFont): boolean => {
   const traits = fontDescriptor('objectForKey', $('NSCTFontTraitsAttribute'));
   const symbolicTraits = parseInt(traits('valueForKey', $('NSCTFontSymbolicTrait')).toString(), 10);
 
-  const NSFontCondensedTrait = (1 << 6);
+  const NSFontCondensedTrait = 1 << 6;
   return (symbolicTraits & NSFontCondensedTrait) !== 0;
 };
 
@@ -123,9 +123,10 @@ function findFont(style: TextStyle): NSFont {
   if (font) {
     return font;
   }
-  const defaultFontFamily = $
-    .NSFont('systemFontOfSize', 14)('valueForKey', $('familyName'))
-    .toString();
+  const defaultFontFamily = $.NSFont('systemFontOfSize', 14)(
+    'valueForKey',
+    $('familyName'),
+  ).toString();
   const defaultFontWeight = 0;
   const defaultFontSize = 14;
 
@@ -303,7 +304,7 @@ export const createNodeJSStringMeasurer = (textNodes: TextNodes, width: number):
   const $ = requireNodobjC();
   const pool = $.NSAutoreleasePool('alloc')('init');
   const fullStr = $.NSMutableAttributedString('alloc')('init');
-  textNodes.forEach((textNode) => {
+  textNodes.forEach(textNode => {
     const newString = createAttributedString(textNode);
     fullStr('appendAttributedString', newString);
   });

@@ -68,9 +68,7 @@ const RESIZE_CONSTRAINTS = {
 export default function makeResizeConstraint(resizingConstraint: ?ResizeConstraints): number {
   if (resizingConstraint) {
     const constraints = [];
-    const {
-      top, right, bottom, left, fixedHeight, fixedWidth,
-    } = resizingConstraint;
+    const { top, right, bottom, left, fixedHeight, fixedWidth } = resizingConstraint;
 
     if (top) {
       constraints.push('top');

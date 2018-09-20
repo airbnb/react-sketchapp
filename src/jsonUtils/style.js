@@ -1,13 +1,8 @@
 // @flow
 import { BorderPosition } from 'sketch-constants';
 import type { SJBorderOptions, SJShadow, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
-import { makeRect, makeColorFromCSS } from '../jsonUtils/models';
-import {
-  makeHorizontalPath,
-  makeVerticalPath,
-  makeShapePath,
-  makeShapeGroup,
-} from '../jsonUtils/shapeLayers';
+import { makeRect, makeColorFromCSS } from './models';
+import { makeHorizontalPath, makeVerticalPath, makeShapePath, makeShapeGroup } from './shapeLayers';
 import type { Color, ViewStyle } from '../types';
 
 const DEFAULT_SHADOW_COLOR = '#000';

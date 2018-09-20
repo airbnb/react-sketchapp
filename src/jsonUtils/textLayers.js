@@ -96,21 +96,21 @@ const makeTextStyleAttributes = (style: TextStyle) => ({
     alignment: TEXT_ALIGN[style.textAlign || 'auto'],
     ...(typeof style.lineHeight !== 'undefined'
       ? {
-        minimumLineHeight: style.lineHeight,
-        maximumLineHeight: style.lineHeight,
-        lineHeightMultiple: 1.0,
-      }
+          minimumLineHeight: style.lineHeight,
+          maximumLineHeight: style.lineHeight,
+          lineHeightMultiple: 1.0,
+        }
       : {}),
   },
   ...(typeof style.letterSpacing !== 'undefined'
     ? {
-      kerning: style.letterSpacing,
-    }
+        kerning: style.letterSpacing,
+      }
     : {}),
   ...(typeof style.textTransform !== 'undefined'
     ? {
-      MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
-    }
+        MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
+      }
     : {}),
   MSAttributedStringFontAttribute: makeFontDescriptor(style),
   textStyleVerticalAlignmentKey: 0,
@@ -133,7 +133,7 @@ const makeAttributedString = (textNodes: TextNodes): any => {
 
   let location = 0;
 
-  textNodes.forEach((node) => {
+  textNodes.forEach(node => {
     json.attributes.push(makeAttribute(node, location));
     json.string += node.content;
     location += node.content.length;

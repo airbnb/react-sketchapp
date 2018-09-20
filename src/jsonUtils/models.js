@@ -68,9 +68,7 @@ const safeToLower = (input: Color): Color => {
 export const makeColorFromCSS = (input: Color, alpha: number = 1): SJColor => {
   const nullableColor: ?number = normalizeColor(safeToLower(input));
   const colorInt: number = nullableColor == null ? 0x00000000 : nullableColor;
-  const {
-    r, g, b, a,
-  } = normalizeColor.rgba(colorInt);
+  const { r, g, b, a } = normalizeColor.rgba(colorInt);
 
   return {
     _class: 'color',

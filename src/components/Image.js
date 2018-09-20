@@ -53,9 +53,7 @@ export default class Image extends React.Component {
   };
 
   render() {
-    const {
-      children, source, defaultSource, resizeMode, name, resizingConstraint,
-    } = this.props;
+    const { children, source, defaultSource, resizeMode, name, resizingConstraint } = this.props;
 
     let style = StyleSheet.flatten(this.props.style) || {};
 

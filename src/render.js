@@ -7,7 +7,13 @@ import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
 import { injectSymbols } from './symbol';
 
-import type { SketchDocumentData, SketchLayer, SketchPage, TreeNode } from './types';
+import type {
+  SketchDocumentData,
+  SketchLayer,
+  SketchPage,
+  TreeNode,
+  WrappedSketchLayer,
+} from './types';
 import RedBox from './components/RedBox';
 import { getDocumentDataFromContainer, getDocumentDataFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
@@ -100,26 +106,34 @@ const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Arr
 
 export const render = (
   element: React$Element<any>,
-  container?: SketchLayer,
+  container?: SketchLayer | WrappedSketchLayer,
 ): SketchLayer | Array<SketchLayer> => {
+  let nativeContainer: SketchLayer | void;
+  if (container && container.sketchObject) {
+    nativeContainer = container.sketchObject;
+  } else if (container) {
+    nativeContainer = container;
+  }
+
   if (!appVersionSupported()) {
     return null;
 
     // The Symbols page holds a special meaning within Sketch / react-sketchapp
     // and due to how `makeSymbol` works, we cannot render into it
-  } else if (isNativeSymbolsPage(container)) {
+  }
+  if (isNativeSymbolsPage(nativeContainer)) {
     throw Error('Cannot render into Symbols page');
   }
 
   try {
     const tree = buildTree(element);
 
-    injectSymbols(getDocumentDataFromContainer(container));
+    injectSymbols(getDocumentDataFromContainer(nativeContainer));
 
-    return renderTree(tree, container);
+    return renderTree(tree, nativeContainer);
   } catch (err) {
     console.error(err);
     const tree = buildTree(<RedBox error={err} />);
-    return renderContents(tree, container);
+    return renderContents(tree, nativeContainer);
   }
 };

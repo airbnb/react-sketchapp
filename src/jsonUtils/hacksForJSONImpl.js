@@ -31,6 +31,11 @@ function makeParagraphStyle(textStyle) {
     pStyle.alignment = TEXT_ALIGN[textStyle.textAlign];
   }
 
+  // TODO: check against only positive spacing values?
+  if (textStyle.paragraphSpacing !== undefined) {
+    pStyle.paragraphSpacing = textStyle.paragraphSpacing;
+  }
+
   return pStyle;
 }
 
@@ -122,7 +127,7 @@ export function createAttributedString(textNode: TextNode): NSAttributedString {
 export function makeEncodedAttributedString(textNodes: TextNodes) {
   const fullStr = NSMutableAttributedString.alloc().init();
 
-  textNodes.forEach((textNode) => {
+  textNodes.forEach(textNode => {
     const newString = createAttributedString(textNode);
     fullStr.appendAttributedString(newString);
   });
@@ -144,12 +149,7 @@ export function makeEncodedTextStyleAttributes(textStyle: TextStyle) {
     MSAttributedStringFontAttribute: encodeSketchJSON(font.fontDescriptor()),
     NSFont: font,
     NSColor: encodeSketchJSON(
-      NSColor.colorWithDeviceRed_green_blue_alpha(
-        color.red,
-        color.green,
-        color.blue,
-        color.alpha,
-      ),
+      NSColor.colorWithDeviceRed_green_blue_alpha(color.red, color.green, color.blue, color.alpha),
     ),
     NSParagraphStyle: encodeSketchJSON(pStyle),
     NSKern: textStyle.letterSpacing || 0,

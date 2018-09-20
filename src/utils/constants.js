@@ -25,6 +25,7 @@ export const INHERITABLE_FONT_STYLES = [
   'letterSpacing',
   'lineHeight',
   'writingDirection',
+  'paragraphSpacing',
 ];
 
 // Only components that are allowed as children of <Text> components

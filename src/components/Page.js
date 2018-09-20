@@ -14,9 +14,7 @@ export default class Page extends React.Component {
   };
 
   render() {
-    const {
-      name, children, style, ...otherProps
-    } = this.props;
+    const { name, children, style, ...otherProps } = this.props;
     const _name = name === 'Symbols' ? 'Symbols (renamed to avoid conflict)' : name;
     const _style = StyleSheet.flatten(style);
 
