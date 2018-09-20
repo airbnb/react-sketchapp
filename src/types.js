@@ -5,6 +5,10 @@ export type Dictionary<K, T> = { [key: K]: T };
 // Sketchy things
 export type SketchLayer = any;
 
+export type WrappedSketchLayer = {
+  sketchObject: SketchLayer,
+};
+
 export type SketchStyle = any;
 
 export type MSArray<T> = {
@@ -154,6 +158,8 @@ export type ViewStyle = {
   borderBottomWidth?: number,
   borderLeftWidth?: number,
   opacity?: number,
+  transform?: string,
+  transformOrigin?: string,
 };
 
 export type TextStyle = {
@@ -170,6 +176,7 @@ export type TextStyle = {
   letterSpacing?: number,
   lineHeight?: number,
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify',
+  paragraphSpacing?: number,
   writingDirection?: 'auto' | 'ltr' | 'rtl',
 };
 

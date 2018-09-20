@@ -57,6 +57,7 @@ export default class ViewRenderer extends SketchRenderer {
   getDefaultGroupName() {
     return 'View';
   }
+
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -126,7 +127,7 @@ export default class ViewRenderer extends SketchRenderer {
     }
 
     if (props.shadows) {
-      props.shadows.map((shadowStyle) => {
+      props.shadows.map(shadowStyle => {
         const shadow = makeShadow(shadowStyle);
         if (shadowStyle.shadowInner) {
           innerShadows.push(shadow);

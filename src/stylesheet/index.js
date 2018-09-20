@@ -22,7 +22,7 @@ const declarationRegistry = {};
 const extractRules = (style: RawStyle): Rules => {
   const declarations = {};
 
-  Object.keys(style).forEach((key) => {
+  Object.keys(style).forEach(key => {
     if (key[0] === ':') {
       // pseudo style. ignore for now.
     } else if (key[0] === '@') {
@@ -50,7 +50,7 @@ const getStyle = (id: StyleId): Style => declarationRegistry[id];
 
 const create = (styles: RawStyles): StyleSheetInstance => {
   const result = {};
-  Object.keys(styles).forEach((key) => {
+  Object.keys(styles).forEach(key => {
     result[key] = registerStyle(styles[key]);
   });
   return result;
@@ -65,7 +65,7 @@ const mergeTransforms = (a: Transform, b: Transform): Transform => {
     hash[key] = result.length - 1;
     return hash;
   }, {});
-  b.forEach((t) => {
+  b.forEach(t => {
     const key = Object.keys(t)[0];
     const index = transformsInA[key];
     if (index !== undefined) {
@@ -102,9 +102,11 @@ const mergeStyle = (a: Style, b: Style): Style => {
 const flattenStyle = (input?: UserStyles): ?Style => {
   if (Array.isArray(input)) {
     return input.reduce((acc, val) => mergeStyle(acc, flattenStyle(val) || {}), {});
-  } else if (typeof input === 'number') {
+  }
+  if (typeof input === 'number') {
     return getStyle(input);
-  } else if (!input) {
+  }
+  if (!input) {
     // input is falsy, so we skip it by returning undefined
     return undefined;
   }

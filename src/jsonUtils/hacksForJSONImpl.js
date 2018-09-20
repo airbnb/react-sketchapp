@@ -120,6 +120,11 @@ function makeParagraphStyle(textStyle) {
     pStyle.alignment = TEXT_ALIGN[textStyle.textAlign];
   }
 
+  // TODO: check against only positive spacing values?
+  if (textStyle.paragraphSpacing !== undefined) {
+    pStyle.paragraphSpacing = textStyle.paragraphSpacing;
+  }
+
   return pStyle;
 }
 
@@ -163,9 +168,7 @@ export const makeImageDataFromUrl = (url: string): MSImageData => {
 export function makeResizeConstraint(resizingConstraint: ?ResizeConstraints): number {
   if (resizingConstraint) {
     const constraints = [];
-    const {
-      top, right, bottom, left, fixedHeight, fixedWidth,
-    } = resizingConstraint;
+    const { top, right, bottom, left, fixedHeight, fixedWidth } = resizingConstraint;
 
     if (top) {
       constraints.push('top');
@@ -255,7 +258,7 @@ export function createAttributedString(textNode: TextNode): NSAttributedString {
 export function makeEncodedAttributedString(textNodes: TextNodes) {
   const fullStr = NSMutableAttributedString.alloc().init();
 
-  textNodes.forEach((textNode) => {
+  textNodes.forEach(textNode => {
     const newString = createAttributedString(textNode);
     fullStr.appendAttributedString(newString);
   });

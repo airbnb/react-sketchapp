@@ -3,9 +3,7 @@ import * as renderers from './renderers';
 import type { TreeNode } from './types';
 
 const flexToSketchJSON = (node: TreeNode) => {
-  const {
-    type, style, textStyle, layout, props, children,
-  } = node;
+  const { type, style, textStyle, layout, props, children } = node;
   const Renderer = renderers[type];
   if (Renderer == null) {
     // Give some insight as to why there might be issues

@@ -81,7 +81,8 @@ const sortProps = propsArray =>
     const expandedB = styleShortHands[b];
     if (expandedA && expandedA[b]) {
       return -1;
-    } else if (expandedB && expandedB[a]) {
+    }
+    if (expandedB && expandedB[a]) {
       return 1;
     }
     return a < b ? -1 : a > b ? 1 : 0;

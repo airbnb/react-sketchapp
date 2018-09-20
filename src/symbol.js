@@ -24,7 +24,7 @@ const symbolsRegistry = {};
 let existingSymbols = [];
 const layers = {};
 
-const msListToArray = (pageList) => {
+const msListToArray = pageList => {
   const out = [];
   // eslint-disable-next-line
   for (let i = 0; i < pageList.length; i++) {
@@ -33,31 +33,22 @@ const msListToArray = (pageList) => {
   return out;
 };
 
-export const getSymbolsPage = (documentData: SketchDocumentData) => {
-  const pages = documentData.pages();
-  const array = msListToArray(pages);
-  return array.find(p => String(p.name()) === 'Symbols');
-};
+const getSymbolsPage = (documentData: SketchDocumentData) =>
+  documentData.symbolsPageOrCreateIfNecessary();
 
 const getExistingSymbols = (documentData: SketchDocumentData) => {
   if (!hasInitialized) {
     hasInitialized = true;
 
-    let symbolsPage = getSymbolsPage(documentData);
-    if (!symbolsPage) {
-      const currentPage = documentData.currentPage();
-      symbolsPage = documentData.addBlankPage();
-      symbolsPage.setName('Symbols');
-      documentData.setCurrentPage(currentPage);
-    }
+    const symbolsPage = getSymbolsPage(documentData);
 
-    existingSymbols = msListToArray(symbolsPage.layers()).map((x) => {
+    existingSymbols = msListToArray(symbolsPage.layers()).map(x => {
       const symbolJson = JSON.parse(toSJSON(x));
       layers[symbolJson.symbolID] = x;
       return symbolJson;
     });
 
-    existingSymbols.forEach((symbolMaster) => {
+    existingSymbols.forEach(symbolMaster => {
       if (symbolMaster._class !== 'symbolMaster') return;
       if (symbolMaster.name in symbolsRegistry) return;
       symbolsRegistry[symbolMaster.name] = symbolMaster;
@@ -69,7 +60,7 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
 const getSymbolID = (masterName: string): string => {
   let symbolId = generateID();
 
-  existingSymbols.forEach((symbolMaster) => {
+  existingSymbols.forEach(symbolMaster => {
     if (symbolMaster.name === masterName) {
       symbolId = symbolMaster.symbolID;
     }
@@ -85,10 +76,10 @@ export const injectSymbols = (documentData?: SketchDocumentData) => {
     }
     const currentPage = documentData.currentPage();
 
-    const symbolsPage = documentData.symbolsPageOrCreateIfNecessary();
+    const symbolsPage = getSymbolsPage(documentData);
 
     let left = 0;
-    Object.keys(symbolsRegistry).forEach((key) => {
+    Object.keys(symbolsRegistry).forEach(key => {
       const symbolMaster = symbolsRegistry[key];
       symbolMaster.frame.y = 0;
       symbolMaster.frame.x = left;
@@ -110,7 +101,9 @@ export const injectSymbols = (documentData?: SketchDocumentData) => {
 export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React.ComponentType<any> =>
   class extends React.Component<any> {
     static symbolID = symbolMaster.symbolID;
+
     static masterName = symbolMaster.name;
+
     static displayName = `SymbolInstance(${symbolMaster.name})`;
 
     static propTypes = {
