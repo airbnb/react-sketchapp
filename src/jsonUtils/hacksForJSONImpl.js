@@ -120,6 +120,11 @@ function makeParagraphStyle(textStyle) {
     pStyle.alignment = TEXT_ALIGN[textStyle.textAlign];
   }
 
+  // TODO: check against only positive spacing values?
+  if (textStyle.paragraphSpacing !== undefined) {
+    pStyle.paragraphSpacing = textStyle.paragraphSpacing;
+  }
+
   return pStyle;
 }
 
