@@ -176,6 +176,7 @@ export type TextStyle = {
   letterSpacing?: number,
   lineHeight?: number,
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify',
+  paragraphSpacing?: number,
   writingDirection?: 'auto' | 'ltr' | 'rtl',
 };
 
