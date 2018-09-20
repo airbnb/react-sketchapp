@@ -2,7 +2,7 @@
 import * as invariant from 'invariant';
 import { appVersionSupported } from 'sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
-import type { SketchContext, SketchStyle, TextStyle } from '../types';
+import type { SketchContext, TextStyle } from '../types';
 import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/hacksForJSONImpl';
@@ -12,14 +12,14 @@ import { INHERITABLE_FONT_STYLES } from '../utils/constants';
 type MurmurHash = number;
 type SketchObjectID = string;
 
-type StyleHash = { [key: MurmurHash]: SketchStyle };
-
 type RegisteredStyle = {|
   cssStyle: TextStyle,
   name: string,
   sketchStyle: SJStyle,
   sharedObjectID: SketchObjectID,
 |};
+
+type StyleHash = { [key: MurmurHash]: RegisteredStyle };
 
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
@@ -74,11 +74,11 @@ const resolve = (style: TextStyle): ?RegisteredStyle => {
   return _styles[hash];
 };
 
-const get = (name: string): TextStyle => {
+const get = (name: string): ?TextStyle => {
   const hash = _byName[name];
   const style = _styles[hash];
 
-  return style ? style.cssStyle : {};
+  return style ? style.cssStyle : undefined;
 };
 
 const clear = () => {

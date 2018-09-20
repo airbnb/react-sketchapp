@@ -6,7 +6,8 @@ import { toSJSON } from 'sketchapp-json-plugin';
 import findFont from '../utils/findFont';
 import getSketchVersion from '../utils/getSketchVersion';
 import type { TextNodes, TextNode, TextStyle, ResizeConstraints, LayoutInfo } from '../types';
-import { generateID, makeColorFromCSS } from './models';
+import { makeColorFromCSS } from './models';
+import { makeStyle } from './style';
 
 export const TEXT_ALIGN = {
   auto: TextAlignment.Left,
@@ -296,14 +297,10 @@ export function makeTextStyle(textStyle: TextStyle) {
     },
   };
 
-  return {
-    _class: 'style',
-    sharedObjectID: generateID(),
-    miterLimit: 10,
-    startDecorationType: 0,
-    endDecorationType: 0,
-    textStyle: value,
-  };
+  const json = makeStyle(textStyle);
+  json.textStyle = value;
+
+  return json;
 }
 
 export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {

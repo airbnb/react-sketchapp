@@ -47,7 +47,7 @@ describe('makeShapeGroup', () => {
     const layers = [{ baz: 'qux' }];
     const fills = ['foo', 'bar'];
 
-    const shapeGroup = makeShapeGroup(frame, layers, fills);
+    const shapeGroup = makeShapeGroup(frame, layers, undefined, undefined, fills);
 
     expect(shapeGroup).toHaveProperty('frame', frame);
     expect(shapeGroup).toHaveProperty('layers', layers);
