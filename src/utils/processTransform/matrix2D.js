@@ -18,11 +18,17 @@
  * */
 export default class Matrix2D {
   a: number;
+
   b: number;
+
   c: number;
+
   d: number;
+
   tx: number;
+
   ty: number;
+
   constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
     this.setTransform(a, b, c, d, tx, ty);
   }

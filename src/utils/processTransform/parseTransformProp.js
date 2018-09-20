@@ -181,6 +181,6 @@ function transformToMatrix(transform, origin) {
   return pooledMatrix.toArray();
 }
 
-export default function (transform?: string, origin: Array<number>) {
+export default function(transform?: string, origin: Array<number>) {
   return transformToMatrix(transform, origin);
 }

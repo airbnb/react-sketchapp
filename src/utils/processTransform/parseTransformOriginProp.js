@@ -13,7 +13,7 @@ function isPercentage(token) {
   return token.indexOf('%') !== -1;
 }
 
-export default function (layout: LayoutInfo, _origin?: string) {
+export default function(layout: LayoutInfo, _origin?: string) {
   const origin = (_origin || '').trim();
 
   const tokens = origin.split(' ');

@@ -21,7 +21,7 @@ function getRotation(a, b) {
   return (possibleRotation + Math.PI) * rad2deg;
 }
 
-export default function (layout: LayoutInfo, props: ViewStyle) {
+export default function(layout: LayoutInfo, props: ViewStyle) {
   if (!props.transform) {
     return {};
   }
