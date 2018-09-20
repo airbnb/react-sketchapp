@@ -1,9 +1,7 @@
-// eslint is broken doesn't like when we just check the props without "using" them
-/* eslint-disable react/no-unused-prop-types */
 // @flow
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import Image from '../Image';
+import { ImageSourcePropType } from '../Image';
 import { numberProp } from './props';
 
 // $FlowFixMe
@@ -13,7 +11,7 @@ export default class SVGImage extends React.Component {
     y: numberProp,
     width: numberProp.isRequired,
     height: numberProp.isRequired,
-    href: Image.propTypes.source,
+    href: ImageSourcePropType,
     preserveAspectRatio: PropTypes.string,
     children: PropTypes.node,
   };

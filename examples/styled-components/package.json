@@ -22,7 +22,7 @@
     "chroma-js": "^1.2.2",
     "prop-types": "^15.5.8",
     "react": "^16.3.2",
-    "react-primitives": "^0.4.2",
+    "react-primitives": "^0.6.0",
     "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^16.3.2",
     "styled-components": "^2.1.0"

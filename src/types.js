@@ -5,6 +5,10 @@ export type Dictionary<K, T> = { [key: K]: T };
 // Sketchy things
 export type SketchLayer = any;
 
+export type WrappedSketchLayer = {
+  sketchObject: SketchLayer,
+};
+
 export type SketchStyle = any;
 
 export type MSArray<T> = {

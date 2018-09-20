@@ -1,40 +1,44 @@
 # API Reference
 
-* [`render`](#renderelement-container)
-* [`renderToJSON`](#rendertojsonelement)
-* [Components](#components)
-  * [`<Document>`](#document)
-  * [`<Page>`](#page)
-  * [`<Artboard>`](#artboard)
-  * [`<Image>`](#image)
-  * [`<RedBox>`](#redbox)
-  * [`<Svg>`](#svg)
-  * [`<Text>`](#text)
-  * [`<View>`](#view)
-* [`Platform`](#platform)
-  * [`OS`](#os)
-  * [`Version`](#version)
-  * [`select`](#selectobj)
-* [`StyleSheet`](#stylesheet)
-  * [`hairlineWidth`](#hairlinewidth)
-  * [`absoluteFill`](#absolutefill)
-  * [`create`](#createstyles)
-  * [`flatten`](#flattenstyles)
-  * [`resolve`](#resolvestyle)
-* [`TextStyles`](#textstyles)
-  * [`create`](#createstyleoptionsstyles)
-  * [`resolve`](#resolvestyle)
-* [`Symbols`](#symbols)
-  * [`makeSymbol`](#makesymbolnode-name)
+- [`render`](#renderelement-container)
+- [`renderToJSON`](#rendertojsonelement)
+- [Components](#components)
+  - [`<Document>`](#document)
+  - [`<Page>`](#page)
+  - [`<Artboard>`](#artboard)
+  - [`<Image>`](#image)
+  - [`<RedBox>`](#redbox)
+  - [`<Svg>`](#svg)
+  - [`<Text>`](#text)
+  - [`<View>`](#view)
+- [`Platform`](#platform)
+  - [`OS`](#os)
+  - [`Version`](#version)
+  - [`select`](#selectobj)
+- [`StyleSheet`](#stylesheet)
+  - [`hairlineWidth`](#hairlinewidth)
+  - [`absoluteFill`](#absolutefill)
+  - [`create`](#createstyles)
+  - [`flatten`](#flattenstyles)
+  - [`resolve`](#resolvestyle)
+- [`TextStyles`](#textstyles)
+  - [`create`](#createstyleoptionsstyles)
+  - [`resolve`](#resolvestyle)
+- [`Symbols`](#symbols)
+  - [`makeSymbol`](#makesymbolnode-name)
 
 ### `render(element, container)`
+
 Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
 
 #### params
+
 ##### `element` (required)
+
 Top-level React component that defines your Sketch document.
 
 Example:
+
 ```
 <Document>
   <Page name="Mobile">
@@ -46,44 +50,58 @@ Example:
 ```
 
 ##### `container` (optional)
-The element to render into - will be replaced. Should either be a Sketch Group or Page Object.
 
-Example: `context.document.currentPage()`.
+The element to render into - will be replaced. Should either be a Sketch [Document](https://developer.sketchapp.com/reference/api/#document), Sketch [Group](https://developer.sketchapp.com/reference/api/#group) or Sketch [Page](https://developer.sketchapp.com/reference/api/#page) Object.
+
+Example: `sketch.getSelectedDocument().selectedPage`.
 
 ### returns
+
 The top-most rendered native Sketch layer.
 
 #### Example
+
 ```js
-const Document = props =>
+import sketch from 'sketch';
+import { View, Text, render } from 'react-sketchapp';
+
+const Document = props => (
   <View>
     <Text>Hello world!</Text>
-  </View>;
+  </View>
+);
 
-export default (context) => {
-  render(<Document />, context.document.currentPage());
-}
+export default () => {
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```
 
 ### `renderToJSON(element)`
+
 Returns a Sketch JSON object for further consumption - doesn't add to the page.
 
 #### params
+
 ##### `element` (required)
 
 ### returns
+
 The top-most Sketch layer as JSON.
 
 ## Components
+
 ### `<Document>`
+
 Wrapper for Sketch's Documents. Must be used at the root of your application and is required if you would like to have multiple pages.
 
 #### props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| `children` | `Node` | | Can only be [`<Page>`](#page) components |
+
+| Prop       | Type   | Default | Note                                     |
+| ---------- | ------ | ------- | ---------------------------------------- |
+| `children` | `Node` |         | Can only be [`<Page>`](#page) components |
 
 #### Example
+
 ```js
 <Document>
   <Page>
@@ -96,39 +114,43 @@ Wrapper for Sketch's Documents. Must be used at the root of your application and
 ```
 
 ### `<Page>`
+
 Wrapper for Sketch's Pages. Requires a [`<Document>`](#document) component as a parent if you would like to use multiple of these components.
 
 #### props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| `name` | `String` | | The name to be displayed in the Sketch Page List |
-| `children` | `Node` | | |
+
+| Prop       | Type     | Default | Note                                             |
+| ---------- | -------- | ------- | ------------------------------------------------ |
+| `name`     | `String` |         | The name to be displayed in the Sketch Page List |
+| `children` | `Node`   |         |                                                  |
 
 #### Example
+
 ```js
-<Page
-  name='My Page'
->
+<Page name="My Page">
   <Text>Hello world!</Text>
 </Page>
 ```
 
 ### `<Artboard>`
+
 Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a parent if you would like to use multiple of these components.
 
 #### props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| `name` | `String` | | The name to be displayed in the Sketch Layer List |
-| `children` | `Node` | | |
-| `style` | [`Style`](/docs/styling.md) | | |
+
+| Prop       | Type                        | Default | Note                                              |
+| ---------- | --------------------------- | ------- | ------------------------------------------------- |
+| `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
+| `children` | `Node`                      |         |                                                   |
+| `style`    | [`Style`](/docs/styling.md) |         |                                                   |
 
 #### Example
+
 ```js
 <Artboard
-  name='My Artboard'
+  name="My Artboard"
   style={{
-    width: 480
+    width: 480,
   }}
 >
   <Text>Hello world!</Text>
@@ -138,12 +160,13 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 ### `<Image>`
 
 #### Props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| `children` | `Node` | | |
-| `source` | `ImageSource` | | |
-| `style` | [`Style`](/docs/styling.md) | | |
-| `resizeMode` | `ResizeMode` | `contain` | |
+
+| Prop         | Type                        | Default   | Note |
+| ------------ | --------------------------- | --------- | ---- |
+| `children`   | `Node`                      |           |      |
+| `source`     | `ImageSource`               |           |      |
+| `style`      | [`Style`](/docs/styling.md) |           |      |
+| `resizeMode` | `ResizeMode`                | `contain` |      |
 
 ```
 type ImageSource = String | { src: String }
@@ -151,10 +174,11 @@ type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
 ```
 
 #### Example
+
 ```js
 <Image
-  source='http://placekitten.com/400'
-  resizeMode='contain'
+  source="http://placekitten.com/400"
+  resizeMode="contain"
   style={{
     height: 400,
     width: 400,
@@ -162,76 +186,78 @@ type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
 />
 ```
 
-
 ### `<RedBox>`
-A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react).
---SUGGESTION: can you give a screenshot of what this looks like?
+
+A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-react](https://github.com/commissure/redbox-react). --SUGGESTION: can you give a screenshot of what this looks like?
 
 #### Props
-| Prop | Type | Default | Note |
-|---|---|---|---|
+
+| Prop    | Type                                                                                              | Default      | Note                      |
+| ------- | ------------------------------------------------------------------------------------------------- | ------------ | ------------------------- |
 | `error` | [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) | **required** | A JavaScript Error object |
 
 #### Example
+
 ```js
-export default (context) => {
+import sketch from 'sketch';
+import { RedBox, render } from 'react-sketchapp';
+
+export default () => {
+  const { selectedPage } = sketch.getSelectedDocument();
   try {
-    render(<BrokenComponent />, context.document.currentPage());
+    render(<BrokenComponent />, selectedPage);
   } catch (err) {
-    render(<RedBox error={err} />, context.document.currentPage());
+    render(<RedBox error={err} />, selectedPage);
   }
-}
+};
 ```
 
 ### `<Svg>`
+
 SVG Interface to Sketch
 
 The API is based on [`react-native-svg`](https://github.com/react-native-community/react-native-svg). See more information on [its README](https://github.com/react-native-community/react-native-svg#Usage).
 
 #### Example
+
 ```js
-export default (context) => {
+import sketch from 'sketch';
+import { Svg, render } from 'react-sketchapp';
+
+export default () => {
   render(
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="494"
-      height="447"
-      viewBox="0 0 494 447"
-    >
+    <Svg xmlns="http://www.w3.org/2000/svg" width="494" height="447" viewBox="0 0 494 447">
       <Svg.G fill="none" fillRule="evenodd">
-        <Svg.Path
-          fill="#FFAE00"
-          d="M247 447L0 160 107 15 247 0l140 15 107 145"
-        />
+        <Svg.Path fill="#FFAE00" d="M247 447L0 160 107 15 247 0l140 15 107 145" />
         <Svg.Path fill="#EC6C00" d="M247 447L0 160h494" />
         <Svg.Path fill="#FFAE00" d="M247 447L100 160h294" />
         <Svg.Path fill="#FFEFB4" d="M247 0L100 160h294" />
-        <Svg.Path
-          fill="#FFAE00"
-          d="M107 15L52 88 0 160h101M387 15l55 73 52 72H393"
-        />
+        <Svg.Path fill="#FFAE00" d="M107 15L52 88 0 160h101M387 15l55 73 52 72H393" />
         <Svg.Path fill="#FED305" d="M107 15l-7 145L247 0m140 15l7 145L247 0" />
       </Svg.G>
-    </Svg>
-  , context.document.currentPage());
-}
+    </Svg>,
+    sketch.getSelectedDocument().selectedPage,
+  );
+};
 ```
 
 ### `<Text>`
+
 Text primitives
 
 #### Props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| `name` | `String` | | The name to be displayed in the Sketch Layer List |
-| `children` | `String` | | |
-| `style` | [`Style`](/docs/styling.md) | | |
 
+| Prop       | Type                        | Default | Note                                              |
+| ---------- | --------------------------- | ------- | ------------------------------------------------- |
+| `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
+| `children` | `String`                    |         |                                                   |
+| `style`    | [`Style`](/docs/styling.md) |         |                                                   |
 
 #### Example
+
 ```js
 <Text
-  name='Sketch Layer name'
+  name="Sketch Layer name"
   style={{
     fontSize: 24,
     fontFamily: 'Helvetica',
@@ -244,19 +270,22 @@ Text primitives
 ```
 
 ### `<View>`
+
 View primitives
 
 #### Props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| `name` | `String` | | The name to be displayed in the Sketch Layer List |
-| `children` | `Node` | | |
-| `style` | [`Style`](/docs/styling.md) | | |
+
+| Prop       | Type                        | Default | Note                                              |
+| ---------- | --------------------------- | ------- | ------------------------------------------------- |
+| `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
+| `children` | `Node`                      |         |                                                   |
+| `style`    | [`Style`](/docs/styling.md) |         |                                                   |
 
 #### Example
+
 ```js
 <View
-  name='Sketch Layer name'
+  name="Sketch Layer name"
   style={{
     flexDirection: 'row',
     width: 480,
@@ -272,32 +301,41 @@ View primitives
 ## Platform
 
 ### `OS`
+
 `sketch`
 
 ### `Version`
+
 `1`
 
 ### `select(obj)`
 
 #### params
+
 ##### `obj`
 
 ## StyleSheet
+
 Compared to single-use `style` objects, `StyleSheets` enable creation of re-usable, optimized style references.
 
 ### `hairlineWidth`
+
 The platform's global 'hairline width'.
 
 ### `absoluteFill`
+
 A constant 'absolute fill' style.
 
 ### `create(styles)`
+
 Create an optimized `StyleSheet` reference from a style object.
 
 #### params
+
 ##### `styles`
 
 #### Example
+
 ```js
 const styles = StyleSheet.create({
   foo: {
@@ -314,16 +352,19 @@ const styles = StyleSheet.create({
 <View>
   <Text style={styles.foo} />
   <Text style={styles.bar} />
-</View>
+</View>;
 ```
 
 ### `flatten(styles)`
+
 Flatten an array of style objects into one aggregated object, **or** look up the definition for a registered stylesheet.
 
 #### params
+
 ##### `styles`
 
 #### Example
+
 ```js
 const styles = StyleSheet.create({
   foo: {
@@ -345,12 +386,15 @@ StyleSheet.flatten(styles.foo);
 ```
 
 ### `resolve(style)`
+
 Resolve one style.
 
 #### params
+
 ##### `style`
 
 #### Example
+
 ```js
 const styles = StyleSheet.create({
   foo: {
@@ -364,25 +408,36 @@ StyleSheet.resolve(styles.foo);
 ```
 
 ## TextStyles
+
 An interface to Sketch's shared text styles. Create styles with or without rendering them to the document canvas.
 
 ### `create(options, styles)`
+
 The primary interface to TextStyles. **Call this before rendering**.
 
 #### params
+
 ##### `options: { context, clearExistingStyles }`
+
 ###### `context` **(required)**
+
 The Sketch API context.
 
 ###### `clearExistingStyles`
+
 Clear any styles already registered in the document.
 
 ##### `styles` **(required)**
+
 An object of JavaScript styles. The keys will be used as Sketch's Text Style names.
 
 #### Example
+
 ```js
-export default (context) => {
+import sketch from 'sketch';
+import { TextStyles, View, Text, render } from 'react-sketchapp';
+
+export default () => {
   const typeStyles = {
     Headline: {
       fontSize: 36,
@@ -396,41 +451,56 @@ export default (context) => {
     },
   };
 
-  TextStyles.create({
-    context: context,
-    clearExistingStyles: true,
-  }, typeStyles);
+  TextStyles.create(
+    {
+      context: context,
+      clearExistingStyles: true,
+    },
+    typeStyles,
+  );
 
-  const Document = () =>
+  const Document = () => (
     <View>
       <Text style={typeStyles.Headline}>Headline text</Text>
       <Text style={typeStyles.Body}>Body text</Text>
     </View>
+  );
 
-  render(<Document />, context.document.currentPage());
-}
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```
 
 ### `resolve(style)`
+
 Find a stored native Sketch style object for a given JavaScript style object. You probably don't need to use this.
 
 #### params
+
 ##### `style`
+
 A JavaScript style
 
 ### `styles`
+
 Find all of the registered styles. You probably don't need to use this.
 
 ### `get(name)`
+
 Find a stored style by _name_.
 
 #### params
+
 ##### `name`
+
 The style name
 
 #### Example
+
 ```js
-export default (context) => {
+import sketch from 'sketch';
+import { TextStyles, View, Text, render } from 'react-sketchapp';
+
+export default () => {
   const typeStyles = {
     Headline: {
       fontSize: 36,
@@ -444,49 +514,59 @@ export default (context) => {
     },
   };
 
-  TextStyles.create({
-    context: context,
-    clearExistingStyles: true,
-  }, typeStyles);
+  TextStyles.create(
+    {
+      context: context,
+      clearExistingStyles: true,
+    },
+    typeStyles,
+  );
 
-  const Document = () =>
+  const Document = () => (
     <View>
       <Text style={TextStyles.get('Headline')}>Headline text</Text>
       <Text style={TextStyles.get('Body')}>Body text</Text>
     </View>
+  );
 
-  render(<Document />, context.document.currentPage());
-}
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```
 
 ### `clear`
+
 Reset the registered styles.
 
 ## Symbols
+
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
 ### `makeSymbol(node, name, document)`
+
 Creates a new symbol and injects it into the `Symbols` page. The name of the symbol can be optionally provided and will default to the display name of the component.
 
 Returns a react component which is an can be used to render instances of the symbol.
 
 #### Parameters
-| Parameter | Type | Default | Note |
-|---|---|---|---|
-| `node` | `Node` | | The node object that will be rendered as a symbol |
-| `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organise these symbols with Sketch. For example `squares/blue` |
-| `document` | `Object` | The current document | The Sketch document to make the symbol in |
+
+| Parameter  | Type     | Default              | Note                                                                                                                           |
+| ---------- | -------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `node`     | `Node`   |                      | The node object that will be rendered as a symbol                                                                              |
+| `name`     | `String` | The node name        | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
+| `document` | `Object` | The current document | The Sketch document to make the symbol in                                                                                      |
 
 ### `getSymbolComponentByName(name)`
+
 Returns a react component which can be used to render the symbol that is associated with that name.
 
 #### Symbol example
+
 ```js
+import sketch from 'sketch';
+import { View, makeSymbol, Artboard, render } from 'react-sketchapp';
+
 const BlueSquare = () => (
-  <View
-    name="Blue Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  />
+  <View name="Blue Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }} />
 );
 
 const BlueSquareSymbol = makeSymbol(BlueSquare);
@@ -498,19 +578,20 @@ const Document = () => (
 );
 
 export default () => {
-  render(<Document />, context.document.currentPage());
-}
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```
 
 #### Text override example
-Text overrides use the name paramater to target a specific Text primitive. When no name is given the value within the Text primitive can be used to override the value.
+
+Text overrides use the name parameter to target a specific Text primitive. When no name is given the value within the Text primitive can be used to override the value.
 
 ```js
+import sketch from 'sketch';
+import { View, Text, makeSymbol, Artboard, render } from 'react-sketchapp';
+
 const BlueSquare = () => (
-  <View
-    name="Blue Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  >
+  <View name="Blue Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
     <Text>Blue Square Text</Text>
   </View>
 );
@@ -519,26 +600,29 @@ const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
 
 const Document = () => (
   <Artboard>
-    <BlueSquareSymbol overrides={{
-      'Blue Square Text': 'Override Text',
-    }} />
+    <BlueSquareSymbol
+      overrides={{
+        'Blue Square Text': 'Override Text',
+      }}
+    />
   </Artboard>
 );
 
 export default () => {
-  render(<Document />, context.document.currentPage());
-}
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```
 
 #### Image override example
-Image overrides use the name paramater to target a specific Image primitive.
+
+Image overrides use the name parameter to target a specific Image primitive.
 
 ```js
+import sketch from 'sketch';
+import { View, Image, Artboard, makeSymbol, render } from 'react-sketchapp';
+
 const BlueSquare = () => (
-  <View
-    name="Blue Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  >
+  <View name="Blue Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
     <Image name="Blue Square Image" source="https://hello.world/image.jpg" />
   </View>
 );
@@ -547,25 +631,27 @@ const BlueSquareSymbol = makeSymbol(BlueSquare, 'squares/blue');
 
 const Document = () => (
   <Artboard>
-    <BlueSquareSymbol overrides={{
-      'Blue Square Image': 'https://hello.world/different.jpg',
-    }} />
+    <BlueSquareSymbol
+      overrides={{
+        'Blue Square Image': 'https://hello.world/different.jpg',
+      }}
+    />
   </Artboard>
 );
 
 export default () => {
-  render(<Document />, context.document.currentPage());
-}
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```
 
 #### Nested symbol + override example
 
 ```js
+import sketch from 'sketch';
+import { View, Text, makeSymbol, Image, Artboard, render } from 'react-sketchapp';
+
 const RedSquare = () => (
-  <View
-    name="Red Square"
-    style={{ width: 100, height: 100, backgroundColor: 'red' }}
-  >
+  <View name="Red Square" style={{ width: 100, height: 100, backgroundColor: 'red' }}>
     <Text name="Red Square Text">Red Square</Text>
   </View>
 );
@@ -573,10 +659,7 @@ const RedSquare = () => (
 const RedSquareSymbol = makeSymbol(RedSquare, 'squares/red');
 
 const BlueSquare = () => (
-  <View
-    name="Blue Square"
-    style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-  >
+  <View name="Blue Square" style={{ width: 100, height: 100, backgroundColor: 'blue' }}>
     <Text name="Blue Square Text">Blue Square</Text>
   </View>
 );
@@ -594,15 +677,9 @@ const Photo = () => (
 const PhotoSymbol = makeSymbol(Photo);
 
 const Nested = () => (
-  <View
-    name="Nested"
-    style={{ display: 'flex', flexDirection: 'column', width: 75, height: 150 }}
-  >
+  <View name="Nested" style={{ display: 'flex', flexDirection: 'column', width: 75, height: 150 }}>
     <PhotoSymbol name="Photo Instance" style={{ width: 75, height: 75 }} />
-    <RedSquareSymbol
-      name="Red Square Instance"
-      style={{ width: 75, height: 75 }}
-    />
+    <RedSquareSymbol name="Red Square Instance" style={{ width: 75, height: 75 }} />
   </View>
 );
 
@@ -622,8 +699,7 @@ const Document = () => (
   </Artboard>
 );
 
-
-export default (context) => {
-  render(<Document />, context.document.currentPage());
-}
+export default () => {
+  render(<Document />, sketch.getSelectedDocument().selectedPage);
+};
 ```

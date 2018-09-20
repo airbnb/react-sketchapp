@@ -19,7 +19,7 @@ before_script:
   - npm prune
 script:
   - npm run check
-  - npm run test:e2e -- --app=/Applications/Sketch.app
+  # - npm run test:e2e -- --app=/Applications/Sketch.app
 after_script:
   - rm "~/Library/App Support/com.bohemiancoding.sketch3/.deployment" # remove the Sketch license
 branches:
