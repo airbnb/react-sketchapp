@@ -4,9 +4,10 @@ import { TextAlignment } from 'sketch-constants';
 import getSketchVersion from '../utils/getSketchVersion';
 import makeResizeConstraint from './resizeConstraint';
 import { makeEncodedAttributedString, makeEncodedTextStyleAttributes } from './hacksForJSONImpl';
-import type { TextNode, TextNodes, ResizeConstraints, TextStyle } from '../types';
+import type { TextNode, TextNodes, ResizeConstraints, TextStyle, ViewStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { TEXT_TRANSFORM } from '../utils/constants';
+import { makeStyle } from './style';
 
 import findFontInSketch from '../utils/findFont';
 import { findFontName as findFontInNode } from './hacksForNodObjCImpl';
@@ -142,25 +143,25 @@ const makeAttributedString = (textNodes: TextNodes): any => {
   return json;
 };
 
-export const makeTextStyle = (style: TextStyle) => ({
-  _class: 'style',
-  miterLimit: 10,
-  startDecorationType: 0,
-  endDecorationType: 0,
-  textStyle: {
+export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>) => {
+  const json = makeStyle(style, undefined, shadows);
+  json.textStyle = {
     _class: 'textStyle',
     encodedAttributes:
       sketchVersion === 'NodeJS' || sketchVersion >= 49
         ? makeTextStyleAttributes(style)
         : makeEncodedTextStyleAttributes(style),
-  },
-});
+  };
+  return json;
+};
 
 const makeTextLayer = (
   frame: SJRect,
   name: string,
   textNodes: TextNodes,
+  style: ViewStyle,
   resizingConstraint: ?ResizeConstraints,
+  shadows?: Array<ViewStyle>,
 ): SJTextLayer => ({
   _class: 'text',
   do_objectID: generateID(),
@@ -182,7 +183,7 @@ const makeTextLayer = (
       : makeEncodedAttributedString(textNodes),
   style:
     sketchVersion === 'NodeJS' || sketchVersion >= 49
-      ? makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles)
+      ? makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows)
       : undefined,
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,

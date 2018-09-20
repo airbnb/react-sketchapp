@@ -30,7 +30,7 @@ class TextStyles {
     return this;
   }
 
-  addStyle(name: string, style: SJStyle) {
+  addStyle(name: string, style: SJStyle): string {
     const { _context } = this;
     invariant(_context, 'Please provide a context');
 
@@ -51,13 +51,13 @@ class TextStyles {
       // NOTE(gold): the returned object ID changes after being added to the store
       // _don't_ rely on the object ID we pass to it, but we have to have one set
       // otherwise Sketch crashes
-      return s.objectID();
+      return String(s.objectID());
     }
     // addSharedStyleWithName_firstInstance was removed in Sketch 50
     const s = MSSharedStyle.alloc().initWithName_firstInstance(name, textStyle);
     container.addSharedObject(s);
 
-    return s.objectID();
+    return String(s.objectID());
   }
 }
 

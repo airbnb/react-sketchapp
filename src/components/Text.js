@@ -4,8 +4,12 @@ import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import TextStylePropTypes from './TextStylePropTypes';
-import ViewStylePropTypes from './ViewStylePropTypes';
-import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import { ViewPropTypes } from './View';
+
+export const TextPropTypes = {
+  ...ViewPropTypes,
+  style: or([PropTypes.shape(TextStylePropTypes), PropTypes.number]),
+};
 
 /**
  * @example
@@ -15,18 +19,7 @@ import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
  */
 // $FlowFixMe
 export default class Text extends React.Component {
-  static propTypes = {
-    // TODO(lmr): do some nice warning stuff like RN does
-    style: or([
-      PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-      PropTypes.number,
-    ]),
-    name: PropTypes.string,
-    resizingConstraint: PropTypes.shape({
-      ...ResizingConstraintPropTypes,
-    }),
-    children: PropTypes.node,
-  };
+  static propTypes = TextPropTypes;
 
   render() {
     return (

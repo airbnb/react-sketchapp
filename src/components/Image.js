@@ -3,9 +3,9 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
-import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ResizeModePropTypes from './ResizeModePropTypes';
 import ImageStylePropTypes from './ImageStylePropTypes';
+import { ViewPropTypes } from './View';
 
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
@@ -34,19 +34,17 @@ const ResizeModes = {
   none: 'Fill',
 };
 
+export const ImagePropTypes = {
+  ...ViewPropTypes,
+  style: or([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
+  defaultSource: ImageSourcePropType,
+  resizeMode: ResizeModePropTypes,
+  source: ImageSourcePropType,
+};
+
 // $FlowFixMe
 export default class Image extends React.Component {
-  static propTypes = {
-    name: PropTypes.string,
-    children: PropTypes.node,
-    defaultSource: ImageSourcePropType,
-    resizeMode: ResizeModePropTypes,
-    source: ImageSourcePropType,
-    style: or([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
-    resizingConstraint: PropTypes.shape({
-      ...ResizingConstraintPropTypes,
-    }),
-  };
+  static propTypes = ImagePropTypes;
 
   static defaultProps = {
     name: 'Image',

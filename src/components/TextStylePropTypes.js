@@ -1,2 +1,6 @@
 // @flow
-export default {};
+import ViewStylePropTypes from './ViewStylePropTypes';
+
+export default {
+  ...ViewStylePropTypes,
+};

@@ -6,7 +6,7 @@ Components use CSS styles + flexbox layout.
 
 | property                  | type                                                                                        | supported? |
 | ------------------------- | ------------------------------------------------------------------------------------------- | ---------- |
-| `shadowColor`             | `Color`                                                                                     | ⛔️        |
+| `shadowColor`             | `Color`                                                                                     | ✅         |
 | `shadowOffset`            | `{ width: number, height: number }`                                                         | ✅         |
 | `shadowOpacity`           | `number`                                                                                    | ✅         |
 | `shadowRadius`            | `number` &#124; `percentage`                                                                | ✅         |
@@ -82,9 +82,9 @@ Components use CSS styles + flexbox layout.
 | `fontStyle`          | `normal` &#124; `italic`                                             | ✅         |
 | `fontWeight`         | `string` &#124; `number`                                             | ✅         |
 | `textDecorationLine` | `none` &#124; `underline` &#124; `double` &#124; `line-through`      | ✅         |
-| `textShadowOffset`   | `{ width: number, height: number }`                                  | ⛔️        |
-| `textShadowRadius`   | `number`                                                             | ⛔️        |
-| `textShadowColor`    | `Color`                                                              | ⛔️        |
+| `textShadowOffset`   | `{ width: number, height: number }`                                  | ✅         |
+| `textShadowRadius`   | `number`                                                             | ✅         |
+| `textShadowColor`    | `Color`                                                              | ✅         |
 | `letterSpacing`      | `number`                                                             | ✅         |
 | `lineHeight`         | `number`                                                             | ✅         |
 | `textAlign`          | `auto` &#124; `left` &#124; `right` &#124; `center` &#124; `justify` | ✅         |

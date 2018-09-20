@@ -215,10 +215,10 @@ describe('get', () => {
     TextStyles.create({ context }, styles);
 
     expect(TextStyles.get('foo')).toEqual(styles.foo);
-    expect(TextStyles.get('baz')).toEqual({});
+    expect(TextStyles.get('baz')).toEqual(undefined);
   });
 
-  it('returns an empty object when not found', () => {
+  it('returns undefined when not found', () => {
     const styles = {
       foo: {
         fontSize: 'bar',
@@ -227,7 +227,7 @@ describe('get', () => {
 
     TextStyles.create({ context }, styles);
 
-    expect(TextStyles.get('baz')).toEqual({});
+    expect(TextStyles.get('baz')).toEqual(undefined);
   });
 });
 
