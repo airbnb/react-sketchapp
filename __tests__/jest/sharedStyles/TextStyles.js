@@ -31,8 +31,8 @@ beforeEach(() => {
       throw new Error('Please provide a context');
     }
   });
-  sharedTextStyles.addStyle = jest.fn();
-  sharedTextStyles.setStyles = jest.fn();
+  sharedTextStyles.addStyle = jest.fn(() => 'styleId');
+  sharedTextStyles.setStyles = jest.fn(() => sharedTextStyles);
 
   context = jest.fn();
 });
