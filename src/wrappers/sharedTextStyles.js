@@ -1,8 +1,9 @@
 // @flow
 import * as invariant from 'invariant';
-import { fromSJSONDictionary } from 'sketchapp-json-plugin';
+import { fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
 import type { SketchContext } from '../types';
+import { generateID } from '../jsonUtils/models';
 
 class TextStyles {
   _context: ?SketchContext;
@@ -29,9 +30,13 @@ class TextStyles {
     return this;
   }
 
-  addStyle(name: string, style: SJStyle) {
+  addStyle(name: string, style: SJStyle): string {
     const { _context } = this;
     invariant(_context, 'Please provide a context');
+
+    // generate a dummy shared object id
+    // eslint-disable-next-line
+    style.sharedObjectID = generateID();
 
     const textStyle = fromSJSONDictionary(style);
 
@@ -46,13 +51,13 @@ class TextStyles {
       // NOTE(gold): the returned object ID changes after being added to the store
       // _don't_ rely on the object ID we pass to it, but we have to have one set
       // otherwise Sketch crashes
-      return s.objectID();
+      return String(s.objectID());
     }
     // addSharedStyleWithName_firstInstance was removed in Sketch 50
     const s = MSSharedStyle.alloc().initWithName_firstInstance(name, textStyle);
     container.addSharedObject(s);
 
-    return s.objectID();
+    return String(s.objectID());
   }
 }
 

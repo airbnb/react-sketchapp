@@ -38,14 +38,10 @@ export default class TextRenderer extends SketchRenderer {
 
     const resolvedTextStyle = TextStyles.resolve(textStyle);
     if (resolvedTextStyle) {
-      layer.style = resolvedTextStyle.sketchStyle;
-      layer.style.sharedObjectID = resolvedTextStyle.sharedObjectID;
-    } else {
-      const resolvedStyle = TextStyles.resolve(props.style);
-      if (resolvedStyle) {
-        layer.style = resolvedStyle.sketchStyle;
-        layer.style.sharedObjectID = resolvedStyle.sharedObjectID;
+      if (!layer.style) {
+        layer.style = resolvedTextStyle.sketchStyle;
       }
+      layer.style.sharedObjectID = resolvedTextStyle.sharedObjectID;
     }
 
     return [layer];

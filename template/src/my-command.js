@@ -14,10 +14,7 @@ const Swatch = ({ name, hex }) => (
       padding: 8,
     }}
   >
-    <Text
-      name="Swatch Name"
-      style={{ color: '#FFF', fontWeight: 'bold' }}
-    >
+    <Text name="Swatch Name" style={{ color: '#FFF', fontWeight: 'bold' }}>
       {name}
     </Text>
     <Text name="Swatch Hex" style={{ color: '#FFF' }}>

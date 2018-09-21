@@ -5,10 +5,14 @@ let sharedTextStyles;
 
 beforeEach(() => {
   jest.resetModules();
-  jest.mock('sketchapp-json-plugin', () => ({
+  jest.mock('@skpm/sketchapp-json-plugin', () => ({
     appVersionSupported: jest.fn(() => true),
     fromSJSONDictionary: jest.fn(),
     toSJSON: jest.fn(),
+  }));
+
+  jest.mock('../../../src/utils/getSketchVersion.js', () => ({
+    default: jest.fn(() => 47),
   }));
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');
@@ -22,8 +26,13 @@ beforeEach(() => {
   TextStyles = TextStyles.default;
   sharedTextStyles = sharedTextStyles.default;
 
-  sharedTextStyles.addStyle = jest.fn();
-  sharedTextStyles.setStyles = jest.fn();
+  sharedTextStyles.setContext = jest.fn(ctx => {
+    if (!ctx) {
+      throw new Error('Please provide a context');
+    }
+  });
+  sharedTextStyles.addStyle = jest.fn(() => 'styleId');
+  sharedTextStyles.setStyles = jest.fn(() => sharedTextStyles);
 
   context = jest.fn();
 });

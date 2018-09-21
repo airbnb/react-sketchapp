@@ -2,7 +2,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
-import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
+import { fromSJSONDictionary, toSJSON } from '@skpm/sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';

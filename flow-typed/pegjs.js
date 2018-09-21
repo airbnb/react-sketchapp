@@ -1,7 +1,9 @@
 // @flow
 
 declare module 'pegjs' {
-  declare var generate: (template: string) => {
-    parse: (s: string) => any
-  }
+  declare var generate: (
+    template: string,
+  ) => {
+    parse: (s: string) => any,
+  };
 }

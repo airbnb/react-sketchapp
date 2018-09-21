@@ -16,17 +16,17 @@ const FONT_STYLES = {
 };
 
 const FONT_WEIGHTS = {
-  normal: NSFontWeightRegular,
-  bold: NSFontWeightBold,
-  '100': NSFontWeightUltraLight,
-  '200': NSFontWeightThin,
-  '300': NSFontWeightLight,
-  '400': NSFontWeightRegular,
-  '500': NSFontWeightMedium,
-  '600': NSFontWeightSemibold,
-  '700': NSFontWeightBold,
-  '800': NSFontWeightHeavy,
-  '900': NSFontWeightBlack,
+  normal: 0,
+  bold: 0.4,
+  '100': -0.8,
+  '200': -0.6,
+  '300': -0.4,
+  '400': 0,
+  '500': 0.23,
+  '600': 0.3,
+  '700': 0.4,
+  '800': 0.56,
+  '900': 0.62,
 };
 
 const isItalicFont = (font: NSFont): boolean => {
@@ -49,17 +49,10 @@ const weightOfFont = (font: NSFont): number => {
   const weight = traits[NSFontWeightTrait].doubleValue();
   if (weight === 0.0) {
     const weights = Object.keys(FONT_WEIGHTS);
-    for (let i = 0; i < weights.length; i += 1) {
-      const w = weights[i];
-
-      if (
-        font
-          .fontName()
-          .toLowerCase()
-          .endsWith(w)
-      ) {
-        return FONT_WEIGHTS[w];
-      }
+    const fontName = String(font.fontName()).toLowerCase();
+    const matchingWeight = weights.find(w => fontName.endsWith(w));
+    if (matchingWeight) {
+      return FONT_WEIGHTS[matchingWeight];
     }
   }
 
@@ -79,9 +72,9 @@ const fontNamesForFamilyName = (familyName: string): Array<string> => {
 };
 
 const useCache = true;
-const _cache: Map<number, NSFont> = new Map();
+const _cache: Map<string, NSFont> = new Map();
 
-const getCached = (key: number): NSFont => {
+const getCached = (key: string): NSFont => {
   if (!useCache) return undefined;
   return _cache.get(key);
 };

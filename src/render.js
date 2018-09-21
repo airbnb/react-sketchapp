@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import type { SJLayer } from 'sketchapp-json-flow-types';
-import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
+import { appVersionSupported, fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
@@ -46,7 +46,7 @@ const getDefaultPage = (): SketchLayer => {
 
 const renderContents = (tree: TreeNode, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(tree);
-  const layer = fromSJSONDictionary(json);
+  const layer = fromSJSONDictionary(json, '99');
 
   return renderLayers([layer], container);
 };
