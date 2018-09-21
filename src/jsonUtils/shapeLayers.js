@@ -145,7 +145,9 @@ export const makeRectShapeLayer = (
   resizingConstraint: ?ResizeConstraints,
 ) => {
   const fixedRadius = radii[0] || 0;
+  const path = makeRectPath(radii);
   return {
+    ...path,
     _class: 'rectangle',
     do_objectID: generateID(),
     frame: makeRect(x, y, width, height),
@@ -162,7 +164,7 @@ export const makeRectShapeLayer = (
     shouldBreakMaskChain: false,
     booleanOperation: -1,
     edited: false,
-    path: makeRectPath(radii),
+    path,
     fixedRadius,
     hasConvertedToNewRoundCorners: true,
   };
