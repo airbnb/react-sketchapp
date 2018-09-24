@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "2.1.0",
+  "version": "3.0.0-beta.0",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "license": "MIT",
@@ -40,19 +40,23 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
+    "@skpm/sketchapp-json-plugin": "^0.2.0",
     "airbnb-prop-types": "^2.10.0",
     "error-stack-parser": "^2.0.0",
     "invariant": "^2.2.2",
     "murmur2js": "^1.0.0",
     "normalize-css-color": "^1.0.1",
+    "pegjs": "^0.10.0",
     "prop-types": "^15.5.8",
     "sketch-constants": "^1.0.2",
-    "sketchapp-json-plugin": "^0.1.2",
     "yoga-layout": "^1.9.3"
   },
   "peerDependencies": {
     "react": "*",
     "react-test-renderer": "*"
+  },
+  "optionalDependencies": {
+    "nodobjc": "^2.1.0"
   },
   "keywords": [
     "sketch",
@@ -114,7 +118,7 @@
     "react": "^16.3.2",
     "react-test-renderer": "^16.3.2",
     "rimraf": "^2.5.4",
-    "sketchapp-json-flow-types": "^0.3.3"
+    "sketchapp-json-flow-types": "^0.3.4"
   },
   "skpm": {
     "test": {

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import type { SJSymbolMaster } from 'sketchapp-json-flow-types';
-import { fromSJSONDictionary, toSJSON } from 'sketchapp-json-plugin';
+import { fromSJSONDictionary, toSJSON } from '@skpm/sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
@@ -33,23 +33,14 @@ const msListToArray = pageList => {
   return out;
 };
 
-export const getSymbolsPage = (documentData: SketchDocumentData) => {
-  const pages = documentData.pages();
-  const array = msListToArray(pages);
-  return array.find(p => String(p.name()) === 'Symbols');
-};
+const getSymbolsPage = (documentData: SketchDocumentData) =>
+  documentData.symbolsPageOrCreateIfNecessary();
 
 const getExistingSymbols = (documentData: SketchDocumentData) => {
   if (!hasInitialized) {
     hasInitialized = true;
 
-    let symbolsPage = getSymbolsPage(documentData);
-    if (!symbolsPage) {
-      const currentPage = documentData.currentPage();
-      symbolsPage = documentData.addBlankPage();
-      symbolsPage.setName('Symbols');
-      documentData.setCurrentPage(currentPage);
-    }
+    const symbolsPage = getSymbolsPage(documentData);
 
     existingSymbols = msListToArray(symbolsPage.layers()).map(x => {
       const symbolJson = JSON.parse(toSJSON(x));
@@ -85,7 +76,7 @@ export const injectSymbols = (documentData?: SketchDocumentData) => {
     }
     const currentPage = documentData.currentPage();
 
-    const symbolsPage = documentData.symbolsPageOrCreateIfNecessary();
+    const symbolsPage = getSymbolsPage(documentData);
 
     let left = 0;
     Object.keys(symbolsRegistry).forEach(key => {

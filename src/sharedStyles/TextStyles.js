@@ -1,18 +1,15 @@
 // @flow
-import * as invariant from 'invariant';
-import { appVersionSupported } from 'sketchapp-json-plugin';
 import type { SJStyle } from 'sketchapp-json-flow-types';
-import type { SketchContext, SketchStyle, TextStyle } from '../types';
+import type { SketchContext, TextStyle } from '../types';
+import getSketchVersion from '../utils/getSketchVersion';
 import hashStyle from '../utils/hashStyle';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
-import { makeTextStyle } from '../jsonUtils/hacksForJSONImpl';
+import { makeTextStyle } from '../jsonUtils/textLayers';
 import pick from '../utils/pick';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
 
-type MurmurHash = number;
+type MurmurHash = string;
 type SketchObjectID = string;
-
-type StyleHash = { [key: MurmurHash]: SketchStyle };
 
 type RegisteredStyle = {|
   cssStyle: TextStyle,
@@ -21,14 +18,27 @@ type RegisteredStyle = {|
   sharedObjectID: SketchObjectID,
 |};
 
+type StyleHash = { [key: MurmurHash]: RegisteredStyle };
+
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
 
-const registerStyle = (name: string, style: TextStyle): void => {
+const sketchVersion = getSketchVersion();
+
+const registerStyle = (name: string, style: TextStyle, id?: string): void => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
-  const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
+  const sharedObjectID =
+    sketchVersion !== 'NodeJS' ? sharedTextStyles.addStyle(name, sketchStyle) : id;
+
+  if (!sharedObjectID) {
+    throw new Error(
+      `Missing id for the style named: ${name}. Please provide it using the idMap option`,
+    );
+  }
+
+  sketchStyle.sharedObjectID = sharedObjectID;
 
   // FIXME(gold): side effect :'(
   _byName[name] = hash;
@@ -44,47 +54,66 @@ const registerStyle = (name: string, style: TextStyle): void => {
 type Options = {
   clearExistingStyles?: boolean,
   context: SketchContext,
+  idMap?: { [name: string]: string },
 };
 
 const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
-  const { clearExistingStyles, context } = options;
+  const { clearExistingStyles, context, idMap } = options;
 
-  if (!appVersionSupported()) {
+  if (sketchVersion !== 'NodeJS' && sketchVersion < 43) {
     context.document.showMessage('💎 Requires Sketch 43+ 💎');
     return {};
   }
 
-  invariant(options && options.context, 'Please provide a context');
+  if (sketchVersion !== 'NodeJS') {
+    sharedTextStyles.setContext(context);
 
-  sharedTextStyles.setContext(context);
-
-  if (clearExistingStyles) {
-    _styles = {};
-    sharedTextStyles.setStyles([]);
+    if (clearExistingStyles) {
+      _styles = {};
+      sharedTextStyles.setStyles([]);
+    }
   }
 
-  Object.keys(styles).forEach(name => registerStyle(name, styles[name]));
+  Object.keys(styles).forEach(name => registerStyle(name, styles[name], (idMap || {})[name]));
 
   return _styles;
 };
 
 const resolve = (style: TextStyle): ?RegisteredStyle => {
-  const hash = hashStyle(style);
+  const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
+  const hash = hashStyle(safeStyle);
 
   return _styles[hash];
 };
 
-const get = (name: string): TextStyle => {
+const get = (name: string): ?TextStyle => {
   const hash = _byName[name];
   const style = _styles[hash];
 
-  return style ? style.cssStyle : {};
+  return style ? style.cssStyle : undefined;
 };
 
 const clear = () => {
   _styles = {};
-  sharedTextStyles.setStyles([]);
+  if (sketchVersion !== 'NodeJS') {
+    sharedTextStyles.setStyles([]);
+  }
 };
+
+type SharedStyle = {
+  _class: 'sharedStyle',
+  do_objectID: string,
+  name: string,
+  value: SJStyle,
+};
+
+const toJSON = (): Array<SharedStyle> =>
+  Object.keys(_styles).map(k => ({
+    _class: 'sharedStyle',
+    do_objectID: _styles[k].sharedObjectID,
+    name: _styles[k].name,
+    value: _styles[k].sketchStyle,
+  }));
 
 const styles = () => _styles;
 
@@ -94,6 +123,7 @@ const TextStyles = {
   get,
   styles,
   clear,
+  toJSON,
 };
 
 export default TextStyles;

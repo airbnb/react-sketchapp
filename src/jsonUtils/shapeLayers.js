@@ -1,8 +1,10 @@
 // @flow
 import type { SJFill, SJPath, SJRect, SJShapeGroupLayer } from 'sketchapp-json-flow-types';
-import { makeResizeConstraint } from './hacksForJSONImpl';
-import { generateID, makeRect } from './models';
-import type { ResizeConstraints } from '../types';
+import { BorderPosition } from 'sketch-constants';
+import makeResizeConstraint from './resizeConstraint';
+import { generateID, makeRect, makeColorFromCSS } from './models';
+import { makeStyle } from './style';
+import type { Color, ResizeConstraints, ViewStyle } from '../types';
 
 type Radii = Array<number>;
 
@@ -143,7 +145,9 @@ export const makeRectShapeLayer = (
   resizingConstraint: ?ResizeConstraints,
 ) => {
   const fixedRadius = radii[0] || 0;
+  const path = makeRectPath(radii);
   return {
+    ...path,
     _class: 'rectangle',
     do_objectID: generateID(),
     frame: makeRect(x, y, width, height),
@@ -160,7 +164,7 @@ export const makeRectShapeLayer = (
     shouldBreakMaskChain: false,
     booleanOperation: -1,
     edited: false,
-    path: makeRectPath(radii),
+    path,
     fixedRadius,
     hasConvertedToNewRoundCorners: true,
   };
@@ -169,7 +173,9 @@ export const makeRectShapeLayer = (
 export const makeShapeGroup = (
   frame: SJRect,
   layers: Array<any> = [],
-  fills?: Array<SJFill> = [],
+  style?: ViewStyle,
+  shadows?: Array<ViewStyle>,
+  fills?: Array<SJFill>,
   resizingConstraint?: ResizeConstraints,
 ): SJShapeGroupLayer => ({
   _class: 'shapeGroup',
@@ -183,16 +189,58 @@ export const makeShapeGroup = (
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,
-  style: {
-    _class: 'style',
-    endDecorationType: 0,
-    fills,
-    miterLimit: 10,
-    startDecorationType: 0,
-  },
+  style: makeStyle(style, fills),
   hasClickThrough: false,
   layers,
   clippingMaskMode: 0,
   hasClippingMask: false,
   windingRule: 1,
 });
+
+export const makeVerticalBorder = (
+  x: number,
+  y: number,
+  length: number,
+  thickness: number,
+  color: Color,
+): SJShapeGroupLayer => {
+  const frame = makeRect(x, y, thickness, length);
+  const shapeFrame = makeRect(0, 0, thickness, length);
+  const shapePath = makeShapePath(shapeFrame, makeVerticalPath());
+  const content = makeShapeGroup(frame, [shapePath]);
+  content.style.borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: 0,
+      position: BorderPosition.Center,
+      thickness,
+    },
+  ];
+  return content;
+};
+
+export const makeHorizontalBorder = (
+  x: number,
+  y: number,
+  length: number,
+  thickness: number,
+  color: Color,
+): SJShapeGroupLayer => {
+  const frame = makeRect(x, y, length, thickness);
+  const shapeFrame = makeRect(0, 0, length, thickness);
+  const shapePath = makeShapePath(shapeFrame, makeHorizontalPath());
+  const content = makeShapeGroup(frame, [shapePath]);
+  content.style.borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: 0,
+      position: BorderPosition.Center,
+      thickness,
+    },
+  ];
+  return content;
+};

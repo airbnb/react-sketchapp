@@ -12,8 +12,4 @@ describe('API', () => {
   it('exports makeEncodedAttributedString', () => {
     expect(hacks.makeEncodedAttributedString).toBeInstanceOf(Function);
   });
-
-  it('exports makeTextStyle', () => {
-    expect(hacks.makeTextStyle).toBeInstanceOf(Function);
-  });
 });

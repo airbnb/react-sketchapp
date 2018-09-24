@@ -26,7 +26,8 @@
     "function-paren-newline": 0,
     "react/require-default-props": 0,
     "react/default-props-match-prop-types": 0,
-    "jsx-a11y/label-has-for": 0
+    "jsx-a11y/label-has-for": 0,
+    "no-mixed-operators": 0
   },
   "env": {
     "node": true,
