@@ -1,0 +1,22 @@
+{
+  "name": "lona-sketch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "generate": "babel-node ./index.js test.sketch"
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "@mathieudutour/react-sketchapp": "^3.0.1",
+    "commander": "^2.15.1",
+    "nodobjc": "^2.1.0",
+    "react": "^16.4.1",
+    "react-sketchapp": "^3.0.0-beta.0",
+    "react-test-renderer": "^16.4.1",
+    "sketch-file": "^0.1.3"
+  }
+}
