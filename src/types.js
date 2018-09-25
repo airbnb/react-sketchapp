@@ -54,6 +54,10 @@ export type SketchDocument = {
   showMessage: (message: string) => void,
 };
 
+export type WrappedSketchDocument = {
+  sketchObject: SketchDocument | SketchDocumentData,
+};
+
 export type SketchContext = {
   document: SketchDocument,
 };

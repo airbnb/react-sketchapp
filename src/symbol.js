@@ -11,7 +11,7 @@ import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentDataFromContext } from './utils/getDocument';
-import type { SketchDocumentData } from './types';
+import type { SketchDocumentData, SketchDocument, WrappedSketchDocument } from './types';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -31,6 +31,31 @@ const msListToArray = pageList => {
     out.push(pageList[i]);
   }
   return out;
+};
+
+const getDocumentData = (
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): SketchDocumentData => {
+  let nativeDocumentData: SketchDocumentData;
+  if (document && document.sketchObject) {
+    const nativeDocument = document.sketchObject;
+    // $FlowFixMe
+    nativeDocumentData = nativeDocument.documentData
+      ? nativeDocument.documentData()
+      : // $FlowFixMe
+        nativeDocument;
+  } else if (document) {
+    if (document.documentData) {
+      // $FlowFixMe
+      nativeDocumentData = document.documentData();
+    } else {
+      nativeDocumentData = document;
+    }
+  } else {
+    nativeDocumentData = getDocumentDataFromContext(context); // eslint-disable-line
+  }
+  // $FlowFixMe
+  return nativeDocumentData;
 };
 
 const getSymbolsPage = (documentData: SketchDocumentData) =>
@@ -68,12 +93,12 @@ const getSymbolID = (masterName: string): string => {
   return symbolId;
 };
 
-export const injectSymbols = (documentData?: SketchDocumentData) => {
+export const injectSymbols = (
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+) => {
   // if hasInitialized is false then makeSymbol has not yet been called
   if (hasInitialized) {
-    if (!documentData) {
-      documentData = getDocumentDataFromContext(context); // eslint-disable-line
-    }
+    const documentData = getDocumentData(document);
     const currentPage = documentData.currentPage();
 
     const symbolsPage = getSymbolsPage(documentData);
@@ -129,10 +154,10 @@ export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React.C
 export const makeSymbol = (
   Component: React.ComponentType<any>,
   name: string,
-  documentData?: any,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): React.ComponentType<any> => {
   if (!hasInitialized) {
-    getExistingSymbols(documentData || getDocumentDataFromContext(context));
+    getExistingSymbols(getDocumentData(document));
   }
 
   const masterName = name || displayName(Component);
