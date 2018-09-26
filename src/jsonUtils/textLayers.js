@@ -113,6 +113,11 @@ const makeTextStyleAttributes = (style: TextStyle) => ({
         MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
       }
     : {}),
+  ...(typeof style.paragraphSpacing !== 'undefined'
+    ? {
+        paragraphSpacing: style.paragraphSpacing,
+      }
+    : {}),
   MSAttributedStringFontAttribute: makeFontDescriptor(style),
   textStyleVerticalAlignmentKey: 0,
   MSAttributedStringColorAttribute: makeColorFromCSS(style.color || 'black'),
