@@ -20,14 +20,36 @@ patch:
         patched: '2018-09-30T21:04:30.675Z'
     - nwb > karma > socket.io > socket.io-adapter > socket.io-parser > debug:
         patched: '2018-09-30T21:04:30.675Z'
+    - react-native > connect > morgan > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > express-session > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > serve-index > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > compression > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > connect-timeout > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > body-parser > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > serve-static > send > debug:
+        patched: '2018-09-30T21:08:31.252Z'
+    - nwb > karma > socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2018-09-30T21:08:31.252Z'
   'npm:lodash:20180130':
     - react-native > plist > xmlbuilder > lodash:
         patched: '2018-09-30T21:04:30.675Z'
     - react-native > xcode > simple-plist > plist > xmlbuilder > lodash:
         patched: '2018-09-30T21:04:30.675Z'
+    - react-native > plist > xmlbuilder > lodash:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > xcode > simple-plist > plist > xmlbuilder > lodash:
+        patched: '2018-09-30T21:08:31.252Z'
   'npm:mime:20170907':
     - react-native > connect > serve-static > send > mime:
         patched: '2018-09-30T21:04:30.675Z'
+    - react-native > connect > serve-static > send > mime:
+        patched: '2018-09-30T21:08:31.252Z'
   'npm:ms:20170412':
     - react-native > connect > serve-favicon > ms:
         patched: '2018-09-30T21:04:30.675Z'
@@ -51,8 +73,34 @@ patch:
         patched: '2018-09-30T21:04:30.675Z'
     - nwb > karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
         patched: '2018-09-30T21:04:30.675Z'
+    - react-native > connect > serve-favicon > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > connect-timeout > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > connect-timeout > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > serve-index > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > body-parser > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > compression > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > express-session > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > morgan > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > serve-static > send > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > serve-static > send > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
+    - nwb > karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2018-09-30T21:08:31.252Z'
   'npm:negotiator:20160616':
     - react-native > connect > compression > accepts > negotiator:
         patched: '2018-09-30T21:04:30.675Z'
     - react-native > connect > serve-index > accepts > negotiator:
         patched: '2018-09-30T21:04:30.675Z'
+    - react-native > connect > compression > accepts > negotiator:
+        patched: '2018-09-30T21:08:31.252Z'
+    - react-native > connect > serve-index > accepts > negotiator:
+        patched: '2018-09-30T21:08:31.252Z'
