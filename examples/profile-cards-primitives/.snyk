@@ -56,3 +56,15 @@ patch:
         patched: '2018-09-30T13:20:16.467Z'
     - react-native > connect > serve-index > accepts > negotiator:
         patched: '2018-09-30T13:20:16.467Z'
+  'npm:hoek:20180212':
+    - nwb > karma > log4js > loggly > request > hawk > hoek:
+        patched: '2018-09-30T21:06:55.395Z'
+    - nwb > karma > log4js > loggly > request > hawk > boom > hoek:
+        patched: '2018-09-30T21:06:55.395Z'
+    - nwb > karma > log4js > loggly > request > hawk > sntp > hoek:
+        patched: '2018-09-30T21:06:55.395Z'
+    - nwb > karma > log4js > loggly > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-09-30T21:06:55.395Z'
+  'npm:tunnel-agent:20170305':
+    - nwb > karma > log4js > loggly > request > tunnel-agent:
+        patched: '2018-09-30T21:06:55.395Z'
