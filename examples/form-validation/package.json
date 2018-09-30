@@ -12,7 +12,9 @@
     "render": "skpm-build --watch --run",
     "render:once": "skpm-build --run",
     "postinstall": "npm run build && skpm-link",
-    "web": "react run src/web.js"
+    "web": "react run src/web.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Lloyd Wheeler <lloyd@lloydwheeler.co.uk>",
   "license": "MIT",
@@ -20,14 +22,16 @@
     "prop-types": "^15.5.8",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-native": "^0.42.3",
+    "react-native": "^0.56.0",
     "react-primitives": "^0.6.0",
     "react-sketchapp": "^2.0.0",
-    "react-test-renderer": "^16.3.2"
+    "react-test-renderer": "^16.3.2",
+    "snyk": "^1.99.1"
   },
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
     "nwb": "^0.15.6",
     "@skpm/builder": "^0.4.0"
-  }
+  },
+  "snyk": true
 }
