@@ -22,7 +22,7 @@
     "prop-types": "^15.5.8",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-native": "^0.56.0",
+    "react-native": "^0.57.0",
     "react-primitives": "^0.6.0",
     "react-sketchapp": "^2.0.0",
     "react-test-renderer": "^16.3.2",
