@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 declare module 'sketch-constants' {
   declare var BorderPosition: {

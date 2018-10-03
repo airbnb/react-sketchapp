@@ -1,1 +1,2 @@
-module.exports = {};
+// @flow
+export default {};

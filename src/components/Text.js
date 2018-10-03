@@ -1,29 +1,14 @@
-/* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import TextStylePropTypes from './TextStylePropTypes';
-import ViewStylePropTypes from './ViewStylePropTypes';
-import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
+import { ViewPropTypes } from './View';
 
-const propTypes = {
-  // TODO(lmr): do some nice warning stuff like RN does
-  style: PropTypes.oneOfType([
-    PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.shape({ ...ViewStylePropTypes, ...TextStylePropTypes }),
-        PropTypes.number,
-      ]),
-    ),
-    PropTypes.number,
-  ]),
-
-  name: PropTypes.string,
-  resizingConstraint: PropTypes.shape({
-    ...ResizingConstraintPropTypes,
-  }),
-  children: PropTypes.node,
+export const TextPropTypes = {
+  ...ViewPropTypes,
+  style: or([PropTypes.shape(TextStylePropTypes), PropTypes.number]),
 };
 
 /**
@@ -33,7 +18,9 @@ const propTypes = {
  * </Text>
  */
 // $FlowFixMe
-class Text extends React.Component {
+export default class Text extends React.Component {
+  static propTypes = TextPropTypes;
+
   render() {
     return (
       <text
@@ -46,7 +33,3 @@ class Text extends React.Component {
     );
   }
 }
-
-Text.propTypes = propTypes;
-
-module.exports = Text;

@@ -1,8 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { pathProps } from './props';
 
-module.exports = class Polyline extends React.Component {
+// $FlowFixMe
+export default class Polyline extends React.Component {
   static propTypes = {
     ...pathProps,
     points: PropTypes.string.isRequired,
@@ -16,4 +18,4 @@ module.exports = class Polyline extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_polyline {...rest}>{children}</svg_polyline>;
   }
-};
+}

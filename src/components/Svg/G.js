@@ -1,7 +1,9 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { pathProps, fontProps } from './props';
 
-module.exports = class G extends React.Component {
+// $FlowFixMe
+export default class G extends React.Component {
   static propTypes = {
     ...pathProps,
     ...fontProps,
@@ -12,4 +14,4 @@ module.exports = class G extends React.Component {
 
     return <svg_g {...rest}>{children}</svg_g>;
   }
-};
+}

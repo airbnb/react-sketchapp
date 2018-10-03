@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import Map from 'react-primitives-google-static-map';
 import { StyleSheet, Text, View } from 'react-primitives';
 
@@ -82,7 +82,11 @@ const App = ({ center, venues }) => {
         }}
         markers={pins}
       />
-      <View name="ListView">{venues.map(v => <Row key={v.id} {...v} />)}</View>
+      <View name="ListView">
+        {venues.map(v => (
+          <Row key={v.id} {...v} />
+        ))}
+      </View>
     </View>
   );
 };

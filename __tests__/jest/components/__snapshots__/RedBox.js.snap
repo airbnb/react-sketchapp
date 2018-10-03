@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RedBox /> renders simple errors 1`] = `
+<view
+  name="RedBox"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={
+    Object {
+      "backgroundColor": "rgb(204, 0, 0)",
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+      "width": 480,
+    }
+  }
+>
+  <text
+    name="Message"
+    resizingConstraint={undefined}
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "lineHeight": 19.2,
+      }
+    }
+  >
+    Error: THIS IS AN ERROR
+  </text>
+  <view
+    name="Frames"
+    resizingConstraint={undefined}
+    shadows={undefined}
+    style={
+      Object {
+        "color": "white",
+        "fontFamily": "Monaco",
+        "marginTop": 20,
+      }
+    }
+  >
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    />
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      Script.runInThisContext
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.defaultEval
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      bound
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.runBound [as eval]
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.onLine
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.emit
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.emit
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.Interface._onLine
+    </text>
+    <text
+      name={undefined}
+      resizingConstraint={undefined}
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.Interface._line
+    </text>
+  </view>
+</view>
+`;
+
+exports[`<RedBox /> renders string errors 1`] = `
+<view
+  name="RedBox"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={
+    Object {
+      "backgroundColor": "rgb(204, 0, 0)",
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+      "width": 480,
+    }
+  }
+>
+  <text
+    name="Message"
+    resizingConstraint={undefined}
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "lineHeight": 19.2,
+      }
+    }
+  >
+    Error: String only error
+  </text>
+</view>
+`;

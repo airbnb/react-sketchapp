@@ -1,7 +1,7 @@
-/* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
-import ErrorStackParser from 'error-stack-parser';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import * as ErrorStackParser from 'error-stack-parser';
 import Text from './Text';
 import View from './View';
 
@@ -40,16 +40,16 @@ const styles = {
   },
 };
 
-const propTypes = {
-  error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string]).isRequired,
-  // filename: PropTypes.string,
-  // editorScheme: PropTypes.string,
-  // useLines: PropTypes.bool,
-  // useColumns: PropTypes.bool,
-};
-
 // $FlowFixMe
-class RedBox extends React.Component {
+export default class RedBox extends React.Component {
+  static propTypes = {
+    error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.string]).isRequired,
+    // filename: PropTypes.string,
+    // editorScheme: PropTypes.string,
+    // useLines: PropTypes.bool,
+    // useColumns: PropTypes.bool,
+  };
+
   static defaultProps = {
     useLines: true,
     useColumns: true,
@@ -111,7 +111,3 @@ class RedBox extends React.Component {
     );
   }
 }
-
-RedBox.propTypes = propTypes;
-
-export default RedBox;

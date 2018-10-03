@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+// @flow
+import * as PropTypes from 'prop-types';
 
 const numberProp = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 const numberArrayProp = PropTypes.oneOfType([PropTypes.arrayOf(numberProp), numberProp]);

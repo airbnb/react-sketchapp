@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle, TreeNode } from '../types';
 import { makeSvgLayer } from '../jsonUtils/hacksForJSONImpl';
@@ -59,10 +59,11 @@ function makeSvgString(el) {
   return string;
 }
 
-class SvgRenderer extends ViewRenderer {
+export default class SvgRenderer extends ViewRenderer {
   getDefaultGroupName(props: any) {
     return props.name || 'Svg';
   }
+
   renderBackingLayers(
     layout: LayoutInfo,
     style: ViewStyle,
@@ -89,5 +90,3 @@ class SvgRenderer extends ViewRenderer {
     return layers;
   }
 }
-
-module.exports = SvgRenderer;

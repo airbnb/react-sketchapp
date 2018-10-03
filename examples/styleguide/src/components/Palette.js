@@ -1,5 +1,5 @@
-/* @flow */
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { View } from 'react-sketchapp';
 import Swatch from './Swatch';
 
@@ -16,7 +16,9 @@ const Palette = ({ colors }: P) => (
       flexDirection: 'row',
     }}
   >
-    {Object.keys(colors).map(name => <Swatch key={name} color={colors[name]} name={name} />)}
+    {Object.keys(colors).map(name => (
+      <Swatch key={name} color={colors[name]} name={name} />
+    ))}
   </View>
 );
 

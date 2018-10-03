@@ -1,6 +1,7 @@
-import PropTypes from 'prop-types';
+// @flow
+import * as PropTypes from 'prop-types';
 
-module.exports = {
+export default {
   top: PropTypes.bool,
   right: PropTypes.bool,
   bottom: PropTypes.bool,

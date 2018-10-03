@@ -1,4 +1,16 @@
+// @flow
 import expandStyle from './expandStyle';
+import type {
+  RawStyle,
+  RawStyles,
+  Rules,
+  Style,
+  StyleId,
+  StyleSheetInstance,
+  Transform,
+  UserStyle,
+  UserStyles,
+} from './types';
 
 const { hasOwnProperty } = Object.prototype;
 
@@ -7,10 +19,10 @@ let _id = 0;
 const guid = () => _id++;
 const declarationRegistry = {};
 
-const extractRules = (style) => {
+const extractRules = (style: RawStyle): Rules => {
   const declarations = {};
 
-  Object.keys(style).forEach((key) => {
+  Object.keys(style).forEach(key => {
     if (key[0] === ':') {
       // pseudo style. ignore for now.
     } else if (key[0] === '@') {
@@ -25,7 +37,7 @@ const extractRules = (style) => {
   };
 };
 
-const registerStyle = (style) => {
+const registerStyle = (style: RawStyle): StyleId => {
   // TODO(lmr):
   // do "proptype"-like validation here in non-production build
   const id = guid();
@@ -34,17 +46,17 @@ const registerStyle = (style) => {
   return id;
 };
 
-const getStyle = id => declarationRegistry[id];
+const getStyle = (id: StyleId): Style => declarationRegistry[id];
 
-const create = (styles) => {
+const create = (styles: RawStyles): StyleSheetInstance => {
   const result = {};
-  Object.keys(styles).forEach((key) => {
+  Object.keys(styles).forEach(key => {
     result[key] = registerStyle(styles[key]);
   });
   return result;
 };
 
-const mergeTransforms = (a, b) => {
+const mergeTransforms = (a: Transform, b: Transform): Transform => {
   if (!a || a.length === 0) return b; // in this case, a has nothing to contribute.
   const result = [];
   const transformsInA = a.reduce((hash, t) => {
@@ -53,7 +65,7 @@ const mergeTransforms = (a, b) => {
     hash[key] = result.length - 1;
     return hash;
   }, {});
-  b.forEach((t) => {
+  b.forEach(t => {
     const key = Object.keys(t)[0];
     const index = transformsInA[key];
     if (index !== undefined) {
@@ -68,7 +80,7 @@ const mergeTransforms = (a, b) => {
 // merge two style hashes together. Sort of like `Object.assign`, but is aware of `transform` as a
 // special case.
 // NOTE(lmr): mutates the first argument!
-const mergeStyle = (a, b) => {
+const mergeStyle = (a: Style, b: Style): Style => {
   let key;
   // eslint-disable-next-line no-restricted-syntax
   for (key in b) {
@@ -87,12 +99,14 @@ const mergeStyle = (a, b) => {
   return a;
 };
 
-const flattenStyle = (input) => {
+const flattenStyle = (input?: UserStyles): ?Style => {
   if (Array.isArray(input)) {
-    return input.reduce((acc, val) => mergeStyle(acc, flattenStyle(val)), {});
-  } else if (typeof input === 'number') {
+    return input.reduce((acc, val) => mergeStyle(acc, flattenStyle(val) || {}), {});
+  }
+  if (typeof input === 'number') {
     return getStyle(input);
-  } else if (!input) {
+  }
+  if (!input) {
     // input is falsy, so we skip it by returning undefined
     return undefined;
   }
@@ -102,7 +116,7 @@ const flattenStyle = (input) => {
 /**
  * A StyleSheet is an abstraction similar to CSS StyleSheets. WIP.
  */
-const StyleSheet = {
+export default {
   hairlineWidth: 1, // TODO(lmr): should this be something different?
   absoluteFill: registerStyle({
     position: 'absolute',
@@ -113,7 +127,5 @@ const StyleSheet = {
   }),
   create,
   flatten: flattenStyle,
-  resolve: style => ({ style: flattenStyle(style) }),
+  resolve: (style: UserStyle) => ({ style: flattenStyle(style) }),
 };
-
-module.exports = StyleSheet;

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 

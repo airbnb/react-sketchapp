@@ -1,6 +1,6 @@
-/* @flow */
-
-import { makeResizeConstraint } from './hacksForJSONImpl';
+// @flow
+import type { SJGroupLayer } from 'sketchapp-json-flow-types';
+import makeResizeConstraint from './resizeConstraint';
 import { generateID, makeRect } from './models';
 import type { ResizeConstraints } from '../types';
 
@@ -11,7 +11,7 @@ const layerGroup = (
   height: number,
   opacity: number,
   resizingConstraint?: ResizeConstraints,
-) => ({
+): SJGroupLayer => ({
   _class: 'group',
   do_objectID: generateID(),
   exportOptions: {

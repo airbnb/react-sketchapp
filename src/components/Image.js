@@ -1,10 +1,11 @@
-/* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
-import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ResizeModePropTypes from './ResizeModePropTypes';
 import ImageStylePropTypes from './ImageStylePropTypes';
+import { ViewPropTypes } from './View';
 
 const ImageURISourcePropType = PropTypes.shape({
   uri: PropTypes.string.isRequired,
@@ -24,24 +25,6 @@ export const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.string,
 ]);
 
-const propTypes = {
-  name: PropTypes.string,
-  children: PropTypes.node,
-  defaultSource: ImageSourcePropType,
-  resizeMode: ResizeModePropTypes,
-  source: ImageSourcePropType,
-  style: PropTypes.oneOfType([
-    PropTypes.shape(ImageStylePropTypes),
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
-    ),
-    PropTypes.number,
-  ]),
-  resizingConstraint: PropTypes.shape({
-    ...ResizingConstraintPropTypes,
-  }),
-};
-
 const ResizeModes = {
   contain: 'Fit',
   cover: 'Fill',
@@ -51,16 +34,24 @@ const ResizeModes = {
   none: 'Fill',
 };
 
+export const ImagePropTypes = {
+  ...ViewPropTypes,
+  style: or([PropTypes.shape(ImageStylePropTypes), PropTypes.number]),
+  defaultSource: ImageSourcePropType,
+  resizeMode: ResizeModePropTypes,
+  source: ImageSourcePropType,
+};
+
 // $FlowFixMe
-class Image extends React.Component {
+export default class Image extends React.Component {
+  static propTypes = ImagePropTypes;
+
   static defaultProps = {
     name: 'Image',
   };
 
   render() {
-    const {
-      children, source, defaultSource, resizeMode, name, resizingConstraint,
-    } = this.props;
+    const { children, source, defaultSource, resizeMode, name, resizingConstraint } = this.props;
 
     let style = StyleSheet.flatten(this.props.style) || {};
 
@@ -86,7 +77,3 @@ class Image extends React.Component {
     );
   }
 }
-
-Image.propTypes = propTypes;
-
-export default Image;

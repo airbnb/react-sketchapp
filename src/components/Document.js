@@ -1,18 +1,14 @@
-/* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const propTypes = {
-  children: PropTypes.node,
-};
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 // $FlowFixMe
-class Document extends React.Component {
+export default class Document extends React.Component {
+  static propTypes = {
+    children: PropTypes.node,
+  };
+
   render() {
     return <document>{this.props.children}</document>;
   }
 }
-
-Document.propTypes = propTypes;
-
-module.exports = Document;

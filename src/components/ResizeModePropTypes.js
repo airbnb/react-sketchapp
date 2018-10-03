@@ -1,3 +1,4 @@
-import PropTypes from 'prop-types';
+// @flow
+import * as PropTypes from 'prop-types';
 
 export default PropTypes.oneOf(['contain', 'cover', 'stretch', 'center', 'repeat', 'none']);

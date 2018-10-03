@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 import { render, renderToJSON } from './render';
 import Platform from './Platform';
 import StyleSheet from './stylesheet';

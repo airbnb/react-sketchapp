@@ -4,18 +4,24 @@ language: node_js
 cache:
   directories:
     - node_modules
+    - $HOME/Library/Caches/Homebrew
 notifications:
   email: false
 node_js:
-  - '6'
-  - '8'
-  - '10'
+  - 'lts/*'
 before_install:
+  - brew update
+  - brew cask install sketch # install Sketch
+  - mkdir -p "~/Library/Application Support/com.bohemiancoding.sketch3/Plugins" # create plugins folder
+  - echo $SKETCH_LICENSE > "~/Library/Application Support/com.bohemiancoding.sketch3/.deployment" # add the Sketch license
   - nvm install-latest-npm
 before_script:
   - npm prune
 script:
   - npm run check
+  # - npm run test:e2e -- --app=/Applications/Sketch.app
+after_script:
+  - rm "~/Library/App Support/com.bohemiancoding.sketch3/.deployment" # remove the Sketch license
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

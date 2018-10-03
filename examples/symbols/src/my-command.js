@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render, Artboard, Text, View, Image, makeSymbol } from 'react-sketchapp';
 
 const RedSquare = () => (

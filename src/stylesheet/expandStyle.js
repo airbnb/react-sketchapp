@@ -1,4 +1,7 @@
 /* eslint max-len:0 no-nested-ternary:0 */
+// @flow
+import type { RawStyle, Style } from './types';
+
 const { hasOwnProperty } = Object.prototype;
 
 const styleShortHands = {
@@ -78,7 +81,8 @@ const sortProps = propsArray =>
     const expandedB = styleShortHands[b];
     if (expandedA && expandedA[b]) {
       return -1;
-    } else if (expandedB && expandedB[a]) {
+    }
+    if (expandedB && expandedB[a]) {
       return 1;
     }
     return a < b ? -1 : a > b ? 1 : 0;
@@ -87,7 +91,7 @@ const sortProps = propsArray =>
 /**
  * Expand the shorthand properties to isolate every declaration from the others.
  */
-const expandStyle = (style) => {
+export default (style: RawStyle): Style => {
   if (!style) return style;
   /* eslint no-param-reassign:0 */
   const propsArray = Object.keys(style);
@@ -113,5 +117,3 @@ const expandStyle = (style) => {
   }
   return resolvedStyle;
 };
-
-module.exports = expandStyle;

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { numberProp } from './props';
 
-// eslint is broken doesn't like when we just check the props without "using" them
-/* eslint-disable react/no-unused-prop-types */
-module.exports = class LinearGradient extends React.Component {
+// $FlowFixMe
+export default class LinearGradient extends React.Component {
   static propTypes = {
     x1: numberProp.isRequired,
     x2: numberProp.isRequired,
@@ -26,4 +26,4 @@ module.exports = class LinearGradient extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_linearGradient {...rest}>{children}</svg_linearGradient>;
   }
-};
+}

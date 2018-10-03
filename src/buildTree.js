@@ -1,4 +1,5 @@
-import TestRenderer from 'react-test-renderer';
+// @flow
+import * as TestRenderer from 'react-test-renderer';
 import * as yoga from 'yoga-layout';
 import Context from './utils/Context';
 import type { TreeNode } from './types';
@@ -9,11 +10,7 @@ import computeTextTree from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
 import zIndex from './utils/zIndex';
 
-export const reactTreeToFlexTree = (
-  node: TreeNode,
-  yogaNode: yoga.NodeInstance,
-  context: Context,
-) => {
+export const reactTreeToFlexTree = (node: TreeNode, yogaNode: yoga.Yoga$Node, context: Context) => {
   let textNodes;
   let textStyle = context.getInheritedStyles();
   const style = node.props && node.props.style ? node.props.style : {};
@@ -83,7 +80,7 @@ const buildTree = (element: React$Element<any>): TreeNode => {
   const renderer = TestRenderer.create(element);
   const json: TreeNode = renderer.toJSON();
   const yogaNode = computeYogaTree(json, new Context());
-  yogaNode.calculateLayout(yoga.UNDEFINED, yoga.UNDEFINED, yoga.DIRECTION_LTR);
+  yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());
 
   return tree;

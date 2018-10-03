@@ -1,7 +1,9 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { pathProps, numberProp } from './props';
 
-module.exports = class Ellipse extends React.Component {
+// $FlowFixMe
+export default class Ellipse extends React.Component {
   static propTypes = {
     ...pathProps,
     cx: numberProp.isRequired,
@@ -21,4 +23,4 @@ module.exports = class Ellipse extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_ellipse {...rest}>{children}</svg_ellipse>;
   }
-};
+}

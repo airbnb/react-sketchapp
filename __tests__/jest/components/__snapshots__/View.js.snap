@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<View /> name defaults to View 1`] = `
+<view
+  name="View"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={undefined}
+/>
+`;
+
+exports[`<View /> name passes its name 1`] = `
+<view
+  name="foo"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={undefined}
+/>
+`;
+
+exports[`<View /> passes its children 1`] = `
+<view
+  name="View"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={undefined}
+>
+  foo
+</view>
+`;
+
+exports[`<View /> style accepts a StyleSheet ordinal 1`] = `
+<view
+  name="View"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<View /> style accepts a plain object 1`] = `
+<view
+  name="View"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<View /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
+<view
+  name="View"
+  resizingConstraint={undefined}
+  shadows={undefined}
+  style={
+    Object {
+      "flex": 1,
+      "flexGrow": 1,
+    }
+  }
+/>
+`;

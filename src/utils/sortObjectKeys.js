@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 const sortObjectKeys = (obj: Object): Object => {
   const keys = Object.keys(obj).sort();

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { typography, fontFamily } from './designSystem';
 import Register from './components/Register';
 

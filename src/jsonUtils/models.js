@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
-/* @flow */
+// @flow
 import type {
   SJColor,
   SJFill,
@@ -7,11 +7,11 @@ import type {
   SJRect,
   SJSymbolMaster,
   SJSymbolInstanceLayer,
-} from '@skpm/sketchapp-json-flow-types';
+} from 'sketchapp-json-flow-types';
 import { FillType } from 'sketch-constants';
-import normalizeColor from 'normalize-css-color';
+import * as normalizeColor from 'normalize-css-color';
 import type { Color, ResizeConstraints } from '../types';
-import { makeResizeConstraint } from './hacksForJSONImpl';
+import makeResizeConstraint from './resizeConstraint';
 
 const lut = [];
 for (let i = 0; i < 256; i += 1) {
@@ -68,9 +68,7 @@ const safeToLower = (input: Color): Color => {
 export const makeColorFromCSS = (input: Color, alpha: number = 1): SJColor => {
   const nullableColor: ?number = normalizeColor(safeToLower(input));
   const colorInt: number = nullableColor == null ? 0x00000000 : nullableColor;
-  const {
-    r, g, b, a,
-  } = normalizeColor.rgba(colorInt);
+  const { r, g, b, a } = normalizeColor.rgba(colorInt);
 
   return {
     _class: 'color',

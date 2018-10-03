@@ -1,8 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { textProps } from './props';
 
-module.exports = class Text extends React.Component {
+// $FlowFixMe
+export default class Text extends React.Component {
   static propTypes = textProps;
 
   static childContextTypes = {
@@ -25,4 +27,4 @@ module.exports = class Text extends React.Component {
     const { children, ...rest } = this.props;
     return <svg_text {...rest}>{children}</svg_text>;
   }
-};
+}

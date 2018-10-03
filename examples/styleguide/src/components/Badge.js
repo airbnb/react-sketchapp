@@ -1,5 +1,5 @@
-/* @flow */
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { View, Text } from 'react-sketchapp';
 
 type P = {

@@ -1,5 +1,5 @@
-/* @flow */
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { View, Text } from 'react-primitives';
 import { colors, fontFamily, spacing, typeRamp } from '../designSystem';
 
@@ -54,13 +54,15 @@ const styles = {
   },
 };
 
-const passwordStrength = (password) => {
+const passwordStrength = password => {
   // Faux password checking
   if (password.length <= 6) {
     return 'short';
-  } else if (password.length <= 9) {
+  }
+  if (password.length <= 9) {
     return 'fair';
-  } else if (password.length <= 12) {
+  }
+  if (password.length <= 12) {
     return 'good';
   }
 

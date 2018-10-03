@@ -1,15 +1,23 @@
-import React from 'react';
-import type { SJLayer } from '@skpm/sketchapp-json-flow-types';
-import { appVersionSupported, fromSJSONDictionary } from 'sketchapp-json-plugin';
+// @flow
+import * as React from 'react';
+import type { SJLayer } from 'sketchapp-json-flow-types';
+import { appVersionSupported, fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
 import { injectSymbols } from './symbol';
 
-import type { SketchDocument, SketchLayer, SketchPage, TreeNode } from './types';
+import type {
+  SketchDocumentData,
+  SketchLayer,
+  SketchPage,
+  TreeNode,
+  WrappedSketchLayer,
+} from './types';
 import RedBox from './components/RedBox';
-import { getDocumentFromContainer, getDocumentFromContext } from './utils/getDocument';
+import { getDocumentDataFromContainer, getDocumentDataFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
+import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
 export const renderToJSON = (element: React$Element<any>): SJLayer => {
@@ -17,7 +25,7 @@ export const renderToJSON = (element: React$Element<any>): SJLayer => {
   return flexToSketchJSON(tree);
 };
 
-export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
+export const renderLayers = (layers: Array<any>, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {
     throw new Error(`
      React SketchApp cannot render into this layer. You may be trying to render into a layer
@@ -30,7 +38,7 @@ export const renderLayers = (layers, container: SketchLayer): SketchLayer => {
 };
 
 const getDefaultPage = (): SketchLayer => {
-  const doc = getDocumentFromContext(context);
+  const doc = getDocumentDataFromContext(context);
   const currentPage = doc.currentPage();
 
   return isNativeSymbolsPage(currentPage) ? doc.addBlankPage() : currentPage;
@@ -38,42 +46,53 @@ const getDefaultPage = (): SketchLayer => {
 
 const renderContents = (tree: TreeNode, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(tree);
-  const layer = fromSJSONDictionary(json);
+  const layer = fromSJSONDictionary(json, '99');
 
   return renderLayers([layer], container);
 };
 
 const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
+  const children = tree.children || [];
+
   // assume if name is set on this nested page, the intent is to overwrite
   // the name of the page it is getting rendered into
   if (tree.props.name) {
     page.setName(tree.props.name);
   }
 
-  return tree.children.map(child => renderContents(child, page));
+  return children.map(child => renderContents(child, page));
 };
 
-const renderDocument = (tree: TreeNode, doc: SketchDocument): Array<SketchLayer> => {
-  if (!isNativeDocument(doc)) {
+const renderDocument = (tree: TreeNode, documentData: SketchDocumentData): Array<SketchLayer> => {
+  if (!isNativeDocument(documentData)) {
     throw new Error('Cannot render a Document into a child of Document');
   }
 
-  const initialPage = doc.currentPage();
+  const initialPage = documentData.currentPage();
   const shouldRenderInitialPage = !isNativeSymbolsPage(initialPage);
+  const children = tree.children || [];
 
-  return tree.children.map((child, i) => {
+  return children.map((child, i) => {
     if (child.type !== 'page') {
       throw new Error('Document children must be of type Page');
     }
 
-    const page = i === 0 && shouldRenderInitialPage ? initialPage : doc.addBlankPage();
+    const page = i === 0 && shouldRenderInitialPage ? initialPage : documentData.addBlankPage();
     return renderPage(child, page);
   });
 };
 
 const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
+  if (isNativeDocument(_container) && tree.type !== 'document') {
+    throw new Error('You need to render a Document into Document');
+  }
+
+  if (!isNativePage(_container) && tree.type === 'page') {
+    throw new Error('You need to render a Page into Page');
+  }
+
   if (tree.type === 'document') {
-    const doc = _container || getDocumentFromContext(context);
+    const doc = _container || getDocumentDataFromContext(context);
 
     resetDocument(doc);
     return renderDocument(tree, doc);
@@ -87,27 +106,34 @@ const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Arr
 
 export const render = (
   element: React$Element<any>,
-  container?: SketchLayer,
+  container?: SketchLayer | WrappedSketchLayer,
 ): SketchLayer | Array<SketchLayer> => {
+  let nativeContainer: SketchLayer | void;
+  if (container && container.sketchObject) {
+    nativeContainer = container.sketchObject;
+  } else if (container) {
+    nativeContainer = container;
+  }
+
   if (!appVersionSupported()) {
     return null;
 
     // The Symbols page holds a special meaning within Sketch / react-sketchapp
     // and due to how `makeSymbol` works, we cannot render into it
-  } else if (isNativeSymbolsPage(container)) {
+  }
+  if (isNativeSymbolsPage(nativeContainer)) {
     throw Error('Cannot render into Symbols page');
   }
 
   try {
     const tree = buildTree(element);
 
-    injectSymbols(
-      container ? getDocumentFromContainer(container) : getDocumentFromContext(context),
-    );
+    injectSymbols(getDocumentDataFromContainer(nativeContainer));
 
-    return renderTree(tree, container);
+    return renderTree(tree, nativeContainer);
   } catch (err) {
+    console.error(err);
     const tree = buildTree(<RedBox error={err} />);
-    return renderContents(tree, container);
+    return renderContents(tree, nativeContainer);
   }
 };

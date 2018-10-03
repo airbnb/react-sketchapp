@@ -1,5 +1,5 @@
-/* @flow */
-import React from 'react';
+// @flow
+import * as React from 'react';
 import Badge from './Badge';
 
 type P = {

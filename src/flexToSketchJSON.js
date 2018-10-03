@@ -1,11 +1,9 @@
-/* @flow */
-import renderers from './renderers';
+// @flow
+import * as renderers from './renderers';
 import type { TreeNode } from './types';
 
 const flexToSketchJSON = (node: TreeNode) => {
-  const {
-    type, style, textStyle, layout, props, children,
-  } = node;
+  const { type, style, textStyle, layout, props, children } = node;
   const Renderer = renderers[type];
   if (Renderer == null) {
     // Give some insight as to why there might be issues
@@ -25,7 +23,8 @@ const flexToSketchJSON = (node: TreeNode) => {
   const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, children);
 
   // stopping the walk down the tree if we have an svg
-  const sublayers = type !== 'svg' ? children.map(child => flexToSketchJSON(child)) : [];
+  const sublayers =
+    children && type !== 'svg' ? children.map(child => flexToSketchJSON(child)) : [];
 
   // Filter out anything null, undefined
   const layers = [...backingLayers, ...sublayers].filter(l => l);
