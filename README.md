@@ -1,7 +1,5 @@
-> This project is currently in **beta and APIs are subject to change**.
-
 <div align="center">
-  <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" style="max-height:163px; width:100; height: auto; max-width:100%" />
+      <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" style="max-height:163px; width:100; height: auto; max-width:100%" />
 </div>
 
 <div align="center">
