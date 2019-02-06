@@ -189,7 +189,7 @@ export const makeShapeGroup = (
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,
-  style: makeStyle(style, fills),
+  style: makeStyle(style, fills, shadows),
   hasClickThrough: false,
   layers,
   clippingMaskMode: 0,
