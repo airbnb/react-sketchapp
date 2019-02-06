@@ -102,6 +102,11 @@ const makeTextStyleAttributes = (style: TextStyle) => ({
           lineHeightMultiple: 1.0,
         }
       : {}),
+    ...(typeof style.paragraphSpacing !== 'undefined'
+      ? {
+          paragraphSpacing: style.paragraphSpacing,
+        }
+      : {}),
   },
   ...(typeof style.letterSpacing !== 'undefined'
     ? {
@@ -111,11 +116,6 @@ const makeTextStyleAttributes = (style: TextStyle) => ({
   ...(typeof style.textTransform !== 'undefined'
     ? {
         MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
-      }
-    : {}),
-  ...(typeof style.paragraphSpacing !== 'undefined'
-    ? {
-        paragraphSpacing: style.paragraphSpacing,
       }
     : {}),
   MSAttributedStringFontAttribute: makeFontDescriptor(style),
