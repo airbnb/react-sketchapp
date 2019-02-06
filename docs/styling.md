@@ -9,6 +9,7 @@ Components use CSS styles + flexbox layout.
 | `shadowColor`             | `Color`                                                                                     | ✅         |
 | `shadowOffset`            | `{ width: number, height: number }`                                                         | ✅         |
 | `shadowOpacity`           | `number`                                                                                    | ✅         |
+| `shadowSpread`            | `number`                                                                                    | ✅         |
 | `shadowRadius`            | `number` &#124; `percentage`                                                                | ✅         |
 | `width`                   | `number` &#124; `percentage`                                                                | ✅         |
 | `height`                  | `number` &#124; `percentage`                                                                | ✅         |
