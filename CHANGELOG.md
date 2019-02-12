@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/). Every release
 
 - Fix setting overrides (#409)
 - Fix images on NodeJS
+- Fix Border-radius clipping incorrectly calculated (#279)
 
 ## Version 3.0.0-beta.1
 
