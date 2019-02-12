@@ -46,7 +46,7 @@ const getDefaultPage = (): SketchLayer => {
 
 const renderContents = (tree: TreeNode, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(tree);
-  const layer = fromSJSONDictionary(json, '99');
+  const layer = fromSJSONDictionary(json);
 
   return renderLayers([layer], container);
 };
