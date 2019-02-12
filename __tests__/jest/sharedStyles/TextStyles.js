@@ -12,7 +12,7 @@ beforeEach(() => {
   }));
 
   jest.mock('../../../src/utils/getSketchVersion.js', () => ({
-    default: jest.fn(() => 47),
+    default: jest.fn(() => 51),
   }));
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');
@@ -21,7 +21,10 @@ beforeEach(() => {
 
   jest.mock('../../../src/wrappers/sharedTextStyles');
 
-  jest.mock('../../../src/jsonUtils/hacksForJSONImpl');
+  jest.mock('../../../src/jsonUtils/sketchImpl/createStringMeasurer');
+  jest.mock('../../../src/jsonUtils/sketchImpl/findFontName');
+  jest.mock('../../../src/jsonUtils/sketchImpl/makeImageDataFromUrl');
+  jest.mock('../../../src/jsonUtils/sketchImpl/makeSvgLayer');
 
   TextStyles = TextStyles.default;
   sharedTextStyles = sharedTextStyles.default;

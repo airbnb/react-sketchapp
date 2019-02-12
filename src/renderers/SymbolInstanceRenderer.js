@@ -1,17 +1,20 @@
 // @flow
 import SketchRenderer from './SketchRenderer';
-import { makeSymbolInstance, makeRect, makeJSONDataReference } from '../jsonUtils/models';
+import {
+  makeSymbolInstance,
+  makeRect,
+  makeJSONDataReference,
+  makeOverride,
+} from '../jsonUtils/models';
 import type { ViewStyle, LayoutInfo, SketchLayer, TextStyle } from '../types';
 import { getSymbolMasterById } from '../symbol';
-import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
+import getImageDataFromURL from '../utils/getImageDataFromURL';
 
 type Override = {
-  type: string,
-  objectId: string,
+  type: 'symbolID' | 'stringValue' | 'layerStyle' | 'textStyle' | 'flowDestination' | 'image',
+  path: string,
   name: string,
   symbolID?: string,
-  width?: number,
-  height?: number,
 };
 
 const findInGroup = (layer: ?SketchLayer, type: string): ?SketchLayer =>
@@ -20,29 +23,27 @@ const findInGroup = (layer: ?SketchLayer, type: string): ?SketchLayer =>
 const hasImageFill = (layer: SketchLayer): boolean =>
   !!(layer.style && layer.style.fills && layer.style.fills.some(f => f.image));
 
-const overrideProps = (layer: SketchLayer): Override => ({
-  type: layer._class,
-  objectId: layer.do_objectID,
-  name: layer.name,
-});
-
 const removeDuplicateOverrides = (overrides: Array<Override>): Array<Override> => {
   const seen = {};
 
-  return overrides.filter(({ objectId }) => {
-    const isDuplicate = typeof seen[objectId] !== 'undefined';
-    seen[objectId] = true;
+  return overrides.filter(({ path }) => {
+    const isDuplicate = typeof seen[path] !== 'undefined';
+    seen[path] = true;
 
     return !isDuplicate;
   });
 };
 
-const extractOverridesReducer = (
+const extractOverridesReducer = (path: string) => (
   overrides: Array<Override>,
   layer: SketchLayer,
 ): Array<Override> => {
   if (layer._class === 'text') {
-    return overrides.concat(overrideProps(layer));
+    return overrides.concat({
+      type: 'stringValue',
+      path: `${path}${layer.do_objectID}`,
+      name: layer.name,
+    });
   }
 
   if (layer._class === 'group') {
@@ -52,7 +53,11 @@ const extractOverridesReducer = (
     const subGroup = findInGroup(layer, 'group');
     const textLayer = findInGroup(subGroup, 'text');
     if (textLayer) {
-      return overrides.concat(overrideProps(textLayer));
+      return overrides.concat({
+        type: 'stringValue',
+        path: `${path}${textLayer.do_objectID}`,
+        name: textLayer.name,
+      });
     }
 
     // here we're doing look-ahead to see if this group contains a shapeGroup
@@ -61,8 +66,8 @@ const extractOverridesReducer = (
     const shapeGroup = findInGroup(layer, 'shapeGroup');
     if (shapeGroup && hasImageFill(shapeGroup)) {
       return overrides.concat({
-        ...overrideProps(shapeGroup),
         type: 'image',
+        path: `${path}${shapeGroup.do_objectID}`,
         name: layer.name,
       });
     }
@@ -70,10 +75,10 @@ const extractOverridesReducer = (
 
   if (layer._class === 'symbolInstance') {
     return overrides.concat({
-      ...overrideProps(layer),
+      type: 'symbolID',
+      path: `${path}${layer.do_objectID}`,
+      name: layer.name,
       symbolID: layer.symbolID,
-      width: layer.frame.width,
-      height: layer.frame.height,
     });
   }
 
@@ -81,14 +86,14 @@ const extractOverridesReducer = (
     (layer._class === 'shapeGroup' || layer._class === 'artboard' || layer._class === 'group') &&
     layer.layers
   ) {
-    return layer.layers.reduce(extractOverridesReducer, overrides);
+    return layer.layers.reduce(extractOverridesReducer(path), overrides);
   }
 
   return overrides;
 };
 
-const extractOverrides = (layers: Array<SketchLayer> = []): Array<Override> => {
-  const overrides = layers.reduce(extractOverridesReducer, []);
+const extractOverrides = (layers: Array<SketchLayer> = [], path?: string): Array<Override> => {
+  const overrides = layers.reduce(extractOverridesReducer(path || ''), []);
   return removeDuplicateOverrides(overrides);
 };
 
@@ -109,8 +114,14 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
 
     const overridableLayers = extractOverrides(masterTree.layers);
 
-    const overrides = overridableLayers.reduce(function inject(memo, reference) {
-      if (reference.type === 'symbolInstance') {
+    const overrides = overridableLayers.reduce(function inject(
+      memo: Array<any>,
+      reference: Override,
+    ) {
+      if (reference.type === 'symbolID') {
+        const newPath = `${reference.path}/`;
+        const originalMaster = getSymbolMasterById(reference.symbolID);
+
         // eslint-disable-next-line
         if (props.overrides.hasOwnProperty(reference.name)) {
           const overrideValue = props.overrides[reference.name];
@@ -120,7 +131,6 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
             );
           }
 
-          const originalMaster = getSymbolMasterById(reference.symbolID);
           const replacementMaster = getSymbolMasterById(overrideValue.symbolID);
 
           if (
@@ -132,27 +142,16 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
             );
           }
 
-          const nestedOverrides = extractOverrides(
-            getSymbolMasterById(overrideValue.symbolID).layers,
-          ).reduce(inject, {});
+          memo.push(makeOverride(reference.path, reference.type, replacementMaster.symbolID));
 
-          return {
-            ...memo,
-            [reference.objectId]: {
-              symbolID: replacementMaster.symbolID,
-              ...nestedOverrides,
-            },
-          };
+          extractOverrides(replacementMaster.layers, newPath).reduce(inject, memo);
+
+          return memo;
         }
 
-        const nestedOverrides = extractOverrides(
-          getSymbolMasterById(reference.symbolID).layers,
-        ).reduce(inject, {});
+        extractOverrides(originalMaster.layers, newPath).reduce(inject, memo);
 
-        return {
-          ...memo,
-          [reference.objectId]: nestedOverrides,
-        };
+        return memo;
       }
 
       // eslint-disable-next-line
@@ -162,27 +161,31 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
 
       const overrideValue = props.overrides[reference.name];
 
-      if (reference.type === 'text') {
+      if (reference.type === 'stringValue') {
         if (typeof overrideValue !== 'string') {
           throw new Error('##FIXME## TEXT OVERRIDE VALUES MUST BE STRINGS');
         }
-        return { ...memo, [reference.objectId]: overrideValue };
+        memo.push(makeOverride(reference.path, reference.type, overrideValue));
       }
 
       if (reference.type === 'image') {
         if (typeof overrideValue !== 'string') {
           throw new Error('##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS');
         }
-        return {
-          ...memo,
-          [reference.objectId]: makeJSONDataReference(makeImageDataFromUrl(overrideValue)),
-        };
+        memo.push(
+          makeOverride(
+            reference.path,
+            reference.type,
+            makeJSONDataReference(getImageDataFromURL(overrideValue)),
+          ),
+        );
       }
 
       return memo;
-    }, {});
+    },
+    []);
 
-    symbolInstance.overrides = overrides;
+    symbolInstance.overrideValues = overrides;
 
     return symbolInstance;
   }

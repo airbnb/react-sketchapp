@@ -1,16 +1,13 @@
 // @flow
 import type { SJRect, SJTextLayer } from 'sketchapp-json-flow-types';
 import { TextAlignment } from 'sketch-constants';
-import getSketchVersion from '../utils/getSketchVersion';
 import makeResizeConstraint from './resizeConstraint';
-import { makeEncodedAttributedString, makeEncodedTextStyleAttributes } from './hacksForJSONImpl';
 import type { TextNode, TextNodes, ResizeConstraints, TextStyle, ViewStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { TEXT_TRANSFORM } from '../utils/constants';
 import { makeStyle } from './style';
 
-import findFontInSketch from '../utils/findFont';
-import { findFontName as findFontInNode } from './hacksForNodObjCImpl';
+import findFontName from '../utils/findFont';
 
 export const TEXT_DECORATION_UNDERLINE = {
   none: 0,
@@ -67,22 +64,10 @@ export const FONT_WEIGHTS = {
 };
 /* eslint-enable */
 
-const sketchVersion = getSketchVersion();
-
-export const getFontName = (style: TextStyle) => {
-  // if we are running in node
-  if (sketchVersion === 'NodeJS') {
-    return findFontInNode(style);
-  }
-
-  const font = findFontInSketch(style);
-  return font.fontDescriptor().postscriptName();
-};
-
 const makeFontDescriptor = (style: TextStyle) => ({
   _class: 'fontDescriptor',
   attributes: {
-    name: String(getFontName(style)), // will default to the system font
+    name: String(findFontName(style)), // will default to the system font
     size: style.fontSize || 14,
   },
 });
@@ -152,10 +137,7 @@ export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>) => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
     _class: 'textStyle',
-    encodedAttributes:
-      sketchVersion === 'NodeJS' || sketchVersion >= 49
-        ? makeTextStyleAttributes(style)
-        : makeEncodedTextStyleAttributes(style),
+    encodedAttributes: makeTextStyleAttributes(style),
   };
   return json;
 };
@@ -182,14 +164,8 @@ const makeTextLayer = (
   resizingType: 0,
   rotation: 0,
   shouldBreakMaskChain: false,
-  attributedString:
-    sketchVersion === 'NodeJS' || sketchVersion >= 49
-      ? makeAttributedString(textNodes)
-      : makeEncodedAttributedString(textNodes),
-  style:
-    sketchVersion === 'NodeJS' || sketchVersion >= 49
-      ? makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows)
-      : undefined,
+  attributedString: makeAttributedString(textNodes),
+  style: makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows),
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,
   // NOTE(akp): I haven't fully figured out the meaning of glyphBounds

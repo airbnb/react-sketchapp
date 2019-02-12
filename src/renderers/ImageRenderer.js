@@ -2,7 +2,7 @@
 import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
 import { PatternFillType } from '../utils/constants';
 import SketchRenderer from './SketchRenderer';
-import { makeImageDataFromUrl } from '../jsonUtils/hacksForJSONImpl';
+import getImageDataFromURL from '../utils/getImageDataFromURL';
 // import processTransform from './processTransform';
 import { makeRect, makeImageFill, makeJSONDataReference } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
@@ -32,7 +32,7 @@ export default class ImageRenderer extends SketchRenderer {
       borderBottomLeftRadius = 0,
     } = style;
 
-    const image = makeImageDataFromUrl(extractURLFromSource(props.source));
+    const image = getImageDataFromURL(extractURLFromSource(props.source));
 
     const fillImage = makeJSONDataReference(image);
 

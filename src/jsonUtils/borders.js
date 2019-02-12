@@ -59,10 +59,21 @@ export const createBorders = (
           isEnabled: true,
           color: makeColorFromCSS(borderTopColor),
           fillType: FillType.Solid,
-          position: BorderPosition.Inside,
+          position: BorderPosition.Outside,
           thickness: borderTopWidth,
         },
       ];
+      const backingLayer = content.layers ? content.layers[0] : undefined;
+      if (backingLayer) {
+        // $FlowFixMe
+        backingLayer.frame.x += borderTopWidth;
+        // $FlowFixMe
+        backingLayer.frame.y += borderTopWidth;
+        // $FlowFixMe
+        backingLayer.frame.width -= borderTopWidth * 2;
+        // $FlowFixMe
+        backingLayer.frame.height -= borderTopWidth * 2;
+      }
     }
 
     return [content];

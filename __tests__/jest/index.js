@@ -4,7 +4,10 @@ let ReactSketch;
 describe('public API', () => {
   beforeEach(() => {
     // jest.resetModules();
-    jest.mock('../../src/jsonUtils/hacksForJSONImpl');
+    jest.mock('../../src/jsonUtils/sketchImpl/createStringMeasurer');
+    jest.mock('../../src/jsonUtils/sketchImpl/findFontName');
+    jest.mock('../../src/jsonUtils/sketchImpl/makeImageDataFromUrl');
+    jest.mock('../../src/jsonUtils/sketchImpl/makeSvgLayer');
     ReactSketch = require('../../src');
   });
 

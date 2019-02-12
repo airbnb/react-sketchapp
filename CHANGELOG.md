@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.0-beta.3
+
+- Fix setting overrides (#409)
+- Fix images on NodeJS
+- Fix Border-radius clipping incorrectly calculated (#279)
+
 ## Version 3.0.0-beta.1
 
 - Fix ShapeGroup on nodejs (#387)

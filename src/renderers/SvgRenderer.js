@@ -1,7 +1,7 @@
 // @flow
 import ViewRenderer from './ViewRenderer';
 import type { SketchLayer, ViewStyle, LayoutInfo, TextStyle, TreeNode } from '../types';
-import { makeSvgLayer } from '../jsonUtils/hacksForJSONImpl';
+import makeSvgLayer from '../jsonUtils/svgLayer';
 
 const snakeExceptions = [
   'gradientUnits',
