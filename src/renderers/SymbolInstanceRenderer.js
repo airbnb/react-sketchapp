@@ -55,8 +55,8 @@ const extractOverridesReducer = (path: string) => (
     if (textLayer) {
       return overrides.concat({
         type: 'stringValue',
-        path: `${path}${layer.do_objectID}`,
-        name: layer.name,
+        path: `${path}${textLayer.do_objectID}`,
+        name: textLayer.name,
       });
     }
 
@@ -120,6 +120,8 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
     ) {
       if (reference.type === 'symbolID') {
         const newPath = `${reference.path}/`;
+        const originalMaster = getSymbolMasterById(reference.symbolID);
+
         // eslint-disable-next-line
         if (props.overrides.hasOwnProperty(reference.name)) {
           const overrideValue = props.overrides[reference.name];
@@ -129,7 +131,6 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
             );
           }
 
-          const originalMaster = getSymbolMasterById(reference.symbolID);
           const replacementMaster = getSymbolMasterById(overrideValue.symbolID);
 
           if (
@@ -148,10 +149,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
           return memo;
         }
 
-        extractOverrides(getSymbolMasterById(reference.symbolID).layers, newPath).reduce(
-          inject,
-          memo,
-        );
+        extractOverrides(originalMaster.layers, newPath).reduce(inject, memo);
 
         return memo;
       }
