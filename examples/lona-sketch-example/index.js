@@ -31,16 +31,6 @@ async function modifySketchTemplate(layers, textStyles) {
   }
 }
 
-function readFromStream(stream) {
-  return new Promise(resolve => {
-    let data = '';
-    stream.on('data', chunk => (data += chunk));
-    stream.on('end', () => {
-      resolve(data);
-    });
-  });
-}
-
 const { layers, textStyles } = renderDocument();
 
 modifySketchTemplate(layers, textStyles);
