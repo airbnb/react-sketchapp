@@ -8,7 +8,7 @@
 
 ## Quick-start 🏃‍
 
-First, make sure you have installed [Sketch](http://sketchapp.com) version 43+, & a recent [npm](https://nodejs.org/en/download/).
+First, make sure you have installed [Sketch](http://sketchapp.com) version 50+, & a recent [npm](https://nodejs.org/en/download/).
 
 Open a new Sketch file, then in a terminal:
 

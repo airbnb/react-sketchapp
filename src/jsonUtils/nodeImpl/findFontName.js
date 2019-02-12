@@ -1,34 +1,10 @@
 /* eslint-disable no-bitwise */
-// This is the worst code ever. Only there to measure a string when running on node
 
-import type { TextNodes, Size, TextNode, TextStyle } from '../types';
-import {
-  TEXT_DECORATION_UNDERLINE,
-  TEXT_DECORATION_LINETHROUGH,
-  TEXT_ALIGN,
-  FONT_STYLES,
-} from './textLayers';
-import hashStyle from '../utils/hashStyle';
-import { APPLE_BROKEN_SYSTEM_FONT, TEXT_TRANSFORM } from '../utils/constants';
-
-// This is the ugliest but it's kind of the only way to avoid bundling
-// this module when using skpm (the other solution would be to add an `ignore` option
-// in every client webpack config...)
-let cached$; // cache nodobjc instance
-function requireNodobjC() {
-  if (cached$) {
-    return cached$;
-  }
-  cached$ = eval("require('nodobjc')"); // eslint-disable-line
-  cached$.framework('Foundation');
-  cached$.framework('AppKit');
-  cached$.framework('CoreGraphics');
-  return cached$;
-}
-
-// this borrows heavily from react-native's RCTFont class
-// thanks y'all
-// https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
+import requireNodobjC from './requireNodobjC';
+import hashStyle from '../../utils/hashStyle';
+import type { TextStyle } from '../../types';
+import { FONT_STYLES } from '../textLayers';
+import { APPLE_BROKEN_SYSTEM_FONT } from '../../utils/constants';
 
 /* eslint-disable quote-props */
 const FONT_WEIGHTS = {
@@ -45,9 +21,6 @@ const FONT_WEIGHTS = {
   '900': 0.62,
 };
 /* eslint-enable quote-props */
-
-// TODO(lmr): do something more sensible here
-const FLOAT_MAX = 999999;
 
 const useCache = true;
 const _cache: Map<number, NSFont> = new Map();
@@ -115,7 +88,7 @@ const weightOfFont = (font: NSFont): number => {
   return weight;
 };
 
-function findFont(style: TextStyle): NSFont {
+export function findFont(style: TextStyle): NSFont {
   const $ = requireNodobjC();
   const cacheKey = hashStyle(style);
 
@@ -228,94 +201,9 @@ function findFont(style: TextStyle): NSFont {
   return font;
 }
 
-export function findFontName(style: TextStyle): String {
+export default function findFontName(style: TextStyle): String {
   const $ = requireNodobjC();
   const font = findFont(style);
   const fontDescriptor = font('valueForKey', $('fontDescriptor'));
   return fontDescriptor('valueForKey', $('postscriptName'));
 }
-
-function makeParagraphStyle(textStyle) {
-  const $ = requireNodobjC();
-  const pStyle = $.NSMutableParagraphStyle('alloc')('init');
-  if (textStyle.lineHeight !== undefined) {
-    pStyle('setMinimumLineHeight', textStyle.lineHeight);
-    pStyle('setLineHeightMultiple', 1.0);
-    pStyle('setMaximumLineHeight', textStyle.lineHeight);
-  }
-
-  if (textStyle.textAlign && TEXT_ALIGN[textStyle.textAlign]) {
-    pStyle('setAlignment', TEXT_ALIGN[textStyle.textAlign]);
-  }
-
-  return pStyle;
-}
-
-function createStringAttributes(textStyles: TextStyle): Object {
-  const $ = requireNodobjC();
-  const font = findFont(textStyles);
-  const { textDecoration } = textStyles;
-
-  const attribs = $.NSMutableDictionary('alloc')('init');
-  const fontDescriptor = font('valueForKey', $('fontDescriptor'));
-
-  attribs('setValue', fontDescriptor, 'forKey', $('MSAttributedStringFontAttribute'));
-  attribs('setValue', font, 'forKey', $('NSFont'));
-  attribs('setValue', makeParagraphStyle(textStyles), 'forKey', $('NSParagraphStyle'));
-  attribs(
-    'setValue',
-    textDecoration ? TEXT_DECORATION_UNDERLINE[textDecoration] || 0 : 0,
-    'forKey',
-    $('NSUnderline'),
-  );
-  attribs(
-    'setValue',
-    textDecoration ? TEXT_DECORATION_LINETHROUGH[textDecoration] || 0 : 0,
-    'forKey',
-    $('NSStrikethrough'),
-  );
-
-  if (textStyles.letterSpacing !== undefined) {
-    attribs('setValue', $(textStyles.letterSpacing), 'forKey', $('NSKern'));
-  }
-
-  if (textStyles.textTransform !== undefined) {
-    attribs(
-      'setValue',
-      TEXT_TRANSFORM[textStyles.textTransform] * 1,
-      'forKey',
-      $('MSAttributedStringTextTransformAttribute'),
-    );
-  }
-
-  return attribs;
-}
-
-export function createAttributedString(textNode: TextNode): NSAttributedString {
-  const $ = requireNodobjC();
-  const { content, textStyles } = textNode;
-
-  const attribs = createStringAttributes(textStyles);
-
-  return $.NSAttributedString('alloc')('initWithString', $(content), 'attributes', attribs);
-}
-
-export const createNodeJSStringMeasurer = (textNodes: TextNodes, width: number): Size => {
-  const $ = requireNodobjC();
-  const pool = $.NSAutoreleasePool('alloc')('init');
-  const fullStr = $.NSMutableAttributedString('alloc')('init');
-  textNodes.forEach(textNode => {
-    const newString = createAttributedString(textNode);
-    fullStr('appendAttributedString', newString);
-  });
-  const { height: measureHeight, width: measureWidth } = fullStr(
-    'boundingRectWithSize',
-    $.CGSizeMake(width, FLOAT_MAX),
-    'options',
-    $.NSStringDrawingUsesLineFragmentOrigin,
-    'context',
-    null,
-  ).size;
-  pool('drain');
-  return { width: measureWidth, height: measureHeight };
-};

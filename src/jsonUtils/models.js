@@ -115,21 +115,31 @@ export const makeRect = (x: number, y: number, width: number, height: number): S
   height,
 });
 
-export const makeJSONDataReference = (image: MSImageData): SJImageDataReference => ({
+export const makeJSONDataReference = (image: {
+  data: string,
+  sha1: string,
+}): SJImageDataReference => ({
   _class: 'MSJSONOriginalDataReference',
   _ref: `images/${generateID()}`,
   _ref_class: 'MSImageData',
   data: {
-    _data: image
-      .data()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+    _data: image.data,
     // TODO(gold): can I just declare this as a var instead of using Cocoa?
   },
   sha1: {
-    _data: image
-      .sha1()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+    _data: image.sha1,
   },
+});
+
+export const makeOverride = (
+  path: string,
+  type: 'symbolID' | 'stringValue' | 'layerStyle' | 'textStyle' | 'flowDestination' | 'image',
+  value: string | SJImageDataReference,
+) => ({
+  _class: 'overrideValue',
+  do_objectID: generateID(),
+  overrideName: `${path}_${type}`,
+  value,
 });
 
 export const makeSymbolInstance = (

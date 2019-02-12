@@ -60,8 +60,8 @@ type Options = {
 const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
   const { clearExistingStyles, context, idMap } = options;
 
-  if (sketchVersion !== 'NodeJS' && sketchVersion < 43) {
-    context.document.showMessage('💎 Requires Sketch 43+ 💎');
+  if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
+    context.document.showMessage('💎 Requires Sketch 50+ 💎');
     return {};
   }
 
