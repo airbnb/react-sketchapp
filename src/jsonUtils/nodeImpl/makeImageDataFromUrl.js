@@ -28,16 +28,19 @@ export default function makeImageDataFromUrl(url: string): { data: string, sha1:
   if (!fetchedData) {
     fetchedData = $.NSData('alloc')(
       'initWithBase64EncodedString',
-      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==',
+      $(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==',
+      ),
       'options',
       $.NSDataBase64DecodingIgnoreUnknownCharacters,
     );
   }
   const image = $.NSImage('alloc')('initWithData', fetchedData);
 
-  const base64 = image
-    .TIFFRepresentation()
-    .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn);
+  const base64 = image('TIFFRepresentation')(
+    'base64EncodedStringWithOptions',
+    $.NSDataBase64EncodingEndLineWithCarriageReturn,
+  ).toString();
 
   const result = {
     data: base64,
