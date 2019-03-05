@@ -1,11 +1,12 @@
-import sha1 from 'js-sha1';
 import requireNodobjC from './requireNodobjC';
+
+const sha1 = require('js-sha1');
 
 // TODO could use nodejs APIs directly
 export default function makeImageDataFromUrl(url: string): { data: string, sha1: string } {
   const $ = requireNodobjC();
   const pool = $.NSAutoreleasePool('alloc')('init');
-  let fetchedData = $.NSData('dataWithContentsOfURL', $.NSURL('URLWithString', url));
+  let fetchedData = $.NSData('dataWithContentsOfURL', $.NSURL('URLWithString', $(url)));
 
   if (fetchedData) {
     const firstByte = fetchedData('subdataWithRange', $.NSMakeRange(0, 1))('description');
@@ -28,16 +29,19 @@ export default function makeImageDataFromUrl(url: string): { data: string, sha1:
   if (!fetchedData) {
     fetchedData = $.NSData('alloc')(
       'initWithBase64EncodedString',
-      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==',
+      $(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==',
+      ),
       'options',
       $.NSDataBase64DecodingIgnoreUnknownCharacters,
     );
   }
   const image = $.NSImage('alloc')('initWithData', fetchedData);
 
-  const base64 = image
-    .TIFFRepresentation()
-    .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn);
+  const base64 = image('TIFFRepresentation')(
+    'base64EncodedStringWithOptions',
+    $.NSDataBase64EncodingEndLineWithCarriageReturn,
+  ).toString();
 
   const result = {
     data: base64,
