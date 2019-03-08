@@ -1,5 +1,5 @@
-export default function makeImageDataFromUrl(url: string): { data: string, sha1: string } {
-  let fetchedData = NSData.dataWithContentsOfURL(NSURL.URLWithString(url));
+export default function makeImageDataFromUrl(url: ?string): { data: string, sha1: string } {
+  let fetchedData = url ? NSData.dataWithContentsOfURL(NSURL.URLWithString(url)) : undefined;
 
   if (fetchedData) {
     const firstByte = fetchedData.subdataWithRange(NSMakeRange(0, 1)).description();
