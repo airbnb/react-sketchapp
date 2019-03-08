@@ -13,7 +13,7 @@ function extractURLFromSource(source) {
   if (typeof source === 'string') {
     return source;
   }
-  return source.uri;
+  return (source || {}).uri;
 }
 
 export default class ImageRenderer extends SketchRenderer {
