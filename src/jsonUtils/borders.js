@@ -1,14 +1,38 @@
 // @flow
 import { BorderPosition, FillType } from 'sketch-constants';
-import type { SJShapeGroupLayer } from 'sketchapp-json-flow-types';
+import type { SJShapeGroupLayer, SJBorderOptions, SJBorder } from 'sketchapp-json-flow-types';
 import { makeColorFromCSS } from './models';
-import type { ViewStyle, LayoutInfo } from '../types';
+import type { ViewStyle, LayoutInfo, BorderStyle } from '../types';
 import same from '../utils/same';
 import { makeVerticalBorder, makeHorizontalBorder } from './shapeLayers';
 import { makeBorderOptions } from './style';
 
 const DEFAULT_BORDER_COLOR = 'transparent';
 const DEFAULT_BORDER_STYLE = 'solid';
+
+export const createUniformBorder = (
+  width: number,
+  color: string,
+  style: BorderStyle = 'solid',
+  position: any = BorderPosition.Center,
+  lineCapStyle: 0 | 1 | 2 = 0,
+  lineJoinStyle: 0 | 1 | 2 = 0,
+): { borderOptions: SJBorderOptions, borders: Array<SJBorder> } => {
+  const borderOptions = makeBorderOptions(style, width, lineCapStyle, lineJoinStyle);
+
+  const borders = [
+    {
+      _class: 'border',
+      isEnabled: true,
+      color: makeColorFromCSS(color),
+      fillType: FillType.Solid,
+      position,
+      thickness: width,
+    },
+  ];
+
+  return { borderOptions, borders };
+};
 
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/prefer-default-export

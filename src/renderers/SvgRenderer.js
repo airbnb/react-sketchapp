@@ -13,6 +13,7 @@ const snakeExceptions = [
   'specularExponent',
   'specularConstant',
   'surfaceScale',
+  'viewBox',
 ];
 function toSnakeCase(string: string) {
   if (string === 'href') {
