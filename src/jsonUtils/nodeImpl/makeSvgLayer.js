@@ -5,11 +5,9 @@ import { makeShapeGroup, makeShapePath } from '../shapeLayers';
 import { makeRect } from '../models';
 import { createUniformBorder } from '../borders';
 import layerGroup from '../layerGroup';
-
 import { makePathsFromCommands, makeLineCapStyle } from './graphics/path';
 import { unionRects, scaleRect, makeBoundingRectFromCommands, resize } from './graphics/rect';
-
-const svgModel = require('@lona/svg-model');
+import requireSvgModel from './requireSvgModel';
 
 function makeLayerFromPathElement(pathElement, parentFrame: SJRect, scale: number) {
   const {
@@ -63,6 +61,8 @@ function makeLayerGroup(frame: SJRect, layers: [SJLayer], name: string): SJGroup
 }
 
 export default function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
+  const svgModel = requireSvgModel();
+
   const {
     data: { params, children },
   } = svgModel(svg);

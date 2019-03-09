@@ -40,7 +40,6 @@
     "watch": "npm run build:react -- --watch"
   },
   "dependencies": {
-    "@lona/svg-model": "^1.0.1",
     "@skpm/sketchapp-json-plugin": "^0.2.0",
     "airbnb-prop-types": "^2.10.0",
     "error-stack-parser": "^2.0.0",
@@ -58,6 +57,7 @@
     "react-test-renderer": "*"
   },
   "optionalDependencies": {
+    "@lona/svg-model": "^1.0.1",
     "nodobjc": "^2.1.0"
   },
   "keywords": [
@@ -94,6 +94,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@skpm/babel-preset": "^0.2.1",
     "@skpm/test-runner": "^0.3.2",
+    "@lona/svg-model": "^1.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
