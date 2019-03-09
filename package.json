@@ -57,6 +57,7 @@
     "react-test-renderer": "*"
   },
   "optionalDependencies": {
+    "@lona/svg-model": "^1.0.1",
     "nodobjc": "^2.1.0"
   },
   "keywords": [
@@ -91,6 +92,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
+    "@lona/svg-model": "^1.0.1",
     "@skpm/babel-preset": "^0.2.1",
     "@skpm/test-runner": "^0.3.2",
     "babel-core": "^7.0.0-bridge.0",
@@ -119,7 +121,7 @@
     "react": "^16.3.2",
     "react-test-renderer": "^16.3.2",
     "rimraf": "^2.5.4",
-    "sketchapp-json-flow-types": "^0.3.5"
+    "sketchapp-json-flow-types": "^0.3.6"
   },
   "skpm": {
     "test": {
