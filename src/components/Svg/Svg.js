@@ -2,6 +2,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ViewPropTypes } from '../View';
+import StyleSheet from '../../stylesheet';
 import Circle from './Circle';
 import ClipPath from './ClipPath';
 import Defs from './Defs';
@@ -82,8 +83,12 @@ export default class Svg extends React.Component {
   };
 
   render() {
-    const { children, ...rest } = this.props;
+    const { children, style, ...rest } = this.props;
 
-    return <svg {...rest}>{children}</svg>;
+    return (
+      <svg {...rest} style={StyleSheet.flatten(style)}>
+        {children}
+      </svg>
+    );
   }
 }
