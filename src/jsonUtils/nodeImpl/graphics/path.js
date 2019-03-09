@@ -1,7 +1,7 @@
-import type { SJPath, SJRect } from 'sketchapp-json-flow-types';
+import type { SJPath, SJRect, SJCurvePoint } from 'sketchapp-json-flow-types';
 
 import { normalizePointInRect } from './point';
-import { SJCurvePoint, makeCurvePoint, describePoint } from './curvePoint';
+import { makeCurvePoint, describePoint } from './curvePoint';
 
 function makePath(curvePoints: [SJCurvePoint], isClosed): SJPath {
   return {
