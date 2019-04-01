@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Svg /> also works when child is directly imported 1`] = `
+<svg
+  preserveAspectRatio="xMidYMid meet"
+  style={undefined}
+  viewBox="0 0 24 24"
+>
+  <svg_circle
+    cx={12}
+    cy={12}
+    r={6}
+  />
+</svg>
+`;
+
 exports[`<Svg /> passes its children 1`] = `
 <svg
   height="447"

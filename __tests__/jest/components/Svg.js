@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import Svg from '../../../src/components/Svg';
+import Svg, { Circle } from '../../../src/components/Svg';
 
 describe('<Svg />', () => {
   it('passes its children', () => {
@@ -15,6 +15,18 @@ describe('<Svg />', () => {
             <Svg.Path fill="#FFAE00" d="M107 15L52 88 0 160h101M387 15l55 73 52 72H393" />
             <Svg.Path fill="#FED305" d="M107 15l-7 145L247 0m140 15l7 145L247 0" />
           </Svg.G>
+        </Svg>,
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('also works when child is directly imported', () => {
+    const tree = renderer
+      .create(
+        <Svg viewBox="0 0 24 24">
+          <Circle cx={12} cy={12} r={6} />
         </Svg>,
       )
       .toJSON();
