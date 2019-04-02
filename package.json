@@ -44,6 +44,7 @@
     "@skpm/sketchapp-json-plugin": "^0.2.0",
     "airbnb-prop-types": "^2.10.0",
     "error-stack-parser": "^2.0.0",
+    "gitbook-plugin-github": "^2.0.0",
     "invariant": "^2.2.2",
     "js-sha1": "^0.6.0",
     "murmur2js": "^1.0.0",
