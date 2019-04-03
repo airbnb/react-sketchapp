@@ -35,6 +35,7 @@
     "test": "jest --config .jestrc.json",
     "test:ci": "jest --config .jestrc.json --runInBand",
     "test:e2e": "skpm-test",
+    "test:update": "npm run test -- --updateSnapshot",
     "test:watch": "npm run test -- --watch",
     "test:e2e:watch": "npm run test:e2e -- --watch",
     "watch": "npm run build:react -- --watch"
@@ -112,7 +113,6 @@
     "gitbook-plugin-anchorjs": "^2.0.0",
     "gitbook-plugin-codeblock-disable-glossary": "0.0.1",
     "gitbook-plugin-edit-link": "^2.0.2",
-    "gitbook-plugin-github": "^3.0.0",
     "gitbook-plugin-prism": "^2.3.0",
     "jest-cli": "^22.4.3",
     "lint-staged": "^7.0.5",

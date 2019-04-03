@@ -241,6 +241,32 @@ export default () => {
 };
 ```
 
+##### Direct imports
+
+Additionally, to have a somewhat more compliant mode to the `react-native-svg` API, the SVG components might as well be imported directly:
+
+```js
+import sketch from 'sketch';
+import { render } from 'react-sketchapp';
+import Svg, { G, Path } from 'react-sketchapp/lib/components/Svg';
+
+export default () => {
+  render(
+    <Svg xmlns="http://www.w3.org/2000/svg" width="494" height="447" viewBox="0 0 494 447">
+      <G fill="none" fillRule="evenodd">
+        <Path fill="#FFAE00" d="M247 447L0 160 107 15 247 0l140 15 107 145" />
+        <Path fill="#EC6C00" d="M247 447L0 160h494" />
+        <Path fill="#FFAE00" d="M247 447L100 160h294" />
+        <Path fill="#FFEFB4" d="M247 0L100 160h294" />
+        <Path fill="#FFAE00" d="M107 15L52 88 0 160h101M387 15l55 73 52 72H393" />
+        <Path fill="#FED305" d="M107 15l-7 145L247 0m140 15l7 145L247 0" />
+      </G>
+    </Svg>,
+    sketch.getSelectedDocument().selectedPage,
+  );
+};
+```
+
 ### `<Text>`
 
 Text primitives

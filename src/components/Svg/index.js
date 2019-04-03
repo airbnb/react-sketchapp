@@ -1,2 +1,22 @@
 // @flow
+export { default as Circle } from './Circle';
+export { default as ClipPath } from './ClipPath';
+export { default as Defs } from './Defs';
+export { default as Ellipse } from './Ellipse';
+export { default as G } from './G';
+export { default as Image } from './Image';
+export { default as Line } from './Line';
+export { default as LinearGradient } from './LinearGradient';
+export { default as Path } from './Path';
+export { default as Pattern } from './Pattern';
+export { default as Polygon } from './Polygon';
+export { default as Polyline } from './Polyline';
+export { default as RadialGradient } from './RadialGradient';
+export { default as Rect } from './Rect';
+export { default as Stop } from './Stop';
+export { default as Symbol } from './Symbol';
+export { default as Text } from './Text';
+export { default as TextPath } from './TextPath';
+export { default as TSpan } from './TSpan';
+export { default as Use } from './Use';
 export { default } from './Svg';
