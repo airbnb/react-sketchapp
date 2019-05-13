@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.0-beta.7
+
+- Fix setting the overflow
+- The symbol masters will try to maintain their overrides IDs so as not to reset instances that have overrides
+- Improve error messages when trying to render a broken override
+
 ## Version 3.0.0-beta.3
 
 - Fix setting overrides (#409)
