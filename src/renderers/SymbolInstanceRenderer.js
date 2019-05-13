@@ -127,7 +127,9 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
           const overrideValue = props.overrides[reference.name];
           if (typeof overrideValue !== 'function' || typeof overrideValue.symbolID !== 'string') {
             throw new Error(
-              '##FIXME## SYMBOL INSTANCE SUBSTITUTIONS MUST BE PASSED THE CONSTRUCTOR OF THE OTHER SYMBOL',
+              `The overriden nested symbol needs to the constructor of another symbol.\n\nIn Symbol Instance: "${
+                props.name
+              }"\nFor Override: "${reference.name}"`,
             );
           }
 
@@ -138,7 +140,9 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
             originalMaster.frame.height !== replacementMaster.frame.height
           ) {
             throw new Error(
-              '##FIXME## SYMBOL MASTER SUBSTITUTIONS REQUIRE THAT MASTERS HAVE THE SAME DIMENSIONS',
+              `The overriden nested symbol needs to have the same dimensions.\n\nIn Symbol Instance: "${
+                props.name
+              }"\nFor Override: "${reference.name}"`,
             );
           }
 
@@ -163,14 +167,22 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
 
       if (reference.type === 'stringValue') {
         if (typeof overrideValue !== 'string') {
-          throw new Error('##FIXME## TEXT OVERRIDE VALUES MUST BE STRINGS');
+          throw new Error(
+            `The override value of a Text must be a string.\n\nIn Symbol Instance: "${
+              props.name
+            }"\nFor Override: "${reference.name}"`,
+          );
         }
         memo.push(makeOverride(reference.path, reference.type, overrideValue));
       }
 
       if (reference.type === 'image') {
         if (typeof overrideValue !== 'string') {
-          throw new Error('##FIXME"" IMAGE OVERRIDE VALUES MUST BE VALID IMAGE HREFS');
+          throw new Error(
+            `The override value of an Image must be a url.\n\nIn Symbol Instance: "${
+              props.name
+            }"\nFor Override: "${reference.name}"`,
+          );
         }
         memo.push(
           makeOverride(
