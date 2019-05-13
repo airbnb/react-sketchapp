@@ -197,13 +197,13 @@ const computeYogaNode = (
     // Overflow
     if (style.overflow) {
       if (style.overflow === 'visible') {
-        yogaNode.setDisplay(yoga.OVERFLOW_VISIBLE);
+        yogaNode.setOverflow(yoga.OVERFLOW_VISIBLE);
       }
       if (style.overflow === 'scroll') {
-        yogaNode.setDisplay(yoga.OVERFLOW_SCROLL);
+        yogaNode.setOverflow(yoga.OVERFLOW_SCROLL);
       }
       if (style.overflow === 'hidden') {
-        yogaNode.setDisplay(yoga.OVERFLOW_HIDDEN);
+        yogaNode.setOverflow(yoga.OVERFLOW_HIDDEN);
       }
     }
 
