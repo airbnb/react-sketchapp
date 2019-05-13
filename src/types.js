@@ -36,7 +36,7 @@ type SketchAssetCollection = {
   gradients: () => Array<MSGradient>,
 };
 
-export type SketchDocumentData = {
+export type SketchDocumentData = {|
   assets: () => SketchAssetCollection,
   layerStyles: () => void,
   layerTextStyles: () => SketchSharedStyleContainer,
@@ -47,16 +47,16 @@ export type SketchDocumentData = {
   setCurrentPage: (page: SketchPage) => void,
   pages: () => MSArray<SketchPage>,
   symbolsPageOrCreateIfNecessary: () => SketchPage,
-};
+|};
 
-export type SketchDocument = {
+export type SketchDocument = {|
   documentData: () => SketchDocumentData,
   showMessage: (message: string) => void,
-};
+|};
 
-export type WrappedSketchDocument = {
+export type WrappedSketchDocument = {|
   sketchObject: SketchDocument | SketchDocumentData,
-};
+|};
 
 export type SketchContext = {
   document: SketchDocument,
