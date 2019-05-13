@@ -36,25 +36,22 @@ const msListToArray = pageList => {
 const getDocumentData = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): SketchDocumentData => {
+  let nativeDocument: SketchDocumentData | SketchDocument;
   let nativeDocumentData: SketchDocumentData;
   if (document && document.sketchObject) {
-    const nativeDocument = document.sketchObject;
-    // $FlowFixMe
-    nativeDocumentData = nativeDocument.documentData
-      ? nativeDocument.documentData()
-      : // $FlowFixMe
-        nativeDocument;
+    nativeDocument = document.sketchObject;
   } else if (document) {
-    if (document.documentData) {
-      // $FlowFixMe
-      nativeDocumentData = document.documentData();
-    } else {
-      nativeDocumentData = document;
-    }
+    nativeDocument = document;
   } else {
-    nativeDocumentData = getDocumentDataFromContext(context); // eslint-disable-line
+    nativeDocument = getDocumentDataFromContext(context);
   }
-  // $FlowFixMe
+
+  if (nativeDocument.documentData) {
+    nativeDocumentData = nativeDocument.documentData();
+  } else {
+    nativeDocumentData = nativeDocument;
+  }
+
   return nativeDocumentData;
 };
 
@@ -80,17 +77,6 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
     });
   }
   return existingSymbols;
-};
-
-const getSymbolID = (masterName: string): string => {
-  let symbolId = generateID();
-
-  existingSymbols.forEach(symbolMaster => {
-    if (symbolMaster.name === masterName) {
-      symbolId = symbolMaster.symbolID;
-    }
-  });
-  return symbolId;
 };
 
 export const injectSymbols = (
@@ -161,7 +147,9 @@ export const makeSymbol = (
   }
 
   const masterName = name || displayName(Component);
-  const symbolID = getSymbolID(masterName);
+  const existingSymbol = existingSymbols.find(symbolMaster => symbolMaster.name === masterName);
+  const symbolID = existingSymbol ? existingSymbol.symbolID : generateID(masterName);
+
   const symbolMaster = flexToSketchJSON(
     buildTree(
       <symbolmaster symbolID={symbolID} name={masterName}>
