@@ -4,7 +4,6 @@ exports[`<Svg /> also works when child is directly imported 1`] = `
 <svg
   height="447"
   preserveAspectRatio="xMidYMid meet"
-  style={undefined}
   viewBox="0 0 494 447"
   width="494"
   xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +45,6 @@ exports[`<Svg /> passes its children 1`] = `
 <svg
   height="447"
   preserveAspectRatio="xMidYMid meet"
-  style={undefined}
   viewBox="0 0 494 447"
   width="494"
   xmlns="http://www.w3.org/2000/svg"

@@ -18,7 +18,7 @@ describe('<Artboard />', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('flattens its stylesheet');
+  it.todo('flattens its stylesheet');
 
   describe('name', () => {
     it('passes its name', () => {

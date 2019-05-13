@@ -4,7 +4,6 @@ exports[`<Image /> name defaults to Image 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -14,7 +13,6 @@ exports[`<Image /> name passes its name 1`] = `
 <image
   name="bar"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -24,7 +22,6 @@ exports[`<Image /> renders children 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 >
@@ -36,7 +33,6 @@ exports[`<Image /> resizeMode falls back to a resizeMode from style 1`] = `
 <image
   name="Image"
   resizeMode="Fit"
-  resizingConstraint={undefined}
   source="foo"
   style={
     Object {
@@ -50,7 +46,6 @@ exports[`<Image /> resizeMode falls back to cover 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -60,7 +55,6 @@ exports[`<Image /> resizeMode prefers prop to style 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={
     Object {
@@ -74,7 +68,6 @@ exports[`<Image /> resizeMode translates center 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -84,7 +77,6 @@ exports[`<Image /> resizeMode translates contain 1`] = `
 <image
   name="Image"
   resizeMode="Fit"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -94,7 +86,6 @@ exports[`<Image /> resizeMode translates cover 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -104,7 +95,6 @@ exports[`<Image /> resizeMode translates none 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -114,7 +104,6 @@ exports[`<Image /> resizeMode translates repeat 1`] = `
 <image
   name="Image"
   resizeMode="Tile"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -124,7 +113,6 @@ exports[`<Image /> resizeMode translates stretch 1`] = `
 <image
   name="Image"
   resizeMode="Stretch"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -134,7 +122,6 @@ exports[`<Image /> source falls back to defaultSource if available 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -144,7 +131,6 @@ exports[`<Image /> source favors style over source for height 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source={
     Object {
       "height": 500,
@@ -164,7 +150,6 @@ exports[`<Image /> source favors style over source for width 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source={
     Object {
       "uri": "foo",
@@ -184,7 +169,6 @@ exports[`<Image /> source prefers source over defaultSource 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source="foo"
   style={Object {}}
 />
@@ -194,7 +178,6 @@ exports[`<Image /> source sets height from source 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source={
     Object {
       "height": 500,
@@ -214,7 +197,6 @@ exports[`<Image /> source sets width from source 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
   source={
     Object {
       "uri": "foo",
@@ -234,8 +216,6 @@ exports[`<Image /> style accepts a StyleSheet ordinal 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
-  source={undefined}
   style={
     Object {
       "flex": 1,
@@ -248,8 +228,6 @@ exports[`<Image /> style accepts a plain object 1`] = `
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
-  source={undefined}
   style={
     Object {
       "flex": 1,
@@ -262,8 +240,6 @@ exports[`<Image /> style accepts an array of plain objects and/or StyleSheet ord
 <image
   name="Image"
   resizeMode="Fill"
-  resizingConstraint={undefined}
-  source={undefined}
   style={
     Object {
       "flex": 1,
