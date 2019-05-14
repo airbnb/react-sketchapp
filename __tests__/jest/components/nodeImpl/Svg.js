@@ -10,7 +10,7 @@ describe('node <Svg />', () => {
 
     jest.mock('../../../../src/jsonUtils/models', () => ({
       ...require.requireActual('../../../../src/jsonUtils/models'),
-      generateID: jest.fn(() => 'mockID'),
+      generateID: jest.fn(seed => (seed ? `${seed}mockID` : 'mockID')),
     }));
 
     ReactSketch = require('../../../../src');

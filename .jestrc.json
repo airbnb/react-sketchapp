@@ -1,12 +1,12 @@
 {
   "testEnvironment": "node",
-  "browser": true,
   "testRegex": "/__tests__/jest/.*\\.jsx?$",
   "testPathIgnorePatterns": [
     "/node_modules/",
     "<rootDir>/_book",
     "<rootDir>/lib",
-    "<rootDir>/scratch"
+    "<rootDir>/scratch",
+    "<rootDir>/template"
   ],
   "globals": {
     "CGSizeMake": true,

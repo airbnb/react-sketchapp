@@ -8,6 +8,7 @@ import type {
   SJSymbolMaster,
   SJSymbolInstanceLayer,
 } from 'sketchapp-json-flow-types';
+import * as seedrandom from 'seedrandom';
 import { FillType } from 'sketch-constants';
 import * as normalizeColor from 'normalize-css-color';
 import type { Color, ResizeConstraints } from '../types';
@@ -18,11 +19,12 @@ for (let i = 0; i < 256; i += 1) {
   lut[i] = (i < 16 ? '0' : '') + i.toString(16);
 }
 // Hack (http://stackoverflow.com/a/21963136)
-function e7() {
-  const d0 = (Math.random() * 0xffffffff) | 0;
-  const d1 = (Math.random() * 0xffffffff) | 0;
-  const d2 = (Math.random() * 0xffffffff) | 0;
-  const d3 = (Math.random() * 0xffffffff) | 0;
+function e7(seed?: ?string) {
+  const random = seed ? seedrandom(`${seed}0`) : Math.random;
+  const d0 = (random() * 0xffffffff) | 0;
+  const d1 = (random() * 0xffffffff) | 0;
+  const d2 = (random() * 0xffffffff) | 0;
+  const d3 = (random() * 0xffffffff) | 0;
   return `${lut[d0 & 0xff] +
     lut[(d0 >> 8) & 0xff] +
     lut[(d0 >> 16) & 0xff] +
@@ -52,8 +54,22 @@ function generateIdNumber() {
   return date;
 }
 
-export function generateID(): string {
-  return e7();
+// Keep track of previous seeds
+const previousSeeds = {};
+
+export function generateID(seed?: ?string): string {
+  let _seed: ?string;
+
+  if (seed) {
+    if (!previousSeeds[seed]) {
+      previousSeeds[seed] = 0;
+    }
+    previousSeeds[seed] += 1;
+
+    _seed = `${seed}${previousSeeds[seed]}`;
+  }
+
+  return e7(_seed);
 }
 
 const safeToLower = (input: Color): Color => {
@@ -153,7 +169,7 @@ export const makeSymbolInstance = (
   verticalSpacing: 0,
   nameIsFixed: true,
   isVisible: true,
-  do_objectID: generateID(),
+  do_objectID: generateID(`symbolInstance:${name}:${symbolID}`),
   resizingConstraint: makeResizeConstraint(resizingConstraint),
   name,
   symbolID,

@@ -151,7 +151,7 @@ const makeTextLayer = (
   shadows?: Array<ViewStyle>,
 ): SJTextLayer => ({
   _class: 'text',
-  do_objectID: generateID(),
+  do_objectID: generateID(`text:${name}-${textNodes.map(node => node.content).join('')}`),
   frame,
   isFlippedHorizontal: false,
   isFlippedVertical: false,

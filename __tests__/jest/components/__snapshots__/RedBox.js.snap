@@ -3,8 +3,6 @@
 exports[`<RedBox /> renders simple errors 1`] = `
 <view
   name="RedBox"
-  resizingConstraint={undefined}
-  shadows={undefined}
   style={
     Object {
       "backgroundColor": "rgb(204, 0, 0)",
@@ -18,7 +16,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
 >
   <text
     name="Message"
-    resizingConstraint={undefined}
     style={
       Object {
         "color": "white",
@@ -32,8 +29,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
   </text>
   <view
     name="Frames"
-    resizingConstraint={undefined}
-    shadows={undefined}
     style={
       Object {
         "color": "white",
@@ -43,8 +38,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
     }
   >
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -54,8 +47,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       }
     />
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -67,8 +58,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       Script.runInThisContext
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -80,8 +69,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       REPLServer.defaultEval
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -93,8 +80,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       bound
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -106,8 +91,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       REPLServer.runBound [as eval]
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -119,8 +102,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       REPLServer.onLine
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -132,8 +113,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       REPLServer.emit
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -145,8 +124,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       REPLServer.emit
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -158,8 +135,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
       REPLServer.Interface._onLine
     </text>
     <text
-      name={undefined}
-      resizingConstraint={undefined}
       style={
         Object {
           "color": "white",
@@ -177,8 +152,6 @@ exports[`<RedBox /> renders simple errors 1`] = `
 exports[`<RedBox /> renders string errors 1`] = `
 <view
   name="RedBox"
-  resizingConstraint={undefined}
-  shadows={undefined}
   style={
     Object {
       "backgroundColor": "rgb(204, 0, 0)",
@@ -192,7 +165,6 @@ exports[`<RedBox /> renders string errors 1`] = `
 >
   <text
     name="Message"
-    resizingConstraint={undefined}
     style={
       Object {
         "color": "white",

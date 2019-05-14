@@ -4,12 +4,12 @@ import { PatternFillType } from '../utils/constants';
 import SketchRenderer from './SketchRenderer';
 import getImageDataFromURL from '../utils/getImageDataFromURL';
 // import processTransform from './processTransform';
-import { makeRect, makeImageFill, makeJSONDataReference } from '../jsonUtils/models';
+import { makeRect, makeImageFill, makeJSONDataReference, generateID } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import { createBorders } from '../jsonUtils/borders';
 import type { ViewStyle, LayoutInfo, TextStyle } from '../types';
 
-function extractURLFromSource(source) {
+function extractURLFromSource(source?: string | { uri: string }): ?string {
   if (typeof source === 'string') {
     return source;
   }
@@ -32,7 +32,9 @@ export default class ImageRenderer extends SketchRenderer {
       borderBottomLeftRadius = 0,
     } = style;
 
-    const image = getImageDataFromURL(extractURLFromSource(props.source));
+    const url = extractURLFromSource(props.source);
+
+    const image = getImageDataFromURL(url);
 
     const fillImage = makeJSONDataReference(image);
 
@@ -48,6 +50,9 @@ export default class ImageRenderer extends SketchRenderer {
     const fills = [makeImageFill(fillImage, PatternFillType[props.resizeMode])];
 
     const content = makeShapeGroup(frame, [shapeLayer], style, props.shadows, fills);
+
+    // try to keep a constant ID based on the URL
+    content.do_objectID = generateID(url);
 
     const contents = createBorders(content, layout, style);
 

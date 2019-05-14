@@ -27,7 +27,8 @@
     "react/require-default-props": 0,
     "react/default-props-match-prop-types": 0,
     "jsx-a11y/label-has-for": 0,
-    "no-mixed-operators": 0
+    "no-mixed-operators": 0,
+    "import/no-cycle": 0
   },
   "env": {
     "node": true,

@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import styles from './style';
 
 class TextBox extends Component {
+  props: {
+    label: string,
+    type: string,
+    value: string,
+    children?: React$Element<any>,
+  };
+
   constructor(props) {
     super(props);
 
@@ -12,13 +19,6 @@ class TextBox extends Component {
       value: this.props.value,
     };
   }
-
-  props: {
-    label: string,
-    type: string,
-    value: string,
-    children?: React$Element<any>,
-  };
 
   handleChange(event) {
     this.setState({ value: event.target.value });
