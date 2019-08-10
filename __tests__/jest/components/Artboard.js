@@ -58,5 +58,22 @@ describe('<Artboard />', () => {
 
       expect(tree).toMatchSnapshot();
     });
+
+    it('accepts artboard viewport preset', () => {
+      const tree = renderer
+        .create(
+          <Artboard
+            style={{ flex: 1, width: 360, height: 1280 }}
+            viewport={{
+              name: 'Mobile',
+              width: 360,
+              height: 640,
+            }}
+          />,
+        )
+        .toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

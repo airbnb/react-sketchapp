@@ -27,6 +27,13 @@ export default class ArtboardRenderer extends SketchRenderer {
       isVisible: true,
       backgroundColor: color || makeColorFromCSS('white'),
       hasBackgroundColor: color !== undefined,
+      ...(props.viewport && {
+        presetDictionary: {
+          allowResizedMatching: 0,
+          offersLandscapeVariant: 1,
+          ...props.viewport,
+        },
+      }),
     };
   }
 }
