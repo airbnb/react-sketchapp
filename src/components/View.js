@@ -19,6 +19,9 @@ export const ViewPropTypes = {
       ...ShadowsPropTypes,
     }),
   ),
+  injectedProps: PropTypes.shape({
+    flow: PropTypes.object,
+  }),
   children: PropTypes.node,
 };
 
@@ -37,6 +40,7 @@ export default class View extends React.Component {
         style={StyleSheet.flatten(this.props.style)}
         resizingConstraint={this.props.resizingConstraint}
         shadows={this.props.shadows}
+        {...this.props.injectedProps}
       >
         {this.props.children}
       </view>

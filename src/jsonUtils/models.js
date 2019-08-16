@@ -57,16 +57,18 @@ function generateIdNumber() {
 // Keep track of previous seeds
 const previousSeeds = {};
 
-export function generateID(seed?: ?string): string {
+export function generateID(seed?: ?string, isHardcoded?: boolean): string {
   let _seed: ?string;
 
-  if (seed) {
+  if (seed && !isHardcoded) {
     if (!previousSeeds[seed]) {
       previousSeeds[seed] = 0;
     }
     previousSeeds[seed] += 1;
 
     _seed = `${seed}${previousSeeds[seed]}`;
+  } else if (seed && isHardcoded) {
+    _seed = seed;
   }
 
   return e7(_seed);

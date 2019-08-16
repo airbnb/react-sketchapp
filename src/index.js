@@ -9,6 +9,7 @@ import Image from './components/Image';
 import RedBox from './components/RedBox';
 import Svg from './components/Svg';
 import View from './components/View';
+import HotSpot from './components/HotSpot';
 import Text from './components/Text';
 import TextStyles from './sharedStyles/TextStyles';
 import { makeSymbol, getSymbolComponentByName, injectSymbols } from './symbol';
@@ -26,6 +27,7 @@ module.exports = {
   Text,
   TextStyles,
   View,
+  HotSpot,
   Platform,
   makeSymbol,
   getSymbolComponentByName,
