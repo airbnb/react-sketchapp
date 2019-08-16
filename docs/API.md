@@ -141,9 +141,11 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | Prop       | Type                        | Default | Note                                                   |
 | ---------- | --------------------------- | ------- | ------------------------------------------------------ |
 | `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List      |
+| `id`       | `String`                    |         | Unique id/seed to be used for prototype HotSpot        |
 | `children` | `Node`                      |         |                                                        |
 | `style`    | [`Style`](/docs/styling.md) |         |                                                        |
 | `viewport` | `Viewport`                  |         | Object: { name: string, width: number, height: number} |
+| `isHome`   | `Boolean`                   |         | Is prototype home screen if true                       |
 
 #### Examples
 
@@ -344,6 +346,48 @@ View primitives
   <Text>Hello World!</Text>
   <Text>Hello World!</Text>
 </View>
+```
+
+### `<HotSpot>` (extends `<View>`)
+
+HotSpot primitives
+
+#### Props
+
+| Prop       | Type                        | Default | Note                                              |
+| ---------- | --------------------------- | ------- | ------------------------------------------------- |
+| `{...ViewProps}` |                       |         | Inherits View props                               |
+| `flow` | `Flow`                          |         | Object: { target: string, targetId: string, animationType: string } |
+
+#### Example
+
+```js
+<Document>
+  <Artboard id="home" name="Home">
+    <HotSpot
+      name="Menu Button"
+      style={{
+        height: 100,
+        backgroundColor: '#01ffae',
+      }}
+      flow={{
+        target: 'menu' // From <Artboard id="" or can be "back"
+        // targetId: uuid (can be used to reference existing artboards/uuids)
+        // animationType: string (constants can be used from require('sketch') API, or hardcoded)
+      }}
+    >
+      <Text>Open menu!</Text>
+    </HotSpot>
+  </Artboard>
+  <Artboard id="menu" name="Menu">
+    <HotSpot
+      name="Go back"
+      flow={{ target: 'back' }} /* "back" used instead of <Artboard> id */
+    >
+      <Text>Go back!</Text>
+    </HotSpotname="Go>
+  </Artboard>
+</Document>
 ```
 
 ## Platform
