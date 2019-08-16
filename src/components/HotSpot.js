@@ -16,7 +16,7 @@ export const HotSpotPropTypes = {
 export default class HotSpot extends React.Component {
   static propTypes = {
     ...ViewPropTypes,
-    HotSpotPropTypes,
+    ...HotSpotPropTypes,
   };
 
   static defaultProps = {
