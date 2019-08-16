@@ -27,6 +27,7 @@ export default class ArtboardRenderer extends SketchRenderer {
       isVisible: true,
       backgroundColor: color || makeColorFromCSS('white'),
       hasBackgroundColor: color !== undefined,
+      ...(props.isHome && { isFlowHome: true }),
       ...(props.viewport && {
         presetDictionary: {
           allowResizedMatching: 0,

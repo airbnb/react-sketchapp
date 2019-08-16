@@ -18,6 +18,7 @@ export default class Artboard extends React.Component {
     style: or([PropTypes.shape(ViewStylePropTypes), PropTypes.number]),
     name: PropTypes.string,
     id: PropTypes.string,
+    isHome: PropTypes.bool,
     children: PropTypes.node,
     viewport: PropTypes.shape(ViewportPropTypes),
   };
@@ -34,6 +35,7 @@ export default class Artboard extends React.Component {
         id={this.props.id}
         name={this.props.name}
         viewport={this.props.viewport}
+        isHome={this.props.isHome}
       >
         {this.props.children}
       </artboard>
