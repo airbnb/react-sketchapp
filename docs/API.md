@@ -11,6 +11,7 @@
   - [`<Svg>`](#svg)
   - [`<Text>`](#text)
   - [`<View>`](#view)
+  - [`<HotSpot>`](#hotspot)
 - [`Platform`](#platform)
   - [`OS`](#os)
   - [`Version`](#version)
@@ -348,7 +349,9 @@ View primitives
 </View>
 ```
 
-### `<HotSpot>` (extends `<View>`)
+### `<HotSpot>`
+
+Extends [`<View>`](#view)
 
 HotSpot primitives
 
