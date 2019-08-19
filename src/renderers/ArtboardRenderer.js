@@ -18,7 +18,7 @@ export default class ArtboardRenderer extends SketchRenderer {
 
     return {
       _class: 'artboard',
-      do_objectID: props.id ? generateID(props.id, true) : generateID(props.name),
+      do_objectID: generateID(`artboard:${props.id || props.name}`),
       frame: makeRect(layout.left, layout.top, layout.width, layout.height),
       // "layerListExpandedType": 0,
       name: props.name || 'Artboard',
