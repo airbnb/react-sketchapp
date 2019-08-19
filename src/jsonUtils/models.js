@@ -60,17 +60,15 @@ const previousSeeds = {};
 export function generateID(seed?: ?string, index?: number): string {
   let _seed: ?string;
 
-  if (seed) {
+  if (seed && !index) {
     if (!previousSeeds[seed]) {
       previousSeeds[seed] = 0;
     }
     previousSeeds[seed] += 1;
 
-    if (!index) {
-      _seed = `${seed}${previousSeeds[seed]}`;
-    } else {
-      _seed = `${seed}${index}`;
-    }
+    _seed = `${seed}${previousSeeds[seed]}`;
+  } else if (seed && index) {
+    _seed = `${seed}${index}`;
   }
 
   return e7(_seed);
