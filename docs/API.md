@@ -11,7 +11,6 @@
   - [`<Svg>`](#svg)
   - [`<Text>`](#text)
   - [`<View>`](#view)
-  - [`<HotSpot>`](#hotspot)
 - [`Platform`](#platform)
   - [`OS`](#os)
   - [`Version`](#version)
@@ -329,10 +328,14 @@ View primitives
 | Prop       | Type                        | Default | Note                                              |
 | ---------- | --------------------------- | ------- | ------------------------------------------------- |
 | `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
+| `id`       | `String`                    |         | Override Sketch object ID seed (optional, falls back to name) |
 | `children` | `Node`                      |         |                                                   |
 | `style`    | [`Style`](/docs/styling.md) |         |                                                   |
+| `flow`     | `Flow`                      |         | Object: { target: string, targetId: string, animationType: string } |
 
-#### Example
+#### Examples
+
+**Example with children**
 
 ```js
 <View
@@ -349,20 +352,7 @@ View primitives
 </View>
 ```
 
-### `<HotSpot>`
-
-Extends [`<View>`](#view)
-
-HotSpot primitives
-
-#### Props
-
-| Prop       | Type                        | Default | Note                                              |
-| ---------- | --------------------------- | ------- | ------------------------------------------------- |
-| `{...ViewProps}` |                       |         | Inherits View props                               |
-| `flow` | `Flow`                          |         | Object: { target: string, targetId: string, animationType: string } |
-
-#### Example
+**Example using `flow` prop for prototyping destination**
 
 ```js
 <Document>
