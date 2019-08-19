@@ -23,7 +23,7 @@ const getArtboard = target => {
   if (target === BackTarget) {
     return BackTarget;
   }
-  return generateID(`artboard:${target}`, 1);
+  return generateID(`artboard:${target}`, true);
 };
 
 const hotspotLayer = ({
