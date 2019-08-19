@@ -141,7 +141,6 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | Prop       | Type                        | Default | Note                                                   |
 | ---------- | --------------------------- | ------- | ------------------------------------------------------ |
 | `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List      |
-| `id`       | `String`                    |         | Unique id/seed to be used for prototype HotSpot        |
 | `children` | `Node`                      |         |                                                        |
 | `style`    | [`Style`](/docs/styling.md) |         |                                                        |
 | `viewport` | `Viewport`                  |         | Object: { name: string, width: number, height: number} |
@@ -328,7 +327,6 @@ View primitives
 | Prop       | Type                        | Default | Note                                              |
 | ---------- | --------------------------- | ------- | ------------------------------------------------- |
 | `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
-| `id`       | `String`                    |         | Override Sketch object ID seed (optional, falls back to name) |
 | `children` | `Node`                      |         |                                                   |
 | `style`    | [`Style`](/docs/styling.md) |         |                                                   |
 | `flow`     | `Flow`                      |         | Object: { target: string, targetId: string, animationType: string } |
@@ -356,29 +354,29 @@ View primitives
 
 ```js
 <Document>
-  <Artboard id="home" name="Home">
-    <HotSpot
+  <Artboard name="Home">
+    <View
       name="Menu Button"
       style={{
         height: 100,
         backgroundColor: '#01ffae',
       }}
       flow={{
-        target: 'menu' // From <Artboard id="" or can be "back"
+        target: 'menu' // From <Artboard name" or can be "back"
         // targetId: uuid (can be used to reference existing artboards/uuids)
         // animationType: string (constants can be used from require('sketch') API, or hardcoded)
       }}
     >
       <Text>Open menu!</Text>
-    </HotSpot>
+    </View>
   </Artboard>
-  <Artboard id="menu" name="Menu">
-    <HotSpot
+  <Artboard name="Menu">
+    <View
       name="Go back"
       flow={{ target: 'back' }} /* "back" used instead of <Artboard> id */
     >
       <Text>Go back!</Text>
-    </HotSpotname="Go>
+    </View>
   </Artboard>
 </Document>
 ```
