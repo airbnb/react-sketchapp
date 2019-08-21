@@ -47,8 +47,11 @@ Here is a reference `tsconfig.json`:
     "strict": true,
     "outDir": "./.ts-compiled",
     "rootDir": "./src",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node"
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ]
 }
 ```
