@@ -79,10 +79,14 @@ export const reactTreeToFlexTree = (node: TreeNode, yogaNode: yoga.Yoga$Node, co
 const buildTree = (element: React$Element<any>): TreeNode => {
   let renderer = {};
 
-  TestRenderer.act(() => {
-    // synchronous callback
+  if (TestRenderer.act !== 'undefined') {
+    TestRenderer.act(() => {
+      // synchronous callback
+      renderer = TestRenderer.create(element);
+    });
+  } else {
     renderer = TestRenderer.create(element);
-  });
+  }
   const json: TreeNode = renderer.toJSON();
   const yogaNode = computeYogaTree(json, new Context());
   yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
