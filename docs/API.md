@@ -328,11 +328,6 @@ View primitives
 | `name` | `String` |  | The name to be displayed in the Sketch Layer List |
 | `children` | `Node` |  |  |
 | `style` | [`Style`](/docs/styling.md) |  |  |
-| `borderPositionType` | `BorderPositionType` | `Outside` |  |
-
-```
-type BorderPositionType = 'Center' | 'Inside' | 'Outside';
-```
 
 #### Example
 
@@ -344,7 +339,6 @@ type BorderPositionType = 'Center' | 'Inside' | 'Outside';
     width: 480,
     backgroundColor: '#01ffae',
   }}
-  borderPositionType="Outside"
 >
   <Text>Hello World!</Text>
   <Text>Hello World!</Text>
