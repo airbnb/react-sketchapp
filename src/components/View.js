@@ -6,6 +6,7 @@ import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
 import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
 import ShadowsPropTypes from './ShadowsPropTypes';
+import BorderPositionTypePropTypes from './BorderPositionTypePropTypes';
 
 export const ViewPropTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
@@ -19,6 +20,7 @@ export const ViewPropTypes = {
       ...ShadowsPropTypes,
     }),
   ),
+  borderPositionType: BorderPositionTypePropTypes,
   children: PropTypes.node,
 };
 
@@ -28,6 +30,7 @@ export default class View extends React.Component {
 
   static defaultProps = {
     name: 'View',
+    borderPositionType: 'Outside',
   };
 
   render() {
@@ -37,6 +40,7 @@ export default class View extends React.Component {
         style={StyleSheet.flatten(this.props.style)}
         resizingConstraint={this.props.resizingConstraint}
         shadows={this.props.shadows}
+        borderPositionType={this.props.borderPositionType}
       >
         {this.props.children}
       </view>

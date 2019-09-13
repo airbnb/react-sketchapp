@@ -2,7 +2,7 @@
 import { BorderPosition, FillType } from 'sketch-constants';
 import type { SJShapeGroupLayer, SJBorderOptions, SJBorder } from 'sketchapp-json-flow-types';
 import { makeColorFromCSS } from './models';
-import type { ViewStyle, LayoutInfo, BorderStyle } from '../types';
+import type { ViewStyle, LayoutInfo, BorderStyle, BorderPositionType } from '../types';
 import same from '../utils/same';
 import { makeVerticalBorder, makeHorizontalBorder } from './shapeLayers';
 import { makeBorderOptions } from './style';
@@ -40,6 +40,7 @@ export const createBorders = (
   content: SJShapeGroupLayer,
   layout: LayoutInfo,
   style?: ViewStyle,
+  borderPositionType?: BorderPositionType = 'Outside',
 ): Array<SJShapeGroupLayer> => {
   if (!style) {
     return [content];
@@ -83,12 +84,12 @@ export const createBorders = (
           isEnabled: true,
           color: makeColorFromCSS(borderTopColor),
           fillType: FillType.Solid,
-          position: BorderPosition.Outside,
+          position: BorderPosition[borderPositionType],
           thickness: borderTopWidth,
         },
       ];
       const backingLayer = content.layers ? content.layers[0] : undefined;
-      if (backingLayer) {
+      if (backingLayer && borderPositionType === 'Outside') {
         // $FlowFixMe
         backingLayer.frame.x += borderTopWidth;
         // $FlowFixMe

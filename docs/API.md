@@ -138,12 +138,12 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 
 #### props
 
-| Prop       | Type                        | Default | Note                                                   |
-| ---------- | --------------------------- | ------- | ------------------------------------------------------ |
-| `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List      |
-| `children` | `Node`                      |         |                                                        |
-| `style`    | [`Style`](/docs/styling.md) |         |                                                        |
-| `viewport` | `Viewport`                  |         | Object: { name: string, width: number, height: number} |
+| Prop | Type | Default | Note |
+| --- | --- | --- | --- |
+| `name` | `String` |  | The name to be displayed in the Sketch Layer List |
+| `children` | `Node` |  |  |
+| `style` | [`Style`](/docs/styling.md) |  |  |
+| `viewport` | `Viewport` |  | Object: { name: string, width: number, height: number} |
 
 #### Examples
 
@@ -214,8 +214,8 @@ A red box / 'red screen of death' error handler. Thanks to [commissure/redbox-re
 
 #### Props
 
-| Prop    | Type                                                                                              | Default      | Note                      |
-| ------- | ------------------------------------------------------------------------------------------------- | ------------ | ------------------------- |
+| Prop | Type | Default | Note |
+| --- | --- | --- | --- |
 | `error` | [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) | **required** | A JavaScript Error object |
 
 #### Example
@@ -295,11 +295,11 @@ Text primitives
 
 #### Props
 
-| Prop       | Type                        | Default | Note                                              |
-| ---------- | --------------------------- | ------- | ------------------------------------------------- |
-| `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
-| `children` | `String`                    |         |                                                   |
-| `style`    | [`Style`](/docs/styling.md) |         |                                                   |
+| Prop | Type | Default | Note |
+| --- | --- | --- | --- |
+| `name` | `String` |  | The name to be displayed in the Sketch Layer List |
+| `children` | `String` |  |  |
+| `style` | [`Style`](/docs/styling.md) |  |  |
 
 #### Example
 
@@ -323,11 +323,16 @@ View primitives
 
 #### Props
 
-| Prop       | Type                        | Default | Note                                              |
-| ---------- | --------------------------- | ------- | ------------------------------------------------- |
-| `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
-| `children` | `Node`                      |         |                                                   |
-| `style`    | [`Style`](/docs/styling.md) |         |                                                   |
+| Prop | Type | Default | Note |
+| --- | --- | --- | --- |
+| `name` | `String` |  | The name to be displayed in the Sketch Layer List |
+| `children` | `Node` |  |  |
+| `style` | [`Style`](/docs/styling.md) |  |  |
+| `borderPositionType` | `BorderPositionType` | `Outside` |  |
+
+```
+type BorderPositionType = 'Center' | 'Inside' | 'Outside';
+```
 
 #### Example
 
@@ -339,6 +344,7 @@ View primitives
     width: 480,
     backgroundColor: '#01ffae',
   }}
+  borderPositionType="Outside"
 >
   <Text>Hello World!</Text>
   <Text>Hello World!</Text>
@@ -597,11 +603,11 @@ Returns a react component which is an can be used to render instances of the sym
 
 #### Parameters
 
-| Parameter  | Type     | Default              | Note                                                                                                                           |
-| ---------- | -------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `node`     | `Node`   |                      | The node object that will be rendered as a symbol                                                                              |
-| `name`     | `String` | The node name        | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
-| `document` | `Object` | The current document | The Sketch document to make the symbol in                                                                                      |
+| Parameter | Type | Default | Note |
+| --- | --- | --- | --- |
+| `node` | `Node` |  | The node object that will be rendered as a symbol |
+| `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
+| `document` | `Object` | The current document | The Sketch document to make the symbol in |
 
 ### `getSymbolComponentByName(name)`
 

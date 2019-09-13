@@ -88,7 +88,7 @@ export default class ViewRenderer extends SketchRenderer {
       }
     }
 
-    const contents = createBorders(content, layout, style);
+    const contents = createBorders(content, layout, style, props.borderPositionType);
 
     layers = layers.concat(contents);
 

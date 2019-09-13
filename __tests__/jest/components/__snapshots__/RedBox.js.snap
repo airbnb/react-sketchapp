@@ -2,6 +2,7 @@
 
 exports[`<RedBox /> renders simple errors 1`] = `
 <view
+  borderPositionType="Outside"
   name="RedBox"
   style={
     Object {
@@ -28,6 +29,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
     Error: THIS IS AN ERROR
   </text>
   <view
+    borderPositionType="Outside"
     name="Frames"
     style={
       Object {
@@ -151,6 +153,7 @@ exports[`<RedBox /> renders simple errors 1`] = `
 
 exports[`<RedBox /> renders string errors 1`] = `
 <view
+  borderPositionType="Outside"
   name="RedBox"
   style={
     Object {

@@ -225,3 +225,5 @@ export type SketchShadow = {
 };
 
 export type SketchShadows = Array<SketchShadow>;
+
+export type BorderPositionType = 'Center' | 'Inside' | 'Outside';
