@@ -17,6 +17,7 @@ export default class Artboard extends React.Component {
     // TODO(lmr): do some nice warning stuff like RN does
     style: or([PropTypes.shape(ViewStylePropTypes), PropTypes.number]),
     name: PropTypes.string,
+    isHome: PropTypes.bool,
     children: PropTypes.node,
     viewport: PropTypes.shape(ViewportPropTypes),
   };
@@ -31,6 +32,7 @@ export default class Artboard extends React.Component {
         style={StyleSheet.flatten(this.props.style)}
         name={this.props.name}
         viewport={this.props.viewport}
+        isHome={this.props.isHome}
       >
         {this.props.children}
       </artboard>

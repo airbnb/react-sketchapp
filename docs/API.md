@@ -144,6 +144,7 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | `children` | `Node`                      |         |                                                        |
 | `style`    | [`Style`](/docs/styling.md) |         |                                                        |
 | `viewport` | `Viewport`                  |         | Object: { name: string, width: number, height: number} |
+| `isHome`   | `Boolean`                   |         | Is prototype home screen if true                       |
 
 #### Examples
 
@@ -328,8 +329,11 @@ View primitives
 | `name`     | `String`                    |         | The name to be displayed in the Sketch Layer List |
 | `children` | `Node`                      |         |                                                   |
 | `style`    | [`Style`](/docs/styling.md) |         |                                                   |
+| `flow`     | `Flow`                      |         | Object: { target: string, targetId: string, animationType: string } |
 
-#### Example
+#### Examples
+
+**Example with children**
 
 ```js
 <View
@@ -344,6 +348,37 @@ View primitives
   <Text>Hello World!</Text>
   <Text>Hello World!</Text>
 </View>
+```
+
+**Example using `flow` prop for prototyping destination**
+
+```js
+<Document>
+  <Artboard name="Home">
+    <View
+      name="Menu Button"
+      style={{
+        height: 100,
+        backgroundColor: '#01ffae',
+      }}
+      flow={{
+        target: 'menu' // From <Artboard name" or can be "back"
+        // targetId: uuid (can be used to reference existing artboards/uuids)
+        // animationType: string (constants can be used from require('sketch') API, or hardcoded)
+      }}
+    >
+      <Text>Open menu!</Text>
+    </View>
+  </Artboard>
+  <Artboard name="Menu">
+    <View
+      name="Go back"
+      flow={{ target: 'back' }} /* "back" used instead of <Artboard> id */
+    >
+      <Text>Go back!</Text>
+    </View>
+  </Artboard>
+</Document>
 ```
 
 ## Platform

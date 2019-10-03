@@ -11,6 +11,12 @@ describe('generateID', () => {
   it('is unique', () => {
     expect(generateID()).not.toBe(generateID());
   });
+  it('seed generates different ID', () => {
+    expect(generateID('test')).not.toBe(generateID('test'));
+  });
+  it('hardcoded seed generates same ID', () => {
+    expect(generateID('test', true)).toBe(generateID('test', true));
+  });
 });
 
 const BLACK = {

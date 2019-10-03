@@ -1,5 +1,6 @@
 // @flow
 import layerGroup from '../jsonUtils/layerGroup';
+import hotspotLayer from '../jsonUtils/hotspotLayer';
 import type { LayoutInfo, ViewStyle, TextStyle, TreeNode } from '../types';
 import processTransform from '../utils/processTransform';
 
@@ -31,6 +32,7 @@ export default class SketchRenderer {
       ),
       name: props.name || this.getDefaultGroupName(props),
       ...transform,
+      ...(props.flow && hotspotLayer(props.flow)),
     };
   }
 

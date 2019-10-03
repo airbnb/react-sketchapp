@@ -18,7 +18,7 @@ export default class ArtboardRenderer extends SketchRenderer {
 
     return {
       _class: 'artboard',
-      do_objectID: generateID(),
+      do_objectID: generateID(`artboard:${props.name}`, true),
       frame: makeRect(layout.left, layout.top, layout.width, layout.height),
       // "layerListExpandedType": 0,
       name: props.name || 'Artboard',
@@ -27,6 +27,7 @@ export default class ArtboardRenderer extends SketchRenderer {
       isVisible: true,
       backgroundColor: color || makeColorFromCSS('white'),
       hasBackgroundColor: color !== undefined,
+      ...(props.isHome && { isFlowHome: true }),
       ...(props.viewport && {
         presetDictionary: {
           allowResizedMatching: 0,
