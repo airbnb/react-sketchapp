@@ -10,7 +10,10 @@ export default {
   shadowColor: Color,
   shadowInner: PropTypes.bool,
   shadowSpread: PropTypes.number,
-  shadowOffset: { width: PropTypes.number, height: PropTypes.number },
+  shadowOffset: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number
+  }),
   shadowOpacity: PropTypes.number,
   shadowRadius: PropTypes.number,
   width: PropTypes.number,
