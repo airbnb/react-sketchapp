@@ -132,6 +132,7 @@ export const render = (
 
     return renderTree(tree, nativeContainer);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     const tree = buildTree(<RedBox error={err} />);
     return renderContents(tree, nativeContainer);

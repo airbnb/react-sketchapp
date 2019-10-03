@@ -111,10 +111,6 @@ export const injectSymbols = (
 
 export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React.ComponentType<any> =>
   class extends React.Component<any> {
-    static symbolID = symbolMaster.symbolID;
-
-    static masterName = symbolMaster.name;
-
     static displayName = `SymbolInstance(${symbolMaster.name})`;
 
     static propTypes = {
@@ -123,6 +119,10 @@ export const createSymbolInstanceClass = (symbolMaster: SJSymbolMaster): React.C
       overrides: PropTypes.object, // eslint-disable-line
       resizingConstraint: PropTypes.object, // eslint-disable-line
     };
+
+    static symbolID = symbolMaster.symbolID;
+
+    static masterName = symbolMaster.name;
 
     render() {
       return (
