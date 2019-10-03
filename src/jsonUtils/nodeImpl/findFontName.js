@@ -164,6 +164,7 @@ export function findFont(style: TextStyle): NSFont {
       isItalic = style.fontStyle ? isItalic : isItalicFont(font);
       isCondensed = isCondensedFont(font);
     } else {
+      // eslint-disable-next-line no-console
       console.log(`Unrecognized font family '${familyName}'`);
       font = $.NSFont('systemFontOfSize', fontSize, 'weight', fontWeight);
     }
