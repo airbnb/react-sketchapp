@@ -10,10 +10,9 @@ export default class TextPath extends React.Component {
 
   render() {
     if (!this.props.href || !this.props.href.match(idExpReg)) {
+      // eslint-disable-next-line no-console
       console.warn(
-        `Invalid \`href\` prop for \`TextPath\` element, expected a href like \`"#id"\`, but got: "${
-          this.props.href
-        }"`,
+        `Invalid \`href\` prop for \`TextPath\` element, expected a href like \`"#id"\`, but got: "${this.props.href}"`,
       );
     }
 

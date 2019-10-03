@@ -169,6 +169,7 @@ function appendTransform(transform) {
     const [a, c, e, b, d, f] = transformParser.parse(transform);
     pooledMatrix.append(...[a, b, c, d, e, f]);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
   }
 }
