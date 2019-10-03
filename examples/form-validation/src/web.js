@@ -19,7 +19,7 @@ export default () => (
           fontFamily,
         }}
       >
-        Form Validation w/ DOM elements and React Primitives. Type a password!{' '}
+        <span>Form Validation w/ DOM elements and React Primitives. Type a password! </span>
         <span role="img" aria-label="icon">
           👀
         </span>
