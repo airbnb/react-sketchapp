@@ -14,7 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/). Every release
 - `Image` and `Text` now support multiple shadows just like `View`
 - Add support for `TextShadow`
 - Add support for `transform`
-- Add support for running `react-sketchapp` on NodeJS
+- Add support for running `react-sketchapp` on NodeJS using `renderToJSON()`
+- Port to TypeScript and publish TypeScript definitions
 
 ## Version 3.0.0-beta.9
 
