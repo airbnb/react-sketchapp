@@ -77,7 +77,7 @@
   },
   "homepage": "https://github.com/airbnb/react-sketchapp",
   "lint-staged": {
-    "*.js": [
+    "*.(j|t)sx?": [
       "npm run prettier:base",
       "git add",
       "eslint --quiet"
