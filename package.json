@@ -32,7 +32,7 @@
     "prepublishOnly": "npm run clean && npm run check && npm run build",
     "prettier:base": "prettier --write",
     "prettify": "npm run prettier:base \"src/**/*.js\" \"examples/**/*.js\" \"__tests__/**/*.js\" \"docs/**/*.md\"",
-    "test": "npm run test:unit && test:e2e",
+    "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest --config jest.config.js --no-watchman",
     "test:ci": "npm run test:unit -- --runInBand",
     "test:e2e": "skpm-test",
@@ -41,12 +41,14 @@
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\""
   },
   "dependencies": {
+    "@lona/svg-model": "^1.0.1",
     "@skpm/sketchapp-json-plugin": "^0.2.0",
     "airbnb-prop-types": "^2.15.0",
     "error-stack-parser": "^2.0.4",
     "invariant": "^2.2.2",
     "js-sha1": "^0.6.0",
     "murmur2js": "^1.0.0",
+    "node-sketch-bridge": "^0.1.0",
     "normalize-css-color": "^1.0.1",
     "pegjs": "^0.10.0",
     "prop-types": "^15.7.2",
@@ -56,10 +58,6 @@
   "peerDependencies": {
     "react": "*",
     "react-test-renderer": "*"
-  },
-  "optionalDependencies": {
-    "@lona/svg-model": "^1.0.1",
-    "nodobjc": "^2.1.0"
   },
   "keywords": [
     "sketch",
@@ -88,7 +86,6 @@
     ]
   },
   "devDependencies": {
-    "@lona/svg-model": "^1.0.1",
     "@sketch-hq/sketch-file-format": "^3.1.1",
     "@sketch-hq/sketch-file-format-ts": "^2.0.0",
     "@skpm/babel-preset": "^0.2.1",
@@ -102,8 +99,8 @@
     "@types/react-test-renderer": "^16.9.1",
     "@types/seedrandom": "^2.4.28",
     "@types/yoga-layout": "^1.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.6.1",
-    "@typescript-eslint/parser": "^2.6.1",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
@@ -122,7 +119,7 @@
     "lint-staged": "^9.4.2",
     "npm-run-all": "^4.1.5",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "react": "^16.11.0",
     "react-test-renderer": "^16.11.0",
     "sketchapp-json-flow-types": "^0.3.6",

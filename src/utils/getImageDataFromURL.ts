@@ -1,12 +1,15 @@
+import sha1 from 'js-sha1';
 import { getSketchVersion } from './getSketchVersion';
 import sketchMethod from '../jsonUtils/sketchImpl/makeImageDataFromUrl';
 import nodeMethod from '../jsonUtils/nodeImpl/makeImageDataFromUrl';
 
 const makeImageDataFromUrl = (url?: string): { data: string; sha1: string } => {
-  if (getSketchVersion() === 'NodeJS') {
-    return nodeMethod(url);
-  }
-  return sketchMethod(url);
+  const data = getSketchVersion() === 'NodeJS' ? nodeMethod(url) : sketchMethod(url);
+
+  return {
+    data,
+    sha1: sha1.default(data),
+  };
 };
 
 export default makeImageDataFromUrl;

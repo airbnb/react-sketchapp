@@ -1,4 +1,4 @@
-export default function makeImageDataFromUrl(url?: string): { data: string; sha1: string } {
+export default function makeImageDataFromUrl(url?: string) {
   let fetchedData = url ? NSData.dataWithContentsOfURL(NSURL.URLWithString(url)) : undefined;
 
   if (fetchedData) {
@@ -37,12 +37,7 @@ export default function makeImageDataFromUrl(url?: string): { data: string; sha1
     imageData = MSImageData.alloc().initWithImage(image);
   }
 
-  return {
-    data: imageData
-      .data()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
-    sha1: imageData
-      .sha1()
-      .base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
-  };
+  return String(
+    imageData.data().base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+  );
 }

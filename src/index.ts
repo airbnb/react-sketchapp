@@ -12,7 +12,7 @@ import Text from './components/Text';
 import TextStyles from './sharedStyles/TextStyles';
 import { makeSymbol, getSymbolComponentByName, injectSymbols } from './symbol';
 
-export default {
+const completeExport = {
   render,
   renderToJSON,
   StyleSheet,
@@ -30,3 +30,6 @@ export default {
   getSymbolComponentByName,
   injectSymbols,
 };
+
+module.exports = completeExport;
+module.exports.default = completeExport;
