@@ -1,8 +1,9 @@
 {
   "name": "react-sketchapp",
-  "version": "3.0.0-beta.9",
+  "version": "3.0.0",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "author": "Jon Gold <jon.gold@airbnb.com> (http://jon.gold)",
   "contributors": [

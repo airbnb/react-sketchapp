@@ -52,12 +52,6 @@ It is recommended that you install an ESlint plugin for your editor of choice wh
 npm run lint
 ```
 
-It is also type-checked with [Flow](https://flow.org/) - run with
-
-```bash
-npm run flow
-```
-
 ### Docs
 
 We always appreciate improvements to the documentation!

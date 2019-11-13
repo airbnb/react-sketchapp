@@ -1,6 +1,5 @@
 **/lib/**
 **/*.sketchplugin/**
 **/node_modules/**
-**/flow-typed/**
 **/_book/**
 **/template/**
