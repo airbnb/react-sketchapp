@@ -1,13 +1,9 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View } from 'react-sketchapp';
 import Label from './Label';
 
-type P = {
-  title: string,
-  children?: any,
-};
-const Section = ({ title, children }: P) => (
+const Section = ({ title, children }) => (
   <View style={{ marginBottom: 96, flexDirection: 'row' }}>
     <View style={{ width: 200 }}>
       <Label bold>{title}</Label>

@@ -1,6 +1,0 @@
-{
-  "presets": ["module:@skpm/babel-preset", "@babel/preset-flow"],
-  "plugins": ["@babel/plugin-proposal-class-properties", ["@babel/plugin-transform-modules-commonjs", {
-    "noInterop": true
-  }]]
-}

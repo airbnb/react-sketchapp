@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Artboard /> name defaults to Artboard 1`] = `
+<sketch_artboard
+  name="Artboard"
+/>
+`;
+
+exports[`<Artboard /> name passes its name 1`] = `
+<sketch_artboard
+  name="bar"
+/>
+`;
+
+exports[`<Artboard /> renders children 1`] = `
+<sketch_artboard
+  name="Artboard"
+>
+  foo
+</sketch_artboard>
+`;
+
+exports[`<Artboard /> style accepts a StyleSheet ordinal 1`] = `
+<sketch_artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<Artboard /> style accepts a plain object 1`] = `
+<sketch_artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<Artboard /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
+<sketch_artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+      "flexGrow": 1,
+    }
+  }
+/>
+`;
+
+exports[`<Artboard /> style accepts artboard viewport preset 1`] = `
+<sketch_artboard
+  name="Artboard"
+  style={
+    Object {
+      "flex": 1,
+      "height": 1280,
+      "width": 360,
+    }
+  }
+  viewport={
+    Object {
+      "height": 640,
+      "name": "Mobile",
+      "width": 360,
+    }
+  }
+/>
+`;

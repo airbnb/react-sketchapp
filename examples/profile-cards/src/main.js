@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { render, Text, View } from 'react-sketchapp';
-import type { User } from './types';
 import { fonts, spacing } from './designSystem';
 import Profile from './components/Profile';
 import Space from './components/Space';
 
-const Page = ({ users }: { users: Array<User> }) => (
+const Page = ({ users }) => (
   <View>
     <Text style={fonts['Title 1']}>Profile Cards</Text>
     <View

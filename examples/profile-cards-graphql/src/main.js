@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import { ApolloClient } from 'apollo-client';
@@ -5,7 +6,6 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { graphql, ApolloProvider } from 'react-apollo';
 import gql from 'graphql-tag';
-import type { User } from './types';
 import { fonts, spacing } from './designSystem';
 import Profile from './components/Profile';
 import Space from './components/Space';
@@ -35,7 +35,7 @@ const QUERY = gql`
 const props = ({ data }) => (data.loading ? { users: [] } : { users: data.allProfiles });
 const withUsers = graphql(QUERY, { props });
 
-const Page = ({ users }: { users: Array<User> }) => (
+const Page = ({ users }) => (
   <View>
     <Text style={fonts['Title 1']}>Profile Cards w/ GraphQL</Text>
     {users && (

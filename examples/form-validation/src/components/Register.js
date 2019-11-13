@@ -1,15 +1,10 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-primitives';
 import { spacing, colors, typeRamp, fontFamily } from '../designSystem';
-import type { Session } from '../types';
 import TextBox from './TextBox';
 import StrengthMeter from './StrengthMeter';
 import Button from './Button';
-
-type Props = {
-  session: Session,
-};
 
 const styles = StyleSheet.create({
   register: {
@@ -28,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Register = ({ session }: Props) => (
+const Register = ({ session }) => (
   <View style={styles.register}>
     <Text style={styles.heading}>Register an Account</Text>
     <TextBox label="Email" value={session.email} type="email" />

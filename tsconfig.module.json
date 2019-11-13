@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "lib/module",
+    "module": "esnext"
+  },
+  "exclude": ["node_modules/**"]
+}

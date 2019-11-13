@@ -1,5 +1,4 @@
 import processColor from './processColor';
-import type { Color } from './processColor';
 
 export const colors = {
   Haus: '#F3F4F4',
@@ -75,9 +74,4 @@ export default {
   ),
   fonts,
   spacing,
-};
-
-export type DesignSystem = {
-  fonts: any,
-  colors: { [key: string]: Color },
 };

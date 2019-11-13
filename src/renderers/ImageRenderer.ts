@@ -1,0 +1,62 @@
+import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import SketchRenderer from './SketchRenderer';
+import getImageDataFromURL from '../utils/getImageDataFromURL';
+// import processTransform from './processTransform';
+import { makeRect, makeImageFill, makeJSONDataReference, generateID } from '../jsonUtils/models';
+import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
+import { createBorders } from '../jsonUtils/borders';
+import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+
+function extractURLFromSource(source?: string | { uri: string }): string | undefined {
+  if (typeof source === 'string') {
+    return source;
+  }
+  return (source || {}).uri;
+}
+
+export default class ImageRenderer extends SketchRenderer {
+  renderBackingLayers(
+    layout: LayoutInfo,
+    style: ViewStyle,
+    _textStyle: TextStyle,
+    props: any,
+  ): FileFormat.ShapeGroup[] {
+    let layers: FileFormat.ShapeGroup[] = [];
+
+    const {
+      borderTopLeftRadius = 0,
+      borderTopRightRadius = 0,
+      borderBottomRightRadius = 0,
+      borderBottomLeftRadius = 0,
+    } = style;
+
+    const url = extractURLFromSource(props.source);
+
+    const image = getImageDataFromURL(url);
+
+    const fillImage = makeJSONDataReference(image);
+
+    const frame = makeRect(0, 0, layout.width, layout.height);
+    const radii = [
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderBottomRightRadius,
+      borderBottomLeftRadius,
+    ];
+    const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
+
+    // @ts-ignore
+    const fills = [makeImageFill(fillImage, FileFormat.PatternFillType[props.resizeMode])];
+
+    const content = makeShapeGroup(frame, [shapeLayer], style, props.shadows, fills);
+
+    // try to keep a constant ID based on the URL
+    content.do_objectID = generateID(url);
+
+    const contents = createBorders(content, layout, style);
+
+    layers = layers.concat(contents);
+
+    return layers;
+  }
+}

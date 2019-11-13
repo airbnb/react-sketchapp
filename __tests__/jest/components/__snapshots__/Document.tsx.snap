@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Document /> renders children 1`] = `
+<sketch_document>
+  foo
+</sketch_document>
+`;

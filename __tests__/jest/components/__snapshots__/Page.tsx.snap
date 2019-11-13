@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Page /> name passes its name 1`] = `
+<sketch_page
+  name="bar"
+/>
+`;
+
+exports[`<Page /> name passes its name and avoids Symbol page conflict 1`] = `
+<sketch_page
+  name="Symbols (renamed to avoid conflict)"
+/>
+`;
+
+exports[`<Page /> name passes otherProps 1`] = `
+<sketch_page
+  propName="something"
+  style={Object {}}
+/>
+`;
+
+exports[`<Page /> renders children 1`] = `
+<sketch_page>
+  foo
+</sketch_page>
+`;

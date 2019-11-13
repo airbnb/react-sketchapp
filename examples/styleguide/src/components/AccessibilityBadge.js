@@ -1,15 +1,7 @@
-// @flow
 import * as React from 'react';
 import Badge from './Badge';
 
-type P = {
-  level: {
-    aaa?: boolean,
-    aa?: boolean,
-    aaLarge?: boolean,
-  },
-};
-const AccessibilityBadge = ({ level }: P) => {
+const AccessibilityBadge = ({ level }) => {
   let text;
   switch (true) {
     case level.aaa:

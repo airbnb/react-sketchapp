@@ -1,7 +1,7 @@
 /* eslint-disable import/named, import/no-unresolved */
 import * as React from 'react';
 import * as sketch from 'sketch';
-import { render, View, Text } from '../../src';
+import { render, View, Text } from '../../lib';
 
 // depending on where those tests run, we don't get the things,
 // eg. the context might be empty or there is no selected document

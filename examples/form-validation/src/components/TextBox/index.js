@@ -1,15 +1,8 @@
-// @flow
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import styles from './style';
 
 class TextBox extends Component {
-  props: {
-    label: string,
-    type: string,
-    value: string,
-    children?: React$Element<any>,
-  };
-
   constructor(props) {
     super(props);
 
