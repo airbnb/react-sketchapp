@@ -1,4 +1,4 @@
-import yoga from 'yoga-layout';
+import yoga from 'yoga-layout-prebuilt';
 import computeYogaTree from '../../../src/jsonUtils/computeYogaTree';
 import Context from '../../../src/utils/Context';
 

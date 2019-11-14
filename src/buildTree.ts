@@ -1,5 +1,5 @@
 import * as TestRenderer from 'react-test-renderer';
-import yoga from 'yoga-layout';
+import yoga from 'yoga-layout-prebuilt';
 import Context from './utils/Context';
 import { TreeNode, TextNode } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';

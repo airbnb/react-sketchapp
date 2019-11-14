@@ -1,4 +1,4 @@
-import * as yoga from 'yoga-layout';
+import yoga from 'yoga-layout-prebuilt';
 import { TreeNode, ViewStyle } from '../types';
 import Context from '../utils/Context';
 import createStringMeasurer from '../utils/createStringMeasurer';

@@ -1,4 +1,4 @@
-import yoga from 'yoga-layout';
+import yoga from 'yoga-layout-prebuilt';
 import computeYogaNode from './computeYogaNode';
 import { TreeNode } from '../types';
 import Context from '../utils/Context';

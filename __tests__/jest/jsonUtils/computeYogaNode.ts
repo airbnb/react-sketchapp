@@ -1,4 +1,4 @@
-import yoga from 'yoga-layout';
+import yoga from 'yoga-layout-prebuilt';
 import computeYogaNode from '../../../src/jsonUtils/computeYogaNode';
 import Context from '../../../src/utils/Context';
 
@@ -202,7 +202,10 @@ describe('Compute Yoga Node', () => {
   });
 
   it('correctly handles position: relative & absolute', () => {
-    const stylesToTest = [{ position: 'relative', left: 10 }, { position: 'absolute', top: 10 }];
+    const stylesToTest = [
+      { position: 'relative', left: 10 },
+      { position: 'absolute', top: 10 },
+    ];
     const [relativeNode, absoluteNode] = createYogaNodes(stylesToTest);
 
     expect(relativeNode).toEqual({
