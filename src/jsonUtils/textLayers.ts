@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
 import { TextNode, TextNodes, ResizeConstraints, TextStyle, ViewStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
@@ -184,7 +184,6 @@ const makeTextLayer = (
     shouldTrim: false,
   },
   isFixedToViewport: false,
-  maintainScrollPosition: false,
 });
 
 export default makeTextLayer;

@@ -214,12 +214,12 @@ export type LayerCreator = (
 ) => SketchLayer;
 
 export type ResizeConstraints = {
-  top: boolean;
-  right: boolean;
-  bottom: boolean;
-  left: boolean;
-  fixedHeight: boolean;
-  fixedWidth: boolean;
+  top?: boolean;
+  right?: boolean;
+  bottom?: boolean;
+  left?: boolean;
+  fixedHeight?: boolean;
+  fixedWidth?: boolean;
 };
 
 export type SketchShadow = {

@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import SketchRenderer from './SketchRenderer';
 import {
   makeSymbolInstance,
@@ -7,7 +7,7 @@ import {
   makeOverride,
 } from '../jsonUtils/models';
 import { ViewStyle, LayoutInfo, TextStyle } from '../types';
-import { getSymbolMasterById } from '../symbol';
+import { getSymbolMasterById, SymbolInstanceProps } from '../symbol';
 import getImageDataFromURL from '../utils/getImageDataFromURL';
 
 type Override = {
@@ -103,7 +103,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
     layout: LayoutInfo,
     _style: ViewStyle,
     _textStyle: TextStyle,
-    props: any,
+    props: SymbolInstanceProps & { symbolID: string },
   ): FileFormat.SymbolInstance {
     const masterTree = getSymbolMasterById(props.symbolID);
 

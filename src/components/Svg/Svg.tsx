@@ -34,7 +34,7 @@ const propTypes = {
   xmlns: PropTypes.string,
 };
 
-type Props = PropTypes.InferProps<typeof propTypes>;
+export type Props = PropTypes.InferProps<typeof propTypes>;
 
 export default class Svg extends React.Component<Props> {
   static displayName = 'Svg';

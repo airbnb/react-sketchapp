@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import layerGroup from '../jsonUtils/layerGroup';
 import hotspotLayer from '../jsonUtils/hotspotLayer';
 import { LayoutInfo, ViewStyle, TextStyle, TreeNode } from '../types';

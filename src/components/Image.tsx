@@ -41,7 +41,7 @@ export const ImagePropTypes = {
   source: ImageSourcePropType,
 };
 
-type Props = PropTypes.InferProps<typeof ImagePropTypes>;
+export type Props = PropTypes.InferProps<typeof ImagePropTypes>;
 
 export default class Image extends React.Component<Props> {
   static propTypes = ImagePropTypes;

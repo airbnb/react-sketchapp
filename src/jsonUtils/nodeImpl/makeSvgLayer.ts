@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { LayoutInfo, ViewStyle } from '../../types';
 import { makeShapeGroup, makeShapePath } from '../shapeLayers';
 import { makeRect } from '../models';

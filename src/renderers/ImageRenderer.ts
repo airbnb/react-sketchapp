@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import SketchRenderer from './SketchRenderer';
 import getImageDataFromURL from '../utils/getImageDataFromURL';
 // import processTransform from './processTransform';
@@ -6,8 +6,9 @@ import { makeRect, makeImageFill, makeJSONDataReference, generateID } from '../j
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import { createBorders } from '../jsonUtils/borders';
 import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { Props } from '../components/Image';
 
-function extractURLFromSource(source?: string | { uri: string }): string | undefined {
+function extractURLFromSource(source?: string | { uri?: string }): string | undefined {
   if (typeof source === 'string') {
     return source;
   }
@@ -19,7 +20,7 @@ export default class ImageRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     _textStyle: TextStyle,
-    props: any,
+    props: Props,
   ): FileFormat.ShapeGroup[] {
     let layers: FileFormat.ShapeGroup[] = [];
 

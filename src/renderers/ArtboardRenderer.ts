@@ -1,15 +1,16 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
 import makeResizeConstraint from '../jsonUtils/resizeConstraint';
 import SketchRenderer from './SketchRenderer';
 import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { Props } from '../components/Artboard';
 
 export default class ArtboardRenderer extends SketchRenderer {
   renderGroupLayer(
     layout: LayoutInfo,
     style: ViewStyle,
     _textStyle: TextStyle,
-    props: any,
+    props: Props,
   ): FileFormat.Artboard {
     let color: FileFormat.Color;
     if (style.backgroundColor !== undefined) {
@@ -25,7 +26,7 @@ export default class ArtboardRenderer extends SketchRenderer {
       isVisible: true,
       backgroundColor: color || makeColorFromCSS('white'),
       hasBackgroundColor: color !== undefined,
-      isFlowHome: props.isHome,
+      isFlowHome: !!props.isHome,
       ...(props.viewport && {
         presetDictionary: {
           allowResizedMatching: 0,
@@ -63,7 +64,6 @@ export default class ArtboardRenderer extends SketchRenderer {
         guides: [],
       },
       resizingConstraint: makeResizeConstraint(),
-      maintainScrollPosition: false,
       resizesContent: false,
       rotation: 0,
     };

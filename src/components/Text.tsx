@@ -10,7 +10,7 @@ export const TextPropTypes = {
   style: or([PropTypes.shape(TextStylePropTypes), PropTypes.number]),
 };
 
-type Props = PropTypes.InferProps<typeof TextPropTypes>;
+export type Props = PropTypes.InferProps<typeof TextPropTypes>;
 
 /**
  * @example

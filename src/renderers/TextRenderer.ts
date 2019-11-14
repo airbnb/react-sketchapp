@@ -1,9 +1,10 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import SketchRenderer from './SketchRenderer';
-import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { ViewStyle, LayoutInfo, TextStyle, TextNode } from '../types';
 import makeTextLayer from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
 import TextStyles from '../sharedStyles/TextStyles';
+import { Props } from '../components/Text';
 
 export default class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: any) {
@@ -14,7 +15,7 @@ export default class TextRenderer extends SketchRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
+    props: Props & { textNodes?: TextNode[] },
   ): FileFormat.Text[] {
     let { name } = props;
 

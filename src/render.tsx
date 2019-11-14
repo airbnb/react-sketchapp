@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { appVersionSupported, fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
@@ -38,7 +38,7 @@ const getDefaultPage = (): SketchLayer => {
 
 const renderContents = (tree: TreeNode | string, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(tree);
-  const layer = fromSJSONDictionary(json, '99');
+  const layer = fromSJSONDictionary(json, '119');
 
   return renderLayers([layer], container);
 };

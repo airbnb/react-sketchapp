@@ -18,7 +18,7 @@ export const ArtboardPropTypes = {
   viewport: PropTypes.shape(ViewportPropTypes),
 };
 
-type Props = PropTypes.InferProps<typeof ArtboardPropTypes>;
+export type Props = PropTypes.InferProps<typeof ArtboardPropTypes>;
 
 export default class Artboard extends React.Component<Props> {
   static propTypes = ArtboardPropTypes;

@@ -1,5 +1,5 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
-import { makeColorFromCSS, makeColorFill, generateID } from './models';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
+import { makeColorFromCSS, makeColorFill } from './models';
 import { ViewStyle, TextStyle } from '../types';
 import hasAnyDefined from '../utils/hasAnyDefined';
 
@@ -100,7 +100,6 @@ export const makeStyle = (
 ): FileFormat.Style => {
   const json: FileFormat.Style = {
     _class: 'style',
-    do_objectID: generateID(),
     fills: [],
     miterLimit: 10,
     innerShadows: [],

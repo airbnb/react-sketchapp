@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 import { fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchContext } from '../types';
 import { generateID } from '../jsonUtils/models';
 
@@ -37,7 +37,7 @@ class TextStyles {
     // @ts-ignore
     style.sharedObjectID = generateID(`sharedStyle:${name}`, !!name);
 
-    const textStyle = fromSJSONDictionary(style);
+    const textStyle = fromSJSONDictionary(style, '119');
 
     // Flow doesn't pick up invariant truthies
     const context: SketchContext = _context;

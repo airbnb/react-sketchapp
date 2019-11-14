@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-operators, no-bitwise */
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import seedrandom from 'seedrandom';
 import normalizeColor, { rgba } from 'normalize-css-color';
 import { Color, ResizeConstraints } from '../types';
@@ -204,7 +204,6 @@ export const makeSymbolInstance = (
   resizingType: FileFormat.ResizeType.Stretch,
   rotation: 0,
   shouldBreakMaskChain: false,
-  maintainScrollPosition: false,
   overrideValues: [],
   scale: 1,
   exportOptions: {
@@ -240,7 +239,6 @@ export const makeSymbolMaster = (
   resizingType: FileFormat.ResizeType.Stretch,
   rotation: 0,
   shouldBreakMaskChain: false,
-  maintainScrollPosition: false,
   exportOptions: {
     _class: 'exportOptions',
     exportFormats: [],

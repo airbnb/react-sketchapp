@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
 import { generateID, makeRect } from './models';
 import { ResizeConstraints } from '../types';
@@ -38,7 +38,6 @@ const layerGroup = (
   layers: [],
   booleanOperation: FileFormat.BooleanOperation.NA,
   isFixedToViewport: false,
-  maintainScrollPosition: false,
 });
 
 export default layerGroup;

@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { makeColorFromCSS } from './models';
 import { ViewStyle, LayoutInfo, BorderStyle } from '../types';
 import same from '../utils/same';
@@ -96,13 +96,9 @@ export const createBorders = (
       ).borders;
       const backingLayer = content.layers ? content.layers[0] : undefined;
       if (backingLayer) {
-        // $FlowFixMe
         backingLayer.frame.x += borderTopWidth;
-        // $FlowFixMe
         backingLayer.frame.y += borderTopWidth;
-        // $FlowFixMe
         backingLayer.frame.width -= borderTopWidth * 2;
-        // $FlowFixMe
         backingLayer.frame.height -= borderTopWidth * 2;
       }
     }

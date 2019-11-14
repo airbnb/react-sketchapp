@@ -1,7 +1,8 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import ViewRenderer from './ViewRenderer';
-import { ViewStyle, LayoutInfo, TextStyle, TreeNode } from '../types';
+import { ViewStyle, LayoutInfo, TextStyle, TreeNode, TextNode } from '../types';
 import makeSvgLayer from '../jsonUtils/svgLayer';
+import {Props} from '../components/Svg/Svg'
 
 const snakeExceptions = [
   'gradientUnits',
@@ -30,7 +31,7 @@ function makeSvgString(
     | string
     | {
         type: string;
-        props: any;
+        props: Props & {textNodes?: TextNode[]};
         children?: (TreeNode | string)[];
       },
 ) {
@@ -77,12 +78,12 @@ export default class SvgRenderer extends ViewRenderer {
     layout: LayoutInfo,
     style: ViewStyle,
     textStyle: TextStyle,
-    props: any,
+    props: Props & {textNodes?: TextNode[]},
     children?: TreeNode[],
   ): FileFormat.AnyLayer[] {
     const layers = super.renderBackingLayers(layout, style, textStyle, props);
 
-    // add the "xmlns:xlink" namespace to we can use `href`
+    // add the "xmlns:xlink" namespace so we can use `href`
     // eslint-disable-next-line
     props['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
 

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { fromSJSONDictionary, toSJSON } from '@skpm/sketchapp-json-plugin';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
+import ResizingConstraintPropTypes from './components/ResizingConstraintPropTypes';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
@@ -102,31 +103,40 @@ export const injectSymbols = (
       symbolMaster.frame.x = left;
       left += symbolMaster.frame.width + 20;
 
-      const newLayer = fromSJSONDictionary(symbolMaster);
+      const newLayer = fromSJSONDictionary(symbolMaster, '119');
       layers[symbolMaster.symbolID] = newLayer;
     });
 
     // Clear out page layers to prepare for re-render
     resetLayer(symbolsPage);
 
-    renderLayers(Object.keys(layers).map(k => layers[k]), symbolsPage);
+    renderLayers(
+      Object.keys(layers).map(k => layers[k]),
+      symbolsPage,
+    );
 
     documentData.setCurrentPage(currentPage);
   }
 };
 
+const SymbolInstancePropTypes = {
+  style: PropTypes.shape(ViewStylePropTypes),
+  name: PropTypes.string,
+  overrides: PropTypes.object, // eslint-disable-line
+  resizingConstraint: PropTypes.shape({
+    ...ResizingConstraintPropTypes,
+  }),
+};
+
+export type SymbolInstanceProps = PropTypes.InferProps<typeof SymbolInstancePropTypes>;
+
 export const createSymbolInstanceClass = (
   symbolMaster: FileFormat.SymbolMaster,
-): React.ComponentType<any> =>
-  class extends React.Component<any> {
+): React.ComponentClass<SymbolInstanceProps> => {
+  return class extends React.Component<SymbolInstanceProps> {
     static displayName = `SymbolInstance(${symbolMaster.name})`;
 
-    static propTypes = {
-      style: PropTypes.shape(ViewStylePropTypes),
-      name: PropTypes.string,
-      overrides: PropTypes.object, // eslint-disable-line
-      resizingConstraint: PropTypes.object, // eslint-disable-line
-    };
+    static propTypes = SymbolInstancePropTypes;
 
     static symbolID = symbolMaster.symbolID;
 
@@ -144,6 +154,7 @@ export const createSymbolInstanceClass = (
       );
     }
   };
+};
 
 export const makeSymbol = (
   Component: React.ComponentType<any>,

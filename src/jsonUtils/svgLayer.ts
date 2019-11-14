@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { LayoutInfo } from '../types';
 import { getSketchVersion } from '../utils/getSketchVersion';
 import sketchMethod from './sketchImpl/makeSvgLayer';

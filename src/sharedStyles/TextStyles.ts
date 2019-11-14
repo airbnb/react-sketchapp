@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchContext, TextStyle } from '../types';
 import { getSketchVersion } from '../utils/getSketchVersion';
 import hashStyle from '../utils/hashStyle';

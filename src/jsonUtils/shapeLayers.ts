@@ -1,4 +1,4 @@
-import FileFormat from '@sketch-hq/sketch-file-format-ts';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
 import { generateID, makeRect, makeColorFromCSS } from './models';
 import { makeStyle } from './style';
@@ -131,7 +131,6 @@ export const makeShapePath = (
   booleanOperation: FileFormat.BooleanOperation.NA,
   edited: false,
   ...path,
-  maintainScrollPosition: false,
   isFixedToViewport: false,
   pointRadiusBehaviour: FileFormat.PointsRadiusBehaviour.Rounded,
   exportOptions: {
@@ -173,8 +172,6 @@ export const makeRectShapeLayer = (
     edited: false,
     fixedRadius,
     hasConvertedToNewRoundCorners: true,
-    needsConvertionToNewRoundCorners: false,
-    maintainScrollPosition: false,
     isFixedToViewport: false,
     pointRadiusBehaviour: FileFormat.PointsRadiusBehaviour.Rounded,
     exportOptions: {
@@ -189,9 +186,9 @@ export const makeRectShapeLayer = (
 
 export const makeShapeGroup = (
   frame: FileFormat.Rect,
-  layers: Array<any> = [],
+  layers: (FileFormat.ShapePath | FileFormat.Rectangle | FileFormat.SymbolMaster | FileFormat.Artboard | FileFormat.Group | FileFormat.Oval | FileFormat.Polygon | FileFormat.Star | FileFormat.Triangle | FileFormat.ShapeGroup | FileFormat.Text | FileFormat.SymbolInstance | FileFormat.Slice | FileFormat.Hotspot | FileFormat.Bitmap)[] = [],
   style?: ViewStyle,
-  shadows?: Array<ViewStyle>,
+  shadows?: ViewStyle[],
   fills?: FileFormat.Fill[],
   resizingConstraint?: ResizeConstraints,
 ): FileFormat.ShapeGroup => ({
@@ -212,7 +209,6 @@ export const makeShapeGroup = (
   clippingMaskMode: 0,
   hasClippingMask: false,
   windingRule: FileFormat.WindingRule.EvenOdd,
-  maintainScrollPosition: false,
   isFixedToViewport: false,
   exportOptions: {
     _class: 'exportOptions',

@@ -26,7 +26,7 @@ export const ViewPropTypes = {
   children: PropTypes.node,
 };
 
-type Props = PropTypes.InferProps<typeof ViewPropTypes>;
+export type Props = PropTypes.InferProps<typeof ViewPropTypes>;
 
 export default class View extends React.Component<Props> {
   static propTypes = ViewPropTypes;
