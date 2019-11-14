@@ -1,18 +1,39 @@
-import { render, renderToJSON } from './render';
-import Platform from './Platform';
-import StyleSheet from './stylesheet';
-import Document from './components/Document';
-import Page from './components/Page';
-import Artboard from './components/Artboard';
-import Image from './components/Image';
-import RedBox from './components/RedBox';
-import Svg from './components/Svg';
-import View from './components/View';
-import Text from './components/Text';
-import TextStyles from './sharedStyles/TextStyles';
-import { makeSymbol, getSymbolComponentByName, injectSymbols } from './symbol';
+import { render as _render, renderToJSON as _renderToJSON } from './render';
+import _Platform from './Platform';
+import _StyleSheet from './stylesheet';
+import _Document from './components/Document';
+import _Page from './components/Page';
+import _Artboard from './components/Artboard';
+import _Image from './components/Image';
+import _RedBox from './components/RedBox';
+import _Svg from './components/Svg';
+import _View from './components/View';
+import _Text from './components/Text';
+import _TextStyles from './sharedStyles/TextStyles';
+import {
+  makeSymbol as _makeSymbol,
+  getSymbolComponentByName as _getSymbolComponentByName,
+  injectSymbols as _injectSymbols,
+} from './symbol';
 
-const completeExport = {
+export const render = _render;
+export const renderToJSON = _renderToJSON;
+export const StyleSheet = _StyleSheet;
+export const Document = _Document;
+export const Page = _Page;
+export const Artboard = _Artboard;
+export const Image = _Image;
+export const RedBox = _RedBox;
+export const Svg = _Svg;
+export const Text = _Text;
+export const TextStyles = _TextStyles;
+export const View = _View;
+export const Platform = _Platform;
+export const makeSymbol = _makeSymbol;
+export const getSymbolComponentByName = _getSymbolComponentByName;
+export const injectSymbols = _injectSymbols;
+
+export default {
   render,
   renderToJSON,
   StyleSheet,
@@ -30,6 +51,3 @@ const completeExport = {
   getSymbolComponentByName,
   injectSymbols,
 };
-
-module.exports = completeExport;
-module.exports.default = completeExport;

@@ -53,7 +53,7 @@
     "pegjs": "^0.10.0",
     "prop-types": "^15.7.2",
     "seedrandom": "^3.0.5",
-    "yoga-layout": "^1.9.3"
+    "yoga-layout-prebuilt": "^1.9.3"
   },
   "peerDependencies": {
     "react": "*",

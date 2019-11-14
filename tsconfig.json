@@ -38,7 +38,11 @@
     "lib": ["es2017", "dom"],
     "types": ["jest", "node"],
     "typeRoots": ["node_modules/@types", "src/types"],
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "yoga-layout": ["./node_modules/yoga-layout-prebuilt"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules/**"],
