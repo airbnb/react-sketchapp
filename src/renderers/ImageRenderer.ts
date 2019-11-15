@@ -46,7 +46,6 @@ export default class ImageRenderer extends SketchRenderer {
     ];
     const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
 
-    // @ts-ignore
     const fills = [makeImageFill(fillImage, FileFormat.PatternFillType[props.resizeMode])];
 
     const content = makeShapeGroup(frame, [shapeLayer], style, props.shadows, fills);

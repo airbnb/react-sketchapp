@@ -33,11 +33,7 @@ class TextStyles {
     const { _context } = this;
     invariant(_context, 'Please provide a context');
 
-    // generate a dummy shared object id
-    // @ts-ignore
-    style.sharedObjectID = generateID(`sharedStyle:${name}`, !!name);
-
-    const textStyle = fromSJSONDictionary(style, '119');
+    const nativeStyle = fromSJSONDictionary(style, '119');
 
     // Flow doesn't pick up invariant truthies
     const context: SketchContext = _context;
@@ -48,18 +44,20 @@ class TextStyles {
 
     // Sketch < 50
     if (container.addSharedStyleWithName_firstInstance) {
-      sharedStyle = container.addSharedStyleWithName_firstInstance(name, textStyle);
+      sharedStyle = container.addSharedStyleWithName_firstInstance(name, nativeStyle);
     } else {
       const allocator = MSSharedStyle.alloc();
       // Sketch 50, 51
       if (allocator.initWithName_firstInstance) {
-        sharedStyle = allocator.initWithName_firstInstance(name, textStyle);
+        sharedStyle = allocator.initWithName_firstInstance(name, nativeStyle);
       } else {
-        sharedStyle = allocator.initWithName_style(name, textStyle);
+        sharedStyle = allocator.initWithName_style(name, nativeStyle);
       }
 
       container.addSharedObject(sharedStyle);
     }
+
+    sharedStyle.objectID = generateID(`sharedStyle:${name}`, !!name);
 
     // NOTE(gold): the returned object ID changes after being added to the store
     // _don't_ rely on the object ID we pass to it, but we have to have one set

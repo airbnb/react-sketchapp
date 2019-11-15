@@ -154,8 +154,8 @@ export const makeRect = (x: number, y: number, width: number, height: number): F
 export const makeJSONDataReference = (image: {
   data: string;
   sha1: string;
-}): FileFormat.ImageFileRef => ({
   // @ts-ignore
+}): FileFormat.ImageDataRef => ({
   _class: 'MSJSONOriginalDataReference',
   _ref: `images/${generateID()}`,
   _ref_class: 'MSImageData',

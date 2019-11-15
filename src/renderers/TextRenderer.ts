@@ -43,7 +43,7 @@ export default class TextRenderer extends SketchRenderer {
         layer.style = resolvedTextStyle.sketchStyle;
       }
       // @ts-ignore
-      layer.style.sharedObjectID = resolvedTextStyle.sharedObjectID;
+      layer.sharedStyleID = resolvedTextStyle.sharedObjectID;
     }
 
     return [layer];

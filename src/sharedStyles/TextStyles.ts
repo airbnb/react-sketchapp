@@ -6,6 +6,7 @@ import sharedTextStyles from '../wrappers/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/textLayers';
 import pick from '../utils/pick';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
+import { generateID } from '../jsonUtils/models';
 
 type MurmurHash = string;
 
@@ -27,17 +28,12 @@ const registerStyle = (name: string, style: TextStyle, id?: string): void => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
-  const sharedObjectID =
+  let sharedObjectID =
     sketchVersion !== 'NodeJS' ? sharedTextStyles.addStyle(name, sketchStyle) : id;
 
   if (!sharedObjectID) {
-    throw new Error(
-      `Missing id for the style named: ${name}. Please provide it using the idMap option`,
-    );
+    sharedObjectID = generateID(`sharedStyle:${name}`, !!name);
   }
-
-  // @ts-ignore
-  sketchStyle.sharedObjectID = sharedObjectID;
 
   // FIXME(gold): side effect :'(
   _byName[name] = hash;
@@ -99,14 +95,7 @@ const clear = () => {
   }
 };
 
-type SharedStyle = {
-  _class: 'sharedStyle';
-  do_objectID: string;
-  name: string;
-  value: FileFormat.Style;
-};
-
-const toJSON = (): Array<SharedStyle> =>
+const toJSON = (): FileFormat.SharedStyle[] =>
   Object.keys(_styles).map(k => ({
     _class: 'sharedStyle',
     do_objectID: _styles[k].sharedObjectID,

@@ -24,38 +24,40 @@ const symbolsRegistry = {};
 let existingSymbols = [];
 const layers = {};
 
-const msListToArray = pageList => {
+function msListToArray<T>(pageList: T[]): T[] {
   const out = [];
   // eslint-disable-next-line
   for (let i = 0; i < pageList.length; i++) {
     out.push(pageList[i]);
   }
   return out;
-};
+}
+
+function isWrappedSketchDocument(x: unknown): x is WrappedSketchDocument {
+  return !!x && !!x['sketchObject'];
+}
+
+function isSketchDocument(x: unknown): x is SketchDocument {
+  return !!x && !!x['documentData'];
+}
 
 const getDocumentData = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): SketchDocumentData => {
   let nativeDocument: SketchDocumentData | SketchDocument;
   let nativeDocumentData: SketchDocumentData;
-  // @ts-ignore
-  if (document && document.sketchObject) {
-    // @ts-ignore
+
+  if (isWrappedSketchDocument(document)) {
     nativeDocument = document.sketchObject;
   } else if (document) {
-    // @ts-ignore
     nativeDocument = document;
   } else {
-    // @ts-ignore
     nativeDocument = getDocumentDataFromContext(context);
   }
 
-  // @ts-ignore
-  if (nativeDocument.documentData) {
-    // @ts-ignore
+  if (isSketchDocument(nativeDocument)) {
     nativeDocumentData = nativeDocument.documentData();
   } else {
-    // @ts-ignore
     nativeDocumentData = nativeDocument;
   }
 
