@@ -11,7 +11,7 @@ import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
-import { getDocumentDataFromContext } from './utils/getDocument';
+import { getDocumentData } from './utils/getDocument';
 import { SketchDocumentData, SketchDocument, WrappedSketchDocument } from './types';
 import { getSketchVersion } from './utils/getSketchVersion';
 
@@ -34,29 +34,6 @@ function msListToArray<T>(pageList: T[]): T[] {
   }
   return out;
 }
-
-const getDocumentData = (
-  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): SketchDocumentData => {
-  let nativeDocument: SketchDocumentData | SketchDocument;
-  let nativeDocumentData: SketchDocumentData;
-
-  if (!document) {
-    nativeDocument = getDocumentDataFromContext(context);
-  } else if ('sketchObject' in document) {
-    nativeDocument = document.sketchObject;
-  } else {
-    nativeDocument = document;
-  }
-
-  if ('documentData' in nativeDocument) {
-    nativeDocumentData = nativeDocument.documentData();
-  } else {
-    nativeDocumentData = nativeDocument;
-  }
-
-  return nativeDocumentData;
-};
 
 const getSymbolsPage = (documentData: SketchDocumentData) =>
   documentData.symbolsPageOrCreateIfNecessary();
@@ -96,8 +73,14 @@ export const injectSymbols = (
   }
 
   // if hasInitialized is false then makeSymbol has not yet been called
+  // so we don't have anything to inject
   if (hasInitialized) {
     const documentData = getDocumentData(document);
+
+    if (!documentData) {
+      return;
+    }
+
     const currentPage = documentData.currentPage();
 
     const symbolsPage = getSymbolsPage(documentData);
@@ -187,10 +170,48 @@ export const makeSymbol = (
   return createSymbolInstanceClass(symbolMaster);
 };
 
-export const getSymbolMasterByName = (name: string): FileFormat.SymbolMaster => {
-  const symbolID = Object.keys(symbolsRegistry).find(
-    key => String(symbolsRegistry[key].name) === name,
-  );
+function tryGettingSymbolMasterInDocumentByName(
+  name: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): FileFormat.SymbolMaster {
+  const documentData = getDocumentData(document);
+
+  const symbols = documentData.symbolMap();
+  const symbol = Object.keys(symbols).find(k => symbols[k].name() === name);
+
+  if (!symbol) {
+    return undefined;
+  }
+
+  return toSJSON(symbol) as FileFormat.SymbolMaster;
+}
+
+function tryGettingSymbolMasterInDocumentById(
+  symbolID: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): FileFormat.SymbolMaster {
+  const documentData = getDocumentData(document);
+
+  const symbol = documentData.symbolMap()[symbolID];
+
+  if (!symbol) {
+    return undefined;
+  }
+
+  return toSJSON(symbol) as FileFormat.SymbolMaster;
+}
+
+export const getSymbolMasterByName = (
+  name: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): FileFormat.SymbolMaster => {
+  const symbolID = name
+    ? Object.keys(symbolsRegistry).find(key => String(symbolsRegistry[key].name) === name)
+    : '';
+
+  if (typeof symbolID === 'undefined' && name && getSketchVersion() !== 'NodeJS') {
+    return tryGettingSymbolMasterInDocumentByName(name, document);
+  }
 
   if (typeof symbolID === 'undefined') {
     throw new Error('##FIXME## NO MASTER FOR THIS SYMBOL NAME');
@@ -199,8 +220,16 @@ export const getSymbolMasterByName = (name: string): FileFormat.SymbolMaster => 
   return symbolsRegistry[symbolID];
 };
 
-export const getSymbolMasterById = (symbolID?: string): FileFormat.SymbolMaster => {
-  const symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;
+export const getSymbolMasterById = (
+  symbolID: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): FileFormat.SymbolMaster => {
+  let symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;
+
+  if (typeof symbolMaster === 'undefined' && symbolID && getSketchVersion() !== 'NodeJS') {
+    symbolMaster = tryGettingSymbolMasterInDocumentById(symbolID, document);
+  }
+
   if (typeof symbolMaster === 'undefined') {
     throw new Error('##FIXME## NO MASTER WITH THAT SYMBOL ID');
   }
@@ -208,5 +237,12 @@ export const getSymbolMasterById = (symbolID?: string): FileFormat.SymbolMaster 
   return symbolMaster;
 };
 
-export const getSymbolComponentByName = (masterName: string) =>
-  createSymbolInstanceClass(getSymbolMasterByName(masterName));
+export const getSymbolComponentById = (
+  symbolID: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+) => createSymbolInstanceClass(getSymbolMasterById(symbolID, document));
+
+export const getSymbolComponentByName = (
+  masterName: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+) => createSymbolInstanceClass(getSymbolMasterByName(masterName, document));

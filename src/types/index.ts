@@ -40,6 +40,7 @@ export type SketchDocumentData = {
   layerStyles: () => void;
   layerTextStyles: () => SketchSharedStyleContainer;
   layerSymbols: () => void;
+  symbolMap: () => { [symbolID: string]: SketchLayer };
   removePageAtIndex: (index: number) => void;
   addBlankPage: () => SketchPage;
   currentPage: () => SketchPage;
