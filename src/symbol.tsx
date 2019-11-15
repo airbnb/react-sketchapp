@@ -13,6 +13,7 @@ import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentDataFromContext } from './utils/getDocument';
 import { SketchDocumentData, SketchDocument, WrappedSketchDocument } from './types';
+import { getSketchVersion } from './utils/getSketchVersion';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -89,6 +90,11 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
 export const injectSymbols = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ) => {
+  if (getSketchVersion() === 'NodeJS') {
+    console.error('Cannot inject symbols in NodeJS');
+    return;
+  }
+
   // if hasInitialized is false then makeSymbol has not yet been called
   if (hasInitialized) {
     const documentData = getDocumentData(document);
@@ -161,7 +167,7 @@ export const makeSymbol = (
   name: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): React.ComponentType<any> => {
-  if (!hasInitialized) {
+  if (!hasInitialized && getSketchVersion() !== 'NodeJS') {
     getExistingSymbols(getDocumentData(document));
   }
 
