@@ -136,10 +136,8 @@ const SymbolInstancePropTypes = {
 
 export type SymbolInstanceProps = PropTypes.InferProps<typeof SymbolInstancePropTypes>;
 
-export const createSymbolInstanceClass = (
-  symbolMaster: FileFormat.SymbolMaster,
-): React.ComponentClass<SymbolInstanceProps> => {
-  return class extends React.Component<SymbolInstanceProps> {
+export const createSymbolInstanceClass = (symbolMaster: FileFormat.SymbolMaster) => {
+  return class SymbolInstance extends React.Component<SymbolInstanceProps> {
     static displayName = `SymbolInstance(${symbolMaster.name})`;
 
     static propTypes = SymbolInstancePropTypes;
@@ -166,7 +164,7 @@ export const makeSymbol = (
   Component: React.ComponentType<any>,
   name: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): React.ComponentType<any> => {
+) => {
   if (!hasInitialized && getSketchVersion() !== 'NodeJS') {
     getExistingSymbols(getDocumentData(document));
   }
@@ -210,5 +208,5 @@ export const getSymbolMasterById = (symbolID?: string): FileFormat.SymbolMaster 
   return symbolMaster;
 };
 
-export const getSymbolComponentByName = (masterName: string): React.ComponentType<any> =>
+export const getSymbolComponentByName = (masterName: string) =>
   createSymbolInstanceClass(getSymbolMasterByName(masterName));
