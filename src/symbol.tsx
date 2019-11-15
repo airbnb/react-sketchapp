@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { fromSJSONDictionary, toSJSON } from '@skpm/sketchapp-json-plugin';
+import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
+import { toSJSON } from './jsonUtils/sketchImpl/sketch-to-json';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
@@ -20,9 +21,9 @@ const displayName = (Component: React.ComponentType<any>): string =>
   Component.displayName || Component.name || `UnknownSymbol${nextId()}`;
 
 let hasInitialized = false;
-const symbolsRegistry = {};
-let existingSymbols = [];
-const layers = {};
+const symbolsRegistry: { [name: string]: FileFormat.SymbolMaster } = {};
+let existingSymbols: FileFormat.SymbolMaster[] = [];
+const layers: { [symbolID: string]: any } = {};
 
 function msListToArray<T>(pageList: T[]): T[] {
   const out = [];
@@ -33,29 +34,21 @@ function msListToArray<T>(pageList: T[]): T[] {
   return out;
 }
 
-function isWrappedSketchDocument(x: unknown): x is WrappedSketchDocument {
-  return !!x && !!x['sketchObject'];
-}
-
-function isSketchDocument(x: unknown): x is SketchDocument {
-  return !!x && !!x['documentData'];
-}
-
 const getDocumentData = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): SketchDocumentData => {
   let nativeDocument: SketchDocumentData | SketchDocument;
   let nativeDocumentData: SketchDocumentData;
 
-  if (isWrappedSketchDocument(document)) {
-    nativeDocument = document.sketchObject;
-  } else if (document) {
-    nativeDocument = document;
-  } else {
+  if (!document) {
     nativeDocument = getDocumentDataFromContext(context);
+  } else if ('sketchObject' in document) {
+    nativeDocument = document.sketchObject;
+  } else {
+    nativeDocument = document;
   }
 
-  if (isSketchDocument(nativeDocument)) {
+  if ('documentData' in nativeDocument) {
     nativeDocumentData = nativeDocument.documentData();
   } else {
     nativeDocumentData = nativeDocument;
@@ -73,11 +66,16 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
 
     const symbolsPage = getSymbolsPage(documentData);
 
-    existingSymbols = msListToArray(symbolsPage.layers()).map(x => {
-      const symbolJson = JSON.parse(toSJSON(x));
-      layers[symbolJson.symbolID] = x;
-      return symbolJson;
-    });
+    existingSymbols = msListToArray(symbolsPage.layers())
+      .map(x => {
+        const symbolJson = toSJSON(x);
+        if (symbolJson._class !== 'symbolMaster') {
+          return undefined;
+        }
+        layers[symbolJson.symbolID] = x;
+        return symbolJson;
+      })
+      .filter(x => x);
 
     existingSymbols.forEach(symbolMaster => {
       if (symbolMaster._class !== 'symbolMaster') return;
@@ -105,7 +103,7 @@ export const injectSymbols = (
       symbolMaster.frame.x = left;
       left += symbolMaster.frame.width + 20;
 
-      const newLayer = fromSJSONDictionary(symbolMaster, '119');
+      const newLayer = fromSJSON(symbolMaster, '119');
       layers[symbolMaster.symbolID] = newLayer;
     });
 
@@ -179,7 +177,7 @@ export const makeSymbol = (
         <Component />
       </sketch_symbolmaster>,
     ),
-  );
+  ) as FileFormat.SymbolMaster;
 
   symbolsRegistry[symbolID] = symbolMaster;
   return createSymbolInstanceClass(symbolMaster);

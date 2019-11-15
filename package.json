@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@lona/svg-model": "^1.0.1",
-    "@skpm/sketchapp-json-plugin": "^0.2.0",
     "airbnb-prop-types": "^2.15.0",
     "error-stack-parser": "^2.0.4",
     "invariant": "^2.2.2",

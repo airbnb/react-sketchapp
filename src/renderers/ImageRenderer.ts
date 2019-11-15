@@ -16,7 +16,7 @@ function extractURLFromSource(source?: string | { uri?: string }): string | unde
 }
 
 export default class ImageRenderer extends SketchRenderer {
-  renderBackingLayers({ layout, style, props }: TreeNode<Props>): FileFormat.ShapeGroup[] {
+  renderBackingLayers({ layout, style, props }: TreeNode<Props>) {
     let layers: FileFormat.ShapeGroup[] = [];
 
     const {

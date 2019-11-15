@@ -55,7 +55,6 @@ function makeLayerFromPathElement(pathElement, _parentFrame: FileFormat.Rect, sc
 function makeLayerGroup(
   frame: FileFormat.Rect,
   layers: (
-    | FileFormat.Artboard
     | FileFormat.Group
     | FileFormat.Oval
     | FileFormat.Polygon
@@ -69,7 +68,8 @@ function makeLayerGroup(
     | FileFormat.SymbolInstance
     | FileFormat.Slice
     | FileFormat.Hotspot
-    | FileFormat.Bitmap)[],
+    | FileFormat.Bitmap
+  )[],
   name: string,
 ) {
   const group = layerGroup(frame.x, frame.y, frame.width, frame.height, 1);

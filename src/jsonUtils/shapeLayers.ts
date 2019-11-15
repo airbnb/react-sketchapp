@@ -186,7 +186,21 @@ export const makeRectShapeLayer = (
 
 export const makeShapeGroup = (
   frame: FileFormat.Rect,
-  layers: (FileFormat.ShapePath | FileFormat.Rectangle | FileFormat.SymbolMaster | FileFormat.Artboard | FileFormat.Group | FileFormat.Oval | FileFormat.Polygon | FileFormat.Star | FileFormat.Triangle | FileFormat.ShapeGroup | FileFormat.Text | FileFormat.SymbolInstance | FileFormat.Slice | FileFormat.Hotspot | FileFormat.Bitmap)[] = [],
+  layers: (
+    | FileFormat.ShapePath
+    | FileFormat.Rectangle
+    | FileFormat.SymbolMaster
+    | FileFormat.Group
+    | FileFormat.Polygon
+    | FileFormat.Star
+    | FileFormat.Triangle
+    | FileFormat.ShapeGroup
+    | FileFormat.Text
+    | FileFormat.SymbolInstance
+    | FileFormat.Slice
+    | FileFormat.Hotspot
+    | FileFormat.Bitmap
+  )[] = [],
   style?: ViewStyle,
   shadows?: ViewStyle[],
   fills?: FileFormat.Fill[],

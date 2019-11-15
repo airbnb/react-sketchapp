@@ -1,14 +1,7 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { toSJSON } from '@skpm/sketchapp-json-plugin';
+import { toSJSON } from './sketch-to-json';
 
 import { LayoutInfo } from '../../types';
-
-// NOTE(gold): toSJSON doesn't recursively parse JS objects
-// https://github.com/airbnb/react-sketchapp/pull/73#discussion_r108529703
-function encodeSketchJSON(sketchObj): any {
-  const encoded = toSJSON(sketchObj);
-  return encoded ? JSON.parse(encoded) : {};
-}
 
 export default function makeSvgLayer(
   layout: LayoutInfo,
@@ -31,5 +24,5 @@ export default function makeSvgLayer(
       height: layout.height,
     },
   };
-  return encodeSketchJSON(svgLayer);
+  return toSJSON(svgLayer) as FileFormat.Group;
 }

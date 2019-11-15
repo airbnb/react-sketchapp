@@ -99,10 +99,7 @@ const extractOverrides = (layers: FileFormat.AnyLayer[] = [], path?: string): Ov
 };
 
 export default class SymbolInstanceRenderer extends SketchRenderer {
-  renderGroupLayer({
-    layout,
-    props,
-  }: TreeNode<SymbolInstanceProps & { symbolID: string }>): FileFormat.SymbolInstance {
+  renderGroupLayer({ layout, props }: TreeNode<SymbolInstanceProps & { symbolID: string }>) {
     const masterTree = getSymbolMasterById(props.symbolID);
 
     const symbolInstance = makeSymbolInstance(
@@ -119,7 +116,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
     const overridableLayers = extractOverrides(masterTree.layers);
 
     const overrides = overridableLayers.reduce(function inject(
-      memo: Array<any>,
+      memo: FileFormat.OverrideValue[],
       reference: Override,
     ) {
       if (reference.type === 'symbolID') {
@@ -157,7 +154,6 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
         return memo;
       }
 
-      // eslint-disable-next-line
       if (!props.overrides.hasOwnProperty(reference.name)) {
         return memo;
       }

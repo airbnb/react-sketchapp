@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { appVersionSupported, fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
+import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
 import { injectSymbols } from './symbol';
-
 import { SketchDocumentData, SketchLayer, SketchPage, TreeNode, WrappedSketchLayer } from './types';
 import RedBox from './components/RedBox';
 import { getDocumentDataFromContainer, getDocumentDataFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
 import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
+import { getSketchVersion } from './utils/getSketchVersion';
 
 export const renderToJSON = (element: React.ReactElement): FileFormat.AnyLayer => {
   const tree = buildTree(element);
@@ -38,7 +38,7 @@ const getDefaultPage = (): SketchLayer => {
 
 const renderContents = (tree: TreeNode | string, container: SketchLayer): SketchLayer => {
   const json = flexToSketchJSON(tree);
-  const layer = fromSJSONDictionary(json, '119');
+  const layer = fromSJSON(json, '119');
 
   return renderLayers([layer], container);
 };
@@ -102,6 +102,10 @@ export const render = (
   element: React.ReactElement,
   container?: SketchLayer | WrappedSketchLayer,
 ): SketchLayer | Array<SketchLayer> => {
+  if (getSketchVersion() === 'NodeJS') {
+    return renderToJSON(element);
+  }
+
   let nativeContainer: SketchLayer | void;
   if (container && container.sketchObject) {
     nativeContainer = container.sketchObject;
@@ -109,12 +113,8 @@ export const render = (
     nativeContainer = container;
   }
 
-  if (!appVersionSupported()) {
-    return null;
-
-    // The Symbols page holds a special meaning within Sketch / react-sketchapp
-    // and due to how `makeSymbol` works, we cannot render into it
-  }
+  // The Symbols page holds a special meaning within Sketch / react-sketchapp
+  // and due to how `makeSymbol` works, we cannot render into it
   if (isNativeSymbolsPage(nativeContainer)) {
     throw Error('Cannot render into Symbols page');
   }

@@ -38,7 +38,25 @@ export default class ViewRenderer extends SketchRenderer {
     return 'View';
   }
 
-  renderBackingLayers({ layout, style, props }: TreeNode<Props>): FileFormat.AnyLayer[] {
+  renderBackingLayers({
+    layout,
+    style,
+    props,
+  }: TreeNode<Props>): (
+    | FileFormat.ShapePath
+    | FileFormat.Rectangle
+    | FileFormat.SymbolMaster
+    | FileFormat.Group
+    | FileFormat.Polygon
+    | FileFormat.Star
+    | FileFormat.Triangle
+    | FileFormat.ShapeGroup
+    | FileFormat.Text
+    | FileFormat.SymbolInstance
+    | FileFormat.Slice
+    | FileFormat.Hotspot
+    | FileFormat.Bitmap
+  )[] {
     let layers: FileFormat.ShapeGroup[] = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
     const {

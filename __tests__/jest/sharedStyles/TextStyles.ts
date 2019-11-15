@@ -5,11 +5,6 @@ let sharedTextStyles;
 
 beforeEach(() => {
   jest.resetModules();
-  jest.mock('@skpm/sketchapp-json-plugin', () => ({
-    appVersionSupported: jest.fn(() => true),
-    fromSJSONDictionary: jest.fn(),
-    toSJSON: jest.fn(),
-  }));
 
   jest.mock('../../../src/utils/getSketchVersion', () => ({
     getSketchVersion: jest.fn(() => 51),

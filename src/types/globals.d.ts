@@ -26,3 +26,6 @@ declare const NSStringDrawingUsesLineFragmentOrigin: any;
 declare const NSBundle: any;
 declare const NSDocumentController: any;
 declare const MSPage: any;
+declare const MOPointer: any;
+declare const MSJSONDictionaryUnarchiver: any;
+declare const MSJSONDataArchiver: any;

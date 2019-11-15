@@ -1,4 +1,3 @@
-import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import ViewRenderer from './ViewRenderer';
 import { TreeNode } from '../types';
 import makeSvgLayer from '../jsonUtils/svgLayer';
@@ -66,7 +65,7 @@ export default class SvgRenderer extends ViewRenderer {
     return props.name || 'Svg';
   }
 
-  renderBackingLayers(node: TreeNode<Props>): FileFormat.AnyLayer[] {
+  renderBackingLayers(node: TreeNode<Props>) {
     const layers = super.renderBackingLayers(node);
 
     const { layout, props, children } = node;

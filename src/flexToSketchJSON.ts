@@ -1,4 +1,6 @@
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import * as renderers from './renderers';
+import SketchRenderer from './renderers/SketchRenderer';
 import { TreeNode } from './types';
 
 function missingRendererError(type: string, annotations?: string) {
@@ -7,7 +9,14 @@ function missingRendererError(type: string, annotations?: string) {
   );
 }
 
-const flexToSketchJSON = (node: TreeNode | string) => {
+const flexToSketchJSON = (
+  node: TreeNode | string,
+):
+  | FileFormat.SymbolMaster
+  | FileFormat.Artboard
+  | FileFormat.Group
+  | FileFormat.ShapeGroup
+  | FileFormat.SymbolInstance => {
   if (typeof node === 'string') {
     throw missingRendererError('string');
   }
@@ -22,7 +31,8 @@ const flexToSketchJSON = (node: TreeNode | string) => {
     );
   }
 
-  const Renderer = renderers[type];
+  const Renderer = <typeof SketchRenderer>renderers[type];
+
   if (Renderer == null) {
     if (type.indexOf('svg') === 0) {
       // the svg renderer should stop the walk down the tree so it shouldn't happen
@@ -36,6 +46,11 @@ const flexToSketchJSON = (node: TreeNode | string) => {
 
   const renderer = new Renderer();
   const groupLayer = renderer.renderGroupLayer(node);
+
+  if (groupLayer._class === 'symbolInstance') {
+    return groupLayer;
+  }
+
   const backingLayers = renderer.renderBackingLayers(node);
 
   // stopping the walk down the tree if we have an svg

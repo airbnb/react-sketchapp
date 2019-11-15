@@ -15,7 +15,12 @@ export default class SketchRenderer {
     layout,
     style,
     props,
-  }: TreeNode): FileFormat.AnyGroup | FileFormat.SymbolInstance {
+  }: TreeNode):
+    | FileFormat.SymbolMaster
+    | FileFormat.Artboard
+    | FileFormat.Group
+    | FileFormat.ShapeGroup
+    | FileFormat.SymbolInstance {
     // Default SketchRenderer just renders an empty group
 
     const transform = processTransform(layout, style);
@@ -37,7 +42,23 @@ export default class SketchRenderer {
     };
   }
 
-  renderBackingLayers(_node: TreeNode): FileFormat.AnyLayer[] {
+  renderBackingLayers(
+    _node: TreeNode,
+  ): (
+    | FileFormat.ShapePath
+    | FileFormat.Rectangle
+    | FileFormat.SymbolMaster
+    | FileFormat.Group
+    | FileFormat.Polygon
+    | FileFormat.Star
+    | FileFormat.Triangle
+    | FileFormat.ShapeGroup
+    | FileFormat.Text
+    | FileFormat.SymbolInstance
+    | FileFormat.Slice
+    | FileFormat.Hotspot
+    | FileFormat.Bitmap
+  )[] {
     return [];
   }
 }

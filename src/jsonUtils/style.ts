@@ -51,25 +51,29 @@ export const makeShadow = (
   const opacity =
     style.shadowOpacity !== undefined
       ? style.shadowOpacity
-      : style['textShadowOpacity'] !== undefined
-      ? style['textShadowOpacity']
+      : 'textShadowOpacity' in style && style.textShadowOpacity !== undefined
+      ? style.textShadowOpacity
       : 1;
-  const color = style.shadowColor || style['textShadowColor'] || DEFAULT_SHADOW_COLOR;
+  const color =
+    style.shadowColor ||
+    ('textShadowColor' in style && style.textShadowColor) ||
+    DEFAULT_SHADOW_COLOR;
   const radius =
     style.shadowRadius !== undefined
       ? style.shadowRadius
-      : style['textShadowRadius'] !== undefined
-      ? style['textShadowRadius']
+      : 'textShadowRadius' in style && style.textShadowRadius !== undefined
+      ? style.textShadowRadius
       : 1;
-  const _class = style.shadowInner !== undefined ? 'innerShadow' : ('shadow' as const);
+  const _class: 'innerShadow' | 'shadow' =
+    style.shadowInner !== undefined ? 'innerShadow' : 'shadow';
   const spread =
     style.shadowSpread !== undefined
       ? style.shadowSpread
-      : style['textShadowSpread'] !== undefined
-      ? style['textShadowSpread']
+      : 'textShadowSpread' in style && style.textShadowSpread !== undefined
+      ? style.textShadowSpread
       : 1;
   const { width: offsetX = 0, height: offsetY = 0 } =
-    style.shadowOffset || style['textShadowOffset'] || {};
+    style.shadowOffset || ('textShadowOffset' in style && style.textShadowOffset) || {};
 
   const commonProps = {
     _class,

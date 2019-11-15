@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { fromSJSONDictionary } from '@skpm/sketchapp-json-plugin';
+import { fromSJSON } from '../jsonUtils/sketchImpl/json-to-sketch';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchContext } from '../types';
 import { generateID } from '../jsonUtils/models';
@@ -33,7 +33,7 @@ class TextStyles {
     const { _context } = this;
     invariant(_context, 'Please provide a context');
 
-    const nativeStyle = fromSJSONDictionary(style, '119');
+    const nativeStyle = fromSJSON(style, '119');
 
     // Flow doesn't pick up invariant truthies
     const context: SketchContext = _context;
