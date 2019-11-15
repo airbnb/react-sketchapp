@@ -1,9 +1,9 @@
-import { TextNodes, Size } from '../types';
+import { TextNode, Size } from '../types';
 import { getSketchVersion } from './getSketchVersion';
 import sketchMethod from '../jsonUtils/sketchImpl/createStringMeasurer';
 import nodeMethod from '../jsonUtils/nodeImpl/createStringMeasurer';
 
-const createStringMeasurer = (textNodes: TextNodes) => (width: number = 0): Size => {
+const createStringMeasurer = (textNodes: TextNode[]) => (width: number = 0): Size => {
   // width would be obj-c NaN and the only way to check for it is by comparing
   // width to itself (because NaN !== NaN)
   // eslint-disable-next-line no-self-compare

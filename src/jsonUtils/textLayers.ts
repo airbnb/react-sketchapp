@@ -1,6 +1,6 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
-import { TextNode, TextNodes, ResizeConstraints, TextStyle, ViewStyle } from '../types';
+import { TextNode, ResizeConstraints, TextStyle, ViewStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { makeStyle } from './style';
 
@@ -116,7 +116,7 @@ const makeAttribute = (node: TextNode, location: number): FileFormat.StringAttri
   attributes: makeTextStyleAttributes(node.textStyles),
 });
 
-const makeAttributedString = (textNodes: TextNodes): FileFormat.AttributedString => {
+const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedString => {
   const json: FileFormat.AttributedString = {
     _class: 'attributedString',
     string: '',
@@ -147,7 +147,7 @@ export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>): Fil
 const makeTextLayer = (
   frame: FileFormat.Rect,
   name: string,
-  textNodes: TextNodes,
+  textNodes: TextNode[],
   _style: ViewStyle,
   resizingConstraint?: ResizeConstraints,
   shadows?: ViewStyle[],

@@ -6,7 +6,7 @@ import {
   makeJSONDataReference,
   makeOverride,
 } from '../jsonUtils/models';
-import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { TreeNode } from '../types';
 import { getSymbolMasterById, SymbolInstanceProps } from '../symbol';
 import getImageDataFromURL from '../utils/getImageDataFromURL';
 
@@ -99,12 +99,10 @@ const extractOverrides = (layers: FileFormat.AnyLayer[] = [], path?: string): Ov
 };
 
 export default class SymbolInstanceRenderer extends SketchRenderer {
-  renderGroupLayer(
-    layout: LayoutInfo,
-    _style: ViewStyle,
-    _textStyle: TextStyle,
-    props: SymbolInstanceProps & { symbolID: string },
-  ): FileFormat.SymbolInstance {
+  renderGroupLayer({
+    layout,
+    props,
+  }: TreeNode<SymbolInstanceProps & { symbolID: string }>): FileFormat.SymbolInstance {
     const masterTree = getSymbolMasterById(props.symbolID);
 
     const symbolInstance = makeSymbolInstance(

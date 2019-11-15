@@ -11,7 +11,7 @@ const flexToSketchJSON = (node: TreeNode | string) => {
   if (typeof node === 'string') {
     throw missingRendererError('string');
   }
-  const { type, style, textStyle, layout, props, children } = node;
+  const { type, children } = node;
 
   // Give some insight as to why there might be issues
   // specific to Page and Document components or SVG components
@@ -35,8 +35,8 @@ const flexToSketchJSON = (node: TreeNode | string) => {
   }
 
   const renderer = new Renderer();
-  const groupLayer = renderer.renderGroupLayer(layout, style, textStyle, props);
-  const backingLayers = renderer.renderBackingLayers(layout, style, textStyle, props, children);
+  const groupLayer = renderer.renderGroupLayer(node);
+  const backingLayers = renderer.renderBackingLayers(node);
 
   // stopping the walk down the tree if we have an svg
   const sublayers =

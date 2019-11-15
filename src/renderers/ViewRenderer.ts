@@ -2,7 +2,7 @@ import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import SketchRenderer from './SketchRenderer';
 import { makeRect } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
-import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { TreeNode } from '../types';
 import { createBorders } from '../jsonUtils/borders';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import { Props } from '../components/View';
@@ -34,16 +34,11 @@ const VISIBLE_STYLES = [
 const OVERFLOW_STYLES = ['overflow', 'overflowX', 'overflowY'];
 
 export default class ViewRenderer extends SketchRenderer {
-  getDefaultGroupName(_props: any) {
+  getDefaultGroupName(_props: Props) {
     return 'View';
   }
 
-  renderBackingLayers(
-    layout: LayoutInfo,
-    style: ViewStyle,
-    _textStyle: TextStyle,
-    props: Props,
-  ): FileFormat.AnyLayer[] {
+  renderBackingLayers({ layout, style, props }: TreeNode<Props>): FileFormat.AnyLayer[] {
     let layers: FileFormat.ShapeGroup[] = [];
     // NOTE(lmr): the group handles the position, so we just care about width/height here
     const {

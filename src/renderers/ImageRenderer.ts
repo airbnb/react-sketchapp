@@ -5,7 +5,7 @@ import getImageDataFromURL from '../utils/getImageDataFromURL';
 import { makeRect, makeImageFill, makeJSONDataReference, generateID } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import { createBorders } from '../jsonUtils/borders';
-import { ViewStyle, LayoutInfo, TextStyle } from '../types';
+import { TreeNode } from '../types';
 import { Props } from '../components/Image';
 
 function extractURLFromSource(source?: string | { uri?: string }): string | undefined {
@@ -16,12 +16,7 @@ function extractURLFromSource(source?: string | { uri?: string }): string | unde
 }
 
 export default class ImageRenderer extends SketchRenderer {
-  renderBackingLayers(
-    layout: LayoutInfo,
-    style: ViewStyle,
-    _textStyle: TextStyle,
-    props: Props,
-  ): FileFormat.ShapeGroup[] {
+  renderBackingLayers({ layout, style, props }: TreeNode<Props>): FileFormat.ShapeGroup[] {
     let layers: FileFormat.ShapeGroup[] = [];
 
     const {

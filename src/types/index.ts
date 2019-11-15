@@ -194,24 +194,15 @@ export type TextStyle = ViewStyle & {
 };
 
 export type TextNode = { content: string; textStyles: TextStyle };
-export type TextNodes = Array<TextNode>;
 
-export type TreeNode = {
+export type TreeNode<Props = any> = {
   type: string;
   style?: ViewStyle;
   textStyle?: TextStyle;
   layout?: LayoutInfo;
-  props: any;
+  props: Props & { textNodes: TextNode[] };
   children?: Array<TreeNode | string>;
 };
-
-export type LayerCreator = (
-  style: ViewStyle,
-  layout: LayoutInfo,
-  textStyle: TextStyle,
-  props: any,
-  value?: string,
-) => SketchLayer;
 
 export type ResizeConstraints = {
   top?: boolean;
@@ -221,14 +212,3 @@ export type ResizeConstraints = {
   fixedHeight?: boolean;
   fixedWidth?: boolean;
 };
-
-export type SketchShadow = {
-  shadowColor: Color;
-  shadowOffset: { width: number; height: number };
-  shadowSpread: number;
-  shadowOpacity: number;
-  shadowRadius: number;
-  shadowInner: boolean;
-};
-
-export type SketchShadows = Array<SketchShadow>;

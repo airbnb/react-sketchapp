@@ -1,22 +1,17 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import SketchRenderer from './SketchRenderer';
-import { ViewStyle, LayoutInfo, TextStyle, TextNode } from '../types';
+import { TreeNode } from '../types';
 import makeTextLayer from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
 import TextStyles from '../sharedStyles/TextStyles';
 import { Props } from '../components/Text';
 
 export default class TextRenderer extends SketchRenderer {
-  getDefaultGroupName(props: any) {
+  getDefaultGroupName(props: Props) {
     return props.name || 'Text';
   }
 
-  renderBackingLayers(
-    layout: LayoutInfo,
-    style: ViewStyle,
-    textStyle: TextStyle,
-    props: Props & { textNodes?: TextNode[] },
-  ): FileFormat.Text[] {
+  renderBackingLayers({ layout, style, textStyle, props }: TreeNode<Props>): FileFormat.Text[] {
     let { name } = props;
 
     // Append all text nodes's content into one string

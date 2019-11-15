@@ -1,4 +1,4 @@
-import { TextNodes, Size, TextNode, TextStyle } from '../../types';
+import { Size, TextNode, TextStyle } from '../../types';
 import {
   TEXT_DECORATION_UNDERLINE,
   TEXT_DECORATION_LINETHROUGH,
@@ -71,7 +71,7 @@ function createAttributedString(textNode: TextNode): NSAttributedString {
   return NSAttributedString.attributedStringWithString_attributes_(content, attribs);
 }
 
-export default function createStringMeasurer(textNodes: TextNodes, width: number): Size {
+export default function createStringMeasurer(textNodes: TextNode[], width: number): Size {
   const fullStr = NSMutableAttributedString.alloc().init();
   textNodes.forEach(textNode => {
     const newString = createAttributedString(textNode);

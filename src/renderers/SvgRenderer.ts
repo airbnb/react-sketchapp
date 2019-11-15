@@ -1,8 +1,8 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import ViewRenderer from './ViewRenderer';
-import { ViewStyle, LayoutInfo, TextStyle, TreeNode, TextNode } from '../types';
+import { TreeNode } from '../types';
 import makeSvgLayer from '../jsonUtils/svgLayer';
-import {Props} from '../components/Svg/Svg'
+import { Props } from '../components/Svg/Svg';
 
 const snakeExceptions = [
   'gradientUnits',
@@ -26,15 +26,7 @@ function toSnakeCase(string: string) {
   return string.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
 }
 
-function makeSvgString(
-  el:
-    | string
-    | {
-        type: string;
-        props: Props & {textNodes?: TextNode[]};
-        children?: (TreeNode | string)[];
-      },
-) {
+function makeSvgString(el: string | TreeNode<Props>) {
   if (typeof el === 'string') {
     return el;
   }
@@ -70,18 +62,14 @@ function makeSvgString(
 }
 
 export default class SvgRenderer extends ViewRenderer {
-  getDefaultGroupName(props: { name?: string }) {
+  getDefaultGroupName(props: Props) {
     return props.name || 'Svg';
   }
 
-  renderBackingLayers(
-    layout: LayoutInfo,
-    style: ViewStyle,
-    textStyle: TextStyle,
-    props: Props & {textNodes?: TextNode[]},
-    children?: TreeNode[],
-  ): FileFormat.AnyLayer[] {
-    const layers = super.renderBackingLayers(layout, style, textStyle, props);
+  renderBackingLayers(node: TreeNode<Props>): FileFormat.AnyLayer[] {
+    const layers = super.renderBackingLayers(node);
+
+    const { layout, props, children } = node;
 
     // add the "xmlns:xlink" namespace so we can use `href`
     // eslint-disable-next-line
