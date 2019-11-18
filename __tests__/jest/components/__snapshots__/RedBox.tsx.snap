@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RedBox /> renders simple errors 1`] = `
+<sketch_view
+  name="RedBox"
+  style={
+    Object {
+      "backgroundColor": "rgb(204, 0, 0)",
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+      "width": 480,
+    }
+  }
+>
+  <sketch_text
+    name="Message"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "lineHeight": 19.2,
+      }
+    }
+  >
+    Error: THIS IS AN ERROR
+  </sketch_text>
+  <sketch_view
+    name="Frames"
+    style={
+      Object {
+        "color": "white",
+        "fontFamily": "Monaco",
+        "marginTop": 20,
+      }
+    }
+  >
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    />
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      Script.runInThisContext
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.defaultEval
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      bound
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.runBound [as eval]
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.onLine
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.emit
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.emit
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.Interface._onLine
+    </sketch_text>
+    <sketch_text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Monaco",
+          "marginTop": 20,
+        }
+      }
+    >
+      REPLServer.Interface._line
+    </sketch_text>
+  </sketch_view>
+</sketch_view>
+`;
+
+exports[`<RedBox /> renders string errors 1`] = `
+<sketch_view
+  name="RedBox"
+  style={
+    Object {
+      "backgroundColor": "rgb(204, 0, 0)",
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+      "width": 480,
+    }
+  }
+>
+  <sketch_text
+    name="Message"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "lineHeight": 19.2,
+      }
+    }
+  >
+    Error: String only error
+  </sketch_text>
+</sketch_view>
+`;

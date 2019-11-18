@@ -1,11 +1,7 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View, Text } from 'react-primitives';
 import { colors, fontFamily, spacing, typeRamp } from '../designSystem';
-
-type Props = {
-  password: string,
-};
 
 const strengths = {
   short: {
@@ -69,7 +65,7 @@ const passwordStrength = password => {
   return 'strong';
 };
 
-const StrengthMeter = ({ password }: Props) => (
+const StrengthMeter = ({ password }) => (
   <View>
     {password.length > 0 && (
       <View style={styles.meter}>

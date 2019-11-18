@@ -1,0 +1,43 @@
+export default function makeImageDataFromUrl(url?: string) {
+  let fetchedData = url ? NSData.dataWithContentsOfURL(NSURL.URLWithString(url)) : undefined;
+
+  if (fetchedData) {
+    const firstByte = fetchedData.subdataWithRange(NSMakeRange(0, 1)).description();
+
+    // Check for first byte. Must use non-type-exact matching (!=).
+    // 0xFF = JPEG, 0x89 = PNG, 0x47 = GIF, 0x49 = TIFF, 0x4D = TIFF
+    if (
+      /* eslint-disable eqeqeq */
+      firstByte != '<ff>' &&
+      firstByte != '<89>' &&
+      firstByte != '<47>' &&
+      firstByte != '<49>' &&
+      firstByte != '<4d>'
+      /* eslint-enable eqeqeq */
+    ) {
+      fetchedData = null;
+    }
+  }
+
+  let image;
+
+  if (!fetchedData) {
+    const errorUrl =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
+    image = NSImage.alloc().initWithContentsOfURL(NSURL.URLWithString(errorUrl));
+  } else {
+    image = NSImage.alloc().initWithData(fetchedData);
+  }
+
+  let imageData: any;
+
+  if (MSImageData.alloc().initWithImage_convertColorSpace !== undefined) {
+    imageData = MSImageData.alloc().initWithImage_convertColorSpace(image, false);
+  } else {
+    imageData = MSImageData.alloc().initWithImage(image);
+  }
+
+  return String(
+    imageData.data().base64EncodedStringWithOptions(NSDataBase64EncodingEndLineWithCarriageReturn),
+  );
+}

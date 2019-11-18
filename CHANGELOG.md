@@ -2,6 +2,24 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.0
+
+- Export Svg components in the Svg/index.js file (Thanks @saschazar21!)
+- Fix setting the overflow
+- The symbol masters will try to maintain their overrides IDs so as not to reset instances that have overrides
+- Improve error messages when trying to render a broken override
+- Do not crash if there is no source for an Image, we will just show an placeholder for the image
+- Handle specifying document in injectSymbols (#388)
+- Add support for paragraph spacing (#382 - Thanks @lessthanzero!)
+- `Image` and `Text` now support multiple shadows just like `View`
+- Add support for `TextShadow`
+- Add support for `transform`
+- Add support for running `react-sketchapp` on NodeJS using `renderToJSON()`
+- Port to TypeScript and publish TypeScript definitions
+- `TextStyles.get(name)` now returns text styles that are part of the document (even if they haven't been defined with `react-sketchapp`) (#407)
+- `getSymbolComponentByName` now returns Symbols that are part of the document (even if they haven't been defined with `react-sketchapp`) (#177)
+- Switch the order of the `TextStyles.create` arguments to `TextStyles.create(styles, options)`
+
 ## Version 3.0.0-beta.9
 
 - Fix setting the overflow

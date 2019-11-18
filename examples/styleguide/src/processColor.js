@@ -1,17 +1,5 @@
-// @flow
 /* eslint-disable import/no-extraneous-dependencies */
 import chroma from 'chroma-js';
-
-export type Color = {
-  hex: string,
-  contrast: number,
-  accessibility: {
-    aa?: boolean,
-    aaLarge?: boolean,
-    aaa?: boolean,
-    aaaLarge?: boolean,
-  },
-};
 
 const minimums = {
   aa: 4.5,
@@ -20,7 +8,7 @@ const minimums = {
   aaaLarge: 4.5,
 };
 
-export default (hex: string): Color => {
+export default hex => {
   const contrast = chroma.contrast(hex, 'white');
   return {
     hex,

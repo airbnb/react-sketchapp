@@ -1,17 +1,16 @@
-// @flow
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 import * as React from 'react';
 import { render, TextStyles, View } from 'react-sketchapp';
 import designSystem from './designSystem';
-import type { DesignSystem } from './designSystem';
 
 import Label from './components/Label';
 import Palette from './components/Palette';
 import Section from './components/Section';
 import TypeSpecimen from './components/TypeSpecimen';
 
-const Document = ({ system }: { system: DesignSystem }) => (
+const Document = ({ system }) => (
   <View>
     <View name="Intro" style={{ width: 420, marginBottom: system.spacing * 4 }}>
       <Label>
@@ -33,13 +32,9 @@ const Document = ({ system }: { system: DesignSystem }) => (
 );
 
 export default () => {
-  TextStyles.create(
-    {
-      context,
-      clearExistingStyles: true,
-    },
-    designSystem.fonts,
-  );
+  TextStyles.create(designSystem.fonts, {
+    clearExistingStyles: true,
+  });
 
   render(<Document system={designSystem} />, context.document.currentPage());
 };

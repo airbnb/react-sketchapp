@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Svg /> also works when child is directly imported 1`] = `
+<sketch_svg
+  height="447"
+  preserveAspectRatio="xMidYMid meet"
+  viewBox="0 0 494 447"
+  width="494"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <svg_g
+    fill="none"
+    fillRule="evenodd"
+  >
+    <svg_path
+      d="M247 447L0 160 107 15 247 0l140 15 107 145"
+      fill="#FFAE00"
+    />
+    <svg_path
+      d="M247 447L0 160h494"
+      fill="#EC6C00"
+    />
+    <svg_path
+      d="M247 447L100 160h294"
+      fill="#FFAE00"
+    />
+    <svg_path
+      d="M247 0L100 160h294"
+      fill="#FFEFB4"
+    />
+    <svg_path
+      d="M107 15L52 88 0 160h101M387 15l55 73 52 72H393"
+      fill="#FFAE00"
+    />
+    <svg_path
+      d="M107 15l-7 145L247 0m140 15l7 145L247 0"
+      fill="#FED305"
+    />
+  </svg_g>
+</sketch_svg>
+`;
+
+exports[`<Svg /> passes its children 1`] = `
+<sketch_svg
+  height="447"
+  preserveAspectRatio="xMidYMid meet"
+  viewBox="0 0 494 447"
+  width="494"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <svg_g
+    fill="none"
+    fillRule="evenodd"
+  >
+    <svg_path
+      d="M247 447L0 160 107 15 247 0l140 15 107 145"
+      fill="#FFAE00"
+    />
+    <svg_path
+      d="M247 447L0 160h494"
+      fill="#EC6C00"
+    />
+    <svg_path
+      d="M247 447L100 160h294"
+      fill="#FFAE00"
+    />
+    <svg_path
+      d="M247 0L100 160h294"
+      fill="#FFEFB4"
+    />
+    <svg_path
+      d="M107 15L52 88 0 160h101M387 15l55 73 52 72H393"
+      fill="#FFAE00"
+    />
+    <svg_path
+      d="M107 15l-7 145L247 0m140 15l7 145L247 0"
+      fill="#FED305"
+    />
+  </svg_g>
+</sketch_svg>
+`;

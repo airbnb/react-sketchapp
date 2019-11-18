@@ -67,8 +67,3 @@ export default {
   fonts,
   spacing,
 };
-
-export type DesignSystem = {
-  fonts: any,
-  colors: { [key: string]: string },
-};

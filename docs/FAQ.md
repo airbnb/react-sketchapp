@@ -6,30 +6,33 @@
 
 #### How do I `console.log`?
 
-If you're using `skpm`, use `console.log` as usual.
-
 You have multiple options to view the logs:
 
 - Using the [sketch-dev-tools](https://github.com/skpm/sketch-dev-tools)
 - `Console.app -> ~/Library/Logs -> com.bohemiancoding.sketch -> Plugin Output.log`
 - in the terminal
+
   ```bash
   skpm log -f
   ```
+
 - in the terminal
+
   ```bash
   tail -F ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
   ```
+
   Occasionally this file disappears — in that case, run this and then try `tail`ing again.
+
   ```bash
   touch ~/Library/Logs/com.bohemiancoding.sketch3/Plugin\ Output.log
   ```
 
-Outside of `skpm`, use `log` instead of `console.log`.
+For more information, check out the [Sketch developer documentation](https://developer.sketch.com/plugins/debugging).
 
 #### I'm running a project as a plugin & Sketch isn't showing my changes
 
-Sketch has a [developer mode](http://developer.sketchapp.com/introduction/preferences#always-reload-scripts-before-running) which refreshes plugins before running. If you're using `skpm` this should be set up automatically, but just in case try running
+Sketch has a [developer mode](https://developer.sketch.com/plugins/debugging#reload-scripts) which refreshes plugins before running. If you're using `skpm` this should be set up automatically, but just in case try running
 
 ```bash
 defaults write com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES
@@ -55,7 +58,7 @@ You can use the [SVG API](/docs/API.md#svg) to draw arbitrary shapes.
 
 #### Any plans to support Sketch's constraints for layout?
 
-Not currently. Flexbox is the closest we have to a predictable, cross-platform layout specification — by using it, we can use the same styles on every platform we build for.
+Not currently. FlexBox is the closest we have to a predictable, cross-platform layout specification — by using it, we can use the same styles on every platform we build for.
 
 We currently use [`yoga`](https://github.com/facebook/yoga).
 
@@ -83,8 +86,8 @@ Given equivalent API support it would be possible to simultaneously render to `r
 
 Rather than tying us into one design tools, reasoning about design in cross-platform primitives _frees us_ to use the tooling we want.
 
-#### Can I use [Flow](https://flow.org) or [TypeScript](https://www.typescriptlang.org/)?
+#### Can I use [TypeScript](https://www.typescriptlang.org/)?
 
 Of course!
 
-Flow definitions are published with the npm package in `lib/*.flow.js`.
+TypeScript definitions are published with the npm package.

@@ -1,12 +1,8 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View, Text } from 'react-sketchapp';
 
-type P = {
-  filled?: boolean,
-  children?: React$Element<any>,
-};
-const Badge = ({ children, filled }: P) => (
+const Badge = ({ children, filled }) => (
   <View
     style={{
       borderRadius: 4,

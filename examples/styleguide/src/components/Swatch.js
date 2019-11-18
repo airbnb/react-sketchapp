@@ -1,17 +1,12 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View } from 'react-sketchapp';
 import AccessibilityBadge from './AccessibilityBadge';
 import Label from './Label';
-import type { Color } from '../processColor';
 
 const SWATCH_WIDTH = 100;
 
-type P = {
-  name: string,
-  color: Color,
-};
-const Swatch = ({ color, name }: P) => (
+const Swatch = ({ color, name }) => (
   <View name={name} style={{ marginBottom: 48, marginRight: 48 }}>
     <View
       style={{

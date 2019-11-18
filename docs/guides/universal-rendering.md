@@ -4,7 +4,7 @@ The `react-sketchapp` components have been architected to provide the same metap
 
 The [`react-primitives`](https://github.com/lelandrichardson/react-primitives) project provides consistent primitive interfaces across platforms, and is the simplest way to achieve Universal Rendering.
 
-### Setup
+## Setup
 
 React Primitives works out-of-the-box with `react-dom` & `react-native`, and `react-sketchapp` (when using `skpm`).
 
@@ -14,7 +14,7 @@ Install `react-primitives` and its peer dependencies
 npm install --save react-primitives react react-dom react-native react-sketchapp
 ```
 
-### Creating your components
+## Creating your components
 
 Import base primitives from `react-primitives` rather than `react-sketchapp` / `react-native` — e.g.
 
@@ -36,11 +36,11 @@ const Row = props =>
 export default Row;
 ```
 
-### Importing existing components
+## Importing existing components
 
-If you have a large existing React Native component library, you might enjoy using a codemod to automatically convert `react-native` imports to `react-primitives` — [a proof-of-concept codemod is provided on ASTExplorer](https://astexplorer.net/#/gist/68d1b3ae3ec7b0a088452a7d38643dc4/latest).
+If you have a large existing React Native component library, you might enjoy using a `codemod` to automatically convert `react-native` imports to `react-primitives` — [a proof-of-concept `codemod` is provided on ASTExplorer](https://astexplorer.net/#/gist/68d1b3ae3ec7b0a088452a7d38643dc4/latest).
 
-### Rendering
+## Rendering
 
 Each platform will require an entry point with its respective `render` / registration call - e.g:
 

@@ -1,12 +1,8 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "root": true,
-  "extends": [
-    "airbnb",
-    "sketch",
-    "prettier"
-  ],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "sketch", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "globals": {
     "React$Component": true,
     "React$Element": true,

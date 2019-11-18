@@ -1,14 +1,8 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View } from 'react-primitives';
 
-type Props = {
-  h?: number,
-  v?: number,
-  children?: React$Element<any>,
-};
-
-const Space = ({ h, v, children }: Props): React$Element<any> => (
+const Space = ({ h, v, children }) => (
   <View
     style={{
       paddingHorizontal: h,

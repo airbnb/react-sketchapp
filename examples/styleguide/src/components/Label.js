@@ -1,12 +1,8 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { Text } from 'react-sketchapp';
 
-type P = {
-  bold?: boolean,
-  children?: any,
-};
-const Label = ({ bold, children }: P) => (
+const Label = ({ bold, children }) => (
   <Text
     style={{
       color: '#333',

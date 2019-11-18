@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Map from 'react-primitives-google-static-map';

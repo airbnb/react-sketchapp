@@ -1,13 +1,9 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View, Text } from 'react-sketchapp';
 import Label from './Label';
 
-type P = {
-  name: string,
-  style: any,
-};
-const TypeSpecimen = ({ name, style }: P) => (
+const TypeSpecimen = ({ name, style }) => (
   <View name={`TypeSpecimen-${name}`} style={{ flexDirection: 'row', marginBottom: 24 }}>
     <View style={{ width: 100 }}>
       <Label>{`${style.fontSize} / ${style.lineHeight}`}</Label>

@@ -1,8 +1,7 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { Image, View, Text, StyleSheet } from 'react-sketchapp';
 import { colors, fonts, spacing } from '../designSystem';
-import type { User } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,31 +20,15 @@ const styles = StyleSheet.create({
   body: fonts.Body,
 });
 
-type ProfileP = {
-  user: User,
-};
+const Avatar = ({ url }) => <Image source={url} style={styles.avatar} />;
 
-type AvatarP = {
-  url: string,
-};
-const Avatar = ({ url }: AvatarP): React$Element<any> => (
-  <Image source={url} style={styles.avatar} />
-);
+const Title = ({ children }) => <Text style={styles.title}>{children}</Text>;
 
-type TextP = { children?: string };
-const Title = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.title}>{children}</Text>
-);
+const Subtitle = ({ children }) => <Text style={styles.subtitle}>{children}</Text>;
 
-const Subtitle = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.subtitle}>{children}</Text>
-);
+const Body = ({ children }) => <Text style={styles.body}>{children}</Text>;
 
-const Body = ({ children }: TextP): React$Element<any> => (
-  <Text style={styles.body}>{children}</Text>
-);
-
-const Profile = (props: ProfileP): React$Element<any> => (
+const Profile = props => (
   <View style={styles.container}>
     <Avatar url={props.user.profileImageUrl} />
     <View style={{ marginBottom: spacing }}>

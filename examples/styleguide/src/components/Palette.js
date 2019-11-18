@@ -1,14 +1,11 @@
-// @flow
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { View } from 'react-sketchapp';
 import Swatch from './Swatch';
 
 const SWATCH_WIDTH = 100;
 
-type P = {
-  colors: any,
-};
-const Palette = ({ colors }: P) => (
+const Palette = ({ colors }) => (
   <View
     style={{
       width: (SWATCH_WIDTH + 48) * 4,

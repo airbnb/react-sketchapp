@@ -1,7 +1,6 @@
 ## Table of Contents
 
 - [Introduction](/README.md)
-- [Examples](/docs/examples.md)
 - [Guides](/docs/guides/README.md)
   - [Using `skpm` as a build system](/docs/guides/using-skpm.md)
   - [Data Fetching](/docs/guides/data-fetching.md)
@@ -22,6 +21,7 @@
   - [StyleSheet](/docs/API.md#stylesheet)
   - [TextStyles](/docs/API.md#textstyles)
   - [Symbols](/docs/API.md#symbols)
+- [Examples](/docs/examples.md)
 - [Change Log](/CHANGELOG.md)
 - [FAQ](/docs/FAQ.md)
 - [Contributing](/CONTRIBUTING.md)

@@ -4,7 +4,7 @@ Sketch allows arbitrary plugins written in [CocoaScript](http://developer.sketch
 
 ## Installation
 
-> Important: Node.js > V6.x is a minimum requirement.
+> Important: Node.JS > V6.x is a minimum requirement.
 
 ```bash
 npm install -g skpm
@@ -24,7 +24,7 @@ skpm create my-plugin --template=airbnb/react-sketchapp
 >
 > - [`airbnb/react-sketchapp`](https://github.com/airbnb/react-sketchapp) is a simple template to get started with `react-sketchapp`
 >
-> 💁 Tip: Any Github repo with a 'template' folder can be used as a custom template: skpm create <project-name> --template=<username>/<repository>
+> 💁 Tip: Any Github repo with a 'template' folder can be used as a custom template: `skpm create <project-name> --template=<username>/<repository>`
 
 ### Build the plugin
 
@@ -73,11 +73,11 @@ To customize Babel, you have two options:
 
 - You may create a [`.babelrc`](https://babeljs.io/docs/usage/babelrc) file in your project's root directory. Any settings you define here will overwrite matching config-keys within skpm preset. For example, if you pass a "presets" object, it will replace & reset all Babel presets that skpm defaults to.
 
-- If you'd like to modify or add to the existing Babel config, you must use a `webpack.skpm.config.js` file. Visit the [Webpack](#webpack) section for more info.
+- If you'd like to modify or add to the existing Babel config, you must use a `webpack.skpm.config.js` file. Visit the [`webpack`](#webpack) section for more info.
 
-### Webpack
+### `webpack`
 
-To customize webpack create `webpack.skpm.config.js` file which exports function that will change webpack's config.
+To customize `webpack` create `webpack.skpm.config.js` file which exports function that will change `webpack`'s config.
 
 ```js
 /**

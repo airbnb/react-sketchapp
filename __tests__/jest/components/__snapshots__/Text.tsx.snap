@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Text /> name defaults to Text 1`] = `<sketch_text />`;
+
+exports[`<Text /> name passes its name 1`] = `
+<sketch_text
+  name="foo"
+/>
+`;
+
+exports[`<Text /> passes its children 1`] = `
+<sketch_text>
+  foo
+</sketch_text>
+`;
+
+exports[`<Text /> style accepts a StyleSheet ordinal 1`] = `
+<sketch_text
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<Text /> style accepts a plain object 1`] = `
+<sketch_text
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<Text /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
+<sketch_text
+  style={
+    Object {
+      "flex": 1,
+      "flexGrow": 1,
+    }
+  }
+/>
+`;
