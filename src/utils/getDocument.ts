@@ -29,18 +29,18 @@ export const getDocument = (
 export const getDocumentData = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): SketchDocumentData | undefined => {
-  let nativeDocument: SketchDocumentData | SketchDocument;
+  let nativeDocument: SketchDocumentData | SketchDocument | undefined;
   let nativeDocumentData: SketchDocumentData;
 
   if (!document && typeof context !== 'undefined') {
     nativeDocument = getDocumentDataFromContext(context);
-  } else if ('sketchObject' in document) {
+  } else if (typeof document !== 'undefined' && 'sketchObject' in document) {
     nativeDocument = document.sketchObject;
   } else {
     nativeDocument = document;
   }
 
-  if (nativeDocument) {
+  if (!nativeDocument) {
     return undefined;
   }
 
