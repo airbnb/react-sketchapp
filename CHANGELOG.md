@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/). Every release
 - Add support for `transform`
 - Add support for running `react-sketchapp` on NodeJS using `renderToJSON()`
 - Port to TypeScript and publish TypeScript definitions
+- `TextStyles.get(name)` now returns text styles that are part of the document (even if they haven't been defined with `react-sketchapp`) (#407)
+- `getSymbolComponentByName` now returns Symbols that are part of the document (even if they haven't been defined with `react-sketchapp`) (#177)
 
 ## Version 3.0.0-beta.9
 
