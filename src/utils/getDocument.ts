@@ -19,8 +19,8 @@ export const getDocument = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): SketchDocument | undefined => {
   const documentData = getDocumentData(document);
-  if (!documentData) {
-    return undefined;
+  if (typeof documentData === 'undefined' || !('delegate' in documentData)) {
+    return documentData;
   }
 
   return documentData.delegate();

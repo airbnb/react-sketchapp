@@ -495,11 +495,15 @@ StyleSheet.resolve(styles.foo);
 
 An interface to Sketch's shared text styles. Create styles with or without rendering them to the document canvas.
 
-### `create(options, styles)`
+### `create(styles, options)`
 
 The primary interface to TextStyles. **Call this before rendering**.
 
 #### Parameters
+
+##### `styles` **(required)**
+
+An object of JavaScript styles. The keys will be used as Sketch's Text Style names.
 
 ##### `options: { document, clearExistingStyles }`
 
@@ -510,10 +514,6 @@ The Sketch Document currently being rendered into.
 ###### `clearExistingStyles`
 
 Clear any styles already registered in the document.
-
-##### `styles` **(required)**
-
-An object of JavaScript styles. The keys will be used as Sketch's Text Style names.
 
 #### Example
 

@@ -3,11 +3,10 @@ import { SketchDocumentData, SketchDocument, WrappedSketchDocument, TextStyle } 
 import { getSketchVersion } from '../utils/getSketchVersion';
 import hashStyle from '../utils/hashStyle';
 import { getDocument } from '../utils/getDocument';
-import sharedTextStyles from '../wrappers/sharedTextStyles';
+import sharedTextStyles from '../utils/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/textLayers';
 import pick from '../utils/pick';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
-import { generateID } from '../jsonUtils/models';
 
 type MurmurHash = string;
 
@@ -29,13 +28,7 @@ const registerStyle = (name: string, style: TextStyle): void => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
-  let sharedObjectID: string;
-
-  if (sketchVersion !== 'NodeJS') {
-    sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
-  } else {
-    sharedObjectID = generateID(`sharedStyle:${name}`, !!name);
-  }
+  const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
 
   // FIXME(gold): side effect :'(
   _byName[name] = hash;
@@ -53,7 +46,7 @@ type Options = {
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument;
 };
 
-const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
+const create = (styles: { [key: string]: TextStyle }, options: Options = {}): StyleHash => {
   const { clearExistingStyles, document } = options;
 
   const doc = getDocument(document);
@@ -63,13 +56,11 @@ const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHa
     return {};
   }
 
-  if (sketchVersion !== 'NodeJS' && doc) {
-    sharedTextStyles.setDocument(doc);
+  sharedTextStyles.setDocument(doc);
 
-    if (clearExistingStyles) {
-      _styles = {};
-      sharedTextStyles.setStyles([]);
-    }
+  if (clearExistingStyles) {
+    _styles = {};
+    sharedTextStyles.setStyles([]);
   }
 
   Object.keys(styles).forEach(name => registerStyle(name, styles[name]));
@@ -95,18 +86,12 @@ const get = (
     return style.cssStyle;
   }
 
-  if (sketchVersion !== 'NodeJS') {
-    return sharedTextStyles.getStyle(name, document ? getDocument(document) : undefined);
-  }
-
-  return undefined;
+  return sharedTextStyles.getStyle(name, document ? getDocument(document) : undefined);
 };
 
 const clear = () => {
   _styles = {};
-  if (sketchVersion !== 'NodeJS') {
-    sharedTextStyles.setStyles([]);
-  }
+  sharedTextStyles.setStyles([]);
 };
 
 const toJSON = (): FileFormat.SharedStyle[] =>

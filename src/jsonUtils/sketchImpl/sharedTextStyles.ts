@@ -1,10 +1,10 @@
 import invariant from 'invariant';
-import { fromSJSON } from '../jsonUtils/sketchImpl/json-to-sketch';
-import { toSJSON } from '../jsonUtils/sketchImpl/sketch-to-json';
+import { fromSJSON } from './json-to-sketch';
+import { toSJSON } from './sketch-to-json';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { SketchDocument, TextStyle } from '../types';
-import { generateID } from '../jsonUtils/models';
-import { parseTextStyle } from '../jsonUtils/textLayers';
+import { SketchDocument, TextStyle } from '../../types';
+import { generateID } from '../models';
+import { parseTextStyle } from '../textLayers';
 
 class TextStyles {
   _document?: SketchDocument;
@@ -92,4 +92,4 @@ class TextStyles {
   }
 }
 
-export default new TextStyles();
+export default TextStyles;

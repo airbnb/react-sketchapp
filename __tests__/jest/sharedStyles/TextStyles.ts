@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 let TextStyles;
-let ctx;
+let doc;
 let sharedTextStyles;
 
 beforeEach(() => {
@@ -12,9 +12,9 @@ beforeEach(() => {
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');
 
-  sharedTextStyles = require('../../../src/wrappers/sharedTextStyles');
+  sharedTextStyles = require('../../../src/utils/sharedTextStyles');
 
-  jest.mock('../../../src/wrappers/sharedTextStyles');
+  jest.mock('../../../src/utils/sharedTextStyles');
 
   jest.mock('../../../src/jsonUtils/sketchImpl/createStringMeasurer');
   jest.mock('../../../src/jsonUtils/sketchImpl/findFontName');
@@ -24,15 +24,15 @@ beforeEach(() => {
   TextStyles = TextStyles.default;
   sharedTextStyles = sharedTextStyles.default;
 
-  sharedTextStyles.setContext = jest.fn(ctx => {
-    if (!ctx) {
-      throw new Error('Please provide a context');
+  sharedTextStyles.setDocument = jest.fn(doc => {
+    if (!doc) {
+      throw new Error('Please provide a sketch document reference');
     }
   });
   sharedTextStyles.addStyle = jest.fn(() => 'styleId');
   sharedTextStyles.setStyles = jest.fn(() => sharedTextStyles);
 
-  ctx = jest.fn();
+  doc = jest.fn();
 });
 
 describe('create', () => {
@@ -40,18 +40,20 @@ describe('create', () => {
     it('it errors', () => {
       const styles = {};
 
-      expect(() => TextStyles.create({}, styles)).toThrowError(/Please provide a context/);
+      expect(() => TextStyles.create({}, styles)).toThrowError(
+        /Please provide a sketch document reference/,
+      );
     });
   });
 
   describe('with a context', () => {
     it('clears clearExistingStyles when true', () => {
       TextStyles.create(
+        {},
         {
           clearExistingStyles: true,
-          context: ctx,
+          document: doc,
         },
-        {},
       );
 
       expect(sharedTextStyles.setStyles).toHaveBeenCalled();
@@ -59,11 +61,11 @@ describe('create', () => {
 
     it('doesn’t clearExistingStyles when false', () => {
       TextStyles.create(
+        {},
         {
           clearExistingStyles: false,
-          context: ctx,
+          document: doc,
         },
-        {},
       );
       expect(sharedTextStyles.setStyles).not.toHaveBeenCalled();
     });
@@ -75,7 +77,7 @@ describe('create', () => {
         },
       };
 
-      const res = TextStyles.create({ context: ctx }, styles);
+      const res = TextStyles.create(styles, { document: doc });
 
       expect(Object.keys(res).length).toBe(1);
     });
@@ -90,7 +92,7 @@ describe('create', () => {
         },
       };
 
-      const res = TextStyles.create({ context: ctx }, styles);
+      const res = TextStyles.create(styles, { document: doc });
 
       expect(Object.keys(res).length).toBe(2);
       expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
@@ -106,7 +108,7 @@ describe('create', () => {
         },
       };
 
-      const res = TextStyles.create({ context: ctx }, styles);
+      const res = TextStyles.create(styles, { document: doc });
 
       expect(Object.keys(res).length).toBe(1);
       expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(2);
@@ -139,12 +141,7 @@ describe('create', () => {
         {},
       );
 
-      const res = TextStyles.create(
-        {
-          context: ctx,
-        },
-        { foo: input },
-      );
+      const res = TextStyles.create({ foo: input }, { document: doc });
 
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
@@ -161,12 +158,7 @@ describe('create', () => {
 
 describe('resolve', () => {
   beforeEach(() => {
-    TextStyles.create(
-      {
-        context: ctx,
-      },
-      {},
-    );
+    TextStyles.create({}, { document: doc });
   });
 
   it('retrieves a matching style', () => {
@@ -175,7 +167,7 @@ describe('resolve', () => {
       [key]: { fontSize: 'bar' },
     };
 
-    TextStyles.create({ context: ctx }, styles);
+    TextStyles.create(styles, { document: doc });
 
     expect(TextStyles.resolve(styles[key])).toBeDefined();
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
@@ -192,7 +184,7 @@ describe('resolve', () => {
       fontSize: 'qux',
     };
 
-    TextStyles.create({ context: ctx }, styles);
+    TextStyles.create(styles, { document: doc });
 
     expect(TextStyles.resolve(style2)).not.toBeDefined();
     expect(sharedTextStyles.addStyle).toHaveBeenCalledTimes(1);
@@ -210,7 +202,7 @@ describe('get', () => {
       },
     };
 
-    TextStyles.create({ context: ctx }, styles);
+    TextStyles.create(styles, { document: doc });
 
     expect(TextStyles.get('foo')).toEqual(styles.foo);
     expect(TextStyles.get('baz')).toEqual(undefined);
@@ -223,7 +215,7 @@ describe('get', () => {
       },
     };
 
-    TextStyles.create({ context: ctx }, styles);
+    TextStyles.create(styles, { document: doc });
 
     expect(TextStyles.get('baz')).toEqual(undefined);
   });
@@ -240,7 +232,7 @@ describe('clear', () => {
       },
     };
 
-    TextStyles.create({ context: ctx }, styles);
+    TextStyles.create(styles, { document: doc });
     TextStyles.clear();
 
     expect(TextStyles.styles()).toEqual({});

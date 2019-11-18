@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/). Every release
 - Port to TypeScript and publish TypeScript definitions
 - `TextStyles.get(name)` now returns text styles that are part of the document (even if they haven't been defined with `react-sketchapp`) (#407)
 - `getSymbolComponentByName` now returns Symbols that are part of the document (even if they haven't been defined with `react-sketchapp`) (#177)
+- Switch the order of the `TextStyles.create` arguments to `TextStyles.create(styles, options)`
 
 ## Version 3.0.0-beta.9
 
