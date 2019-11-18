@@ -29,7 +29,7 @@
     "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch git@github.com:airbnb/react-sketchapp.git gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push git@github.com:airbnb/react-sketchapp.git gh-pages --force",
     "lint": "eslint .",
     "lint-staged": "lint-staged",
-    "prepublishOnly": "npm run clean && npm run check && npm run build",
+    "prepublishOnly": "npm run clean && npm run test:ci && npm run build",
     "prettier:base": "prettier --write",
     "prettify": "npm run prettier:base \"src/**/*.(j|t)sx?\" \"examples/**/*.(j|t)sx?\" \"__tests__/**/*.(j|t)sx?\" \"docs/**/*.md\"",
     "test": "npm run test:unit && npm run test:e2e",

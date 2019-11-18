@@ -6,3 +6,16 @@ examples
 docs
 .vscode
 yarn.lock
+__tests__
+.github
+template
+book.json
+prettier.config.js
+.eslintrc
+.eslintignore
+.editorconfig
+.bookignore
+src
+jest.config.js
+tsconfig.json
+tsconfig.module.json
