@@ -147,20 +147,24 @@ export const findFont = (style: TextStyle): NSFont => {
       console.log(`Unrecognized font family '${familyName}'`);
       font = NSFont.systemFontOfSize_weight(fontSize, fontWeight);
     }
+
+    didFindFont = true;
   }
 
-  // Get the closest font that matches the given weight for the fontFamily
-  let closestWeight = Infinity;
-  for (let i = 0; i < fontNames.length; i += 1) {
-    const match = NSFont.fontWithName_size(fontNames[i], fontSize);
+  if (!didFindFont) {
+    // Get the closest font that matches the given weight for the fontFamily
+    let closestWeight = Infinity;
+    for (let i = 0; i < fontNames.length; i += 1) {
+      const match = NSFont.fontWithName_size(fontNames[i], fontSize);
 
-    if (isItalic === isItalicFont(match) && isCondensed === isCondensedFont(match)) {
-      const testWeight = weightOfFont(match);
+      if (isItalic === isItalicFont(match) && isCondensed === isCondensedFont(match)) {
+        const testWeight = weightOfFont(match);
 
-      if (Math.abs(testWeight - fontWeight) < Math.abs(closestWeight - fontWeight)) {
-        font = match;
+        if (Math.abs(testWeight - fontWeight) < Math.abs(closestWeight - fontWeight)) {
+          font = match;
 
-        closestWeight = testWeight;
+          closestWeight = testWeight;
+        }
       }
     }
   }

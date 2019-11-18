@@ -1,27 +1,29 @@
 import invariant from 'invariant';
 import { fromSJSON } from '../jsonUtils/sketchImpl/json-to-sketch';
+import { toSJSON } from '../jsonUtils/sketchImpl/sketch-to-json';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { SketchContext } from '../types';
+import { SketchDocument, TextStyle } from '../types';
 import { generateID } from '../jsonUtils/models';
+import { parseTextStyle } from '../jsonUtils/textLayers';
 
 class TextStyles {
-  _context?: SketchContext;
+  _document?: SketchDocument;
 
   constructor() {
-    this._context = null;
+    this._document = null;
   }
 
-  setContext(context: SketchContext) {
-    invariant(context, 'Please provide a context');
+  setDocument(doc: SketchDocument) {
+    invariant(doc, 'Please provide a sketch document reference');
 
-    this._context = context;
+    this._document = doc;
     return this;
   }
 
   setStyles(styles: Array<any>) {
-    invariant(this._context, 'Please provide a context');
+    invariant(this._document, 'Please provide a sketch document reference');
 
-    this._context.document
+    this._document
       .documentData()
       .layerTextStyles()
       .setObjects(styles);
@@ -30,15 +32,12 @@ class TextStyles {
   }
 
   addStyle(name: string, style: FileFormat.Style): string {
-    const { _context } = this;
-    invariant(_context, 'Please provide a context');
+    const { _document } = this;
+    invariant(_document, 'Please provide a sketch document reference');
 
     const nativeStyle = fromSJSON(style, '119');
 
-    // Flow doesn't pick up invariant truthies
-    const context: SketchContext = _context;
-
-    const container = context.document.documentData().layerTextStyles();
+    const container = _document.documentData().layerTextStyles();
 
     let sharedStyle: any;
 
@@ -63,6 +62,33 @@ class TextStyles {
     // _don't_ rely on the object ID we pass to it, but we have to have one set
     // otherwise Sketch crashes
     return String(sharedStyle.objectID());
+  }
+
+  getStyle(name: string, document?: SketchDocument): TextStyle | undefined {
+    const { _document } = this;
+    const doc = document || _document;
+
+    invariant(doc, 'Please provide a sketch document reference');
+
+    const sharedStyles = doc
+      .documentData()
+      .layerTextStyles()
+      .objects();
+
+    let foundStyle = undefined;
+    for (let i = 0; i < sharedStyles.length; i++) {
+      if (String(sharedStyles[i].name()) === String(name)) {
+        foundStyle = sharedStyles[i].style();
+      }
+    }
+
+    if (!foundStyle) {
+      return undefined;
+    }
+
+    const style = toSJSON(foundStyle) as FileFormat.Style;
+
+    return parseTextStyle(style);
   }
 }
 

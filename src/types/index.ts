@@ -22,6 +22,7 @@ export type SketchPage = {
 export type SketchStyle = any;
 
 export type SketchSharedStyleContainer = {
+  objects: () => any[];
   setObjects: (objects: Array<SketchStyle>) => void;
   addSharedStyleWithName_firstInstance: (name: string, ins: SketchStyle) => any;
   addSharedObject: (ins: any) => any;
@@ -36,6 +37,7 @@ type SketchAssetCollection = {
 };
 
 export type SketchDocumentData = {
+  delegate: () => SketchDocument;
   assets: () => SketchAssetCollection;
   layerStyles: () => void;
   layerTextStyles: () => SketchSharedStyleContainer;

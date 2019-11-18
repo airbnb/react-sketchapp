@@ -2,7 +2,7 @@ import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
 import { TextNode, ResizeConstraints, TextStyle, ViewStyle } from '../types';
 import { generateID, makeColorFromCSS } from './models';
-import { makeStyle } from './style';
+import { makeStyle, parseStyle } from './style';
 
 import findFontName from '../utils/findFont';
 
@@ -18,6 +18,12 @@ export const TEXT_ALIGN = {
   right: FileFormat.TextHorizontalAlignment.Right,
   center: FileFormat.TextHorizontalAlignment.Centered,
   justify: FileFormat.TextHorizontalAlignment.Justified,
+};
+
+const TEXT_ALIGN_REVERSE = {
+  [FileFormat.TextHorizontalAlignment.Right]: 'right',
+  [FileFormat.TextHorizontalAlignment.Centered]: 'center',
+  [FileFormat.TextHorizontalAlignment.Justified]: 'justify',
 };
 
 export const TEXT_DECORATION_LINETHROUGH = {
@@ -142,6 +148,70 @@ export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>): Fil
     verticalAlignment: FileFormat.TextVerticalAlignment.Top,
   };
   return json;
+};
+
+export const parseTextStyle = (json: FileFormat.Style): TextStyle => {
+  const style: TextStyle = parseStyle(json);
+
+  if (json.textStyle) {
+    if (
+      json.textStyle.encodedAttributes.underlineStyle &&
+      json.textStyle.encodedAttributes.underlineStyle !== 0
+    ) {
+      style.textDecoration =
+        json.textStyle.encodedAttributes.underlineStyle === 9 ? 'double' : 'underline';
+    }
+
+    if (
+      json.textStyle.encodedAttributes.strikethroughStyle &&
+      json.textStyle.encodedAttributes.strikethroughStyle !== 0
+    ) {
+      style.textDecoration = 'line-through';
+    }
+
+    if (TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment]) {
+      style.textAlign =
+        TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment];
+    }
+
+    if (typeof json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight !== 'undefined') {
+      style.lineHeight = json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight;
+    }
+
+    if (typeof json.textStyle.encodedAttributes.kerning !== 'undefined') {
+      style.letterSpacing = json.textStyle.encodedAttributes.kerning;
+    }
+
+    const color = json.textStyle.encodedAttributes.MSAttributedStringColorAttribute;
+    style.color = `#${Math.round(color.red * 255).toString(16)}${Math.round(
+      color.green * 255,
+    ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
+
+    if (color.alpha !== 1) {
+      style.color += `${Math.round(color.alpha * 255).toString(16)}`;
+    }
+
+    if (
+      json.textStyle.encodedAttributes.MSAttributedStringTextTransformAttribute !==
+      FileFormat.TextTransform.None
+    ) {
+      style.textTransform =
+        json.textStyle.encodedAttributes.MSAttributedStringTextTransformAttribute ===
+        FileFormat.TextTransform.Lowercase
+          ? 'lowercase'
+          : 'uppercase';
+    }
+
+    const font = json.textStyle.encodedAttributes.MSAttributedStringFontAttribute;
+
+    style.fontSize = font.attributes.size;
+
+    // we are cheating here, setting the name of the font instead of parsing
+    // the family, weight and traits. react-sketchapp will handle it nevertheless
+    style.fontFamily = font.attributes.name;
+  }
+
+  return style;
 };
 
 const makeTextLayer = (

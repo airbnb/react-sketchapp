@@ -15,13 +15,24 @@ export const getDocumentDataFromContainer = (container?: any): SketchDocumentDat
   return container.documentData();
 };
 
+export const getDocument = (
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): SketchDocument | undefined => {
+  const documentData = getDocumentData(document);
+  if (!documentData) {
+    return undefined;
+  }
+
+  return documentData.delegate();
+};
+
 export const getDocumentData = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): SketchDocumentData | undefined => {
   let nativeDocument: SketchDocumentData | SketchDocument;
   let nativeDocumentData: SketchDocumentData;
 
-  if (!document) {
+  if (!document && typeof context !== 'undefined') {
     nativeDocument = getDocumentDataFromContext(context);
   } else if ('sketchObject' in document) {
     nativeDocument = document.sketchObject;

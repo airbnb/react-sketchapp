@@ -497,11 +497,11 @@ The primary interface to TextStyles. **Call this before rendering**.
 
 #### params
 
-##### `options: { context, clearExistingStyles }`
+##### `options: { document, clearExistingStyles }`
 
-###### `context` **(required)**
+###### `document`
 
-The Sketch API context.
+The Sketch Document currently being rendered into.
 
 ###### `clearExistingStyles`
 

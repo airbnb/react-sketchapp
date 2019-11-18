@@ -166,3 +166,55 @@ export const makeStyle = (
 
   return json;
 };
+
+export function parseStyle(json: FileFormat.Style): ViewStyle {
+  const style: ViewStyle = {};
+
+  if (json.contextSettings && json.contextSettings.opacity !== 1) {
+    style.opacity = json.contextSettings.opacity;
+  }
+
+  if (
+    json.fills.length > 0 &&
+    json.fills[0].fillType === FileFormat.FillType.Color &&
+    json.fills[0].isEnabled
+  ) {
+    const color = json.fills[0].color;
+    style.backgroundColor = `#${Math.round(color.red * 255).toString(16)}${Math.round(
+      color.green * 255,
+    ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
+
+    if (color.alpha !== 1) {
+      style.backgroundColor += `${Math.round(color.alpha * 255).toString(16)}`;
+    }
+  }
+
+  if (
+    (json.shadows.length > 0 && json.shadows[0].isEnabled) ||
+    (json.innerShadows.length > 0 && json.innerShadows[0].isEnabled)
+  ) {
+    const isNormalShadow = json.shadows.length > 0 && json.shadows[0].isEnabled;
+    const shadow = isNormalShadow ? json.shadows[0] : json.innerShadows[0];
+    style.shadowRadius = shadow.blurRadius;
+    style.shadowSpread = shadow.spread;
+    style.shadowOffset = {
+      width: shadow.offsetX,
+      height: shadow.offsetY,
+    };
+
+    const color = shadow.color;
+    style.shadowColor = `#${Math.round(color.red * 255).toString(16)}${Math.round(
+      color.green * 255,
+    ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
+
+    if (color.alpha !== 1) {
+      style.shadowOpacity = color.alpha;
+    }
+
+    if (!isNormalShadow) {
+      style.shadowInner = true;
+    }
+  }
+
+  return style;
+}

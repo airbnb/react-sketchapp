@@ -1,7 +1,8 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { SketchContext, TextStyle } from '../types';
+import { SketchDocumentData, SketchDocument, WrappedSketchDocument, TextStyle } from '../types';
 import { getSketchVersion } from '../utils/getSketchVersion';
 import hashStyle from '../utils/hashStyle';
+import { getDocument } from '../utils/getDocument';
 import sharedTextStyles from '../wrappers/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/textLayers';
 import pick from '../utils/pick';
@@ -24,14 +25,15 @@ const _byName: { [key: string]: MurmurHash } = {};
 
 const sketchVersion = getSketchVersion();
 
-const registerStyle = (name: string, style: TextStyle, id?: string): void => {
+const registerStyle = (name: string, style: TextStyle): void => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
-  let sharedObjectID =
-    sketchVersion !== 'NodeJS' ? sharedTextStyles.addStyle(name, sketchStyle) : id;
+  let sharedObjectID: string;
 
-  if (!sharedObjectID) {
+  if (sketchVersion !== 'NodeJS') {
+    sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
+  } else {
     sharedObjectID = generateID(`sharedStyle:${name}`, !!name);
   }
 
@@ -48,20 +50,21 @@ const registerStyle = (name: string, style: TextStyle, id?: string): void => {
 
 type Options = {
   clearExistingStyles?: boolean;
-  context: SketchContext;
-  idMap?: { [name: string]: string };
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument;
 };
 
 const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHash => {
-  const { clearExistingStyles, context, idMap } = options;
+  const { clearExistingStyles, document } = options;
+
+  const doc = getDocument(document);
 
   if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
-    context.document.showMessage('💎 Requires Sketch 50+ 💎');
+    doc.showMessage('💎 Requires Sketch 50+ 💎');
     return {};
   }
 
-  if (sketchVersion !== 'NodeJS') {
-    sharedTextStyles.setContext(context);
+  if (sketchVersion !== 'NodeJS' && doc) {
+    sharedTextStyles.setDocument(doc);
 
     if (clearExistingStyles) {
       _styles = {};
@@ -69,7 +72,7 @@ const create = (options: Options, styles: { [key: string]: TextStyle }): StyleHa
     }
   }
 
-  Object.keys(styles).forEach(name => registerStyle(name, styles[name], (idMap || {})[name]));
+  Object.keys(styles).forEach(name => registerStyle(name, styles[name]));
 
   return _styles;
 };
@@ -81,11 +84,22 @@ const resolve = (style: TextStyle): RegisteredStyle | undefined => {
   return _styles[hash];
 };
 
-const get = (name: string): TextStyle | undefined => {
+const get = (
+  name: string,
+  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+): TextStyle | undefined => {
   const hash = _byName[name];
   const style = _styles[hash];
 
-  return style ? style.cssStyle : undefined;
+  if (style) {
+    return style.cssStyle;
+  }
+
+  if (sketchVersion !== 'NodeJS') {
+    return sharedTextStyles.getStyle(name, document ? getDocument(document) : undefined);
+  }
+
+  return undefined;
 };
 
 const clear = () => {
