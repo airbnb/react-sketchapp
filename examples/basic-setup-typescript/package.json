@@ -21,14 +21,13 @@
   "devDependencies": {
     "@skpm/builder": "^0.4.0",
     "@types/chroma-js": "^1.3.3",
-    "@types/react-sketchapp": "^0.12.1",
-    "typescript": "^2.6.2"
+    "typescript": "^3.7.2"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",
     "prop-types": "^15.5.8",
     "react": "^16.3.2",
-    "react-sketchapp": "^2.0.0",
+    "react-sketchapp": "^3.0.0",
     "react-test-renderer": "^16.3.2"
   }
 }

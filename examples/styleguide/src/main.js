@@ -32,13 +32,9 @@ const Document = ({ system }) => (
 );
 
 export default () => {
-  TextStyles.create(
-    {
-      context,
-      clearExistingStyles: true,
-    },
-    designSystem.fonts,
-  );
+  TextStyles.create(designSystem.fonts, {
+    clearExistingStyles: true,
+  });
 
   render(<Document system={designSystem} />, context.document.currentPage());
 };
