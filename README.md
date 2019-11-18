@@ -1,5 +1,5 @@
 <div align="center">
-      <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" style="max-height:163px; width:100; height: auto; max-width:100%" />
+  <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" style="max-height:163px; width:100; height: auto; max-width:100%" />
 </div>
 
 <div align="center">
@@ -8,7 +8,7 @@
 
 ## Quick-start 🏃‍
 
-First, make sure you have installed [Sketch](http://sketchapp.com) version 50+, & a recent [npm](https://nodejs.org/en/download/).
+First, make sure you have installed [Sketch](http://sketch.com) version 50+, & a recent [npm](https://nodejs.org/en/download/).
 
 Open a new Sketch file, then in a terminal:
 
@@ -23,7 +23,7 @@ Next, [check out some more examples](https://github.com/airbnb/react-sketchapp/t
 
 ![readme-intro](https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png)
 
-[![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp) ![Sketch.app](https://img.shields.io/badge/Sketch.app-43--50-brightgreen.svg) [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/airbnb/react-sketchapp) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-sketchapp/Lobby)
+[![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp) ![Sketch.app](https://img.shields.io/badge/Sketch.app-43--50-brightgreen.svg) [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/airbnb/react-sketchapp)
 
 ## Why?!
 

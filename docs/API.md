@@ -29,9 +29,9 @@
 
 ### `render(element, container)`
 
-Returns the top-level rendered Sketch object or an array of Sketch objects if you use <Page> components.
+Returns the top-level rendered Sketch object or an array of Sketch objects if you use `<Page>` components.
 
-#### params
+#### Parameters
 
 ##### `element` (required)
 
@@ -39,11 +39,13 @@ Top-level React component that defines your Sketch document.
 
 Example:
 
-```
+```js
 <Document>
   <Page name="Mobile">
     <Artboard name="iPhone">
-      <View><Text>Hello World</Text></View>
+      <View>
+        <Text>Hello World</Text>
+      </View>
     </Artboard>
   </Page>
 </Document>
@@ -55,7 +57,7 @@ The element to render into - will be replaced. Should either be a Sketch [Docume
 
 Example: `sketch.getSelectedDocument().selectedPage`.
 
-### returns
+#### Returns
 
 The top-most rendered native Sketch layer.
 
@@ -80,11 +82,13 @@ export default () => {
 
 Returns a Sketch JSON object for further consumption - doesn't add to the page.
 
-#### params
+#### Parameters
 
 ##### `element` (required)
 
-### returns
+Top-level React component that defines your Sketch document.
+
+#### Returns
 
 The top-most Sketch layer as JSON.
 
@@ -94,7 +98,7 @@ The top-most Sketch layer as JSON.
 
 Wrapper for Sketch's Documents. Must be used at the root of your application and is required if you would like to have multiple pages.
 
-#### props
+#### Props
 
 | Prop       | Type   | Default | Note                                     |
 | ---------- | ------ | ------- | ---------------------------------------- |
@@ -117,7 +121,7 @@ Wrapper for Sketch's Documents. Must be used at the root of your application and
 
 Wrapper for Sketch's Pages. Requires a [`<Document>`](#document) component as a parent if you would like to use multiple of these components.
 
-#### props
+#### Props
 
 | Prop       | Type     | Default | Note                                             |
 | ---------- | -------- | ------- | ------------------------------------------------ |
@@ -136,7 +140,7 @@ Wrapper for Sketch's Pages. Requires a [`<Document>`](#document) component as a 
 
 Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a parent if you would like to use multiple of these components.
 
-#### props
+#### Props
 
 | Prop | Type | Default | Note |
 | --- | --- | --- | --- |
@@ -191,9 +195,9 @@ Mobile screen artboard with viewport preset (supports scrolling in prototypes).
 | `style`      | [`Style`](/docs/styling.md) |           |      |
 | `resizeMode` | `ResizeMode`                | `contain` |      |
 
-```
-type ImageSource = String | { src: String }
-type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none'
+```js
+type ImageSource = string | { src: string };
+type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none';
 ```
 
 #### Example
@@ -264,7 +268,7 @@ export default () => {
 };
 ```
 
-##### Direct imports
+#### Direct imports
 
 Additionally, to have a somewhat more compliant mode to the `react-native-svg` API, the SVG components might as well be imported directly:
 
@@ -333,7 +337,7 @@ View primitives
 
 #### Examples
 
-**Example with children**
+##### Example with children
 
 ```js
 <View
@@ -350,7 +354,7 @@ View primitives
 </View>
 ```
 
-**Example using `flow` prop for prototyping destination**
+##### Example using `flow` prop for prototyping destination
 
 ```js
 <Document>
@@ -390,7 +394,7 @@ View primitives
 
 ### `select(obj)`
 
-#### params
+#### Parameters
 
 ##### `obj`
 
@@ -410,7 +414,7 @@ A constant 'absolute fill' style.
 
 Create an optimized `StyleSheet` reference from a style object.
 
-#### params
+#### Parameters
 
 ##### `styles`
 
@@ -439,7 +443,7 @@ const styles = StyleSheet.create({
 
 Flatten an array of style objects into one aggregated object, **or** look up the definition for a registered stylesheet.
 
-#### params
+#### Parameters
 
 ##### `styles`
 
@@ -469,7 +473,7 @@ StyleSheet.flatten(styles.foo);
 
 Resolve one style.
 
-#### params
+#### Parameters
 
 ##### `style`
 
@@ -495,7 +499,7 @@ An interface to Sketch's shared text styles. Create styles with or without rende
 
 The primary interface to TextStyles. **Call this before rendering**.
 
-#### params
+#### Parameters
 
 ##### `options: { document, clearExistingStyles }`
 
@@ -554,7 +558,7 @@ export default () => {
 
 Find a stored native Sketch style object for a given JavaScript style object. You probably don't need to use this.
 
-#### params
+#### Parameters
 
 ##### `style`
 
@@ -566,9 +570,9 @@ Find all of the registered styles. You probably don't need to use this.
 
 ### `get(name)`
 
-Find a stored style by _name_.
+Find a text style by _name_.
 
-#### params
+#### Parameters
 
 ##### `name`
 
@@ -639,7 +643,7 @@ Returns a react component which is an can be used to render instances of the sym
 
 Returns a react component which can be used to render the symbol that is associated with that name.
 
-#### Symbol example
+### Symbol example
 
 ```js
 import sketch from 'sketch';
@@ -662,7 +666,7 @@ export default () => {
 };
 ```
 
-#### Text override example
+### Text override example
 
 Text overrides use the name parameter to target a specific Text primitive. When no name is given the value within the Text primitive can be used to override the value.
 
@@ -693,7 +697,7 @@ export default () => {
 };
 ```
 
-#### Image override example
+### Image override example
 
 Image overrides use the name parameter to target a specific Image primitive.
 
@@ -724,7 +728,7 @@ export default () => {
 };
 ```
 
-#### Nested symbol + override example
+####Nested symbol + override example
 
 ```js
 import sketch from 'sketch';

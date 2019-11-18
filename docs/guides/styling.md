@@ -1,8 +1,8 @@
 # Styling
 
-Components use CSS styles + flexbox layout.
+Components use CSS styles + FlexBox layout.
 
-#### Layout Styles
+## Layout Styles
 
 | property | type | supported? |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ Components use CSS styles + flexbox layout.
 | `borderLeftWidth` | `number` &#124; `percentage` | ✅ |
 | `opacity` | `number` | ✅ |
 
-#### Type Styles
+## Type Styles
 
 | property | type | supported? |
 | --- | --- | --- |
@@ -92,6 +92,8 @@ Components use CSS styles + flexbox layout.
 | `writingDirection` | `auto` &#124; `ltr` &#124; `rtl` | ⛔️ |
 | `opacity` | `number` | ✅ |
 | `percentage` | `points` &#124; `percentages` | ✅ |
+
+## Examples
 
 Styles can be passed to components as plain objects, or via [`StyleSheet`](/docs/API.md).
 
