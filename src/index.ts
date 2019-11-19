@@ -13,6 +13,7 @@ import _TextStyles from './sharedStyles/TextStyles';
 import {
   makeSymbol as _makeSymbol,
   getSymbolComponentByName as _getSymbolComponentByName,
+  getSymbolMasterByName as _getSymbolMasterByName,
   injectSymbols as _injectSymbols,
 } from './symbol';
 
@@ -31,6 +32,7 @@ export const View = _View;
 export const Platform = _Platform;
 export const makeSymbol = _makeSymbol;
 export const getSymbolComponentByName = _getSymbolComponentByName;
+export const getSymbolMasterByName = _getSymbolMasterByName;
 export const injectSymbols = _injectSymbols;
 
 export default {
@@ -49,5 +51,6 @@ export default {
   Platform,
   makeSymbol,
   getSymbolComponentByName,
+  getSymbolMasterByName,
   injectSymbols,
 };

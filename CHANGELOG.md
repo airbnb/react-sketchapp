@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.1
+
+- Allow passing a style object when making a symbol
+- Expose `getSymbolMasterByName`
+
 ## Version 3.0.0
 
 - Export Svg components in the Svg/index.js file (Thanks @saschazar21!)
