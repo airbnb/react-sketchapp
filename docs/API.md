@@ -625,7 +625,7 @@ Reset the registered styles.
 
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
-### `makeSymbol(node, name, document)`
+### `makeSymbol(node, props, document)`
 
 Creates a new symbol and injects it into the `Symbols` page. The name of the symbol can be optionally provided and will default to the display name of the component.
 
@@ -636,12 +636,18 @@ Returns a react component which is an can be used to render instances of the sym
 | Parameter | Type | Default | Note |
 | --- | --- | --- | --- |
 | `node` | `Node` |  | The node object that will be rendered as a symbol |
-| `name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
+| `props` | `Object` | The node name | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
+| `props.name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
+| `props.style` | [`Style`](/docs/styling.md) |  |  |
 | `document` | `Object` | The current document | The Sketch document to make the symbol in |
 
 ### `getSymbolComponentByName(name)`
 
-Returns a react component which can be used to render the symbol that is associated with that name.
+Returns a react component which can be used to render the symbol instance that is associated with that name.
+
+### `getSymbolMasterByName(name)`
+
+Returns the JSON representation of the symbol master that is associated with that name.
 
 ### Symbol example
 

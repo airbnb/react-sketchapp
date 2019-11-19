@@ -143,16 +143,25 @@ export const createSymbolInstanceClass = (symbolMaster: FileFormat.SymbolMaster)
   };
 };
 
+const SymbolMasterPropTypes = {
+  style: PropTypes.shape(ViewStylePropTypes),
+  name: PropTypes.string,
+};
+
+export type SymbolMasterProps = PropTypes.InferProps<typeof SymbolMasterPropTypes>;
+
 export const makeSymbol = (
   Component: React.ComponentType<any>,
-  name: string,
+  symbolProps: string | SymbolMasterProps,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ) => {
   if (!hasInitialized && getSketchVersion() !== 'NodeJS') {
     getExistingSymbols(getDocumentData(document));
   }
 
-  const masterName = name || displayName(Component);
+  const masterName =
+    (typeof symbolProps === 'string' ? symbolProps : (symbolProps || {}).name) ||
+    displayName(Component);
   const existingSymbol = existingSymbols.find(symbolMaster => symbolMaster.name === masterName);
   const symbolID = existingSymbol
     ? existingSymbol.symbolID
@@ -160,7 +169,11 @@ export const makeSymbol = (
 
   const symbolMaster = flexToSketchJSON(
     buildTree(
-      <sketch_symbolmaster symbolID={symbolID} name={masterName}>
+      <sketch_symbolmaster
+        {...(typeof symbolProps !== 'string' ? symbolProps || {} : {})}
+        symbolID={symbolID}
+        name={masterName}
+      >
         <Component />
       </sketch_symbolmaster>,
     ),
