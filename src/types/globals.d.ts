@@ -29,3 +29,5 @@ declare const MSPage: any;
 declare const MOPointer: any;
 declare const MSJSONDictionaryUnarchiver: any;
 declare const MSJSONDataArchiver: any;
+declare const NSMakeRect: any;
+declare const MSLayerGroup: any;
