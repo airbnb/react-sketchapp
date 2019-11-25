@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.2
+
+- Fix rotation direction (#433)
+- Fix Svg renders when the shape doesn't fit the viewbox (#288)
+- Add missing strokeAlignment prop (#276)
+
 ## Version 3.0.1
 
 - Allow passing a style object when making a symbol
