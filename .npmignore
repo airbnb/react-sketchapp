@@ -19,3 +19,4 @@ src
 jest.config.js
 tsconfig.json
 tsconfig.module.json
+.travis.yml
