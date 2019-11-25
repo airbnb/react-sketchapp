@@ -11,11 +11,10 @@ export default class SketchRenderer {
     return 'Group';
   }
 
-  renderGroupLayer({
-    layout,
-    style,
-    props,
-  }: TreeNode):
+  renderGroupLayer(
+    { layout, style, props }: TreeNode,
+    _children: FileFormat.AnyLayer[],
+  ):
     | FileFormat.SymbolMaster
     | FileFormat.Artboard
     | FileFormat.Group
