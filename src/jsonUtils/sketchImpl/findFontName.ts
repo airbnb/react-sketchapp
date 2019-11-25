@@ -10,16 +10,26 @@ import { APPLE_BROKEN_SYSTEM_FONT } from '../../utils/constants';
 // https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
 
 const FONT_WEIGHTS = {
-  normal: 0,
-  bold: 0.4,
+  ultralight: -0.8,
   '100': -0.8,
+  thin: -0.6,
   '200': -0.6,
+  light: -0.4,
   '300': -0.4,
+  normal: 0,
+  regular: 0,
   '400': 0,
+  semibold: 0.23,
+  demibold: 0.23,
   '500': 0.23,
   '600': 0.3,
+  bold: 0.4,
   '700': 0.4,
+  extrabold: 0.56,
+  ultrabold: 0.56,
+  heavy: 0.56,
   '800': 0.56,
+  black: 0.62,
   '900': 0.62,
 };
 
@@ -87,7 +97,9 @@ export const findFont = (style: TextStyle): NSFont => {
   const defaultFontSize = 14;
 
   const fontSize = style.fontSize ? style.fontSize : defaultFontSize;
-  let fontWeight = style.fontWeight ? FONT_WEIGHTS[style.fontWeight] : defaultFontWeight;
+  let fontWeight = style.fontWeight
+    ? FONT_WEIGHTS[style.fontWeight.toLowerCase()]
+    : defaultFontWeight;
   // Default to Helvetica if fonts are missing
   // Must use two equals (==) for compatibility with Cocoascript
   // eslint-disable-next-line eqeqeq
