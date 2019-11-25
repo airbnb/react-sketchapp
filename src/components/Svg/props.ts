@@ -26,6 +26,7 @@ const strokeProps = {
   strokeDashoffset: numberProp,
   strokeLinecap: PropTypes.oneOf(['butt', 'square', 'round']),
   strokeLinejoin: PropTypes.oneOf(['miter', 'bevel', 'round']),
+  strokeAlignment: PropTypes.oneOf(['center', 'inner', 'outer']),
   strokeMiterlimit: numberProp,
 };
 
