@@ -4,7 +4,7 @@ import { toSJSON } from './sketch-to-json';
 import { LayoutInfo } from '../../types';
 
 export default function makeSvgLayer(
-  layout: LayoutInfo,
+  _layout: LayoutInfo,
   name: string,
   svg: string,
 ): FileFormat.Group {
@@ -12,17 +12,14 @@ export default function makeSvgLayer(
   const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
   const svgImporter = MSSVGImporter.svgImporter();
   svgImporter.prepareToImportFromData(svgData);
-  const svgLayer = svgImporter.importAsLayer();
-  svgLayer.name = name;
-  svgLayer.rect = {
-    origin: {
-      x: 0,
-      y: 0,
-    },
-    size: {
-      width: layout.width,
-      height: layout.height,
-    },
-  };
-  return toSJSON(svgLayer) as FileFormat.Group;
+
+  const frame = NSMakeRect(0, 0, svgImporter.graph().width(), svgImporter.graph().height());
+  const root = MSLayerGroup.alloc().initWithFrame(frame);
+  root.name = name;
+
+  svgImporter.graph().makeLayerWithParentLayer_progress(root, null);
+  root.ungroupSingleChildDescendentGroups();
+  svgImporter.scale_rootGroup(svgImporter.importer().scaleValue(), root);
+
+  return toSJSON(root) as FileFormat.Group;
 }
