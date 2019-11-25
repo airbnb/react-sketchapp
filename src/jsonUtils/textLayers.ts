@@ -50,30 +50,6 @@ export const FONT_STYLES = {
   oblique: true,
 };
 
-export const FONT_WEIGHTS = {
-  normal: 'Regular',
-  ultralight: 'UltraLight',
-  thin: 'Thin',
-  light: 'Light',
-  regular: 'Regular',
-  medium: 'Medium',
-  semibold: 'Semibold',
-  demibold: 'Semibold',
-  extrabold: 'Heavy',
-  bold: 'Bold',
-  heavy: 'Heavy',
-  black: 'Black',
-  '100': 'UltraLight',
-  '200': 'Thin',
-  '300': 'Light',
-  '400': 'Regular',
-  '500': 'Medium',
-  '600': 'Semibold',
-  '700': 'Bold',
-  '800': 'Heavy',
-  '900': 'Black',
-};
-
 const makeFontDescriptor = (style: TextStyle): FileFormat.FontDescriptor => ({
   _class: 'fontDescriptor',
   attributes: {
