@@ -12,15 +12,19 @@ function isRotation(a: number, b: number, c: number, d: number) {
 
 const rad2deg = 180 / Math.PI;
 
-function getRotation(a, b) {
+function getRotation(a: number, b: number) {
+  const sketchFactor = -1;
   const possibleRotation = Math.acos(a);
   if (closeEnough(Math.sin(possibleRotation), b) || closeEnough(Math.sin(possibleRotation), -b)) {
-    return possibleRotation * rad2deg;
+    return sketchFactor * possibleRotation * rad2deg;
   }
-  return (possibleRotation + Math.PI) * rad2deg;
+  return sketchFactor * (possibleRotation + Math.PI) * rad2deg;
 }
 
-export default function(layout: LayoutInfo, props: ViewStyle) {
+export default function(
+  layout: LayoutInfo,
+  props: ViewStyle,
+): { rotation?: number; isFlippedVertical?: boolean; isFlippedHorizontal?: boolean } {
   if (!props.transform) {
     return {};
   }
