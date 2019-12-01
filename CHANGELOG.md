@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.3
+
+- Fix typo in Symbol (Thanks @antoni!)
+- Fix messed up `js-sha` import (#456)
+
 ## Version 3.0.2
 
 - Fix rotation direction (#433)
