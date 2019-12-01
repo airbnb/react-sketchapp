@@ -165,7 +165,7 @@ export const makeSymbol = (
   const existingSymbol = existingSymbols.find(symbolMaster => symbolMaster.name === masterName);
   const symbolID = existingSymbol
     ? existingSymbol.symbolID
-    : generateID(`symbolID:${masterName}`, !!name);
+    : generateID(`symbolID:${masterName}`, !!masterName);
 
   const symbolMaster = flexToSketchJSON(
     buildTree(
