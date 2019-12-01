@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A React renderer for Sketch.app",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

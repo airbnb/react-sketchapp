@@ -8,7 +8,7 @@ const makeImageDataFromUrl = (url?: string): { data: string; sha1: string } => {
 
   return {
     data,
-    sha1: sha1.default(data),
+    sha1: sha1(data),
   };
 };
 
