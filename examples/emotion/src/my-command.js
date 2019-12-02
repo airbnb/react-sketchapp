@@ -19,7 +19,7 @@ const Image = emotion.Image`
   padding: 40px;
 `;
 
-const emotionLogo = 'https://emotion.sh/static/emotion-a76dfa0d18a0536af9e917cdb8f873b9-a69fb.png';
+const emotionLogo = 'https://avatars3.githubusercontent.com/u/31557565?s=400&v=4';
 
 class App extends React.Component {
   render() {
