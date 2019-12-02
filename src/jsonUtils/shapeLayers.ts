@@ -1,6 +1,6 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
-import { generateID, makeRect, makeColorFromCSS } from './models';
+import { generateID, makeRect, makeColorFromCSS, emptyGradient } from './models';
 import { makeStyle } from './style';
 import { Color, ResizeConstraints, ViewStyle } from '../types';
 
@@ -261,14 +261,7 @@ export const makeVerticalBorder = (
         blendMode: FileFormat.BlendMode.Normal,
         opacity: 1,
       },
-      gradient: {
-        _class: 'gradient',
-        gradientType: FileFormat.GradientType.Linear,
-        elipseLength: 0,
-        from: '{0, 0}',
-        to: '{1, 1}',
-        stops: [],
-      },
+      gradient: emptyGradient,
     },
   ];
   return content;
@@ -298,14 +291,7 @@ export const makeHorizontalBorder = (
         blendMode: FileFormat.BlendMode.Normal,
         opacity: 1,
       },
-      gradient: {
-        _class: 'gradient',
-        gradientType: FileFormat.GradientType.Linear,
-        elipseLength: 0,
-        from: '{0, 0}',
-        to: '{1, 1}',
-        stops: [],
-      },
+      gradient: emptyGradient,
     },
   ];
   return content;
