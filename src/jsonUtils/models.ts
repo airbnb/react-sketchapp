@@ -144,7 +144,7 @@ export const makeImageFill = (
 ): FileFormat.Fill => ({
   _class: 'fill',
   isEnabled: true,
-  fillType: FileFormat.FillType.Pattern,
+  fillType: 4, // FileFormat.FillType.Pattern,
   // @ts-ignore
   image,
   noiseIndex: 0,
