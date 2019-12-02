@@ -1,5 +1,5 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { makeColorFromCSS } from './models';
+import { makeColorFromCSS, emptyGradient } from './models';
 import { ViewStyle, LayoutInfo, BorderStyle } from '../types';
 import same from '../utils/same';
 import { makeVerticalBorder, makeHorizontalBorder } from './shapeLayers';
@@ -31,14 +31,7 @@ export const createUniformBorder = (
         blendMode: FileFormat.BlendMode.Normal,
         opacity: 1,
       },
-      gradient: {
-        _class: 'gradient',
-        gradientType: FileFormat.GradientType.Linear,
-        elipseLength: 0,
-        from: '{0, 0}',
-        to: '{1, 1}',
-        stops: [],
-      },
+      gradient: emptyGradient,
     },
   ];
 

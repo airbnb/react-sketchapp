@@ -88,6 +88,38 @@ export const makeColorFromCSS = (input: Color, alpha: number = 1): FileFormat.Co
   };
 };
 
+export const emptyGradient: FileFormat.Gradient = {
+  _class: 'gradient',
+  elipseLength: 0,
+  from: '{0.5, 0}',
+  gradientType: 0,
+  to: '{0.5, 1}',
+  stops: [
+    {
+      _class: 'gradientStop',
+      position: 0,
+      color: {
+        _class: 'color',
+        alpha: 1,
+        blue: 1,
+        green: 1,
+        red: 1,
+      },
+    },
+    {
+      _class: 'gradientStop',
+      position: 1,
+      color: {
+        _class: 'color',
+        alpha: 1,
+        blue: 0,
+        green: 0,
+        red: 0,
+      },
+    },
+  ],
+};
+
 // Solid color fill
 export const makeColorFill = (cssColor: Color): FileFormat.Fill => ({
   _class: 'fill',
@@ -103,14 +135,7 @@ export const makeColorFill = (cssColor: Color): FileFormat.Fill => ({
     blendMode: FileFormat.BlendMode.Normal,
     opacity: 1,
   },
-  gradient: {
-    _class: 'gradient',
-    gradientType: FileFormat.GradientType.Linear,
-    elipseLength: 0,
-    from: '{0, 0}',
-    to: '{1, 1}',
-    stops: [],
-  },
+  gradient: emptyGradient,
 });
 
 export const makeImageFill = (
@@ -119,7 +144,7 @@ export const makeImageFill = (
 ): FileFormat.Fill => ({
   _class: 'fill',
   isEnabled: true,
-  fillType: FileFormat.FillType.Pattern,
+  fillType: 4, // FileFormat.FillType.Pattern,
   // @ts-ignore
   image,
   noiseIndex: 0,
@@ -131,14 +156,7 @@ export const makeImageFill = (
     blendMode: FileFormat.BlendMode.Normal,
     opacity: 1,
   },
-  gradient: {
-    _class: 'gradient',
-    gradientType: FileFormat.GradientType.Linear,
-    elipseLength: 0,
-    from: '{0, 0}',
-    to: '{1, 1}',
-    stops: [],
-  },
+  gradient: emptyGradient,
 });
 
 // Used in frames, etc

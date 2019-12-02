@@ -2,24 +2,24 @@ export default function makeImageDataFromUrl(url?: string) {
   let fetchedData = url ? NSData.dataWithContentsOfURL(NSURL.URLWithString(url)) : undefined;
 
   if (fetchedData) {
-    const firstByte = fetchedData.subdataWithRange(NSMakeRange(0, 1)).description();
+    const firstByte = String(
+      NSString.alloc().initWithData_encoding(fetchedData, NSISOLatin1StringEncoding),
+    ).charCodeAt(0);
 
-    // Check for first byte. Must use non-type-exact matching (!=).
+    // Check for first byte to see if we have an image.
     // 0xFF = JPEG, 0x89 = PNG, 0x47 = GIF, 0x49 = TIFF, 0x4D = TIFF
     if (
-      /* eslint-disable eqeqeq */
-      firstByte != '<ff>' &&
-      firstByte != '<89>' &&
-      firstByte != '<47>' &&
-      firstByte != '<49>' &&
-      firstByte != '<4d>'
-      /* eslint-enable eqeqeq */
+      firstByte !== 0xff &&
+      firstByte !== 0x89 &&
+      firstByte !== 0x47 &&
+      firstByte !== 0x49 &&
+      firstByte !== 0x4d
     ) {
       fetchedData = null;
     }
   }
 
-  let image;
+  let image: any;
 
   if (!fetchedData) {
     const errorUrl =
