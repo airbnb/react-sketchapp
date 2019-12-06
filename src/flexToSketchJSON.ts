@@ -45,11 +45,6 @@ const flexToSketchJSON = (
   }
 
   const renderer = new Renderer();
-  const groupLayer = renderer.renderGroupLayer(node);
-
-  if (groupLayer._class === 'symbolInstance') {
-    return groupLayer;
-  }
 
   const backingLayers = renderer.renderBackingLayers(node);
 
@@ -59,6 +54,12 @@ const flexToSketchJSON = (
 
   // Filter out anything null, undefined
   const layers = [...backingLayers, ...sublayers].filter(l => l);
+
+  const groupLayer = renderer.renderGroupLayer(node, layers);
+
+  if (groupLayer._class === 'symbolInstance') {
+    return groupLayer;
+  }
 
   return { ...groupLayer, layers };
 };
