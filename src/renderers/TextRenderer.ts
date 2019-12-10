@@ -36,7 +36,6 @@ export default class TextRenderer extends SketchRenderer {
       if (!layer.style) {
         layer.style = resolvedTextStyle.sketchStyle;
       }
-      // @ts-ignore
       layer.sharedStyleID = resolvedTextStyle.sharedObjectID;
     }
 

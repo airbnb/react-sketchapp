@@ -64,8 +64,6 @@ export const makeShadow = (
       : 'textShadowRadius' in style && style.textShadowRadius !== undefined
       ? style.textShadowRadius
       : 1;
-  const _class: 'innerShadow' | 'shadow' =
-    style.shadowInner !== undefined ? 'innerShadow' : 'shadow';
   const spread =
     style.shadowSpread !== undefined
       ? style.shadowSpread
@@ -76,7 +74,6 @@ export const makeShadow = (
     style.shadowOffset || ('textShadowOffset' in style && style.textShadowOffset) || {};
 
   const commonProps = {
-    _class,
     isEnabled: true,
     blurRadius: radius,
     color: makeColorFromCSS(color, opacity),
@@ -88,11 +85,17 @@ export const makeShadow = (
     offsetX,
     offsetY,
     spread,
-  };
+  } as const;
+
+  if (style.shadowInner) {
+    return {
+      _class: 'innerShadow',
+      ...commonProps,
+    };
+  }
 
   return {
-    // @ts-ignore
-    _class,
+    _class: 'shadow',
     ...commonProps,
   };
 };
@@ -146,9 +149,9 @@ export const makeStyle = (
   if (hasAnyDefined(style, SHADOW_STYLES)) {
     const shadow = [makeShadow(style)];
     if (style.shadowInner) {
-      json.innerShadows = shadow;
+      json.innerShadows = shadow as FileFormat.InnerShadow[];
     } else {
-      json.shadows = shadow;
+      json.shadows = shadow as FileFormat.Shadow[];
     }
   }
 
@@ -156,9 +159,9 @@ export const makeStyle = (
     shadowsProp.map(shadowStyle => {
       const shadow = makeShadow(shadowStyle);
       if (shadowStyle.shadowInner) {
-        json.innerShadows.push(shadow);
+        json.innerShadows.push(shadow as FileFormat.InnerShadow);
       } else {
-        json.shadows.push(shadow);
+        json.shadows.push(shadow as FileFormat.Shadow);
       }
       return shadowStyle;
     });

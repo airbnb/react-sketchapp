@@ -139,13 +139,13 @@ export const makeColorFill = (cssColor: Color): FileFormat.Fill => ({
 });
 
 export const makeImageFill = (
-  image: FileFormat.ImageFileRef,
+  image: FileFormat.ImageDataRef,
   patternFillType: FileFormat.PatternFillType = FileFormat.PatternFillType.Fill,
 ): FileFormat.Fill => ({
   _class: 'fill',
   isEnabled: true,
-  fillType: 4, // FileFormat.FillType.Pattern,
-  // @ts-ignore
+  fillType: FileFormat.FillType.Pattern,
+  color: makeColorFromCSS('white'),
   image,
   noiseIndex: 0,
   noiseIntensity: 0,
@@ -172,7 +172,6 @@ export const makeRect = (x: number, y: number, width: number, height: number): F
 export const makeJSONDataReference = (image: {
   data: string;
   sha1: string;
-  // @ts-ignore
 }): FileFormat.ImageDataRef => ({
   _class: 'MSJSONOriginalDataReference',
   _ref: `images/${generateID()}`,
@@ -189,11 +188,12 @@ export const makeJSONDataReference = (image: {
 export const makeOverride = (
   path: string,
   type: 'symbolID' | 'stringValue' | 'layerStyle' | 'textStyle' | 'flowDestination' | 'image',
-  value: string | FileFormat.ImageFileRef,
+  value: string | FileFormat.ImageDataRef,
 ): FileFormat.OverrideValue => ({
   _class: 'overrideValue',
   do_objectID: generateID(),
   overrideName: `${path}_${type}`,
+  // @ts-ignore https://github.com/sketch-hq/sketch-file-format-ts/issues/9
   value,
 });
 

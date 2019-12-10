@@ -21,7 +21,6 @@ const findInGroup = (layer: FileFormat.AnyGroup, type: string): FileFormat.AnyLa
   layer && layer.layers && layer.layers.find(l => l._class === type);
 
 const hasImageFill = (layer: FileFormat.AnyLayer): boolean =>
-  // @ts-ignore
   !!(layer.style && layer.style.fills && layer.style.fills.some(f => f.image));
 
 const removeDuplicateOverrides = (overrides: Array<Override>): Array<Override> => {
