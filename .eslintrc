@@ -24,7 +24,8 @@
     "react/default-props-match-prop-types": 0,
     "jsx-a11y/label-has-for": 0,
     "no-mixed-operators": 0,
-    "import/no-cycle": 0
+    "import/no-cycle": 0,
+    "import/extensions": 0
   },
   "env": {
     "node": true,
