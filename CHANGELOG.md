@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.0.5
+
+- Fix missing dependency (#462)
+
 ## Version 3.0.4
 
 - Fix rendering images (#458)
