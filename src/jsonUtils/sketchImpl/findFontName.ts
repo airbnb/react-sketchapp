@@ -3,7 +3,6 @@
 import hashStyle from '../../utils/hashStyle';
 import { TextStyle } from '../../types';
 import { FONT_STYLES } from '../textLayers';
-import { APPLE_BROKEN_SYSTEM_FONT } from '../../utils/constants';
 
 // this borrows heavily from react-native's RCTFont class
 // thanks y'all
@@ -100,10 +99,8 @@ export const findFont = (style: TextStyle): NSFont => {
   let fontWeight = style.fontWeight
     ? FONT_WEIGHTS[style.fontWeight.toLowerCase()]
     : defaultFontWeight;
-  // Default to Helvetica if fonts are missing
-  // Must use two equals (==) for compatibility with Cocoascript
-  // eslint-disable-next-line eqeqeq
-  let familyName = defaultFontFamily == APPLE_BROKEN_SYSTEM_FONT ? 'Helvetica' : defaultFontFamily;
+
+  let familyName = defaultFontFamily;
   let isItalic = false;
   let isCondensed = false;
 
@@ -156,7 +153,6 @@ export const findFont = (style: TextStyle): NSFont => {
       isItalic = style.fontStyle ? isItalic : isItalicFont(font);
       isCondensed = isCondensedFont(font);
     } else {
-      console.log(`Unrecognized font family '${familyName}'`);
       font = NSFont.systemFontOfSize_weight(fontSize, fontWeight);
     }
 
@@ -198,7 +194,7 @@ export const findFont = (style: TextStyle): NSFont => {
   return font;
 };
 
-export default function findFontName(style: TextStyle) {
+export default function findFontName(style: TextStyle): string {
   const font = findFont(style);
   return font.fontDescriptor().postscriptName();
 }

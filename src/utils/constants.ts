@@ -20,6 +20,3 @@ export const INHERITABLE_FONT_STYLES = [
 
 // Only components that are allowed as children of <Text> components
 export const VALID_TEXT_CHILDREN_TYPES = ['text'];
-
-// Font displayed if San Francisco fonts are not found
-export const APPLE_BROKEN_SYSTEM_FONT = '.AppleSystemUIFont';
