@@ -3,7 +3,6 @@
 import hashStyle from '../../utils/hashStyle';
 import { TextStyle } from '../../types';
 import { FONT_STYLES } from '../textLayers';
-import { APPLE_BROKEN_SYSTEM_FONT } from '../../utils/constants';
 
 // this borrows heavily from react-native's RCTFont class
 // thanks y'all
