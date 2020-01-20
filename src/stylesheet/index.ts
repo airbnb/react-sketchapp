@@ -14,7 +14,6 @@ import {
 const { hasOwnProperty } = Object.prototype;
 
 let _id = 0;
-// eslint-disable-next-line no-plusplus
 const guid = () => _id++;
 const declarationRegistry = {};
 
@@ -81,7 +80,6 @@ const mergeTransforms = (a: Transform, b: Transform): Transform => {
 // NOTE(lmr): mutates the first argument!
 const mergeStyle = (a: Style, b: Style): Style => {
   let key: string;
-  // eslint-disable-next-line no-restricted-syntax
   for (key in b) {
     if (hasOwnProperty.call(b, key)) {
       switch (key) {
@@ -89,7 +87,6 @@ const mergeStyle = (a: Style, b: Style): Style => {
           a[key] = mergeTransforms(a[key], b[key]);
           break;
         default:
-          /* eslint no-param-reassign: 0 */
           a[key] = b[key];
           break;
       }

@@ -1,4 +1,3 @@
-/* eslint-disable import/named, import/no-unresolved */
 import * as React from 'react';
 import * as sketch from 'sketch';
 import { render, View, Artboard, Text } from '../../lib';
@@ -23,7 +22,6 @@ const colorList = {
 
 test('should render a Page with a rectangle', (context, document) => {
   const { selectedPage } = getDoc(document);
-  // eslint-disable-next-line
   const Swatch = ({ name, hex }) => (
     <View
       name={`Swatch ${name}`}

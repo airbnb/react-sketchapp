@@ -47,7 +47,6 @@ export const makeBorderOptions = (
 export const makeShadow = (
   style: ViewStyle | TextStyle,
 ): FileFormat.Shadow | FileFormat.InnerShadow => {
-  /* eslint-disable no-nested-ternary */
   const opacity =
     style.shadowOpacity !== undefined
       ? style.shadowOpacity

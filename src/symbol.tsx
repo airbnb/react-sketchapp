@@ -16,7 +16,7 @@ import { SketchDocumentData, SketchDocument, WrappedSketchDocument } from './typ
 import { getSketchVersion } from './utils/getSketchVersion';
 
 let id = 0;
-const nextId = () => ++id; // eslint-disable-line
+const nextId = () => ++id;
 
 const displayName = (Component: React.ComponentType<any>): string =>
   Component.displayName || Component.name || `UnknownSymbol${nextId()}`;
@@ -28,7 +28,6 @@ const layers: { [symbolID: string]: any } = {};
 
 function msListToArray<T>(pageList: T[]): T[] {
   const out = [];
-  // eslint-disable-next-line
   for (let i = 0; i < pageList.length; i++) {
     out.push(pageList[i]);
   }
@@ -111,7 +110,7 @@ export const injectSymbols = (
 const SymbolInstancePropTypes = {
   style: PropTypes.shape(ViewStylePropTypes),
   name: PropTypes.string,
-  overrides: PropTypes.object, // eslint-disable-line
+  overrides: PropTypes.object,
   resizingConstraint: PropTypes.shape({
     ...ResizingConstraintPropTypes,
   }),

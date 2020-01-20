@@ -71,7 +71,6 @@ export default class SvgRenderer extends ViewRenderer {
     const { layout, props, children } = node;
 
     // add the "xmlns:xlink" namespace so we can use `href`
-    // eslint-disable-next-line
     props['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
 
     const svgString = makeSvgString({

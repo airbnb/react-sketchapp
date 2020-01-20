@@ -57,13 +57,11 @@ export default class RedBox extends React.Component<Props> {
   };
 
   renderFrames(frames: Array<StackFrame>) {
-    /* eslint-disable react/no-array-index-key */
     return frames.map((f, index) => (
       <Text key={index} style={styles.stack}>
         {f.functionName}
       </Text>
     ));
-    /* eslint-enable */
   }
 
   render() {

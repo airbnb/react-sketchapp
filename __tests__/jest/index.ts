@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import ReactSketch from '../../src';
 jest.mock('../../src/jsonUtils/sketchImpl/createStringMeasurer');
 jest.mock('../../src/jsonUtils/sketchImpl/findFontName');

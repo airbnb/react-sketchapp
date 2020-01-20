@@ -38,8 +38,6 @@ export const createUniformBorder = (
   return { borderOptions, borders };
 };
 
-/* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/prefer-default-export
 export const createBorders = (
   content: FileFormat.ShapeGroup,
   layout: LayoutInfo,

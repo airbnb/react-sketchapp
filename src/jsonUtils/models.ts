@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-operators, no-bitwise */
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import seedrandom from 'seedrandom';
 import normalizeColor, { rgba } from 'normalize-css-color';

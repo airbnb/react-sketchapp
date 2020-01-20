@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { render, View } from 'react-sketchapp';
 import { Text } from 'react-primitives';

@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 let TextStyles;
 let doc;
 let sharedTextStyles;

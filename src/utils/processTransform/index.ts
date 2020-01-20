@@ -33,10 +33,8 @@ export default function(
   const [a, b, c, d, tx, ty] = parseTransformProp(props.transform, origin);
 
   // apply translation
-  /* eslint-disable no-param-reassign */
   layout.top += ty;
   layout.left += tx;
-  /* eslint-enable */
 
   // look for a rotation
   if (isRotation(a, b, c, d)) {

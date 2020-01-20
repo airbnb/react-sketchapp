@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
-
 import * as React from 'react';
 import { render, TextStyles, View } from 'react-sketchapp';
 import designSystem from './designSystem';

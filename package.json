@@ -27,14 +27,13 @@
     "docs:build": "npm run docs:prepare && gitbook build",
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git fetch https://github.com/airbnb/react-sketchapp gh-pages && git checkout -b gh-pages && git add . && git commit -am 'update book' && git push https://github.com/airbnb/react-sketchapp gh-pages --force",
-    "lint": "eslint .",
     "lint-staged": "lint-staged",
     "prepublishOnly": "npm run clean && npm run test:ci && npm run build",
     "prettier:base": "prettier --write",
     "prettify": "npm run prettier:base \"src/**/*.(j|t)sx?\" \"examples/**/*.(j|t)sx?\" \"__tests__/**/*.(j|t)sx?\" \"docs/**/*.md\"",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest --config jest.config.js --no-watchman",
-    "test:ci": "npm run lint && npm run test:unit -- --runInBand",
+    "test:ci": "npm run test:unit -- --runInBand",
     "test:e2e": "skpm-test",
     "test:update": "npm run test -- --updateSnapshot",
     "test:e2e:watch": "npm run test:e2e -- --watch",
@@ -76,8 +75,7 @@
   "homepage": "https://github.com/airbnb/react-sketchapp",
   "lint-staged": {
     "*.(j|t)sx?": [
-      "npm run prettier:base",
-      "eslint --quiet"
+      "npm run prettier:base"
     ],
     "*.md": [
       "npm run prettier:base"
@@ -94,17 +92,6 @@
     "@types/react": "^16.9.17",
     "@types/react-test-renderer": "^16.9.1",
     "@types/seedrandom": "^2.4.28",
-    "@typescript-eslint/eslint-plugin": "^2.16.0",
-    "@typescript-eslint/parser": "^2.16.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-config-sketch": "^0.2.4",
-    "eslint-plugin-import": "^2.20.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
     "gitbook-cli": "^2.3.0",
     "gitbook-plugin-anchorjs": "^2.1.0",
     "gitbook-plugin-codeblock-disable-glossary": "0.0.1",

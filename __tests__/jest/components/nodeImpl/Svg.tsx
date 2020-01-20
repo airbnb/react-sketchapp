@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import * as React from 'react';
 
 import ReactSketch from '../../../../src';
