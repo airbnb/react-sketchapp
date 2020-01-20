@@ -13,7 +13,7 @@ class TextStyles {
     this._document = null;
   }
 
-  setDocument(doc: SketchDocument) {
+  setDocument(doc?: SketchDocument) {
     invariant(doc, 'Please provide a sketch document reference');
 
     this._document = doc;

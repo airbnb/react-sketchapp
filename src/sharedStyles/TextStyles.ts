@@ -51,10 +51,6 @@ const create = (styles: { [key: string]: TextStyle }, options: Options = {}): St
 
   const doc = getDocument(document);
 
-  if (!doc) {
-    return {};
-  }
-
   if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
     doc.showMessage('💎 Requires Sketch 50+ 💎');
     return {};
