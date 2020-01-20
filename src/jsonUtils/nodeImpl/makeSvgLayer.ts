@@ -6,7 +6,7 @@ import { createUniformBorder } from '../borders';
 import layerGroup from '../layerGroup';
 import { makePathsFromCommands, makeLineCapStyle } from './graphics/path';
 import { unionRects, scaleRect, makeBoundingRectFromCommands, resize } from './graphics/rect';
-import requireSvgModel from './requireSvgModel';
+import weakRequire from '../../utils/weakRequire';
 
 function makeLayerFromPathElement(pathElement, _parentFrame: FileFormat.Rect, scale: number) {
   const {
@@ -79,7 +79,7 @@ function makeLayerGroup(
 }
 
 export default function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
-  const svgModel = requireSvgModel();
+  const svgModel = weakRequire(module, '@lona/svg-model');
 
   const {
     data: { params, children },

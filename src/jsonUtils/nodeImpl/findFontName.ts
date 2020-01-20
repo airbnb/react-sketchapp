@@ -1,6 +1,8 @@
-import requireObjCBridge from './requireObjCBridge';
 import { TextStyle } from '../../types';
+import weakRequire from '../../utils/weakRequire';
+
+const bridge = weakRequire(module, 'node-sketch-bridge');
 
 export default function findFontName(style: TextStyle): string {
-  return requireObjCBridge().findFontName(style);
+  return bridge.findFontName(style);
 }
