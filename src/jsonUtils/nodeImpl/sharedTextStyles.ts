@@ -3,7 +3,7 @@ import { SketchDocument, TextStyle } from '../../types';
 import { generateID } from '../models';
 
 class TextStyles {
-  setDocument(_doc: SketchDocument) {
+  setDocument(_doc?: SketchDocument) {
     return this;
   }
 

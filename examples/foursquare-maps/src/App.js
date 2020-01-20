@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Map from 'react-primitives-google-static-map';
@@ -50,7 +49,6 @@ const LatLong = PropTypes.shape({
 const Venue = {
   name: PropTypes.string,
   location: PropTypes.shape({
-    // eslint-disable-next-line react/no-unused-prop-types
     address: PropTypes.string,
   }),
 };

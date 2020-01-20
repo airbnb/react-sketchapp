@@ -150,5 +150,5 @@ export default () => {
     .then(data => {
       render(<Timeline data={data} />, context.document.currentPage());
     })
-    .catch(e => console.error(e)); // eslint-disable-line no-console
+    .catch(e => console.error(e));
 };

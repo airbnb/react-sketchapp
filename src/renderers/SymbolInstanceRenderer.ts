@@ -24,7 +24,7 @@ const hasImageFill = (layer: FileFormat.AnyLayer): boolean =>
   !!(layer.style && layer.style.fills && layer.style.fills.some(f => f.image));
 
 const removeDuplicateOverrides = (overrides: Array<Override>): Array<Override> => {
-  const seen = {};
+  const seen: { [path: string]: boolean } = {};
 
   return overrides.filter(({ path }) => {
     const isDuplicate = typeof seen[path] !== 'undefined';
@@ -98,8 +98,17 @@ const extractOverrides = (layers: FileFormat.AnyLayer[] = [], path?: string): Ov
 };
 
 export default class SymbolInstanceRenderer extends SketchRenderer {
-  renderGroupLayer({ layout, props }: TreeNode<SymbolInstanceProps & { symbolID: string }>) {
+  renderGroupLayer({
+    layout,
+    props,
+  }: TreeNode<SymbolInstanceProps & { symbolID: string; name: string }>) {
     const masterTree = getSymbolMasterById(props.symbolID);
+
+    if (!masterTree) {
+      throw new Error(
+        'Trying to create a symbol instance for a Symbol Master that does not exists',
+      );
+    }
 
     const symbolInstance = makeSymbolInstance(
       makeRect(layout.left, layout.top, layout.width, layout.height),
@@ -108,13 +117,15 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
       props.resizingConstraint,
     );
 
-    if (!props.overrides) {
+    const { overrides } = props;
+
+    if (!overrides) {
       return symbolInstance;
     }
 
     const overridableLayers = extractOverrides(masterTree.layers);
 
-    const overrides = overridableLayers.reduce(function inject(
+    const overrideValues = overridableLayers.reduce(function inject(
       memo: FileFormat.OverrideValue[],
       reference: Override,
     ) {
@@ -122,15 +133,25 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
         const newPath = `${reference.path}/`;
         const originalMaster = getSymbolMasterById(reference.symbolID);
 
-        if (props.overrides.hasOwnProperty(reference.name)) {
-          const overrideValue = props.overrides[reference.name];
-          if (typeof overrideValue !== 'function' || typeof overrideValue.symbolID !== 'string') {
+        if (!originalMaster) {
+          return memo;
+        }
+
+        if (reference.name in overrides) {
+          const overrideValue = overrides[reference.name];
+          // @ts-ignore
+          const overrideSymbolId = overrideValue.symbolID;
+          if (typeof overrideValue !== 'function' || typeof overrideSymbolId !== 'string') {
             throw new Error(
-              `The overriden nested symbol needs to the constructor of another symbol.\n\nIn Symbol Instance: "${props.name}"\nFor Override: "${reference.name}"`,
+              `The overriden nested symbol needs to be the constructor of another symbol.\n\nIn Symbol Instance: "${props.name}"\nFor Override: "${reference.name}"`,
             );
           }
 
-          const replacementMaster = getSymbolMasterById(overrideValue.symbolID);
+          const replacementMaster = getSymbolMasterById(overrideSymbolId);
+
+          if (!replacementMaster) {
+            return memo;
+          }
 
           if (
             originalMaster.frame.width !== replacementMaster.frame.width ||
@@ -153,11 +174,11 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
         return memo;
       }
 
-      if (!props.overrides.hasOwnProperty(reference.name)) {
+      if (!overrides.hasOwnProperty(reference.name)) {
         return memo;
       }
 
-      const overrideValue = props.overrides[reference.name];
+      const overrideValue = overrides[reference.name];
 
       if (reference.type === 'stringValue') {
         if (typeof overrideValue !== 'string') {
@@ -187,7 +208,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
     },
     []);
 
-    symbolInstance.overrideValues = overrides;
+    symbolInstance.overrideValues = overrideValues;
 
     return symbolInstance;
   }

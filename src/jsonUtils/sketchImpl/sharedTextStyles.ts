@@ -7,13 +7,13 @@ import { generateID } from '../models';
 import { parseTextStyle } from '../textLayers';
 
 class TextStyles {
-  _document?: SketchDocument;
+  _document: SketchDocument | null;
 
   constructor() {
     this._document = null;
   }
 
-  setDocument(doc: SketchDocument) {
+  setDocument(doc?: SketchDocument) {
     invariant(doc, 'Please provide a sketch document reference');
 
     this._document = doc;

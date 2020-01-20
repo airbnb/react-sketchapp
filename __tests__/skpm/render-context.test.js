@@ -1,4 +1,3 @@
-/* eslint-disable import/named, import/no-unresolved */
 import * as React from 'react';
 import * as sketch from 'sketch';
 import { render, View, Text } from '../../lib';
@@ -12,7 +11,6 @@ function getDoc(document) {
 
 test('should render a Page with context events', (context, document) => {
   const { selectedPage } = getDoc(document);
-  // eslint-disable-next-line
   const Swatch = ({ hex }) => {
     const [count, setCount] = React.useState(0);
 

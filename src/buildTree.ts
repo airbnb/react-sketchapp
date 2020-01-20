@@ -10,25 +10,27 @@ import { INHERITABLE_FONT_STYLES } from './utils/constants';
 import zIndex from './utils/zIndex';
 
 export const reactTreeToFlexTree = (
-  node: TreeNode | string,
+  node: TestRenderer.ReactTestRendererNode,
   yogaNode: yoga.YogaNode,
   context: Context,
-) => {
-  let textNodes: TextNode[];
+): TreeNode => {
+  let textNodes: TextNode[] = [];
   let textStyle = context.getInheritedStyles();
 
-  let newChildren = [];
+  let newChildren: (string | TreeNode<any>)[] = [];
 
   let style: any;
   let type: string;
 
   if (typeof node === 'string') {
     textNodes = computeTextTree(node, context);
+    type = 'sketch_text';
   } else {
     style = node.props && node.props.style ? node.props.style : {};
     type = node.type || 'sketch_text';
 
-    if (type === 'sketch_svg') {
+    if (type === 'sketch_svg' && node.children) {
+      // @ts-ignore
       newChildren = node.children;
     } else if (type === 'sketch_text') {
       // If current node is a Text node, add text styles to Context to pass down to
@@ -87,8 +89,8 @@ export const reactTreeToFlexTree = (
   };
 };
 
-const buildTree = (element: React.ReactElement): TreeNode => {
-  let renderer: TestRenderer.ReactTestRenderer;
+const buildTree = (element: React.ReactElement) => {
+  let renderer: TestRenderer.ReactTestRenderer | undefined;
 
   if (typeof TestRenderer.act !== 'undefined') {
     TestRenderer.act(() => {
@@ -99,7 +101,14 @@ const buildTree = (element: React.ReactElement): TreeNode => {
     renderer = TestRenderer.create(element);
   }
 
-  const json: TreeNode = renderer.toJSON();
+  if (!renderer) {
+    throw new Error('Cannot access react renderer');
+  }
+
+  const json = renderer.toJSON();
+  if (!json) {
+    throw new Error('Cannot render react element');
+  }
   const yogaNode = computeYogaTree(json, new Context());
   yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());

@@ -11,4 +11,9 @@ module.exports = {
     '<rootDir>/src',
     '<rootDir>/docs',
   ],
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
 };

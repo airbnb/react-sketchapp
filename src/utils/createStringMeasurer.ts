@@ -6,7 +6,6 @@ import nodeMethod from '../jsonUtils/nodeImpl/createStringMeasurer';
 const createStringMeasurer = (textNodes: TextNode[]) => (width: number = 0): Size => {
   // width would be obj-c NaN and the only way to check for it is by comparing
   // width to itself (because NaN !== NaN)
-  // eslint-disable-next-line no-self-compare
   const _width = width !== width ? 0 : width;
 
   if (textNodes.length > 0) {

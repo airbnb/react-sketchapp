@@ -1,8 +1,9 @@
-import { TreeNode, TextNode } from '../types';
+import { ReactTestRendererNode } from 'react-test-renderer';
+import { TextNode } from '../types';
 import Context from '../utils/Context';
 import { VALID_TEXT_CHILDREN_TYPES } from '../utils/constants';
 
-const walkTextTree = (textTree: TreeNode | string, context: Context, textNodes: TextNode[]) => {
+const walkTextTree = (textTree: ReactTestRendererNode, context: Context, textNodes: TextNode[]) => {
   if (typeof textTree !== 'string' && !VALID_TEXT_CHILDREN_TYPES.includes(textTree.type)) {
     throw new Error(`"${textTree.type}" is not a valid child for Text components`);
   }
@@ -26,7 +27,11 @@ const walkTextTree = (textTree: TreeNode | string, context: Context, textNodes: 
   }
 };
 
-const computeTextTree = (node: TreeNode | string, context: Context, textNodes: TextNode[] = []) => {
+const computeTextTree = (
+  node: ReactTestRendererNode,
+  context: Context,
+  textNodes: TextNode[] = [],
+) => {
   if (typeof node === 'string') {
     return [
       {

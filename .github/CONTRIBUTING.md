@@ -44,13 +44,9 @@ To run tests continuously
 npm run test:watch
 ```
 
-This codebase adheres to the [Airbnb Styleguide](https://github.com/airbnb/javascript) and is enforced using [ESLint](http://eslint.org/).
+This style of the codebase is enforced by [Prettier](https://prettier.io/).
 
-It is recommended that you install an ESlint plugin for your editor of choice when working on this codebase, however you can always check to see if the source code is compliant by running:
-
-```bash
-npm run lint
-```
+It is recommended that you install a Prettier plugin for your editor of choice when working on this codebase.
 
 ### Docs
 
@@ -99,7 +95,7 @@ In general, the contribution workflow looks like this:
 - Open a new issue in the [Issue tracker](https://github.com/airbnb/react-sketchapp/issues).
 - Fork the repo.
 - Create a new feature branch based off the `master` branch.
-- Make sure all tests pass and there are no linting errors.
+- Make sure all tests pass.
 - Submit a pull request, referencing any issues it addresses.
 
 Please try to keep your pull request focused in scope and avoid including unrelated commits.

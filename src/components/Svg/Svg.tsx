@@ -32,6 +32,7 @@ const propTypes = {
   viewBox: PropTypes.string,
   preserveAspectRatio: PropTypes.string,
   xmlns: PropTypes.string,
+  'xmlns:xlink': PropTypes.string,
 };
 
 export type Props = PropTypes.InferProps<typeof propTypes>;

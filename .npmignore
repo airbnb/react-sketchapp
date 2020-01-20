@@ -11,8 +11,6 @@ __tests__
 template
 book.json
 prettier.config.js
-.eslintrc
-.eslintignore
 .editorconfig
 .bookignore
 src

@@ -8,7 +8,7 @@ import { createBorders } from '../jsonUtils/borders';
 import { TreeNode } from '../types';
 import { Props } from '../components/Image';
 
-function extractURLFromSource(source?: string | { uri?: string }): string | undefined {
+function extractURLFromSource(source?: string | { uri?: string } | null): string | undefined {
   if (typeof source === 'string') {
     return source;
   }
@@ -16,7 +16,11 @@ function extractURLFromSource(source?: string | { uri?: string }): string | unde
 }
 
 export default class ImageRenderer extends SketchRenderer {
-  renderBackingLayers({ layout, style, props }: TreeNode<Props>) {
+  renderBackingLayers({
+    layout,
+    style,
+    props,
+  }: TreeNode<Props & { resizeMode?: FileFormat.PatternFillType }>) {
     let layers: FileFormat.ShapeGroup[] = [];
 
     const {
@@ -41,7 +45,7 @@ export default class ImageRenderer extends SketchRenderer {
     ];
     const shapeLayer = makeRectShapeLayer(0, 0, layout.width, layout.height, radii);
 
-    const fills = [makeImageFill(fillImage, FileFormat.PatternFillType[props.resizeMode])];
+    const fills = [makeImageFill(fillImage, props.resizeMode)];
 
     const content = makeShapeGroup(frame, [shapeLayer], style, props.shadows, fills);
 

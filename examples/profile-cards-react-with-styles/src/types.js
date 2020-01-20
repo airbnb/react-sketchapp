@@ -1,4 +1,3 @@
-/* eslint-disable */
 export type User = {
   screen_name: string,
   name: string,

@@ -4,7 +4,7 @@ import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 
 export const resetLayer = (container: SketchDocumentData | SketchPage) => {
   if (isNativeDocument(container)) {
-    resetDocument(container); // eslint-disable-line
+    resetDocument(container);
     return;
   }
   const layers = container.children();

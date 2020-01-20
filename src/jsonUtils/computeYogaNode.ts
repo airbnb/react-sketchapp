@@ -1,16 +1,17 @@
 import yoga from 'yoga-layout-prebuilt';
-import { TreeNode, ViewStyle } from '../types';
+import { ReactTestRendererNode } from 'react-test-renderer';
+import { ViewStyle } from '../types';
 import Context from '../utils/Context';
 import createStringMeasurer from '../utils/createStringMeasurer';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import pick from '../utils/pick';
 import computeTextTree from './computeTextTree';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
-import isNullOrUndefined from '../utils/isNullOrUndefined';
+import isDefined from '../utils/isDefined';
 import { getSymbolMasterById } from '../symbol';
 
 // flatten all styles (including nested) into one object
-export const getStyles = (node: TreeNode | string): ViewStyle => {
+export const getStyles = (node: ReactTestRendererNode): ViewStyle => {
   if (typeof node === 'string') {
     return {};
   }
@@ -28,7 +29,7 @@ export const getStyles = (node: TreeNode | string): ViewStyle => {
 };
 
 const computeYogaNode = (
-  node: TreeNode | string,
+  node: ReactTestRendererNode,
   context: Context,
 ): { node: yoga.YogaNode; stop?: boolean } => {
   const yogaNode = yoga.Node.create();
@@ -38,7 +39,11 @@ const computeYogaNode = (
   // Setup default symbol instance dimensions
   if (typeof node !== 'string' && node.type === 'sketch_symbolinstance') {
     const symbolProps = node.props;
-    const { frame } = getSymbolMasterById(symbolProps.symbolID);
+    const symbolMaster = getSymbolMasterById(symbolProps.symbolID);
+    if (!symbolMaster) {
+      throw new Error('Cannot find Symbol Master with id ' + symbolProps.symbolID);
+    }
+    const { frame } = symbolMaster;
     yogaNode.setWidth(frame.width);
     yogaNode.setHeight(frame.height);
   }
@@ -46,12 +51,12 @@ const computeYogaNode = (
   if (typeof node !== 'string' && node.type === 'sketch_svg') {
     const svgProps = node.props;
     // Width
-    if (!isNullOrUndefined(svgProps.width)) {
+    if (isDefined(svgProps.width)) {
       yogaNode.setWidth(svgProps.width);
     }
 
     // Height
-    if (!isNullOrUndefined(svgProps.height)) {
+    if (isDefined(svgProps.height)) {
       yogaNode.setHeight(svgProps.height);
     }
   }
@@ -60,109 +65,109 @@ const computeYogaNode = (
     // http://facebook.github.io/react-native/releases/0.48/docs/layout-props.html
 
     // Width
-    if (!isNullOrUndefined(style.width)) {
+    if (isDefined(style.width)) {
       yogaNode.setWidth(style.width);
     }
 
     // Height
-    if (!isNullOrUndefined(style.height)) {
+    if (isDefined(style.height)) {
       yogaNode.setHeight(style.height);
     }
 
     // Min-Height
-    if (!isNullOrUndefined(style.minHeight)) {
+    if (isDefined(style.minHeight)) {
       yogaNode.setMinHeight(style.minHeight);
     }
 
     // Min-Width
-    if (!isNullOrUndefined(style.minWidth)) {
+    if (isDefined(style.minWidth)) {
       yogaNode.setMinWidth(style.minWidth);
     }
 
     // Max-Height
-    if (!isNullOrUndefined(style.maxHeight)) {
+    if (isDefined(style.maxHeight)) {
       yogaNode.setMaxHeight(style.maxHeight);
     }
 
     // Min-Width
-    if (!isNullOrUndefined(style.maxWidth)) {
+    if (isDefined(style.maxWidth)) {
       yogaNode.setMaxWidth(style.maxWidth);
     }
 
     // Margin
-    if (!isNullOrUndefined(style.marginTop)) {
+    if (isDefined(style.marginTop)) {
       yogaNode.setMargin(yoga.EDGE_TOP, style.marginTop);
     }
-    if (!isNullOrUndefined(style.marginBottom)) {
+    if (isDefined(style.marginBottom)) {
       yogaNode.setMargin(yoga.EDGE_BOTTOM, style.marginBottom);
     }
-    if (!isNullOrUndefined(style.marginLeft)) {
+    if (isDefined(style.marginLeft)) {
       yogaNode.setMargin(yoga.EDGE_LEFT, style.marginLeft);
     }
-    if (!isNullOrUndefined(style.marginRight)) {
+    if (isDefined(style.marginRight)) {
       yogaNode.setMargin(yoga.EDGE_RIGHT, style.marginRight);
     }
-    if (!isNullOrUndefined(style.marginVertical)) {
+    if (isDefined(style.marginVertical)) {
       yogaNode.setMargin(yoga.EDGE_VERTICAL, style.marginVertical);
     }
-    if (!isNullOrUndefined(style.marginHorizontal)) {
+    if (isDefined(style.marginHorizontal)) {
       yogaNode.setMargin(yoga.EDGE_HORIZONTAL, style.marginHorizontal);
     }
-    if (!isNullOrUndefined(style.margin)) {
+    if (isDefined(style.margin)) {
       yogaNode.setMargin(yoga.EDGE_ALL, style.margin);
     }
 
     // Padding
-    if (!isNullOrUndefined(style.paddingTop)) {
+    if (isDefined(style.paddingTop)) {
       yogaNode.setPadding(yoga.EDGE_TOP, style.paddingTop);
     }
-    if (!isNullOrUndefined(style.paddingBottom)) {
+    if (isDefined(style.paddingBottom)) {
       yogaNode.setPadding(yoga.EDGE_BOTTOM, style.paddingBottom);
     }
-    if (!isNullOrUndefined(style.paddingLeft)) {
+    if (isDefined(style.paddingLeft)) {
       yogaNode.setPadding(yoga.EDGE_LEFT, style.paddingLeft);
     }
-    if (!isNullOrUndefined(style.paddingRight)) {
+    if (isDefined(style.paddingRight)) {
       yogaNode.setPadding(yoga.EDGE_RIGHT, style.paddingRight);
     }
-    if (!isNullOrUndefined(style.paddingVertical)) {
+    if (isDefined(style.paddingVertical)) {
       yogaNode.setPadding(yoga.EDGE_VERTICAL, style.paddingVertical);
     }
-    if (!isNullOrUndefined(style.paddingHorizontal)) {
+    if (isDefined(style.paddingHorizontal)) {
       yogaNode.setPadding(yoga.EDGE_HORIZONTAL, style.paddingHorizontal);
     }
-    if (!isNullOrUndefined(style.padding)) {
+    if (isDefined(style.padding)) {
       yogaNode.setPadding(yoga.EDGE_ALL, style.padding);
     }
 
     // Border
-    if (!isNullOrUndefined(style.borderTopWidth)) {
+    if (isDefined(style.borderTopWidth)) {
       yogaNode.setBorder(yoga.EDGE_TOP, style.borderTopWidth);
     }
-    if (!isNullOrUndefined(style.borderBottomWidth)) {
+    if (isDefined(style.borderBottomWidth)) {
       yogaNode.setBorder(yoga.EDGE_BOTTOM, style.borderBottomWidth);
     }
-    if (!isNullOrUndefined(style.borderLeftWidth)) {
+    if (isDefined(style.borderLeftWidth)) {
       yogaNode.setBorder(yoga.EDGE_LEFT, style.borderLeftWidth);
     }
-    if (!isNullOrUndefined(style.borderRightWidth)) {
+    if (isDefined(style.borderRightWidth)) {
       yogaNode.setBorder(yoga.EDGE_RIGHT, style.borderRightWidth);
     }
-    if (!isNullOrUndefined(style.borderWidth)) {
+    if (isDefined(style.borderWidth)) {
       yogaNode.setBorder(yoga.EDGE_ALL, style.borderWidth);
     }
 
     // Flex
-    if (!isNullOrUndefined(style.flex)) {
+    if (isDefined(style.flex)) {
       yogaNode.setFlex(style.flex);
     }
-    if (!isNullOrUndefined(style.flexGrow)) {
+    if (isDefined(style.flexGrow)) {
       yogaNode.setFlexGrow(style.flexGrow);
     }
-    if (!isNullOrUndefined(style.flexShrink)) {
+    if (isDefined(style.flexShrink)) {
       yogaNode.setFlexShrink(style.flexShrink);
     }
-    if (!isNullOrUndefined(style.flexBasis)) {
+    if (isDefined(style.flexBasis)) {
       yogaNode.setFlexBasis(style.flexBasis);
     }
 
@@ -174,16 +179,16 @@ const computeYogaNode = (
       yogaNode.setPositionType(yoga.POSITION_TYPE_RELATIVE);
     }
 
-    if (!isNullOrUndefined(style.top)) {
+    if (isDefined(style.top)) {
       yogaNode.setPosition(yoga.EDGE_TOP, style.top);
     }
-    if (!isNullOrUndefined(style.left)) {
+    if (isDefined(style.left)) {
       yogaNode.setPosition(yoga.EDGE_LEFT, style.left);
     }
-    if (!isNullOrUndefined(style.right)) {
+    if (isDefined(style.right)) {
       yogaNode.setPosition(yoga.EDGE_RIGHT, style.right);
     }
-    if (!isNullOrUndefined(style.bottom)) {
+    if (isDefined(style.bottom)) {
       yogaNode.setPosition(yoga.EDGE_BOTTOM, style.bottom);
     }
 

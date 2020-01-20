@@ -1,7 +1,9 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchLayer } from '../../types';
 
-export function toSJSON(sketchObject: SketchLayer): FileFormat.AnyObject | FileFormat.AnyLayer {
+export function toSJSON(
+  sketchObject: SketchLayer,
+): FileFormat.AnyObject | FileFormat.AnyLayer | null {
   if (!sketchObject) {
     return null;
   }

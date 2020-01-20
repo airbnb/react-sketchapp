@@ -6,6 +6,6 @@ export default function requireObjCBridge() {
   if (cached$) {
     return cached$;
   }
-  cached$ = eval("require('node-sketch-bridge')"); // eslint-disable-line
+  cached$ = eval("require('node-sketch-bridge')");
   return cached$;
 }

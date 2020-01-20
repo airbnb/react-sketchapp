@@ -38,8 +38,6 @@ export const createUniformBorder = (
   return { borderOptions, borders };
 };
 
-/* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/prefer-default-export
 export const createBorders = (
   content: FileFormat.ShapeGroup,
   layout: LayoutInfo,
@@ -75,12 +73,12 @@ export const createBorders = (
     // in this case, we can do everything with just a single shape.
     if (borderTopStyle !== undefined) {
       const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
-      if (borderOptions) {
+      if (borderOptions && content.style) {
         content.style.borderOptions = borderOptions;
       }
     }
 
-    if (borderTopWidth > 0) {
+    if (borderTopWidth > 0 && content.style) {
       content.style.borders = createUniformBorder(
         borderTopWidth,
         borderTopColor,
@@ -108,7 +106,7 @@ export const createBorders = (
     topBorder.name = 'Border (top)';
 
     const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
-    if (borderOptions) {
+    if (borderOptions && topBorder.style) {
       topBorder.style.borderOptions = borderOptions;
     }
 
@@ -126,7 +124,7 @@ export const createBorders = (
     rightBorder.name = 'Border (right)';
 
     const borderOptions = makeBorderOptions(borderRightStyle, borderRightWidth);
-    if (borderOptions) {
+    if (borderOptions && rightBorder.style) {
       rightBorder.style.borderOptions = borderOptions;
     }
 
@@ -144,7 +142,7 @@ export const createBorders = (
     bottomBorder.name = 'Border (bottom)';
 
     const borderOptions = makeBorderOptions(borderBottomStyle, borderBottomWidth);
-    if (borderOptions) {
+    if (borderOptions && bottomBorder.style) {
       bottomBorder.style.borderOptions = borderOptions;
     }
 
@@ -156,7 +154,7 @@ export const createBorders = (
     leftBorder.name = 'Border (left)';
 
     const borderOptions = makeBorderOptions(borderLeftStyle, borderLeftWidth);
-    if (borderOptions) {
+    if (borderOptions && leftBorder.style) {
       leftBorder.style.borderOptions = borderOptions;
     }
 

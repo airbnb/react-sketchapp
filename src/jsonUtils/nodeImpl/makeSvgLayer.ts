@@ -8,7 +8,7 @@ import { makePathsFromCommands, makeLineCapStyle } from './graphics/path';
 import { unionRects, scaleRect, makeBoundingRectFromCommands, resize } from './graphics/rect';
 import requireSvgModel from './requireSvgModel';
 
-function makeLayerFromPathElement(pathElement, _parentFrame: FileFormat.Rect, scale: number) {
+function makeLayerFromPathElement(pathElement: any, _parentFrame: FileFormat.Rect, scale: number) {
   const {
     data: {
       params: { commands, style },
@@ -36,7 +36,7 @@ function makeLayerFromPathElement(pathElement, _parentFrame: FileFormat.Rect, sc
 
   const shapeGroup = makeShapeGroup(shapeGroupFrame, shapePaths, viewStyle);
 
-  if (style.stroke) {
+  if (style.stroke && shapeGroup.style) {
     const lineCap = makeLineCapStyle(style.strokeLineCap);
     const borderStyle = createUniformBorder(
       style.strokeWidth * scale,
@@ -104,12 +104,16 @@ export default function makeSvgLayer(layout: LayoutInfo, name: string, svg: stri
 
   // The top-level frame is the union of every path within
   const frame = unionRects(
-    ...children.map(pathElement => makeBoundingRectFromCommands(pathElement.data.params.commands)),
+    ...children.map((pathElement: any) =>
+      makeBoundingRectFromCommands(pathElement.data.params.commands),
+    ),
   );
 
   // Scale the frame to fill the viewBox
   const scaledFrame = scaleRect(frame, scale);
 
-  const layers = children.map(element => makeLayerFromPathElement(element, scaledFrame, scale));
+  const layers = children.map((element: any) =>
+    makeLayerFromPathElement(element, scaledFrame, scale),
+  );
   return makeLayerGroup(croppedRect, layers, name);
 }

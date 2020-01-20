@@ -10,6 +10,7 @@ export const TEXT_DECORATION_UNDERLINE = {
   none: FileFormat.UnderlineStyle.None,
   underline: FileFormat.UnderlineStyle.Underlined,
   double: 9,
+  'line-through': 0,
 };
 
 export const TEXT_ALIGN = {
@@ -21,13 +22,16 @@ export const TEXT_ALIGN = {
 };
 
 const TEXT_ALIGN_REVERSE = {
+  [FileFormat.TextHorizontalAlignment.Natural]: 'left',
   [FileFormat.TextHorizontalAlignment.Right]: 'right',
   [FileFormat.TextHorizontalAlignment.Centered]: 'center',
   [FileFormat.TextHorizontalAlignment.Justified]: 'justify',
-};
+} as const;
 
 export const TEXT_DECORATION_LINETHROUGH = {
   none: 0,
+  underline: 0,
+  double: 0,
   'line-through': 1,
 };
 
@@ -116,7 +120,10 @@ const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedStrin
   return json;
 };
 
-export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>): FileFormat.Style => {
+export const makeTextStyle = (
+  style: TextStyle,
+  shadows?: (ViewStyle | undefined | null)[] | null,
+): FileFormat.Style => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
     _class: 'textStyle',
@@ -130,41 +137,40 @@ export const parseTextStyle = (json: FileFormat.Style): TextStyle => {
   const style: TextStyle = parseStyle(json);
 
   if (json.textStyle) {
-    if (
-      json.textStyle.encodedAttributes.underlineStyle &&
-      json.textStyle.encodedAttributes.underlineStyle !== 0
-    ) {
-      style.textDecoration =
-        json.textStyle.encodedAttributes.underlineStyle === 9 ? 'double' : 'underline';
+    const attr = json.textStyle.encodedAttributes;
+    if (attr.underlineStyle) {
+      style.textDecoration = attr.underlineStyle === 9 ? 'double' : 'underline';
     }
 
-    if (
-      json.textStyle.encodedAttributes.strikethroughStyle &&
-      json.textStyle.encodedAttributes.strikethroughStyle !== 0
-    ) {
+    if (attr.strikethroughStyle) {
       style.textDecoration = 'line-through';
     }
 
-    if (TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment]) {
-      style.textAlign =
-        TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment];
+    if (
+      attr.paragraphStyle &&
+      attr.paragraphStyle.alignment &&
+      TEXT_ALIGN_REVERSE[attr.paragraphStyle.alignment]
+    ) {
+      style.textAlign = TEXT_ALIGN_REVERSE[attr.paragraphStyle.alignment];
     }
 
-    if (typeof json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight !== 'undefined') {
-      style.lineHeight = json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight;
+    if (attr.paragraphStyle && typeof attr.paragraphStyle.minimumLineHeight !== 'undefined') {
+      style.lineHeight = attr.paragraphStyle.minimumLineHeight;
     }
 
-    if (typeof json.textStyle.encodedAttributes.kerning !== 'undefined') {
-      style.letterSpacing = json.textStyle.encodedAttributes.kerning;
+    if (typeof attr.kerning !== 'undefined') {
+      style.letterSpacing = attr.kerning;
     }
 
     const color = json.textStyle.encodedAttributes.MSAttributedStringColorAttribute;
-    style.color = `#${Math.round(color.red * 255).toString(16)}${Math.round(
-      color.green * 255,
-    ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
+    if (color) {
+      style.color = `#${Math.round(color.red * 255).toString(16)}${Math.round(
+        color.green * 255,
+      ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
 
-    if (color.alpha !== 1) {
-      style.color += `${Math.round(color.alpha * 255).toString(16)}`;
+      if (color.alpha !== 1) {
+        style.color += `${Math.round(color.alpha * 255).toString(16)}`;
+      }
     }
 
     if (
@@ -195,8 +201,8 @@ const makeTextLayer = (
   name: string,
   textNodes: TextNode[],
   _style: ViewStyle,
-  resizingConstraint?: ResizeConstraints,
-  shadows?: ViewStyle[],
+  resizingConstraint?: ResizeConstraints | null,
+  shadows?: (ViewStyle | undefined | null)[] | null,
 ): FileFormat.Text => ({
   _class: 'text',
   do_objectID: generateID(`text:${name}-${textNodes.map(node => node.content).join('')}`),

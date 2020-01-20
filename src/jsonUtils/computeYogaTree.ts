@@ -1,10 +1,10 @@
 import yoga from 'yoga-layout-prebuilt';
+import { ReactTestRendererNode } from 'react-test-renderer';
 import computeYogaNode from './computeYogaNode';
-import { TreeNode } from '../types';
 import Context from '../utils/Context';
 import zIndex from '../utils/zIndex';
 
-const walkTree = (tree: TreeNode | string, context: Context) => {
+const walkTree = (tree: ReactTestRendererNode, context: Context) => {
   const { node, stop } = computeYogaNode(tree, context);
 
   if (typeof tree === 'string' || tree.type === 'sketch_svg') {
@@ -28,6 +28,7 @@ const walkTree = (tree: TreeNode | string, context: Context) => {
 
   return node;
 };
-const treeToNodes = (root: TreeNode, context: Context): yoga.YogaNode => walkTree(root, context);
+const treeToNodes = (root: ReactTestRendererNode, context: Context): yoga.YogaNode =>
+  walkTree(root, context);
 
 export default treeToNodes;

@@ -1,11 +1,10 @@
-/* eslint-disable no-mixed-operators, no-bitwise */
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import seedrandom from 'seedrandom';
 import normalizeColor, { rgba } from 'normalize-css-color';
 import { Color, ResizeConstraints } from '../types';
 import makeResizeConstraint from './resizeConstraint';
 
-const lut = [];
+const lut: string[] = [];
 for (let i = 0; i < 256; i += 1) {
   lut[i] = (i < 16 ? '0' : '') + i.toString(16);
 }
@@ -46,7 +45,7 @@ function generateIdNumber() {
 }
 
 // Keep track of previous seeds
-const previousSeeds = {};
+const previousSeeds: { [seed: string]: number } = {};
 
 export function generateID(seed?: string, hardcoded?: boolean): string {
   let _seed = seed;
@@ -201,7 +200,7 @@ export const makeSymbolInstance = (
   frame: FileFormat.Rect,
   symbolID: string,
   name: string,
-  resizingConstraint?: ResizeConstraints,
+  resizingConstraint?: ResizeConstraints | null,
 ): FileFormat.SymbolInstance => ({
   _class: 'symbolInstance',
   horizontalSpacing: 0,

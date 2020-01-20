@@ -106,7 +106,7 @@ export const render = (
     return renderToJSON(element);
   }
 
-  let nativeContainer: SketchLayer | void;
+  let nativeContainer: SketchLayer | undefined;
   if (container && container.sketchObject) {
     nativeContainer = container.sketchObject;
   } else if (container) {
@@ -126,7 +126,6 @@ export const render = (
 
     return renderTree(tree, nativeContainer);
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(err);
     const tree = buildTree(<RedBox error={err} />);
     return renderContents(tree, nativeContainer);

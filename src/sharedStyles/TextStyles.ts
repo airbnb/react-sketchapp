@@ -24,7 +24,7 @@ const _byName: { [key: string]: MurmurHash } = {};
 
 const sketchVersion = getSketchVersion();
 
-const registerStyle = (name: string, style: TextStyle): void => {
+const registerStyle = (name: string, style: TextStyle) => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
   const sketchStyle = makeTextStyle(safeStyle);
@@ -52,7 +52,9 @@ const create = (styles: { [key: string]: TextStyle }, options: Options = {}): St
   const doc = getDocument(document);
 
   if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
-    doc.showMessage('💎 Requires Sketch 50+ 💎');
+    if (doc) {
+      doc.showMessage('💎 Requires Sketch 50+ 💎');
+    }
     return {};
   }
 
@@ -68,7 +70,10 @@ const create = (styles: { [key: string]: TextStyle }, options: Options = {}): St
   return _styles;
 };
 
-const resolve = (style: TextStyle): RegisteredStyle | undefined => {
+const resolve = (style?: TextStyle): RegisteredStyle | undefined => {
+  if (!style) {
+    return undefined;
+  }
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
 

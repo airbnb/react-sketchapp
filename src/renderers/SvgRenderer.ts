@@ -31,7 +31,7 @@ function makeSvgString(el: string | TreeNode<Props>) {
   }
   const { type, props, children } = el;
 
-  if (props && props.textNodes) {
+  if (props && props.textNodes && props.textNodes.length) {
     return props.textNodes.reduce((prev, textNode) => prev + textNode.content, '');
   }
 
@@ -43,6 +43,7 @@ function makeSvgString(el: string | TreeNode<Props>) {
 
   const cleanedType = type.slice(4);
   const attributes = Object.keys(props || {}).reduce(
+    // @ts-ignore
     (prev, k) => (props[k] ? `${prev} ${toSnakeCase(k)}="${props[k]}"` : prev),
     '',
   );
@@ -68,16 +69,17 @@ export default class SvgRenderer extends ViewRenderer {
   renderBackingLayers(node: TreeNode<Props>) {
     const layers = super.renderBackingLayers(node);
 
-    const { layout, props, children } = node;
+    const { layout, props, children, style } = node;
 
     // add the "xmlns:xlink" namespace so we can use `href`
-    // eslint-disable-next-line
     props['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
 
     const svgString = makeSvgString({
       type: 'svg_svg',
       props,
       children,
+      style,
+      layout,
     });
 
     const svgLayer = makeSvgLayer(layout, 'Shape', svgString);
