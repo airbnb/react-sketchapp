@@ -148,7 +148,7 @@ export const makeRectShapeLayer = (
   width: number,
   height: number,
   radii: Radii = [0, 0, 0, 0],
-  resizingConstraint?: ResizeConstraints,
+  resizingConstraint?: ResizeConstraints | null,
 ): FileFormat.Rectangle => {
   const fixedRadius = radii[0] || 0;
   const path = makeRectPath(radii);
@@ -202,7 +202,7 @@ export const makeShapeGroup = (
     | FileFormat.Bitmap
   )[] = [],
   style?: ViewStyle,
-  shadows?: ViewStyle[],
+  shadows?: (ViewStyle | undefined | null)[] | null,
   fills?: FileFormat.Fill[],
   resizingConstraint?: ResizeConstraints,
 ): FileFormat.ShapeGroup => ({
@@ -248,6 +248,9 @@ export const makeVerticalBorder = (
   const shapeFrame = makeRect(0, 0, thickness, length);
   const shapePath = makeShapePath(shapeFrame, makeVerticalPath());
   const content = makeShapeGroup(frame, [shapePath]);
+  if (!content.style) {
+    return content;
+  }
   content.style.borders = [
     {
       _class: 'border',
@@ -278,6 +281,9 @@ export const makeHorizontalBorder = (
   const shapeFrame = makeRect(0, 0, length, thickness);
   const shapePath = makeShapePath(shapeFrame, makeHorizontalPath());
   const content = makeShapeGroup(frame, [shapePath]);
+  if (!content.style) {
+    return content;
+  }
   content.style.borders = [
     {
       _class: 'border',

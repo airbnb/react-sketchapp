@@ -1,5 +1,6 @@
 import yoga from 'yoga-layout-prebuilt';
-import { TreeNode, ViewStyle } from '../types';
+import { ReactTestRendererNode } from 'react-test-renderer';
+import { ViewStyle } from '../types';
 import Context from '../utils/Context';
 import createStringMeasurer from '../utils/createStringMeasurer';
 import hasAnyDefined from '../utils/hasAnyDefined';
@@ -10,7 +11,7 @@ import isNullOrUndefined from '../utils/isNullOrUndefined';
 import { getSymbolMasterById } from '../symbol';
 
 // flatten all styles (including nested) into one object
-export const getStyles = (node: TreeNode | string): ViewStyle => {
+export const getStyles = (node: ReactTestRendererNode): ViewStyle => {
   if (typeof node === 'string') {
     return {};
   }
@@ -28,7 +29,7 @@ export const getStyles = (node: TreeNode | string): ViewStyle => {
 };
 
 const computeYogaNode = (
-  node: TreeNode | string,
+  node: ReactTestRendererNode,
   context: Context,
 ): { node: yoga.YogaNode; stop?: boolean } => {
   const yogaNode = yoga.Node.create();

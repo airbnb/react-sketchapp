@@ -102,7 +102,7 @@ export const makeShadow = (
 export const makeStyle = (
   style?: ViewStyle | TextStyle,
   fills?: FileFormat.Fill[],
-  shadowsProp?: ViewStyle[],
+  shadowsProp?: (ViewStyle | undefined | null)[] | null,
 ): FileFormat.Style => {
   const json: FileFormat.Style = {
     _class: 'style',
@@ -125,7 +125,7 @@ export const makeStyle = (
   };
 
   if (fills && fills.length) {
-    json.fills = json.fills.concat(fills);
+    json.fills = (json.fills || []).concat(fills);
   }
 
   if (!style) {
@@ -142,7 +142,7 @@ export const makeStyle = (
 
   if (style.backgroundColor) {
     const fill = makeColorFill(style.backgroundColor);
-    json.fills.unshift(fill);
+    (json.fills || []).unshift(fill);
   }
 
   if (hasAnyDefined(style, SHADOW_STYLES)) {
@@ -155,14 +155,16 @@ export const makeStyle = (
   }
 
   if (shadowsProp) {
-    shadowsProp.map(shadowStyle => {
+    shadowsProp.forEach(shadowStyle => {
+      if (!shadowStyle) {
+        return;
+      }
       const shadow = makeShadow(shadowStyle);
       if (shadowStyle.shadowInner) {
-        json.innerShadows.push(shadow as FileFormat.InnerShadow);
+        (json.innerShadows || []).push(shadow as FileFormat.InnerShadow);
       } else {
-        json.shadows.push(shadow as FileFormat.Shadow);
+        (json.shadows || []).push(shadow as FileFormat.Shadow);
       }
-      return shadowStyle;
     });
   }
 
@@ -177,6 +179,7 @@ export function parseStyle(json: FileFormat.Style): ViewStyle {
   }
 
   if (
+    json.fills &&
     json.fills.length > 0 &&
     json.fills[0].fillType === FileFormat.FillType.Color &&
     json.fills[0].isEnabled
@@ -192,11 +195,11 @@ export function parseStyle(json: FileFormat.Style): ViewStyle {
   }
 
   if (
-    (json.shadows.length > 0 && json.shadows[0].isEnabled) ||
-    (json.innerShadows.length > 0 && json.innerShadows[0].isEnabled)
+    (json.shadows && json.shadows.length > 0 && json.shadows[0].isEnabled) ||
+    (json.innerShadows && json.innerShadows.length > 0 && json.innerShadows[0].isEnabled)
   ) {
-    const isNormalShadow = json.shadows.length > 0 && json.shadows[0].isEnabled;
-    const shadow = isNormalShadow ? json.shadows[0] : json.innerShadows[0];
+    const isNormalShadow = json.shadows && json.shadows.length > 0 && json.shadows[0].isEnabled;
+    const shadow = isNormalShadow ? (json.shadows || [])[0] : (json.innerShadows || [])[0];
     style.shadowRadius = shadow.blurRadius;
     style.shadowSpread = shadow.spread;
     style.shadowOffset = {

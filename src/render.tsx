@@ -106,7 +106,7 @@ export const render = (
     return renderToJSON(element);
   }
 
-  let nativeContainer: SketchLayer | void;
+  let nativeContainer: SketchLayer | undefined;
   if (container && container.sketchObject) {
     nativeContainer = container.sketchObject;
   } else if (container) {

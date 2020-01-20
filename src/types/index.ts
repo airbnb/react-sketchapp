@@ -182,7 +182,7 @@ export type TextStyle = ViewStyle & {
   fontSize?: number;
   fontStyle?: 'normal' | 'italic';
   fontWeight?: string;
-  textDecoration?: string;
+  textDecoration?: 'none' | 'underline' | 'double' | 'line-through';
   textShadowOpacity?: number;
   textShadowSpread?: number;
   textShadowOffset?: { width: number; height: number };
@@ -200,9 +200,9 @@ export type TextNode = { content: string; textStyles: TextStyle };
 
 export type TreeNode<Props = any> = {
   type: string;
-  style?: ViewStyle;
+  style: ViewStyle;
   textStyle?: TextStyle;
-  layout?: LayoutInfo;
+  layout: LayoutInfo;
   props: Props & { textNodes: TextNode[] };
   children?: Array<TreeNode | string>;
 };

@@ -116,7 +116,7 @@ const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedStrin
   return json;
 };
 
-export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>): FileFormat.Style => {
+export const makeTextStyle = (style: TextStyle, shadows?: ViewStyle[] | null): FileFormat.Style => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
     _class: 'textStyle',
@@ -145,12 +145,18 @@ export const parseTextStyle = (json: FileFormat.Style): TextStyle => {
       style.textDecoration = 'line-through';
     }
 
-    if (TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment]) {
+    if (
+      json.textStyle.encodedAttributes.paragraphStyle &&
+      TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment]
+    ) {
       style.textAlign =
         TEXT_ALIGN_REVERSE[json.textStyle.encodedAttributes.paragraphStyle.alignment];
     }
 
-    if (typeof json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight !== 'undefined') {
+    if (
+      json.textStyle.encodedAttributes.paragraphStyle &&
+      typeof json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight !== 'undefined'
+    ) {
       style.lineHeight = json.textStyle.encodedAttributes.paragraphStyle.minimumLineHeight;
     }
 
@@ -159,12 +165,14 @@ export const parseTextStyle = (json: FileFormat.Style): TextStyle => {
     }
 
     const color = json.textStyle.encodedAttributes.MSAttributedStringColorAttribute;
-    style.color = `#${Math.round(color.red * 255).toString(16)}${Math.round(
-      color.green * 255,
-    ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
+    if (color) {
+      style.color = `#${Math.round(color.red * 255).toString(16)}${Math.round(
+        color.green * 255,
+      ).toString(16)}${Math.round(color.blue * 255).toString(16)}`;
 
-    if (color.alpha !== 1) {
-      style.color += `${Math.round(color.alpha * 255).toString(16)}`;
+      if (color.alpha !== 1) {
+        style.color += `${Math.round(color.alpha * 255).toString(16)}`;
+      }
     }
 
     if (
@@ -195,8 +203,8 @@ const makeTextLayer = (
   name: string,
   textNodes: TextNode[],
   _style: ViewStyle,
-  resizingConstraint?: ResizeConstraints,
-  shadows?: ViewStyle[],
+  resizingConstraint?: ResizeConstraints | null,
+  shadows?: ViewStyle[] | null,
 ): FileFormat.Text => ({
   _class: 'text',
   do_objectID: generateID(`text:${name}-${textNodes.map(node => node.content).join('')}`),

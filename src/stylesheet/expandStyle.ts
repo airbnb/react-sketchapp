@@ -73,7 +73,7 @@ const styleShortHands = {
  * override less specific styles, whatever the order in which they were
  * originally declared.
  */
-const sortProps = propsArray =>
+const sortProps = (propsArray: string[]) =>
   propsArray.sort((a, b) => {
     const expandedA = styleShortHands[a];
     const expandedB = styleShortHands[b];

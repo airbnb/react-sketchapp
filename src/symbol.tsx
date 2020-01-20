@@ -37,6 +37,10 @@ function msListToArray<T>(pageList: T[]): T[] {
 const getSymbolsPage = (documentData: SketchDocumentData) =>
   documentData.symbolsPageOrCreateIfNecessary();
 
+function exists(x: FileFormat.SymbolMaster | undefined): x is FileFormat.SymbolMaster {
+  return !!x;
+}
+
 const getExistingSymbols = (documentData: SketchDocumentData) => {
   if (!hasInitialized) {
     hasInitialized = true;
@@ -52,7 +56,7 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
         layers[symbolJson.symbolID] = x;
         return symbolJson;
       })
-      .filter(x => x);
+      .filter(exists);
 
     existingSymbols.forEach(symbolMaster => {
       if (symbolMaster._class !== 'symbolMaster') return;
@@ -155,7 +159,10 @@ export const makeSymbol = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ) => {
   if (!hasInitialized && getSketchVersion() !== 'NodeJS') {
-    getExistingSymbols(getDocumentData(document));
+    const documentData = getDocumentData(document);
+    if (documentData) {
+      getExistingSymbols(documentData);
+    }
   }
 
   const masterName =
@@ -185,8 +192,12 @@ export const makeSymbol = (
 function tryGettingSymbolMasterInDocumentByName(
   name: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): FileFormat.SymbolMaster {
+): FileFormat.SymbolMaster | undefined {
   const documentData = getDocumentData(document);
+
+  if (!documentData) {
+    return undefined;
+  }
 
   const symbols = documentData.symbolMap();
   const symbol = Object.keys(symbols).find(k => symbols[k].name() === name);
@@ -201,8 +212,12 @@ function tryGettingSymbolMasterInDocumentByName(
 function tryGettingSymbolMasterInDocumentById(
   symbolID: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): FileFormat.SymbolMaster {
+): FileFormat.SymbolMaster | undefined {
   const documentData = getDocumentData(document);
+
+  if (!documentData) {
+    return undefined;
+  }
 
   const symbol = documentData.symbolMap()[symbolID];
 
@@ -216,7 +231,7 @@ function tryGettingSymbolMasterInDocumentById(
 export const getSymbolMasterByName = (
   name: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): FileFormat.SymbolMaster => {
+): FileFormat.SymbolMaster | undefined => {
   const symbolID = name
     ? Object.keys(symbolsRegistry).find(key => String(symbolsRegistry[key].name) === name)
     : '';
@@ -235,7 +250,7 @@ export const getSymbolMasterByName = (
 export const getSymbolMasterById = (
   symbolID: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): FileFormat.SymbolMaster => {
+): FileFormat.SymbolMaster | undefined => {
   let symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;
 
   if (typeof symbolMaster === 'undefined' && symbolID && getSketchVersion() !== 'NodeJS') {
@@ -252,9 +267,21 @@ export const getSymbolMasterById = (
 export const getSymbolComponentById = (
   symbolID: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-) => createSymbolInstanceClass(getSymbolMasterById(symbolID, document));
+) => {
+  const symbolMaster = getSymbolMasterById(symbolID, document);
+  if (!symbolMaster) {
+    return undefined;
+  }
+  return createSymbolInstanceClass(symbolMaster);
+};
 
 export const getSymbolComponentByName = (
   masterName: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-) => createSymbolInstanceClass(getSymbolMasterByName(masterName, document));
+) => {
+  const symbolMaster = getSymbolMasterByName(masterName, document);
+  if (!symbolMaster) {
+    return undefined;
+  }
+  return createSymbolInstanceClass(symbolMaster);
+};

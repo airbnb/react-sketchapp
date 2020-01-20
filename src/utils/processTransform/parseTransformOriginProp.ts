@@ -1,6 +1,6 @@
 import { LayoutInfo } from '../../types';
 
-const KEYWORDS = {
+const KEYWORDS: { [keyword: string]: [number, number, number] } = {
   top: [0.5, 0, 0],
   bottom: [0.5, 1, 0],
   left: [0, 0.5, 0],

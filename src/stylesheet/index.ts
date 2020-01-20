@@ -11,14 +11,12 @@ import {
   UserStyles,
 } from './types';
 
-const { hasOwnProperty } = Object.prototype;
-
 let _id = 0;
 const guid = () => _id++;
-const declarationRegistry = {};
+const declarationRegistry: { [id: string]: Style } = {};
 
 const extractRules = (style: RawStyle): Rules => {
-  const declarations = {};
+  const declarations: { [key: string]: any } = {};
 
   Object.keys(style).forEach(key => {
     if (key[0] === ':') {
@@ -47,23 +45,23 @@ const registerStyle = (style: RawStyle): StyleId => {
 const getStyle = (id: StyleId): Style => declarationRegistry[id];
 
 const create = (styles: RawStyles): StyleSheetInstance => {
-  const result = {};
+  const result: StyleSheetInstance = {};
   Object.keys(styles).forEach(key => {
     result[key] = registerStyle(styles[key]);
   });
   return result;
 };
 
-const mergeTransforms = (a: Transform, b: Transform): Transform => {
+const mergeTransforms = (a?: Transform, b?: Transform): Transform | undefined => {
   if (!a || a.length === 0) return b; // in this case, a has nothing to contribute.
-  const result = [];
-  const transformsInA = a.reduce((hash, t) => {
+  const result: Transform = [];
+  const transformsInA: { [key: string]: number } = a.reduce((hash, t) => {
     const key = Object.keys(t)[0];
     result.push(t);
     hash[key] = result.length - 1;
     return hash;
   }, {});
-  b.forEach(t => {
+  (b || []).forEach(t => {
     const key = Object.keys(t)[0];
     const index = transformsInA[key];
     if (index !== undefined) {
@@ -79,19 +77,13 @@ const mergeTransforms = (a: Transform, b: Transform): Transform => {
 // special case.
 // NOTE(lmr): mutates the first argument!
 const mergeStyle = (a: Style, b: Style): Style => {
-  let key: string;
-  for (key in b) {
-    if (hasOwnProperty.call(b, key)) {
-      switch (key) {
-        case 'transform':
-          a[key] = mergeTransforms(a[key], b[key]);
-          break;
-        default:
-          a[key] = b[key];
-          break;
-      }
+  Object.keys(b).forEach(key => {
+    if (key === 'transform') {
+      a[key] = mergeTransforms(a[key], b[key]);
+    } else {
+      a[key] = b[key];
     }
-  }
+  });
   return a;
 };
 

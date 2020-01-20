@@ -29,7 +29,12 @@ export default class Matrix2D {
   ty: number;
 
   constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
-    this.setTransform(a, b, c, d, tx, ty);
+    this.a = a === null || a === undefined ? 1 : a;
+    this.b = b || 0;
+    this.c = c || 0;
+    this.d = d === null || d === undefined ? 1 : d;
+    this.tx = tx || 0;
+    this.ty = ty || 0;
   }
 
   /**

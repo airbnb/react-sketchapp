@@ -11,20 +11,15 @@ export default class TextRenderer extends SketchRenderer {
   }
 
   renderBackingLayers({ layout, style, textStyle, props }: TreeNode<Props>) {
-    let { name } = props;
-
-    // Append all text nodes's content into one string
-    if (!name && props.textNodes) {
-      name = '';
-      props.textNodes.forEach(textNode => {
-        name += textNode.content;
-      });
-    }
+    // Append all text nodes's content into one string if name is missing
+    const resolvedName = props.name
+      ? props.name
+      : props.textNodes.map(textNode => textNode.content).join('');
 
     const frame = makeRect(0, 0, layout.width, layout.height);
     const layer = makeTextLayer(
       frame,
-      name,
+      resolvedName,
       props.textNodes,
       style,
       props.resizingConstraint,

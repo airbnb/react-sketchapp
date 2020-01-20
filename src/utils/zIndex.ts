@@ -1,7 +1,9 @@
-import { TreeNode } from '../types';
+import { ReactTestRendererNode } from 'react-test-renderer';
 
 // Sort z-index values lowest to highest
-const zIndex = (nodes: Array<TreeNode | string>): Array<TreeNode & { oIndex: number } | string> =>
+const zIndex = (
+  nodes: (ReactTestRendererNode | string)[],
+): ((ReactTestRendererNode & { oIndex: number }) | string)[] =>
   nodes
     .map((node, index) => {
       if (typeof node === 'string') {

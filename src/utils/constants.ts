@@ -19,4 +19,4 @@ export const INHERITABLE_FONT_STYLES = [
 ] as const;
 
 // Only components that are allowed as children of <Text> components
-export const VALID_TEXT_CHILDREN_TYPES = ['text'];
+export const VALID_TEXT_CHILDREN_TYPES = ['text', 'sketch_text'];

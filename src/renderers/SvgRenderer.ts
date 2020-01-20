@@ -68,7 +68,7 @@ export default class SvgRenderer extends ViewRenderer {
   renderBackingLayers(node: TreeNode<Props>) {
     const layers = super.renderBackingLayers(node);
 
-    const { layout, props, children } = node;
+    const { layout, props, children, style } = node;
 
     // add the "xmlns:xlink" namespace so we can use `href`
     props['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
@@ -77,6 +77,8 @@ export default class SvgRenderer extends ViewRenderer {
       type: 'svg_svg',
       props,
       children,
+      style,
+      layout,
     });
 
     const svgLayer = makeSvgLayer(layout, 'Shape', svgString);
