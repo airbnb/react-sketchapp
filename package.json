@@ -48,7 +48,7 @@
     "invariant": "^2.2.2",
     "js-sha1": "^0.6.0",
     "murmur2js": "^1.0.0",
-    "node-sketch-bridge": "^0.1.0",
+    "node-sketch-bridge": "^0.2.0",
     "normalize-css-color": "^1.0.1",
     "pegjs": "^0.10.0",
     "prop-types": "^15.7.2",
