@@ -150,7 +150,7 @@ const SymbolMasterPropTypes = {
 
 export type SymbolMasterProps = PropTypes.InferProps<typeof SymbolMasterPropTypes>;
 
-export const makeSymbol = (
+export const makeSymbol = async (
   Component: React.ComponentType<any>,
   symbolProps: string | SymbolMasterProps,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
@@ -167,7 +167,7 @@ export const makeSymbol = (
     ? existingSymbol.symbolID
     : generateID(`symbolID:${masterName}`, !!masterName);
 
-  const symbolMaster = flexToSketchJSON(
+  const symbolMaster = (await flexToSketchJSON(
     buildTree(
       <sketch_symbolmaster
         {...(typeof symbolProps !== 'string' ? symbolProps || {} : {})}
@@ -177,7 +177,7 @@ export const makeSymbol = (
         <Component />
       </sketch_symbolmaster>,
     ),
-  ) as FileFormat.SymbolMaster;
+  )) as FileFormat.SymbolMaster;
 
   symbolsRegistry[symbolID] = symbolMaster;
   return createSymbolInstanceClass(symbolMaster);

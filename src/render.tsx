@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
+import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
@@ -13,7 +13,7 @@ import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
 import { getSketchVersion } from './utils/getSketchVersion';
 
-export const renderToJSON = (element: React.ReactElement): FileFormat.AnyLayer => {
+export const renderToJSON = async (element: React.ReactElement): Promise<FileFormat.AnyLayer> => {
   const tree = buildTree(element);
   return flexToSketchJSON(tree);
 };
@@ -36,14 +36,17 @@ const getDefaultPage = (): SketchLayer => {
   return isNativeSymbolsPage(currentPage) ? doc.addBlankPage() : currentPage;
 };
 
-const renderContents = (tree: TreeNode | string, container: SketchLayer): SketchLayer => {
-  const json = flexToSketchJSON(tree);
+const renderContents = async (
+  tree: TreeNode | string,
+  container: SketchLayer,
+): Promise<SketchLayer> => {
+  const json = await flexToSketchJSON(tree);
   const layer = fromSJSON(json, '119');
 
   return renderLayers([layer], container);
 };
 
-const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
+const renderPage = async (tree: TreeNode, page: SketchPage): Promise<Array<SketchLayer>> => {
   const children = tree.children || [];
 
   // assume if name is set on this nested page, the intent is to overwrite
@@ -52,10 +55,13 @@ const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
     page.setName(tree.props.name);
   }
 
-  return children.map(child => renderContents(child, page));
+  return Promise.all(children.map(child => renderContents(child, page)));
 };
 
-const renderDocument = (tree: TreeNode, documentData: SketchDocumentData): Array<SketchLayer> => {
+const renderDocument = async (
+  tree: TreeNode,
+  documentData: SketchDocumentData,
+): Promise<Array<SketchLayer>> => {
   if (!isNativeDocument(documentData)) {
     throw new Error('Cannot render a Document into a child of Document');
   }
@@ -74,7 +80,10 @@ const renderDocument = (tree: TreeNode, documentData: SketchDocumentData): Array
   });
 };
 
-const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
+const renderTree = async (
+  tree: TreeNode,
+  _container?: SketchLayer,
+): Promise<SketchLayer | Array<SketchLayer>> => {
   if (isNativeDocument(_container) && tree.type !== 'sketch_document') {
     throw new Error('You need to render a Document into Document');
   }
@@ -98,10 +107,10 @@ const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Arr
     : renderContents(tree, container);
 };
 
-export const render = (
+export const render = async (
   element: React.ReactElement,
   container?: SketchLayer | WrappedSketchLayer,
-): SketchLayer | Array<SketchLayer> => {
+): Promise<SketchLayer | Array<SketchLayer>> => {
   if (getSketchVersion() === 'NodeJS') {
     return renderToJSON(element);
   }
@@ -124,7 +133,8 @@ export const render = (
 
     injectSymbols(getDocumentDataFromContainer(nativeContainer));
 
-    return renderTree(tree, nativeContainer);
+    const layer = await renderTree(tree, nativeContainer);
+    return layer;
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);

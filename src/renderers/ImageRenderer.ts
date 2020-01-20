@@ -16,7 +16,7 @@ function extractURLFromSource(source?: string | { uri?: string }): string | unde
 }
 
 export default class ImageRenderer extends SketchRenderer {
-  renderBackingLayers({ layout, style, props }: TreeNode<Props>) {
+  async renderBackingLayers({ layout, style, props }: TreeNode<Props>) {
     let layers: FileFormat.ShapeGroup[] = [];
 
     const {
@@ -28,7 +28,7 @@ export default class ImageRenderer extends SketchRenderer {
 
     const url = extractURLFromSource(props.source);
 
-    const image = getImageDataFromURL(url);
+    const image = await getImageDataFromURL(url);
 
     const fillImage = makeJSONDataReference(image);
 

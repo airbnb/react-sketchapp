@@ -11,16 +11,17 @@ export default class SketchRenderer {
     return 'Group';
   }
 
-  renderGroupLayer({
+  async renderGroupLayer({
     layout,
     style,
     props,
-  }: TreeNode):
+  }: TreeNode): Promise<
     | FileFormat.SymbolMaster
     | FileFormat.Artboard
     | FileFormat.Group
     | FileFormat.ShapeGroup
-    | FileFormat.SymbolInstance {
+    | FileFormat.SymbolInstance
+  > {
     // Default SketchRenderer just renders an empty group
 
     const transform = processTransform(layout, style);
@@ -42,23 +43,25 @@ export default class SketchRenderer {
     };
   }
 
-  renderBackingLayers(
+  async renderBackingLayers(
     _node: TreeNode,
-  ): (
-    | FileFormat.ShapePath
-    | FileFormat.Rectangle
-    | FileFormat.SymbolMaster
-    | FileFormat.Group
-    | FileFormat.Polygon
-    | FileFormat.Star
-    | FileFormat.Triangle
-    | FileFormat.ShapeGroup
-    | FileFormat.Text
-    | FileFormat.SymbolInstance
-    | FileFormat.Slice
-    | FileFormat.Hotspot
-    | FileFormat.Bitmap
-  )[] {
+  ): Promise<
+    (
+      | FileFormat.ShapePath
+      | FileFormat.Rectangle
+      | FileFormat.SymbolMaster
+      | FileFormat.Group
+      | FileFormat.Polygon
+      | FileFormat.Star
+      | FileFormat.Triangle
+      | FileFormat.ShapeGroup
+      | FileFormat.Text
+      | FileFormat.SymbolInstance
+      | FileFormat.Slice
+      | FileFormat.Hotspot
+      | FileFormat.Bitmap
+    )[]
+  > {
     return [];
   }
 }

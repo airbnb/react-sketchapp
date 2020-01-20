@@ -9,14 +9,15 @@ function missingRendererError(type: string, annotations?: string) {
   );
 }
 
-const flexToSketchJSON = (
+const flexToSketchJSON = async (
   node: TreeNode | string,
-):
+): Promise<
   | FileFormat.SymbolMaster
   | FileFormat.Artboard
   | FileFormat.Group
   | FileFormat.ShapeGroup
-  | FileFormat.SymbolInstance => {
+  | FileFormat.SymbolInstance
+> => {
   if (typeof node === 'string') {
     throw missingRendererError('string');
   }
@@ -45,17 +46,19 @@ const flexToSketchJSON = (
   }
 
   const renderer = new Renderer();
-  const groupLayer = renderer.renderGroupLayer(node);
+  const groupLayer = await renderer.renderGroupLayer(node);
 
   if (groupLayer._class === 'symbolInstance') {
     return groupLayer;
   }
 
-  const backingLayers = renderer.renderBackingLayers(node);
+  const backingLayers = await renderer.renderBackingLayers(node);
 
   // stopping the walk down the tree if we have an svg
   const sublayers =
-    children && type !== 'sketch_svg' ? children.map(child => flexToSketchJSON(child)) : [];
+    children && type !== 'sketch_svg'
+      ? await Promise.all(children.map(child => flexToSketchJSON(child)))
+      : [];
 
   // Filter out anything null, undefined
   const layers = [...backingLayers, ...sublayers].filter(l => l);
