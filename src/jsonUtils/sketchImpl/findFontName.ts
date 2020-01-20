@@ -6,7 +6,7 @@ import { FONT_STYLES } from '../textLayers';
 // thanks y'all
 // https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
 
-const FONT_WEIGHTS = {
+const FONT_WEIGHTS: { [key: string]: number } = {
   ultralight: -0.8,
   '100': -0.8,
   thin: -0.6,

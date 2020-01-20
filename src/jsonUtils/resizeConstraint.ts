@@ -12,7 +12,7 @@ import { ResizeConstraints } from '../types';
   6. fixedWidth
  */
 
-const RESIZE_CONSTRAINTS = {
+const RESIZE_CONSTRAINTS: { [key: string]: number } = {
   top_left_fixedHeight_fixedWidth: 9,
   top_right_left_fixedHeight: 10,
   top_left_fixedHeight: 11,

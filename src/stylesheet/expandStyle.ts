@@ -2,7 +2,7 @@ import { RawStyle, Style } from './types';
 
 const { hasOwnProperty } = Object.prototype;
 
-const styleShortHands = {
+const styleShortHands: { [key: string]: { [subKey: string]: boolean } } = {
   borderColor: {
     borderTopColor: true,
     borderRightColor: true,
@@ -93,7 +93,7 @@ export default (style: RawStyle): Style => {
   if (!style) return style;
   const propsArray = Object.keys(style);
   const sortedProps = sortProps(propsArray);
-  const resolvedStyle = {};
+  const resolvedStyle: Style = {};
 
   for (let i = 0; i < sortedProps.length; i++) {
     const key = sortedProps[i];

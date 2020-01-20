@@ -26,12 +26,12 @@ const hotspotLayer = ({
 }: {
   targetId?: string;
   target?: string;
-  animationType?: string;
+  animationType?: 'none' | 'slideFromRight' | 'slideFromLeft' | 'slideFromBottom' | 'slideFromTop';
 }): { flow: FileFormat.FlowConnection } => ({
   flow: {
     _class: 'MSImmutableFlowConnection',
     animationType: (animationType && animationTypes[animationType]) || -1,
-    destinationArtboardID: target ? getArtboard(target) : targetId,
+    destinationArtboardID: target ? getArtboard(target) : targetId || 'broken',
   },
 });
 

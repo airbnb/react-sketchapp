@@ -52,7 +52,9 @@ const create = (styles: { [key: string]: TextStyle }, options: Options = {}): St
   const doc = getDocument(document);
 
   if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
-    doc.showMessage('💎 Requires Sketch 50+ 💎');
+    if (doc) {
+      doc.showMessage('💎 Requires Sketch 50+ 💎');
+    }
     return {};
   }
 

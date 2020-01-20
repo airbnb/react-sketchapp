@@ -31,7 +31,7 @@ function makeSvgString(el: string | TreeNode<Props>) {
   }
   const { type, props, children } = el;
 
-  if (props && props.textNodes) {
+  if (props && props.textNodes && props.textNodes.length) {
     return props.textNodes.reduce((prev, textNode) => prev + textNode.content, '');
   }
 
@@ -43,6 +43,7 @@ function makeSvgString(el: string | TreeNode<Props>) {
 
   const cleanedType = type.slice(4);
   const attributes = Object.keys(props || {}).reduce(
+    // @ts-ignore
     (prev, k) => (props[k] ? `${prev} ${toSnakeCase(k)}="${props[k]}"` : prev),
     '',
   );

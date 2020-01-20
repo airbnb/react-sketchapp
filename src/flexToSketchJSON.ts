@@ -31,7 +31,8 @@ const flexToSketchJSON = (
     );
   }
 
-  const Renderer = <typeof SketchRenderer>renderers[type];
+  // @ts-ignore
+  const Renderer: typeof SketchRenderer | null = renderers[type];
 
   if (Renderer == null) {
     if (type.indexOf('svg') === 0) {

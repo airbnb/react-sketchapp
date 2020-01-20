@@ -1,9 +1,10 @@
 export type Transform = { [key: string]: number }[];
 export type Style = {
   resizeMode?: 'contain' | 'cover' | 'stretch' | 'center' | 'repeat' | 'none';
-  height?: number;
-  width?: number;
+  height?: number | null;
+  width?: number | null;
   transform?: Transform;
+  [key: string]: unknown;
 };
 export type StyleId = number;
 export type RawStyle = { [key: string]: any };

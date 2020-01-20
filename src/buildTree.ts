@@ -90,7 +90,7 @@ export const reactTreeToFlexTree = (
 };
 
 const buildTree = (element: React.ReactElement) => {
-  let renderer: TestRenderer.ReactTestRenderer;
+  let renderer: TestRenderer.ReactTestRenderer | undefined;
 
   if (typeof TestRenderer.act !== 'undefined') {
     TestRenderer.act(() => {
@@ -101,7 +101,14 @@ const buildTree = (element: React.ReactElement) => {
     renderer = TestRenderer.create(element);
   }
 
+  if (!renderer) {
+    throw new Error('Cannot access react renderer');
+  }
+
   const json = renderer.toJSON();
+  if (!json) {
+    throw new Error('Cannot render react element');
+  }
   const yogaNode = computeYogaTree(json, new Context());
   yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());

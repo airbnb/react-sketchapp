@@ -37,7 +37,7 @@ function msListToArray<T>(pageList: T[]): T[] {
 const getSymbolsPage = (documentData: SketchDocumentData) =>
   documentData.symbolsPageOrCreateIfNecessary();
 
-function exists(x: FileFormat.SymbolMaster | undefined): x is FileFormat.SymbolMaster {
+function exists(x: FileFormat.SymbolMaster | undefined | null): x is FileFormat.SymbolMaster {
   return !!x;
 }
 
@@ -50,7 +50,7 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
     existingSymbols = msListToArray(symbolsPage.layers())
       .map(x => {
         const symbolJson = toSJSON(x);
-        if (symbolJson._class !== 'symbolMaster') {
+        if (!symbolJson || symbolJson._class !== 'symbolMaster') {
           return undefined;
         }
         layers[symbolJson.symbolID] = x;
@@ -114,7 +114,7 @@ export const injectSymbols = (
 const SymbolInstancePropTypes = {
   style: PropTypes.shape(ViewStylePropTypes),
   name: PropTypes.string,
-  overrides: PropTypes.object,
+  overrides: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
   resizingConstraint: PropTypes.shape({
     ...ResizingConstraintPropTypes,
   }),
@@ -248,7 +248,7 @@ export const getSymbolMasterByName = (
 };
 
 export const getSymbolMasterById = (
-  symbolID: string,
+  symbolID?: string,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): FileFormat.SymbolMaster | undefined => {
   let symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;

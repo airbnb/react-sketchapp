@@ -75,10 +75,10 @@ export default class RedBox extends React.Component<Props> {
       );
     }
 
-    let frames: ErrorStackParser.StackFrame[];
-    let parseError: Error;
+    let frames: ErrorStackParser.StackFrame[] | undefined;
+    let parseError: Error | undefined;
 
-    let frameChildren: JSX.Element[] | JSX.Element;
+    let frameChildren: JSX.Element[] | JSX.Element | undefined;
 
     try {
       frames = ErrorStackParser.parse(error);

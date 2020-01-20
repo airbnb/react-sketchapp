@@ -11,7 +11,7 @@ import { makeColorFromCSS } from '../models';
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
 
-function makeParagraphStyle(textStyle) {
+function makeParagraphStyle(textStyle: TextStyle) {
   const pStyle = NSMutableParagraphStyle.alloc().init();
   if (textStyle.lineHeight !== undefined) {
     pStyle.minimumLineHeight = textStyle.lineHeight;
