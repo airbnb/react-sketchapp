@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
-import { toSJSON } from './jsonUtils/sketchImpl/sketch-to-json';
+import convertJsonToSketch from './jsonUtils/sketchJson/convertJsonToSketch';
+import convertSketchToJson from './jsonUtils/sketchJson/convertSketchToJson';
 import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
@@ -47,7 +47,7 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
 
     existingSymbols = msListToArray(symbolsPage.layers())
       .map(x => {
-        const symbolJson = toSJSON(x);
+        const symbolJson = convertSketchToJson(x);
         if (symbolJson._class !== 'symbolMaster') {
           return undefined;
         }
@@ -93,7 +93,7 @@ export const injectSymbols = (
       symbolMaster.frame.x = left;
       left += symbolMaster.frame.width + 20;
 
-      const newLayer = fromSJSON(symbolMaster, '119');
+      const newLayer = convertJsonToSketch(symbolMaster, '119');
       layers[symbolMaster.symbolID] = newLayer;
     });
 
@@ -200,7 +200,7 @@ function tryGettingSymbolMasterInDocumentByName(
     return undefined;
   }
 
-  return toSJSON(symbol) as FileFormat.SymbolMaster;
+  return convertSketchToJson(symbol) as FileFormat.SymbolMaster;
 }
 
 function tryGettingSymbolMasterInDocumentById(
@@ -215,7 +215,7 @@ function tryGettingSymbolMasterInDocumentById(
     return undefined;
   }
 
-  return toSJSON(symbol) as FileFormat.SymbolMaster;
+  return convertSketchToJson(symbol) as FileFormat.SymbolMaster;
 }
 
 export const getSymbolMasterByName = (

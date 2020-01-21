@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
+import convertJsonToSketch from './jsonUtils/sketchJson/convertJsonToSketch';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
@@ -43,7 +43,7 @@ const renderContents = async (
   bridge: PlatformBridge,
 ): Promise<SketchLayer> => {
   const json = await flexToSketchJSON(tree, bridge);
-  const layer = fromSJSON(json, '119');
+  const layer = convertJsonToSketch(json, '119');
 
   return renderLayers([layer], container);
 };

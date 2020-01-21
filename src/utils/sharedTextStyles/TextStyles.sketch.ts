@@ -1,6 +1,6 @@
 import invariant from 'invariant';
-import { fromSJSON } from '../../jsonUtils/sketchImpl/json-to-sketch';
-import { toSJSON } from '../../jsonUtils/sketchImpl/sketch-to-json';
+import convertJsonToSketch from '../../jsonUtils/sketchJson/convertJsonToSketch';
+import convertSketchToJson from '../../jsonUtils/sketchJson/convertSketchToJson';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchDocument, TextStyle } from '../../types';
 import { generateID } from '../../jsonUtils/models';
@@ -35,7 +35,7 @@ class TextStyles {
     const { _document } = this;
     invariant(_document, 'Please provide a sketch document reference');
 
-    const nativeStyle = fromSJSON(style, '119');
+    const nativeStyle = convertJsonToSketch(style, '119');
 
     const container = _document.documentData().layerTextStyles();
 
@@ -86,7 +86,7 @@ class TextStyles {
       return undefined;
     }
 
-    const style = toSJSON(foundStyle) as FileFormat.Style;
+    const style = convertSketchToJson(foundStyle) as FileFormat.Style;
 
     return parseTextStyle(style);
   }
