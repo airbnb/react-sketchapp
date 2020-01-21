@@ -4,9 +4,9 @@ import {
   TEXT_DECORATION_LINETHROUGH,
   TEXT_ALIGN,
   TEXT_TRANSFORM,
-} from '../textLayers';
+} from '../../jsonUtils/textLayers';
 import { findFont } from './findFontName';
-import { makeColorFromCSS } from '../models';
+import { makeColorFromCSS } from '../../jsonUtils/models';
 
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;

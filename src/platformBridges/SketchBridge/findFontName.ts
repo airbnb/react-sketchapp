@@ -2,7 +2,7 @@
 
 import hashStyle from '../../utils/hashStyle';
 import { TextStyle } from '../../types';
-import { FONT_STYLES } from '../textLayers';
+import { FONT_STYLES } from '../../jsonUtils/textLayers';
 
 // this borrows heavily from react-native's RCTFont class
 // thanks y'all

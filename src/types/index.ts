@@ -215,3 +215,10 @@ export type ResizeConstraints = {
   fixedHeight?: boolean;
   fixedWidth?: boolean;
 };
+
+export type PlatformBridge = {
+  createStringMeasurer(textNodes: TextNode[], maxWidth: number): Size;
+  findFontName(style: TextStyle): string;
+  fetch(input: RequestInfo, init?: RequestInit): Promise<Response>;
+  readFile(path: string): Promise<Buffer>;
+};
