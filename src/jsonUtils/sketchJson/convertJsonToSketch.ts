@@ -23,7 +23,7 @@ export default function convertJsonToSketch(
   );
 
   if (err.value() !== null) {
-    console.error(err.value());
+    if (process.env.NODE_ENV !== 'production') console.error(err.value());
     throw new Error(err.value());
   }
 

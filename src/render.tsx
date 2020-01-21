@@ -141,8 +141,9 @@ export default async function render(
     const layer = await renderTree(tree, nativeContainer, platformBridge);
     return layer;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    if (process.env.NODE_ENV !== 'production')
+      // eslint-disable-next-line no-console
+      console.error(err);
     const tree = buildTree(<RedBox error={err} />, platformBridge);
     return renderContents(tree, nativeContainer, platformBridge);
   }

@@ -69,7 +69,8 @@ export const injectSymbols = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ) => {
   if (!isRunningInSketch()) {
-    console.error('Cannot inject symbols while Sketch is not running');
+    if (process.env.NODE_ENV !== 'production')
+      console.error('Cannot inject symbols while Sketch is not running');
     return;
   }
 
