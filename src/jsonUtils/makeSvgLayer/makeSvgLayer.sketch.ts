@@ -1,5 +1,5 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { toSJSON } from './sketch-to-json';
+import { toSJSON } from '../sketchImpl/sketch-to-json';
 
 import { LayoutInfo } from '../../types';
 

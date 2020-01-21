@@ -1,6 +1,6 @@
 import ViewRenderer from './ViewRenderer';
 import { TreeNode } from '../types';
-import makeSvgLayer from '../jsonUtils/svgLayer';
+import makeSvgLayer from '../jsonUtils/makeSvgLayer';
 import { Props } from '../components/Svg/Svg';
 
 const snakeExceptions = [
