@@ -1,9 +1,8 @@
 import { PlatformBridge } from '../types';
-import weakRequire from '../utils/weakRequire';
 
-const { createStringMeasurer, findFontName } = weakRequire(module, 'node-sketch-bridge');
-const fetch = weakRequire(module, 'node-fetch');
-const { readFile: nodeReadFile } = weakRequire(module, 'fs');
+import { createStringMeasurer, findFontName } from 'node-sketch-bridge';
+import fetch from 'node-fetch';
+import { readFile as nodeReadFile } from 'fs';
 
 const NodeMacOSBridge: PlatformBridge = {
   createStringMeasurer,
