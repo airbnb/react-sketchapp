@@ -1,22 +1,23 @@
 import * as React from 'react';
-import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
 import buildTree from './buildTree';
 import flexToSketchJSON from './flexToSketchJSON';
 import { resetLayer, resetDocument } from './resets';
 import { injectSymbols } from './symbol';
-import { SketchDocumentData, SketchLayer, SketchPage, TreeNode, WrappedSketchLayer } from './types';
+import {
+  SketchDocumentData,
+  SketchLayer,
+  SketchPage,
+  TreeNode,
+  WrappedSketchLayer,
+  PlatformBridge,
+} from './types';
 import RedBox from './components/RedBox';
 import { getDocumentDataFromContainer, getDocumentDataFromContext } from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
 import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
-import { getSketchVersion } from './utils/getSketchVersion';
-
-export const renderToJSON = async (element: React.ReactElement): Promise<FileFormat.AnyLayer> => {
-  const tree = buildTree(element);
-  return flexToSketchJSON(tree);
-};
+import getDefaultBridge from './platformBridges/getDefaultBridge';
 
 export const renderLayers = (layers: Array<any>, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {
@@ -39,14 +40,19 @@ const getDefaultPage = (): SketchLayer => {
 const renderContents = async (
   tree: TreeNode | string,
   container: SketchLayer,
+  bridge: PlatformBridge,
 ): Promise<SketchLayer> => {
-  const json = await flexToSketchJSON(tree);
+  const json = await flexToSketchJSON(tree, bridge);
   const layer = fromSJSON(json, '119');
 
   return renderLayers([layer], container);
 };
 
-const renderPage = async (tree: TreeNode, page: SketchPage): Promise<Array<SketchLayer>> => {
+const renderPage = async (
+  tree: TreeNode,
+  page: SketchPage,
+  bridge: PlatformBridge,
+): Promise<Array<SketchLayer>> => {
   const children = tree.children || [];
 
   // assume if name is set on this nested page, the intent is to overwrite
@@ -55,12 +61,13 @@ const renderPage = async (tree: TreeNode, page: SketchPage): Promise<Array<Sketc
     page.setName(tree.props.name);
   }
 
-  return Promise.all(children.map(child => renderContents(child, page)));
+  return Promise.all(children.map(child => renderContents(child, page, bridge)));
 };
 
 const renderDocument = async (
   tree: TreeNode,
   documentData: SketchDocumentData,
+  bridge: PlatformBridge,
 ): Promise<Array<SketchLayer>> => {
   if (!isNativeDocument(documentData)) {
     throw new Error('Cannot render a Document into a child of Document');
@@ -76,13 +83,14 @@ const renderDocument = async (
     }
 
     const page = i === 0 && shouldRenderInitialPage ? initialPage : documentData.addBlankPage();
-    return renderPage(child, page);
+    return renderPage(child, page, bridge);
   });
 };
 
 const renderTree = async (
   tree: TreeNode,
-  _container?: SketchLayer,
+  _container: SketchLayer | null | undefined,
+  bridge: PlatformBridge,
 ): Promise<SketchLayer | Array<SketchLayer>> => {
   if (isNativeDocument(_container) && tree.type !== 'sketch_document') {
     throw new Error('You need to render a Document into Document');
@@ -96,25 +104,22 @@ const renderTree = async (
     const doc = _container || getDocumentDataFromContext(context);
 
     resetDocument(doc);
-    return renderDocument(tree, doc);
+    return renderDocument(tree, doc, bridge);
   }
 
   const container = _container || getDefaultPage();
 
   resetLayer(container);
   return tree.type === 'sketch_page'
-    ? renderPage(tree, container)
-    : renderContents(tree, container);
+    ? renderPage(tree, container, bridge)
+    : renderContents(tree, container, bridge);
 };
 
-export const render = async (
+export default async function render(
   element: React.ReactElement,
   container?: SketchLayer | WrappedSketchLayer,
-): Promise<SketchLayer | Array<SketchLayer>> => {
-  if (getSketchVersion() === 'NodeJS') {
-    return renderToJSON(element);
-  }
-
+  platformBridge: PlatformBridge = getDefaultBridge(),
+): Promise<SketchLayer | Array<SketchLayer>> {
   let nativeContainer: SketchLayer | void;
   if (container && container.sketchObject) {
     nativeContainer = container.sketchObject;
@@ -129,16 +134,16 @@ export const render = async (
   }
 
   try {
-    const tree = buildTree(element);
+    const tree = buildTree(element, platformBridge);
 
     injectSymbols(getDocumentDataFromContainer(nativeContainer));
 
-    const layer = await renderTree(tree, nativeContainer);
+    const layer = await renderTree(tree, nativeContainer, platformBridge);
     return layer;
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
-    const tree = buildTree(<RedBox error={err} />);
-    return renderContents(tree, nativeContainer);
+    const tree = buildTree(<RedBox error={err} />, platformBridge);
+    return renderContents(tree, nativeContainer, platformBridge);
   }
-};
+}

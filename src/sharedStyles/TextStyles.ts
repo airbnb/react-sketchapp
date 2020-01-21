@@ -1,5 +1,11 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { SketchDocumentData, SketchDocument, WrappedSketchDocument, TextStyle } from '../types';
+import {
+  SketchDocumentData,
+  SketchDocument,
+  WrappedSketchDocument,
+  TextStyle,
+  PlatformBridge,
+} from '../types';
 import getSketchVersion from '../utils/getSketchVersion';
 import isRunningInSketch from '../utils/isRunningInSketch';
 import hashStyle from '../utils/hashStyle';
@@ -8,6 +14,7 @@ import sharedTextStyles from '../utils/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/textLayers';
 import pick from '../utils/pick';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
+import getDefaultBridge from '../platformBridges/getDefaultBridge';
 
 type MurmurHash = string;
 
@@ -23,10 +30,14 @@ type StyleHash = { [key: string]: RegisteredStyle };
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
 
-const registerStyle = (name: string, style: TextStyle): void => {
+const registerStyle = (
+  name: string,
+  style: TextStyle,
+  platformBridge: PlatformBridge = getDefaultBridge(),
+): void => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
   const hash = hashStyle(safeStyle);
-  const sketchStyle = makeTextStyle(safeStyle);
+  const sketchStyle = makeTextStyle(safeStyle, null, platformBridge);
   const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
 
   // FIXME(gold): side effect :'(
@@ -45,7 +56,11 @@ type Options = {
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument;
 };
 
-const create = (styles: { [key: string]: TextStyle }, options: Options = {}): StyleHash => {
+const create = (
+  styles: { [key: string]: TextStyle },
+  options: Options = {},
+  platformBridge: PlatformBridge = getDefaultBridge(),
+): StyleHash => {
   const { clearExistingStyles, document } = options;
 
   const doc = getDocument(document);
@@ -62,7 +77,7 @@ const create = (styles: { [key: string]: TextStyle }, options: Options = {}): St
     sharedTextStyles.setStyles([]);
   }
 
-  Object.keys(styles).forEach(name => registerStyle(name, styles[name]));
+  Object.keys(styles).forEach(name => registerStyle(name, styles[name], platformBridge));
 
   return _styles;
 };

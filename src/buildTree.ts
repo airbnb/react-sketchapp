@@ -1,7 +1,7 @@
 import * as TestRenderer from 'react-test-renderer';
 import yoga from 'yoga-layout-prebuilt';
 import Context from './utils/Context';
-import { TreeNode, TextNode } from './types';
+import { TreeNode, TextNode, PlatformBridge } from './types';
 import hasAnyDefined from './utils/hasAnyDefined';
 import pick from './utils/pick';
 import computeYogaTree from './jsonUtils/computeYogaTree';
@@ -87,7 +87,7 @@ export const reactTreeToFlexTree = (
   };
 };
 
-const buildTree = (element: React.ReactElement): TreeNode => {
+const buildTree = (element: React.ReactElement, bridge: PlatformBridge): TreeNode => {
   let renderer: TestRenderer.ReactTestRenderer;
 
   if (typeof TestRenderer.act !== 'undefined') {
@@ -100,7 +100,7 @@ const buildTree = (element: React.ReactElement): TreeNode => {
   }
 
   const json: TreeNode = renderer.toJSON();
-  const yogaNode = computeYogaTree(json, new Context());
+  const yogaNode = computeYogaTree(json, new Context(), bridge);
   yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());
 

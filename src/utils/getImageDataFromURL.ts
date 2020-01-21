@@ -3,6 +3,7 @@
 // TODO: Load node polyfill
 // TODO: Read from FS
 import sha1 from 'js-sha1';
+import { PlatformBridge } from '../types';
 
 const ERROR_IMAGE =
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
@@ -36,13 +37,14 @@ const isImage = (buffer: Buffer): boolean => {
 };
 
 export default async function getImageDataFromURL(
+  bridge: PlatformBridge,
   url?: string,
 ): Promise<Readonly<{ data: string; sha1: string }>> {
   if (!url) {
     return ERROR_RESULT;
   }
 
-  const response = await fetch(url);
+  const response = await bridge.fetch(url);
   if (!response.ok) {
     return ERROR_RESULT;
   }

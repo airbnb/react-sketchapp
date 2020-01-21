@@ -180,7 +180,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
           makeOverride(
             reference.path,
             reference.type,
-            makeJSONDataReference(await getImageDataFromURL(overrideValue)),
+            makeJSONDataReference(await getImageDataFromURL(this.platformBridge, overrideValue)),
           ),
         );
       }

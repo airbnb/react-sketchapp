@@ -1,7 +1,7 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import * as renderers from './renderers';
 import SketchRenderer from './renderers/SketchRenderer';
-import { TreeNode } from './types';
+import { TreeNode, PlatformBridge } from './types';
 
 function missingRendererError(type: string, annotations?: string) {
   return new Error(
@@ -11,6 +11,7 @@ function missingRendererError(type: string, annotations?: string) {
 
 const flexToSketchJSON = async (
   node: TreeNode | string,
+  bridge: PlatformBridge,
 ): Promise<
   | FileFormat.SymbolMaster
   | FileFormat.Artboard
@@ -45,7 +46,7 @@ const flexToSketchJSON = async (
     throw missingRendererError(type);
   }
 
-  const renderer = new Renderer();
+  const renderer = new Renderer(bridge);
   const groupLayer = await renderer.renderGroupLayer(node);
 
   if (groupLayer._class === 'symbolInstance') {
@@ -57,7 +58,7 @@ const flexToSketchJSON = async (
   // stopping the walk down the tree if we have an svg
   const sublayers =
     children && type !== 'sketch_svg'
-      ? await Promise.all(children.map(child => flexToSketchJSON(child)))
+      ? await Promise.all(children.map(child => flexToSketchJSON(child, bridge)))
       : [];
 
   // Filter out anything null, undefined

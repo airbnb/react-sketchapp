@@ -29,6 +29,7 @@ export default class TextRenderer extends SketchRenderer {
       style,
       props.resizingConstraint,
       props.shadows,
+      this.platformBridge,
     );
 
     const resolvedTextStyle = TextStyles.resolve(textStyle);

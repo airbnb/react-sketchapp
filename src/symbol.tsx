@@ -12,8 +12,9 @@ import flexToSketchJSON from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentData } from './utils/getDocument';
-import { SketchDocumentData, SketchDocument, WrappedSketchDocument } from './types';
-import { getSketchVersion } from './utils/getSketchVersion';
+import { SketchDocumentData, SketchDocument, WrappedSketchDocument, PlatformBridge } from './types';
+import getDefaultBridge from './platformBridges/getDefaultBridge';
+import isRunningInSketch from './utils/isRunningInSketch';
 
 let id = 0;
 const nextId = () => ++id; // eslint-disable-line
@@ -67,8 +68,8 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
 export const injectSymbols = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ) => {
-  if (getSketchVersion() === 'NodeJS') {
-    console.error('Cannot inject symbols in NodeJS');
+  if (!isRunningInSketch()) {
+    console.error('Cannot inject symbols while Sketch is not running');
     return;
   }
 
@@ -154,8 +155,9 @@ export const makeSymbol = async (
   Component: React.ComponentType<any>,
   symbolProps: string | SymbolMasterProps,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+  bridge: PlatformBridge = getDefaultBridge(),
 ) => {
-  if (!hasInitialized && getSketchVersion() !== 'NodeJS') {
+  if (!hasInitialized && isRunningInSketch()) {
     getExistingSymbols(getDocumentData(document));
   }
 
@@ -176,7 +178,9 @@ export const makeSymbol = async (
       >
         <Component />
       </sketch_symbolmaster>,
+      bridge,
     ),
+    bridge,
   )) as FileFormat.SymbolMaster;
 
   symbolsRegistry[symbolID] = symbolMaster;
@@ -222,7 +226,7 @@ export const getSymbolMasterByName = (
     ? Object.keys(symbolsRegistry).find(key => String(symbolsRegistry[key].name) === name)
     : '';
 
-  if (typeof symbolID === 'undefined' && name && getSketchVersion() !== 'NodeJS') {
+  if (typeof symbolID === 'undefined' && name && isRunningInSketch()) {
     return tryGettingSymbolMasterInDocumentByName(name, document);
   }
 
@@ -239,7 +243,7 @@ export const getSymbolMasterById = (
 ): FileFormat.SymbolMaster => {
   let symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;
 
-  if (typeof symbolMaster === 'undefined' && symbolID && getSketchVersion() !== 'NodeJS') {
+  if (typeof symbolMaster === 'undefined' && symbolID && isRunningInSketch()) {
     symbolMaster = tryGettingSymbolMasterInDocumentById(symbolID, document);
   }
 

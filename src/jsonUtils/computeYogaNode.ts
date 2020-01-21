@@ -1,7 +1,7 @@
 import yoga from 'yoga-layout-prebuilt';
-import { TreeNode, ViewStyle } from '../types';
+import { TreeNode, ViewStyle, PlatformBridge } from '../types';
 import Context from '../utils/Context';
-import createStringMeasurer from '../utils/createStringMeasurer';
+import measureString from '../utils/measureString';
 import hasAnyDefined from '../utils/hasAnyDefined';
 import pick from '../utils/pick';
 import computeTextTree from './computeTextTree';
@@ -30,6 +30,7 @@ export const getStyles = (node: TreeNode | string): ViewStyle => {
 const computeYogaNode = (
   node: TreeNode | string,
   context: Context,
+  bridge: PlatformBridge,
 ): { node: yoga.YogaNode; stop?: boolean } => {
   const yogaNode = yoga.Node.create();
   const hasStyle = typeof node !== 'string' && node.props && node.props.style;
@@ -341,7 +342,7 @@ const computeYogaNode = (
 
     // Handle Text Children
     const textNodes = computeTextTree(node, context);
-    yogaNode.setMeasureFunc(createStringMeasurer(textNodes));
+    yogaNode.setMeasureFunc((width: number = 0) => measureString(bridge, textNodes, width));
 
     return { node: yogaNode, stop: true };
   }

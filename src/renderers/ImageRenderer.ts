@@ -28,7 +28,7 @@ export default class ImageRenderer extends SketchRenderer {
 
     const url = extractURLFromSource(props.source);
 
-    const image = await getImageDataFromURL(url);
+    const image = await getImageDataFromURL(this.platformBridge, url);
 
     const fillImage = makeJSONDataReference(image);
 

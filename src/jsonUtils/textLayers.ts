@@ -1,10 +1,8 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import makeResizeConstraint from './resizeConstraint';
-import { TextNode, ResizeConstraints, TextStyle, ViewStyle } from '../types';
+import { TextNode, ResizeConstraints, TextStyle, ViewStyle, PlatformBridge } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { makeStyle, parseStyle } from './style';
-
-import findFontName from '../utils/findFont';
 
 export const TEXT_DECORATION_UNDERLINE = {
   none: FileFormat.UnderlineStyle.None,
@@ -50,15 +48,18 @@ export const FONT_STYLES = {
   oblique: true,
 };
 
-const makeFontDescriptor = (style: TextStyle): FileFormat.FontDescriptor => ({
+const makeFontDescriptor = (
+  style: TextStyle,
+  bridge: PlatformBridge,
+): FileFormat.FontDescriptor => ({
   _class: 'fontDescriptor',
   attributes: {
-    name: String(findFontName(style)), // will default to the system font
+    name: String(bridge.findFontName(style)), // will default to the system font
     size: style.fontSize || 14,
   },
 });
 
-const makeTextStyleAttributes = (style: TextStyle) =>
+const makeTextStyleAttributes = (style: TextStyle, bridge: PlatformBridge) =>
   ({
     underlineStyle: style.textDecoration ? TEXT_DECORATION_UNDERLINE[style.textDecoration] || 0 : 0,
     strikethroughStyle: style.textDecoration
@@ -86,19 +87,26 @@ const makeTextStyleAttributes = (style: TextStyle) =>
           MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
         }
       : {}),
-    MSAttributedStringFontAttribute: makeFontDescriptor(style),
+    MSAttributedStringFontAttribute: makeFontDescriptor(style, bridge),
     textStyleVerticalAlignmentKey: 0,
     MSAttributedStringColorAttribute: makeColorFromCSS(style.color || 'black'),
   } as const);
 
-const makeAttribute = (node: TextNode, location: number): FileFormat.StringAttribute => ({
+const makeAttribute = (
+  node: TextNode,
+  location: number,
+  bridge: PlatformBridge,
+): FileFormat.StringAttribute => ({
   _class: 'stringAttribute',
   location,
   length: node.content.length,
-  attributes: makeTextStyleAttributes(node.textStyles),
+  attributes: makeTextStyleAttributes(node.textStyles, bridge),
 });
 
-const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedString => {
+const makeAttributedString = (
+  textNodes: TextNode[],
+  bridge: PlatformBridge,
+): FileFormat.AttributedString => {
   const json: FileFormat.AttributedString = {
     _class: 'attributedString',
     string: '',
@@ -108,7 +116,7 @@ const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedStrin
   let location = 0;
 
   textNodes.forEach(node => {
-    json.attributes.push(makeAttribute(node, location));
+    json.attributes.push(makeAttribute(node, location, bridge));
     json.string += node.content;
     location += node.content.length;
   });
@@ -116,11 +124,15 @@ const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedStrin
   return json;
 };
 
-export const makeTextStyle = (style: TextStyle, shadows?: Array<ViewStyle>): FileFormat.Style => {
+export const makeTextStyle = (
+  style: TextStyle,
+  shadows: Array<ViewStyle> | null,
+  bridge: PlatformBridge,
+): FileFormat.Style => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
     _class: 'textStyle',
-    encodedAttributes: makeTextStyleAttributes(style),
+    encodedAttributes: makeTextStyleAttributes(style, bridge),
     verticalAlignment: FileFormat.TextVerticalAlignment.Top,
   };
   return json;
@@ -195,8 +207,9 @@ const makeTextLayer = (
   name: string,
   textNodes: TextNode[],
   _style: ViewStyle,
-  resizingConstraint?: ResizeConstraints,
-  shadows?: ViewStyle[],
+  resizingConstraint: ResizeConstraints | null,
+  shadows: ViewStyle[] | null,
+  bridge: PlatformBridge,
 ): FileFormat.Text => ({
   _class: 'text',
   do_objectID: generateID(`text:${name}-${textNodes.map(node => node.content).join('')}`),
@@ -212,8 +225,8 @@ const makeTextLayer = (
   resizingType: FileFormat.ResizeType.Stretch,
   rotation: 0,
   shouldBreakMaskChain: false,
-  attributedString: makeAttributedString(textNodes),
-  style: makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows),
+  attributedString: makeAttributedString(textNodes, bridge),
+  style: makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows, bridge),
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,
   // NOTE(akp): I haven't fully figured out the meaning of glyphBounds
