@@ -1,6 +1,7 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchDocumentData, SketchDocument, WrappedSketchDocument, TextStyle } from '../types';
-import { getSketchVersion } from '../utils/getSketchVersion';
+import getSketchVersion from '../utils/getSketchVersion';
+import isRunningInSketch from '../utils/isRunningInSketch';
 import hashStyle from '../utils/hashStyle';
 import { getDocument } from '../utils/getDocument';
 import sharedTextStyles from '../utils/sharedTextStyles';
@@ -21,8 +22,6 @@ type StyleHash = { [key: string]: RegisteredStyle };
 
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
-
-const sketchVersion = getSketchVersion();
 
 const registerStyle = (name: string, style: TextStyle): void => {
   const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
@@ -51,7 +50,7 @@ const create = (styles: { [key: string]: TextStyle }, options: Options = {}): St
 
   const doc = getDocument(document);
 
-  if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
+  if (isRunningInSketch() && parseInt(getSketchVersion()) < 50) {
     doc.showMessage('💎 Requires Sketch 50+ 💎');
     return {};
   }
