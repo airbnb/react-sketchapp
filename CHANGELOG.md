@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.1.0
+
+- Fix acceptable text children (#474)
+- Fix parsing of SVG arc shorthand parameters (#467)
+- Change default font resolution, always falling back to the system font when the `fontFamily` is missing or not specified
+
 ## Version 3.0.5
 
 - Fix missing dependency (#462)
