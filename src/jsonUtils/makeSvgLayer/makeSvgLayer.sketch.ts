@@ -3,11 +3,11 @@ import convertSketchToJson from '../sketchJson/convertSketchToJson';
 
 import { LayoutInfo } from '../../types';
 
-export default function makeSvgLayer(
+export default async function makeSvgLayer(
   _layout: LayoutInfo,
   name: string,
   svg: string,
-): FileFormat.Group {
+): Promise<FileFormat.Group> {
   const svgString = NSString.stringWithString(svg);
   const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
   const svgImporter = MSSVGImporter.svgImporter();

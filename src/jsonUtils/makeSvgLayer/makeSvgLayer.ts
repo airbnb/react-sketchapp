@@ -6,7 +6,6 @@ import { createUniformBorder } from '../borders';
 import layerGroup from '../layerGroup';
 import { makePathsFromCommands, makeLineCapStyle } from './graphics/path';
 import { unionRects, scaleRect, makeBoundingRectFromCommands, resize } from './graphics/rect';
-import weakRequire from '../../utils/weakRequire';
 
 function makeLayerFromPathElement(pathElement, _parentFrame: FileFormat.Rect, scale: number) {
   const {
@@ -78,8 +77,13 @@ function makeLayerGroup(
   return group;
 }
 
-export default function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
-  const svgModel = weakRequire(module, '@lona/svg-model');
+export default async function makeSvgLayer(
+  layout: LayoutInfo,
+  name: string,
+  svg: string,
+): Promise<FileFormat.Group> {
+  // Load the module only if it has been made available through another import.
+  const svgModel = await import(/* webpackMode: "weak" */ '@lona/svg-model');
 
   const {
     data: { params, children },
