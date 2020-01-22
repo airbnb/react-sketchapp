@@ -10,7 +10,9 @@
     "watch": "skpm-build --watch",
     "render": "skpm-build --watch --run",
     "render:once": "skpm-build --run",
-    "postinstall": "npm run build && skpm-link"
+    "postinstall": "npm run build && skpm-link",
+    "link": "skpm-link",
+    "clean": "rm -rf profile-cards.sketchplugin"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
@@ -20,6 +22,6 @@
     "react-test-renderer": "^16.3.2"
   },
   "devDependencies": {
-    "@skpm/builder": "^0.4.0"
+    "@skpm/builder": "^0.7.5"
   }
 }
