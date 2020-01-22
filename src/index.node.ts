@@ -1,7 +1,14 @@
 import { default as _render } from './render';
 import { default as _renderToJSON } from './renderToJSON';
-import { makeSymbol as _makeSymbol } from './symbol';
-import { SketchLayer, WrappedSketchLayer, PlatformBridge } from './types';
+import { makeSymbol as _makeSymbol, SymbolMasterProps } from './symbol';
+import {
+  SketchLayer,
+  WrappedSketchLayer,
+  PlatformBridge,
+  SketchDocumentData,
+  WrappedSketchDocument,
+  SketchDocument,
+} from './types';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { default as _TextStyles } from './sharedStyles/TextStyles';
 

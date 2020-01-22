@@ -32,7 +32,7 @@ export default class TextRenderer extends SketchRenderer {
       this.platformBridge,
     );
 
-    const resolvedTextStyle = TextStyles.resolve(textStyle);
+    const resolvedTextStyle = TextStyles(() => this.platformBridge).resolve(textStyle);
     if (resolvedTextStyle) {
       if (!layer.style) {
         layer.style = resolvedTextStyle.sketchStyle;

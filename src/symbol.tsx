@@ -154,7 +154,7 @@ export type SymbolMasterProps = PropTypes.InferProps<typeof SymbolMasterPropType
 export const makeSymbol = async (
   Component: React.ComponentType<any>,
   symbolProps: string | SymbolMasterProps,
-  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+  document: SketchDocumentData | SketchDocument | WrappedSketchDocument | null,
   bridge: PlatformBridge,
 ) => {
   if (!hasInitialized && isRunningInSketch()) {
