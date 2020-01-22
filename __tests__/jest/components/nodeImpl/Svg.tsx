@@ -10,7 +10,7 @@ jest.mock('../../../../src/jsonUtils/models', () => ({
 }));
 
 describe('node <Svg />', () => {
-  it('generates the json for an svg', () => {
+  it('generates the json for an svg', async () => {
     class SVGElement extends React.Component {
       render() {
         return (
@@ -26,6 +26,6 @@ describe('node <Svg />', () => {
       }
     }
 
-    expect(ReactSketch.renderToJSON(<SVGElement />)).toMatchSnapshot();
+    expect(await ReactSketch.renderToJSON(<SVGElement />)).toMatchSnapshot();
   });
 });

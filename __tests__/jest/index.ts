@@ -1,9 +1,5 @@
 /* eslint-disable global-require */
-import ReactSketch from '../../src';
-jest.mock('../../src/jsonUtils/sketchImpl/createStringMeasurer');
-jest.mock('../../src/jsonUtils/sketchImpl/findFontName');
-jest.mock('../../src/jsonUtils/sketchImpl/makeImageDataFromUrl');
-jest.mock('../../src/jsonUtils/sketchImpl/makeSvgLayer');
+import * as ReactSketch from '../../src';
 
 describe('public API', () => {
   it('exports render', () => {

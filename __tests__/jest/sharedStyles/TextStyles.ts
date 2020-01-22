@@ -1,3 +1,5 @@
+import NodeMacOSBridge from '../../../src/platformBridges/NodeMacOSBridge';
+
 /* eslint-disable global-require */
 let TextStyles;
 let doc;
@@ -7,7 +9,8 @@ beforeEach(() => {
   jest.resetModules();
 
   jest.mock('../../../src/utils/getSketchVersion', () => ({
-    getSketchVersion: jest.fn(() => 51),
+    __esModule: true,
+    default: jest.fn(() => '51'),
   }));
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');
@@ -16,12 +19,7 @@ beforeEach(() => {
 
   jest.mock('../../../src/utils/sharedTextStyles');
 
-  jest.mock('../../../src/jsonUtils/sketchImpl/createStringMeasurer');
-  jest.mock('../../../src/jsonUtils/sketchImpl/findFontName');
-  jest.mock('../../../src/jsonUtils/sketchImpl/makeImageDataFromUrl');
-  jest.mock('../../../src/jsonUtils/sketchImpl/makeSvgLayer');
-
-  TextStyles = TextStyles.default;
+  TextStyles = TextStyles.default(() => NodeMacOSBridge);
   sharedTextStyles = sharedTextStyles.default;
 
   sharedTextStyles.setDocument = jest.fn(doc => {
@@ -115,41 +113,32 @@ describe('create', () => {
     });
 
     it('only stores text attributes', () => {
-      const whitelist = [
-        'color',
-        'fontFamily',
-        'fontSize',
-        'fontStyle',
-        'fontWeight',
-        'textShadowOffset',
-        'textShadowRadius',
-        'textShadowColor',
-        'textTransform',
-        'letterSpacing',
-        'lineHeight',
-        'textAlign',
-        'writingDirection',
-      ];
+      const whitelist = {
+        color: 'red',
+        fontFamily: 'Helvetica',
+        fontSize: 14,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        textShadowOffset: 2,
+        textShadowRadius: 1,
+        textShadowColor: 'black',
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+        lineHeight: 18,
+        textAlign: 'left',
+        writingDirection: 'ltr',
+      };
 
-      const blacklist = ['foo', 'bar', 'baz'];
+      const blacklist = { foo: 1, bar: 2, baz: 3 };
 
-      const input = [...whitelist, ...blacklist].reduce(
-        (acc, key) => ({
-          ...acc,
-          [key]: true,
-        }),
-        {},
-      );
-
-      const res = TextStyles.create({ foo: input }, { document: doc });
-
+      const res = TextStyles.create({ foo: { ...whitelist, ...blacklist } }, { document: doc });
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
-      whitelist.forEach(key => {
-        expect(firstStoredStyle).toHaveProperty(key, true);
+      Object.keys(whitelist).forEach(key => {
+        expect(firstStoredStyle).toHaveProperty(key, whitelist[key]);
       });
 
-      blacklist.forEach(key => {
+      Object.keys(blacklist).forEach(key => {
         expect(firstStoredStyle).not.toHaveProperty(key);
       });
     });

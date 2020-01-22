@@ -83,7 +83,7 @@ export default async function makeSvgLayer(
   svg: string,
 ): Promise<FileFormat.Group> {
   // Load the module only if it has been made available through another import.
-  const svgModel = await import(/* webpackMode: "weak" */ '@lona/svg-model');
+  const svgModel = (await import(/* webpackMode: "weak" */ '@lona/svg-model')).default;
 
   const {
     data: { params, children },

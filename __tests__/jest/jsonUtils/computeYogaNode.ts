@@ -1,6 +1,7 @@
 import yoga from 'yoga-layout-prebuilt';
 import computeYogaNode from '../../../src/jsonUtils/computeYogaNode';
 import Context from '../../../src/utils/Context';
+import NodeMacOSBridge from '../../../src/platformBridges/NodeMacOSBridge';
 
 const widthAndHeightStylesStub = {
   width: 10,
@@ -32,7 +33,7 @@ const createYogaNodes = (
   styles.forEach(style => {
     const treeNode = createTreeNode(style);
     const ctx = new Context();
-    const { node } = computeYogaNode(treeNode, ctx);
+    const { node } = computeYogaNode(treeNode, ctx, NodeMacOSBridge);
     node.calculateLayout(
       containerWidth || undefined,
       containerHeight || undefined,
