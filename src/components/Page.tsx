@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
+import StyleSheet from '../StyleSheet';
 import PageStylePropTypes from './PageStylePropTypes';
 
 export const PagePropTypes = {

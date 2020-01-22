@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import * as React from 'react';
 
-import ReactSketch from '../../../../src';
+import * as ReactSketch from '../../../../src';
 import Svg from '../../../../src/components/Svg';
 
 jest.mock('../../../../src/jsonUtils/models', () => ({
