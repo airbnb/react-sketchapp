@@ -14,7 +14,6 @@ import sharedTextStyles from '../utils/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/textLayers';
 import pick from '../utils/pick';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
-import getDefaultBridge from '../platformBridges/getDefaultBridge';
 
 type MurmurHash = string;
 
@@ -27,104 +26,100 @@ type RegisteredStyle = {
 
 type StyleHash = { [key: string]: RegisteredStyle };
 
-let _styles: StyleHash = {};
-const _byName: { [key: string]: MurmurHash } = {};
-
-const registerStyle = (
-  name: string,
-  style: TextStyle,
-  platformBridge: PlatformBridge = getDefaultBridge(),
-): void => {
-  const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
-  const hash = hashStyle(safeStyle);
-  const sketchStyle = makeTextStyle(safeStyle, null, platformBridge);
-  const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
-
-  // FIXME(gold): side effect :'(
-  _byName[name] = hash;
-
-  _styles[hash] = {
-    cssStyle: safeStyle,
-    name,
-    sketchStyle,
-    sharedObjectID,
-  };
-};
-
 type Options = {
   clearExistingStyles?: boolean;
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument;
 };
 
-const create = (
-  styles: { [key: string]: TextStyle },
-  options: Options = {},
-  platformBridge: PlatformBridge = getDefaultBridge(),
-): StyleHash => {
-  const { clearExistingStyles, document } = options;
+let _styles: StyleHash = {};
+const _byName: { [key: string]: MurmurHash } = {};
 
-  const doc = getDocument(document);
+const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
+  registerStyle(
+    name: string,
+    style: TextStyle,
+    platformBridge: PlatformBridge = getDefaultBridge(),
+  ) {
+    const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
+    const hash = hashStyle(safeStyle);
+    const sketchStyle = makeTextStyle(safeStyle, null, platformBridge);
+    const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
 
-  if (isRunningInSketch() && parseInt(getSketchVersion()) < 50) {
-    doc.showMessage('💎 Requires Sketch 50+ 💎');
-    return {};
-  }
+    // FIXME(gold): side effect :'(
+    _byName[name] = hash;
 
-  sharedTextStyles.setDocument(doc);
+    _styles[hash] = {
+      cssStyle: safeStyle,
+      name,
+      sketchStyle,
+      sharedObjectID,
+    };
+  },
 
-  if (clearExistingStyles) {
+  create(
+    styles: { [key: string]: TextStyle },
+    options: Options = {},
+    platformBridge: PlatformBridge = getDefaultBridge(),
+  ) {
+    const { clearExistingStyles, document } = options;
+
+    const doc = getDocument(document);
+
+    if (isRunningInSketch() && parseInt(getSketchVersion()) < 50) {
+      doc.showMessage('💎 Requires Sketch 50+ 💎');
+      return {};
+    }
+
+    sharedTextStyles.setDocument(doc);
+
+    if (clearExistingStyles) {
+      _styles = {};
+      sharedTextStyles.setStyles([]);
+    }
+
+    Object.keys(styles).forEach(name => this.registerStyle(name, styles[name], platformBridge));
+
+    return _styles;
+  },
+
+  resolve(style: TextStyle): RegisteredStyle | undefined {
+    const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
+    const hash = hashStyle(safeStyle);
+
+    return _styles[hash];
+  },
+
+  get(
+    name: string,
+    document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+  ): TextStyle | undefined {
+    const hash = _byName[name];
+    const style = _styles[hash];
+
+    if (style) {
+      return style.cssStyle;
+    }
+
+    return sharedTextStyles.getStyle(name, document ? getDocument(document) : undefined);
+  },
+
+  clear(): void {
     _styles = {};
     sharedTextStyles.setStyles([]);
-  }
+  },
 
-  Object.keys(styles).forEach(name => registerStyle(name, styles[name], platformBridge));
+  toJSON(): FileFormat.SharedStyle[] {
+    return Object.keys(_styles).map(k => ({
+      _class: 'sharedStyle',
+      do_objectID: _styles[k].sharedObjectID,
+      name: _styles[k].name,
+      value: _styles[k].sketchStyle,
+    }));
+  },
 
-  return _styles;
-};
-
-const resolve = (style: TextStyle): RegisteredStyle | undefined => {
-  const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
-  const hash = hashStyle(safeStyle);
-
-  return _styles[hash];
-};
-
-const get = (
-  name: string,
-  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-): TextStyle | undefined => {
-  const hash = _byName[name];
-  const style = _styles[hash];
-
-  if (style) {
-    return style.cssStyle;
-  }
-
-  return sharedTextStyles.getStyle(name, document ? getDocument(document) : undefined);
-};
-
-const clear = () => {
-  _styles = {};
-  sharedTextStyles.setStyles([]);
-};
-
-const toJSON = (): FileFormat.SharedStyle[] =>
-  Object.keys(_styles).map(k => ({
-    _class: 'sharedStyle',
-    do_objectID: _styles[k].sharedObjectID,
-    name: _styles[k].name,
-    value: _styles[k].sketchStyle,
-  }));
-
-const styles = () => _styles;
-
-const TextStyles = {
-  create,
-  resolve,
-  get,
-  styles,
-  clear,
-  toJSON,
-};
+  styles() {
+    return _styles;
+  },
+});
 
 export default TextStyles;

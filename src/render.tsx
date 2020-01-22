@@ -17,7 +17,6 @@ import { getDocumentDataFromContainer, getDocumentDataFromContext } from './util
 import isNativeDocument from './utils/isNativeDocument';
 import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
-import getDefaultBridge from './platformBridges/getDefaultBridge';
 
 export const renderLayers = (layers: Array<any>, container: SketchLayer): SketchLayer => {
   if (container.addLayers === undefined) {

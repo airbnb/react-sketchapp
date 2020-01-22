@@ -13,7 +13,6 @@ import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentData } from './utils/getDocument';
 import { SketchDocumentData, SketchDocument, WrappedSketchDocument, PlatformBridge } from './types';
-import getDefaultBridge from './platformBridges/getDefaultBridge';
 import isRunningInSketch from './utils/isRunningInSketch';
 
 let id = 0;
