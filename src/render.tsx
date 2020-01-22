@@ -117,8 +117,8 @@ const renderTree = async (
 
 export default async function render(
   element: React.ReactElement,
-  container?: SketchLayer | WrappedSketchLayer,
-  platformBridge: PlatformBridge = getDefaultBridge(),
+  container: SketchLayer | WrappedSketchLayer | null,
+  platformBridge: PlatformBridge,
 ): Promise<SketchLayer | Array<SketchLayer>> {
   let nativeContainer: SketchLayer | void;
   if (container && container.sketchObject) {

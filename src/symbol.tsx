@@ -156,7 +156,7 @@ export const makeSymbol = async (
   Component: React.ComponentType<any>,
   symbolProps: string | SymbolMasterProps,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
-  bridge: PlatformBridge = getDefaultBridge(),
+  bridge: PlatformBridge,
 ) => {
   if (!hasInitialized && isRunningInSketch()) {
     getExistingSymbols(getDocumentData(document));
