@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import convertJsonToSketch from './jsonUtils/sketchJson/convertJsonToSketch';
 import convertSketchToJson from './jsonUtils/sketchJson/convertSketchToJson';
-import StyleSheet from './StyleSheet';
+import StyleSheet from './stylesheet';
 import { generateID } from './jsonUtils/models';
 import ViewStylePropTypes from './components/ViewStylePropTypes';
 import ResizingConstraintPropTypes from './components/ResizingConstraintPropTypes';

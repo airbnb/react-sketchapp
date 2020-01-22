@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ViewPropTypes } from '../View';
-import StyleSheet from '../../StyleSheet';
+import StyleSheet from '../../stylesheet';
 import Circle from './Circle';
 import ClipPath from './ClipPath';
 import Defs from './Defs';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../StyleSheet';
+import StyleSheet from '../stylesheet';
 import ResizeModePropTypes from './ResizeModePropTypes';
 import ImageStylePropTypes from './ImageStylePropTypes';
 import { ViewPropTypes } from './View';
