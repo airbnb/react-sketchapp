@@ -2,6 +2,7 @@
   "name": "react-sketchapp",
   "version": "3.1.0",
   "description": "A React renderer for Sketch.app",
+  "sideEffects": false,
   "main": "lib/index.js",
   "module": "lib/module/index.js",
   "sketch": "lib/module/index.sketch.js",
