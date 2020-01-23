@@ -3,7 +3,7 @@ import { SketchLayer } from '../../types';
 
 export default function convertSketchToJson(
   sketchObject: SketchLayer,
-): FileFormat.AnyObject | FileFormat.AnyLayer {
+): FileFormat.AnyObject | FileFormat.AnyLayer | null {
   if (!sketchObject) {
     return null;
   }

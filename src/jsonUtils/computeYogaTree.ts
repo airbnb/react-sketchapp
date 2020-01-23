@@ -1,10 +1,11 @@
 import yoga from 'yoga-layout-prebuilt';
+import { ReactTestRendererNode } from 'react-test-renderer';
 import computeYogaNode from './computeYogaNode';
-import { TreeNode, PlatformBridge } from '../types';
+import { PlatformBridge } from '../types';
 import Context from '../utils/Context';
 import zIndex from '../utils/zIndex';
 
-const walkTree = (tree: TreeNode | string, context: Context, bridge: PlatformBridge) => {
+const walkTree = (tree: ReactTestRendererNode, context: Context, bridge: PlatformBridge) => {
   const { node, stop } = computeYogaNode(tree, context, bridge);
 
   if (typeof tree === 'string' || tree.type === 'sketch_svg') {
@@ -29,7 +30,10 @@ const walkTree = (tree: TreeNode | string, context: Context, bridge: PlatformBri
   return node;
 };
 
-const computeYogaTree = (root: TreeNode, context: Context, bridge: PlatformBridge): yoga.YogaNode =>
-  walkTree(root, context, bridge);
+const computeYogaTree = (
+  root: ReactTestRendererNode,
+  context: Context,
+  bridge: PlatformBridge,
+): yoga.YogaNode => walkTree(root, context, bridge);
 
 export default computeYogaTree;

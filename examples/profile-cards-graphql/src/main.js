@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import { ApolloClient } from 'apollo-client';
@@ -31,7 +30,6 @@ const QUERY = gql`
   }
 `;
 
-// eslint-disable-next-line
 const props = ({ data }) => (data.loading ? { users: [] } : { users: data.allProfiles });
 const withUsers = graphql(QUERY, { props });
 
@@ -68,5 +66,5 @@ export default () => {
   client
     .query({ query: QUERY })
     .then(() => render(<App />, context.document.currentPage()))
-    .catch(console.log); // eslint-disable-line no-console
+    .catch(console.log);
 };

@@ -23,7 +23,6 @@ export default class Use extends React.Component<Props> {
 
     if (!href || !matched) {
       if (process.env.NODE_ENV !== 'production')
-        // eslint-disable-next-line no-console
         console.warn(
           `Invalid \`href\` prop for \`Use\` element, expected a href like \`"#id"\`, but got: "${href}"`,
         );

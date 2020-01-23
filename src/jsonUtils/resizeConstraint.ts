@@ -12,7 +12,7 @@ import { ResizeConstraints } from '../types';
   6. fixedWidth
  */
 
-const RESIZE_CONSTRAINTS = {
+const RESIZE_CONSTRAINTS: { [key: string]: number } = {
   top_left_fixedHeight_fixedWidth: 9,
   top_right_left_fixedHeight: 10,
   top_left_fixedHeight: 11,
@@ -64,7 +64,9 @@ const RESIZE_CONSTRAINTS = {
   none: 63,
 };
 
-export default function makeResizeConstraint(resizingConstraint?: ResizeConstraints): number {
+export default function makeResizeConstraint(
+  resizingConstraint?: ResizeConstraints | null,
+): number {
   if (resizingConstraint) {
     const constraints = [];
     const { top, right, bottom, left, fixedHeight, fixedWidth } = resizingConstraint;

@@ -42,7 +42,7 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
   ) {
     const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
     const hash = hashStyle(safeStyle);
-    const sketchStyle = makeTextStyle(safeStyle, null, platformBridge);
+    const sketchStyle = makeTextStyle(safeStyle, undefined, platformBridge);
     const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
 
     // FIXME(gold): side effect :'(
@@ -60,7 +60,7 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
     styles: { [key: string]: TextStyle },
     options: Options = {},
     platformBridge: PlatformBridge = getDefaultBridge(),
-  ) {
+  ): StyleHash {
     const { clearExistingStyles, document } = options;
 
     const doc = getDocument(document);
@@ -82,7 +82,10 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
     return _styles;
   },
 
-  resolve(style: TextStyle): RegisteredStyle | undefined {
+  resolve(style?: TextStyle): RegisteredStyle | undefined {
+    if (!style) {
+      return undefined;
+    }
     const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
     const hash = hashStyle(safeStyle);
 

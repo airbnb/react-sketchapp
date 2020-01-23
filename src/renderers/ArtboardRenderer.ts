@@ -7,7 +7,7 @@ import { Props } from '../components/Artboard';
 
 export default class ArtboardRenderer extends SketchRenderer {
   async renderGroupLayer({ layout, style, props }: TreeNode<Props>): Promise<FileFormat.Artboard> {
-    let color: FileFormat.Color;
+    let color: FileFormat.Color | undefined;
     if (style.backgroundColor !== undefined) {
       color = makeColorFromCSS(style.backgroundColor);
     }

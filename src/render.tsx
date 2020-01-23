@@ -116,10 +116,10 @@ const renderTree = async (
 
 export default async function render(
   element: React.ReactElement,
-  container: SketchLayer | WrappedSketchLayer | null,
+  container: SketchLayer | WrappedSketchLayer | undefined,
   platformBridge: PlatformBridge,
 ): Promise<SketchLayer | Array<SketchLayer>> {
-  let nativeContainer: SketchLayer | void;
+  let nativeContainer: SketchLayer | undefined;
   if (container && container.sketchObject) {
     nativeContainer = container.sketchObject;
   } else if (container) {
@@ -140,9 +140,7 @@ export default async function render(
     const layer = await renderTree(tree, nativeContainer, platformBridge);
     return layer;
   } catch (err) {
-    if (process.env.NODE_ENV !== 'production')
-      // eslint-disable-next-line no-console
-      console.error(err);
+    if (process.env.NODE_ENV !== 'production') console.error(err);
     const tree = buildTree(<RedBox error={err} />, platformBridge);
     return renderContents(tree, nativeContainer, platformBridge);
   }

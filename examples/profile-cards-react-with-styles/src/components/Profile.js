@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { Image, View, Text } from 'react-sketchapp';
 import { css, withStyles } from '../withStyles';

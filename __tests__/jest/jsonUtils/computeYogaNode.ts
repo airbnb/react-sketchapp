@@ -22,6 +22,7 @@ const createTreeNode = (style: { [key: string]: number | string }) => ({
   props: {
     style,
   },
+  children: [],
 });
 
 const createYogaNodes = (

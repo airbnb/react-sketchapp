@@ -3,7 +3,7 @@
 exports[`<Image /> name defaults to Image 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -12,7 +12,7 @@ exports[`<Image /> name defaults to Image 1`] = `
 exports[`<Image /> name passes its name 1`] = `
 <sketch_image
   name="bar"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -21,7 +21,7 @@ exports[`<Image /> name passes its name 1`] = `
 exports[`<Image /> renders children 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 >
@@ -32,7 +32,7 @@ exports[`<Image /> renders children 1`] = `
 exports[`<Image /> resizeMode falls back to a resizeMode from style 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fit"
+  resizeMode={3}
   source="foo"
   style={
     Object {
@@ -45,7 +45,7 @@ exports[`<Image /> resizeMode falls back to a resizeMode from style 1`] = `
 exports[`<Image /> resizeMode falls back to cover 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -54,7 +54,7 @@ exports[`<Image /> resizeMode falls back to cover 1`] = `
 exports[`<Image /> resizeMode prefers prop to style 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={
     Object {
@@ -67,7 +67,7 @@ exports[`<Image /> resizeMode prefers prop to style 1`] = `
 exports[`<Image /> resizeMode translates center 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -76,7 +76,7 @@ exports[`<Image /> resizeMode translates center 1`] = `
 exports[`<Image /> resizeMode translates contain 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fit"
+  resizeMode={3}
   source="foo"
   style={Object {}}
 />
@@ -85,7 +85,7 @@ exports[`<Image /> resizeMode translates contain 1`] = `
 exports[`<Image /> resizeMode translates cover 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -94,7 +94,7 @@ exports[`<Image /> resizeMode translates cover 1`] = `
 exports[`<Image /> resizeMode translates none 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -103,7 +103,7 @@ exports[`<Image /> resizeMode translates none 1`] = `
 exports[`<Image /> resizeMode translates repeat 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Tile"
+  resizeMode={0}
   source="foo"
   style={Object {}}
 />
@@ -112,7 +112,7 @@ exports[`<Image /> resizeMode translates repeat 1`] = `
 exports[`<Image /> resizeMode translates stretch 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Stretch"
+  resizeMode={2}
   source="foo"
   style={Object {}}
 />
@@ -121,7 +121,7 @@ exports[`<Image /> resizeMode translates stretch 1`] = `
 exports[`<Image /> source falls back to defaultSource if available 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -130,7 +130,7 @@ exports[`<Image /> source falls back to defaultSource if available 1`] = `
 exports[`<Image /> source favors style over source for height 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source={
     Object {
       "height": 500,
@@ -149,7 +149,7 @@ exports[`<Image /> source favors style over source for height 1`] = `
 exports[`<Image /> source favors style over source for width 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source={
     Object {
       "uri": "foo",
@@ -168,7 +168,7 @@ exports[`<Image /> source favors style over source for width 1`] = `
 exports[`<Image /> source prefers source over defaultSource 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source="foo"
   style={Object {}}
 />
@@ -177,7 +177,7 @@ exports[`<Image /> source prefers source over defaultSource 1`] = `
 exports[`<Image /> source sets height from source 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source={
     Object {
       "height": 500,
@@ -196,7 +196,7 @@ exports[`<Image /> source sets height from source 1`] = `
 exports[`<Image /> source sets width from source 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   source={
     Object {
       "uri": "foo",
@@ -215,7 +215,7 @@ exports[`<Image /> source sets width from source 1`] = `
 exports[`<Image /> style accepts a StyleSheet ordinal 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   style={
     Object {
       "flex": 1,
@@ -227,7 +227,7 @@ exports[`<Image /> style accepts a StyleSheet ordinal 1`] = `
 exports[`<Image /> style accepts a plain object 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   style={
     Object {
       "flex": 1,
@@ -239,7 +239,7 @@ exports[`<Image /> style accepts a plain object 1`] = `
 exports[`<Image /> style accepts an array of plain objects and/or StyleSheet ordinals 1`] = `
 <sketch_image
   name="Image"
-  resizeMode="Fill"
+  resizeMode={1}
   style={
     Object {
       "flex": 1,

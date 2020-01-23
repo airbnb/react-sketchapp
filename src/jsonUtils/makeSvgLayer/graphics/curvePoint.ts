@@ -16,7 +16,7 @@ export function makeCurvePoint(
     _class: 'curvePoint',
     cornerRadius: 0,
     curveFrom: describePoint(curveFrom || point),
-    curveMode,
+    curveMode: curveMode || 0,
     curveTo: describePoint(curveTo || point),
     hasCurveFrom: !!curveFrom,
     hasCurveTo: !!curveTo,

@@ -168,9 +168,7 @@ function appendTransform(transform: string) {
     const [a, c, e, b, d, f] = transformParser.parse(transform);
     pooledMatrix.append(a, b, c, d, e, f);
   } catch (e) {
-    if (process.env.NODE_ENV !== 'production')
-      // eslint-disable-next-line no-console
-      console.error(e);
+    if (process.env.NODE_ENV !== 'production') console.error(e);
   }
 }
 

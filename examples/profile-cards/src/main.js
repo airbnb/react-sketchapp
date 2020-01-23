@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { render, Text, View } from 'react-sketchapp';
 import { fonts, spacing } from './designSystem';

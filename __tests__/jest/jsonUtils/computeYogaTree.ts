@@ -32,6 +32,7 @@ const treeRootStub = {
           width: 96,
         },
       },
+      children: [],
     },
   ],
 };

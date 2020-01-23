@@ -17,7 +17,10 @@ function makePath(curvePoints: FileFormat.CurvePoint[], isClosed: boolean): Path
 //
 // This is a rough port of Lona's PDF to Sketch path conversion
 // https://github.com/airbnb/Lona/blob/94fd0b26de3e3f4b4496cdaa4ab31c6d258dc4ac/studio/LonaStudio/Utils/Sketch.swift#L285
-export function makePathsFromCommands(commands, frame: FileFormat.Rect): Path[] {
+export function makePathsFromCommands(
+  commands: { type: string; data: any }[],
+  frame: FileFormat.Rect,
+): Path[] {
   const paths: Path[] = [];
   let curvePoints: FileFormat.CurvePoint[] = [];
 
@@ -30,7 +33,7 @@ export function makePathsFromCommands(commands, frame: FileFormat.Rect): Path[] 
     curvePoints = [];
   }
 
-  commands.forEach(command => {
+  commands.forEach((command: any) => {
     const { type, data } = command;
 
     switch (type) {

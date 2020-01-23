@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { Text, View } from 'react-primitives';
 import { spacing, colors, fontFamily } from '../designSystem';

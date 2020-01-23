@@ -1,9 +1,8 @@
-/* eslint max-len:0 no-nested-ternary:0 */
 import { RawStyle, Style } from './types';
 
 const { hasOwnProperty } = Object.prototype;
 
-const styleShortHands = {
+const styleShortHands: { [key: string]: { [subKey: string]: boolean } } = {
   borderColor: {
     borderTopColor: true,
     borderRightColor: true,
@@ -74,7 +73,7 @@ const styleShortHands = {
  * override less specific styles, whatever the order in which they were
  * originally declared.
  */
-const sortProps = propsArray =>
+const sortProps = (propsArray: string[]) =>
   propsArray.sort((a, b) => {
     const expandedA = styleShortHands[a];
     const expandedB = styleShortHands[b];
@@ -92,19 +91,16 @@ const sortProps = propsArray =>
  */
 export default (style: RawStyle): Style => {
   if (!style) return style;
-  /* eslint no-param-reassign:0 */
   const propsArray = Object.keys(style);
   const sortedProps = sortProps(propsArray);
-  const resolvedStyle = {};
+  const resolvedStyle: Style = {};
 
-  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < sortedProps.length; i++) {
     const key = sortedProps[i];
     const expandedProps = styleShortHands[key];
     const value = style[key];
 
     if (expandedProps) {
-      // eslint-disable-next-line no-restricted-syntax
       for (const propName in expandedProps) {
         if (hasOwnProperty.call(expandedProps, propName)) {
           resolvedStyle[propName] = value;

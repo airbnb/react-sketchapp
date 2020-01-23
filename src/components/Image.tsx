@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
@@ -24,13 +25,13 @@ export const ImageSourcePropType = PropTypes.oneOfType([
   PropTypes.string,
 ]);
 
-const ResizeModes = {
-  contain: 'Fit',
-  cover: 'Fill',
-  stretch: 'Stretch',
-  center: 'Fill', // TODO(gold): implement ResizeModes.center
-  repeat: 'Tile',
-  none: 'Fill',
+const ResizeModes: { [key: string]: FileFormat.PatternFillType } = {
+  contain: 3,
+  cover: 1,
+  stretch: 2,
+  center: 1, // TODO(gold): implement ResizeModes.center
+  repeat: 0,
+  none: 1,
 };
 
 export const ImagePropTypes = {
@@ -56,6 +57,7 @@ export default class Image extends React.Component<Props> {
     let style = StyleSheet.flatten(this.props.style) || {};
 
     const sketchResizeMode = ResizeModes[resizeMode || (style && style.resizeMode) || 'cover'];
+
     if (source && typeof source !== 'string') {
       style = {
         height: source.height,

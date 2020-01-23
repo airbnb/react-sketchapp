@@ -1,5 +1,4 @@
 module.exports = config => {
-  // eslint-disable-next-line no-param-reassign
   config.node = {
     console: false,
     global: false,

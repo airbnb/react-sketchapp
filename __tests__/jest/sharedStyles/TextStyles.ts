@@ -1,6 +1,5 @@
 import NodeMacOSBridge from '../../../src/platformBridges/NodeMacOSBridge';
 
-/* eslint-disable global-require */
 let TextStyles;
 let doc;
 let sharedTextStyles;

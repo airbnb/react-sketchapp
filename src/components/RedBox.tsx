@@ -57,13 +57,11 @@ export default class RedBox extends React.Component<Props> {
   };
 
   renderFrames(frames: Array<StackFrame>) {
-    /* eslint-disable react/no-array-index-key */
     return frames.map((f, index) => (
       <Text key={index} style={styles.stack}>
         {f.functionName}
       </Text>
     ));
-    /* eslint-enable */
   }
 
   render() {
@@ -77,10 +75,10 @@ export default class RedBox extends React.Component<Props> {
       );
     }
 
-    let frames: ErrorStackParser.StackFrame[];
-    let parseError: Error;
+    let frames: ErrorStackParser.StackFrame[] | undefined;
+    let parseError: Error | undefined;
 
-    let frameChildren: JSX.Element[] | JSX.Element;
+    let frameChildren: JSX.Element[] | JSX.Element | undefined;
 
     try {
       frames = ErrorStackParser.parse(error);
