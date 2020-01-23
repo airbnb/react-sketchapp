@@ -65,7 +65,7 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
 
     const doc = getDocument(document);
 
-    if (isRunningInSketch() && parseInt(getSketchVersion()) < 50) {
+    if (isRunningInSketch() && doc != null && parseInt(getSketchVersion()) < 50) {
       doc.showMessage('💎 Requires Sketch 50+ 💎');
       return {};
     }

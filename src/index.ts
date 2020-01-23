@@ -33,8 +33,8 @@ export async function renderToJSON(
 
 export async function makeSymbol(
   Component: React.ComponentType<any>,
-  symbolProps?: string | SymbolMasterProps,
-  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+  symbolProps: string | SymbolMasterProps,
+  document: SketchDocumentData | SketchDocument | WrappedSketchDocument | undefined,
   bridge: PlatformBridge = getDefaultPlatformBridge(),
 ) {
   return _makeSymbol(Component, symbolProps, document, bridge);

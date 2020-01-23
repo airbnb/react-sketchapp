@@ -126,6 +126,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
     const overridableLayers = extractOverrides(masterTree.layers);
 
     const overrideValues = await overridableLayers.reduce(async function inject(
+      this: SymbolInstanceRenderer,
       memo: Promise<FileFormat.OverrideValue[]>,
       reference: Override,
     ) {
