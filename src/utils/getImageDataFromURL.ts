@@ -29,12 +29,7 @@ const fetchRemoteImage = async (url: string, { fetch }: PlatformBridge): Promise
     throw new Error(`${response.status}`);
   }
 
-  const arrayBuffer = await response.arrayBuffer();
-  if (Buffer.isBuffer(arrayBuffer)) {
-    // skpm polyfill returns a Buffer instead of an ArrayBuffer
-    return arrayBuffer;
-  }
-  return Buffer.from(arrayBuffer);
+  return Buffer.from(await response.arrayBuffer());
 };
 
 export default async function getImageDataFromURL(
