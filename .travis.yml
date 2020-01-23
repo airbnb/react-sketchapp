@@ -16,6 +16,7 @@ node_js:
 before_script:
   - npm prune
 script:
+  - npm run build # smoke-test that everything transpiles correctly
   - npm run test:ci
   # - npm run test:e2e -- --app=/Applications/Sketch.app
 # after_script:
