@@ -92,4 +92,4 @@ class TextStyles {
   }
 }
 
-export default TextStyles;
+export default new TextStyles();

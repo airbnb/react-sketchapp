@@ -82,7 +82,7 @@ export default class SvgRenderer extends ViewRenderer {
       layout,
     });
 
-    const svgLayer = await makeSvgLayer(layout, 'Shape', svgString);
+    const svgLayer = makeSvgLayer(layout, 'Shape', svgString);
 
     layers.push(svgLayer);
 
