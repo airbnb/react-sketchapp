@@ -1,3 +1,4 @@
+// TODO: It would be better to move everything over to node-sketch-bridge
 import { PlatformBridge } from '../types';
 
 import { createStringMeasurer, findFontName } from 'node-sketch-bridge';
