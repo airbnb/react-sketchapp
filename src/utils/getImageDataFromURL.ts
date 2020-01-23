@@ -1,7 +1,3 @@
-/* global fetch */
-// TODO: Read data:// URLs
-// TODO: Load node polyfill
-// TODO: Read from FS
 import sha1 from 'js-sha1';
 import { PlatformBridge } from '../types';
 
@@ -11,15 +7,6 @@ const ERROR_IMAGE =
 const ERROR_RESULT = {
   data: ERROR_IMAGE,
   sha1: sha1(ERROR_IMAGE),
-};
-
-const readBufferFromResponse = async (response: Response): Promise<Buffer> => {
-  const arrayBuffer = await response.arrayBuffer();
-  if (Buffer.isBuffer(arrayBuffer)) {
-    // skpm polyfill returns a Buffer instead of an ArrayBuffer
-    return arrayBuffer;
-  }
-  return Buffer.from(arrayBuffer);
 };
 
 const isImage = (buffer: Buffer): boolean => {
@@ -36,6 +23,20 @@ const isImage = (buffer: Buffer): boolean => {
   );
 };
 
+const fetchRemoteImage = async (url: string, { fetch }: PlatformBridge): Promise<Buffer> => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`${response.status}`);
+  }
+
+  const arrayBuffer = await response.arrayBuffer();
+  if (Buffer.isBuffer(arrayBuffer)) {
+    // skpm polyfill returns a Buffer instead of an ArrayBuffer
+    return arrayBuffer;
+  }
+  return Buffer.from(arrayBuffer);
+};
+
 export default async function getImageDataFromURL(
   bridge: PlatformBridge,
   url?: string,
@@ -44,18 +45,25 @@ export default async function getImageDataFromURL(
     return ERROR_RESULT;
   }
 
-  const response = await bridge.fetch(url);
-  if (!response.ok) {
+  try {
+    const parsedUrl = new URL(url);
+
+    const buffer = await (parsedUrl.protocol === 'file:'
+      ? bridge.readFile(parsedUrl.pathname)
+      : fetchRemoteImage(url, bridge));
+
+    if (!isImage(buffer)) throw new Error('Unrecognized image format');
+
+    const data = buffer.toString('base64');
+
+    return {
+      data,
+      sha1: sha1(data),
+    };
+  } catch (error) {
+    if (process.env.NODE_ENV !== 'production')
+      console.error(`Error while fetching '${url}':`, error);
+
     return ERROR_RESULT;
   }
-
-  const buffer = await readBufferFromResponse(response);
-  if (!isImage(buffer)) return ERROR_RESULT;
-
-  const data = buffer.toString('base64');
-
-  return {
-    data,
-    sha1: sha1(data),
-  };
 }
