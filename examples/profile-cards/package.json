@@ -10,9 +10,7 @@
     "watch": "skpm-build --watch",
     "render": "skpm-build --watch --run",
     "render:once": "skpm-build --run",
-    "postinstall": "npm run build && skpm-link",
-    "link": "skpm-link",
-    "clean": "rm -rf profile-cards.sketchplugin"
+    "postinstall": "npm run build && skpm-link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
