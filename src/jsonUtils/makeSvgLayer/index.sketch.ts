@@ -1,5 +1,5 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import convertSketchToJson from '../sketchJson/convertSketchToJson';
+import toSJSON from '../sketchJson/toSJSON';
 
 import { LayoutInfo } from '../../types';
 
@@ -21,5 +21,5 @@ export default function makeSvgLayer(
   root.ungroupSingleChildDescendentGroups();
   svgImporter.scale_rootGroup(svgImporter.importer().scaleValue(), root);
 
-  return convertSketchToJson(root) as FileFormat.Group;
+  return toSJSON(root) as FileFormat.Group;
 }

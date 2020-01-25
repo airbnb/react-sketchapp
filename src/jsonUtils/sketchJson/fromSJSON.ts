@@ -10,7 +10,7 @@ const SKETCH_HIGHEST_COMPATIBLE_VERSION = '95';
 /**
  *  Takes a Sketch JSON tree and turns it into a native object. May throw on invalid data
  */
-export default function convertJsonToSketch(
+export default function fromSJSON(
   jsonTree: FileFormat.AnyLayer | FileFormat.AnyObject,
   version = SKETCH_HIGHEST_COMPATIBLE_VERSION,
 ): SketchLayer {
