@@ -140,7 +140,7 @@ export default async function render(
     const layer = await renderTree(tree, nativeContainer, platformBridge);
     return layer;
   } catch (err) {
-    if (process.env.NODE_ENV !== 'production') console.error(err);
+    console.error(err);
     const tree = buildTree(<RedBox error={err} />, platformBridge);
     return renderContents(tree, nativeContainer, platformBridge);
   }

@@ -11,10 +11,9 @@ export default class TextPath extends React.Component<Props> {
 
   render() {
     if (!this.props.href || !this.props.href.match(idExpReg)) {
-      if (process.env.NODE_ENV !== 'production')
-        console.warn(
-          `Invalid \`href\` prop for \`TextPath\` element, expected a href like \`"#id"\`, but got: "${this.props.href}"`,
-        );
+      console.warn(
+        `Invalid \`href\` prop for \`TextPath\` element, expected a href like \`"#id"\`, but got: "${this.props.href}"`,
+      );
     }
 
     const { children, ...rest } = this.props;

@@ -56,7 +56,6 @@ export default async function getImageDataFromURL(
       sha1: sha1(data),
     };
   } catch (error) {
-    if (process.env.NODE_ENV !== 'production')
       console.error(`Error while fetching '${url}':`, error);
 
     return ERROR_RESULT;

@@ -13,7 +13,7 @@ export default function convertSketchToJson(
   const data = MSJSONDataArchiver.archiveStringWithRootObject_error(imm, err);
 
   if (err.value() !== null) {
-    if (process.env.NODE_ENV !== 'production') console.error(err.value());
+    console.error(err.value());
     throw new Error(err.value());
   }
 

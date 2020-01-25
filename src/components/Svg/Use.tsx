@@ -22,10 +22,9 @@ export default class Use extends React.Component<Props> {
     const matched = href.match(idExpReg);
 
     if (!href || !matched) {
-      if (process.env.NODE_ENV !== 'production')
-        console.warn(
-          `Invalid \`href\` prop for \`Use\` element, expected a href like \`"#id"\`, but got: "${href}"`,
-        );
+      console.warn(
+        `Invalid \`href\` prop for \`Use\` element, expected a href like \`"#id"\`, but got: "${href}"`,
+      );
     }
     const { children, ...rest } = this.props;
     return <svg_use {...rest}>{children}</svg_use>;
