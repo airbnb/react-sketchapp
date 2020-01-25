@@ -8,8 +8,7 @@ beforeEach(() => {
   jest.resetModules();
 
   jest.mock('../../../src/utils/getSketchVersion', () => ({
-    __esModule: true,
-    default: jest.fn(() => '51'),
+    getSketchVersion: jest.fn(() => 51),
   }));
 
   TextStyles = require('../../../src/sharedStyles/TextStyles');

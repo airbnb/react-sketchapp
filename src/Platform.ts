@@ -1,8 +1,6 @@
-import getSketchVersion from './utils/getSketchVersion';
-
 const Platform = {
   OS: 'sketch',
-  Version: getSketchVersion(),
+  Version: 1,
   select: (obj: { sketch: any }) => obj.sketch,
 };
 

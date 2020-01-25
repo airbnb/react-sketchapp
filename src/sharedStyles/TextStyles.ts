@@ -6,7 +6,7 @@ import {
   TextStyle,
   PlatformBridge,
 } from '../types';
-import getSketchVersion from '../utils/getSketchVersion';
+import { getSketchVersion } from '../utils/getSketchVersion';
 import isRunningInSketch from '../utils/isRunningInSketch';
 import hashStyle from '../utils/hashStyle';
 import { getDocument } from '../utils/getDocument';
@@ -65,7 +65,7 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
 
     const doc = getDocument(document);
 
-    if (isRunningInSketch() && doc != null && parseInt(getSketchVersion()) < 50) {
+    if (isRunningInSketch() && doc != null && getSketchVersion() < 50) {
       doc.showMessage('💎 Requires Sketch 50+ 💎');
       return {};
     }
