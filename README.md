@@ -61,7 +61,7 @@ Found a novel use? We'd love to hear about it!
 
 - [Examples](http://airbnb.io/react-sketchapp/docs/examples.html)
 - [API Reference](http://airbnb.io/react-sketchapp/docs/API.html)
-- [Styling](http://airbnb.io/react-sketchapp/docs/styling.html)
+- [Styling](http://airbnb.io/react-sketchapp/docs/guides/styling.html)
 - [Universal Rendering](http://airbnb.io/react-sketchapp/docs/guides/universal-rendering.html)
 - [Data Fetching](http://airbnb.io/react-sketchapp/docs/guides/data-fetching.html)
 - [FAQ](http://airbnb.io/react-sketchapp/docs/FAQ.html)

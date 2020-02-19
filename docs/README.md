@@ -5,7 +5,7 @@
   - [Using `skpm` as a build system](/docs/guides/using-skpm.md)
   - [Data Fetching](/docs/guides/data-fetching.md)
   - [Universal Rendering](/docs/guides/universal-rendering.md)
-  - [Styling](/docs/styling.md)
+  - [Styling](/docs/guides/styling.md)
 - [API Reference](/docs/API.md)
   - [render](/docs/API.md#renderelement-container)
   - [renderToJSON](/docs/API.md#rendertojsonelement)
