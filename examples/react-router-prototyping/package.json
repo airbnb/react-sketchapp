@@ -13,7 +13,7 @@
     "render:once": "skpm-build --run",
     "postinstall": "npm run build && skpm-link"
   },
-  "author": "Macintosh Helper",
+  "author": "Macintosh Helper <github@macintoshhelper.com>",
   "license": "MIT",
   "devDependencies": {
     "@skpm/builder": "^0.4.3"
