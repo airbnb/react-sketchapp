@@ -15,12 +15,10 @@ export function fromSJSON(
   version = SKETCH_HIGHEST_COMPATIBLE_VERSION,
 ): SketchLayer {
   const err = MOPointer.alloc().init();
-  const decoded = MSJSONDictionaryUnarchiver.unarchiveObjectFromDictionary_asVersion_corruptionDetected_error(
-    jsonTree,
-    version,
-    null,
-    err,
-  );
+  const unarchivedObjectFromDictionary =
+    MSJSONDictionaryUnarchiver.unarchivedObjectFromDictionary_asVersion_corruptionDetected_error ||
+    MSJSONDictionaryUnarchiver.unarchiveObjectFromDictionary_asVersion_corruptionDetected_error;
+  const decoded = unarchivedObjectFromDictionary(jsonTree, version, null, err);
 
   if (err.value() !== null) {
     console.error(err.value());
