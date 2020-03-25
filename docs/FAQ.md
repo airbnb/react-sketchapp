@@ -62,20 +62,20 @@ Not currently. FlexBox is the closest we have to a predictable, cross-platform l
 
 We currently use [`yoga`](https://github.com/facebook/yoga).
 
-#### Is there two-way binding? Can I generate React components from Sketch? :repeat:
+#### Is there two-way binding? Can I generate React components from Sketch? 🔁
 
 Nope.
 
 Isomorphisms are compelling but our focus is on tools that we can use day-to-day to improve the productivity of designers and engineers working on large-scale production applications.
 
-Getting production-ready semantics out of Sketch is more difficult than generating production-ready Sketch templates from React components :skull:
+Getting production-ready semantics out of Sketch is more difficult than generating production-ready Sketch templates from React components 💀
 
 Our solution is to keep our [our design system](http://airbnb.design/building-a-visual-language/)’s source of truth in code, and use `react-sketchapp` to compose & consume it.
 
 To _edit_ our design system, we are free to leverage any technology that can create React components, or be compiled to JSX, such as:
 
 - [React-centric IDEs](https://www.decosoftware.com/)
-- in-house design tools that are tailored to our workflow (whilst being backed by data, version control & semantic versioning) :soon: :eyes:
+- in-house design tools that are tailored to our workflow (whilst being backed by data, version control & semantic versioning) 🔜 👀
 - writing React components in text editors with our fingers
 
 #### Does this tie your workflow to Sketch? What about other design tools?
