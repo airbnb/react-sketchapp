@@ -24,4 +24,4 @@
 - [Examples](/docs/examples.md)
 - [Change Log](/CHANGELOG.md)
 - [FAQ](/docs/FAQ.md)
-- [Contributing](/CONTRIBUTING.md)
+- [Contributing](https://github.com/airbnb/react-sketchapp/blob/master/.github/CONTRIBUTING.md)
