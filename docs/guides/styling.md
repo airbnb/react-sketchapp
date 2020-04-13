@@ -76,7 +76,7 @@ Components use CSS styles + FlexBox layout.
 | `shadowOffset` | `{ width: number, height: number }` | ✅ |
 | `shadowOpacity` | `number` | ✅ |
 | `shadowRadius` | `number` &#124; `percentage` | ✅ |
-| [see `react-sketchapp` only styles](#react-sketchapp-only-shadow-styles)   | | |
+| [see `react-sketchapp` only styles](#react-sketchapp-only-styles)   | | |
 
 ## Type Styles
 
