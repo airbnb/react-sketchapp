@@ -6,12 +6,6 @@ Components use CSS styles + FlexBox layout.
 
 | property | type | supported? |
 | --- | --- | --- |
-| `shadowColor` | `Color` | ✅ |
-| `shadowOffset` | `{ width: number, height: number }` | ✅ |
-| `shadowOpacity` | `number` | ✅ |
-| `shadowSpread` | `number` | ✅ |
-| `shadowInner` | `boolean` | ✅ |
-| `shadowRadius` | `number` &#124; `percentage` | ✅ |
 | `width` | `number` &#124; `percentage` | ✅ |
 | `height` | `number` &#124; `percentage` | ✅ |
 | `top` | `number` &#124; `percentage` | ✅ |
@@ -73,6 +67,22 @@ Components use CSS styles + FlexBox layout.
 | `borderBottomWidth` | `number` &#124; `percentage` | ✅ |
 | `borderLeftWidth` | `number` &#124; `percentage` | ✅ |
 | `opacity` | `number` | ✅ |
+
+## Shadow Styles
+
+| property | type | supported? |
+| --- | --- | --- |
+| `shadowColor` | `Color` | ✅ |
+| `shadowOffset` | `{ width: number, height: number }` | ✅ |
+| `shadowOpacity` | `number` | ✅ |
+| `shadowRadius` | `number` &#124; `percentage` | ✅ |
+
+### `react-sketchapp` only shadow styles:
+
+| property | type | supported? |
+| --- | --- | --- |
+| `shadowSpread` | `number` | ✅ |
+| `shadowInner` | `boolean` | ✅ |
 
 ## Type Styles
 
