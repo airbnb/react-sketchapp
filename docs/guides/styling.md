@@ -10,6 +10,7 @@ Components use CSS styles + FlexBox layout.
 | `shadowOffset` | `{ width: number, height: number }` | ✅ |
 | `shadowOpacity` | `number` | ✅ |
 | `shadowSpread` | `number` | ✅ |
+| `shadowInner` | `boolean` | ✅ |
 | `shadowRadius` | `number` &#124; `percentage` | ✅ |
 | `width` | `number` &#124; `percentage` | ✅ |
 | `height` | `number` &#124; `percentage` | ✅ |
