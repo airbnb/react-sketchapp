@@ -72,17 +72,11 @@ Components use CSS styles + FlexBox layout.
 
 | property | type | supported? |
 | --- | --- | --- |
-| `shadowColor` | `Color` | ✅ |
+| `shadowColor` | `Color`                                                  | ✅ |
 | `shadowOffset` | `{ width: number, height: number }` | ✅ |
 | `shadowOpacity` | `number` | ✅ |
 | `shadowRadius` | `number` &#124; `percentage` | ✅ |
-
-### `react-sketchapp` only shadow styles:
-
-| property | type | supported? |
-| --- | --- | --- |
-| `shadowSpread` | `number` | ✅ |
-| `shadowInner` | `boolean` | ✅ |
+| [see `react-sketchapp` only styles](#react-sketchapp-only-shadow-styles)   | | |
 
 ## Type Styles
 
@@ -103,6 +97,13 @@ Components use CSS styles + FlexBox layout.
 | `writingDirection` | `auto` &#124; `ltr` &#124; `rtl` | ⛔️ |
 | `opacity` | `number` | ✅ |
 | `percentage` | `points` &#124; `percentages` | ✅ |
+
+## React Sketch.app Only Styles
+
+| property | type | supported? |
+| --- | --- | --- |
+| `shadowSpread` | `number` | ✅ |
+| `shadowInner` | `boolean` | ✅ |
 
 ## Examples
 
