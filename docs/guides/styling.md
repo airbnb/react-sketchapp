@@ -72,11 +72,10 @@ Components use CSS styles + FlexBox layout.
 
 | property | type | supported? |
 | --- | --- | --- |
-| `shadowColor` | `Color`                                                  | ✅ |
+| `shadowColor` | `Color` | ✅ |
 | `shadowOffset` | `{ width: number, height: number }` | ✅ |
 | `shadowOpacity` | `number` | ✅ |
 | `shadowRadius` | `number` &#124; `percentage` | ✅ |
-| [see `react-sketchapp` only styles](#react-sketchapp-only-styles)   | | |
 
 ## Type Styles
 
@@ -98,7 +97,9 @@ Components use CSS styles + FlexBox layout.
 | `opacity` | `number` | ✅ |
 | `percentage` | `points` &#124; `percentages` | ✅ |
 
-## React Sketch.app Only Styles
+## Styles Specific To `react-sketchapp`
+
+Some properties are Sketch specific and won't work cross-platform but give you a better control over your components.
 
 | property | type | supported? |
 | --- | --- | --- |
