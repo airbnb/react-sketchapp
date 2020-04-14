@@ -6,11 +6,6 @@ Components use CSS styles + FlexBox layout.
 
 | property | type | supported? |
 | --- | --- | --- |
-| `shadowColor` | `Color` | ✅ |
-| `shadowOffset` | `{ width: number, height: number }` | ✅ |
-| `shadowOpacity` | `number` | ✅ |
-| `shadowSpread` | `number` | ✅ |
-| `shadowRadius` | `number` &#124; `percentage` | ✅ |
 | `width` | `number` &#124; `percentage` | ✅ |
 | `height` | `number` &#124; `percentage` | ✅ |
 | `top` | `number` &#124; `percentage` | ✅ |
@@ -73,6 +68,15 @@ Components use CSS styles + FlexBox layout.
 | `borderLeftWidth` | `number` &#124; `percentage` | ✅ |
 | `opacity` | `number` | ✅ |
 
+## Shadow Styles
+
+| property | type | supported? |
+| --- | --- | --- |
+| `shadowColor` | `Color` | ✅ |
+| `shadowOffset` | `{ width: number, height: number }` | ✅ |
+| `shadowOpacity` | `number` | ✅ |
+| `shadowRadius` | `number` &#124; `percentage` | ✅ |
+
 ## Type Styles
 
 | property | type | supported? |
@@ -92,6 +96,15 @@ Components use CSS styles + FlexBox layout.
 | `writingDirection` | `auto` &#124; `ltr` &#124; `rtl` | ⛔️ |
 | `opacity` | `number` | ✅ |
 | `percentage` | `points` &#124; `percentages` | ✅ |
+
+## Styles Specific To `react-sketchapp`
+
+Some properties are Sketch specific and won't work cross-platform but give you a better control over your components.
+
+| property | type | supported? |
+| --- | --- | --- |
+| `shadowSpread` | `number` | ✅ |
+| `shadowInner` | `boolean` | ✅ |
 
 ## Examples
 
