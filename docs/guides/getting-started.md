@@ -125,8 +125,8 @@ const getDocumentByName = name => {
   return (sketch.getDocuments() || []).find(doc => {
     const nativeDoc = doc.sketchObject || {};
     // (unstable/native API)
-    const name = nativeDoc.displayName ? nativeDoc.displayName() : '';
-    if (name.trim() === name) {
+    const docName = nativeDoc.displayName ? nativeDoc.displayName() : '';
+    if (docName.trim() === name) {
       return doc;
     }
   });
