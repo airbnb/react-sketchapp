@@ -70,12 +70,12 @@ Components use CSS styles + FlexBox layout.
 
 ## Shadow Styles
 
-| property | type | supported? |
-| --- | --- | --- |
-| `shadowColor` | `Color` | ✅ |
-| `shadowOffset` | `{ width: number, height: number }` | ✅ |
-| `shadowOpacity` | `number` | ✅ |
-| `shadowRadius` | `number` &#124; `percentage` | ✅ |
+| property        | type                                | supported? |
+| --------------- | ----------------------------------- | ---------- |
+| `shadowColor`   | `Color`                             | ✅         |
+| `shadowOffset`  | `{ width: number, height: number }` | ✅         |
+| `shadowOpacity` | `number`                            | ✅         |
+| `shadowRadius`  | `number` &#124; `percentage`        | ✅         |
 
 ## Type Styles
 
@@ -101,10 +101,11 @@ Components use CSS styles + FlexBox layout.
 
 Some properties are Sketch specific and won't work cross-platform but give you a better control over your components.
 
-| property | type | supported? |
-| --- | --- | --- |
-| `shadowSpread` | `number` | ✅ |
-| `shadowInner` | `boolean` | ✅ |
+| property        | type                                         | supported? |
+| --------------- | -------------------------------------------- | ---------- |
+| `shadowSpread`  | `number`                                     | ✅         |
+| `shadowInner`   | `boolean`                                    | ✅         |
+| `textTransform` | `none` &#124; `uppercase` &#124; `lowercase` | ✅         |
 
 ## Examples
 
