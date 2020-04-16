@@ -7,7 +7,11 @@ import { resetLayer, resetDocument } from './resets';
 import { injectSymbols } from './symbol';
 import { SketchDocumentData, SketchLayer, SketchPage, TreeNode, WrappedSketchLayer } from './types';
 import RedBox from './components/RedBox';
-import { getDocumentDataFromContainer, getDocumentDataFromContext } from './utils/getDocument';
+import {
+  getDocumentDataFromContainer,
+  getDocumentDataFromContext,
+  getDocumentData,
+} from './utils/getDocument';
 import isNativeDocument from './utils/isNativeDocument';
 import isNativePage from './utils/isNativePage';
 import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
@@ -56,10 +60,6 @@ const renderPage = (tree: TreeNode, page: SketchPage): Array<SketchLayer> => {
 };
 
 const renderDocument = (tree: TreeNode, documentData: SketchDocumentData): Array<SketchLayer> => {
-  if (!isNativeDocument(documentData)) {
-    throw new Error('Cannot render a Document into a child of Document');
-  }
-
   const initialPage = documentData.currentPage();
   const shouldRenderInitialPage = !isNativeSymbolsPage(initialPage);
   const children = tree.children || [];
@@ -75,19 +75,29 @@ const renderDocument = (tree: TreeNode, documentData: SketchDocumentData): Array
 };
 
 const renderTree = (tree: TreeNode, _container?: SketchLayer): SketchLayer | Array<SketchLayer> => {
-  if (isNativeDocument(_container) && tree.type !== 'sketch_document') {
-    throw new Error('You need to render a Document into Document');
-  }
-
-  if (!isNativePage(_container) && tree.type === 'sketch_page') {
-    throw new Error('You need to render a Page into Page');
-  }
-
   if (tree.type === 'sketch_document') {
-    const doc = _container || getDocumentDataFromContext(context);
+    if (_container && !isNativeDocument(_container)) {
+      throw new Error('Cannot render a Document into a child of Document');
+    }
+
+    const doc = getDocumentData(_container);
+
+    if (!doc) {
+      return;
+    }
 
     resetDocument(doc);
     return renderDocument(tree, doc);
+  }
+
+  if (isNativeDocument(_container)) {
+    throw new Error('You need to render a Document into Document');
+  }
+
+  if (tree.type === 'sketch_page') {
+    if (_container && !isNativePage(_container)) {
+      throw new Error('You need to render a Page into Page');
+    }
   }
 
   const container = _container || getDefaultPage();
