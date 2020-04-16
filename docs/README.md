@@ -2,6 +2,7 @@
 
 - [Introduction](/README.md)
 - [Guides](/docs/guides/README.md)
+  - [Getting Started](/docs/guides/getting-started.md)
   - [Using `skpm` as a build system](/docs/guides/using-skpm.md)
   - [Data Fetching](/docs/guides/data-fetching.md)
   - [Universal Rendering](/docs/guides/universal-rendering.md)
