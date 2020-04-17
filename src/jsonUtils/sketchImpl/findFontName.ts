@@ -94,12 +94,7 @@ export const findFont = (style: TextStyle): NSFont => {
   const defaultFontSize = 14;
 
   const fontSize = style.fontSize ? style.fontSize : defaultFontSize;
-  let fontWeight =
-    style.fontWeight &&
-    String(style.fontWeight).toLowerCase() &&
-    FONT_WEIGHTS[String(style.fontWeight).toLowerCase()]
-      ? FONT_WEIGHTS[String(style.fontWeight).toLowerCase()]
-      : defaultFontWeight;
+  let fontWeight = FONT_WEIGHTS[String(style.fontWeight).toLowerCase()] || defaultFontWeight;
 
   let familyName = defaultFontFamily;
   let isItalic = false;
