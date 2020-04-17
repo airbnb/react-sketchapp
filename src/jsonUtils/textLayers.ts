@@ -6,14 +6,14 @@ import { makeStyle, parseStyle } from './style';
 
 import findFontName from '../utils/findFont';
 
-export const TEXT_DECORATION_UNDERLINE = {
+export const TEXT_DECORATION_UNDERLINE: { [key: string]: number } = {
   none: FileFormat.UnderlineStyle.None,
   underline: FileFormat.UnderlineStyle.Underlined,
   double: 9,
   'line-through': 0,
 };
 
-export const TEXT_ALIGN = {
+export const TEXT_ALIGN: { [key: string]: number } = {
   auto: FileFormat.TextHorizontalAlignment.Left,
   left: FileFormat.TextHorizontalAlignment.Left,
   right: FileFormat.TextHorizontalAlignment.Right,
@@ -21,21 +21,21 @@ export const TEXT_ALIGN = {
   justify: FileFormat.TextHorizontalAlignment.Justified,
 };
 
-const TEXT_ALIGN_REVERSE = {
+const TEXT_ALIGN_REVERSE: { [key: number]: 'center' | 'auto' | 'left' | 'right' | 'justify' } = {
   [FileFormat.TextHorizontalAlignment.Natural]: 'left',
   [FileFormat.TextHorizontalAlignment.Right]: 'right',
   [FileFormat.TextHorizontalAlignment.Centered]: 'center',
   [FileFormat.TextHorizontalAlignment.Justified]: 'justify',
 } as const;
 
-export const TEXT_DECORATION_LINETHROUGH = {
+export const TEXT_DECORATION_LINETHROUGH: { [key: string]: number } = {
   none: 0,
   underline: 0,
   double: 0,
   'line-through': 1,
 };
 
-export const TEXT_TRANSFORM = {
+export const TEXT_TRANSFORM: { [key: string]: number } = {
   uppercase: FileFormat.TextTransform.Uppercase,
   lowercase: FileFormat.TextTransform.Lowercase,
   initial: FileFormat.TextTransform.None,
@@ -48,7 +48,7 @@ export const TEXT_TRANSFORM = {
 // thanks y'all
 // https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
 
-export const FONT_STYLES = {
+export const FONT_STYLES: { [key: string]: boolean } = {
   normal: false,
   italic: true,
   oblique: true,
@@ -72,7 +72,7 @@ const makeTextStyleAttributes = (style: TextStyle) =>
       _class: 'paragraphStyle',
       alignment: TEXT_ALIGN[style.textAlign || 'auto'],
       paragraphSpacing: style.paragraphSpacing || 0,
-      ...(typeof style.lineHeight !== 'undefined'
+      ...(typeof style.lineHeight !== 'undefined' && style.lineHeight !== null
         ? {
             minimumLineHeight: style.lineHeight,
             maximumLineHeight: style.lineHeight,
@@ -80,12 +80,12 @@ const makeTextStyleAttributes = (style: TextStyle) =>
           }
         : {}),
     },
-    ...(typeof style.letterSpacing !== 'undefined'
+    ...(typeof style.letterSpacing !== 'undefined' && style.letterSpacing !== null
       ? {
           kerning: style.letterSpacing,
         }
       : {}),
-    ...(typeof style.textTransform !== 'undefined'
+    ...(typeof style.textTransform !== 'undefined' && style.textTransform !== null
       ? {
           MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
         }

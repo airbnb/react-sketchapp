@@ -1,17 +1,17 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { makeColorFromCSS, emptyGradient } from './models';
-import { ViewStyle, LayoutInfo, BorderStyle } from '../types';
+import { ViewStyle, LayoutInfo, BorderStyle, Color } from '../types';
 import same from '../utils/same';
 import { makeVerticalBorder, makeHorizontalBorder } from './shapeLayers';
 import { makeBorderOptions } from './style';
 
 const DEFAULT_BORDER_COLOR = 'transparent';
-const DEFAULT_BORDER_STYLE = 'solid';
+export const DEFAULT_BORDER_STYLE = 'solid';
 
 export const createUniformBorder = (
   width: number,
-  color: string,
-  style: BorderStyle = 'solid',
+  color: Color,
+  style: BorderStyle = DEFAULT_BORDER_STYLE,
   position: FileFormat.BorderPosition = FileFormat.BorderPosition.Center,
   lineCapStyle: FileFormat.LineCapStyle = FileFormat.LineCapStyle.Butt,
   lineJoinStyle: FileFormat.LineJoinStyle = FileFormat.LineJoinStyle.Miter,
@@ -71,14 +71,14 @@ export const createBorders = (
   ) {
     // all sides have same border width
     // in this case, we can do everything with just a single shape.
-    if (borderTopStyle !== undefined) {
+    if (borderTopStyle !== undefined && borderTopWidth !== null) {
       const borderOptions = makeBorderOptions(borderTopStyle, borderTopWidth);
       if (borderOptions && content.style) {
         content.style.borderOptions = borderOptions;
       }
     }
 
-    if (borderTopWidth > 0 && content.style) {
+    if (borderTopWidth && borderTopWidth > 0 && content.style) {
       content.style.borders = createUniformBorder(
         borderTopWidth,
         borderTopColor,
@@ -101,7 +101,7 @@ export const createBorders = (
 
   const layers = [content];
 
-  if (borderTopWidth > 0) {
+  if (borderTopWidth && borderTopWidth > 0) {
     const topBorder = makeHorizontalBorder(0, 0, layout.width, borderTopWidth, borderTopColor);
     topBorder.name = 'Border (top)';
 
@@ -113,7 +113,7 @@ export const createBorders = (
     layers.push(topBorder);
   }
 
-  if (borderRightWidth > 0) {
+  if (borderRightWidth && borderRightWidth > 0) {
     const rightBorder = makeVerticalBorder(
       layout.width - borderRightWidth,
       0,
@@ -131,7 +131,7 @@ export const createBorders = (
     layers.push(rightBorder);
   }
 
-  if (borderBottomWidth > 0) {
+  if (borderBottomWidth && borderBottomWidth > 0) {
     const bottomBorder = makeHorizontalBorder(
       0,
       layout.height - borderBottomWidth,
@@ -149,7 +149,7 @@ export const createBorders = (
     layers.push(bottomBorder);
   }
 
-  if (borderLeftWidth > 0) {
+  if (borderLeftWidth && borderLeftWidth > 0) {
     const leftBorder = makeVerticalBorder(0, 0, layout.height, borderLeftWidth, borderLeftColor);
     leftBorder.name = 'Border (left)';
 
