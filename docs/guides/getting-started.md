@@ -95,8 +95,6 @@ export default () => {
   const documents = sketch.getDocuments();
   const document = sketch.getSelectedDocument() // get the current document
     || new sketch.Document(); // or create a new document
-
-  render(<App />, document);
 };
 ```
 
