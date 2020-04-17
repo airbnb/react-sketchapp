@@ -25,7 +25,8 @@ export default class SketchRenderer {
 
     const transform = processTransform(layout, style);
 
-    const opacity = style.opacity !== undefined ? style.opacity : DEFAULT_OPACITY;
+    const opacity =
+      style.opacity !== undefined && style.opacity !== null ? style.opacity : DEFAULT_OPACITY;
 
     return {
       ...layerGroup(

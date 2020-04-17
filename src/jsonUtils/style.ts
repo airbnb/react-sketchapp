@@ -1,7 +1,8 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { makeColorFromCSS, makeColorFill } from './models';
-import { ViewStyle, TextStyle } from '../types';
+import { ViewStyle, TextStyle, BorderStyle } from '../types';
 import hasAnyDefined from '../utils/hasAnyDefined';
+import { DEFAULT_BORDER_STYLE } from './borders';
 
 const DEFAULT_SHADOW_COLOR = '#000';
 
@@ -18,7 +19,7 @@ const SHADOW_STYLES = [
   'textShadowSpread',
 ];
 
-const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): number[] => {
+const makeDashPattern = (style: BorderStyle, width: number): number[] => {
   switch (style) {
     case 'dashed':
       return [width * 3, width * 3];
@@ -32,7 +33,7 @@ const makeDashPattern = (style: 'dashed' | 'dotted' | 'solid', width: number): n
 };
 
 export const makeBorderOptions = (
-  style: 'dashed' | 'dotted' | 'solid',
+  style: BorderStyle,
   width: number,
   lineCapStyle: FileFormat.LineCapStyle = FileFormat.LineCapStyle.Butt,
   lineJoinStyle: FileFormat.LineJoinStyle = FileFormat.LineJoinStyle.Miter,
@@ -48,9 +49,11 @@ export const makeShadow = (
   style: ViewStyle | TextStyle,
 ): FileFormat.Shadow | FileFormat.InnerShadow => {
   const opacity =
-    style.shadowOpacity !== undefined
+    style.shadowOpacity !== undefined && style.shadowOpacity !== null
       ? style.shadowOpacity
-      : 'textShadowOpacity' in style && style.textShadowOpacity !== undefined
+      : 'textShadowOpacity' in style &&
+        style.textShadowOpacity !== undefined &&
+        style.textShadowOpacity !== null
       ? style.textShadowOpacity
       : 1;
   const color =
@@ -58,19 +61,30 @@ export const makeShadow = (
     ('textShadowColor' in style && style.textShadowColor) ||
     DEFAULT_SHADOW_COLOR;
   const radius =
-    style.shadowRadius !== undefined
+    style.shadowRadius !== undefined && style.shadowRadius !== null
       ? style.shadowRadius
-      : 'textShadowRadius' in style && style.textShadowRadius !== undefined
+      : 'textShadowRadius' in style &&
+        style.textShadowRadius !== undefined &&
+        style.textShadowRadius !== null
       ? style.textShadowRadius
       : 1;
   const spread =
-    style.shadowSpread !== undefined
+    style.shadowSpread !== undefined && style.shadowSpread !== null
       ? style.shadowSpread
-      : 'textShadowSpread' in style && style.textShadowSpread !== undefined
+      : 'textShadowSpread' in style &&
+        style.textShadowSpread !== undefined &&
+        style.textShadowSpread !== null
       ? style.textShadowSpread
       : 1;
-  const { width: offsetX = 0, height: offsetY = 0 } =
+  let { width: offsetX, height: offsetY } =
     style.shadowOffset || ('textShadowOffset' in style && style.textShadowOffset) || {};
+
+  if (!offsetX) {
+    offsetX = 0;
+  }
+  if (!offsetY) {
+    offsetY = 0;
+  }
 
   const commonProps = {
     isEnabled: true,
@@ -110,7 +124,7 @@ export const makeStyle = (
     miterLimit: 10,
     innerShadows: [],
     shadows: [],
-    borderOptions: makeBorderOptions('solid', 0, 0, 0),
+    borderOptions: makeBorderOptions(DEFAULT_BORDER_STYLE, 0, 0, 0),
     startMarkerType: FileFormat.MarkerType.OpenArrow,
     endMarkerType: FileFormat.MarkerType.OpenArrow,
     windingRule: FileFormat.WindingRule.EvenOdd,
