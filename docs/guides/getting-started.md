@@ -60,7 +60,7 @@ Example modifications (assuming we want to rename the entrypoint file to `main.j
 To render your app to Sketch, open the Sketch application, create a new blank document, then go to your Terminal and run:
 
 ```bash
-// Make sure you've already done `cd my-app`
+# Make sure you've already done `cd my-app`
 npm run render
 ```
 
