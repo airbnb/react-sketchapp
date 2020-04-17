@@ -93,10 +93,8 @@ const App = () => (
 
 export default () => {
   const documents = sketch.getDocuments();
-  const document =
-    Array.isArray(documents) && documents.length >= 1 // if there are any open documents
-      ? documents[0] // select the last active document
-      : new sketch.Document(); // or create a new document
+  const document = sketch.getSelectedDocument() // get the current document
+    || new sketch.Document(); // or create a new document
 
   render(<App />, document);
 };
