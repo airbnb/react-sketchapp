@@ -1,10 +1,19 @@
 import * as PropTypes from 'prop-types';
 
-const BorderStyle = PropTypes.oneOf(['solid', 'dotted', 'dashed']);
-const Color = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-const Overflow = PropTypes.oneOf(['visible', 'hidden', 'scroll']);
+export const BorderStyle = PropTypes.oneOf<'solid' | 'dotted' | 'dashed'>([
+  'solid',
+  'dotted',
+  'dashed',
+]);
+export const Color = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
+export const Overflow = PropTypes.oneOf<'visible' | 'hidden' | 'scroll'>([
+  'visible',
+  'hidden',
+  'scroll',
+]);
 
 export default {
+  display: PropTypes.oneOf(['flex', 'none']),
   color: Color,
   shadowColor: Color,
   shadowInner: PropTypes.bool,
@@ -39,18 +48,46 @@ export default {
   paddingBottom: PropTypes.number,
   paddingLeft: PropTypes.number,
   paddingRight: PropTypes.number,
-  position: PropTypes.oneOf(['absolute', 'relative']),
-  flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
-  flexWrap: PropTypes.oneOf(['wrap', 'nowrap']),
-  justifyContent: PropTypes.oneOf([
+  position: PropTypes.oneOf<'absolute' | 'relative'>(['absolute', 'relative']),
+  flexDirection: PropTypes.oneOf<'row' | 'row-reverse' | 'column' | 'column-reverse'>([
+    'row',
+    'row-reverse',
+    'column',
+    'column-reverse',
+  ]),
+  flexWrap: PropTypes.oneOf<'wrap' | 'nowrap' | 'wrap-reverse'>(['wrap', 'nowrap', 'wrap-reverse']),
+  justifyContent: PropTypes.oneOf<
+    'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around'
+  >(['flex-start', 'flex-end', 'center', 'space-between', 'space-around']),
+  alignContent: PropTypes.oneOf<
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'stretch'
+    | 'baseline'
+    | 'auto'
+  >([
     'flex-start',
     'flex-end',
     'center',
     'space-between',
     'space-around',
+    'stretch',
+    'baseline',
+    'auto',
   ]),
-  alignItems: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'stretch']),
-  alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'stretch']),
+  alignItems: PropTypes.oneOf<'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'>([
+    'flex-start',
+    'flex-end',
+    'center',
+    'stretch',
+    'baseline',
+  ]),
+  alignSelf: PropTypes.oneOf<
+    'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
+  >(['auto', 'flex-start', 'flex-end', 'center', 'stretch', 'baseline']),
   overflow: Overflow,
   overflowX: Overflow,
   overflowY: Overflow,
@@ -60,7 +97,7 @@ export default {
   flexBasis: PropTypes.number,
   aspectRatio: PropTypes.number,
   zIndex: PropTypes.number,
-  backfaceVisibility: PropTypes.oneOf(['visible', 'hidden']),
+  backfaceVisibility: PropTypes.oneOf<'visible' | 'hidden'>(['visible', 'hidden']),
   backgroundColor: Color,
   borderColor: Color,
   borderTopColor: Color,

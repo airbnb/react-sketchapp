@@ -50,11 +50,11 @@ function createStringAttributes(textStyles: TextStyle): Object {
   const color = makeColorFromCSS(textStyles.color || 'black');
   attribs.MSAttributedStringColorAttribute = color;
 
-  if (textStyles.letterSpacing !== undefined) {
+  if (textStyles.letterSpacing !== undefined && textStyles.letterSpacing !== null) {
     attribs.NSKern = textStyles.letterSpacing;
   }
 
-  if (textStyles.textTransform !== undefined) {
+  if (textStyles.textTransform !== undefined && textStyles.textTransform !== null) {
     attribs.MSAttributedStringTextTransformAttribute = TEXT_TRANSFORM[textStyles.textTransform] * 1;
   }
 

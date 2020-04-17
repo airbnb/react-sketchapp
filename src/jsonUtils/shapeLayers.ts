@@ -4,7 +4,7 @@ import { generateID, makeRect, makeColorFromCSS, emptyGradient } from './models'
 import { makeStyle } from './style';
 import { Color, ResizeConstraints, ViewStyle } from '../types';
 
-type Radii = number[];
+type Radii = (number | null)[];
 
 export const makeHorizontalPath = (): Pick<FileFormat.ShapePath, 'isClosed' | 'points'> => ({
   isClosed: false,
@@ -67,7 +67,7 @@ export const makeRectPath = (
     points: [
       {
         _class: 'curvePoint',
-        cornerRadius: r0,
+        cornerRadius: r0 || 0,
         curveFrom: '{0, 0}',
         curveMode: FileFormat.CurveMode.Straight,
         curveTo: '{0, 0}',
@@ -77,7 +77,7 @@ export const makeRectPath = (
       },
       {
         _class: 'curvePoint',
-        cornerRadius: r1,
+        cornerRadius: r1 || 0,
         curveFrom: '{1, 0}',
         curveMode: FileFormat.CurveMode.Straight,
         curveTo: '{1, 0}',
@@ -87,7 +87,7 @@ export const makeRectPath = (
       },
       {
         _class: 'curvePoint',
-        cornerRadius: r2,
+        cornerRadius: r2 || 0,
         curveFrom: '{1, 1}',
         curveMode: FileFormat.CurveMode.Straight,
         curveTo: '{1, 1}',
@@ -97,7 +97,7 @@ export const makeRectPath = (
       },
       {
         _class: 'curvePoint',
-        cornerRadius: r3,
+        cornerRadius: r3 || 0,
         curveFrom: '{0, 1}',
         curveMode: FileFormat.CurveMode.Straight,
         curveTo: '{0, 1}',

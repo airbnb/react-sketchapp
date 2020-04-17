@@ -41,7 +41,7 @@ function makeLayerFromPathElement(pathElement: any, _parentFrame: FileFormat.Rec
     const borderStyle = createUniformBorder(
       style.strokeWidth * scale,
       style.stroke,
-      'solid',
+      undefined,
       FileFormat.BorderPosition.Center,
       lineCap,
       lineCap,
