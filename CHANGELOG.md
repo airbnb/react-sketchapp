@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/). Every release
 
 ## Version 3.1.2
 
+- Add proptypes for Text
+- Allow `fontWeigth` to be a number
+
+## Version 3.1.2
+
 - Handle passing a Sketch document more properly
 
 ## Version 3.1.1
