@@ -5,6 +5,7 @@ declare module JSX {
     sketch_view: any;
     sketch_text: any;
     sketch_page: any;
+    sketch_pagecontainer: any;
     sketch_image: any;
     sketch_document: any;
     sketch_artboard: any;

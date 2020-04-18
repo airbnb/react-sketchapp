@@ -41,6 +41,11 @@ const getDefaultPage = (): SketchLayer => {
 };
 
 const renderContents = (tree: TreeNode | string, container: SketchLayer): SketchLayer => {
+  if (typeof tree !== 'string' && tree.type === 'sketch_pagecontainer') {
+    const children = tree.children || [];
+
+    return children.map(child => renderContents(child, container));
+  }
   const json = flexToSketchJSON(tree);
   const layer = fromSJSON(json, '119');
 
