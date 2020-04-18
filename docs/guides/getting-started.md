@@ -6,6 +6,8 @@ You can create a `react-sketchapp` project with `skpm`, by cloning a ready-made 
 
 You will need npm, Node and Sketch.
 
+- Terminal (if you’re new to the command line, this [guide](https://medium.com/32pixels/the-designers-guide-to-the-osx-command-prompt-71b0016cac31) may help)
+  - You need to make sure `git` is installed – type `git --version` in your Terminal to check if it's installed, if it isn’t, you should be prompted to install via “command line developer tools”.
 - Code editor e.g. [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io/)
 - Node.js & `npm` – [install with Homebrew](https://nodejs.org/en/download/package-manager/#macos) (or install with [Node Version Manager](https://nodejs.org/en/download/package-manager/#nvm))
 - [Sketch](https://www.sketch.com/)
@@ -18,7 +20,7 @@ You will need npm, Node and Sketch.
 ### Installation
 
 ```bash
-npm i -g skpm
+npm install --global skpm
 skpm create my-app --template=airbnb/react-sketchapp # template is a GitHub repo
 cd my-app
 ```
@@ -64,73 +66,6 @@ To render your app to Sketch, open the Sketch application, create a new blank do
 npm run render
 ```
 
-If you forget to create a new document, you may get an error saying `null is not an object`. You can handle this case with the instructions below:
+You can pass the target Sketch container layer (i.e. document, group or page object) to the `render` function in your Sketch plugin entrypoint file, using the Sketch API: `render(<App />, sketch.getSelectedDocument()`.
 
-### Rendering to Multiple Pages or New Documents
-
-`src/my-command.js` (or whatever file you may have renamed it to).
-
-```js
-import React from 'react';
-import { render } from 'react-sketchapp';
-
-import { render, Document, Page } from 'react-sketchapp';
-
-const App = () => (
-  <Document>
-    <Page name="Page 1">
-      <Artboard>
-        <Text>Hello World!</Text>
-      </Artboard>
-    </Page>
-    <Page name="Page 2">
-      <Artboard>
-        <Text>Hello World, again!</Text>
-      </Artboard>
-    </Page>
-  </Document>
-);
-
-export default () => {
-  const documents = sketch.getDocuments();
-  const document = sketch.getSelectedDocument() // get the current document
-    || new sketch.Document(); // or create a new document
-};
-```
-
-Here are some examples of retrieving our desired target document:
-
-**Get selected document**
-
-```js
-const sketch = require('sketch');
-
-export default () => {
-  const document = sketch.getSelectedDocument();
-
-  render(<App />, document);
-};
-```
-
-**Get document by name**
-
-```js
-const sketch = require('sketch');
-
-const getDocumentByName = name => {
-  return (sketch.getDocuments() || []).find(doc => {
-    const nativeDoc = doc.sketchObject || {};
-    // (unstable/native API)
-    const docName = nativeDoc.displayName ? nativeDoc.displayName() : '';
-    if (docName.trim() === name) {
-      return doc;
-    }
-  });
-};
-
-export default () => {
-  const document = getDocumentByName('My App Design') || new sketch.Document(); // Fallback to new document if document not found
-
-  render(<App />, document);
-};
-```
+For more info on rendering to Sketch, see the [rendering](./rendering.md) page.
