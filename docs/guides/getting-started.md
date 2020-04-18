@@ -17,7 +17,7 @@ You will need npm, Node and Sketch.
 
 **Replace** `my-app` with your desired project name:
 
-### Installation
+### Installation
 
 ```bash
 npm install --global skpm
@@ -25,7 +25,7 @@ skpm create my-app --template=airbnb/react-sketchapp # template is a GitHub repo
 cd my-app
 ```
 
-### Setup
+### Setup
 
 You can now open `my-app` in your code editor of choice. You will see a `src` folder with a `manifest.json` file and Sketch entrypoint (e.g. `my-command.js`). If you wish to rename `my-command.js`, you can do so and update the file name in `script` in `manifest.json`
 
