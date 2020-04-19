@@ -55,6 +55,7 @@ export default () => {
 We can select a document by name, by looping through `sketch.getDocuments()` and checking `doc.path` inside the loop.
 
 ```js
+import path from 'path';
 import sketch from 'sketch';
 import { render } from 'react-sketchapp';
 
