@@ -11,6 +11,8 @@
   - [`<Svg>`](#svg)
   - [`<Text>`](#text)
   - [`<View>`](#view)
+- [`Hooks`](#hooks)
+  - [`useWindowDimensions`](#usewindowdimensions)
 - [`Platform`](#platform)
   - [`OS`](#os)
   - [`Version`](#version)
@@ -25,7 +27,7 @@
   - [`create`](#createstyleoptionsstyles)
   - [`resolve`](#resolvestyle)
 - [`Symbols`](#symbols)
-  - [`makeSymbol`](#makesymbolnode-name)
+  - [`makeSymbol`](#makesymbolnode-props-document)
 
 ### `render(element, container)`
 
@@ -382,6 +384,39 @@ View primitives
 </Document>
 ```
 
+## Hooks
+
+### `useWindowDimensions()`
+
+Returns the window dimensions of the parent `<Artboard>`. Returns `{ width: number, height: number, fontScale: number, scale: number }`.
+
+#### Example
+
+```js
+import { Page, Artboard, View, Text, useWindowDimensions } from 'react-sketchapp';
+
+const HomePage = () => {
+  const { height, width } = useWindowDimensions();
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ height, width }}>
+        <Text>Hello World</Text>
+      </View>
+      <View style={{ height, width, backgroundColor: 'blue' }} />
+    </View>
+  );
+};
+
+render(
+  <Page>
+    <Artboard viewport={{ width: 360, height: 640 }}>
+      <HomePage />
+    </Artboard>
+  </Page>,
+);
+```
+
 ## Platform
 
 ### `OS`
@@ -734,7 +769,7 @@ export default () => {
 };
 ```
 
-####Nested symbol + override example
+#### Nested symbol + override example
 
 ```js
 import sketch from 'sketch';
