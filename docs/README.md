@@ -4,6 +4,7 @@
 - [Guides](/docs/guides/README.md)
   - [Getting Started](/docs/guides/getting-started.md)
   - [Using `skpm` as a build system](/docs/guides/using-skpm.md)
+  - [Rendering](rendering.md)
   - [Data Fetching](/docs/guides/data-fetching.md)
   - [Universal Rendering](/docs/guides/universal-rendering.md)
   - [Styling](/docs/guides/styling.md)
