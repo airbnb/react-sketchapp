@@ -30,10 +30,11 @@ export default class Artboard extends React.Component<Props> {
   };
 
   render() {
+    const style = StyleSheet.flatten(this.props.style as UserStyles);
     return (
-      <ArtboardProvider viewport={this.props.viewport}>
+      <ArtboardProvider viewport={this.props.viewport} style={style}>
         <sketch_artboard
-          style={StyleSheet.flatten(this.props.style as UserStyles)}
+          style={style}
           name={this.props.name}
           viewport={this.props.viewport}
           isHome={this.props.isHome}
