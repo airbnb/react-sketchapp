@@ -26,11 +26,10 @@ export default class ArtboardRenderer extends SketchRenderer {
         presetDictionary: {
           allowResizedMatching: 0,
           offersLandscapeVariant: 1,
-          ...{
-            name: props.viewport.name,
-            width: props.viewport.width,
-            height: props.viewport.height,
-          },
+
+          name: props.viewport.name,
+          width: props.viewport.width,
+          height: props.viewport.height,
         },
       }),
       isFlippedHorizontal: false,
