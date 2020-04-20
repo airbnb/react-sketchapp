@@ -90,6 +90,7 @@ Components use CSS styles + FlexBox layout.
 | `textShadowOffset` | `{ width: number, height: number }` | ✅ |
 | `textShadowRadius` | `number` | ✅ |
 | `textShadowColor` | `Color` | ✅ |
+| `textTransform` | `none` &#124; `uppercase` &#124; `lowercase` | ✅ |
 | `letterSpacing` | `number` | ✅ |
 | `lineHeight` | `number` | ✅ |
 | `textAlign` | `auto` &#124; `left` &#124; `right` &#124; `center` &#124; `justify` | ✅ |
