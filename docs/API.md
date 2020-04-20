@@ -149,8 +149,10 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | `name` | `String` |  | The name to be displayed in the Sketch Layer List |
 | `children` | `Node` |  |  |
 | `style` | [`Style`](/docs/styling.md) |  |  |
-| `viewport` | `Viewport` |  | Object: { name: string, width: number, height: number} |
+| `viewport` | `Viewport` |  | Object: { name: string, width: number, height: number, scale?: number, fontScale?: number } |
 | `isHome` | `Boolean` |  | Is prototype home screen if true |
+
+The `scale` and `fontScale` attributes in the `viewport` prop are not used by Sketch, but can be used together with the [`useWindowDimensions`](#usewindowdimensions) hook for conditional styling/rendering.
 
 #### Examples
 

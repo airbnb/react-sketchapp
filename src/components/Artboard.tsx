@@ -10,6 +10,8 @@ const ViewportPropTypes = {
   name: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,
+  scale: PropTypes.number,
+  fontScale: PropTypes.number,
 };
 
 export const ArtboardPropTypes = {

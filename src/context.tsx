@@ -16,9 +16,9 @@ const ArtboardContext = React.createContext({
 
 export const useWindowDimensions = () => {
   const { state } = React.useContext(ArtboardContext);
-  const { width, height } = state || {};
+  const { width, height, scale, fontScale } = state || {};
 
-  return { width, height };
+  return { width, height, scale, fontScale };
 }
 
 const ArtboardPropTypes = {
@@ -26,6 +26,8 @@ const ArtboardPropTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
     name: PropTypes.string,
+    scale: PropTypes.number,
+    fontScale: PropTypes.number,
   }),
   children: PropTypes.node,
 };
@@ -45,7 +47,9 @@ export const ArtboardProvider = ({ children, viewport, style }: ArtboardProps) =
   const state = {
     ...oState,
     width: viewport.width || (style || {}).width || oState.width,
-    height: viewport.height || (style || {}).height || oState.height
+    height: viewport.height || (style || {}).height || oState.height,
+    scale: viewport.scale || oState.scale,
+    fontScale: viewport.fontScale || oState.scale,
   };
 
   return (
