@@ -405,16 +405,38 @@ const HomePage = () => {
       <View style={{ height, width }}>
         <Text>Hello World</Text>
       </View>
-      <View style={{ height, width, backgroundColor: 'blue' }} />
+      {(width >= 768) && (
+        <View style={{ height, width, backgroundColor: 'blue' }}>
+          <Text style={{ color: 'white' }}>
+            You can only see this text on tablet/desktop
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
 
+const devices = [{
+  name: 'Mobile',
+  width: 360,
+  height: 640,
+}, {
+  name: 'Tablet',
+  width: 768
+  height: 1024,
+}, {
+  name: 'Desktop',
+  width: 1024
+  height: 1280,
+}];
+
 render(
-  <Page>
-    <Artboard viewport={{ width: 360, height: 640 }}>
-      <HomePage />
-    </Artboard>
+  <Page style={{ flexDirection: 'row' }}>
+    {devices.map(viewport => (
+      <Artboard viewport={viewport} style={{ marginRight: 80 }}>
+        <HomePage />
+      </Artboard>
+    ))}
   </Page>,
 );
 ```
