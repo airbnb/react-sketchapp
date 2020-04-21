@@ -81,7 +81,6 @@ const mergeStyle = (a: Style, b: Style): Style => {
     if (key === 'transform') {
       a[key] = mergeTransforms(a[key], b[key]);
     } else {
-      // @ts-ignore
       a[key] = b[key];
     }
   });
