@@ -16,6 +16,7 @@ import {
   getSymbolMasterByName as _getSymbolMasterByName,
   injectSymbols as _injectSymbols,
 } from './symbol';
+import { useWindowDimensions as _useWindowDimensions } from './context';
 
 export const render = _render;
 export const renderToJSON = _renderToJSON;
@@ -34,6 +35,7 @@ export const makeSymbol = _makeSymbol;
 export const getSymbolComponentByName = _getSymbolComponentByName;
 export const getSymbolMasterByName = _getSymbolMasterByName;
 export const injectSymbols = _injectSymbols;
+export const useWindowDimensions = _useWindowDimensions;
 
 export default {
   render,
@@ -53,4 +55,5 @@ export default {
   getSymbolComponentByName,
   getSymbolMasterByName,
   injectSymbols,
+  useWindowDimensions,
 };

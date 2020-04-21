@@ -11,6 +11,8 @@
   - [`<Svg>`](#svg)
   - [`<Text>`](#text)
   - [`<View>`](#view)
+- [`Hooks`](#hooks)
+  - [`useWindowDimensions`](#usewindowdimensions)
 - [`Platform`](#platform)
   - [`OS`](#os)
   - [`Version`](#version)
@@ -25,7 +27,7 @@
   - [`create`](#createstyleoptionsstyles)
   - [`resolve`](#resolvestyle)
 - [`Symbols`](#symbols)
-  - [`makeSymbol`](#makesymbolnode-name)
+  - [`makeSymbol`](#makesymbolnode-props-document)
 
 ### `render(element, container)`
 
@@ -147,8 +149,10 @@ Wrapper for Sketch's Artboards. Requires a [`<Page>`](#page) component as a pare
 | `name` | `String` |  | The name to be displayed in the Sketch Layer List |
 | `children` | `Node` |  |  |
 | `style` | [`Style`](/docs/styling.md) |  |  |
-| `viewport` | `Viewport` |  | Object: { name: string, width: number, height: number} |
+| `viewport` | `Viewport` |  | Object: { name: string, width: number, height: number, scale?: number, fontScale?: number } |
 | `isHome` | `Boolean` |  | Is prototype home screen if true |
+
+The `scale` and `fontScale` attributes in the `viewport` prop are not used by Sketch, but can be used together with the [`useWindowDimensions`](#usewindowdimensions) hook for conditional styling/rendering.
 
 #### Examples
 
@@ -380,6 +384,61 @@ View primitives
     </View>
   </Artboard>
 </Document>
+```
+
+## Hooks
+
+### `useWindowDimensions()`
+
+Returns the window dimensions of the parent `<Artboard>`. Returns `{ width: number, height: number, fontScale: number, scale: number }`.
+
+#### Example
+
+```js
+import { Page, Artboard, View, Text, useWindowDimensions } from 'react-sketchapp';
+
+const HomePage = () => {
+  const { height, width } = useWindowDimensions();
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ height, width }}>
+        <Text>Hello World</Text>
+      </View>
+      {(width >= 768) && (
+        <View style={{ height, width, backgroundColor: 'blue' }}>
+          <Text style={{ color: 'white' }}>
+            You can only see this text on tablet/desktop
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+};
+
+const devices = [{
+  name: 'Mobile',
+  width: 360,
+  height: 640,
+}, {
+  name: 'Tablet',
+  width: 768
+  height: 1024,
+}, {
+  name: 'Desktop',
+  width: 1024
+  height: 1280,
+}];
+
+render(
+  <Page style={{ flexDirection: 'row' }}>
+    {devices.map(viewport => (
+      <Artboard viewport={viewport} style={{ marginRight: 80 }}>
+        <HomePage />
+      </Artboard>
+    ))}
+  </Page>,
+);
 ```
 
 ## Platform
@@ -734,7 +793,7 @@ export default () => {
 };
 ```
 
-####Nested symbol + override example
+#### Nested symbol + override example
 
 ```js
 import sketch from 'sketch';
