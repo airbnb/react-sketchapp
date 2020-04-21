@@ -1,0 +1,614 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Introduction · react-sketchapp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="docs/guides/" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Table of Contents</li>
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="docs/guides/">
+            
+                <a href="docs/guides/">
+            
+                    
+                    Guides
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="docs/guides/getting-started.html">
+            
+                <a href="docs/guides/getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="docs/guides/using-skpm.html">
+            
+                <a href="docs/guides/using-skpm.html">
+            
+                    
+                    Using skpm as a build system
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="docs/guides/rendering.html">
+            
+                <a href="docs/guides/rendering.html">
+            
+                    
+                    Rendering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="docs/guides/data-fetching.html">
+            
+                <a href="docs/guides/data-fetching.html">
+            
+                    
+                    Data Fetching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="docs/guides/universal-rendering.html">
+            
+                <a href="docs/guides/universal-rendering.html">
+            
+                    
+                    Universal Rendering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="docs/guides/styling.html">
+            
+                <a href="docs/guides/styling.html">
+            
+                    
+                    Styling
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="docs/API.html">
+            
+                <a href="docs/API.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="docs/API.html">
+            
+                <a href="docs/API.html#renderelement-container">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="docs/API.html">
+            
+                <a href="docs/API.html#rendertojsonelement">
+            
+                    
+                    renderToJSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="docs/API.html">
+            
+                <a href="docs/API.html#document">
+            
+                    
+                    Document
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="docs/API.html">
+            
+                <a href="docs/API.html#page">
+            
+                    
+                    Page
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="docs/API.html">
+            
+                <a href="docs/API.html#artboard">
+            
+                    
+                    Artboard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="docs/API.html">
+            
+                <a href="docs/API.html#image">
+            
+                    
+                    Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="docs/API.html">
+            
+                <a href="docs/API.html#redbox">
+            
+                    
+                    RedBox
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="docs/API.html">
+            
+                <a href="docs/API.html#svg">
+            
+                    
+                    Svg
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="docs/API.html">
+            
+                <a href="docs/API.html#text">
+            
+                    
+                    Text
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="docs/API.html">
+            
+                <a href="docs/API.html#view">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="docs/API.html">
+            
+                <a href="docs/API.html#platform">
+            
+                    
+                    Platform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="docs/API.html">
+            
+                <a href="docs/API.html#stylesheet">
+            
+                    
+                    StyleSheet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="docs/API.html">
+            
+                <a href="docs/API.html#textstyles">
+            
+                    
+                    TextStyles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="docs/API.html">
+            
+                <a href="docs/API.html#symbols">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="docs/examples.html">
+            
+                <a href="docs/examples.html">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="CHANGELOG.html">
+            
+                <a href="CHANGELOG.html">
+            
+                    
+                    Change Log
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="docs/FAQ.html">
+            
+                <a href="docs/FAQ.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <a target="_blank" href="https://github.com/airbnb/react-sketchapp/blob/master/.github/CONTRIBUTING.md">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Introduction</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <div align="center">
+  <img alt="react-sketchapp" src="https://cldup.com/MxSVEkc_gb.png" style="max-height:163px; width:100; height: auto; max-width:100%">
+</div>
+
+<div align="center">
+  <strong>render React components to Sketch; tailor-made for design systems</strong>
+</div>
+
+<h2 id="quick-start-&#x1F3C3;&#x200D;">Quick-start &#x1F3C3;&#x200D;</h2>
+<p>First, make sure you have installed <a href="http://sketch.com" target="_blank">Sketch</a> version 50+, &amp; a recent <a href="https://nodejs.org/en/download/" target="_blank">npm</a>.</p>
+<p>Open a new Sketch file, then in a terminal:</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">git</span> clone https://github.com/airbnb/react-sketchapp.git
+<span class="token builtin class-name">cd</span> react-sketchapp/examples/basic-setup <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> <span class="token function">install</span>
+
+<span class="token function">npm</span> run render
+</code></pre>
+<p>Next, <a href="https://github.com/airbnb/react-sketchapp/tree/master/examples" target="_blank">check out some more examples</a>!</p>
+<p><img src="https://cloud.githubusercontent.com/assets/591643/24777148/e742cd0e-1ad8-11e7-8751-090f6b2db514.png" alt="readme-intro"></p>
+<p><a href="https://www.npmjs.com/package/react-sketchapp" target="_blank"><img src="https://img.shields.io/npm/v/react-sketchapp.svg" alt="npm"></a> <img src="https://img.shields.io/badge/Sketch.app-43--50-brightgreen.svg" alt="Sketch.app"> <a href="https://travis-ci.org/airbnb/react-sketchapp" target="_blank"><img src="https://img.shields.io/travis/rust-lang/rust.svg" alt="Travis"></a></p>
+<h2 id="why">Why?!</h2>
+<p>Managing the assets of design systems in Sketch is complex, error-prone and time consuming. Sketch is scriptable, but the API often changes. React provides the perfect wrapper to build reusable documents in a way already familiar to JavaScript developers.</p>
+<h2 id="what-does-the-code-look-like">What does the code look like?</h2>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">&apos;react&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> render<span class="token punctuation">,</span> Text<span class="token punctuation">,</span> Artboard <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;react-sketchapp&apos;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>Artboard<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> fontFamily<span class="token punctuation">:</span> <span class="token string">&apos;Comic Sans MS&apos;</span><span class="token punctuation">,</span> color<span class="token punctuation">:</span> <span class="token string">&apos;hotPink&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>props<span class="token punctuation">.</span>message<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>Artboard<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token parameter">context</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>App message<span class="token operator">=</span><span class="token string">&quot;Hello world!&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> context<span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">currentPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="what-can-i-do-with-it">What can I do with it?</h2>
+<ul>
+<li><strong>Manage design systems&#x2014;</strong> <code>react-sketchapp</code> was built for <a href="http://airbnb.design/building-a-visual-language/" target="_blank">Airbnb&#x2019;s design system</a>; this is the easiest way to manage Sketch assets in a large design system</li>
+<li><strong>Use real components for designs&#x2014;</strong> Implement your designs in code as React components and render them into Sketch</li>
+<li><strong>Design with real data&#x2014;</strong> Designing with data is important but challenging; <code>react-sketchapp</code> makes it simple to fetch and incorporate real data into your Sketch files</li>
+<li><strong>Build new tools on top of Sketch&#x2014;</strong> the easiest way to use Sketch as a canvas for custom design tooling</li>
+</ul>
+<p>Found a novel use? We&apos;d love to hear about it!</p>
+<p><a href="http://airbnb.design/painting-with-code/" target="_blank">Read more about why we built it</a></p>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li><a href="http://airbnb.io/react-sketchapp/docs/examples.html" target="_blank">Examples</a></li>
+<li><a href="http://airbnb.io/react-sketchapp/docs/API.html" target="_blank">API Reference</a></li>
+<li><a href="http://airbnb.io/react-sketchapp/docs/guides/styling.html" target="_blank">Styling</a></li>
+<li><a href="http://airbnb.io/react-sketchapp/docs/guides/universal-rendering.html" target="_blank">Universal Rendering</a></li>
+<li><a href="http://airbnb.io/react-sketchapp/docs/guides/data-fetching.html" target="_blank">Data Fetching</a></li>
+<li><a href="http://airbnb.io/react-sketchapp/docs/FAQ.html" target="_blank">FAQ</a></li>
+<li><a href="https://github.com/airbnb/react-sketchapp/blob/master/.github/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="docs/guides/" class="navigation navigation-next navigation-unique" aria-label="Next page: Guides">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Guides","level":"1.2","depth":1,"path":"docs/guides/README.md","ref":"docs/guides/README.md","articles":[{"title":"Getting Started","level":"1.2.1","depth":2,"path":"docs/guides/getting-started.md","ref":"docs/guides/getting-started.md","articles":[]},{"title":"Using skpm as a build system","level":"1.2.2","depth":2,"path":"docs/guides/using-skpm.md","ref":"docs/guides/using-skpm.md","articles":[]},{"title":"Rendering","level":"1.2.3","depth":2,"path":"docs/guides/rendering.md","ref":"docs/guides/rendering.md","articles":[]},{"title":"Data Fetching","level":"1.2.4","depth":2,"path":"docs/guides/data-fetching.md","ref":"docs/guides/data-fetching.md","articles":[]},{"title":"Universal Rendering","level":"1.2.5","depth":2,"path":"docs/guides/universal-rendering.md","ref":"docs/guides/universal-rendering.md","articles":[]},{"title":"Styling","level":"1.2.6","depth":2,"path":"docs/guides/styling.md","ref":"docs/guides/styling.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","-search","codeblock-disable-glossary","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/airbnb/react-sketchapp/"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/airbnb/react-sketchapp/tree/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"react-sketchapp","gitbook":">= 3.2.1"},"file":{"path":"README.md","mtime":"2020-03-25T14:41:05.762Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-21T21:42:23.484Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

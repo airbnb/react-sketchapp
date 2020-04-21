@@ -1,0 +1,633 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Using skpm as a build system · react-sketchapp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="rendering.html" />
+    
+    
+    <link rel="prev" href="getting-started.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Table of Contents</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Guides
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="getting-started.html">
+            
+                <a href="getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="using-skpm.html">
+            
+                <a href="using-skpm.html">
+            
+                    
+                    Using skpm as a build system
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="rendering.html">
+            
+                <a href="rendering.html">
+            
+                    
+                    Rendering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="data-fetching.html">
+            
+                <a href="data-fetching.html">
+            
+                    
+                    Data Fetching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="universal-rendering.html">
+            
+                <a href="universal-rendering.html">
+            
+                    
+                    Universal Rendering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="styling.html">
+            
+                <a href="styling.html">
+            
+                    
+                    Styling
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../API.html">
+            
+                <a href="../API.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../API.html">
+            
+                <a href="../API.html#renderelement-container">
+            
+                    
+                    render
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../API.html">
+            
+                <a href="../API.html#rendertojsonelement">
+            
+                    
+                    renderToJSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../API.html">
+            
+                <a href="../API.html#document">
+            
+                    
+                    Document
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../API.html">
+            
+                <a href="../API.html#page">
+            
+                    
+                    Page
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../API.html">
+            
+                <a href="../API.html#artboard">
+            
+                    
+                    Artboard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../API.html">
+            
+                <a href="../API.html#image">
+            
+                    
+                    Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../API.html">
+            
+                <a href="../API.html#redbox">
+            
+                    
+                    RedBox
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../API.html">
+            
+                <a href="../API.html#svg">
+            
+                    
+                    Svg
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../API.html">
+            
+                <a href="../API.html#text">
+            
+                    
+                    Text
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../API.html">
+            
+                <a href="../API.html#view">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../API.html">
+            
+                <a href="../API.html#platform">
+            
+                    
+                    Platform
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../API.html">
+            
+                <a href="../API.html#stylesheet">
+            
+                    
+                    StyleSheet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../API.html">
+            
+                <a href="../API.html#textstyles">
+            
+                    
+                    TextStyles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="../API.html">
+            
+                <a href="../API.html#symbols">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../examples.html">
+            
+                <a href="../examples.html">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../CHANGELOG.html">
+            
+                <a href="../../CHANGELOG.html">
+            
+                    
+                    Change Log
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../FAQ.html">
+            
+                <a href="../FAQ.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <a target="_blank" href="https://github.com/airbnb/react-sketchapp/blob/master/.github/CONTRIBUTING.md">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Using skpm as a build system</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="using-skpm-as-a-build-system">Using <code>skpm</code> as a build system</h1>
+<p>Sketch allows arbitrary plugins written in <a href="http://developer.sketchapp.com/guides/cocoascript" target="_blank">CocoaScript</a> to run. <a href="https://github.com/skpm/skpm" target="_blank"><code>skpm</code></a> is a utility to create, build and manage Sketch plugins. It takes care of transforming your JavaScript into CocoaScript and makes sure the context it is running in is as close as possible to what you are used to when writing JavaScript.</p>
+<h2 id="installation">Installation</h2>
+<blockquote>
+<p>Important: Node.JS &gt; V6.x is a minimum requirement.</p>
+</blockquote>
+<pre class="language-"><code class="lang-bash"><span class="token function">npm</span> <span class="token function">install</span> -g skpm
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="creating-a-new-plugin">Creating a new plugin</h3>
+<pre class="language-"><code class="lang-bash">skpm create my-plugin --template<span class="token operator">=</span>airbnb/react-sketchapp
+</code></pre>
+<blockquote>
+<p>A note on templates</p>
+<p>The purpose of skpm templates are to provide opinionated development tooling setups so that users can get started with actual plugin code as fast as possible.</p>
+<ul>
+<li><a href="https://github.com/airbnb/react-sketchapp" target="_blank"><code>airbnb/react-sketchapp</code></a> is a simple template to get started with <code>react-sketchapp</code></li>
+</ul>
+<p>&#x1F481; Tip: Any Github repo with a &apos;template&apos; folder can be used as a custom template: <code>skpm create <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project-name</span><span class="token punctuation">&gt;</span></span> --template=<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">&gt;</span></span>/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repository</span><span class="token punctuation">&gt;</span></span></code></p>
+</blockquote>
+<h3 id="build-the-plugin">Build the plugin</h3>
+<p>Once the installation is done, you can run some commands inside the project folder:</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">npm</span> run build
+</code></pre>
+<p>To watch for changes:</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">npm</span> run <span class="token function">watch</span>
+</code></pre>
+<p>Additionally, if you wish to run the plugin every time it is built:</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">npm</span> run render
+</code></pre>
+<h3 id="view-the-plugins-log">View the plugin&apos;s log</h3>
+<p>To view the output of your <code>console.log</code>, you have a few different options:</p>
+<ul>
+<li>Using the <a href="https://github.com/skpm/sketch-dev-tools" target="_blank">sketch-dev-tools</a></li>
+<li>Open Console.app and look for the sketch logs</li>
+<li>Look at the <code>~/Library/Logs/com.bohemiancoding.sketch3/Plugin Output.log</code> file</li>
+</ul>
+<p>Skpm provides a convenient way to do the latter:</p>
+<pre class="language-"><code class="lang-bash">skpm log
+
+  -f, -F        The <span class="token variable"><span class="token variable">`</span>-f<span class="token variable">`</span></span> option causes <span class="token function">tail</span> to not stop when end of <span class="token function">file</span> is
+                reached, but rather to <span class="token function">wait</span> <span class="token keyword">for</span> additional data to be appended
+                to the input.                       <span class="token punctuation">[</span>boolean<span class="token punctuation">]</span> <span class="token punctuation">[</span>default: <span class="token string">&quot;false&quot;</span><span class="token punctuation">]</span>
+  --number, -n  Shows <span class="token variable"><span class="token variable">`</span>number<span class="token variable">`</span></span> lines of the logs.                       <span class="token punctuation">[</span>number<span class="token punctuation">]</span>
+</code></pre>
+<h2 id="custom-configuration">Custom Configuration</h2>
+<h3 id="babel">Babel</h3>
+<p>To customize Babel, you have two options:</p>
+<ul>
+<li><p>You may create a <a href="https://babeljs.io/docs/usage/babelrc" target="_blank"><code>.babelrc</code></a> file in your project&apos;s root directory. Any settings you define here will overwrite matching config-keys within skpm preset. For example, if you pass a &quot;presets&quot; object, it will replace &amp; reset all Babel presets that skpm defaults to.</p>
+</li>
+<li><p>If you&apos;d like to modify or add to the existing Babel config, you must use a <code>webpack.skpm.config.js</code> file. Visit the <a href="#webpack"><code>webpack</code></a> section for more info.</p>
+</li>
+</ul>
+<h3 id="webpack"><code>webpack</code></h3>
+<p>To customize <code>webpack</code> create <code>webpack.skpm.config.js</code> file which exports function that will change <code>webpack</code>&apos;s config.</p>
+<pre class="language-"><code class="lang-js"><span class="token comment">/**
+ * Function that mutates original webpack config.
+ * Supports asynchronous changes when promise is returned.
+ *
+ * @param {object} config - original webpack config.
+ * @param {boolean} isPluginCommand - wether the config is for a plugin command or a resource
+ **/</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> isPluginCommand</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">/** you can change config here **/</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page: Getting Started">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="rendering.html" class="navigation navigation-next " aria-label="Next page: Rendering">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Using skpm as a build system","level":"1.2.2","depth":2,"next":{"title":"Rendering","level":"1.2.3","depth":2,"path":"docs/guides/rendering.md","ref":"docs/guides/rendering.md","articles":[]},"previous":{"title":"Getting Started","level":"1.2.1","depth":2,"path":"docs/guides/getting-started.md","ref":"docs/guides/getting-started.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","-search","codeblock-disable-glossary","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/airbnb/react-sketchapp/"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/airbnb/react-sketchapp/tree/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"react-sketchapp","gitbook":">= 3.2.1"},"file":{"path":"docs/guides/using-skpm.md","mtime":"2019-11-18T18:11:30.173Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-21T21:42:23.484Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
