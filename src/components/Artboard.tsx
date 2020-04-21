@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
 import StyleSheet from '../stylesheet';
 import ViewStylePropTypes from './ViewStylePropTypes';
-import { UserStyles } from '../stylesheet/types';
 import { ArtboardProvider } from '../context';
 
 const ViewportPropTypes = {
@@ -32,7 +31,7 @@ export default class Artboard extends React.Component<Props> {
   };
 
   render() {
-    const style = StyleSheet.flatten(this.props.style as UserStyles);
+    const style = StyleSheet.flatten(this.props.style);
     return (
       <ArtboardProvider viewport={this.props.viewport} style={style}>
         <sketch_artboard
