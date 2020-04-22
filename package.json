@@ -39,8 +39,8 @@
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\""
   },
   "dependencies": {
-    "@lona/svg-model": "^1.0.4",
-    "@sketch-hq/sketch-file-format-ts": "^4.0.0",
+    "@lona/svg-model": "^2.0.0",
+    "@sketch-hq/sketch-file-format-ts": "^4.0.3",
     "airbnb-prop-types": "^2.15.0",
     "error-stack-parser": "^2.0.6",
     "invariant": "^2.2.2",
@@ -51,7 +51,7 @@
     "pegjs": "^0.10.0",
     "prop-types": "^15.7.2",
     "seedrandom": "^3.0.5",
-    "yoga-layout-prebuilt": "^1.9.3"
+    "yoga-layout-prebuilt": "^1.9.5"
   },
   "peerDependencies": {
     "react": "*",
@@ -85,11 +85,11 @@
     "@skpm/test-runner": "^0.4.1",
     "@types/airbnb-prop-types": "^2.13.1",
     "@types/invariant": "^2.2.31",
-    "@types/jest": "^24.9.0",
-    "@types/node": "^13.1.8",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.2",
     "@types/pegjs": "^0.10.1",
-    "@types/react": "^16.9.17",
-    "@types/react-test-renderer": "^16.9.1",
+    "@types/react": "^16.9.34",
+    "@types/react-test-renderer": "^16.9.2",
     "@types/seedrandom": "^2.4.28",
     "gitbook-cli": "^2.3.0",
     "gitbook-plugin-anchorjs": "^2.1.0",
@@ -97,18 +97,18 @@
     "gitbook-plugin-edit-link": "^2.0.2",
     "gitbook-plugin-github": "^2.0.0",
     "gitbook-plugin-prism": "^2.3.0",
-    "jest": "^24.9.0",
-    "jest-cli": "^24.9.0",
-    "lint-staged": "^10.0.0",
+    "jest": "^25.4.0",
+    "jest-cli": "^25.4.0",
+    "lint-staged": "^10.1.7",
     "npm-run-all": "^4.1.5",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.19.1",
-    "react": "^16.12.0",
-    "react-test-renderer": "^16.12.0",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "react-test-renderer": "^16.13.1",
     "sketchapp-json-flow-types": "^0.3.6",
     "trash-cli": "^3.0.0",
-    "ts-jest": "^24.3.0",
-    "typescript": "^3.7.5"
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
   },
   "skpm": {
     "test": {
