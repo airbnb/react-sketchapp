@@ -9,7 +9,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class G extends React.Component<Props> {
+export class G extends React.Component<Props> {
   static propTypes = propTypes;
 
   render() {

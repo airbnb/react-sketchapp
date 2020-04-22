@@ -7,7 +7,7 @@ const minimums = {
   aaaLarge: 4.5,
 };
 
-export default hex => {
+export default (hex) => {
   const contrast = chroma.contrast(hex, 'white');
   return {
     hex,

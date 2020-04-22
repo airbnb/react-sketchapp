@@ -1,21 +1,18 @@
-import { TextNode, Size } from '../types';
-import { getSketchVersion } from './getSketchVersion';
-import sketchMethod from '../jsonUtils/sketchImpl/createStringMeasurer';
-import nodeMethod from '../jsonUtils/nodeImpl/createStringMeasurer';
+import { TextNode, Size, PlatformBridge } from '../types';
 
-const createStringMeasurer = (textNodes: TextNode[]) => (width: number = 0): Size => {
-  // width would be obj-c NaN and the only way to check for it is by comparing
+function isNaN(num: number): boolean {
+  // If the value is obj-c NaN, the only way to check for it is by comparing
   // width to itself (because NaN !== NaN)
-  const _width = width !== width ? 0 : width;
+  // eslint-disable-next-line no-self-compare
+  return Number.isNaN(num) || num !== num;
+}
 
-  if (textNodes.length > 0) {
-    if (getSketchVersion() === 'NodeJS') {
-      return nodeMethod(textNodes, _width);
-    }
-    return sketchMethod(textNodes, _width);
-  }
+export const createStringMeasurer = (bridge: PlatformBridge) => (textNodes: TextNode[]) => (
+  width: number = 0,
+): Size => {
+  const sanitizedWidth = isNaN(width) ? 0 : width;
 
-  return { width: _width, height: 0 };
+  return textNodes.length > 0
+    ? bridge.createStringMeasurer(textNodes, sanitizedWidth)
+    : { width: sanitizedWidth, height: 0 };
 };
-
-export default createStringMeasurer;

@@ -1,18 +1,18 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { fromSJSON } from './jsonUtils/sketchImpl/json-to-sketch';
-import { toSJSON } from './jsonUtils/sketchImpl/sketch-to-json';
-import StyleSheet from './stylesheet';
+import { fromSJSON } from './jsonUtils/sketchJson/fromSJSON';
+import { toSJSON } from './jsonUtils/sketchJson/toSJSON';
+import { StyleSheet } from './stylesheet';
 import { generateID } from './jsonUtils/models';
-import ViewStylePropTypes from './components/ViewStylePropTypes';
-import ResizingConstraintPropTypes from './components/ResizingConstraintPropTypes';
-import buildTree from './buildTree';
-import flexToSketchJSON from './flexToSketchJSON';
+import { ViewStylePropTypes } from './components/ViewStylePropTypes';
+import { ResizingConstraintPropTypes } from './components/ResizingConstraintPropTypes';
+import { buildTree } from './buildTree';
+import { flexToSketchJSON } from './flexToSketchJSON';
 import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentData } from './utils/getDocument';
-import { SketchDocumentData, SketchDocument, WrappedSketchDocument } from './types';
+import { SketchDocumentData, SketchDocument, WrappedSketchDocument, PlatformBridge } from './types';
 import { getSketchVersion } from './utils/getSketchVersion';
 
 let id = 0;
@@ -48,7 +48,7 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
     const symbolsPage = getSymbolsPage(documentData);
 
     existingSymbols = msListToArray(symbolsPage.layers())
-      .map(x => {
+      .map((x) => {
         const symbolJson = toSJSON(x);
         if (!symbolJson || symbolJson._class !== 'symbolMaster') {
           return undefined;
@@ -58,7 +58,7 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
       })
       .filter(exists);
 
-    existingSymbols.forEach(symbolMaster => {
+    existingSymbols.forEach((symbolMaster) => {
       if (symbolMaster._class !== 'symbolMaster') return;
       if (symbolMaster.name in symbolsRegistry) return;
       symbolsRegistry[symbolMaster.name] = symbolMaster;
@@ -89,7 +89,7 @@ export const injectSymbols = (
     const symbolsPage = getSymbolsPage(documentData);
 
     let left = 0;
-    Object.keys(symbolsRegistry).forEach(key => {
+    Object.keys(symbolsRegistry).forEach((key) => {
       const symbolMaster = symbolsRegistry[key];
       symbolMaster.frame.y = 0;
       symbolMaster.frame.x = left;
@@ -103,7 +103,7 @@ export const injectSymbols = (
     resetLayer(symbolsPage);
 
     renderLayers(
-      Object.keys(layers).map(k => layers[k]),
+      Object.keys(layers).map((k) => layers[k]),
       symbolsPage,
     );
 
@@ -153,7 +153,7 @@ const SymbolMasterPropTypes = {
 
 export type SymbolMasterProps = PropTypes.InferProps<typeof SymbolMasterPropTypes>;
 
-export const makeSymbol = (
+export const makeSymbol = (bridge: PlatformBridge) => (
   Component: React.ComponentType<any>,
   symbolProps: string | SymbolMasterProps,
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
@@ -168,13 +168,13 @@ export const makeSymbol = (
   const masterName =
     (typeof symbolProps === 'string' ? symbolProps : (symbolProps || {}).name) ||
     displayName(Component);
-  const existingSymbol = existingSymbols.find(symbolMaster => symbolMaster.name === masterName);
+  const existingSymbol = existingSymbols.find((symbolMaster) => symbolMaster.name === masterName);
   const symbolID = existingSymbol
     ? existingSymbol.symbolID
     : generateID(`symbolID:${masterName}`, !!masterName);
 
-  const symbolMaster = flexToSketchJSON(
-    buildTree(
+  const symbolMaster = flexToSketchJSON(bridge)(
+    buildTree(bridge)(
       <sketch_symbolmaster
         {...(typeof symbolProps !== 'string' ? symbolProps || {} : {})}
         symbolID={symbolID}
@@ -200,7 +200,7 @@ function tryGettingSymbolMasterInDocumentByName(
   }
 
   const symbols = documentData.symbolMap();
-  const symbol = Object.keys(symbols).find(k => symbols[k].name() === name);
+  const symbol = Object.keys(symbols).find((k) => symbols[k].name() === name);
 
   if (!symbol) {
     return undefined;
@@ -233,7 +233,7 @@ export const getSymbolMasterByName = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ): FileFormat.SymbolMaster | undefined => {
   const symbolID = name
-    ? Object.keys(symbolsRegistry).find(key => String(symbolsRegistry[key].name) === name)
+    ? Object.keys(symbolsRegistry).find((key) => String(symbolsRegistry[key].name) === name)
     : '';
 
   if (typeof symbolID === 'undefined' && name && getSketchVersion() !== 'NodeJS') {

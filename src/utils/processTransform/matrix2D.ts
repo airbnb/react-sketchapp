@@ -15,7 +15,7 @@
  *
  * Note the locations of b and c.
  * */
-export default class Matrix2D {
+export class Matrix2D {
   a: number;
 
   b: number;

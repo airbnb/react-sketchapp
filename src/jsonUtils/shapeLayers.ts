@@ -1,5 +1,5 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import makeResizeConstraint from './resizeConstraint';
+import { makeResizeConstraint } from './resizeConstraint';
 import { generateID, makeRect, makeColorFromCSS, emptyGradient } from './models';
 import { makeStyle } from './style';
 import { Color, ResizeConstraints, ViewStyle } from '../types';

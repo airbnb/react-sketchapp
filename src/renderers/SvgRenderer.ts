@@ -1,6 +1,6 @@
-import ViewRenderer from './ViewRenderer';
+import { ViewRenderer } from './ViewRenderer';
 import { TreeNode } from '../types';
-import makeSvgLayer from '../jsonUtils/svgLayer';
+import { makeSvgLayer } from '../jsonUtils/makeSvgLayer';
 import { Props } from '../components/Svg/Svg';
 
 const snakeExceptions = [
@@ -22,7 +22,7 @@ function toSnakeCase(string: string) {
   if (snakeExceptions.indexOf(string) !== -1) {
     return string;
   }
-  return string.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+  return string.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
 }
 
 function makeSvgString(el: string | TreeNode<Props>) {
@@ -61,7 +61,7 @@ function makeSvgString(el: string | TreeNode<Props>) {
   return string;
 }
 
-export default class SvgRenderer extends ViewRenderer {
+export class SvgRenderer extends ViewRenderer {
   getDefaultGroupName(props: Props) {
     return props.name || 'Svg';
   }

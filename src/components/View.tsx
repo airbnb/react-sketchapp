@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
-import ViewStylePropTypes from './ViewStylePropTypes';
-import ResizingConstraintPropTypes from './ResizingConstraintPropTypes';
-import ShadowsPropTypes from './ShadowsPropTypes';
+import { StyleSheet } from '../stylesheet';
+import { ViewStylePropTypes } from './ViewStylePropTypes';
+import { ResizingConstraintPropTypes } from './ResizingConstraintPropTypes';
+import { ShadowsPropTypes } from './ShadowsPropTypes';
 
 export const ViewPropTypes = {
   // TODO(lmr): do some nice warning stuff like RN does
@@ -28,7 +28,7 @@ export const ViewPropTypes = {
 
 export type Props = PropTypes.InferProps<typeof ViewPropTypes>;
 
-export default class View extends React.Component<Props> {
+export class View extends React.Component<Props> {
   static propTypes = ViewPropTypes;
 
   static defaultProps = {

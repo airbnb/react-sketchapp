@@ -4,14 +4,12 @@ import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
-const textColor = hex => {
+const textColor = (hex) => {
   const vsWhite = chroma.contrast(hex, 'white');
   if (vsWhite > 4) {
     return '#FFF';
   }
-  return chroma(hex)
-    .darken(3)
-    .hex();
+  return chroma(hex).darken(3).hex();
 };
 
 const Swatch = ({ name, hex }) => (
@@ -50,7 +48,7 @@ const Document = ({ colors }) => (
       width: (96 + 8) * 4,
     }}
   >
-    {Object.keys(colors).map(color => (
+    {Object.keys(colors).map((color) => (
       <Swatch name={color} hex={colors[color]} key={color} />
     ))}
   </Artboard>

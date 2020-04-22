@@ -12,7 +12,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Line extends React.Component<Props> {
+export class Line extends React.Component<Props> {
   static propTypes = propTypes;
 
   static defaultProps = {

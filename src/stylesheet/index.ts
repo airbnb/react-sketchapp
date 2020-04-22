@@ -1,4 +1,4 @@
-import expandStyle from './expandStyle';
+import { expandStyle } from './expandStyle';
 import {
   RawStyle,
   RawStyles,
@@ -18,7 +18,7 @@ const declarationRegistry: { [id: string]: Style } = {};
 const extractRules = (style: RawStyle): Rules => {
   const declarations: { [key: string]: any } = {};
 
-  Object.keys(style).forEach(key => {
+  Object.keys(style).forEach((key) => {
     if (key[0] === ':') {
       // pseudo style. ignore for now.
     } else if (key[0] === '@') {
@@ -46,7 +46,7 @@ const getStyle = (id: StyleId): Style => declarationRegistry[id];
 
 const create = (styles: RawStyles): StyleSheetInstance => {
   const result: StyleSheetInstance = {};
-  Object.keys(styles).forEach(key => {
+  Object.keys(styles).forEach((key) => {
     result[key] = registerStyle(styles[key]);
   });
   return result;
@@ -61,7 +61,7 @@ const mergeTransforms = (a?: Transform, b?: Transform): Transform | undefined =>
     hash[key] = result.length - 1;
     return hash;
   }, {});
-  (b || []).forEach(t => {
+  (b || []).forEach((t) => {
     const key = Object.keys(t)[0];
     const index = transformsInA[key];
     if (index !== undefined) {
@@ -77,7 +77,7 @@ const mergeTransforms = (a?: Transform, b?: Transform): Transform | undefined =>
 // special case.
 // NOTE(lmr): mutates the first argument!
 const mergeStyle = (a: Style, b: Style): Style => {
-  Object.keys(b).forEach(key => {
+  Object.keys(b).forEach((key) => {
     if (key === 'transform') {
       a[key] = mergeTransforms(a[key], b[key]);
     } else {
@@ -105,7 +105,7 @@ const flattenStyle = (input?: UserStyles | null): Style | undefined => {
 /**
  * A StyleSheet is an abstraction similar to CSS StyleSheets. WIP.
  */
-export default {
+export const StyleSheet = {
   hairlineWidth: 1, // TODO(lmr): should this be something different?
   absoluteFill: registerStyle({
     position: 'absolute',

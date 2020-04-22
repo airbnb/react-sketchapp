@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 
-export default {
+export const ShadowsPropTypes = {
   shadowColor: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   shadowOffset: PropTypes.shape({
     width: PropTypes.number,

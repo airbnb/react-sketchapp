@@ -1,13 +1,13 @@
 import * as TestRenderer from 'react-test-renderer';
 import yoga from 'yoga-layout-prebuilt';
-import Context from './utils/Context';
-import { TreeNode, TextNode } from './types';
-import hasAnyDefined from './utils/hasAnyDefined';
-import pick from './utils/pick';
-import computeYogaTree from './jsonUtils/computeYogaTree';
-import computeTextTree from './jsonUtils/computeTextTree';
+import { Context } from './utils/Context';
+import { TreeNode, TextNode, PlatformBridge } from './types';
+import { hasAnyDefined } from './utils/hasAnyDefined';
+import { pick } from './utils/pick';
+import { computeYogaTree } from './jsonUtils/computeYogaTree';
+import { computeTextTree } from './jsonUtils/computeTextTree';
 import { INHERITABLE_FONT_STYLES } from './utils/constants';
-import zIndex from './utils/zIndex';
+import { zIndex } from './utils/zIndex';
 
 export const reactTreeToFlexTree = (
   node: TestRenderer.ReactTestRendererNode,
@@ -89,7 +89,7 @@ export const reactTreeToFlexTree = (
   };
 };
 
-const buildTree = (element: React.ReactElement) => {
+export const buildTree = (bridge: PlatformBridge) => (element: React.ReactElement) => {
   let renderer: TestRenderer.ReactTestRenderer | undefined;
 
   if (typeof TestRenderer.act !== 'undefined') {
@@ -109,11 +109,9 @@ const buildTree = (element: React.ReactElement) => {
   if (!json) {
     throw new Error('Cannot render react element');
   }
-  const yogaNode = computeYogaTree(json, new Context());
+  const yogaNode = computeYogaTree(bridge)(json, new Context());
   yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());
 
   return tree;
 };
-
-export default buildTree;

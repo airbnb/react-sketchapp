@@ -1,6 +1,6 @@
 type Styles = Object;
 
-class Context {
+export class Context {
   styles: Styles;
 
   staged: Array<Styles>;
@@ -26,5 +26,3 @@ class Context {
     return this.styles;
   }
 }
-
-export default Context;

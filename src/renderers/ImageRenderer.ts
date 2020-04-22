@@ -1,6 +1,6 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import SketchRenderer from './SketchRenderer';
-import getImageDataFromURL from '../utils/getImageDataFromURL';
+import { SketchRenderer } from './SketchRenderer';
+import { getImageDataFromURL } from '../utils/getImageDataFromURL';
 // import processTransform from './processTransform';
 import { makeRect, makeImageFill, makeJSONDataReference, generateID } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
@@ -15,7 +15,7 @@ function extractURLFromSource(source?: string | { uri?: string } | null): string
   return (source || {}).uri;
 }
 
-export default class ImageRenderer extends SketchRenderer {
+export class ImageRenderer extends SketchRenderer {
   renderBackingLayers({
     layout,
     style,
@@ -32,7 +32,7 @@ export default class ImageRenderer extends SketchRenderer {
 
     const url = extractURLFromSource(props.source);
 
-    const image = getImageDataFromURL(url);
+    const image = getImageDataFromURL(this.platformBridge)(url);
 
     const fillImage = makeJSONDataReference(image);
 

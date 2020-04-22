@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import Page from '../../../src/components/Page';
+import { Page } from '../../../src/components/Page';
 
 describe('<Page />', () => {
   it('renders children', () => {

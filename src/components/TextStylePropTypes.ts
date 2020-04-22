@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
-import ViewStylePropTypes, { Color } from './ViewStylePropTypes';
+import { ViewStylePropTypes, Color } from './ViewStylePropTypes';
 
-export default {
+export const TextStylePropTypes = {
   ...ViewStylePropTypes,
   fontFamily: PropTypes.string,
   fontSize: PropTypes.number,

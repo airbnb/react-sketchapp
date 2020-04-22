@@ -1,4 +1,4 @@
-import isDefined from '../../../src/utils/isDefined';
+import { isDefined } from '../../../src/utils/isDefined';
 
 describe('isNullOrUndefined', () => {
   it('correctly identify null', () => {

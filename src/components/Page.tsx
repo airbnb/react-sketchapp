@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
-import PageStylePropTypes from './PageStylePropTypes';
+import { StyleSheet } from '../stylesheet';
+import { PageStylePropTypes } from './PageStylePropTypes';
 
 export const PagePropTypes = {
   name: PropTypes.string,
@@ -12,7 +12,7 @@ export const PagePropTypes = {
 
 type Props = PropTypes.InferProps<typeof PagePropTypes>;
 
-export default class Page extends React.Component<Props> {
+export class Page extends React.Component<Props> {
   static propTypes = PagePropTypes;
 
   render() {

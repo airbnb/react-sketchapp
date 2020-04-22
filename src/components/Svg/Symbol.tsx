@@ -10,7 +10,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Symbol extends React.Component<Props> {
+export class Symbol extends React.Component<Props> {
   static propTypes = propTypes;
 
   render() {

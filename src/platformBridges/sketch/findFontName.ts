@@ -1,6 +1,6 @@
-import hashStyle from '../../utils/hashStyle';
+import { hashStyle } from '../../utils/hashStyle';
 import { TextStyle } from '../../types';
-import { FONT_STYLES } from '../textLayers';
+import { FONT_STYLES } from '../../jsonUtils/textLayers';
 
 // this borrows heavily from react-native's RCTFont class
 // thanks y'all
@@ -53,7 +53,7 @@ const weightOfFont = (font: NSFont): number => {
   if (weight === 0.0) {
     const weights = Object.keys(FONT_WEIGHTS);
     const fontName = String(font.fontName()).toLowerCase();
-    const matchingWeight = weights.find(w => fontName.endsWith(w));
+    const matchingWeight = weights.find((w) => fontName.endsWith(w));
     if (matchingWeight) {
       return FONT_WEIGHTS[matchingWeight];
     }
@@ -190,7 +190,7 @@ export const findFont = (style: TextStyle): NSFont => {
   return font;
 };
 
-export default function findFontName(style: TextStyle): string {
+export function findFontName(style: TextStyle): string {
   const font = findFont(style);
   return font.fontDescriptor().postscriptName();
 }

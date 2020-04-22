@@ -12,7 +12,7 @@ const Palette = ({ colors }) => (
       flexDirection: 'row',
     }}
   >
-    {Object.keys(colors).map(name => (
+    {Object.keys(colors).map((name) => (
       <Swatch key={name} color={colors[name]} name={name} />
     ))}
   </View>

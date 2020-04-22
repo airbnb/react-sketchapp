@@ -49,7 +49,7 @@ const styles = {
   },
 };
 
-const passwordStrength = password => {
+const passwordStrength = (password) => {
   // Faux password checking
   if (password.length <= 6) {
     return 'short';

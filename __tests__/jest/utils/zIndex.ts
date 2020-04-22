@@ -1,4 +1,4 @@
-import zIndex from '../../../src/utils/zIndex';
+import { zIndex } from '../../../src/utils/zIndex';
 
 const noZIndexNode = {
   props: {

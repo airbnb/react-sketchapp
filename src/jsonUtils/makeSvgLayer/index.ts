@@ -1,12 +1,12 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
+import svgModel from '@lona/svg-model';
 import { LayoutInfo, ViewStyle } from '../../types';
 import { makeShapeGroup, makeShapePath } from '../shapeLayers';
 import { makeRect } from '../models';
 import { createUniformBorder } from '../borders';
-import layerGroup from '../layerGroup';
+import { layerGroup } from '../layerGroup';
 import { makePathsFromCommands, makeLineCapStyle } from './graphics/path';
 import { unionRects, scaleRect, makeBoundingRectFromCommands, resize } from './graphics/rect';
-import requireSvgModel from './requireSvgModel';
 
 function makeLayerFromPathElement(pathElement: any, _parentFrame: FileFormat.Rect, scale: number) {
   const {
@@ -26,7 +26,7 @@ function makeLayerFromPathElement(pathElement: any, _parentFrame: FileFormat.Rec
   // and we don't want to apply the origin translation twice.
   const shapePathFrame = makeRect(0, 0, shapeGroupFrame.width, shapeGroupFrame.height);
 
-  const shapePaths = paths.map(path => makeShapePath(shapePathFrame, path));
+  const shapePaths = paths.map((path) => makeShapePath(shapePathFrame, path));
 
   const viewStyle: ViewStyle = {};
 
@@ -78,9 +78,7 @@ function makeLayerGroup(
   return group;
 }
 
-export default function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
-  const svgModel = requireSvgModel();
-
+export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
   const {
     data: { params, children },
   } = svgModel(svg);
@@ -92,14 +90,10 @@ export default function makeSvgLayer(layout: LayoutInfo, name: string, svg: stri
       width: layout.width,
       height: layout.height,
     },
-    preserveAspectRatio = 'xMidYMid meet',
   } = params;
 
-  const meetOrSlice = preserveAspectRatio.split(' ')[1] || 'meet';
-  const resizeMode = meetOrSlice === 'meet' ? 'contain' : 'cover';
-
   // Determine the rect to generate layers within
-  const croppedRect = resize(viewBox, layout, resizeMode);
+  const croppedRect = resize(viewBox, layout, 'contain');
   const scale = croppedRect.width / viewBox.width;
 
   // The top-level frame is the union of every path within

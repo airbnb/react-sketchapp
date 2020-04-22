@@ -17,7 +17,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class RadialGradient extends React.Component<Props> {
+export class RadialGradient extends React.Component<Props> {
   static propTypes = propTypes;
 
   static defaultProps = {

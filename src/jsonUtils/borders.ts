@@ -1,7 +1,7 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { makeColorFromCSS, emptyGradient } from './models';
 import { ViewStyle, LayoutInfo, BorderStyle, Color } from '../types';
-import same from '../utils/same';
+import { same } from '../utils/same';
 import { makeVerticalBorder, makeHorizontalBorder } from './shapeLayers';
 import { makeBorderOptions } from './style';
 

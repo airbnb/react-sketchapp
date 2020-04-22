@@ -121,7 +121,7 @@ Row.propTypes = {
   status: PropTypes.string,
 };
 
-const Timeline = props => (
+const Timeline = (props) => (
   <Artboard style={styles.artboard}>
     <Header title="Product Timeline" />
     {props.data.records.map(({ id, fields }) => (
@@ -146,9 +146,9 @@ Timeline.propTypes = {
 
 export default () => {
   fetch(API_ENDPOINT_URL)
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       render(<Timeline data={data} />, context.document.currentPage());
     })
-    .catch(e => console.error(e));
+    .catch((e) => console.error(e));
 };

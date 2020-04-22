@@ -1,9 +1,9 @@
 import { makeSymbolMaster, makeRect } from '../jsonUtils/models';
-import SketchRenderer from './SketchRenderer';
+import { SketchRenderer } from './SketchRenderer';
 import { TreeNode } from '../types';
 import { SymbolMasterProps } from '../symbol';
 
-export default class SymbolMasterRenderer extends SketchRenderer {
+export class SymbolMasterRenderer extends SketchRenderer {
   renderGroupLayer({
     layout,
     props,

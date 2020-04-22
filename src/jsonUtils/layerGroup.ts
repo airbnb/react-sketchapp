@@ -1,10 +1,10 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import makeResizeConstraint from './resizeConstraint';
+import { makeResizeConstraint } from './resizeConstraint';
 import { generateID, makeRect } from './models';
 import { ResizeConstraints } from '../types';
 import { makeStyle } from './style';
 
-const layerGroup = (
+export const layerGroup = (
   x: number,
   y: number,
   width: number,
@@ -39,5 +39,3 @@ const layerGroup = (
   booleanOperation: FileFormat.BooleanOperation.NA,
   isFixedToViewport: false,
 });
-
-export default layerGroup;

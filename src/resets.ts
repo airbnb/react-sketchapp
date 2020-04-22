@@ -1,6 +1,6 @@
 import { SketchDocumentData, SketchPage } from './types';
-import isNativeDocument from './utils/isNativeDocument';
-import isNativeSymbolsPage from './utils/isNativeSymbolsPage';
+import { isNativeDocument } from './utils/isNativeDocument';
+import { isNativeSymbolsPage } from './utils/isNativeSymbolsPage';
 
 export const resetLayer = (container: SketchDocumentData | SketchPage) => {
   if (isNativeDocument(container)) {

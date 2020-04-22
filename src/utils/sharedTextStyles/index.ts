@@ -1,6 +1,6 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchDocument, TextStyle } from '../../types';
-import { generateID } from '../models';
+import { generateID } from '../../jsonUtils/models';
 
 class TextStyles {
   setDocument(_doc?: SketchDocument) {
@@ -20,4 +20,4 @@ class TextStyles {
   }
 }
 
-export default TextStyles;
+export const sharedTextStyles = new TextStyles();

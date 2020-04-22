@@ -1,4 +1,4 @@
-import layerGroup from '../../../src/jsonUtils/layerGroup';
+import { layerGroup } from '../../../src/jsonUtils/layerGroup';
 
 describe('layer group', () => {
   it('is correctly constructed', () => {

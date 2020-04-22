@@ -15,7 +15,7 @@ const Page = ({ sessions }) => (
         flexWrap: 'wrap',
       }}
     >
-      {sessions.map(session => (
+      {sessions.map((session) => (
         <Space key={session.password} h={spacing.Large} v={spacing.Large}>
           <Register session={session} />
         </Space>

@@ -1,4 +1,4 @@
-export default function makeImageDataFromUrl(url?: string) {
+export function makeImageDataFromUrl(url?: string) {
   let fetchedData = url ? NSData.dataWithContentsOfURL(NSURL.URLWithString(url)) : undefined;
 
   if (fetchedData) {

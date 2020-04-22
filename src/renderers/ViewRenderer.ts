@@ -1,10 +1,10 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import SketchRenderer from './SketchRenderer';
+import { SketchRenderer } from './SketchRenderer';
 import { makeRect } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';
 import { TreeNode } from '../types';
 import { createBorders } from '../jsonUtils/borders';
-import hasAnyDefined from '../utils/hasAnyDefined';
+import { hasAnyDefined } from '../utils/hasAnyDefined';
 import { Props } from '../components/View';
 
 const VISIBLE_STYLES = [
@@ -33,7 +33,7 @@ const VISIBLE_STYLES = [
 
 const OVERFLOW_STYLES = ['overflow', 'overflowX', 'overflowY'];
 
-export default class ViewRenderer extends SketchRenderer {
+export class ViewRenderer extends SketchRenderer {
   getDefaultGroupName(_props: Props) {
     return 'View';
   }

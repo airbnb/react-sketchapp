@@ -13,7 +13,7 @@ type Props = PropTypes.InferProps<typeof propTypes>;
 
 const idExpReg = /^#(.+)$/;
 
-export default class Use extends React.Component<Props> {
+export class Use extends React.Component<Props> {
   static propTypes = propTypes;
 
   render() {

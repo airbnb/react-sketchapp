@@ -1,3 +1,5 @@
+import bridge from '../../../src/platformBridges/macos';
+
 let TextStyles;
 let doc;
 let sharedTextStyles;
@@ -9,21 +11,16 @@ beforeEach(() => {
     getSketchVersion: jest.fn(() => 51),
   }));
 
-  TextStyles = require('../../../src/sharedStyles/TextStyles');
+  TextStyles = require('../../../src/sharedStyles/TextStyles').TextStyles;
 
   sharedTextStyles = require('../../../src/utils/sharedTextStyles');
 
   jest.mock('../../../src/utils/sharedTextStyles');
 
-  jest.mock('../../../src/jsonUtils/sketchImpl/createStringMeasurer');
-  jest.mock('../../../src/jsonUtils/sketchImpl/findFontName');
-  jest.mock('../../../src/jsonUtils/sketchImpl/makeImageDataFromUrl');
-  jest.mock('../../../src/jsonUtils/sketchImpl/makeSvgLayer');
+  TextStyles = TextStyles(() => bridge);
+  sharedTextStyles = sharedTextStyles.sharedTextStyles;
 
-  TextStyles = TextStyles.default;
-  sharedTextStyles = sharedTextStyles.default;
-
-  sharedTextStyles.setDocument = jest.fn(doc => {
+  sharedTextStyles.setDocument = jest.fn((doc) => {
     if (!doc) {
       throw new Error('Please provide a sketch document reference');
     }
@@ -144,11 +141,11 @@ describe('create', () => {
 
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
-      whitelist.forEach(key => {
+      whitelist.forEach((key) => {
         expect(firstStoredStyle).toHaveProperty(key, true);
       });
 
-      blacklist.forEach(key => {
+      blacklist.forEach((key) => {
         expect(firstStoredStyle).not.toHaveProperty(key);
       });
     });

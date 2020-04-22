@@ -1,13 +1,13 @@
 import yoga from 'yoga-layout-prebuilt';
 import { ReactTestRendererNode } from 'react-test-renderer';
-import { ViewStyle } from '../types';
-import Context from '../utils/Context';
-import createStringMeasurer from '../utils/createStringMeasurer';
-import hasAnyDefined from '../utils/hasAnyDefined';
-import pick from '../utils/pick';
-import computeTextTree from './computeTextTree';
+import { ViewStyle, PlatformBridge } from '../types';
+import { Context } from '../utils/Context';
+import { createStringMeasurer } from '../utils/createStringMeasurer';
+import { hasAnyDefined } from '../utils/hasAnyDefined';
+import { pick } from '../utils/pick';
+import { computeTextTree } from './computeTextTree';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
-import isDefined from '../utils/isDefined';
+import { isDefined } from '../utils/isDefined';
 import { getSymbolMasterById } from '../symbol';
 
 // flatten all styles (including nested) into one object
@@ -21,14 +21,14 @@ export const getStyles = (node: ReactTestRendererNode): ViewStyle => {
   if (Array.isArray(style)) {
     const flattened = Array.prototype.concat.apply([], style);
     const themeFlattened = Array.prototype.concat.apply([], flattened);
-    const objectsOnly = themeFlattened.filter(f => f);
+    const objectsOnly = themeFlattened.filter((f) => f);
     style = Object.assign({}, ...objectsOnly);
   }
 
   return style;
 };
 
-const computeYogaNode = (
+export const computeYogaNode = (bridge: PlatformBridge) => (
   node: ReactTestRendererNode,
   context: Context,
 ): { node: yoga.YogaNode; stop?: boolean } => {
@@ -346,12 +346,10 @@ const computeYogaNode = (
 
     // Handle Text Children
     const textNodes = computeTextTree(node, context);
-    yogaNode.setMeasureFunc(createStringMeasurer(textNodes));
+    yogaNode.setMeasureFunc(createStringMeasurer(bridge)(textNodes));
 
     return { node: yogaNode, stop: true };
   }
 
   return { node: yogaNode };
 };
-
-export default computeYogaNode;

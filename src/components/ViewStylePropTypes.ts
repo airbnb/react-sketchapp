@@ -12,7 +12,7 @@ export const Overflow = PropTypes.oneOf<'visible' | 'hidden' | 'scroll'>([
   'scroll',
 ]);
 
-export default {
+export const ViewStylePropTypes = {
   display: PropTypes.oneOf(['flex', 'none']),
   color: Color,
   shadowColor: Color,
