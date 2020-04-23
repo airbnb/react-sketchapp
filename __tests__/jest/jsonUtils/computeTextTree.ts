@@ -1,5 +1,5 @@
-import computeTextTree from '../../../src/jsonUtils/computeTextTree';
-import Context from '../../../src/utils/Context';
+import { computeTextTree } from '../../../src/jsonUtils/computeTextTree';
+import { Context } from '../../../src/utils/Context';
 
 // Example Text component tree
 const treeStub = {

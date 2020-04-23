@@ -1,7 +1,8 @@
 import yoga from 'yoga-layout-prebuilt';
-import computeYogaTree from '../../src/jsonUtils/computeYogaTree';
-import Context from '../../src/utils/Context';
+import { computeYogaTree } from '../../src/jsonUtils/computeYogaTree';
+import { Context } from '../../src/utils/Context';
 import { reactTreeToFlexTree } from '../../src/buildTree';
+import bridge from '../../src/platformBridges/macos';
 
 const treeRootStub = {
   type: 'artboard',
@@ -58,7 +59,7 @@ const treeRootStub = {
 
 describe('Compute Flex Tree', () => {
   it('correctly creates flex tree', () => {
-    const yogaNode = computeYogaTree(treeRootStub, new Context());
+    const yogaNode = computeYogaTree(bridge)(treeRootStub, new Context());
     yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
     const tree = reactTreeToFlexTree(treeRootStub, yogaNode, new Context());
 

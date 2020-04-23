@@ -1,5 +1,5 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import SketchRenderer from './SketchRenderer';
+import { SketchRenderer } from './SketchRenderer';
 import {
   makeSymbolInstance,
   makeRect,
@@ -8,7 +8,7 @@ import {
 } from '../jsonUtils/models';
 import { TreeNode } from '../types';
 import { getSymbolMasterById, SymbolInstanceProps } from '../symbol';
-import getImageDataFromURL from '../utils/getImageDataFromURL';
+import { getImageDataFromURL } from '../utils/getImageDataFromURL';
 
 type Override = {
   type: 'symbolID' | 'stringValue' | 'layerStyle' | 'textStyle' | 'flowDestination' | 'image';
@@ -18,10 +18,10 @@ type Override = {
 };
 
 const findInGroup = (layer: FileFormat.AnyGroup, type: string): FileFormat.AnyLayer | undefined =>
-  layer && layer.layers && layer.layers.find(l => l._class === type);
+  layer && layer.layers && layer.layers.find((l) => l._class === type);
 
 const hasImageFill = (layer: FileFormat.AnyLayer): boolean =>
-  !!(layer.style && layer.style.fills && layer.style.fills.some(f => f.image));
+  !!(layer.style && layer.style.fills && layer.style.fills.some((f) => f.image));
 
 const removeDuplicateOverrides = (overrides: Array<Override>): Array<Override> => {
   const seen: { [path: string]: boolean } = {};
@@ -97,11 +97,12 @@ const extractOverrides = (layers: FileFormat.AnyLayer[] = [], path?: string): Ov
   return removeDuplicateOverrides(overrides);
 };
 
-export default class SymbolInstanceRenderer extends SketchRenderer {
+export class SymbolInstanceRenderer extends SketchRenderer {
   renderGroupLayer({
     layout,
     props,
   }: TreeNode<SymbolInstanceProps & { symbolID: string; name: string }>) {
+    const bridge = this.platformBridge;
     const masterTree = getSymbolMasterById(props.symbolID);
 
     if (!masterTree) {
@@ -199,7 +200,7 @@ export default class SymbolInstanceRenderer extends SketchRenderer {
           makeOverride(
             reference.path,
             reference.type,
-            makeJSONDataReference(getImageDataFromURL(overrideValue)),
+            makeJSONDataReference(getImageDataFromURL(bridge)(overrideValue)),
           ),
         );
       }

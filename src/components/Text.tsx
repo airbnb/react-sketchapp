@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
-import TextStylePropTypes from './TextStylePropTypes';
+import { StyleSheet } from '../stylesheet';
+import { TextStylePropTypes } from './TextStylePropTypes';
 import { ViewPropTypes } from './View';
 
 export const TextPropTypes = {
@@ -18,7 +18,7 @@ export type Props = PropTypes.InferProps<typeof TextPropTypes>;
  *   Hello World!
  * </Text>
  */
-export default class Text extends React.Component<Props> {
+export class Text extends React.Component<Props> {
   static propTypes = TextPropTypes;
 
   render() {

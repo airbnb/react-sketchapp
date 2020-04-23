@@ -1,10 +1,11 @@
 import * as PropTypes from 'prop-types';
-import ViewStylePropTypes, {
+import {
+  ViewStylePropTypes,
   Color as ColorProp,
   BorderStyle as BorderProp,
   Overflow as OverflowProp,
 } from '../components/ViewStylePropTypes';
-import TextStylePropTypes from '../components/TextStylePropTypes';
+import { TextStylePropTypes } from '../components/TextStylePropTypes';
 
 // Sketchy things
 export type SketchLayer = any;
@@ -118,4 +119,10 @@ export type ResizeConstraints = {
   left?: boolean;
   fixedHeight?: boolean;
   fixedWidth?: boolean;
+};
+
+export type PlatformBridge = {
+  createStringMeasurer(textNodes: TextNode[], maxWidth: number): Size;
+  findFontName(style: TextStyle): string;
+  makeImageDataFromUrl(url?: string): string;
 };

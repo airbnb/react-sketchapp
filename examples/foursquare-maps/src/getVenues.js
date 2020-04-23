@@ -16,8 +16,8 @@ export default () => {
   });
 
   return fetch(`https://api.foursquare.com/v2/venues/search?${params}`)
-    .then(res => res.json())
-    .then(data => ({
+    .then((res) => res.json())
+    .then((data) => ({
       venues: data.response.venues,
       latitude,
       longitude,

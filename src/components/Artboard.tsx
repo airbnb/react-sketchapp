@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
-import ViewStylePropTypes from './ViewStylePropTypes';
+import { StyleSheet } from '../stylesheet';
+import { ViewStylePropTypes } from './ViewStylePropTypes';
 import { ArtboardProvider } from '../context';
 
 const ViewportPropTypes = {
@@ -23,7 +23,7 @@ export const ArtboardPropTypes = {
 
 export type Props = PropTypes.InferProps<typeof ArtboardPropTypes>;
 
-export default class Artboard extends React.Component<Props> {
+export class Artboard extends React.Component<Props> {
   static propTypes = ArtboardPropTypes;
 
   static defaultProps = {

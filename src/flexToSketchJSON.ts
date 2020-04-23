@@ -1,7 +1,7 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import * as renderers from './renderers';
-import SketchRenderer from './renderers/SketchRenderer';
-import { TreeNode } from './types';
+import { SketchRenderer } from './renderers/SketchRenderer';
+import { TreeNode, PlatformBridge } from './types';
 
 function missingRendererError(type: string, annotations?: string) {
   return new Error(
@@ -9,7 +9,7 @@ function missingRendererError(type: string, annotations?: string) {
   );
 }
 
-const flexToSketchJSON = (
+export const flexToSketchJSON = (bridge: PlatformBridge) => (
   node: TreeNode | string,
 ):
   | FileFormat.SymbolMaster
@@ -45,7 +45,7 @@ const flexToSketchJSON = (
     throw missingRendererError(type);
   }
 
-  const renderer = new Renderer();
+  const renderer = new Renderer(bridge);
   const groupLayer = renderer.renderGroupLayer(node);
 
   if (groupLayer._class === 'symbolInstance') {
@@ -55,13 +55,14 @@ const flexToSketchJSON = (
   const backingLayers = renderer.renderBackingLayers(node);
 
   // stopping the walk down the tree if we have an svg
+  const curriedFlexToSketchJSON = flexToSketchJSON(bridge);
   const sublayers =
-    children && type !== 'sketch_svg' ? children.map(child => flexToSketchJSON(child)) : [];
+    children && type !== 'sketch_svg'
+      ? children.map((child) => curriedFlexToSketchJSON(child))
+      : [];
 
   // Filter out anything null, undefined
-  const layers = [...backingLayers, ...sublayers].filter(l => l);
+  const layers = [...backingLayers, ...sublayers].filter((l) => l);
 
   return { ...groupLayer, layers };
 };
-
-export default flexToSketchJSON;

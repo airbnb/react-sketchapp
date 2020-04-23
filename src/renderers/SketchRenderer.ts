@@ -1,12 +1,18 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import layerGroup from '../jsonUtils/layerGroup';
-import hotspotLayer from '../jsonUtils/hotspotLayer';
-import { TreeNode } from '../types';
-import processTransform from '../utils/processTransform';
+import { layerGroup } from '../jsonUtils/layerGroup';
+import { hotspotLayer } from '../jsonUtils/hotspotLayer';
+import { TreeNode, PlatformBridge } from '../types';
+import { processTransform } from '../utils/processTransform';
 
 const DEFAULT_OPACITY = 1.0;
 
-export default class SketchRenderer {
+export class SketchRenderer {
+  protected readonly platformBridge: PlatformBridge;
+
+  constructor(bridge: PlatformBridge) {
+    this.platformBridge = bridge;
+  }
+
   getDefaultGroupName(_props: any) {
     return 'Group';
   }

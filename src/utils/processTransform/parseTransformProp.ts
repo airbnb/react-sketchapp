@@ -1,6 +1,6 @@
 // based on https://github.com/react-native-community/react-native-svg/blob/28235ea137a75097c011f11fee92bec8a97b4afa/lib/extract/extractTransform.js
 import * as peg from 'pegjs';
-import Matrix2D from './matrix2D';
+import { Matrix2D } from './matrix2D';
 
 const pooledMatrix = new Matrix2D();
 
@@ -180,6 +180,6 @@ function transformToMatrix(transform: string, origin: [number, number, number]) 
   return pooledMatrix.toArray();
 }
 
-export default function(transform: string, origin: [number, number, number]) {
+export function parseTransformProp(transform: string, origin: [number, number, number]) {
   return transformToMatrix(transform, origin);
 }

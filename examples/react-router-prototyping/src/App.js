@@ -7,7 +7,10 @@ import Post from './routes/post';
 import Profile from './routes/profile';
 
 const App = () => (
-  <SketchRouter locations={['/profile/john', '/post/1']} viewport={{ name: 'Mobile', width: 360, height: 640 }}>
+  <SketchRouter
+    locations={['/profile/john', '/post/1']}
+    viewport={{ name: 'Mobile', width: 360, height: 640 }}
+  >
     {/* (Need to have menus/sidebars inside of a Route) */}
     <Switch>
       <Route path="/" exact render={({ location }) => <Home />} />

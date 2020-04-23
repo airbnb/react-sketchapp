@@ -3,10 +3,10 @@ import { makeRect } from '../../models';
 import { Point, Size } from './types';
 
 export function makeBoundingRectFromPoints(points: Point[]): FileFormat.Rect {
-  const x = Math.min(...points.map(point => point.x));
-  const y = Math.min(...points.map(point => point.y));
-  const width = Math.max(...points.map(point => point.x)) - x;
-  const height = Math.max(...points.map(point => point.y)) - y;
+  const x = Math.min(...points.map((point) => point.x));
+  const y = Math.min(...points.map((point) => point.y));
+  const width = Math.max(...points.map((point) => point.x)) - x;
+  const height = Math.max(...points.map((point) => point.y)) - y;
 
   return makeRect(x, y, width, height);
 }

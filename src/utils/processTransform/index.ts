@@ -1,6 +1,6 @@
 import { LayoutInfo, ViewStyle } from '../../types';
-import parseTransformProp from './parseTransformProp';
-import parseTransformOriginProp from './parseTransformOriginProp';
+import { parseTransformProp } from './parseTransformProp';
+import { parseTransformOriginProp } from './parseTransformOriginProp';
 
 function closeEnough(a: number, b: number) {
   return Math.abs(a - b) < 0.01;
@@ -21,7 +21,7 @@ function getRotation(a: number, b: number) {
   return sketchFactor * (possibleRotation + Math.PI) * rad2deg;
 }
 
-export default function(
+export function processTransform(
   layout: LayoutInfo,
   props: ViewStyle,
 ): { rotation?: number; isFlippedVertical?: boolean; isFlippedHorizontal?: boolean } {

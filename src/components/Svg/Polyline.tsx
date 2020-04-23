@@ -9,7 +9,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Polyline extends React.Component<Props> {
+export class Polyline extends React.Component<Props> {
   static propTypes = propTypes;
 
   static defaultProps = {

@@ -1,7 +1,7 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { makeColorFromCSS, makeColorFill } from './models';
 import { ViewStyle, TextStyle, BorderStyle } from '../types';
-import hasAnyDefined from '../utils/hasAnyDefined';
+import { hasAnyDefined } from '../utils/hasAnyDefined';
 import { DEFAULT_BORDER_STYLE } from './borders';
 
 const DEFAULT_SHADOW_COLOR = '#000';
@@ -169,7 +169,7 @@ export const makeStyle = (
   }
 
   if (shadowsProp) {
-    shadowsProp.forEach(shadowStyle => {
+    shadowsProp.forEach((shadowStyle) => {
       if (!shadowStyle) {
         return;
       }

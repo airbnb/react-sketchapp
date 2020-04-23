@@ -4,7 +4,6 @@ import { View, Text } from 'react-sketchapp';
 import AppBar from '../components/AppBar';
 import NavBar from '../components/NavBar';
 
-
 const Profile = ({ user }) => {
   const name = user ? `${user.charAt(0).toUpperCase()}${user.slice(1)}` : 'User not found';
 
@@ -13,9 +12,7 @@ const Profile = ({ user }) => {
       <AppBar />
       <NavBar />
       <View style={{ height: 200, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 20, color: 'black' }}>
-          {name}
-        </Text>
+        <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
       </View>
     </View>
   );

@@ -89,7 +89,7 @@ const sortProps = (propsArray: string[]) =>
 /**
  * Expand the shorthand properties to isolate every declaration from the others.
  */
-export default (style: RawStyle): Style => {
+export const expandStyle = (style: RawStyle): Style => {
   if (!style) return style;
   const propsArray = Object.keys(style);
   const sortedProps = sortProps(propsArray);

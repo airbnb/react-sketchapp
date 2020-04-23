@@ -1,10 +1,10 @@
 import invariant from 'invariant';
-import { fromSJSON } from './json-to-sketch';
-import { toSJSON } from './sketch-to-json';
+import { fromSJSON } from '../../jsonUtils/sketchJson/fromSJSON';
+import { toSJSON } from '../../jsonUtils/sketchJson/toSJSON';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { SketchDocument, TextStyle } from '../../types';
-import { generateID } from '../models';
-import { parseTextStyle } from '../textLayers';
+import { generateID } from '../../jsonUtils/models';
+import { parseTextStyle } from '../../jsonUtils/textLayers';
 
 class TextStyles {
   _document: SketchDocument | null;
@@ -23,10 +23,7 @@ class TextStyles {
   setStyles(styles: Array<any>) {
     invariant(this._document, 'Please provide a sketch document reference');
 
-    this._document
-      .documentData()
-      .layerTextStyles()
-      .setObjects(styles);
+    this._document.documentData().layerTextStyles().setObjects(styles);
 
     return this;
   }
@@ -70,10 +67,7 @@ class TextStyles {
 
     invariant(doc, 'Please provide a sketch document reference');
 
-    const sharedStyles = doc
-      .documentData()
-      .layerTextStyles()
-      .objects();
+    const sharedStyles = doc.documentData().layerTextStyles().objects();
 
     let foundStyle = undefined;
     for (let i = 0; i < sharedStyles.length; i++) {
@@ -92,4 +86,4 @@ class TextStyles {
   }
 }
 
-export default TextStyles;
+export const sharedTextStyles = new TextStyles();

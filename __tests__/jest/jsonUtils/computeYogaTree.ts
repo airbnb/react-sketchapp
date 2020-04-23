@@ -1,6 +1,7 @@
 import yoga from 'yoga-layout-prebuilt';
-import computeYogaTree from '../../../src/jsonUtils/computeYogaTree';
-import Context from '../../../src/utils/Context';
+import { computeYogaTree } from '../../../src/jsonUtils/computeYogaTree';
+import { Context } from '../../../src/utils/Context';
+import bridge from '../../../src/platformBridges/macos';
 
 const treeRootStub = {
   type: 'artboard',
@@ -36,11 +37,11 @@ const treeRootStub = {
   ],
 };
 
-computeYogaTree(treeRootStub, new Context());
+computeYogaTree(bridge)(treeRootStub, new Context());
 
 describe('Compute Yoga Tree', () => {
   it('correctly create yoga nodes into layout tree', () => {
-    const yogaTree = computeYogaTree(treeRootStub, new Context());
+    const yogaTree = computeYogaTree(bridge)(treeRootStub, new Context());
     yogaTree.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
     expect(yogaTree.getComputedLayout()).toEqual({
       bottom: 0,

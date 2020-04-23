@@ -19,7 +19,7 @@ const getArtboard = (target: string) => {
   return generateID(`artboard:${target}`, true);
 };
 
-const hotspotLayer = ({
+export const hotspotLayer = ({
   targetId,
   target,
   animationType,
@@ -34,5 +34,3 @@ const hotspotLayer = ({
     destinationArtboardID: target ? getArtboard(target) : targetId || 'broken',
   },
 });
-
-export default hotspotLayer;

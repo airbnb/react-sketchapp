@@ -4,7 +4,7 @@ import { textProps } from './props';
 
 type Props = PropTypes.InferProps<typeof textProps>;
 
-export default class TSpan extends React.Component<Props> {
+export class TSpan extends React.Component<Props> {
   static propTypes = textProps;
 
   static childContextTypes = {

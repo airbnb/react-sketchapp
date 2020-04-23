@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import Artboard from '../../../src/components/Artboard';
-import StyleSheet from '../../../src/stylesheet';
+import { Artboard } from '../../../src/components/Artboard';
+import { StyleSheet } from '../../../src/stylesheet';
 
 describe('<Artboard />', () => {
   it('renders children', () => {

@@ -1,11 +1,11 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import { generateID, makeRect, makeColorFromCSS } from '../jsonUtils/models';
-import makeResizeConstraint from '../jsonUtils/resizeConstraint';
-import SketchRenderer from './SketchRenderer';
+import { makeResizeConstraint } from '../jsonUtils/resizeConstraint';
+import { SketchRenderer } from './SketchRenderer';
 import { TreeNode } from '../types';
 import { Props } from '../components/Artboard';
 
-export default class ArtboardRenderer extends SketchRenderer {
+export class ArtboardRenderer extends SketchRenderer {
   renderGroupLayer({ layout, style, props }: TreeNode<Props>): FileFormat.Artboard {
     let color: FileFormat.Color | undefined;
     if (style.backgroundColor !== undefined) {

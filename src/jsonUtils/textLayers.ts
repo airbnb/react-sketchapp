@@ -1,10 +1,8 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import makeResizeConstraint from './resizeConstraint';
-import { TextNode, ResizeConstraints, TextStyle, ViewStyle } from '../types';
+import { makeResizeConstraint } from './resizeConstraint';
+import { TextNode, ResizeConstraints, TextStyle, ViewStyle, PlatformBridge } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { makeStyle, parseStyle } from './style';
-
-import findFontName from '../utils/findFont';
 
 export const TEXT_DECORATION_UNDERLINE: { [key: string]: number } = {
   none: FileFormat.UnderlineStyle.None,
@@ -54,15 +52,17 @@ export const FONT_STYLES: { [key: string]: boolean } = {
   oblique: true,
 };
 
-const makeFontDescriptor = (style: TextStyle): FileFormat.FontDescriptor => ({
+const makeFontDescriptor = (bridge: PlatformBridge) => (
+  style: TextStyle,
+): FileFormat.FontDescriptor => ({
   _class: 'fontDescriptor',
   attributes: {
-    name: String(findFontName(style)), // will default to the system font
+    name: bridge.findFontName(String(style)), // will default to the system font
     size: style.fontSize || 14,
   },
 });
 
-const makeTextStyleAttributes = (style: TextStyle) =>
+const makeTextStyleAttributes = (bridge: PlatformBridge) => (style: TextStyle) =>
   ({
     underlineStyle: style.textDecoration ? TEXT_DECORATION_UNDERLINE[style.textDecoration] || 0 : 0,
     strikethroughStyle: style.textDecoration
@@ -90,19 +90,24 @@ const makeTextStyleAttributes = (style: TextStyle) =>
           MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
         }
       : {}),
-    MSAttributedStringFontAttribute: makeFontDescriptor(style),
+    MSAttributedStringFontAttribute: makeFontDescriptor(bridge)(style),
     textStyleVerticalAlignmentKey: 0,
     MSAttributedStringColorAttribute: makeColorFromCSS(style.color || 'black'),
   } as const);
 
-const makeAttribute = (node: TextNode, location: number): FileFormat.StringAttribute => ({
+const makeAttribute = (bridge: PlatformBridge) => (
+  node: TextNode,
+  location: number,
+): FileFormat.StringAttribute => ({
   _class: 'stringAttribute',
   location,
   length: node.content.length,
-  attributes: makeTextStyleAttributes(node.textStyles),
+  attributes: makeTextStyleAttributes(bridge)(node.textStyles),
 });
 
-const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedString => {
+const makeAttributedString = (bridge: PlatformBridge) => (
+  textNodes: TextNode[],
+): FileFormat.AttributedString => {
   const json: FileFormat.AttributedString = {
     _class: 'attributedString',
     string: '',
@@ -111,8 +116,8 @@ const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedStrin
 
   let location = 0;
 
-  textNodes.forEach(node => {
-    json.attributes.push(makeAttribute(node, location));
+  textNodes.forEach((node) => {
+    json.attributes.push(makeAttribute(bridge)(node, location));
     json.string += node.content;
     location += node.content.length;
   });
@@ -120,14 +125,14 @@ const makeAttributedString = (textNodes: TextNode[]): FileFormat.AttributedStrin
   return json;
 };
 
-export const makeTextStyle = (
+export const makeTextStyle = (bridge: PlatformBridge) => (
   style: TextStyle,
   shadows?: (ViewStyle | undefined | null)[] | null,
 ): FileFormat.Style => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
     _class: 'textStyle',
-    encodedAttributes: makeTextStyleAttributes(style),
+    encodedAttributes: makeTextStyleAttributes(bridge)(style),
     verticalAlignment: FileFormat.TextVerticalAlignment.Top,
   };
   return json;
@@ -196,7 +201,7 @@ export const parseTextStyle = (json: FileFormat.Style): TextStyle => {
   return style;
 };
 
-const makeTextLayer = (
+export const makeTextLayer = (bridge: PlatformBridge) => (
   frame: FileFormat.Rect,
   name: string,
   textNodes: TextNode[],
@@ -205,7 +210,7 @@ const makeTextLayer = (
   shadows?: (ViewStyle | undefined | null)[] | null,
 ): FileFormat.Text => ({
   _class: 'text',
-  do_objectID: generateID(`text:${name}-${textNodes.map(node => node.content).join('')}`),
+  do_objectID: generateID(`text:${name}-${textNodes.map((node) => node.content).join('')}`),
   frame,
   isFlippedHorizontal: false,
   isFlippedVertical: false,
@@ -218,8 +223,8 @@ const makeTextLayer = (
   resizingType: FileFormat.ResizeType.Stretch,
   rotation: 0,
   shouldBreakMaskChain: false,
-  attributedString: makeAttributedString(textNodes),
-  style: makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows),
+  attributedString: makeAttributedString(bridge)(textNodes),
+  style: makeTextStyle(bridge)((textNodes[0] || { textStyles: {} }).textStyles, shadows),
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,
   // NOTE(akp): I haven't fully figured out the meaning of glyphBounds
@@ -237,5 +242,3 @@ const makeTextLayer = (
   },
   isFixedToViewport: false,
 });
-
-export default makeTextLayer;

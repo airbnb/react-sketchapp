@@ -27,7 +27,7 @@ const Subtitle = ({ children }) => <Text style={styles.subtitle}>{children}</Tex
 
 const Body = ({ children }) => <Text style={styles.body}>{children}</Text>;
 
-const Profile = props => (
+const Profile = (props) => (
   <View style={styles.container}>
     <Avatar url={props.user.profile_image_url} />
     <View style={{ marginBottom: spacing }}>

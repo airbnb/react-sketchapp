@@ -16,7 +16,7 @@ const Page = ({ users }) => (
         width: users.length * 300,
       }}
     >
-      {users.map(user => (
+      {users.map((user) => (
         <Space key={user.screen_name} h={spacing} v={spacing}>
           <Profile user={user} />
         </Space>

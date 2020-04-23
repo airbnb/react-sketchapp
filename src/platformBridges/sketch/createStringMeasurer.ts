@@ -4,9 +4,9 @@ import {
   TEXT_DECORATION_LINETHROUGH,
   TEXT_ALIGN,
   TEXT_TRANSFORM,
-} from '../textLayers';
+} from '../../jsonUtils/textLayers';
+import { makeColorFromCSS } from '../../jsonUtils/models';
 import { findFont } from './findFontName';
-import { makeColorFromCSS } from '../models';
 
 // TODO(lmr): do something more sensible here
 const FLOAT_MAX = 999999;
@@ -71,9 +71,9 @@ function createAttributedString(textNode: TextNode): NSAttributedString {
   return NSAttributedString.attributedStringWithString_attributes_(content, attribs);
 }
 
-export default function createStringMeasurer(textNodes: TextNode[], width: number): Size {
+export function createStringMeasurer(textNodes: TextNode[], width: number): Size {
   const fullStr = NSMutableAttributedString.alloc().init();
-  textNodes.forEach(textNode => {
+  textNodes.forEach((textNode) => {
     const newString = createAttributedString(textNode);
     fullStr.appendAttributedString(newString);
   });

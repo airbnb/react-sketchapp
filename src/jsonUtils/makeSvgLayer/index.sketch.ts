@@ -1,13 +1,9 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import { toSJSON } from './sketch-to-json';
+import { toSJSON } from '../sketchJson/toSJSON';
 
 import { LayoutInfo } from '../../types';
 
-export default function makeSvgLayer(
-  _layout: LayoutInfo,
-  name: string,
-  svg: string,
-): FileFormat.Group {
+export function makeSvgLayer(_layout: LayoutInfo, name: string, svg: string): FileFormat.Group {
   const svgString = NSString.stringWithString(svg);
   const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
   const svgImporter = MSSVGImporter.svgImporter();

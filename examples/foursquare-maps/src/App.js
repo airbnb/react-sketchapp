@@ -63,7 +63,7 @@ const Row = ({ name, location }) => (
 Row.propTypes = Venue;
 
 const App = ({ center, venues }) => {
-  const pins = venues.map(v => ({
+  const pins = venues.map((v) => ({
     latitude: v.location.lat,
     longitude: v.location.lng,
   }));
@@ -82,7 +82,7 @@ const App = ({ center, venues }) => {
         markers={pins}
       />
       <View name="ListView">
-        {venues.map(v => (
+        {venues.map((v) => (
           <Row key={v.id} {...v} />
         ))}
       </View>

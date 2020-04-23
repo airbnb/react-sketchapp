@@ -1,11 +1,11 @@
-import SketchRenderer from './SketchRenderer';
+import { SketchRenderer } from './SketchRenderer';
 import { TreeNode } from '../types';
-import makeTextLayer from '../jsonUtils/textLayers';
+import { makeTextLayer } from '../jsonUtils/textLayers';
 import { makeRect } from '../jsonUtils/models';
-import TextStyles from '../sharedStyles/TextStyles';
+import { TextStyles } from '../sharedStyles/TextStyles';
 import { Props } from '../components/Text';
 
-export default class TextRenderer extends SketchRenderer {
+export class TextRenderer extends SketchRenderer {
   getDefaultGroupName(props: Props) {
     return props.name || 'Text';
   }
@@ -14,10 +14,10 @@ export default class TextRenderer extends SketchRenderer {
     // Append all text nodes's content into one string if name is missing
     const resolvedName = props.name
       ? props.name
-      : props.textNodes.map(textNode => textNode.content).join('');
+      : props.textNodes.map((textNode) => textNode.content).join('');
 
     const frame = makeRect(0, 0, layout.width, layout.height);
-    const layer = makeTextLayer(
+    const layer = makeTextLayer(this.platformBridge)(
       frame,
       resolvedName,
       props.textNodes,
@@ -26,7 +26,7 @@ export default class TextRenderer extends SketchRenderer {
       props.shadows,
     );
 
-    const resolvedTextStyle = TextStyles.resolve(textStyle);
+    const resolvedTextStyle = TextStyles(() => this.platformBridge).resolve(textStyle);
     if (resolvedTextStyle) {
       if (!layer.style) {
         layer.style = resolvedTextStyle.sketchStyle;

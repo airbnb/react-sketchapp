@@ -10,7 +10,7 @@ const initialArtboardState = {
   fontScale: 1,
 };
 
-const ArtboardContext = React.createContext({
+export const ArtboardContext = React.createContext({
   state: initialArtboardState,
 });
 
@@ -19,7 +19,7 @@ export const useWindowDimensions = () => {
   const { width, height, scale, fontScale } = state || {};
 
   return { width, height, scale, fontScale };
-}
+};
 
 const ArtboardPropTypes = {
   viewport: PropTypes.shape({
@@ -33,8 +33,8 @@ const ArtboardPropTypes = {
 };
 
 type ArtboardProps = PropTypes.InferProps<typeof ArtboardPropTypes> & {
-  children: any,
-  style?: Style,
+  children: any;
+  style?: Style;
 };
 
 export const ArtboardProvider = ({ children, viewport, style }: ArtboardProps) => {
@@ -52,11 +52,5 @@ export const ArtboardProvider = ({ children, viewport, style }: ArtboardProps) =
     fontScale: viewport.fontScale || oState.scale,
   };
 
-  return (
-    <ArtboardContext.Provider value={{ state }}>
-      {children}
-    </ArtboardContext.Provider>
-  )
-}
-
-export default ArtboardContext;
+  return <ArtboardContext.Provider value={{ state }}>{children}</ArtboardContext.Provider>;
+};

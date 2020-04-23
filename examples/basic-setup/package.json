@@ -9,14 +9,14 @@
   "scripts": {
     "build": "skpm-build",
     "watch": "skpm-build --watch",
-    "render": "skpm-build --watch --run",
+    "render": "node ../../../skpm/packages/builder/lib/build.js --watch --run",
     "render:once": "skpm-build --run",
     "postinstall": "npm run build && skpm-link"
   },
   "author": "Jon Gold <jon.gold@airbnb.com>",
   "license": "MIT",
   "devDependencies": {
-    "@skpm/builder": "^0.7.4"
+    "@skpm/builder": "^0.7.5"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",

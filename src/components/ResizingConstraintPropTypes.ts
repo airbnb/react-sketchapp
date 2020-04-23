@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 
-export default {
+export const ResizingConstraintPropTypes = {
   top: PropTypes.bool,
   right: PropTypes.bool,
   bottom: PropTypes.bool,

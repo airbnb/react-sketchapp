@@ -4,10 +4,12 @@ import { render, Page, Document as RootDocument } from 'react-sketchapp';
 
 import App from './App';
 
-const pages = [{
-  name: 'App',
-  component: App,
-}];
+const pages = [
+  {
+    name: 'App',
+    component: App,
+  },
+];
 
 const Document = () => (
   <RootDocument>
@@ -19,13 +21,11 @@ const Document = () => (
   </RootDocument>
 );
 
-
 export default () => {
   const data = context.document.documentData();
   const pages = context.document.pages();
 
   data.setCurrentPage(pages.firstObject());
-
 
   render(<Document />);
 };

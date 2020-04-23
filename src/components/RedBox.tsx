@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import ErrorStackParser from 'error-stack-parser';
-import Text from './Text';
-import View from './View';
+import { Text } from './Text';
+import { View } from './View';
 
 type StackFrame = {
   isConstrutor?: boolean;
@@ -48,7 +48,7 @@ export const ErrorBoxPropTypes = {
 
 type Props = PropTypes.InferProps<typeof ErrorBoxPropTypes>;
 
-export default class RedBox extends React.Component<Props> {
+export class RedBox extends React.Component<Props> {
   static propTypes = ErrorBoxPropTypes;
 
   static defaultProps = {
