@@ -1,6 +1,6 @@
 {
   "name": "react-sketchapp",
-  "version": "3.2.0",
+  "version": "3.2.2",
   "description": "A React renderer for Sketch.app",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@lona/svg-model": "^2.0.0",
-    "@sketch-hq/sketch-file-format-ts": "^4.0.3",
+    "@sketch-hq/sketch-file-format-ts": "4.0.3",
     "airbnb-prop-types": "^2.15.0",
     "error-stack-parser": "^2.0.6",
     "invariant": "^2.2.2",

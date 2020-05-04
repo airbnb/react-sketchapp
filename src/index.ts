@@ -14,7 +14,7 @@ import {
 import { TextStyles as _TextStyles } from './sharedStyles/TextStyles';
 
 function getDefaultPlatformBridge() {
-  return require('./platformBridges/macos');
+  return require('./platformBridges/macos').default;
 }
 
 export function render(

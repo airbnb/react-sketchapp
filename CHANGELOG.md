@@ -2,6 +2,15 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.2.2
+
+- Fix getting the default bridge on NodeJS
+
+## Version 3.2.1
+
+- `Platform.version` now reflects the Sketch version
+- Fix a bug for a broken version of `@sketch-hq/sketch-file-format-ts`
+
 ## Version 3.2.0
 
 - Add a new `useWindowDimensions` hook for Artboard viewport (#501)
