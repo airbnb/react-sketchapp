@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@lona/svg-model": "^2.0.0",
-    "@sketch-hq/sketch-file-format-ts": "^4.0.3",
+    "@sketch-hq/sketch-file-format-ts": "4.0.3",
     "airbnb-prop-types": "^2.15.0",
     "error-stack-parser": "^2.0.6",
     "invariant": "^2.2.2",
