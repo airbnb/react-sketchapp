@@ -9,7 +9,7 @@
   "scripts": {
     "build": "skpm-build",
     "watch": "skpm-build --watch",
-    "render": "node ../../../skpm/packages/builder/lib/build.js --watch --run",
+    "render": "skpm-build --watch --run",
     "render:once": "skpm-build --run",
     "postinstall": "npm run build && skpm-link"
   },
