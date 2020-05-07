@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { render, Artboard, Text, View } from 'react-sketchapp';
+import { render, Artboard, Text, View } from '../../../lib';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
@@ -23,7 +23,10 @@ const Swatch = ({ name, hex }) => (
       padding: 8,
     }}
   >
-    <Text name="Swatch Name" style={{ color: textColor(hex), fontWeight: 'bold' }}>
+    <Text
+      name="Swatch Name"
+      style={{ color: textColor(hex), fontWeight: 'bold', fontFamily: 'Helvetica' }}
+    >
       {name}
     </Text>
     <Text name="Swatch Hex" style={{ color: textColor(hex) }}>

@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.2.3
+
+- Fix getting the font name (#510)
+
 ## Version 3.2.2
 
 - Fix getting the default bridge on NodeJS
@@ -15,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/). Every release
 
 - Add a new `useWindowDimensions` hook for Artboard viewport (#501)
 
-## Version 3.1.2
+## Version 3.1.3
 
 - Add proptypes for Text
 - Allow `fontWeigth` to be a number
