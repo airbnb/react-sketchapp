@@ -132,7 +132,7 @@ describe('create', () => {
       const input = [...whitelist, ...blacklist].reduce(
         (acc, key) => ({
           ...acc,
-          [key]: true,
+          [key]: '',
         }),
         {},
       );
@@ -142,7 +142,7 @@ describe('create', () => {
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
       whitelist.forEach((key) => {
-        expect(firstStoredStyle).toHaveProperty(key, true);
+        expect(firstStoredStyle).toHaveProperty(key, '');
       });
 
       blacklist.forEach((key) => {

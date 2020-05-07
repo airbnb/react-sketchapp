@@ -192,5 +192,5 @@ export const findFont = (style: TextStyle): NSFont => {
 
 export function findFontName(style: TextStyle): string {
   const font = findFont(style);
-  return font.fontDescriptor().postscriptName();
+  return String(font.fontDescriptor().postscriptName());
 }

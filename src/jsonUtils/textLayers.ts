@@ -57,7 +57,7 @@ const makeFontDescriptor = (bridge: PlatformBridge) => (
 ): FileFormat.FontDescriptor => ({
   _class: 'fontDescriptor',
   attributes: {
-    name: bridge.findFontName(String(style)), // will default to the system font
+    name: bridge.findFontName(style), // will default to the system font
     size: style.fontSize || 14,
   },
 });
