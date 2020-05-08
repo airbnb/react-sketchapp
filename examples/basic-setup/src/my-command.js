@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { render, Artboard, Text, View } from '../../../lib';
+import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
 // take a hex and give us a nice text color to put over it
