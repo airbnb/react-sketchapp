@@ -1,4 +1,5 @@
 import * as React from 'react';
+import sketch from 'sketch';
 import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
@@ -67,5 +68,5 @@ export default () => {
     'TypeScript Blue': '#007ACC',
   };
 
-  render(<Document colors={colorList} />, context.document.currentPage());
+  render(<Document colors={colorList} />, sketch.getSelectedDocument().selectedPage);
 };
