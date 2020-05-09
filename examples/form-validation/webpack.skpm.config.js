@@ -6,7 +6,7 @@ module.exports = (config) => {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
-        'react-sketchapp': path.resolve(__dirname, '../../lib/'), // FIXME: Should be able to do '../../', as that's a close simulation of an 'npm install' and import 'react-sketchapp'
+        'react-sketchapp': path.resolve(__dirname, '../../lib/'),
       },
     };
   }
