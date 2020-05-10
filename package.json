@@ -38,6 +38,7 @@
     "test:unit": "jest --config jest.config.js --no-watchman",
     "test:ci": "npm run test:unit -- --runInBand",
     "test:e2e": "skpm-test",
+    "test:e2e:examples": "npm run build --prefix __tests__/examples/",
     "test:update": "npm run test -- --updateSnapshot",
     "test:e2e:watch": "npm run test:e2e -- --watch",
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\""
