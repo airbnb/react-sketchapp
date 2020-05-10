@@ -63,5 +63,6 @@ const App = () => (
 );
 
 export default () => {
-  render(<App />, sketch.getSelectedDocument());
+  // FIXME: Get this working with skpm-test instead for CLI / CI stdout feedback
+  render(<App />, sketch.getSelectedDocument() || new sketch.Document());
 };
