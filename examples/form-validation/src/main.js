@@ -6,7 +6,7 @@ import DATA from './data';
 import Register from './components/Register';
 import Space from './components/Space';
 
-const Page = ({ sessions }) => (
+export const Page = ({ sessions }) => (
   <View>
     <Text style={typography.Heading}>Form Validation w/ DOM elements and React Primitives</Text>
     <View
