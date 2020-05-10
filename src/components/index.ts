@@ -5,5 +5,5 @@ export { Image } from './Image';
 export { RedBox } from './RedBox';
 export { View } from './View';
 export { Text } from './Text';
-import Svg from './Svg';
+import * as Svg from './Svg';
 export { Svg };
