@@ -18,7 +18,8 @@
     "@skpm/builder": "^0.4.3"
   },
   "dependencies": {
-    "emotion-primitives": "^1.0.0-beta.6",
+    "@emotion/core": "^10.0.28",
+    "@emotion/primitives": "^10.0.30",
     "react": "^16.4.1",
     "react-primitives": "^0.6.0",
     "react-sketchapp": "^3.0.0"

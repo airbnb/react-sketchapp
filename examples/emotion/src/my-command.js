@@ -1,5 +1,5 @@
 import React from 'react';
-import emotion from 'emotion-primitives';
+import emotion from '@emotion/primitives';
 import { render } from 'react-sketchapp';
 
 const Container = emotion.View`
@@ -21,7 +21,7 @@ const Image = emotion.Image`
 
 const emotionLogo = 'https://avatars3.githubusercontent.com/u/31557565?s=400&v=4';
 
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     return (
       <Container borderRadius="10px">
