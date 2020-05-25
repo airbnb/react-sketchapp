@@ -37,7 +37,7 @@
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest --config jest.config.js --no-watchman",
     "test:ci": "npm run test:unit -- --runInBand",
-    "test:e2e": "skpm-test",
+    "test:e2e": "npm run test:e2e --prefix __tests__/skpm",
     "test:e2e:examples": "npm run build --prefix __tests__/examples/",
     "test:update": "npm run test -- --updateSnapshot",
     "test:e2e:watch": "npm run test:e2e -- --watch",
@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@skpm/babel-preset": "^0.2.1",
-    "@skpm/test-runner": "^0.4.1",
+    "@skpm/test-runner": "^0.3.2",
     "@types/airbnb-prop-types": "^2.13.1",
     "@types/invariant": "^2.2.31",
     "@types/jest": "^25.2.1",
