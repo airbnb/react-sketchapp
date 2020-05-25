@@ -52,7 +52,7 @@ const pages = [
   },
 ];
 
-const App = () => (
+export const App = () => (
   <Document>
     {pages.map(({ name, component: Component, data }) => (
       <Page key={name} name={name}>
