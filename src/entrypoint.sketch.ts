@@ -37,5 +37,3 @@ export function makeSymbol(
 }
 
 export const TextStyles = _TextStyles(() => SketchBridge);
-
-export * from './index.common';
