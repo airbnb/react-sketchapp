@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import emotion from '@emotion/primitives';
 import { render } from 'react-sketchapp';
 
