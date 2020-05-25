@@ -1,0 +1,23 @@
+{
+  "name": "example-tests",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "skpm": {
+    "test": {
+      "testRegex": "/.*.(test|spec).jsx?$"
+    }
+  },
+  "scripts": {
+    "test:e2e": "../../node_modules/.bin/skpm-test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/primitives": "^10.0.30",
+    "chroma-js": "^1.2.2",
+    "emotion-primitives": "^1.0.0-beta.0",
+    "ramda": "^0.27.0",
+    "react-primitives": "^0.8.1"
+  }
+}
