@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.2.6
+
+- Fix the SVG component export
+
 ## Version 3.2.5
 
 - Fix Skpm taking the wrong entry point when requiring react-sketchapp
