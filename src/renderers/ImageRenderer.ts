@@ -15,7 +15,7 @@ function extractURLFromSource(source?: string | { uri?: string } | null): string
   return (source || {}).uri;
 }
 
-export default class ImageRenderer extends SketchRenderer {
+export class ImageRenderer extends SketchRenderer {
   async renderBackingLayers({
     layout,
     style,
@@ -32,7 +32,7 @@ export default class ImageRenderer extends SketchRenderer {
 
     const url = extractURLFromSource(props.source);
 
-    const image = await getImageDataFromURL(this.platformBridge, url);
+    const image = await getImageDataFromURL(this.platformBridge)(url);
 
     const fillImage = makeJSONDataReference(image);
 

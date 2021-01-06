@@ -1,12 +1,13 @@
 import { PlatformBridge } from '../../types';
 import { createStringMeasurer } from './createStringMeasurer';
 import { findFontName } from './findFontName';
-import { makeImageDataFromUrl } from './makeImageDataFromUrl';
+import readFile from './readFile';
 
 const SketchBridge: PlatformBridge = {
   createStringMeasurer,
   findFontName,
-  makeImageDataFromUrl,
+  fetch,
+  readFile,
 };
 
 export default SketchBridge;

@@ -113,12 +113,12 @@ export type TreeNode<Props = any> = {
 };
 
 export type ResizeConstraints = {
-  top?: boolean;
-  right?: boolean;
-  bottom?: boolean;
-  left?: boolean;
-  fixedHeight?: boolean;
-  fixedWidth?: boolean;
+  top?: boolean | null;
+  right?: boolean | null;
+  bottom?: boolean | null;
+  left?: boolean | null;
+  fixedHeight?: boolean | null;
+  fixedWidth?: boolean | null;
 };
 
 export type PlatformBridge = {

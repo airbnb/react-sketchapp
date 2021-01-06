@@ -42,7 +42,7 @@ export const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
   ) {
     const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
     const hash = hashStyle(safeStyle);
-    const sketchStyle = makeTextStyle(safeStyle, undefined, platformBridge);
+    const sketchStyle = makeTextStyle(platformBridge)(safeStyle, undefined);
     const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
 
     // FIXME(gold): side effect :'(

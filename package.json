@@ -5,7 +5,6 @@
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "lib/module/index.js",
-  "sketch": "lib/module/index.sketch.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
   "author": "Jon Gold <jon.gold@airbnb.com> (http://jon.gold)",

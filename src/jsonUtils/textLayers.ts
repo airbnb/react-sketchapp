@@ -128,7 +128,6 @@ const makeAttributedString = (bridge: PlatformBridge) => (
 export const makeTextStyle = (bridge: PlatformBridge) => (
   style: TextStyle,
   shadows: (ViewStyle | undefined | null)[] | undefined | null,
-  bridge: PlatformBridge,
 ): FileFormat.Style => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {

@@ -4,7 +4,7 @@ import { buildTree } from './buildTree';
 import { flexToSketchJSON } from './flexToSketchJSON';
 import * as React from 'react';
 
-export const renderToJSON = async (platformBridge: PlatformBridge) => (
+export const renderToJSON = (platformBridge: PlatformBridge) => async (
   element: React.ReactElement,
 ): Promise<FileFormat.AnyLayer> => {
   const tree = buildTree(platformBridge)(element);

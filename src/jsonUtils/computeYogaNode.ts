@@ -31,7 +31,6 @@ export const getStyles = (node: ReactTestRendererNode): ViewStyle => {
 export const computeYogaNode = (bridge: PlatformBridge) => (
   node: ReactTestRendererNode,
   context: Context,
-  bridge: PlatformBridge,
 ): { node: yoga.YogaNode; stop?: boolean } => {
   const yogaNode = yoga.Node.create();
   const hasStyle = typeof node !== 'string' && node.props && node.props.style;

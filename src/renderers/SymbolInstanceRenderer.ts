@@ -102,7 +102,6 @@ export class SymbolInstanceRenderer extends SketchRenderer {
     layout,
     props,
   }: TreeNode<SymbolInstanceProps & { symbolID: string; name: string }>) {
-    const bridge = this.platformBridge;
     const masterTree = getSymbolMasterById(props.symbolID);
 
     if (!masterTree) {
@@ -203,7 +202,7 @@ export class SymbolInstanceRenderer extends SketchRenderer {
           makeOverride(
             reference.path,
             reference.type,
-            makeJSONDataReference(await getImageDataFromURL(this.platformBridge, overrideValue)),
+            makeJSONDataReference(await getImageDataFromURL(this.platformBridge)(overrideValue)),
           ),
         );
       }

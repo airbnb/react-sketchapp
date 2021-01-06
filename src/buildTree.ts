@@ -109,6 +109,13 @@ export const buildTree = (bridge: PlatformBridge) => (element: React.ReactElemen
   if (!json) {
     throw new Error('Cannot render react element');
   }
+
+  if (Array.isArray(json)) {
+    // TODO: It should be investigated in which cases the renderer can actually return
+    // an array and possibly handle this better instead of bailing out
+    throw new Error('Unexpected array in render result');
+  }
+
   const yogaNode = computeYogaTree(bridge)(json, new Context());
   yogaNode.calculateLayout(undefined, undefined, yoga.DIRECTION_LTR);
   const tree = reactTreeToFlexTree(json, yogaNode, new Context());
