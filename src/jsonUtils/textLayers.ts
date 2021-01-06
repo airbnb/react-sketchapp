@@ -208,7 +208,6 @@ export const makeTextLayer = (bridge: PlatformBridge) => (
   _style: ViewStyle,
   resizingConstraint: ResizeConstraints | undefined | null,
   shadows: (ViewStyle | undefined | null)[] | undefined | null,
-  bridge: PlatformBridge,
 ): FileFormat.Text => ({
   _class: 'text',
   do_objectID: generateID(`text:${name}-${textNodes.map((node) => node.content).join('')}`),
