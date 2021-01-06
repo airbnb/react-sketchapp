@@ -862,4 +862,4 @@ export default () => {
 };
 ```
 
-[platform-bridge-api]: ./src/types/index.ts#L124-130
+[platform-bridge-api]: ../src/types/index.ts#L124-130
