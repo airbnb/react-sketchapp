@@ -1,17 +1,17 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import makeResizeConstraint from './resizeConstraint';
+import { makeResizeConstraint } from './resizeConstraint';
 import { TextNode, ResizeConstraints, TextStyle, ViewStyle, PlatformBridge } from '../types';
 import { generateID, makeColorFromCSS } from './models';
 import { makeStyle, parseStyle } from './style';
 
-export const TEXT_DECORATION_UNDERLINE = {
+export const TEXT_DECORATION_UNDERLINE: { [key: string]: number } = {
   none: FileFormat.UnderlineStyle.None,
   underline: FileFormat.UnderlineStyle.Underlined,
   double: 9,
   'line-through': 0,
 };
 
-export const TEXT_ALIGN = {
+export const TEXT_ALIGN: { [key: string]: number } = {
   auto: FileFormat.TextHorizontalAlignment.Left,
   left: FileFormat.TextHorizontalAlignment.Left,
   right: FileFormat.TextHorizontalAlignment.Right,
@@ -19,21 +19,21 @@ export const TEXT_ALIGN = {
   justify: FileFormat.TextHorizontalAlignment.Justified,
 };
 
-const TEXT_ALIGN_REVERSE = {
+const TEXT_ALIGN_REVERSE: { [key: number]: 'center' | 'auto' | 'left' | 'right' | 'justify' } = {
   [FileFormat.TextHorizontalAlignment.Natural]: 'left',
   [FileFormat.TextHorizontalAlignment.Right]: 'right',
   [FileFormat.TextHorizontalAlignment.Centered]: 'center',
   [FileFormat.TextHorizontalAlignment.Justified]: 'justify',
 } as const;
 
-export const TEXT_DECORATION_LINETHROUGH = {
+export const TEXT_DECORATION_LINETHROUGH: { [key: string]: number } = {
   none: 0,
   underline: 0,
   double: 0,
   'line-through': 1,
 };
 
-export const TEXT_TRANSFORM = {
+export const TEXT_TRANSFORM: { [key: string]: number } = {
   uppercase: FileFormat.TextTransform.Uppercase,
   lowercase: FileFormat.TextTransform.Lowercase,
   initial: FileFormat.TextTransform.None,
@@ -46,24 +46,23 @@ export const TEXT_TRANSFORM = {
 // thanks y'all
 // https://github.com/facebook/react-native/blob/master/React/Views/RCTFont.mm
 
-export const FONT_STYLES = {
+export const FONT_STYLES: { [key: string]: boolean } = {
   normal: false,
   italic: true,
   oblique: true,
 };
 
-const makeFontDescriptor = (
+const makeFontDescriptor = (bridge: PlatformBridge) => (
   style: TextStyle,
-  bridge: PlatformBridge,
 ): FileFormat.FontDescriptor => ({
   _class: 'fontDescriptor',
   attributes: {
-    name: String(bridge.findFontName(style)), // will default to the system font
+    name: bridge.findFontName(style), // will default to the system font
     size: style.fontSize || 14,
   },
 });
 
-const makeTextStyleAttributes = (style: TextStyle, bridge: PlatformBridge) =>
+const makeTextStyleAttributes = (bridge: PlatformBridge) => (style: TextStyle) =>
   ({
     underlineStyle: style.textDecoration ? TEXT_DECORATION_UNDERLINE[style.textDecoration] || 0 : 0,
     strikethroughStyle: style.textDecoration
@@ -73,7 +72,7 @@ const makeTextStyleAttributes = (style: TextStyle, bridge: PlatformBridge) =>
       _class: 'paragraphStyle',
       alignment: TEXT_ALIGN[style.textAlign || 'auto'],
       paragraphSpacing: style.paragraphSpacing || 0,
-      ...(typeof style.lineHeight !== 'undefined'
+      ...(typeof style.lineHeight !== 'undefined' && style.lineHeight !== null
         ? {
             minimumLineHeight: style.lineHeight,
             maximumLineHeight: style.lineHeight,
@@ -81,35 +80,33 @@ const makeTextStyleAttributes = (style: TextStyle, bridge: PlatformBridge) =>
           }
         : {}),
     },
-    ...(typeof style.letterSpacing !== 'undefined'
+    ...(typeof style.letterSpacing !== 'undefined' && style.letterSpacing !== null
       ? {
           kerning: style.letterSpacing,
         }
       : {}),
-    ...(typeof style.textTransform !== 'undefined'
+    ...(typeof style.textTransform !== 'undefined' && style.textTransform !== null
       ? {
           MSAttributedStringTextTransformAttribute: TEXT_TRANSFORM[style.textTransform] * 1,
         }
       : {}),
-    MSAttributedStringFontAttribute: makeFontDescriptor(style, bridge),
+    MSAttributedStringFontAttribute: makeFontDescriptor(bridge)(style),
     textStyleVerticalAlignmentKey: 0,
     MSAttributedStringColorAttribute: makeColorFromCSS(style.color || 'black'),
   } as const);
 
-const makeAttribute = (
+const makeAttribute = (bridge: PlatformBridge) => (
   node: TextNode,
   location: number,
-  bridge: PlatformBridge,
 ): FileFormat.StringAttribute => ({
   _class: 'stringAttribute',
   location,
   length: node.content.length,
-  attributes: makeTextStyleAttributes(node.textStyles, bridge),
+  attributes: makeTextStyleAttributes(bridge)(node.textStyles),
 });
 
-const makeAttributedString = (
+const makeAttributedString = (bridge: PlatformBridge) => (
   textNodes: TextNode[],
-  bridge: PlatformBridge,
 ): FileFormat.AttributedString => {
   const json: FileFormat.AttributedString = {
     _class: 'attributedString',
@@ -119,8 +116,8 @@ const makeAttributedString = (
 
   let location = 0;
 
-  textNodes.forEach(node => {
-    json.attributes.push(makeAttribute(node, location, bridge));
+  textNodes.forEach((node) => {
+    json.attributes.push(makeAttribute(bridge)(node, location));
     json.string += node.content;
     location += node.content.length;
   });
@@ -128,7 +125,7 @@ const makeAttributedString = (
   return json;
 };
 
-export const makeTextStyle = (
+export const makeTextStyle = (bridge: PlatformBridge) => (
   style: TextStyle,
   shadows: (ViewStyle | undefined | null)[] | undefined | null,
   bridge: PlatformBridge,
@@ -136,7 +133,7 @@ export const makeTextStyle = (
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
     _class: 'textStyle',
-    encodedAttributes: makeTextStyleAttributes(style, bridge),
+    encodedAttributes: makeTextStyleAttributes(bridge)(style),
     verticalAlignment: FileFormat.TextVerticalAlignment.Top,
   };
   return json;
@@ -205,7 +202,7 @@ export const parseTextStyle = (json: FileFormat.Style): TextStyle => {
   return style;
 };
 
-const makeTextLayer = (
+export const makeTextLayer = (bridge: PlatformBridge) => (
   frame: FileFormat.Rect,
   name: string,
   textNodes: TextNode[],
@@ -215,7 +212,7 @@ const makeTextLayer = (
   bridge: PlatformBridge,
 ): FileFormat.Text => ({
   _class: 'text',
-  do_objectID: generateID(`text:${name}-${textNodes.map(node => node.content).join('')}`),
+  do_objectID: generateID(`text:${name}-${textNodes.map((node) => node.content).join('')}`),
   frame,
   isFlippedHorizontal: false,
   isFlippedVertical: false,
@@ -228,8 +225,8 @@ const makeTextLayer = (
   resizingType: FileFormat.ResizeType.Stretch,
   rotation: 0,
   shouldBreakMaskChain: false,
-  attributedString: makeAttributedString(textNodes, bridge),
-  style: makeTextStyle((textNodes[0] || { textStyles: {} }).textStyles, shadows, bridge),
+  attributedString: makeAttributedString(bridge)(textNodes),
+  style: makeTextStyle(bridge)((textNodes[0] || { textStyles: {} }).textStyles, shadows),
   automaticallyDrawOnUnderlyingPath: false,
   dontSynchroniseWithSymbol: false,
   // NOTE(akp): I haven't fully figured out the meaning of glyphBounds
@@ -247,5 +244,3 @@ const makeTextLayer = (
   },
   isFixedToViewport: false,
 });
-
-export default makeTextLayer;

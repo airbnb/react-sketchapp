@@ -2,7 +2,7 @@ import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import seedrandom from 'seedrandom';
 import normalizeColor, { rgba } from 'normalize-css-color';
 import { Color, ResizeConstraints } from '../types';
-import makeResizeConstraint from './resizeConstraint';
+import { makeResizeConstraint } from './resizeConstraint';
 
 const lut: string[] = [];
 for (let i = 0; i < 256; i += 1) {
@@ -15,16 +15,13 @@ function e7(seed?: string) {
   const d1 = (random() * 0xffffffff) | 0;
   const d2 = (random() * 0xffffffff) | 0;
   const d3 = (random() * 0xffffffff) | 0;
-  return `${lut[d0 & 0xff] +
-    lut[(d0 >> 8) & 0xff] +
-    lut[(d0 >> 16) & 0xff] +
-    lut[(d0 >> 24) & 0xff]}-${lut[d1 & 0xff]}${lut[(d1 >> 8) & 0xff]}-${
-    lut[((d1 >> 16) & 0x0f) | 0x40]
-  }${lut[(d1 >> 24) & 0xff]}-${lut[(d2 & 0x3f) | 0x80]}${lut[(d2 >> 8) & 0xff]}-${
-    lut[(d2 >> 16) & 0xff]
-  }${lut[(d2 >> 24) & 0xff]}${lut[d3 & 0xff]}${lut[(d3 >> 8) & 0xff]}${lut[(d3 >> 16) & 0xff]}${
-    lut[(d3 >> 24) & 0xff]
-  }`;
+  return `${
+    lut[d0 & 0xff] + lut[(d0 >> 8) & 0xff] + lut[(d0 >> 16) & 0xff] + lut[(d0 >> 24) & 0xff]
+  }-${lut[d1 & 0xff]}${lut[(d1 >> 8) & 0xff]}-${lut[((d1 >> 16) & 0x0f) | 0x40]}${
+    lut[(d1 >> 24) & 0xff]
+  }-${lut[(d2 & 0x3f) | 0x80]}${lut[(d2 >> 8) & 0xff]}-${lut[(d2 >> 16) & 0xff]}${
+    lut[(d2 >> 24) & 0xff]
+  }${lut[d3 & 0xff]}${lut[(d3 >> 8) & 0xff]}${lut[(d3 >> 16) & 0xff]}${lut[(d3 >> 24) & 0xff]}`;
 }
 
 // Keep track on previous numbers that are generated

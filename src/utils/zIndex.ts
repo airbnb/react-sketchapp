@@ -1,7 +1,7 @@
 import { ReactTestRendererNode } from 'react-test-renderer';
 
 // Sort z-index values lowest to highest
-const zIndex = (
+export const zIndex = (
   nodes: (ReactTestRendererNode | string)[],
 ): ((ReactTestRendererNode & { oIndex: number }) | string)[] =>
   nodes
@@ -29,5 +29,3 @@ const zIndex = (
           : 0;
       return aIndex - bIndex;
     });
-
-export default zIndex;

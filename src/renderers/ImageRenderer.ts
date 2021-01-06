@@ -1,6 +1,6 @@
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
-import SketchRenderer from './SketchRenderer';
-import getImageDataFromURL from '../utils/getImageDataFromURL';
+import { SketchRenderer } from './SketchRenderer';
+import { getImageDataFromURL } from '../utils/getImageDataFromURL';
 // import processTransform from './processTransform';
 import { makeRect, makeImageFill, makeJSONDataReference, generateID } from '../jsonUtils/models';
 import { makeRectShapeLayer, makeShapeGroup } from '../jsonUtils/shapeLayers';

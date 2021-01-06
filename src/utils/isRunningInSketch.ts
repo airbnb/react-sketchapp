@@ -1,5 +1,5 @@
 import { getSketchVersion } from './getSketchVersion';
 
-export default function isRunningInSketch() {
+export function isRunningInSketch() {
   return getSketchVersion() !== 'NodeJS';
 }

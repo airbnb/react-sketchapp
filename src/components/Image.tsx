@@ -2,9 +2,9 @@ import * as React from 'react';
 import { FileFormat1 as FileFormat } from '@sketch-hq/sketch-file-format-ts';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
-import ResizeModePropTypes from './ResizeModePropTypes';
-import ImageStylePropTypes from './ImageStylePropTypes';
+import { StyleSheet } from '../stylesheet';
+import { ResizeModePropTypes } from './ResizeModePropTypes';
+import { ImageStylePropTypes } from './ImageStylePropTypes';
 import { ViewPropTypes } from './View';
 
 const ImageURISourcePropType = PropTypes.shape({
@@ -44,7 +44,7 @@ export const ImagePropTypes = {
 
 export type Props = PropTypes.InferProps<typeof ImagePropTypes>;
 
-export default class Image extends React.Component<Props> {
+export class Image extends React.Component<Props> {
   static propTypes = ImagePropTypes;
 
   static defaultProps = {

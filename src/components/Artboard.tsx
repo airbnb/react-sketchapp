@@ -1,13 +1,16 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { or } from 'airbnb-prop-types';
-import StyleSheet from '../stylesheet';
-import ViewStylePropTypes from './ViewStylePropTypes';
+import { StyleSheet } from '../stylesheet';
+import { ViewStylePropTypes } from './ViewStylePropTypes';
+import { ArtboardProvider } from '../context';
 
 const ViewportPropTypes = {
   name: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,
+  scale: PropTypes.number,
+  fontScale: PropTypes.number,
 };
 
 export const ArtboardPropTypes = {
@@ -20,7 +23,7 @@ export const ArtboardPropTypes = {
 
 export type Props = PropTypes.InferProps<typeof ArtboardPropTypes>;
 
-export default class Artboard extends React.Component<Props> {
+export class Artboard extends React.Component<Props> {
   static propTypes = ArtboardPropTypes;
 
   static defaultProps = {
@@ -28,15 +31,18 @@ export default class Artboard extends React.Component<Props> {
   };
 
   render() {
+    const style = StyleSheet.flatten(this.props.style);
     return (
-      <sketch_artboard
-        style={StyleSheet.flatten(this.props.style)}
-        name={this.props.name}
-        viewport={this.props.viewport}
-        isHome={this.props.isHome}
-      >
-        {this.props.children}
-      </sketch_artboard>
+      <ArtboardProvider viewport={this.props.viewport} style={style}>
+        <sketch_artboard
+          style={style}
+          name={this.props.name}
+          viewport={this.props.viewport}
+          isHome={this.props.isHome}
+        >
+          {this.props.children}
+        </sketch_artboard>
+      </ArtboardProvider>
     );
   }
 }

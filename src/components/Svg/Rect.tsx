@@ -14,7 +14,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Rect extends React.Component<Props> {
+export class Rect extends React.Component<Props> {
   static propTypes = propTypes;
 
   static defaultProps = {

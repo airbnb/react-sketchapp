@@ -4,7 +4,7 @@ import { LayoutInfo, ViewStyle } from '../../types';
 import { makeShapeGroup, makeShapePath } from '../shapeLayers';
 import { makeRect } from '../models';
 import { createUniformBorder } from '../borders';
-import layerGroup from '../layerGroup';
+import { layerGroup } from '../layerGroup';
 import { makePathsFromCommands, makeLineCapStyle } from './graphics/path';
 import { unionRects, scaleRect, makeBoundingRectFromCommands, resize } from './graphics/rect';
 
@@ -26,7 +26,7 @@ function makeLayerFromPathElement(pathElement: any, _parentFrame: FileFormat.Rec
   // and we don't want to apply the origin translation twice.
   const shapePathFrame = makeRect(0, 0, shapeGroupFrame.width, shapeGroupFrame.height);
 
-  const shapePaths = paths.map(path => makeShapePath(shapePathFrame, path));
+  const shapePaths = paths.map((path) => makeShapePath(shapePathFrame, path));
 
   const viewStyle: ViewStyle = {};
 
@@ -41,7 +41,7 @@ function makeLayerFromPathElement(pathElement: any, _parentFrame: FileFormat.Rec
     const borderStyle = createUniformBorder(
       style.strokeWidth * scale,
       style.stroke,
-      'solid',
+      undefined,
       FileFormat.BorderPosition.Center,
       lineCap,
       lineCap,
@@ -78,11 +78,7 @@ function makeLayerGroup(
   return group;
 }
 
-export default function makeSvgLayer(
-  layout: LayoutInfo,
-  name: string,
-  svg: string,
-): FileFormat.Group {
+export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string): FileFormat.Group {
   const {
     data: { params, children },
   } = svgModel(svg);
@@ -94,14 +90,10 @@ export default function makeSvgLayer(
       width: layout.width,
       height: layout.height,
     },
-    preserveAspectRatio = 'xMidYMid meet',
   } = params;
 
-  const meetOrSlice = preserveAspectRatio.split(' ')[1] || 'meet';
-  const resizeMode = meetOrSlice === 'meet' ? 'contain' : 'cover';
-
   // Determine the rect to generate layers within
-  const croppedRect = resize(viewBox, layout, resizeMode);
+  const croppedRect = resize(viewBox, layout, 'contain');
   const scale = croppedRect.width / viewBox.width;
 
   // The top-level frame is the union of every path within

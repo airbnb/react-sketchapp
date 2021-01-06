@@ -1,6 +1,6 @@
 import { ReactTestRendererNode } from 'react-test-renderer';
 import { TextNode } from '../types';
-import Context from '../utils/Context';
+import { Context } from '../utils/Context';
 import { VALID_TEXT_CHILDREN_TYPES } from '../utils/constants';
 
 const walkTextTree = (textTree: ReactTestRendererNode, context: Context, textNodes: TextNode[]) => {
@@ -27,7 +27,7 @@ const walkTextTree = (textTree: ReactTestRendererNode, context: Context, textNod
   }
 };
 
-const computeTextTree = (
+export const computeTextTree = (
   node: ReactTestRendererNode,
   context: Context,
   textNodes: TextNode[] = [],
@@ -60,5 +60,3 @@ const computeTextTree = (
 
   return textNodes;
 };
-
-export default computeTextTree;

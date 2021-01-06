@@ -1,4 +1,5 @@
 import * as React from 'react';
+import sketch from 'sketch';
 import { render, Artboard, Text, View } from 'react-sketchapp';
 import chroma from 'chroma-js';
 
@@ -8,14 +9,12 @@ const textColor = (hex: string) => {
   if (vsWhite > 4) {
     return '#FFF';
   }
-  return chroma(hex)
-    .darken(3)
-    .hex();
+  return chroma(hex).darken(3).hex();
 };
 
 interface SwatchProps {
-  name: string,
-  hex: string,
+  name: string;
+  hex: string;
 }
 
 const Swatch = ({ name, hex }: SwatchProps) => (
@@ -29,10 +28,7 @@ const Swatch = ({ name, hex }: SwatchProps) => (
       padding: 8,
     }}
   >
-    <Text
-      name="Swatch Name"
-      style={{ color: textColor(hex), fontWeight: 'bold' }}
-    >
+    <Text name="Swatch Name" style={{ color: textColor(hex), fontWeight: 'bold' }}>
       {name}
     </Text>
     <Text name="Swatch Hex" style={{ color: textColor(hex) }}>
@@ -42,7 +38,7 @@ const Swatch = ({ name, hex }: SwatchProps) => (
 );
 
 interface DocumentProps {
-  colors: { [key: string]: string }
+  colors: { [key: string]: string };
 }
 const Document = ({ colors }: DocumentProps) => (
   <Artboard
@@ -53,12 +49,11 @@ const Document = ({ colors }: DocumentProps) => (
       width: (96 + 8) * 4,
     }}
   >
-    {Object.keys(colors).map(color => (
+    {Object.keys(colors).map((color) => (
       <Swatch name={color} hex={colors[color]} key={color} />
     ))}
   </Artboard>
 );
-
 
 export default () => {
   const colorList = {
@@ -73,5 +68,5 @@ export default () => {
     'TypeScript Blue': '#007ACC',
   };
 
-  render(<Document colors={colorList} />, context.document.currentPage());
+  render(<Document colors={colorList} />, sketch.getSelectedDocument().selectedPage);
 };

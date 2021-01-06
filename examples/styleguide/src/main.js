@@ -17,7 +17,7 @@ const Document = ({ system }) => (
     </View>
 
     <Section title="Type Styles">
-      {Object.keys(system.fonts).map(name => (
+      {Object.keys(system.fonts).map((name) => (
         <TypeSpecimen key={name} name={name} style={TextStyles.get(name)} />
       ))}
     </Section>

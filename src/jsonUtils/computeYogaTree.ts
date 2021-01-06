@@ -1,12 +1,12 @@
 import yoga from 'yoga-layout-prebuilt';
 import { ReactTestRendererNode } from 'react-test-renderer';
-import computeYogaNode from './computeYogaNode';
 import { PlatformBridge } from '../types';
-import Context from '../utils/Context';
-import zIndex from '../utils/zIndex';
+import { computeYogaNode } from './computeYogaNode';
+import { Context } from '../utils/Context';
+import { zIndex } from '../utils/zIndex';
 
-const walkTree = (tree: ReactTestRendererNode, context: Context, bridge: PlatformBridge) => {
-  const { node, stop } = computeYogaNode(tree, context, bridge);
+const walkTree = (bridge: PlatformBridge) => (tree: ReactTestRendererNode, context: Context) => {
+  const { node, stop } = computeYogaNode(bridge)(tree, context);
 
   if (typeof tree === 'string' || tree.type === 'sketch_svg') {
     // handle svg node, eg: stop here, we will handle the children in the renderer
@@ -21,7 +21,7 @@ const walkTree = (tree: ReactTestRendererNode, context: Context, bridge: Platfor
       const childComponent = children[index];
       // Avoid going into <text> node's children
       if (!stop) {
-        const childNode = walkTree(childComponent, context.forChildren(), bridge);
+        const childNode = walkTree(bridge)(childComponent, context.forChildren());
         node.insertChild(childNode, index);
       }
     }
@@ -30,10 +30,7 @@ const walkTree = (tree: ReactTestRendererNode, context: Context, bridge: Platfor
   return node;
 };
 
-const computeYogaTree = (
+export const computeYogaTree = (bridge: PlatformBridge) => (
   root: ReactTestRendererNode,
   context: Context,
-  bridge: PlatformBridge,
-): yoga.YogaNode => walkTree(root, context, bridge);
-
-export default computeYogaTree;
+): yoga.YogaNode => walkTree(bridge)(root, context);

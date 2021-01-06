@@ -17,7 +17,7 @@ const Page = ({ users }) => (
         width: users.length * 300,
       }}
     >
-      {users.map(user => (
+      {users.map((user) => (
         <Profile user={user} />
       ))}
     </View>

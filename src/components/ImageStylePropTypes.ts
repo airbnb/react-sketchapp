@@ -1,7 +1,7 @@
-import ViewStylePropTypes from './ViewStylePropTypes';
-import ResizeModePropTypes from './ResizeModePropTypes';
+import { ViewStylePropTypes } from './ViewStylePropTypes';
+import { ResizeModePropTypes } from './ResizeModePropTypes';
 
-export default {
+export const ImageStylePropTypes = {
   ...ViewStylePropTypes,
   resizeMode: ResizeModePropTypes,
 };

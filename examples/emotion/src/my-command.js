@@ -8,7 +8,7 @@ const Container = emotion.View`
   align-items: center;
   margin: 50px;
   border: 5px solid red;
-  background-color: ${props => props.theme.backgroundColor}
+  background-color: ${(props) => props.theme.backgroundColor}
 `;
 
 const Description = emotion.Text`

@@ -2,6 +2,48 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/). Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/airbnb/react-sketchapp/releases) page.
 
+## Version 3.2.6
+
+- Fix the SVG component export
+
+## Version 3.2.5
+
+- Fix Skpm taking the wrong entry point when requiring react-sketchapp
+
+## Version 3.2.4
+
+- Fix the generated ES package
+
+## Version 3.2.3
+
+- Fix getting the font name (#510)
+
+## Version 3.2.2
+
+- Fix getting the default bridge on NodeJS
+
+## Version 3.2.1
+
+- `Platform.version` now reflects the Sketch version
+- Fix a bug for a broken version of `@sketch-hq/sketch-file-format-ts`
+
+## Version 3.2.0
+
+- Add a new `useWindowDimensions` hook for Artboard viewport (#501)
+
+## Version 3.1.3
+
+- Add proptypes for Text
+- Allow `fontWeigth` to be a number
+
+## Version 3.1.2
+
+- Handle passing a Sketch document more properly
+
+## Version 3.1.1
+
+- Fix for Sketch 64
+
 ## Version 3.1.0
 
 - Fix acceptable text children (#474)

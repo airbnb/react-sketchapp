@@ -64,9 +64,7 @@ const RESIZE_CONSTRAINTS: { [key: string]: number } = {
   none: 63,
 };
 
-export default function makeResizeConstraint(
-  resizingConstraint?: ResizeConstraints | null,
-): number {
+export function makeResizeConstraint(resizingConstraint?: ResizeConstraints | null): number {
   if (resizingConstraint) {
     const constraints = [];
     const { top, right, bottom, left, fixedHeight, fixedWidth } = resizingConstraint;

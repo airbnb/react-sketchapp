@@ -7,7 +7,7 @@ export const DocumentPropTypes = {
 
 type Props = PropTypes.InferProps<typeof DocumentPropTypes>;
 
-export default class Document extends React.Component<Props> {
+export class Document extends React.Component<Props> {
   static propTypes = {
     children: PropTypes.node,
   };

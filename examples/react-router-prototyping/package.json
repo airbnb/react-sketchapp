@@ -1,0 +1,29 @@
+{
+  "name": "react-router-prototyping",
+  "version": "1.0.0",
+  "description": "",
+  "skpm": {
+    "main": "react-router-prototyping.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
+  "scripts": {
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "render": "skpm-build --watch --run",
+    "render:once": "skpm-build --run",
+    "postinstall": "npm run build && skpm-link"
+  },
+  "author": "Macintosh Helper <github@macintoshhelper.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@skpm/builder": "^0.4.3"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.8",
+    "react": "^16.13.0",
+    "react-router-primitives": "^0.1.2",
+    "react-sketchapp": "^3.1.0",
+    "react-sketchapp-router": "^0.1.3",
+    "react-test-renderer": "^16.13.0"
+  }
+}

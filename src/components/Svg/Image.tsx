@@ -15,7 +15,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class SVGImage extends React.Component<Props> {
+export class SVGImage extends React.Component<Props> {
   static propTypes = propTypes;
 
   static defaultProps = {

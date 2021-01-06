@@ -1,8 +1,9 @@
-export { default as Document } from './Document';
-export { default as Page } from './Page';
-export { default as Artboard } from './Artboard';
-export { default as Image } from './Image';
-export { default as RedBox } from './RedBox';
-export { default as Svg } from './Svg';
-export { default as View } from './View';
-export { default as Text } from './Text';
+export { Document } from './Document';
+export { Page } from './Page';
+export { Artboard } from './Artboard';
+export { Image } from './Image';
+export { RedBox } from './RedBox';
+export { View } from './View';
+export { Text } from './Text';
+import Svg from './Svg';
+export { Svg };

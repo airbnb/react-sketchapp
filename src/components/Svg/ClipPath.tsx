@@ -8,7 +8,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class ClipPath extends React.Component<Props> {
+export class ClipPath extends React.Component<Props> {
   static propTypes = propTypes;
 
   render() {

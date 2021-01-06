@@ -1,4 +1,4 @@
-import NodeMacOSBridge from '../../../src/platformBridges/NodeMacOSBridge';
+import bridge from '../../../src/platformBridges/macos';
 
 let TextStyles;
 let doc;
@@ -11,16 +11,16 @@ beforeEach(() => {
     getSketchVersion: jest.fn(() => 51),
   }));
 
-  TextStyles = require('../../../src/sharedStyles/TextStyles');
+  TextStyles = require('../../../src/sharedStyles/TextStyles').TextStyles;
 
   sharedTextStyles = require('../../../src/utils/sharedTextStyles');
 
   jest.mock('../../../src/utils/sharedTextStyles');
 
-  TextStyles = TextStyles.default(() => NodeMacOSBridge);
-  sharedTextStyles = sharedTextStyles.default;
+  TextStyles = TextStyles(() => bridge);
+  sharedTextStyles = sharedTextStyles.sharedTextStyles;
 
-  sharedTextStyles.setDocument = jest.fn(doc => {
+  sharedTextStyles.setDocument = jest.fn((doc) => {
     if (!doc) {
       throw new Error('Please provide a sketch document reference');
     }
@@ -132,11 +132,11 @@ describe('create', () => {
       const res = TextStyles.create({ foo: { ...whitelist, ...blacklist } }, { document: doc });
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
-      Object.keys(whitelist).forEach(key => {
+      Object.keys(whitelist).forEach((key) => {
         expect(firstStoredStyle).toHaveProperty(key, whitelist[key]);
       });
 
-      Object.keys(blacklist).forEach(key => {
+      Object.keys(blacklist).forEach((key) => {
         expect(firstStoredStyle).not.toHaveProperty(key);
       });
     });

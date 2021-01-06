@@ -11,7 +11,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Circle extends React.Component<Props> {
+export class Circle extends React.Component<Props> {
   static propTypes = propTypes;
 
   static defaultProps = {

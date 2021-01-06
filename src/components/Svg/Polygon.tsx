@@ -9,7 +9,7 @@ const propTypes = {
 
 type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Polygon extends React.Component<Props> {
+export class Polygon extends React.Component<Props> {
   static displayName = 'Polygon';
 
   static propTypes = propTypes;

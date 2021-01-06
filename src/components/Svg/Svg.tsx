@@ -1,27 +1,27 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ViewPropTypes } from '../View';
-import StyleSheet from '../../stylesheet';
-import Circle from './Circle';
-import ClipPath from './ClipPath';
-import Defs from './Defs';
-import Ellipse from './Ellipse';
-import G from './G';
-import Image from './Image';
-import Line from './Line';
-import LinearGradient from './LinearGradient';
-import Path from './Path';
-import Pattern from './Pattern';
-import Polygon from './Polygon';
-import Polyline from './Polyline';
-import RadialGradient from './RadialGradient';
-import Rect from './Rect';
-import Stop from './Stop';
-import Symbol from './Symbol';
-import Text from './Text';
-import TextPath from './TextPath';
-import TSpan from './TSpan';
-import Use from './Use';
+import { StyleSheet } from '../../stylesheet';
+import { Circle } from './Circle';
+import { ClipPath } from './ClipPath';
+import { Defs } from './Defs';
+import { Ellipse } from './Ellipse';
+import { G } from './G';
+import { SVGImage as Image } from './Image';
+import { Line } from './Line';
+import { LinearGradient } from './LinearGradient';
+import { Path } from './Path';
+import { Pattern } from './Pattern';
+import { Polygon } from './Polygon';
+import { Polyline } from './Polyline';
+import { RadialGradient } from './RadialGradient';
+import { Rect } from './Rect';
+import { Stop } from './Stop';
+import { Symbol } from './Symbol';
+import { Text } from './Text';
+import { TextPath } from './TextPath';
+import { TSpan } from './TSpan';
+import { Use } from './Use';
 
 const propTypes = {
   ...ViewPropTypes,
@@ -37,7 +37,7 @@ const propTypes = {
 
 export type Props = PropTypes.InferProps<typeof propTypes>;
 
-export default class Svg extends React.Component<Props> {
+export class Svg extends React.Component<Props> {
   static displayName = 'Svg';
 
   static propTypes = propTypes;

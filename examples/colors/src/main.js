@@ -19,7 +19,7 @@ const Document = ({ colors, steps }) => {
 
   return (
     <View style={styles.container}>
-      {times(i => color(i / steps).hex(), steps).map((val, i) => (
+      {times((i) => color(i / steps).hex(), steps).map((val, i) => (
         <View
           name={val}
           key={val}

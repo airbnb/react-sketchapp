@@ -23,7 +23,7 @@ export default () => (
       can use it in our web UI, and continue to use primitives, or mix them with DOM elements
     </p>
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      {DATA.map(user => (
+      {DATA.map((user) => (
         <Space h={spacing} v={spacing}>
           <Profile key={user.screen_name} user={user} />
         </Space>

@@ -20,4 +20,4 @@ class TextStyles {
   }
 }
 
-export default new TextStyles();
+export const sharedTextStyles = new TextStyles();

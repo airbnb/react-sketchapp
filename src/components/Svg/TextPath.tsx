@@ -6,7 +6,7 @@ type Props = PropTypes.InferProps<typeof textPathProps>;
 
 const idExpReg = /^#(.+)$/;
 
-export default class TextPath extends React.Component<Props> {
+export class TextPath extends React.Component<Props> {
   static propTypes = textPathProps;
 
   render() {

@@ -32,10 +32,9 @@ const fetchRemoteImage = async (url: string, { fetch }: PlatformBridge): Promise
   return Buffer.from(await response.arrayBuffer());
 };
 
-export default async function getImageDataFromURL(
-  bridge: PlatformBridge,
+export const getImageDataFromURL = (bridge: PlatformBridge) => async (
   url?: string,
-): Promise<Readonly<{ data: string; sha1: string }>> {
+): Promise<Readonly<{ data: string; sha1: string }>> => {
   if (!url) {
     return ERROR_RESULT;
   }
@@ -56,8 +55,8 @@ export default async function getImageDataFromURL(
       sha1: sha1(data),
     };
   } catch (error) {
-      console.error(`Error while fetching '${url}':`, error);
+    console.error(`Error while fetching '${url}':`, error);
 
     return ERROR_RESULT;
   }
-}
+};

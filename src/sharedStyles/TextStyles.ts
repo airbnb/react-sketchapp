@@ -7,12 +7,12 @@ import {
   PlatformBridge,
 } from '../types';
 import { getSketchVersion } from '../utils/getSketchVersion';
-import isRunningInSketch from '../utils/isRunningInSketch';
-import hashStyle from '../utils/hashStyle';
+import { isRunningInSketch } from '../utils/isRunningInSketch';
+import { hashStyle } from '../utils/hashStyle';
 import { getDocument } from '../utils/getDocument';
-import sharedTextStyles from '../utils/sharedTextStyles';
+import { sharedTextStyles } from '../utils/sharedTextStyles';
 import { makeTextStyle } from '../jsonUtils/textLayers';
-import pick from '../utils/pick';
+import { pick } from '../utils/pick';
 import { INHERITABLE_FONT_STYLES } from '../utils/constants';
 
 type MurmurHash = string;
@@ -34,7 +34,7 @@ type Options = {
 let _styles: StyleHash = {};
 const _byName: { [key: string]: MurmurHash } = {};
 
-const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
+export const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
   registerStyle(
     name: string,
     style: TextStyle,
@@ -65,8 +65,12 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
 
     const doc = getDocument(document);
 
-    if (isRunningInSketch() && doc != null && getSketchVersion() < 50) {
-      doc.showMessage('💎 Requires Sketch 50+ 💎');
+    const sketchVersion = getSketchVersion();
+
+    if (isRunningInSketch() && sketchVersion < 50) {
+      if (doc) {
+        doc.showMessage('💎 Requires Sketch 50+ 💎');
+      }
       return {};
     }
 
@@ -77,7 +81,7 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
       sharedTextStyles.setStyles([]);
     }
 
-    Object.keys(styles).forEach(name => this.registerStyle(name, styles[name], platformBridge));
+    Object.keys(styles).forEach((name) => this.registerStyle(name, styles[name], platformBridge));
 
     return _styles;
   },
@@ -112,7 +116,7 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
   },
 
   toJSON(): FileFormat.SharedStyle[] {
-    return Object.keys(_styles).map(k => ({
+    return Object.keys(_styles).map((k) => ({
       _class: 'sharedStyle',
       do_objectID: _styles[k].sharedObjectID,
       name: _styles[k].name,
@@ -124,5 +128,3 @@ const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
     return _styles;
   },
 });
-
-export default TextStyles;
