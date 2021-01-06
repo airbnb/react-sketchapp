@@ -61,7 +61,7 @@ Example: `sketch.getSelectedDocument().selectedPage`.
 
 ##### `bridge` (optional)
 
-An object implementing the [Platform Bridge API][platform-bridge-api]. When not specified, it will attempt to load the most suitable one for the platform in use among the ones bundled with the package.
+An object implementing the Platform Bridge API. When not specified, it will attempt to load the most suitable one for the platform in use among the ones bundled with the package.
 
 #### Returns
 
@@ -96,7 +96,7 @@ Top-level React component that defines your Sketch document.
 
 ##### `bridge` (optional)
 
-An object implementing the [Platform Bridge API][platform-bridge-api]. When not specified, it will attempt to load the most suitable one for the platform in use among the ones bundled with the package.
+An object implementing the Platform Bridge API. When not specified, it will attempt to load the most suitable one for the platform in use among the ones bundled with the package.
 
 #### Returns
 
@@ -707,7 +707,7 @@ Returns a react component which is an can be used to render instances of the sym
 | `props.name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
 | `props.style` | [`Style`](/docs/styling.md) |  |  |
 | `document` | `Object` | The current document | The Sketch document to make the symbol in |
-| `bridge` | `Object` | _platform-dependent_ | An object implementing the [Platform Bridge API][platform-bridge-api]. |
+| `bridge` | `Object` | _platform-dependent_ | An object implementing the Platform Bridge API. |
 
 ### `getSymbolComponentByName(name)`
 
@@ -861,5 +861,3 @@ export default () => {
   render(<Document />, sketch.getSelectedDocument().selectedPage);
 };
 ```
-
-[platform-bridge-api]: ../src/types/index.ts#L124-130
