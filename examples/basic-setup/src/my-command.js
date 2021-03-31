@@ -42,7 +42,7 @@ const Color = {
 
 Swatch.propTypes = Color;
 
-const Document = ({ colors }) => (
+export const Document = ({ colors }) => (
   <Artboard
     name="Swatches"
     style={{

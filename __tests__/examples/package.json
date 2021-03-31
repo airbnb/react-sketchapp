@@ -1,0 +1,26 @@
+{
+  "name": "example-tests",
+  "version": "1.0.0",
+  "description": "",
+  "skpm": {
+    "main": "example-tests.sketchplugin",
+    "manifest": "src/manifest.json"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/skpm-build",
+    "watch": "../../node_modules/.bin/skpm-build --watch",
+    "render": "../../node_modules/.bin/skpm-build --watch --run",
+    "render:once": "../../node_modules/.bin/skpm-build --run",
+    "postinstall": "npm run build && ../../node_modules/.bin/skpm-link"
+  },
+  "author": "Macintosh Helper <github@macintoshhelper.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/primitives": "^10.0.30",
+    "chroma-js": "^1.2.2",
+    "emotion-primitives": "^1.0.0-beta.0",
+    "ramda": "^0.27.0",
+    "react-primitives": "^0.8.1"
+  }
+}

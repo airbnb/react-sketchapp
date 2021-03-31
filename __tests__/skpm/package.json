@@ -1,0 +1,15 @@
+{
+  "name": "example-tests",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "skpm": {
+    "test": {
+      "testRegex": "/.*.(test|spec).jsx?$"
+    }
+  },
+  "scripts": {
+    "test": "../../node_modules/.bin/skpm-test"
+  },
+  "license": "MIT"
+}

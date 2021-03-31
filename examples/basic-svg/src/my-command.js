@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, Artboard, Svg } from 'react-sketchapp';
 
-const Document = () => (
+export const Document = () => (
   <Artboard
     name="Sketch Logo"
     style={{

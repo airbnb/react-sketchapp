@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Document = ({ colors, steps }) => {
+export const Document = ({ colors, steps }) => {
   const color = chroma.scale(colors);
 
   return (
