@@ -66,8 +66,8 @@ export class SvgRenderer extends ViewRenderer {
     return props.name || 'Svg';
   }
 
-  renderBackingLayers(node: TreeNode<Props>) {
-    const layers = super.renderBackingLayers(node);
+  async renderBackingLayers(node: TreeNode<Props>) {
+    const layers = await super.renderBackingLayers(node);
 
     const { layout, props, children, style } = node;
 

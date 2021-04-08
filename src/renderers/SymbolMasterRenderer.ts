@@ -4,7 +4,7 @@ import { TreeNode } from '../types';
 import { SymbolMasterProps } from '../symbol';
 
 export class SymbolMasterRenderer extends SketchRenderer {
-  renderGroupLayer({
+  async renderGroupLayer({
     layout,
     props,
   }: TreeNode<SymbolMasterProps & { symbolID: string; name: string }>) {

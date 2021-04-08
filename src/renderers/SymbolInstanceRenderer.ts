@@ -98,11 +98,10 @@ const extractOverrides = (layers: FileFormat.AnyLayer[] = [], path?: string): Ov
 };
 
 export class SymbolInstanceRenderer extends SketchRenderer {
-  renderGroupLayer({
+  async renderGroupLayer({
     layout,
     props,
   }: TreeNode<SymbolInstanceProps & { symbolID: string; name: string }>) {
-    const bridge = this.platformBridge;
     const masterTree = getSymbolMasterById(props.symbolID);
 
     if (!masterTree) {
@@ -126,8 +125,9 @@ export class SymbolInstanceRenderer extends SketchRenderer {
 
     const overridableLayers = extractOverrides(masterTree.layers);
 
-    const overrideValues = overridableLayers.reduce(function inject(
-      memo: FileFormat.OverrideValue[],
+    const overrideValues = await overridableLayers.reduce(async function inject(
+      this: SymbolInstanceRenderer,
+      memo: Promise<FileFormat.OverrideValue[]>,
       reference: Override,
     ) {
       if (reference.type === 'symbolID') {
@@ -163,7 +163,9 @@ export class SymbolInstanceRenderer extends SketchRenderer {
             );
           }
 
-          memo.push(makeOverride(reference.path, reference.type, replacementMaster.symbolID));
+          (await memo).push(
+            makeOverride(reference.path, reference.type, replacementMaster.symbolID),
+          );
 
           extractOverrides(replacementMaster.layers, newPath).reduce(inject, memo);
 
@@ -187,7 +189,7 @@ export class SymbolInstanceRenderer extends SketchRenderer {
             `The override value of a Text must be a string.\n\nIn Symbol Instance: "${props.name}"\nFor Override: "${reference.name}"`,
           );
         }
-        memo.push(makeOverride(reference.path, reference.type, overrideValue));
+        (await memo).push(makeOverride(reference.path, reference.type, overrideValue));
       }
 
       if (reference.type === 'image') {
@@ -196,18 +198,18 @@ export class SymbolInstanceRenderer extends SketchRenderer {
             `The override value of an Image must be a url.\n\nIn Symbol Instance: "${props.name}"\nFor Override: "${reference.name}"`,
           );
         }
-        memo.push(
+        (await memo).push(
           makeOverride(
             reference.path,
             reference.type,
-            makeJSONDataReference(getImageDataFromURL(bridge)(overrideValue)),
+            makeJSONDataReference(await getImageDataFromURL(this.platformBridge)(overrideValue)),
           ),
         );
       }
 
       return memo;
     },
-    []);
+    Promise.resolve([]));
 
     symbolInstance.overrideValues = overrideValues;
 

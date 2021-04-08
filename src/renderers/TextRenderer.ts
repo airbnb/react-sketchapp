@@ -10,7 +10,7 @@ export class TextRenderer extends SketchRenderer {
     return props.name || 'Text';
   }
 
-  renderBackingLayers({ layout, style, textStyle, props }: TreeNode<Props>) {
+  async renderBackingLayers({ layout, style, textStyle, props }: TreeNode<Props>) {
     // Append all text nodes's content into one string if name is missing
     const resolvedName = props.name
       ? props.name

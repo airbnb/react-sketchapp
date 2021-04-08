@@ -7,6 +7,7 @@ import {
   PlatformBridge,
 } from '../types';
 import { getSketchVersion } from '../utils/getSketchVersion';
+import { isRunningInSketch } from '../utils/isRunningInSketch';
 import { hashStyle } from '../utils/hashStyle';
 import { getDocument } from '../utils/getDocument';
 import { sharedTextStyles } from '../utils/sharedTextStyles';
@@ -41,7 +42,7 @@ export const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
   ) {
     const safeStyle = pick(style, INHERITABLE_FONT_STYLES);
     const hash = hashStyle(safeStyle);
-    const sketchStyle = makeTextStyle(platformBridge)(safeStyle);
+    const sketchStyle = makeTextStyle(platformBridge)(safeStyle, undefined);
     const sharedObjectID = sharedTextStyles.addStyle(name, sketchStyle);
 
     // FIXME(gold): side effect :'(
@@ -66,7 +67,7 @@ export const TextStyles = (getDefaultBridge: () => PlatformBridge) => ({
 
     const sketchVersion = getSketchVersion();
 
-    if (sketchVersion !== 'NodeJS' && sketchVersion < 50) {
+    if (isRunningInSketch() && sketchVersion < 50) {
       if (doc) {
         doc.showMessage('💎 Requires Sketch 50+ 💎');
       }

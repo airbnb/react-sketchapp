@@ -35,13 +35,13 @@ Managing the assets of design systems in Sketch is complex, error-prone and time
 import * as React from 'react';
 import { render, Text, Artboard } from 'react-sketchapp';
 
-const App = props => (
+const App = (props) => (
   <Artboard>
     <Text style={{ fontFamily: 'Comic Sans MS', color: 'hotPink' }}>{props.message}</Text>
   </Artboard>
 );
 
-export default context => {
+export default (context) => {
   render(<App message="Hello world!" />, context.document.currentPage());
 };
 ```

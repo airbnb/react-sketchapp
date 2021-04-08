@@ -40,20 +40,20 @@ const getDefaultPage = (): SketchLayer => {
   return isNativeSymbolsPage(currentPage) ? doc.addBlankPage() : currentPage;
 };
 
-const renderContents = (bridge: PlatformBridge) => (
+const renderContents = (bridge: PlatformBridge) => async (
   tree: TreeNode | string,
   container: SketchLayer,
-): SketchLayer => {
-  const json = flexToSketchJSON(bridge)(tree);
+): Promise<SketchLayer> => {
+  const json = await flexToSketchJSON(bridge)(tree);
   const layer = fromSJSON(json, '119');
 
   return renderLayers([layer], container);
 };
 
-const renderPage = (bridge: PlatformBridge) => (
+const renderPage = (bridge: PlatformBridge) => async (
   tree: TreeNode,
   page: SketchPage,
-): Array<SketchLayer> => {
+): Promise<Array<SketchLayer>> => {
   const children = tree.children || [];
 
   // assume if name is set on this nested page, the intent is to overwrite

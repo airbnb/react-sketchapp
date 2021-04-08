@@ -111,41 +111,32 @@ describe('create', () => {
     });
 
     it('only stores text attributes', () => {
-      const whitelist = [
-        'color',
-        'fontFamily',
-        'fontSize',
-        'fontStyle',
-        'fontWeight',
-        'textShadowOffset',
-        'textShadowRadius',
-        'textShadowColor',
-        'textTransform',
-        'letterSpacing',
-        'lineHeight',
-        'textAlign',
-        'writingDirection',
-      ];
+      const whitelist = {
+        color: 'red',
+        fontFamily: 'Helvetica',
+        fontSize: 14,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        textShadowOffset: 2,
+        textShadowRadius: 1,
+        textShadowColor: 'black',
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+        lineHeight: 18,
+        textAlign: 'left',
+        writingDirection: 'ltr',
+      };
 
-      const blacklist = ['foo', 'bar', 'baz'];
+      const blacklist = { foo: 1, bar: 2, baz: 3 };
 
-      const input = [...whitelist, ...blacklist].reduce(
-        (acc, key) => ({
-          ...acc,
-          [key]: '',
-        }),
-        {},
-      );
-
-      const res = TextStyles.create({ foo: input }, { document: doc });
-
+      const res = TextStyles.create({ foo: { ...whitelist, ...blacklist } }, { document: doc });
       const firstStoredStyle = res[Object.keys(res)[0]].cssStyle;
 
-      whitelist.forEach((key) => {
-        expect(firstStoredStyle).toHaveProperty(key, '');
+      Object.keys(whitelist).forEach((key) => {
+        expect(firstStoredStyle).toHaveProperty(key, whitelist[key]);
       });
 
-      blacklist.forEach((key) => {
+      Object.keys(blacklist).forEach((key) => {
         expect(firstStoredStyle).not.toHaveProperty(key);
       });
     });

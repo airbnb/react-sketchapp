@@ -78,7 +78,7 @@ function makeLayerGroup(
   return group;
 }
 
-export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string) {
+export function makeSvgLayer(layout: LayoutInfo, name: string, svg: string): FileFormat.Group {
   const {
     data: { params, children },
   } = svgModel(svg);

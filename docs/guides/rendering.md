@@ -28,8 +28,7 @@ const App = () => (
 
 export default () => {
   const documents = sketch.getDocuments();
-  const document =
-    sketch.getSelectedDocument() || new sketch.Document(); // get the current document // or create a new document
+  const document = sketch.getSelectedDocument() || new sketch.Document(); // get the current document // or create a new document
 };
 ```
 
@@ -61,8 +60,8 @@ import { render } from 'react-sketchapp';
 
 // const App = () => ... or import App from './App';
 
-const getDocumentByName = name => {
-  return (sketch.getDocuments() || []).find(doc => {
+const getDocumentByName = (name) => {
+  return (sketch.getDocuments() || []).find((doc) => {
     return doc.path && path.basename(doc.path, '.sketch') === name;
   });
 };

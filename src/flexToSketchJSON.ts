@@ -9,14 +9,15 @@ function missingRendererError(type: string, annotations?: string) {
   );
 }
 
-export const flexToSketchJSON = (bridge: PlatformBridge) => (
+export const flexToSketchJSON = (bridge: PlatformBridge) => async (
   node: TreeNode | string,
-):
+): Promise<
   | FileFormat.SymbolMaster
   | FileFormat.Artboard
   | FileFormat.Group
   | FileFormat.ShapeGroup
-  | FileFormat.SymbolInstance => {
+  | FileFormat.SymbolInstance
+> => {
   if (typeof node === 'string') {
     throw missingRendererError('string');
   }
@@ -46,19 +47,19 @@ export const flexToSketchJSON = (bridge: PlatformBridge) => (
   }
 
   const renderer = new Renderer(bridge);
-  const groupLayer = renderer.renderGroupLayer(node);
+  const groupLayer = await renderer.renderGroupLayer(node);
 
   if (groupLayer._class === 'symbolInstance') {
     return groupLayer;
   }
 
-  const backingLayers = renderer.renderBackingLayers(node);
+  const backingLayers = await renderer.renderBackingLayers(node);
 
   // stopping the walk down the tree if we have an svg
   const curriedFlexToSketchJSON = flexToSketchJSON(bridge);
   const sublayers =
     children && type !== 'sketch_svg'
-      ? children.map((child) => curriedFlexToSketchJSON(child))
+      ? await Promise.all(children.map((child) => curriedFlexToSketchJSON(child)))
       : [];
 
   // Filter out anything null, undefined

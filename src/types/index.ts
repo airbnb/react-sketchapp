@@ -113,16 +113,17 @@ export type TreeNode<Props = any> = {
 };
 
 export type ResizeConstraints = {
-  top?: boolean;
-  right?: boolean;
-  bottom?: boolean;
-  left?: boolean;
-  fixedHeight?: boolean;
-  fixedWidth?: boolean;
+  top?: boolean | null;
+  right?: boolean | null;
+  bottom?: boolean | null;
+  left?: boolean | null;
+  fixedHeight?: boolean | null;
+  fixedWidth?: boolean | null;
 };
 
 export type PlatformBridge = {
   createStringMeasurer(textNodes: TextNode[], maxWidth: number): Size;
   findFontName(style: TextStyle): string;
-  makeImageDataFromUrl(url?: string): string;
+  fetch(input: RequestInfo, init?: RequestInit): Promise<Response>;
+  readFile(path: string): Promise<Buffer>;
 };

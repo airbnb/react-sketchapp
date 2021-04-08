@@ -15,7 +15,7 @@
   "author": "Nitin Tulswani <tulswani19@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@skpm/builder": "^0.4.3"
+    "@skpm/builder": "^0.7.5"
   },
   "dependencies": {
     "emotion-primitives": "^1.0.0-beta.6",

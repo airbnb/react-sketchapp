@@ -13,7 +13,7 @@ import { renderLayers } from './render';
 import { resetLayer } from './resets';
 import { getDocumentData } from './utils/getDocument';
 import { SketchDocumentData, SketchDocument, WrappedSketchDocument, PlatformBridge } from './types';
-import { getSketchVersion } from './utils/getSketchVersion';
+import { isRunningInSketch } from './utils/isRunningInSketch';
 
 let id = 0;
 const nextId = () => ++id;
@@ -70,8 +70,8 @@ const getExistingSymbols = (documentData: SketchDocumentData) => {
 export const injectSymbols = (
   document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
 ) => {
-  if (getSketchVersion() === 'NodeJS') {
-    console.error('Cannot inject symbols in NodeJS');
+  if (!isRunningInSketch()) {
+    console.error('Cannot inject symbols while Sketch is not running');
     return;
   }
 
@@ -153,12 +153,12 @@ const SymbolMasterPropTypes = {
 
 export type SymbolMasterProps = PropTypes.InferProps<typeof SymbolMasterPropTypes>;
 
-export const makeSymbol = (bridge: PlatformBridge) => (
+export const makeSymbol = (bridge: PlatformBridge) => async (
   Component: React.ComponentType<any>,
   symbolProps: string | SymbolMasterProps,
-  document?: SketchDocumentData | SketchDocument | WrappedSketchDocument,
+  document: SketchDocumentData | SketchDocument | WrappedSketchDocument | undefined,
 ) => {
-  if (!hasInitialized && getSketchVersion() !== 'NodeJS') {
+  if (!hasInitialized && isRunningInSketch()) {
     const documentData = getDocumentData(document);
     if (documentData) {
       getExistingSymbols(documentData);
@@ -173,7 +173,7 @@ export const makeSymbol = (bridge: PlatformBridge) => (
     ? existingSymbol.symbolID
     : generateID(`symbolID:${masterName}`, !!masterName);
 
-  const symbolMaster = flexToSketchJSON(bridge)(
+  const symbolMaster = (await flexToSketchJSON(bridge)(
     buildTree(bridge)(
       <sketch_symbolmaster
         {...(typeof symbolProps !== 'string' ? symbolProps || {} : {})}
@@ -183,7 +183,7 @@ export const makeSymbol = (bridge: PlatformBridge) => (
         <Component />
       </sketch_symbolmaster>,
     ),
-  ) as FileFormat.SymbolMaster;
+  )) as FileFormat.SymbolMaster;
 
   symbolsRegistry[symbolID] = symbolMaster;
   return createSymbolInstanceClass(symbolMaster);
@@ -236,7 +236,7 @@ export const getSymbolMasterByName = (
     ? Object.keys(symbolsRegistry).find((key) => String(symbolsRegistry[key].name) === name)
     : '';
 
-  if (typeof symbolID === 'undefined' && name && getSketchVersion() !== 'NodeJS') {
+  if (typeof symbolID === 'undefined' && name && isRunningInSketch()) {
     return tryGettingSymbolMasterInDocumentByName(name, document);
   }
 
@@ -253,7 +253,7 @@ export const getSymbolMasterById = (
 ): FileFormat.SymbolMaster | undefined => {
   let symbolMaster = symbolID ? symbolsRegistry[symbolID] : undefined;
 
-  if (typeof symbolMaster === 'undefined' && symbolID && getSketchVersion() !== 'NodeJS') {
+  if (typeof symbolMaster === 'undefined' && symbolID && isRunningInSketch()) {
     symbolMaster = tryGettingSymbolMasterInDocumentById(symbolID, document);
   }
 

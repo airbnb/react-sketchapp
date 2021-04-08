@@ -29,7 +29,7 @@
 - [`Symbols`](#symbols)
   - [`makeSymbol`](#makesymbolnode-props-document)
 
-### `render(element, container)`
+### `async render(element, container?, bridge?)`
 
 Returns the top-level rendered Sketch object or an array of Sketch objects if you use `<Page>` components.
 
@@ -59,6 +59,10 @@ The element to render into - will be replaced. Should either be a Sketch [Docume
 
 Example: `sketch.getSelectedDocument().selectedPage`.
 
+##### `bridge` (optional)
+
+An object implementing the Platform Bridge API. When not specified, it will attempt to load the most suitable one for the platform in use among the ones bundled with the package.
+
 #### Returns
 
 The top-most rendered native Sketch layer.
@@ -69,18 +73,18 @@ The top-most rendered native Sketch layer.
 import sketch from 'sketch';
 import { View, Text, render } from 'react-sketchapp';
 
-const Document = props => (
+const Document = (props) => (
   <View>
     <Text>Hello world!</Text>
   </View>
 );
 
-export default () => {
-  render(<Document />, sketch.getSelectedDocument().selectedPage);
+export default async () => {
+  await render(<Document />, sketch.getSelectedDocument().selectedPage);
 };
 ```
 
-### `renderToJSON(element)`
+### `async renderToJSON(element, bridge?)`
 
 Returns a Sketch JSON object for further consumption - doesn't add to the page.
 
@@ -89,6 +93,10 @@ Returns a Sketch JSON object for further consumption - doesn't add to the page.
 ##### `element` (required)
 
 Top-level React component that defines your Sketch document.
+
+##### `bridge` (optional)
+
+An object implementing the Platform Bridge API. When not specified, it will attempt to load the most suitable one for the platform in use among the ones bundled with the package.
 
 #### Returns
 
@@ -684,7 +692,7 @@ Reset the registered styles.
 
 An interface to Sketch's symbols. Create symbols and optionally inject them into the symbols page.
 
-### `makeSymbol(node, props, document)`
+### `makeSymbol(node, props, document, bridge?)`
 
 Creates a new symbol and injects it into the `Symbols` page. The name of the symbol can be optionally provided and will default to the display name of the component.
 
@@ -699,6 +707,7 @@ Returns a react component which is an can be used to render instances of the sym
 | `props.name` | `String` | The node name | Optional name for the symbol, string can include backslashes to organize these symbols with Sketch. For example `squares/blue` |
 | `props.style` | [`Style`](/docs/styling.md) |  |  |
 | `document` | `Object` | The current document | The Sketch document to make the symbol in |
+| `bridge` | `Object` | _platform-dependent_ | An object implementing the Platform Bridge API. |
 
 ### `getSymbolComponentByName(name)`
 

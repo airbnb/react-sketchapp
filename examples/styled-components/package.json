@@ -16,7 +16,7 @@
   "author": "Mathieu Dutour <mathieu@dutour.me>",
   "license": "MIT",
   "devDependencies": {
-    "@skpm/builder": "^0.4.0"
+    "@skpm/builder": "^0.7.5"
   },
   "dependencies": {
     "chroma-js": "^1.2.2",

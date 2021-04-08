@@ -127,7 +127,7 @@ const makeAttributedString = (bridge: PlatformBridge) => (
 
 export const makeTextStyle = (bridge: PlatformBridge) => (
   style: TextStyle,
-  shadows?: (ViewStyle | undefined | null)[] | null,
+  shadows: (ViewStyle | undefined | null)[] | undefined | null,
 ): FileFormat.Style => {
   const json = makeStyle(style, undefined, shadows);
   json.textStyle = {
@@ -206,8 +206,8 @@ export const makeTextLayer = (bridge: PlatformBridge) => (
   name: string,
   textNodes: TextNode[],
   _style: ViewStyle,
-  resizingConstraint?: ResizeConstraints | null,
-  shadows?: (ViewStyle | undefined | null)[] | null,
+  resizingConstraint: ResizeConstraints | undefined | null,
+  shadows: (ViewStyle | undefined | null)[] | undefined | null,
 ): FileFormat.Text => ({
   _class: 'text',
   do_objectID: generateID(`text:${name}-${textNodes.map((node) => node.content).join('')}`),
