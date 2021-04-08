@@ -54,7 +54,9 @@
     "normalize-css-color": "^1.0.1",
     "pegjs": "^0.10.0",
     "prop-types": "^15.7.2",
+    "regenerator-runtime": "^0.13.7",
     "seedrandom": "^3.0.5",
+    "whatwg-url": "^7.1.0",
     "yoga-layout-prebuilt": "^1.9.5"
   },
   "peerDependencies": {
@@ -91,6 +93,7 @@
     "@types/react": "^16.9.34",
     "@types/react-test-renderer": "^16.9.2",
     "@types/seedrandom": "^2.4.28",
+    "@types/whatwg-url": "^8.2.0",
     "gitbook-cli": "^2.3.0",
     "gitbook-plugin-anchorjs": "^2.1.0",
     "gitbook-plugin-codeblock-disable-glossary": "0.0.1",

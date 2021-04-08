@@ -1,5 +1,6 @@
 import sha1 from 'js-sha1';
 import { PlatformBridge } from '../types';
+import { URL } from 'whatwg-url';
 
 const ERROR_IMAGE =
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8w8DwHwAEOQHNmnaaOAAAAABJRU5ErkJggg==';
