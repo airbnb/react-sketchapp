@@ -1,14 +1,12 @@
 os: osx
 language: node_js
-cache:
-  directories:
-    - node_modules
-#     - $HOME/Library/Caches/Homebrew
 notifications:
   email: false
 node_js:
-  - 'lts/*'
-# before_install:
+  - 12
+  - 14
+before_install:
+  - npm install -g npm
 #   - brew update
 #   - brew cask install sketch # install Sketch
 #   - mkdir -p "~/Library/Application Support/com.bohemiancoding.sketch3/Plugins" # create plugins folder
