@@ -2,6 +2,8 @@ os: osx
 language: node_js
 notifications:
   email: false
+cache:
+  npm: false
 node_js:
   - 12
   - 14
