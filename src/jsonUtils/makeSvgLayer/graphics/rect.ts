@@ -11,8 +11,10 @@ export function makeBoundingRectFromPoints(points: Point[]): FileFormat.Rect {
   return makeRect(x, y, width, height);
 }
 
-export function makeBoundingRectFromCommands(commands: any): FileFormat.Rect {
-  const points: Point[] = commands.reduce((acc: Point[], command: any) => {
+type Command = { type: string; data: any };
+
+export function makeBoundingRectFromCommands(commands: Command[]): FileFormat.Rect {
+  const points: Point[] = commands.reduce((acc: Point[], command: Command) => {
     const { type, data } = command;
 
     switch (type) {
